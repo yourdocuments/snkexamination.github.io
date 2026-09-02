@@ -1,0 +1,2741 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Student Certificates</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --primary-soft:#eff6ff;
+
+    --success:#16a34a;
+    --danger:#dc2626;
+    --warning:#d97706;
+
+    --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+    --primary-soft:#172554;
+    --shadow:0 10px 30px rgba(0,0,0,.28);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    min-height:70px;
+    padding:12px 25px;
+
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    box-shadow:0 4px 20px rgba(15,23,42,.04);
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:14px;
+    font-weight:900;
+    line-height:1.2;
+}
+
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.header-btn{
+    min-height:38px;
+    padding:0 12px;
+
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:9px;
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.header-btn:hover{
+    background:var(--primary-soft);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    max-width:1250px;
+    margin:auto;
+    padding:28px 20px 50px;
+}
+
+.page-header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.page-title h1{
+    font-size:23px;
+    margin-bottom:4px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.btn{
+    min-height:38px;
+    padding:0 13px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.btn:hover{
+    background:var(--primary-soft);
+}
+
+.btn.primary{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+}
+
+.btn.primary:hover{
+    background:var(--primary-dark);
+}
+
+.btn.success{
+    background:var(--success);
+    border-color:var(--success);
+    color:#fff;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    padding:14px;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:35px;
+    height:35px;
+
+    border-radius:9px;
+    background:var(--primary-soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.stat-number{
+    font-size:22px;
+    font-weight:900;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.stat.blue .stat-number{
+    color:var(--primary);
+}
+
+.stat.green .stat-number{
+    color:var(--success);
+}
+
+.stat.orange .stat-number{
+    color:var(--warning);
+}
+
+.stat.red .stat-number{
+    color:var(--danger);
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    padding:15px;
+
+    box-shadow:var(--shadow);
+    margin-bottom:17px;
+}
+
+.filter-title{
+    font-size:11px;
+    font-weight:900;
+    margin-bottom:12px;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:1.6fr 1fr auto;
+    gap:9px;
+    align-items:end;
+}
+
+.field label{
+    display:block;
+    color:var(--muted);
+
+    font-size:7px;
+    font-weight:900;
+
+    margin-bottom:5px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:38px;
+
+    border:1px solid var(--border);
+    border-radius:8px;
+
+    background:var(--card);
+    color:var(--text);
+
+    padding:0 10px;
+    outline:none;
+
+    font-size:8px;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:var(--primary);
+}
+
+
+/* =========================================================
+   CERTIFICATE GRID
+========================================================= */
+
+.certificate-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+
+/* =========================================================
+   CERTIFICATE WRAPPER
+========================================================= */
+
+.certificate-item{
+    background:var(--card);
+    border:1px solid var(--border);
+
+    border-radius:15px;
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+}
+
+
+/* =========================================================
+   CERTIFICATE
+========================================================= */
+
+.certificate{
+    width:100%;
+    min-height:420px;
+
+    background:#fff;
+    color:#172033;
+
+    position:relative;
+    overflow:hidden;
+
+    padding:18px;
+
+    border:8px solid #1d4ed8;
+}
+
+.certificate::before{
+    content:"";
+
+    position:absolute;
+    inset:7px;
+
+    border:2px solid #d4af37;
+
+    pointer-events:none;
+}
+
+.certificate::after{
+    content:"";
+
+    position:absolute;
+
+    width:230px;
+    height:230px;
+
+    border-radius:50%;
+
+    border:30px solid rgba(37,99,235,.04);
+
+    right:-100px;
+    bottom:-100px;
+
+    pointer-events:none;
+}
+
+.certificate-inner{
+    min-height:376px;
+
+    position:relative;
+    z-index:2;
+
+    padding:15px 18px;
+
+    text-align:center;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.cert-logo{
+    width:52px;
+    height:52px;
+
+    object-fit:contain;
+
+    margin-bottom:5px;
+}
+
+.cert-institute{
+    font-size:17px;
+    font-weight:900;
+
+    color:#1d4ed8;
+
+    letter-spacing:.2px;
+}
+
+.cert-tagline{
+    font-size:7px;
+    color:#64748b;
+
+    margin-top:2px;
+}
+
+.cert-heading{
+    font-family:"Playfair Display",serif;
+
+    font-size:27px;
+
+    color:#172033;
+
+    margin-top:17px;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+}
+
+.cert-subheading{
+    font-size:7px;
+    color:#64748b;
+
+    margin-top:2px;
+}
+
+.cert-divider{
+    width:100px;
+    height:2px;
+
+    background:#d4af37;
+
+    margin:11px 0 14px;
+}
+
+.cert-text{
+    font-size:8px;
+    color:#475467;
+
+    margin-bottom:7px;
+}
+
+.student-name{
+    font-family:"Playfair Display",serif;
+
+    font-size:25px;
+    font-weight:800;
+
+    color:#111827;
+
+    padding:0 15px 5px;
+
+    border-bottom:1px solid #cbd5e1;
+
+    max-width:90%;
+}
+
+.cert-description{
+    max-width:470px;
+
+    font-size:8px;
+    line-height:1.8;
+
+    color:#475467;
+
+    margin-top:10px;
+}
+
+.course-name{
+    color:#1d4ed8;
+    font-weight:900;
+}
+
+.cert-details{
+    margin-top:12px;
+
+    display:flex;
+    justify-content:center;
+    gap:25px;
+
+    flex-wrap:wrap;
+}
+
+.cert-detail{
+    text-align:left;
+
+    font-size:6.5px;
+    color:#64748b;
+}
+
+.cert-detail strong{
+    display:block;
+
+    color:#172033;
+
+    font-size:7px;
+
+    margin-top:2px;
+}
+
+.cert-bottom{
+    width:100%;
+
+    margin-top:auto;
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.signature{
+    width:100px;
+
+    border-top:1px solid #334155;
+
+    padding-top:4px;
+
+    font-size:6px;
+
+    color:#475467;
+}
+
+.certificate-id{
+    font-size:6px;
+    color:#64748b;
+}
+
+.certificate-id strong{
+    color:#172033;
+}
+
+
+/* =========================================================
+   CERTIFICATE ACTIONS
+========================================================= */
+
+.certificate-actions{
+    padding:10px;
+
+    border-top:1px solid var(--border);
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap:6px;
+}
+
+.card-btn{
+    min-height:34px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:7px;
+
+    font-size:7px;
+    font-weight:900;
+}
+
+.card-btn:hover{
+    background:var(--primary-soft);
+}
+
+.card-btn.primary{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+    grid-column:1/-1;
+
+    background:var(--card);
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:55px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.empty-icon{
+    font-size:40px;
+    margin-bottom:9px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+
+    z-index:3000;
+
+    background:rgba(15,23,42,.68);
+
+    backdrop-filter:blur(5px);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:15px;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:950px;
+
+    max-height:95vh;
+    overflow:auto;
+
+    background:var(--card);
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+
+.modal-header{
+    position:sticky;
+    top:0;
+    z-index:5;
+
+    background:var(--card);
+
+    padding:15px 18px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.modal-header h2{
+    font-size:13px;
+}
+
+.modal-header-actions{
+    display:flex;
+    gap:6px;
+}
+
+.close-btn{
+    width:32px;
+    height:32px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:8px;
+
+    font-size:16px;
+}
+
+.close-btn:hover{
+    color:var(--danger);
+    background:#fee2e2;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.preview-area{
+    background:#e5e7eb;
+
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    padding:25px;
+
+    display:flex;
+
+    justify-content:center;
+
+    overflow:auto;
+}
+
+.preview-certificate{
+    width:850px;
+    min-width:850px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    z-index:5000;
+
+    background:#111827;
+    color:#fff;
+
+    padding:11px 15px;
+
+    border-radius:9px;
+
+    font-size:9px;
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    padding:25px 10px 5px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .certificate-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:800px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .filters{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filters .btn{
+        width:100%;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .header{
+        padding:10px 13px;
+    }
+
+    .main{
+        padding:18px 13px 35px;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .actions{
+        width:100%;
+    }
+
+    .actions .btn{
+        flex:1;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .certificate{
+        min-height:390px;
+    }
+
+    .cert-heading{
+        font-size:22px;
+    }
+
+    .student-name{
+        font-size:21px;
+    }
+
+}
+
+@media(max-width:430px){
+
+    .certificate{
+        padding:12px;
+    }
+
+    .certificate-inner{
+        padding:13px 12px;
+    }
+
+    .cert-institute{
+        font-size:14px;
+    }
+
+    .cert-heading{
+        font-size:20px;
+    }
+
+    .student-name{
+        font-size:18px;
+    }
+
+    .cert-description{
+        font-size:7px;
+    }
+
+    .certificate-actions{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT SINGLE CERTIFICATE
+========================================================= */
+
+body.single-print{
+    background:#fff !important;
+}
+
+body.single-print .header,
+body.single-print .main,
+body.single-print .footer,
+body.single-print .modal-overlay,
+body.single-print .toast{
+    display:none !important;
+}
+
+body.single-print .print-wrapper{
+    display:flex !important;
+
+    min-height:100vh;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#fff;
+}
+
+body.single-print .certificate{
+    width:850px;
+    min-height:600px;
+
+    box-shadow:none;
+
+    border-width:10px;
+}
+
+body.single-print .certificate-inner{
+    min-height:556px;
+}
+
+.print-wrapper{
+    display:none;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    @page{
+        size:A4 landscape;
+        margin:8mm;
+    }
+
+    body{
+        background:#fff !important;
+    }
+
+    .header,
+    .page-header,
+    .stats,
+    .filter-card,
+    .certificate-actions,
+    .footer,
+    .modal-overlay,
+    .toast{
+        display:none !important;
+    }
+
+    .main{
+        max-width:none;
+        padding:0;
+    }
+
+    .certificate-grid{
+        display:block;
+    }
+
+    .certificate-item{
+        page-break-inside:avoid;
+
+        margin-bottom:15px;
+
+        box-shadow:none;
+
+        border:none;
+    }
+
+    .certificate{
+        box-shadow:none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+        >
+
+        <div class="logo-text">
+
+            SNK IT Institute
+
+            <small>
+                Student Certificate Management
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="header-btn"
+            id="themeBtn"
+            onclick="toggleTheme()"
+        >
+            🌙
+        </button>
+
+        <button
+            class="header-btn"
+            onclick="goBack()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<main class="main">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="page-title">
+
+            <h1>
+                📜 Student Certificates
+            </h1>
+
+            <p>
+                Student certificate preview, management এবং print করুন।
+            </p>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="btn"
+                onclick="printAllCertificates()"
+            >
+                🖨️ Print All
+            </button>
+
+            <button
+                class="btn primary"
+                onclick="refreshStudents()"
+            >
+                🔄 Refresh
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <section class="stats">
+
+        <div class="stat blue">
+
+            <div class="stat-icon">
+                👨‍🎓
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalStudents"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Total Students
+            </div>
+
+        </div>
+
+
+        <div class="stat green">
+
+            <div class="stat-icon">
+                📜
+            </div>
+
+            <div
+                class="stat-number"
+                id="certificateCount"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Certificates
+            </div>
+
+        </div>
+
+
+        <div class="stat orange">
+
+            <div class="stat-icon">
+                🎓
+            </div>
+
+            <div
+                class="stat-number"
+                id="courseCount"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Courses
+            </div>
+
+        </div>
+
+
+        <div class="stat red">
+
+            <div class="stat-icon">
+                ⛔
+            </div>
+
+            <div
+                class="stat-number"
+                id="inactiveCount"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Inactive Students
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FILTER
+    ====================================================== -->
+
+    <section class="filter-card">
+
+        <div class="filter-title">
+            🔎 Search & Filter Certificates
+        </div>
+
+
+        <div class="filters">
+
+            <div class="field">
+
+                <label>
+                    Search Student
+                </label>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Name, Student ID, phone, email..."
+                    oninput="renderCertificates()"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Course
+                </label>
+
+                <select
+                    id="courseFilter"
+                    onchange="renderCertificates()"
+                >
+
+                    <option value="all">
+                        All Courses
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="resetFilters()"
+            >
+                Reset
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CERTIFICATE GRID
+    ====================================================== -->
+
+    <section
+        class="certificate-grid"
+        id="certificateGrid"
+    ></section>
+
+
+
+    <footer class="footer">
+
+        © 2026 SNK IT Institute • Student Certificate Management
+
+    </footer>
+
+</main>
+
+
+
+<!-- =======================================================
+     PREVIEW MODAL
+======================================================= -->
+
+<div
+    class="modal-overlay"
+    id="previewModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                📜 Certificate Preview
+            </h2>
+
+
+            <div class="modal-header-actions">
+
+                <button
+                    class="btn primary"
+                    onclick="printPreview()"
+                >
+                    🖨️ Print
+                </button>
+
+                <button
+                    class="close-btn"
+                    onclick="closePreview()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div class="preview-area">
+
+                <div
+                    class="preview-certificate"
+                    id="previewContent"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     SINGLE PRINT WRAPPER
+======================================================= -->
+
+<div
+    class="print-wrapper"
+    id="printWrapper"
+></div>
+
+
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const STUDENTS_KEY =
+    "snkStudents";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let students = [];
+
+let previewStudentId = null;
+
+
+/* =========================================================
+   LOAD STUDENTS
+========================================================= */
+
+function loadStudents(){
+
+    try{
+
+        const raw =
+            localStorage.getItem(
+                STUDENTS_KEY
+            );
+
+        students =
+            raw
+            ?
+            JSON.parse(raw)
+            :
+            [];
+
+    }
+    catch(error){
+
+        console.error(
+            "Student loading error:",
+            error
+        );
+
+        students = [];
+
+    }
+
+    if(
+        !Array.isArray(students)
+    ){
+
+        students = [];
+
+    }
+
+}
+
+
+/* =========================================================
+   STUDENT HELPERS
+========================================================= */
+
+function getStudentId(student){
+
+    return String(
+        student.id ||
+        student.studentId ||
+        ""
+    );
+
+}
+
+
+function getStudentName(student){
+
+    return (
+        student.name ||
+        student.studentName ||
+        "Student"
+    );
+
+}
+
+
+function getCourse(student){
+
+    return (
+        student.course ||
+        student.courseName ||
+        "-"
+    );
+
+}
+
+
+function getEmail(student){
+
+    return (
+        student.email ||
+        "-"
+    );
+
+}
+
+
+function getPhone(student){
+
+    return (
+        student.phone ||
+        "-"
+    );
+
+}
+
+
+function getStatus(student){
+
+    return String(
+        student.status ||
+        "active"
+    ).toLowerCase();
+
+}
+
+
+function getAdmissionDate(student){
+
+    return (
+        student.admissionDate ||
+        student.admission_date ||
+        ""
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadTheme();
+
+        loadStudents();
+
+        buildCourseFilter();
+
+        renderCertificates();
+
+    }
+);
+
+
+/* =========================================================
+   COURSE FILTER
+========================================================= */
+
+function buildCourseFilter(){
+
+    const select =
+        document.getElementById(
+            "courseFilter"
+        );
+
+    const current =
+        select.value;
+
+
+    const courses =
+        [
+            ...new Set(
+                students
+                .map(
+                    student =>
+                        getCourse(student)
+                )
+                .filter(
+                    course =>
+                        course &&
+                        course !== "-"
+                )
+            )
+        ]
+        .sort(
+            (a,b) =>
+                String(a)
+                .localeCompare(
+                    String(b)
+                )
+        );
+
+
+    select.innerHTML = `
+        <option value="all">
+            All Courses
+        </option>
+    `;
+
+
+    courses.forEach(
+        course => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                course;
+
+            option.textContent =
+                course;
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    if(
+        courses.includes(
+            current
+        )
+    ){
+
+        select.value =
+            current;
+
+    }
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function getFilteredStudents(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const course =
+        document.getElementById(
+            "courseFilter"
+        )
+        .value;
+
+
+    return students.filter(
+        student => {
+
+            const name =
+                getStudentName(
+                    student
+                )
+                .toLowerCase();
+
+
+            const id =
+                getStudentId(
+                    student
+                )
+                .toLowerCase();
+
+
+            const phone =
+                getPhone(
+                    student
+                )
+                .toLowerCase();
+
+
+            const email =
+                getEmail(
+                    student
+                )
+                .toLowerCase();
+
+
+            const studentCourse =
+                getCourse(
+                    student
+                );
+
+
+            const searchMatch =
+                !search ||
+                name.includes(search) ||
+                id.includes(search) ||
+                phone.includes(search) ||
+                email.includes(search);
+
+
+            const courseMatch =
+                course === "all" ||
+                studentCourse === course;
+
+
+            return (
+                searchMatch &&
+                courseMatch
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER CERTIFICATES
+========================================================= */
+
+function renderCertificates(){
+
+    const grid =
+        document.getElementById(
+            "certificateGrid"
+        );
+
+
+    grid.innerHTML =
+        "";
+
+
+    const filtered =
+        getFilteredStudents();
+
+
+    if(
+        filtered.length === 0
+    ){
+
+        grid.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📜
+                </div>
+
+                <strong>
+                    কোনো Student Certificate পাওয়া যায়নি
+                </strong>
+
+                <div
+                    style="
+                        margin-top:5px;
+                        font-size:7px;
+                    "
+                >
+                    Student Management থেকে student যোগ করুন।
+                </div>
+
+            </div>
+
+        `;
+
+        updateStats();
+
+        return;
+
+    }
+
+
+    filtered.forEach(
+        student => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "certificate-item";
+
+
+            item.innerHTML = `
+
+                ${buildCertificateHTML(
+                    student
+                )}
+
+                <div class="certificate-actions">
+
+                    <button
+                        class="card-btn"
+                        onclick="previewCertificate('${escapeAttribute(
+                            getStudentId(student)
+                        )}')"
+                    >
+                        👁️ Preview
+                    </button>
+
+                    <button
+                        class="card-btn primary"
+                        onclick="printSingleCertificate('${escapeAttribute(
+                            getStudentId(student)
+                        )}')"
+                    >
+                        🖨️ Print
+                    </button>
+
+                    <button
+                        class="card-btn"
+                        onclick="copyCertificateId('${escapeAttribute(
+                            getStudentId(student)
+                        )}')"
+                    >
+                        📋 Copy ID
+                    </button>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(
+                item
+            );
+
+        }
+    );
+
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   BUILD CERTIFICATE
+========================================================= */
+
+function buildCertificateHTML(
+    student
+){
+
+    const name =
+        getStudentName(
+            student
+        );
+
+
+    const id =
+        getStudentId(
+            student
+        );
+
+
+    const course =
+        getCourse(
+            student
+        );
+
+
+    const admission =
+        formatDate(
+            getAdmissionDate(
+                student
+            )
+        );
+
+
+    return `
+
+        <div class="certificate">
+
+            <div class="certificate-inner">
+
+                <img
+                    class="cert-logo"
+                    src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+                    alt="SNK IT Institute"
+                >
+
+
+                <div class="cert-institute">
+                    SNK IT Institute
+                </div>
+
+
+                <div class="cert-tagline">
+                    Technology • Education • Skills
+                </div>
+
+
+                <div class="cert-heading">
+                    Certificate
+                </div>
+
+
+                <div class="cert-subheading">
+                    OF COMPLETION
+                </div>
+
+
+                <div class="cert-divider"></div>
+
+
+                <div class="cert-text">
+                    This certificate is proudly presented to
+                </div>
+
+
+                <div class="student-name">
+                    ${escapeHtml(name)}
+                </div>
+
+
+                <div class="cert-description">
+
+                    In recognition of successfully completing the
+
+                    <span class="course-name">
+                        ${escapeHtml(course)}
+                    </span>
+
+                    course/program at SNK IT Institute.
+
+                    We appreciate the student's dedication,
+                    effort and commitment to learning.
+
+                </div>
+
+
+                <div class="cert-details">
+
+                    <div class="cert-detail">
+
+                        Student ID
+
+                        <strong>
+                            ${escapeHtml(id || "-")}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="cert-detail">
+
+                        Completion / Admission Date
+
+                        <strong>
+                            ${escapeHtml(admission)}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cert-bottom">
+
+                    <div class="signature">
+
+                        Authorized Signature
+
+                    </div>
+
+
+                    <div class="certificate-id">
+
+                        Certificate No.
+
+                        <strong>
+                            ${escapeHtml(
+                                createCertificateNumber(student)
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="signature">
+
+                        Institute Authority
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   CERTIFICATE NUMBER
+========================================================= */
+
+function createCertificateNumber(
+    student
+){
+
+    const id =
+        getStudentId(
+            student
+        );
+
+
+    if(
+        id
+    ){
+
+        return "SNK-CERT-" +
+            id
+            .replace(
+                /[^a-zA-Z0-9]/g,
+                ""
+            )
+            .toUpperCase();
+
+    }
+
+
+    return "SNK-CERT-" +
+        String(
+            students.indexOf(student) + 1
+        )
+        .padStart(
+            4,
+            "0"
+        );
+
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function previewCertificate(
+    id
+){
+
+    const student =
+        findStudent(
+            id
+        );
+
+
+    if(
+        !student
+    ){
+
+        showToast(
+            "Student পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
+
+
+    previewStudentId =
+        String(id);
+
+
+    document.getElementById(
+        "previewContent"
+    ).innerHTML =
+        buildCertificateHTML(
+            student
+        );
+
+
+    document.getElementById(
+        "previewModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE PREVIEW
+========================================================= */
+
+function closePreview(){
+
+    document.getElementById(
+        "previewModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    previewStudentId =
+        null;
+
+}
+
+
+/* =========================================================
+   PRINT PREVIEW
+========================================================= */
+
+function printPreview(){
+
+    if(
+        !previewStudentId
+    ){
+
+        showToast(
+            "Certificate selected নেই!"
+        );
+
+        return;
+
+    }
+
+
+    printSingleCertificate(
+        previewStudentId
+    );
+
+}
+
+
+/* =========================================================
+   PRINT SINGLE
+========================================================= */
+
+function printSingleCertificate(
+    id
+){
+
+    const student =
+        findStudent(
+            id
+        );
+
+
+    if(
+        !student
+    ){
+
+        showToast(
+            "Student পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
+
+
+    const wrapper =
+        document.getElementById(
+            "printWrapper"
+        );
+
+
+    wrapper.innerHTML =
+        buildCertificateHTML(
+            student
+        );
+
+
+    document.body.classList.add(
+        "single-print"
+    );
+
+
+    setTimeout(
+        function(){
+
+            window.print();
+
+        },
+        150
+    );
+
+}
+
+
+/* =========================================================
+   PRINT ALL
+========================================================= */
+
+function printAllCertificates(){
+
+    const filtered =
+        getFilteredStudents();
+
+
+    if(
+        filtered.length === 0
+    ){
+
+        showToast(
+            "Print করার মতো certificate নেই!"
+        );
+
+        return;
+
+    }
+
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   AFTER PRINT
+========================================================= */
+
+window.addEventListener(
+    "afterprint",
+    function(){
+
+        document.body.classList.remove(
+            "single-print"
+        );
+
+
+        document.getElementById(
+            "printWrapper"
+        ).innerHTML =
+            "";
+
+    }
+);
+
+
+/* =========================================================
+   FIND STUDENT
+========================================================= */
+
+function findStudent(
+    id
+){
+
+    return students.find(
+        student =>
+            getStudentId(
+                student
+            ) ===
+            String(id)
+    );
+
+}
+
+
+/* =========================================================
+   COPY ID
+========================================================= */
+
+async function copyCertificateId(
+    id
+){
+
+    try{
+
+        await navigator.clipboard.writeText(
+            String(id)
+        );
+
+
+        showToast(
+            "Student ID copied ✓"
+        );
+
+    }
+    catch(error){
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+
+        textarea.value =
+            String(id);
+
+
+        document.body.appendChild(
+            textarea
+        );
+
+
+        textarea.select();
+
+
+        try{
+
+            document.execCommand(
+                "copy"
+            );
+
+            showToast(
+                "Student ID copied ✓"
+            );
+
+        }
+        catch(e){
+
+            showToast(
+                "Copy করা যায়নি!"
+            );
+
+        }
+
+
+        textarea.remove();
+
+    }
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+    const total =
+        students.length;
+
+
+    const inactive =
+        students.filter(
+            student =>
+                getStatus(student) !==
+                "active"
+        ).length;
+
+
+    const courses =
+        new Set(
+            students
+            .map(
+                student =>
+                    getCourse(student)
+            )
+            .filter(
+                course =>
+                    course &&
+                    course !== "-"
+            )
+        ).size;
+
+
+    document.getElementById(
+        "totalStudents"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "certificateCount"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "courseCount"
+    ).textContent =
+        courses;
+
+
+    document.getElementById(
+        "inactiveCount"
+    ).textContent =
+        inactive;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetFilters(){
+
+    document.getElementById(
+        "searchInput"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "courseFilter"
+    ).value =
+        "all";
+
+
+    renderCertificates();
+
+
+    showToast(
+        "Filters reset ✓"
+    );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshStudents(){
+
+    loadStudents();
+
+    buildCourseFilter();
+
+    renderCertificates();
+
+
+    showToast(
+        "Student data refreshed ✓"
+    );
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        "snkCertificateTheme",
+        dark
+        ?
+        "dark"
+        :
+        "light"
+    );
+
+
+    updateThemeButton();
+
+}
+
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem(
+            "snkCertificateTheme"
+        );
+
+
+    if(
+        theme === "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+
+    updateThemeButton();
+
+}
+
+
+function updateThemeButton(){
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        dark
+        ?
+        "☀️"
+        :
+        "🌙";
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+function goBack(){
+
+    if(
+        document.referrer
+    ){
+
+        history.back();
+
+    }
+    else{
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDate(
+    value
+){
+
+    if(
+        !value
+    ){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(
+            value
+        );
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value == null
+        ?
+        ""
+        :
+        String(value);
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   ESCAPE ATTRIBUTE
+========================================================= */
+
+function escapeAttribute(
+    value
+){
+
+    return String(
+        value == null
+        ?
+        ""
+        :
+        value
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#39;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+function showToast(
+    message
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+
+}
+
+
+/* =========================================================
+   MODAL CLICK
+========================================================= */
+
+document.getElementById(
+    "previewModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            this
+        ){
+
+            closePreview();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closePreview();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   STORAGE SYNC
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            STUDENTS_KEY
+        ){
+
+            loadStudents();
+
+            buildCourseFilter();
+
+            renderCertificates();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
