@@ -1,1 +1,2367 @@
-#
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Student Result Details</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --soft:#eff6ff;
+
+    --success:#16a34a;
+    --success-soft:#dcfce7;
+
+    --warning:#d97706;
+    --warning-soft:#fef3c7;
+
+    --danger:#dc2626;
+    --danger-soft:#fee2e2;
+
+    --purple:#7c3aed;
+    --purple-soft:#f3e8ff;
+
+    --shadow:0 10px 30px rgba(15,23,42,.07);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+
+    --soft:#172554;
+    --success-soft:#052e16;
+    --warning-soft:#451a03;
+    --danger-soft:#450a0a;
+    --purple-soft:#2e1065;
+
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:70px;
+
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 25px;
+
+    box-shadow:0 4px 20px rgba(15,23,42,.04);
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:43px;
+    height:43px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:14px;
+    font-weight:900;
+    line-height:1.2;
+}
+
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:2px;
+}
+
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.header-btn{
+    height:38px;
+
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:9px;
+
+    padding:0 11px;
+
+    font-size:9px;
+    font-weight:800;
+}
+
+.header-btn:hover{
+    background:var(--soft);
+}
+
+.main{
+    max-width:1100px;
+    margin:auto;
+
+    padding:28px 20px 50px;
+}
+
+.page-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:18px;
+}
+
+.page-title h1{
+    font-size:25px;
+    margin-bottom:4px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.action-buttons{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.action-btn{
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:9px;
+
+    padding:9px 13px;
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.action-btn.primary{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+}
+
+.action-btn:hover{
+    background:var(--soft);
+}
+
+.action-btn.primary:hover{
+    background:var(--primary-dark);
+}
+
+.student-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:var(--shadow);
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:14px;
+}
+
+.student-avatar{
+    width:70px;
+    height:70px;
+
+    border-radius:16px;
+
+    background:var(--soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+
+    flex-shrink:0;
+}
+
+.student-info{
+    flex:1;
+}
+
+.student-info h2{
+    font-size:18px;
+    margin-bottom:3px;
+}
+
+.student-id{
+    color:var(--muted);
+    font-size:8px;
+}
+
+.student-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+
+    margin-top:8px;
+}
+
+.meta{
+    padding:5px 8px;
+
+    border-radius:20px;
+
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    font-size:7px;
+    font-weight:800;
+}
+
+.verified{
+    background:var(--success-soft);
+    color:var(--success);
+
+    border-color:transparent;
+}
+
+.overview{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+
+    gap:11px;
+
+    margin-bottom:14px;
+}
+
+.overview-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    padding:14px;
+
+    box-shadow:var(--shadow);
+}
+
+.overview-icon{
+    width:35px;
+    height:35px;
+
+    border-radius:9px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--soft);
+
+    font-size:15px;
+
+    margin-bottom:8px;
+}
+
+.overview-number{
+    font-size:22px;
+    font-weight:900;
+}
+
+.overview-label{
+    color:var(--muted);
+    font-size:7px;
+}
+
+.result-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:14px;
+}
+
+.card-heading{
+    padding:15px 17px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.card-heading h2{
+    font-size:13px;
+}
+
+.card-heading span{
+    color:var(--muted);
+    font-size:7px;
+}
+
+.table-scroll{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+
+    min-width:720px;
+}
+
+th{
+    text-align:left;
+
+    padding:11px 14px;
+
+    background:var(--bg);
+
+    color:var(--muted);
+
+    font-size:7px;
+    font-weight:900;
+
+    border-bottom:1px solid var(--border);
+}
+
+td{
+    padding:12px 14px;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:8px;
+}
+
+tr:last-child td{
+    border-bottom:none;
+}
+
+.assignment{
+    font-weight:900;
+}
+
+.course{
+    color:var(--muted);
+    font-size:6px;
+    margin-top:2px;
+}
+
+.marks{
+    font-weight:900;
+}
+
+.percentage{
+    font-weight:900;
+}
+
+.grade{
+    display:inline-flex;
+
+    min-width:32px;
+    height:25px;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:7px;
+
+    background:var(--success-soft);
+    color:var(--success);
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.feedback{
+    color:var(--muted);
+
+    font-size:7px;
+
+    max-width:190px;
+
+    line-height:1.5;
+}
+
+.summary{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+
+    margin-bottom:14px;
+}
+
+.summary-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:18px;
+
+    box-shadow:var(--shadow);
+}
+
+.summary-card h3{
+    font-size:11px;
+    margin-bottom:13px;
+}
+
+.progress-row{
+    margin-bottom:11px;
+}
+
+.progress-label{
+    display:flex;
+    justify-content:space-between;
+
+    font-size:7px;
+    font-weight:800;
+
+    margin-bottom:5px;
+}
+
+.progress{
+    width:100%;
+    height:8px;
+
+    background:var(--bg);
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+
+    width:0%;
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+    transition:width .5s;
+}
+
+.grade-box{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.big-grade{
+    width:80px;
+    height:80px;
+
+    border-radius:20px;
+
+    background:var(--success-soft);
+    color:var(--success);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:34px;
+    font-weight:900;
+}
+
+.grade-details strong{
+    display:block;
+
+    font-size:15px;
+
+    margin-bottom:3px;
+}
+
+.grade-details span{
+    color:var(--muted);
+
+    font-size:7px;
+}
+
+.feedback-section{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:18px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:14px;
+}
+
+.feedback-section h2{
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.feedback-box{
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    line-height:1.7;
+
+    margin-bottom:8px;
+}
+
+.feedback-box:last-child{
+    margin-bottom:0;
+}
+
+.feedback-title{
+    color:var(--text);
+
+    font-size:7px;
+
+    font-weight:900;
+
+    margin-bottom:4px;
+}
+
+.empty{
+    display:none;
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    box-shadow:var(--shadow);
+}
+
+.empty-icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.empty h2{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.empty p{
+    color:var(--muted);
+    font-size:8px;
+}
+
+.footer{
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    padding:20px 10px 5px;
+}
+
+.toast{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    background:#111827;
+    color:#fff;
+
+    padding:11px 15px;
+
+    border-radius:9px;
+
+    font-size:9px;
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:5000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+
+/* PRINT */
+
+@media print{
+
+    body{
+        background:#fff;
+    }
+
+    .header,
+    .page-header .action-buttons,
+    .footer{
+        display:none !important;
+    }
+
+    .main{
+        max-width:none;
+        padding:0;
+    }
+
+    .student-card,
+    .overview-card,
+    .result-card,
+    .summary-card,
+    .feedback-section{
+        box-shadow:none;
+    }
+
+    .result-card,
+    .student-card,
+    .overview-card,
+    .summary-card,
+    .feedback-section{
+        break-inside:avoid;
+    }
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+    .overview{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .summary{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .header{
+        height:64px;
+        padding:0 13px;
+    }
+
+    .logo{
+        width:38px;
+        height:38px;
+    }
+
+    .header-btn{
+        padding:0 8px;
+    }
+
+    .main{
+        padding:18px 13px 35px;
+    }
+
+    .page-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .student-card{
+        align-items:flex-start;
+    }
+
+    .student-avatar{
+        width:55px;
+        height:55px;
+        font-size:24px;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .overview{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+    }
+
+    .overview-card{
+        padding:11px;
+    }
+
+    .overview-number{
+        font-size:18px;
+    }
+
+    .student-card{
+        padding:14px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+        >
+
+        <div class="logo-text">
+
+            SNK IT Institute
+
+            <small>
+                Student Result Details
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="header-btn"
+            onclick="toggleTheme()"
+            id="themeBtn"
+        >
+            🌙
+        </button>
+
+
+        <button
+            class="header-btn"
+            onclick="goBack()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="page-title">
+
+            <h1>
+                🎓 Result Details
+            </h1>
+
+            <p>
+                Student-এর সম্পূর্ণ assignment result, grade এবং teacher feedback।
+            </p>
+
+        </div>
+
+
+        <div class="action-buttons">
+
+            <button
+                class="action-btn"
+                onclick="goBack()"
+            >
+                ← Results
+            </button>
+
+
+            <button
+                class="action-btn primary"
+                onclick="printResult()"
+            >
+                🖨️ Print Result
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STUDENT CARD
+    ================================================== -->
+
+    <section
+        class="student-card"
+        id="studentCard"
+    >
+
+        <div class="student-avatar">
+            🎓
+        </div>
+
+
+        <div class="student-info">
+
+            <h2
+                id="studentName"
+            >
+                Student
+            </h2>
+
+            <div
+                class="student-id"
+                id="studentId"
+            >
+                Student ID: -
+            </div>
+
+
+            <div class="student-meta">
+
+                <span
+                    class="meta"
+                    id="studentCourse"
+                >
+                    Course: -
+                </span>
+
+
+                <span
+                    class="meta"
+                    id="studentClass"
+                >
+                    Class: -
+                </span>
+
+
+                <span class="meta verified">
+                    ✓ Result Verified
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         OVERVIEW
+    ================================================== -->
+
+    <section class="overview">
+
+
+        <div class="overview-card">
+
+            <div class="overview-icon">
+                📝
+            </div>
+
+            <div
+                class="overview-number"
+                id="totalAssignments"
+            >
+                0
+            </div>
+
+            <div class="overview-label">
+                Total Assignments
+            </div>
+
+        </div>
+
+
+        <div class="overview-card">
+
+            <div class="overview-icon">
+                🎯
+            </div>
+
+            <div
+                class="overview-number"
+                id="totalMarks"
+            >
+                0
+            </div>
+
+            <div class="overview-label">
+                Total Marks
+            </div>
+
+        </div>
+
+
+        <div class="overview-card">
+
+            <div class="overview-icon">
+                ✅
+            </div>
+
+            <div
+                class="overview-number"
+                id="obtainedMarks"
+            >
+                0
+            </div>
+
+            <div class="overview-label">
+                Obtained Marks
+            </div>
+
+        </div>
+
+
+        <div class="overview-card">
+
+            <div class="overview-icon">
+                📊
+            </div>
+
+            <div
+                class="overview-number"
+                id="overallPercentage"
+            >
+                0%
+            </div>
+
+            <div class="overview-label">
+                Overall Percentage
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RESULT TABLE
+    ================================================== -->
+
+    <section class="result-card">
+
+        <div class="card-heading">
+
+            <h2>
+                📚 Assignment-wise Result
+            </h2>
+
+            <span>
+                Graded submissions
+            </span>
+
+        </div>
+
+
+        <div class="table-scroll">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Assignment
+                        </th>
+
+                        <th>
+                            Submitted
+                        </th>
+
+                        <th>
+                            Marks
+                        </th>
+
+                        <th>
+                            Percentage
+                        </th>
+
+                        <th>
+                            Grade
+                        </th>
+
+                        <th>
+                            Feedback
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="resultBody"
+                ></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SUMMARY
+    ================================================== -->
+
+    <section class="summary">
+
+
+        <div class="summary-card">
+
+            <h3>
+                📈 Performance
+            </h3>
+
+
+            <div class="progress-row">
+
+                <div class="progress-label">
+
+                    <span>
+                        Overall Progress
+                    </span>
+
+                    <span
+                        id="progressText"
+                    >
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        id="progressBar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-row">
+
+                <div class="progress-label">
+
+                    <span>
+                        Completion
+                    </span>
+
+                    <span
+                        id="completionText"
+                    >
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        id="completionBar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <h3>
+                🏆 Overall Grade
+            </h3>
+
+
+            <div class="grade-box">
+
+                <div
+                    class="big-grade"
+                    id="bigGrade"
+                >
+                    -
+                </div>
+
+
+                <div class="grade-details">
+
+                    <strong
+                        id="gradeTitle"
+                    >
+                        Result Pending
+                    </strong>
+
+                    <span
+                        id="gradeDescription"
+                    >
+                        Graded assignments-এর উপর ভিত্তি করে grade দেখানো হবে।
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FEEDBACK
+    ================================================== -->
+
+    <section class="feedback-section">
+
+        <h2>
+            💬 Teacher Feedback
+        </h2>
+
+
+        <div
+            id="feedbackList"
+        ></div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         EMPTY
+    ================================================== -->
+
+    <section
+        class="empty"
+        id="emptyState"
+    >
+
+        <div class="empty-icon">
+            📊
+        </div>
+
+        <h2>
+            এখনো কোনো Result পাওয়া যায়নি
+        </h2>
+
+        <p>
+            Admin submission grade করার পর এখানে result দেখা যাবে।
+        </p>
+
+    </section>
+
+
+
+    <footer class="footer">
+
+        © 2026 SNK IT Institute
+        • Student Result Details
+
+    </footer>
+
+</main>
+
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+const SUBMISSION_KEY =
+    "snkAssignmentSubmissions";
+
+const ASSIGNMENT_KEY =
+    "snkAssignments";
+
+
+let submissions = [];
+
+let assignments = [];
+
+let studentId = null;
+
+
+/* =====================================================
+   URL / STORAGE STUDENT ID
+===================================================== */
+
+function getStudentId(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const urlId =
+        params.get(
+            "studentId"
+        );
+
+
+    if(urlId){
+
+        return urlId;
+
+    }
+
+
+    return (
+        localStorage.getItem(
+            "snkCurrentStudentId"
+        ) ||
+        localStorage.getItem(
+            "studentId"
+        ) ||
+        null
+    );
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData(){
+
+    assignments =
+        JSON.parse(
+            localStorage.getItem(
+                ASSIGNMENT_KEY
+            )
+        ) || [];
+
+
+    submissions =
+        JSON.parse(
+            localStorage.getItem(
+                SUBMISSION_KEY
+            )
+        ) || [];
+
+
+    studentId =
+        getStudentId();
+
+
+    renderPage();
+
+}
+
+
+/* =====================================================
+   GET ASSIGNMENT
+===================================================== */
+
+function getAssignment(
+    id
+){
+
+    return assignments.find(
+        item =>
+            String(
+                item.id
+            ) ===
+            String(
+                id
+            )
+    );
+
+}
+
+
+/* =====================================================
+   FILTER STUDENT SUBMISSIONS
+===================================================== */
+
+function getStudentSubmissions(){
+
+    if(
+        !studentId
+    ){
+
+        return submissions;
+
+    }
+
+
+    return submissions.filter(
+        item =>
+            String(
+                item.studentId
+            ) ===
+            String(
+                studentId
+            )
+    );
+
+}
+
+
+/* =====================================================
+   GRADE
+===================================================== */
+
+function calculateGrade(
+    percentage
+){
+
+    if(
+        percentage >= 80
+    ){
+
+        return "A+";
+
+    }
+
+    if(
+        percentage >= 70
+    ){
+
+        return "A";
+
+    }
+
+    if(
+        percentage >= 60
+    ){
+
+        return "A-";
+
+    }
+
+    if(
+        percentage >= 50
+    ){
+
+        return "B";
+
+    }
+
+    if(
+        percentage >= 40
+    ){
+
+        return "C";
+
+    }
+
+    if(
+        percentage >= 33
+    ){
+
+        return "D";
+
+    }
+
+    return "F";
+
+}
+
+
+/* =====================================================
+   GRADE DESCRIPTION
+===================================================== */
+
+function gradeDescription(
+    grade
+){
+
+    const map = {
+
+        "A+":
+            "Excellent performance",
+
+        "A":
+            "Very good performance",
+
+        "A-":
+            "Good performance",
+
+        "B":
+            "Satisfactory performance",
+
+        "C":
+            "Average performance",
+
+        "D":
+            "Pass — improvement recommended",
+
+        "F":
+            "Needs improvement"
+
+    };
+
+
+    return (
+        map[grade] ||
+        "Result pending"
+    );
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(
+    value
+){
+
+    if(!value){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "-";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(
+    value
+){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value == null
+        ? ""
+        : String(
+            value
+        );
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   RENDER PAGE
+===================================================== */
+
+function renderPage(){
+
+    const list =
+        getStudentSubmissions();
+
+
+    const graded =
+        list.filter(
+            item =>
+                item.mark !== null &&
+                item.mark !== undefined &&
+                item.mark !== ""
+        );
+
+
+    const resultBody =
+        document.getElementById(
+            "resultBody"
+        );
+
+
+    const feedbackList =
+        document.getElementById(
+            "feedbackList"
+        );
+
+
+    resultBody.innerHTML =
+        "";
+
+    feedbackList.innerHTML =
+        "";
+
+
+    if(
+        list.length === 0
+    ){
+
+        document.getElementById(
+            "studentCard"
+        ).style.display =
+            "none";
+
+
+        document.querySelector(
+            ".overview"
+        ).style.display =
+            "none";
+
+
+        document.querySelector(
+            ".result-card"
+        ).style.display =
+            "none";
+
+
+        document.querySelector(
+            ".summary"
+        ).style.display =
+            "none";
+
+
+        document.querySelector(
+            ".feedback-section"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "emptyState"
+        ).style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "studentCard"
+    ).style.display =
+        "flex";
+
+
+    document.querySelector(
+        ".overview"
+    ).style.display =
+        "grid";
+
+
+    document.querySelector(
+        ".result-card"
+    ).style.display =
+        "block";
+
+
+    document.querySelector(
+        ".summary"
+    ).style.display =
+        "grid";
+
+
+    document.querySelector(
+        ".feedback-section"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "emptyState"
+    ).style.display =
+        "none";
+
+
+    /* STUDENT INFO */
+
+    const first =
+        list[0];
+
+
+    document.getElementById(
+        "studentName"
+    ).textContent =
+        first.studentName ||
+        "Student";
+
+
+    document.getElementById(
+        "studentId"
+    ).textContent =
+        "Student ID: " +
+        (
+            first.studentId ||
+            "-"
+        );
+
+
+    document.getElementById(
+        "studentCourse"
+    ).textContent =
+        "Course: " +
+        (
+            first.course ||
+            getAssignment(
+                first.assignmentId
+            )?.course ||
+            "-"
+        );
+
+
+    document.getElementById(
+        "studentClass"
+    ).textContent =
+        "Class: " +
+        (
+            first.className ||
+            first.class ||
+            "-"
+        );
+
+
+    /* MARK CALCULATION */
+
+    let totalMarks =
+        0;
+
+    let obtainedMarks =
+        0;
+
+
+    graded.forEach(
+        submission => {
+
+            const assignment =
+                getAssignment(
+                    submission.assignmentId
+                );
+
+
+            const total =
+                Number(
+                    assignment?.marks ??
+                    submission.totalMarks ??
+                    0
+                );
+
+
+            const obtained =
+                Number(
+                    submission.mark
+                );
+
+
+            totalMarks +=
+                total;
+
+
+            if(
+                !Number.isNaN(
+                    obtained
+                )
+            ){
+
+                obtainedMarks +=
+                    obtained;
+
+            }
+
+        }
+    );
+
+
+    const percentage =
+        totalMarks > 0
+        ?
+        (
+            obtainedMarks /
+            totalMarks
+        ) *
+        100
+        :
+        0;
+
+
+    const completion =
+        list.length > 0
+        ?
+        (
+            graded.length /
+            list.length
+        ) *
+        100
+        :
+        0;
+
+
+    /* OVERVIEW */
+
+    document.getElementById(
+        "totalAssignments"
+    ).textContent =
+        list.length;
+
+
+    document.getElementById(
+        "totalMarks"
+    ).textContent =
+        totalMarks;
+
+
+    document.getElementById(
+        "obtainedMarks"
+    ).textContent =
+        obtainedMarks;
+
+
+    document.getElementById(
+        "overallPercentage"
+    ).textContent =
+        percentage.toFixed(1) +
+        "%";
+
+
+    /* PROGRESS */
+
+    document.getElementById(
+        "progressText"
+    ).textContent =
+        percentage.toFixed(1) +
+        "%";
+
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        Math.min(
+            percentage,
+            100
+        ) +
+        "%";
+
+
+    document.getElementById(
+        "completionText"
+    ).textContent =
+        completion.toFixed(1) +
+        "%";
+
+
+    document.getElementById(
+        "completionBar"
+    ).style.width =
+        completion +
+        "%";
+
+
+    /* GRADE */
+
+    if(
+        graded.length === 0
+    ){
+
+        document.getElementById(
+            "bigGrade"
+        ).textContent =
+            "-";
+
+
+        document.getElementById(
+            "gradeTitle"
+        ).textContent =
+            "Result Pending";
+
+
+        document.getElementById(
+            "gradeDescription"
+        ).textContent =
+            "Admin এখনো assignment grade করেননি।";
+
+    }
+    else{
+
+        const grade =
+            calculateGrade(
+                percentage
+            );
+
+
+        document.getElementById(
+            "bigGrade"
+        ).textContent =
+            grade;
+
+
+        document.getElementById(
+            "gradeTitle"
+        ).textContent =
+            gradeDescription(
+                grade
+            );
+
+
+        document.getElementById(
+            "gradeDescription"
+        ).textContent =
+            "Overall percentage: " +
+            percentage.toFixed(1) +
+            "%";
+
+    }
+
+
+    /* TABLE */
+
+    list.forEach(
+        submission => {
+
+            const assignment =
+                getAssignment(
+                    submission.assignmentId
+                );
+
+
+            const title =
+                assignment?.title ||
+                submission.assignmentTitle ||
+                "Assignment";
+
+
+            const course =
+                assignment?.course ||
+                submission.course ||
+                "Course";
+
+
+            const total =
+                Number(
+                    assignment?.marks ??
+                    submission.totalMarks ??
+                    0
+                );
+
+
+            const gradedSubmission =
+                submission.mark !== null &&
+                submission.mark !== undefined &&
+                submission.mark !== "";
+
+
+            const obtained =
+                Number(
+                    submission.mark
+                );
+
+
+            const itemPercentage =
+                gradedSubmission &&
+                total > 0
+                ?
+                (
+                    obtained /
+                    total
+                ) *
+                100
+                :
+                null;
+
+
+            const grade =
+                itemPercentage !== null
+                ?
+                calculateGrade(
+                    itemPercentage
+                )
+                :
+                "-";
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="assignment">
+
+                        ${escapeHtml(
+                            title
+                        )}
+
+                    </div>
+
+                    <div class="course">
+
+                        ${escapeHtml(
+                            course
+                        )}
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    ${formatDate(
+                        submission.submittedAt
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <span class="marks">
+
+                        ${
+                            gradedSubmission
+                            ?
+                            escapeHtml(
+                                obtained
+                            ) +
+                            " / " +
+                            escapeHtml(
+                                total
+                            )
+                            :
+                            "Pending"
+                        }
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="percentage">
+
+                        ${
+                            itemPercentage !== null
+                            ?
+                            itemPercentage.toFixed(
+                                1
+                            ) + "%"
+                            :
+                            "-"
+                        }
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="grade">
+
+                        ${escapeHtml(
+                            grade
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <div class="feedback">
+
+                        ${escapeHtml(
+                            submission.teacherFeedback ||
+                            "No feedback"
+                        )}
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            resultBody.appendChild(
+                row
+            );
+
+
+            /* FEEDBACK */
+
+            if(
+                submission.teacherFeedback
+            ){
+
+                const feedback =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                feedback.className =
+                    "feedback-box";
+
+
+                feedback.innerHTML = `
+
+                    <div class="feedback-title">
+
+                        ${escapeHtml(
+                            title
+                        )}
+
+                    </div>
+
+                    ${escapeHtml(
+                        submission.teacherFeedback
+                    )}
+
+                `;
+
+
+                feedbackList.appendChild(
+                    feedback
+                );
+
+            }
+
+        }
+    );
+
+
+    if(
+        feedbackList.children.length === 0
+    ){
+
+        const noFeedback =
+            document.createElement(
+                "div"
+            );
+
+
+        noFeedback.className =
+            "feedback-box";
+
+
+        noFeedback.textContent =
+            "এখনো কোনো teacher feedback দেওয়া হয়নি।";
+
+
+        feedbackList.appendChild(
+            noFeedback
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+function printResult(){
+
+    window.print();
+
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+function goBack(){
+
+    if(
+        document.referrer &&
+        document.referrer.includes(
+            "student-results"
+        )
+    ){
+
+        history.back();
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "student-results.html";
+
+}
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        "snkResultDetailsTheme",
+        dark
+        ?
+        "dark"
+        :
+        "light"
+    );
+
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        dark
+        ?
+        "☀️"
+        :
+        "🌙";
+
+}
+
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem(
+            "snkResultDetailsTheme"
+        );
+
+
+    if(
+        theme === "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+
+        document.getElementById(
+            "themeBtn"
+        ).textContent =
+            "☀️";
+
+    }
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+    message
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        () => {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+/* =====================================================
+   AUTO UPDATE
+===================================================== */
+
+setInterval(
+    function(){
+
+        loadData();
+
+    },
+    5000
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+loadTheme();
+
+loadData();
+
+</script>
+
+</body>
+</html>
+```
