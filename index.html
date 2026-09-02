@@ -14,6 +14,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+
+        /* =========================
+           BASIC RESET
+        ========================== */
+
         * {
             margin: 0;
             padding: 0;
@@ -26,308 +31,752 @@
 
         body {
             font-family: "Noto Sans Bengali", Arial, sans-serif;
+
             background: #f5f7fb;
             color: #172033;
+
             min-height: 100vh;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease;
         }
+
+
+        /* =========================
+           DARK MODE
+        ========================== */
+
+        body.dark {
+
+            background: #0b1120;
+            color: #f1f5f9;
+
+        }
+
 
         /* =========================
            HEADER
         ========================== */
 
         .header {
+
             width: 100%;
+
             background: #ffffff;
+
             border-bottom: 1px solid #e7eaf0;
+
             position: sticky;
+
             top: 0;
+
             z-index: 1000;
+
+            transition:
+                background 0.3s ease,
+                border-color 0.3s ease;
+
         }
+
+
+        body.dark .header {
+
+            background: #111827;
+
+            border-color: #273244;
+
+        }
+
 
         .header-inner {
+
             max-width: 1200px;
+
             margin: auto;
+
             padding: 15px 20px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
             gap: 20px;
+
         }
+
+
+        /* =========================
+           BRAND
+        ========================== */
 
         .brand {
+
             display: flex;
+
             align-items: center;
+
             gap: 12px;
+
         }
+
 
         .brand-logo {
+
             width: 46px;
+
             height: 46px;
+
             border-radius: 12px;
+
             background: #111827;
+
             color: #ffffff;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             font-size: 18px;
+
             font-weight: 800;
+
+            transition: 0.3s ease;
+
         }
+
+
+        body.dark .brand-logo {
+
+            background: #ffffff;
+
+            color: #111827;
+
+        }
+
 
         .brand-text h1 {
+
             font-size: 18px;
+
             font-weight: 800;
+
             line-height: 1.2;
+
         }
+
 
         .brand-text p {
+
             font-size: 12px;
+
             color: #667085;
+
             margin-top: 3px;
+
+            transition: color 0.3s ease;
+
         }
+
+
+        body.dark .brand-text p {
+
+            color: #94a3b8;
+
+        }
+
+
+        /* =========================
+           HEADER ACTIONS
+        ========================== */
 
         .header-actions {
+
             display: flex;
+
             align-items: center;
+
             gap: 10px;
+
         }
+
 
         .header-btn {
+
             border: 1px solid #e1e5eb;
+
             background: #ffffff;
+
             color: #344054;
+
             padding: 9px 13px;
+
             border-radius: 9px;
+
             cursor: pointer;
+
             font-family: inherit;
+
             font-size: 13px;
+
+            transition: 0.2s ease;
+
         }
 
+
         .header-btn:hover {
+
             background: #f4f6f8;
+
         }
+
+
+        body.dark .header-btn {
+
+            background: #172033;
+
+            border-color: #344054;
+
+            color: #f8fafc;
+
+        }
+
+
+        body.dark .header-btn:hover {
+
+            background: #1e293b;
+
+        }
+
+
+        /* =========================
+           THEME BUTTON
+        ========================== */
+
+        .theme-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 40px;
+
+            height: 40px;
+
+            padding: 0;
+
+            font-size: 18px;
+
+        }
+
 
         /* =========================
            MAIN
         ========================== */
 
         .main {
+
             max-width: 1200px;
+
             margin: auto;
+
             padding: 35px 20px 60px;
+
         }
+
 
         /* =========================
            WELCOME
         ========================== */
 
         .welcome {
+
             background: #111827;
+
             color: #ffffff;
+
             border-radius: 20px;
+
             padding: 38px;
+
             margin-bottom: 25px;
+
             position: relative;
+
             overflow: hidden;
+
         }
+
 
         .welcome::after {
+
             content: "";
+
             position: absolute;
+
             width: 220px;
+
             height: 220px;
+
             border-radius: 50%;
+
             background: rgba(255, 255, 255, 0.05);
+
             right: -70px;
+
             top: -80px;
+
         }
+
 
         .welcome-content {
+
             position: relative;
+
             z-index: 2;
+
         }
+
 
         .welcome small {
+
             color: #cbd5e1;
+
             font-size: 13px;
+
         }
+
 
         .welcome h2 {
+
             font-size: 30px;
+
             margin-top: 8px;
+
             margin-bottom: 8px;
+
         }
+
 
         .welcome p {
+
             color: #d1d5db;
+
             font-size: 14px;
+
             max-width: 650px;
+
             line-height: 1.8;
+
         }
 
+
         /* =========================
-           QUICK CARDS
+           SECTION TITLE
         ========================== */
 
         .section-title {
+
             margin-bottom: 15px;
+
         }
+
 
         .section-title h3 {
+
             font-size: 20px;
+
             font-weight: 800;
+
         }
+
 
         .section-title p {
+
             color: #667085;
+
             font-size: 13px;
+
             margin-top: 3px;
+
         }
+
+
+        body.dark .section-title p {
+
+            color: #94a3b8;
+
+        }
+
+
+        /* =========================
+           CARDS
+        ========================== */
 
         .cards {
+
             display: grid;
+
             grid-template-columns: repeat(4, 1fr);
+
             gap: 16px;
+
         }
+
 
         .card {
+
             background: #ffffff;
+
             border: 1px solid #e7eaf0;
+
             border-radius: 16px;
+
             padding: 22px;
-            transition: 0.2s ease;
+
+            transition:
+
+                transform 0.2s ease,
+
+                box-shadow 0.2s ease,
+
+                background 0.3s ease,
+
+                border-color 0.3s ease;
+
         }
+
 
         .card:hover {
+
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(16, 24, 40, 0.07);
+
+            box-shadow:
+
+                0 10px 30px rgba(16, 24, 40, 0.07);
+
         }
+
+
+        body.dark .card {
+
+            background: #111827;
+
+            border-color: #273244;
+
+        }
+
+
+        body.dark .card:hover {
+
+            box-shadow:
+
+                0 10px 30px rgba(0, 0, 0, 0.25);
+
+        }
+
 
         .card-icon {
+
             width: 44px;
+
             height: 44px;
+
             border-radius: 12px;
+
             background: #f2f4f7;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             font-size: 21px;
+
             margin-bottom: 15px;
+
+            transition: background 0.3s ease;
+
         }
+
+
+        body.dark .card-icon {
+
+            background: #1e293b;
+
+        }
+
 
         .card h4 {
+
             font-size: 16px;
+
             margin-bottom: 6px;
+
         }
 
+
         .card p {
+
             font-size: 12px;
+
             color: #667085;
+
             line-height: 1.6;
+
         }
+
+
+        body.dark .card p {
+
+            color: #94a3b8;
+
+        }
+
 
         /* =========================
            NOTICE
         ========================== */
 
         .notice {
+
             margin-top: 25px;
+
             background: #ffffff;
+
             border: 1px solid #e7eaf0;
+
             border-radius: 16px;
+
             padding: 22px;
+
+            transition:
+
+                background 0.3s ease,
+
+                border-color 0.3s ease;
+
         }
+
+
+        body.dark .notice {
+
+            background: #111827;
+
+            border-color: #273244;
+
+        }
+
 
         .notice h3 {
+
             font-size: 18px;
+
             margin-bottom: 10px;
+
         }
 
+
         .notice-box {
+
             background: #f8fafc;
+
             border-radius: 12px;
+
             padding: 15px;
+
             color: #475467;
+
             font-size: 13px;
+
             line-height: 1.8;
+
+            transition:
+
+                background 0.3s ease,
+
+                color 0.3s ease;
+
         }
+
+
+        body.dark .notice-box {
+
+            background: #172033;
+
+            color: #cbd5e1;
+
+        }
+
 
         /* =========================
            FOOTER
         ========================== */
 
         .footer {
+
             text-align: center;
+
             padding: 25px 20px;
+
             color: #667085;
+
             font-size: 12px;
+
             border-top: 1px solid #e7eaf0;
+
             background: #ffffff;
+
+            transition:
+
+                background 0.3s ease,
+
+                border-color 0.3s ease,
+
+                color 0.3s ease;
+
         }
+
+
+        body.dark .footer {
+
+            background: #111827;
+
+            border-color: #273244;
+
+            color: #94a3b8;
+
+        }
+
 
         /* =========================
            RESPONSIVE
         ========================== */
 
         @media (max-width: 900px) {
+
             .cards {
+
                 grid-template-columns: repeat(2, 1fr);
+
             }
+
         }
+
 
         @media (max-width: 600px) {
 
             .header-inner {
+
                 padding: 12px 15px;
+
             }
+
 
             .brand-text h1 {
+
                 font-size: 15px;
+
             }
+
 
             .brand-text p {
+
                 font-size: 10px;
+
             }
+
 
             .brand-logo {
+
                 width: 40px;
+
                 height: 40px;
+
                 font-size: 15px;
+
             }
+
 
             .header-btn {
+
                 padding: 8px 10px;
+
                 font-size: 11px;
+
             }
+
+
+            .theme-btn {
+
+                width: 36px;
+
+                height: 36px;
+
+                font-size: 16px;
+
+            }
+
 
             .main {
+
                 padding: 20px 15px 40px;
+
             }
+
 
             .welcome {
+
                 padding: 28px 22px;
+
                 border-radius: 16px;
+
             }
+
 
             .welcome h2 {
+
                 font-size: 23px;
+
             }
+
 
             .welcome p {
+
                 font-size: 12px;
+
             }
+
 
             .cards {
+
                 grid-template-columns: 1fr;
+
             }
+
 
             .section-title h3 {
+
                 font-size: 18px;
+
             }
+
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
     <!-- =========================
          HEADER
@@ -337,6 +786,9 @@
 
         <div class="header-inner">
 
+
+            <!-- BRAND -->
+
             <div class="brand">
 
                 <div class="brand-logo">
@@ -344,19 +796,53 @@
                 </div>
 
                 <div class="brand-text">
-                    <h1>SNK IT Institute</h1>
-                    <p>Student Portal</p>
+
+                    <h1>
+                        SNK IT Institute
+                    </h1>
+
+                    <p>
+                        Student Portal
+                    </p>
+
                 </div>
 
             </div>
 
+
+            <!-- HEADER BUTTONS -->
+
             <div class="header-actions">
 
-                <button class="header-btn">
+
+                <!-- THEME BUTTON -->
+
+                <button
+                    class="header-btn theme-btn"
+                    id="themeButton"
+                    onclick="toggleTheme()"
+                    title="Change Theme"
+                >
+                    🌙
+                </button>
+
+
+                <!-- LANGUAGE -->
+
+                <button
+                    class="header-btn"
+                    id="languageButton"
+                >
                     বাংলা
                 </button>
 
-                <button class="header-btn">
+
+                <!-- LOGIN -->
+
+                <button
+                    class="header-btn"
+                    id="loginButton"
+                >
                     Login
                 </button>
 
@@ -367,26 +853,33 @@
     </header>
 
 
+
     <!-- =========================
-         MAIN CONTENT
+         MAIN
     ========================== -->
 
     <main class="main">
 
-        <!-- Welcome -->
+
+        <!-- WELCOME -->
 
         <section class="welcome">
 
             <div class="welcome-content">
 
-                <small>Welcome to Student Portal</small>
+                <small>
+                    Welcome to Student Portal
+                </small>
 
-                <h2>SNK IT Institute</h2>
+                <h2>
+                    SNK IT Institute
+                </h2>
 
                 <p>
-                    আপনার কোর্সের Assignment, Quiz, Deadline,
-                    Submission এবং Result সহজে দেখার জন্য
-                    এই Student Portal তৈরি করা হচ্ছে।
+                    আপনার কোর্সের Assignment, Quiz,
+                    Deadline, Submission এবং Result
+                    সহজে দেখার জন্য এই Student Portal
+                    তৈরি করা হচ্ছে।
                 </p>
 
             </div>
@@ -394,13 +887,17 @@
         </section>
 
 
-        <!-- Quick Access -->
+
+        <!-- PORTAL FEATURES -->
 
         <section>
 
+
             <div class="section-title">
 
-                <h3>Student Portal</h3>
+                <h3>
+                    Student Portal
+                </h3>
 
                 <p>
                     আপনার প্রয়োজনীয় বিষয়গুলো এখানে পাওয়া যাবে।
@@ -409,7 +906,11 @@
             </div>
 
 
+
             <div class="cards">
+
+
+                <!-- PROFILE -->
 
                 <div class="card">
 
@@ -417,15 +918,20 @@
                         👨‍🎓
                     </div>
 
-                    <h4>Student Profile</h4>
+                    <h4>
+                        Student Profile
+                    </h4>
 
                     <p>
-                        Student ID এবং নিজের basic information
-                        এখানে দেখা যাবে।
+                        Student ID এবং নিজের basic
+                        information এখানে দেখা যাবে।
                     </p>
 
                 </div>
 
+
+
+                <!-- ASSIGNMENT -->
 
                 <div class="card">
 
@@ -433,15 +939,20 @@
                         📝
                     </div>
 
-                    <h4>Assignment</h4>
+                    <h4>
+                        Assignment
+                    </h4>
 
                     <p>
-                        Assignment, deadline এবং submission
-                        পরবর্তীতে এখানে থাকবে।
+                        Assignment, deadline এবং
+                        submission পরবর্তীতে এখানে থাকবে।
                     </p>
 
                 </div>
 
+
+
+                <!-- QUIZ -->
 
                 <div class="card">
 
@@ -449,7 +960,9 @@
                         🧠
                     </div>
 
-                    <h4>Quiz</h4>
+                    <h4>
+                        Quiz
+                    </h4>
 
                     <p>
                         Online quiz এবং countdown timer
@@ -459,31 +972,40 @@
                 </div>
 
 
+
+                <!-- RESULT -->
+
                 <div class="card">
 
                     <div class="card-icon">
                         🏆
                     </div>
 
-                    <h4>Result</h4>
+                    <h4>
+                        Result
+                    </h4>
 
                     <p>
-                        Admin mark দেওয়ার পরে আপনার result
-                        এখানে দেখা যাবে।
+                        Admin mark দেওয়ার পরে আপনার
+                        result এখানে দেখা যাবে।
                     </p>
 
                 </div>
+
 
             </div>
 
         </section>
 
 
-        <!-- Notice -->
+
+        <!-- NOTICE -->
 
         <section class="notice">
 
-            <h3>📢 Notice</h3>
+            <h3>
+                📢 Notice
+            </h3>
 
             <div class="notice-box">
 
@@ -495,7 +1017,9 @@
 
         </section>
 
+
     </main>
+
 
 
     <!-- =========================
@@ -505,10 +1029,103 @@
     <footer class="footer">
 
         © 2026 SNK IT Institute
+
         <br>
+
         Student Learning Portal
 
     </footer>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* =========================
+           THEME SYSTEM
+        ========================== */
+
+        function toggleTheme() {
+
+            document.body.classList.toggle("dark");
+
+            const themeButton =
+                document.getElementById("themeButton");
+
+
+            if (document.body.classList.contains("dark")) {
+
+                themeButton.textContent = "☀️";
+
+                localStorage.setItem(
+                    "snkTheme",
+                    "dark"
+                );
+
+            } else {
+
+                themeButton.textContent = "🌙";
+
+                localStorage.setItem(
+                    "snkTheme",
+                    "light"
+                );
+
+            }
+
+        }
+
+
+
+        /* =========================
+           LOAD SAVED THEME
+        ========================== */
+
+        function loadTheme() {
+
+            const savedTheme =
+                localStorage.getItem("snkTheme");
+
+
+            const themeButton =
+                document.getElementById("themeButton");
+
+
+            if (savedTheme === "dark") {
+
+                document.body.classList.add("dark");
+
+                themeButton.textContent = "☀️";
+
+            } else {
+
+                document.body.classList.remove("dark");
+
+                themeButton.textContent = "🌙";
+
+            }
+
+        }
+
+
+
+        /* =========================
+           START
+        ========================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                loadTheme();
+
+            }
+        );
+
+    </script>
 
 
 </body>
