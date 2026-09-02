@@ -30,6 +30,7 @@
     --success:#16a34a;
     --warning:#d97706;
     --danger:#dc2626;
+    --purple:#7c3aed;
     --sidebar:#111827;
     --shadow:0 10px 30px rgba(15,23,42,.07);
 }
@@ -68,6 +69,7 @@ a{
     text-decoration:none;
     color:inherit;
 }
+
 
 /* =========================
    SIDEBAR
@@ -208,6 +210,7 @@ a{
     font-size:14px;
 }
 
+
 /* =========================
    MAIN
 ========================= */
@@ -217,6 +220,7 @@ a{
     width:calc(100% - 255px);
     min-width:0;
 }
+
 
 /* =========================
    TOPBAR
@@ -305,6 +309,7 @@ a{
     font-size:8px;
 }
 
+
 /* =========================
    CONTENT
 ========================= */
@@ -341,9 +346,6 @@ a{
     font-weight:800;
 }
 
-.primary-btn:hover{
-    background:var(--primary-dark);
-}
 
 /* =========================
    STATS
@@ -389,6 +391,7 @@ a{
     color:var(--muted);
     font-size:8px;
 }
+
 
 /* =========================
    TOOLBAR
@@ -446,68 +449,112 @@ a{
     min-width:145px;
 }
 
-.filter-btn{
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    padding:10px 12px;
-    border-radius:8px;
-    font-size:9px;
-    font-weight:700;
-}
 
 /* =========================
-   QUIZ GRID
+   TABLE
 ========================= */
 
-.quiz-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.quiz-card{
+.table-card{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:15px;
-    overflow:hidden;
     box-shadow:var(--shadow);
-    transition:.2s;
+    overflow:hidden;
 }
 
-.quiz-card:hover{
-    transform:translateY(-2px);
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
 }
 
-.quiz-header{
-    padding:17px;
-    background:var(--soft);
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1120px;
+}
+
+thead{
+    background:var(--bg);
+}
+
+th{
+    color:var(--muted);
+    font-size:8px;
+    font-weight:800;
+    text-align:left;
+    padding:13px 14px;
     border-bottom:1px solid var(--border);
+    white-space:nowrap;
 }
 
-.quiz-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    margin-bottom:12px;
+td{
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    font-size:9px;
+    white-space:nowrap;
 }
 
-.quiz-icon{
-    width:42px;
-    height:42px;
-    border-radius:11px;
-    background:var(--card);
-    display:flex;
+tbody tr:hover{
+    background:var(--bg);
+}
+
+.quiz-cell strong{
+    display:block;
+    font-size:10px;
+}
+
+.quiz-cell span{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.course-badge{
+    display:inline-flex;
+    padding:5px 8px;
+    background:var(--soft);
+    color:var(--primary);
+    border-radius:20px;
+    font-size:7px;
+    font-weight:800;
+}
+
+.time-badge{
+    display:inline-flex;
     align-items:center;
-    justify-content:center;
-    font-size:20px;
+    gap:4px;
+    padding:5px 8px;
+    background:#f5f3ff;
+    color:var(--purple);
+    border-radius:20px;
+    font-size:7px;
+    font-weight:800;
+}
+
+body.dark .time-badge{
+    background:#2e1065;
+    color:#c4b5fd;
+}
+
+.deadline{
+    font-weight:700;
+}
+
+.deadline.upcoming{
+    color:var(--warning);
+}
+
+.deadline.active{
+    color:var(--success);
+}
+
+.deadline.overdue{
+    color:var(--danger);
 }
 
 .status{
     display:inline-flex;
-    align-items:center;
-    gap:5px;
     padding:5px 8px;
     border-radius:20px;
     font-size:7px;
@@ -515,79 +562,30 @@ a{
 }
 
 .status.active{
-    color:#15803d;
     background:#dcfce7;
+    color:#15803d;
 }
 
-.status.inactive{
-    color:#b91c1c;
+.status.closed{
     background:#fee2e2;
+    color:#b91c1c;
 }
 
-.status.upcoming{
-    color:#a16207;
-    background:#fef9c3;
+.status.draft{
+    background:#f3f4f6;
+    color:#4b5563;
 }
 
-.quiz-title{
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:4px;
+body.dark .status.draft{
+    background:#1f2937;
+    color:#d1d5db;
 }
 
-.quiz-course{
-    color:var(--muted);
-    font-size:8px;
-}
-
-.quiz-body{
-    padding:14px;
-}
-
-.quiz-info{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-bottom:12px;
-}
-
-.info-box{
-    background:var(--bg);
-    border:1px solid var(--border);
-    border-radius:8px;
-    padding:8px;
-}
-
-.info-label{
-    display:block;
-    color:var(--muted);
-    font-size:7px;
-    margin-bottom:2px;
-}
-
-.info-value{
-    font-size:9px;
+.attempt-count{
     font-weight:800;
 }
 
-.deadline{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    color:var(--muted);
-    font-size:8px;
-    margin-bottom:11px;
-}
-
-.quiz-footer{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding-top:10px;
-    border-top:1px solid var(--border);
-}
-
-.quiz-actions{
+.row-actions{
     display:flex;
     gap:5px;
 }
@@ -609,24 +607,6 @@ a{
     color:var(--danger);
 }
 
-.preview-btn{
-    border:none;
-    background:var(--primary);
-    color:#fff;
-    padding:7px 10px;
-    border-radius:7px;
-    font-size:7px;
-    font-weight:800;
-}
-
-.no-result{
-    display:none;
-    padding:45px 20px;
-    text-align:center;
-    color:var(--muted);
-    font-size:10px;
-    grid-column:1/-1;
-}
 
 /* =========================
    MODAL
@@ -693,11 +673,11 @@ a{
 }
 
 .form-group{
-    margin-bottom:11px;
+    margin-bottom:12px;
 }
 
 .form-group.full{
-    grid-column:1/-1;
+    grid-column:1 / -1;
 }
 
 .form-group label{
@@ -721,14 +701,8 @@ a{
 }
 
 .form-group textarea{
-    min-height:75px;
+    min-height:80px;
     resize:vertical;
-}
-
-.form-hint{
-    color:var(--muted);
-    font-size:7px;
-    margin-top:4px;
 }
 
 .form-actions{
@@ -758,60 +732,145 @@ a{
     font-weight:800;
 }
 
+
 /* =========================
-   QUESTION MODAL
+   QUESTIONS MODAL
 ========================= */
 
+.question-info{
+    background:var(--soft);
+    border-radius:10px;
+    padding:12px;
+    margin-bottom:15px;
+}
+
+.question-info strong{
+    font-size:10px;
+}
+
+.question-info p{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
 .question-list{
-    margin-top:12px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
 }
 
 .question-item{
     border:1px solid var(--border);
     border-radius:10px;
-    padding:11px;
-    margin-bottom:8px;
+    padding:12px;
     background:var(--bg);
 }
 
-.question-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-}
-
 .question-number{
+    color:var(--primary);
     font-size:8px;
     font-weight:800;
-    color:var(--primary);
+    margin-bottom:4px;
 }
 
 .question-text{
     font-size:9px;
     font-weight:700;
-    margin:5px 0;
-}
-
-.question-options{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:5px;
+    margin-bottom:8px;
 }
 
 .option{
-    border:1px solid var(--border);
-    padding:6px;
-    border-radius:6px;
-    font-size:7px;
+    font-size:8px;
     color:var(--muted);
+    margin:3px 0;
 }
 
-.option.correct{
+.correct{
     color:var(--success);
-    border-color:#86efac;
-    background:#f0fdf4;
+    font-weight:700;
 }
+
+
+/* =========================
+   ATTEMPTS MODAL
+========================= */
+
+.attempt-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.attempt-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:11px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--bg);
+}
+
+.student-info{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.student-avatar{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:9px;
+    font-weight:800;
+}
+
+.student-info strong{
+    display:block;
+    font-size:9px;
+}
+
+.student-info span{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+}
+
+.score{
+    font-size:10px;
+    font-weight:800;
+    color:var(--success);
+}
+
+.view-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:7px 10px;
+    border-radius:7px;
+    font-size:8px;
+    font-weight:700;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty-state{
+    display:none;
+    text-align:center;
+    padding:45px 20px;
+    color:var(--muted);
+    font-size:10px;
+}
+
 
 /* =========================
    FOOTER
@@ -825,6 +884,7 @@ a{
     text-align:center;
     margin-top:25px;
 }
+
 
 /* =========================
    MOBILE
@@ -845,10 +905,6 @@ a{
 @media(max-width:1100px){
 
     .stats-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .quiz-grid{
         grid-template-columns:repeat(2,1fr);
     }
 }
@@ -920,13 +976,8 @@ a{
         min-width:0;
     }
 
-    .filter-select,
-    .filter-btn{
+    .filter-select{
         width:100%;
-    }
-
-    .quiz-grid{
-        grid-template-columns:1fr;
     }
 
     .form-grid{
@@ -936,16 +987,14 @@ a{
     .form-group.full{
         grid-column:auto;
     }
-
-    .question-options{
-        grid-template-columns:1fr;
-    }
 }
 
 </style>
 </head>
 
+
 <body>
+
 
 <!-- =========================
      SIDEBAR
@@ -956,13 +1005,18 @@ a{
     <div class="sidebar-logo">
 
         <img
-        src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-        alt="SNK IT Institute Logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute Logo"
         >
 
         <div class="sidebar-logo-text">
+
             SNK IT Institute
-            <small>Admin Control Panel</small>
+
+            <small>
+                Admin Control Panel
+            </small>
+
         </div>
 
     </div>
@@ -974,19 +1028,52 @@ a{
             MAIN
         </div>
 
-        <a class="menu-item" href="admin.html">
-            <span class="menu-icon">📊</span>
-            <span>Dashboard</span>
+
+        <a
+            class="menu-item"
+            href="admin.html"
+        >
+
+            <span class="menu-icon">
+                📊
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
         </a>
 
-        <a class="menu-item" href="students.html">
-            <span class="menu-icon">👨‍🎓</span>
-            <span>Students</span>
+
+        <a
+            class="menu-item"
+            href="students.html"
+        >
+
+            <span class="menu-icon">
+                👨‍🎓
+            </span>
+
+            <span>
+                Students
+            </span>
+
         </a>
 
-        <a class="menu-item" href="courses.html">
-            <span class="menu-icon">🎓</span>
-            <span>Courses</span>
+
+        <a
+            class="menu-item"
+            href="courses.html"
+        >
+
+            <span class="menu-icon">
+                🎓
+            </span>
+
+            <span>
+                Courses
+            </span>
+
         </a>
 
 
@@ -994,41 +1081,88 @@ a{
             ACADEMIC
         </div>
 
-        <a class="menu-item" href="assignments.html">
-            <span class="menu-icon">📝</span>
-            <span>Assignments</span>
+
+        <a
+            class="menu-item"
+            href="assignments.html"
+        >
+
+            <span class="menu-icon">
+                📝
+            </span>
+
+            <span>
+                Assignments
+            </span>
+
         </a>
 
-        <a class="menu-item active" href="quiz.html">
-            <span class="menu-icon">🎯</span>
-            <span>Quiz</span>
+
+        <a
+            class="menu-item active"
+            href="quiz.html"
+        >
+
+            <span class="menu-icon">
+                🎯
+            </span>
+
+            <span>
+                Quiz
+            </span>
+
         </a>
 
-        <button
-        class="menu-item"
-        onclick="showDemo('Results')">
 
-            <span class="menu-icon">🏆</span>
-            <span>Results</span>
+        <a
+            class="menu-item"
+            href="results.html"
+        >
 
-        </button>
+            <span class="menu-icon">
+                🏆
+            </span>
+
+            <span>
+                Results
+            </span>
+
+        </a>
 
 
         <div class="menu-label">
             CONTENT
         </div>
 
-        <a class="menu-item" href="resources.html">
-            <span class="menu-icon">📚</span>
-            <span>Resources</span>
+
+        <a
+            class="menu-item"
+            href="resources.html"
+        >
+
+            <span class="menu-icon">
+                📚
+            </span>
+
+            <span>
+                Resources
+            </span>
+
         </a>
 
-        <button
-        class="menu-item"
-        onclick="showDemo('Notices')">
 
-            <span class="menu-icon">📢</span>
-            <span>Notices</span>
+        <button
+            class="menu-item"
+            onclick="showDemo('Notices')"
+        >
+
+            <span class="menu-icon">
+                📢
+            </span>
+
+            <span>
+                Notices
+            </span>
 
         </button>
 
@@ -1037,12 +1171,19 @@ a{
             SYSTEM
         </div>
 
-        <button
-        class="menu-item"
-        onclick="showDemo('Settings')">
 
-            <span class="menu-icon">⚙️</span>
-            <span>Settings</span>
+        <button
+            class="menu-item"
+            onclick="showDemo('Settings')"
+        >
+
+            <span class="menu-icon">
+                ⚙️
+            </span>
+
+            <span>
+                Settings
+            </span>
 
         </button>
 
@@ -1058,16 +1199,22 @@ a{
             </div>
 
             <div class="admin-mini-info">
-                <strong>Super Admin</strong>
-                <span>Administrator</span>
+
+                <strong>
+                    Super Admin
+                </strong>
+
+                <span>
+                    Administrator
+                </span>
+
             </div>
 
             <button
-            class="logout-small"
-            onclick="logoutDemo()">
-
+                class="logout-small"
+                onclick="logoutDemo()"
+            >
                 🚪
-
             </button>
 
         </div>
@@ -1078,10 +1225,10 @@ a{
 
 
 <div
-class="sidebar-overlay"
-id="sidebarOverlay"
-onclick="closeSidebar()">
-</div>
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+    onclick="closeSidebar()"
+></div>
 
 
 <!-- =========================
@@ -1090,1054 +1237,1132 @@ onclick="closeSidebar()">
 
 <main class="main">
 
-    <!-- TOPBAR -->
 
-    <header class="topbar">
+<header class="topbar">
 
-        <div class="topbar-left">
+    <div class="topbar-left">
 
-            <button
+        <button
             class="mobile-menu-btn"
-            onclick="toggleSidebar()">
+            onclick="toggleSidebar()"
+        >
+            ☰
+        </button>
 
-                ☰
 
-            </button>
+        <div class="page-heading">
 
-            <div class="page-heading">
+            <h1>
+                Quiz Management
+            </h1>
 
-                <h1>
-                    Quiz Management
-                </h1>
-
-                <p>
-                    SNK IT Institute • Online Quiz Control
-                </p>
-
-            </div>
+            <p>
+                SNK IT Institute • Quiz Control
+            </p>
 
         </div>
 
+    </div>
 
-        <div class="topbar-actions">
 
-            <button
+    <div class="topbar-actions">
+
+        <button
             class="topbar-btn"
             onclick="toggleTheme()"
-            id="themeBtn">
+            id="themeBtn"
+        >
+            🌙
+        </button>
 
-                🌙
 
-            </button>
-
-
-            <button
+        <button
             class="topbar-btn"
-            onclick="showDemo('Notifications')">
+            onclick="showDemo('Notifications')"
+        >
+            🔔
+        </button>
 
-                🔔
 
-            </button>
+        <div class="admin-top-profile">
 
+            <div class="top-avatar">
+                👨‍💼
+            </div>
 
-            <div class="admin-top-profile">
+            <div class="top-profile-text">
 
-                <div class="top-avatar">
-                    👨‍💼
-                </div>
+                <strong>
+                    Super Admin
+                </strong>
 
-                <div class="top-profile-text">
-
-                    <strong>
-                        Super Admin
-                    </strong>
-
-                    <span>
-                        Administrator
-                    </span>
-
-                </div>
+                <span>
+                    Administrator
+                </span>
 
             </div>
 
         </div>
 
-    </header>
+    </div>
+
+</header>
 
 
-    <!-- CONTENT -->
+<section class="content">
 
-    <section class="content">
 
-        <div class="page-intro">
+    <div class="page-intro">
+
+        <div>
+
+            <h2>
+                Quiz
+            </h2>
+
+            <p>
+                Quiz তৈরি করুন, সময় নির্ধারণ করুন এবং student attempts দেখুন।
+            </p>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="openAddQuiz()"
+        >
+            ＋ New Quiz
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🎯
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalQuiz"
+            >
+                5
+            </div>
+
+            <div class="stat-title">
+                Total Quiz
+            </div>
+
+            <div class="stat-description">
+                মোট quiz
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🟢
+            </div>
+
+            <div
+                class="stat-number"
+                id="activeQuiz"
+            >
+                3
+            </div>
+
+            <div class="stat-title">
+                Active Quiz
+            </div>
+
+            <div class="stat-description">
+                student দিতে পারবে
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                👨‍🎓
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalAttempts"
+            >
+                29
+            </div>
+
+            <div class="stat-title">
+                Total Attempts
+            </div>
+
+            <div class="stat-description">
+                student quiz attempts
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⏱️
+            </div>
+
+            <div
+                class="stat-number"
+            >
+                30m
+            </div>
+
+            <div class="stat-title">
+                Default Time
+            </div>
+
+            <div class="stat-description">
+                quiz countdown
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOOLBAR
+    ========================= -->
+
+    <div class="toolbar">
+
+        <div class="toolbar-row">
+
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Quiz বা course খুঁজুন..."
+                    oninput="filterQuiz()"
+                >
+
+            </div>
+
+
+            <select
+                class="filter-select"
+                id="courseFilter"
+                onchange="filterQuiz()"
+            >
+
+                <option value="all">
+                    সব Course
+                </option>
+
+                <option value="Computer Basic">
+                    Computer Basic
+                </option>
+
+                <option value="MS Word">
+                    MS Word
+                </option>
+
+                <option value="MS Excel">
+                    MS Excel
+                </option>
+
+                <option value="Graphic Design">
+                    Graphic Design
+                </option>
+
+            </select>
+
+
+            <select
+                class="filter-select"
+                id="statusFilter"
+                onchange="filterQuiz()"
+            >
+
+                <option value="all">
+                    সব Status
+                </option>
+
+                <option value="Active">
+                    Active
+                </option>
+
+                <option value="Closed">
+                    Closed
+                </option>
+
+                <option value="Draft">
+                    Draft
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         QUIZ TABLE
+    ========================= -->
+
+    <div class="table-card">
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            QUIZ
+                        </th>
+
+                        <th>
+                            COURSE
+                        </th>
+
+                        <th>
+                            TIME
+                        </th>
+
+                        <th>
+                            DEADLINE
+                        </th>
+
+                        <th>
+                            MARKS
+                        </th>
+
+                        <th>
+                            ATTEMPTS
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="quizTable">
+
+
+                    <!-- QUIZ 1 -->
+
+                    <tr
+                        data-name="Computer Basic Quiz 01"
+                        data-course="Computer Basic"
+                        data-status="Active"
+                    >
+
+                        <td>
+
+                            <div class="quiz-cell">
+
+                                <strong>
+                                    Computer Basic Quiz 01
+                                </strong>
+
+                                <span>
+                                    Computer fundamentals MCQ
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="course-badge">
+                                Computer Basic
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="time-badge">
+                                ⏱️ 20 min
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="deadline upcoming">
+                                15 Sep 2026
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            20
+                        </td>
+
+
+                        <td>
+
+                            <span class="attempt-count">
+                                10
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewQuiz(
+                                        'Computer Basic Quiz 01',
+                                        'Computer Basic',
+                                        '20',
+                                        '15 Sep 2026',
+                                        '20',
+                                        'Active'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showQuestions('Computer Basic Quiz 01')"
+                                >
+                                    ❓
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showAttempts('Computer Basic Quiz 01')"
+                                >
+                                    👨‍🎓
+                                </button>
+
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteQuiz(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- QUIZ 2 -->
+
+                    <tr
+                        data-name="MS Word Quiz 01"
+                        data-course="MS Word"
+                        data-status="Active"
+                    >
+
+                        <td>
+
+                            <div class="quiz-cell">
+
+                                <strong>
+                                    MS Word Quiz 01
+                                </strong>
+
+                                <span>
+                                    Word tools and formatting
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="course-badge">
+                                MS Word
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="time-badge">
+                                ⏱️ 30 min
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="deadline active">
+                                18 Sep 2026
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            25
+                        </td>
+
+
+                        <td>
+                            <span class="attempt-count">
+                                8
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewQuiz(
+                                        'MS Word Quiz 01',
+                                        'MS Word',
+                                        '30',
+                                        '18 Sep 2026',
+                                        '25',
+                                        'Active'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showQuestions('MS Word Quiz 01')"
+                                >
+                                    ❓
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showAttempts('MS Word Quiz 01')"
+                                >
+                                    👨‍🎓
+                                </button>
+
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteQuiz(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- QUIZ 3 -->
+
+                    <tr
+                        data-name="Excel Formula Quiz"
+                        data-course="MS Excel"
+                        data-status="Active"
+                    >
+
+                        <td>
+
+                            <div class="quiz-cell">
+
+                                <strong>
+                                    Excel Formula Quiz
+                                </strong>
+
+                                <span>
+                                    Formula and spreadsheet MCQ
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="course-badge">
+                                MS Excel
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="time-badge">
+                                ⏱️ 25 min
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="deadline active">
+                                20 Sep 2026
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            25
+                        </td>
+
+
+                        <td>
+                            <span class="attempt-count">
+                                6
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewQuiz(
+                                        'Excel Formula Quiz',
+                                        'MS Excel',
+                                        '25',
+                                        '20 Sep 2026',
+                                        '25',
+                                        'Active'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showQuestions('Excel Formula Quiz')"
+                                >
+                                    ❓
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showAttempts('Excel Formula Quiz')"
+                                >
+                                    👨‍🎓
+                                </button>
+
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteQuiz(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- QUIZ 4 -->
+
+                    <tr
+                        data-name="Graphic Design Quiz"
+                        data-course="Graphic Design"
+                        data-status="Closed"
+                    >
+
+                        <td>
+
+                            <div class="quiz-cell">
+
+                                <strong>
+                                    Graphic Design Quiz
+                                </strong>
+
+                                <span>
+                                    Design fundamentals
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="course-badge">
+                                Graphic Design
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="time-badge">
+                                ⏱️ 15 min
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="deadline overdue">
+                                01 Sep 2026
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            15
+                        </td>
+
+
+                        <td>
+                            <span class="attempt-count">
+                                5
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <span class="status closed">
+                                Closed
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewQuiz(
+                                        'Graphic Design Quiz',
+                                        'Graphic Design',
+                                        '15',
+                                        '01 Sep 2026',
+                                        '15',
+                                        'Closed'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showQuestions('Graphic Design Quiz')"
+                                >
+                                    ❓
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showAttempts('Graphic Design Quiz')"
+                                >
+                                    👨‍🎓
+                                </button>
+
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteQuiz(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- QUIZ 5 -->
+
+                    <tr
+                        data-name="Final Computer Quiz"
+                        data-course="Computer Basic"
+                        data-status="Draft"
+                    >
+
+                        <td>
+
+                            <div class="quiz-cell">
+
+                                <strong>
+                                    Final Computer Quiz
+                                </strong>
+
+                                <span>
+                                    Final assessment quiz
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="course-badge">
+                                Computer Basic
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="time-badge">
+                                ⏱️ 30 min
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="deadline">
+                                30 Sep 2026
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            50
+                        </td>
+
+
+                        <td>
+                            <span class="attempt-count">
+                                0
+                            </span>
+                        </td>
+
+
+                        <td>
+
+                            <span class="status draft">
+                                Draft
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewQuiz(
+                                        'Final Computer Quiz',
+                                        'Computer Basic',
+                                        '30',
+                                        '30 Sep 2026',
+                                        '50',
+                                        'Draft'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showQuestions('Final Computer Quiz')"
+                                >
+                                    ❓
+                                </button>
+
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showAttempts('Final Computer Quiz')"
+                                >
+                                    👨‍🎓
+                                </button>
+
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteQuiz(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            class="empty-state"
+            id="emptyState"
+        >
+            😕 কোনো Quiz পাওয়া যায়নি।
+        </div>
+
+    </div>
+
+
+    <footer class="footer">
+
+        © 2026 SNK IT Institute • Quiz Management
+
+    </footer>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     VIEW QUIZ MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="viewModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
 
             <div>
 
-                <h2>
-                    Quiz
-                </h2>
+                <h3>
+                    Quiz Details
+                </h3>
 
                 <p>
-                    শিক্ষার্থীদের জন্য Quiz তৈরি, সময় নির্ধারণ ও পরিচালনা করুন।
+                    Quiz information
                 </p>
 
             </div>
 
+
             <button
-            class="primary-btn"
-            onclick="openQuizModal()">
-
-                ＋ নতুন Quiz
-
+                class="modal-close"
+                onclick="closeModal('viewModal')"
+            >
+                ×
             </button>
 
         </div>
 
 
-        <!-- STATS -->
+        <div class="form-group">
 
-        <div class="stats-grid">
+            <label>
+                Quiz Name
+            </label>
 
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🎯
-                </div>
-
-                <div
-                class="stat-number"
-                id="totalQuiz">
-                    6
-                </div>
-
-                <div class="stat-title">
-                    Total Quiz
-                </div>
-
-                <div class="stat-description">
-                    মোট Quiz
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🟢
-                </div>
-
-                <div
-                class="stat-number"
-                id="activeQuiz">
-                    3
-                </div>
-
-                <div class="stat-title">
-                    Active
-                </div>
-
-                <div class="stat-description">
-                    বর্তমানে চালু
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    ⏳
-                </div>
-
-                <div
-                class="stat-number"
-                id="upcomingQuiz">
-                    2
-                </div>
-
-                <div class="stat-title">
-                    Upcoming
-                </div>
-
-                <div class="stat-description">
-                    শীঘ্রই শুরু হবে
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    ❓
-                </div>
-
-                <div
-                class="stat-number"
-                id="totalQuestions">
-                    60
-                </div>
-
-                <div class="stat-title">
-                    Questions
-                </div>
-
-                <div class="stat-description">
-                    মোট প্রশ্ন
-                </div>
-
-            </div>
+            <input
+                id="viewName"
+                type="text"
+                readonly
+            >
 
         </div>
 
 
-        <!-- TOOLBAR -->
+        <div class="form-grid">
 
-        <div class="toolbar">
 
-            <div class="toolbar-row">
+            <div class="form-group">
 
-                <div class="search-box">
+                <label>
+                    Course
+                </label>
 
-                    <span>
-                        🔍
-                    </span>
-
-                    <input
+                <input
+                    id="viewCourse"
                     type="text"
-                    id="searchInput"
-                    placeholder="Quiz খুঁজুন..."
-                    oninput="filterQuizzes()"
-                    >
+                    readonly
+                >
 
-                </div>
+            </div>
 
 
-                <select
-                class="filter-select"
-                id="courseFilter"
-                onchange="filterQuizzes()">
+            <div class="form-group">
 
-                    <option value="all">
-                        সব Course
-                    </option>
+                <label>
+                    Time
+                </label>
 
-                    <option value="Computer Basics">
-                        Computer Basics
-                    </option>
+                <input
+                    id="viewTime"
+                    type="text"
+                    readonly
+                >
 
-                    <option value="MS Office">
-                        MS Office
-                    </option>
-
-                    <option value="Graphic Design">
-                        Graphic Design
-                    </option>
-
-                    <option value="Web Design">
-                        Web Design
-                    </option>
-
-                </select>
+            </div>
 
 
-                <select
-                class="filter-select"
-                id="statusFilter"
-                onchange="filterQuizzes()">
+            <div class="form-group">
 
-                    <option value="all">
-                        সব Status
-                    </option>
+                <label>
+                    Deadline
+                </label>
 
-                    <option value="active">
-                        Active
-                    </option>
+                <input
+                    id="viewDeadline"
+                    type="text"
+                    readonly
+                >
 
-                    <option value="upcoming">
-                        Upcoming
-                    </option>
-
-                    <option value="inactive">
-                        Inactive
-                    </option>
-
-                </select>
+            </div>
 
 
-                <button
-                class="filter-btn"
-                onclick="resetFilters()">
+            <div class="form-group">
 
-                    Reset
+                <label>
+                    Total Marks
+                </label>
 
-                </button>
+                <input
+                    id="viewMarks"
+                    type="text"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>
+                    Status
+                </label>
+
+                <input
+                    id="viewStatus"
+                    type="text"
+                    readonly
+                >
 
             </div>
 
         </div>
 
 
-        <!-- QUIZ GRID -->
-
-        <div
-        class="quiz-grid"
-        id="quizGrid">
-
-
-            <!-- QUIZ 1 -->
-
-            <article
-            class="quiz-card"
-            data-title="Computer Basic Quiz 01"
-            data-course="Computer Basics"
-            data-status="active">
-
-                <div class="quiz-header">
-
-                    <div class="quiz-top">
-
-                        <div class="quiz-icon">
-                            💻
-                        </div>
-
-                        <span class="status active">
-                            ● Active
-                        </span>
-
-                    </div>
-
-                    <div class="quiz-title">
-                        Computer Basic Quiz 01
-                    </div>
-
-                    <div class="quiz-course">
-                        Computer Basics
-                    </div>
-
-                </div>
-
-
-                <div class="quiz-body">
-
-                    <div class="quiz-info">
-
-                        <div class="info-box">
-
-                            <span class="info-label">
-                                Questions
-                            </span>
-
-                            <span class="info-value">
-                                10
-                            </span>
-
-                        </div>
-
-                        <div class="info-box">
-
-                            <span class="info-label">
-                                Time
-                            </span>
-
-                            <span class="info-value">
-                                10 Min
-                            </span>
-
-                        </div>
-
-                        <div class="info-box">
-
-                            <span class="info-label">
-                                Marks
-                            </span>
-
-                            <span class="info-value">
-                                10
-                            </span>
-
-                        </div>
-
-                        <div class="info-box">
-
-                            <span class="info-label">
-                                Attempts
-                            </span>
-
-                            <span class="info-value">
-                                1
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="deadline">
-                        📅 Deadline: 10 Sep 2026, 10:00 PM
-                    </div>
-
-
-                    <div class="quiz-footer">
-
-                        <div class="quiz-actions">
-
-                            <button
-                            class="action-btn"
-                            onclick="editQuiz('Computer Basic Quiz 01')">
-                                ✏️
-                            </button>
-
-                            <button
-                            class="action-btn"
-                            onclick="toggleQuizStatus(this)">
-                                🔄
-                            </button>
-
-                            <button
-                            class="action-btn delete"
-                            onclick="deleteQuiz(this)">
-                                🗑️
-                            </button>
-
-                        </div>
-
-                        <button
-                        class="preview-btn"
-                        onclick="previewQuiz('Computer Basic Quiz 01')">
-
-                            👁 Preview
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- QUIZ 2 -->
-
-            <article
-            class="quiz-card"
-            data-title="MS Word Basic Test"
-            data-course="MS Office"
-            data-status="active">
-
-                <div class="quiz-header">
-
-                    <div class="quiz-top">
-
-                        <div class="quiz-icon">
-                            📄
-                        </div>
-
-                        <span class="status active">
-                            ● Active
-                        </span>
-
-                    </div>
-
-                    <div class="quiz-title">
-                        MS Word Basic Test
-                    </div>
-
-                    <div class="quiz-course">
-                        MS Office
-                    </div>
-
-                </div>
-
-
-                <div class="quiz-body">
-
-                    <div class="quiz-info">
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Questions
-                            </span>
-                            <span class="info-value">
-                                10
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Time
-                            </span>
-                            <span class="info-value">
-                                15 Min
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Marks
-                            </span>
-                            <span class="info-value">
-                                10
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Attempts
-                            </span>
-                            <span class="info-value">
-                                1
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="deadline">
-                        📅 Deadline: 12 Sep 2026, 09:00 PM
-                    </div>
-
-
-                    <div class="quiz-footer">
-
-                        <div class="quiz-actions">
-
-                            <button
-                            class="action-btn"
-                            onclick="editQuiz('MS Word Basic Test')">
-                                ✏️
-                            </button>
-
-                            <button
-                            class="action-btn"
-                            onclick="toggleQuizStatus(this)">
-                                🔄
-                            </button>
-
-                            <button
-                            class="action-btn delete"
-                            onclick="deleteQuiz(this)">
-                                🗑️
-                            </button>
-
-                        </div>
-
-                        <button
-                        class="preview-btn"
-                        onclick="previewQuiz('MS Word Basic Test')">
-
-                            👁 Preview
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- QUIZ 3 -->
-
-            <article
-            class="quiz-card"
-            data-title="Graphic Design Fundamentals"
-            data-course="Graphic Design"
-            data-status="upcoming">
-
-                <div class="quiz-header">
-
-                    <div class="quiz-top">
-
-                        <div class="quiz-icon">
-                            🎨
-                        </div>
-
-                        <span class="status upcoming">
-                            ● Upcoming
-                        </span>
-
-                    </div>
-
-                    <div class="quiz-title">
-                        Graphic Design Fundamentals
-                    </div>
-
-                    <div class="quiz-course">
-                        Graphic Design
-                    </div>
-
-                </div>
-
-
-                <div class="quiz-body">
-
-                    <div class="quiz-info">
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Questions
-                            </span>
-                            <span class="info-value">
-                                15
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Time
-                            </span>
-                            <span class="info-value">
-                                20 Min
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Marks
-                            </span>
-                            <span class="info-value">
-                                15
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Attempts
-                            </span>
-                            <span class="info-value">
-                                1
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="deadline">
-                        📅 Deadline: 15 Sep 2026, 10:00 PM
-                    </div>
-
-
-                    <div class="quiz-footer">
-
-                        <div class="quiz-actions">
-
-                            <button
-                            class="action-btn"
-                            onclick="editQuiz('Graphic Design Fundamentals')">
-                                ✏️
-                            </button>
-
-                            <button
-                            class="action-btn"
-                            onclick="toggleQuizStatus(this)">
-                                🔄
-                            </button>
-
-                            <button
-                            class="action-btn delete"
-                            onclick="deleteQuiz(this)">
-                                🗑️
-                            </button>
-
-                        </div>
-
-                        <button
-                        class="preview-btn"
-                        onclick="previewQuiz('Graphic Design Fundamentals')">
-
-                            👁 Preview
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- QUIZ 4 -->
-
-            <article
-            class="quiz-card"
-            data-title="HTML & CSS Introduction"
-            data-course="Web Design"
-            data-status="upcoming">
-
-                <div class="quiz-header">
-
-                    <div class="quiz-top">
-
-                        <div class="quiz-icon">
-                            🌐
-                        </div>
-
-                        <span class="status upcoming">
-                            ● Upcoming
-                        </span>
-
-                    </div>
-
-                    <div class="quiz-title">
-                        HTML & CSS Introduction
-                    </div>
-
-                    <div class="quiz-course">
-                        Web Design
-                    </div>
-
-                </div>
-
-
-                <div class="quiz-body">
-
-                    <div class="quiz-info">
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Questions
-                            </span>
-                            <span class="info-value">
-                                10
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Time
-                            </span>
-                            <span class="info-value">
-                                15 Min
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Marks
-                            </span>
-                            <span class="info-value">
-                                10
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Attempts
-                            </span>
-                            <span class="info-value">
-                                1
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="deadline">
-                        📅 Deadline: 18 Sep 2026, 08:00 PM
-                    </div>
-
-
-                    <div class="quiz-footer">
-
-                        <div class="quiz-actions">
-
-                            <button
-                            class="action-btn"
-                            onclick="editQuiz('HTML & CSS Introduction')">
-                                ✏️
-                            </button>
-
-                            <button
-                            class="action-btn"
-                            onclick="toggleQuizStatus(this)">
-                                🔄
-                            </button>
-
-                            <button
-                            class="action-btn delete"
-                            onclick="deleteQuiz(this)">
-                                🗑️
-                            </button>
-
-                        </div>
-
-                        <button
-                        class="preview-btn"
-                        onclick="previewQuiz('HTML & CSS Introduction')">
-
-                            👁 Preview
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- QUIZ 5 -->
-
-            <article
-            class="quiz-card"
-            data-title="Computer Hardware Quiz"
-            data-course="Computer Basics"
-            data-status="inactive">
-
-                <div class="quiz-header">
-
-                    <div class="quiz-top">
-
-                        <div class="quiz-icon">
-                            🖥️
-                        </div>
-
-                        <span class="status inactive">
-                            ● Inactive
-                        </span>
-
-                    </div>
-
-                    <div class="quiz-title">
-                        Computer Hardware Quiz
-                    </div>
-
-                    <div class="quiz-course">
-                        Computer Basics
-                    </div>
-
-                </div>
-
-
-                <div class="quiz-body">
-
-                    <div class="quiz-info">
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Questions
-                            </span>
-                            <span class="info-value">
-                                10
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Time
-                            </span>
-                            <span class="info-value">
-                                10 Min
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Marks
-                            </span>
-                            <span class="info-value">
-                                10
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Attempts
-                            </span>
-                            <span class="info-value">
-                                1
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="deadline">
-                        📅 Deadline: 20 Sep 2026, 10:00 PM
-                    </div>
-
-
-                    <div class="quiz-footer">
-
-                        <div class="quiz-actions">
-
-                            <button
-                            class="action-btn"
-                            onclick="editQuiz('Computer Hardware Quiz')">
-                                ✏️
-                            </button>
-
-                            <button
-                            class="action-btn"
-                            onclick="toggleQuizStatus(this)">
-                                🔄
-                            </button>
-
-                            <button
-                            class="action-btn delete"
-                            onclick="deleteQuiz(this)">
-                                🗑️
-                            </button>
-
-                        </div>
-
-                        <button
-                        class="preview-btn"
-                        onclick="previewQuiz('Computer Hardware Quiz')">
-
-                            👁 Preview
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- QUIZ 6 -->
-
-            <article
-            class="quiz-card"
-            data-title="Excel Formula Practice"
-            data-course="MS Office"
-            data-status="active">
-
-                <div class="quiz-header">
-
-                    <div class="quiz-top">
-
-                        <div class="quiz-icon">
-                            📊
-                        </div>
-
-                        <span class="status active">
-                            ● Active
-                        </span>
-
-                    </div>
-
-                    <div class="quiz-title">
-                        Excel Formula Practice
-                    </div>
-
-                    <div class="quiz-course">
-                        MS Office
-                    </div>
-
-                </div>
-
-
-                <div class="quiz-body">
-
-                    <div class="quiz-info">
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Questions
-                            </span>
-                            <span class="info-value">
-                                15
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Time
-                            </span>
-                            <span class="info-value">
-                                20 Min
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Marks
-                            </span>
-                            <span class="info-value">
-                                15
-                            </span>
-                        </div>
-
-                        <div class="info-box">
-                            <span class="info-label">
-                                Attempts
-                            </span>
-                            <span class="info-value">
-                                1
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="deadline">
-                        📅 Deadline: 22 Sep 2026, 09:00 PM
-                    </div>
-
-
-                    <div class="quiz-footer">
-
-                        <div class="quiz-actions">
-
-                            <button
-                            class="action-btn"
-                            onclick="editQuiz('Excel Formula Practice')">
-                                ✏️
-                            </button>
-
-                            <button
-                            class="action-btn"
-                            onclick="toggleQuizStatus(this)">
-                                🔄
-                            </button>
-
-                            <button
-                            class="action-btn delete"
-                            onclick="deleteQuiz(this)">
-                                🗑️
-                            </button>
-
-                        </div>
-
-                        <button
-                        class="preview-btn"
-                        onclick="previewQuiz('Excel Formula Practice')">
-
-                            👁 Preview
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <div
-            class="no-result"
-            id="noResult">
-
-                😕 কোনো Quiz পাওয়া যায়নি।
-
-            </div>
+        <div class="form-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeModal('viewModal')"
+            >
+                Close
+            </button>
 
         </div>
 
+    </div>
 
-        <footer class="footer">
-
-            © 2026 SNK IT Institute • Admin Panel
-
-        </footer>
-
-    </section>
-
-</main>
+</div>
 
 
 <!-- =========================
@@ -2145,56 +2370,60 @@ onclick="closeSidebar()">
 ========================= -->
 
 <div
-class="modal-overlay"
-id="quizModal">
+    class="modal-overlay"
+    id="addModal"
+>
 
     <div class="modal">
+
 
         <div class="modal-header">
 
             <div>
 
                 <h3>
-                    নতুন Quiz তৈরি করুন
+                    Create New Quiz
                 </h3>
 
                 <p>
-                    Quiz-এর basic information দিন।
+                    নতুন quiz তৈরি করুন।
                 </p>
 
             </div>
 
+
             <button
-            class="modal-close"
-            onclick="closeQuizModal()">
-
+                class="modal-close"
+                onclick="closeModal('addModal')"
+            >
                 ×
-
             </button>
 
         </div>
 
 
         <form
-        id="quizForm"
-        onsubmit="saveQuiz(event)">
+            onsubmit="saveQuiz(event)"
+        >
+
+
+            <div class="form-group">
+
+                <label>
+                    Quiz Name
+                </label>
+
+                <input
+                    id="newName"
+                    type="text"
+                    placeholder="যেমন: MS Excel Quiz 02"
+                    required
+                >
+
+            </div>
+
 
             <div class="form-grid">
-
-                <div class="form-group full">
-
-                    <label>
-                        Quiz Name
-                    </label>
-
-                    <input
-                    type="text"
-                    id="quizName"
-                    placeholder="যেমন: Computer Basic Quiz 02"
-                    required
-                    >
-
-                </div>
 
 
                 <div class="form-group">
@@ -2204,29 +2433,30 @@ id="quizModal">
                     </label>
 
                     <select
-                    id="quizCourse"
-                    required>
+                        id="newCourse"
+                        required
+                    >
 
                         <option value="">
-                            Course নির্বাচন করুন
+                            Select Course
                         </option>
 
-                        <option value="Computer Basics">
-                            Computer Basics
+                        <option value="Computer Basic">
+                            Computer Basic
                         </option>
 
-                        <option value="MS Office">
-                            MS Office
+                        <option value="MS Word">
+                            MS Word
+                        </option>
+
+                        <option value="MS Excel">
+                            MS Excel
                         </option>
 
                         <option value="Graphic Design">
                             Graphic Design
                         </option>
 
-                        <option value="Web Design">
-                            Web Design
-                        </option>
-
                     </select>
 
                 </div>
@@ -2235,62 +2465,19 @@ id="quizModal">
                 <div class="form-group">
 
                     <label>
-                        Status
+                        Quiz Time
                     </label>
 
                     <select
-                    id="quizStatus"
-                    required>
-
-                        <option value="active">
-                            Active
-                        </option>
-
-                        <option value="upcoming">
-                            Upcoming
-                        </option>
-
-                        <option value="inactive">
-                            Inactive
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Number of Questions
-                    </label>
-
-                    <input
-                    type="number"
-                    id="questionCount"
-                    min="1"
-                    value="10"
-                    required
+                        id="newTime"
+                        required
                     >
 
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Time Limit
-                    </label>
-
-                    <select
-                    id="timeLimit"
-                    required>
-
-                        <option value="5">
-                            5 Minutes
+                        <option value="">
+                            Select Time
                         </option>
 
-                        <option value="10" selected>
+                        <option value="10">
                             10 Minutes
                         </option>
 
@@ -2326,57 +2513,11 @@ id="quizModal">
                     </label>
 
                     <input
-                    type="number"
-                    id="totalMarks"
-                    min="1"
-                    value="10"
-                    required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Maximum Attempts
-                    </label>
-
-                    <select
-                    id="maxAttempts"
-                    required>
-
-                        <option value="1">
-                            1 Attempt
-                        </option>
-
-                        <option value="2">
-                            2 Attempts
-                        </option>
-
-                        <option value="3">
-                            3 Attempts
-                        </option>
-
-                        <option value="0">
-                            Unlimited
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Start Date & Time
-                    </label>
-
-                    <input
-                    type="datetime-local"
-                    id="startDate"
-                    required
+                        id="newMarks"
+                        type="number"
+                        min="1"
+                        placeholder="20"
+                        required
                     >
 
                 </div>
@@ -2389,9 +2530,9 @@ id="quizModal">
                     </label>
 
                     <input
-                    type="datetime-local"
-                    id="deadlineDate"
-                    required
+                        id="newDeadline"
+                        type="date"
+                        required
                     >
 
                 </div>
@@ -2400,19 +2541,43 @@ id="quizModal">
                 <div class="form-group full">
 
                     <label>
-                        Quiz Description
+                        Status
                     </label>
 
-                    <textarea
-                    id="quizDescription"
-                    placeholder="Quiz সম্পর্কে সংক্ষিপ্ত নির্দেশনা লিখুন...">
-                    </textarea>
+                    <select
+                        id="newStatus"
+                        required
+                    >
 
-                    <div class="form-hint">
-                        Student Quiz শুরু করার আগে এই নির্দেশনা দেখতে পারবে।
-                    </div>
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Draft">
+                            Draft
+                        </option>
+
+                        <option value="Closed">
+                            Closed
+                        </option>
+
+                    </select>
 
                 </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Instructions
+                </label>
+
+                <textarea
+                    id="newDescription"
+                    placeholder="Student-এর জন্য quiz instruction লিখুন..."
+                ></textarea>
 
             </div>
 
@@ -2420,20 +2585,19 @@ id="quizModal">
             <div class="form-actions">
 
                 <button
-                type="button"
-                class="secondary-btn"
-                onclick="closeQuizModal()">
-
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal('addModal')"
+                >
                     Cancel
-
                 </button>
 
+
                 <button
-                type="submit"
-                class="save-btn">
-
+                    type="submit"
+                    class="save-btn"
+                >
                     💾 Save Quiz
-
                 </button>
 
             </div>
@@ -2446,78 +2610,82 @@ id="quizModal">
 
 
 <!-- =========================
-     PREVIEW MODAL
+     QUESTIONS MODAL
 ========================= -->
 
 <div
-class="modal-overlay"
-id="previewModal">
+    class="modal-overlay"
+    id="questionsModal"
+>
 
     <div class="modal">
+
 
         <div class="modal-header">
 
             <div>
 
-                <h3 id="previewTitle">
-                    Quiz Preview
+                <h3 id="questionsTitle">
+                    Quiz Questions
                 </h3>
 
                 <p>
-                    Student view-এর basic preview
+                    প্রশ্ন ও correct answer
                 </p>
 
             </div>
 
+
             <button
-            class="modal-close"
-            onclick="closePreview()">
-
+                class="modal-close"
+                onclick="closeModal('questionsModal')"
+            >
                 ×
-
             </button>
+
+        </div>
+
+
+        <div class="question-info">
+
+            <strong>
+                Sample MCQ Questions
+            </strong>
+
+            <p>
+                পরবর্তী step-এ Admin এখান থেকে নতুন প্রশ্ন যোগ করতে পারবে।
+            </p>
 
         </div>
 
 
         <div class="question-list">
 
+
             <div class="question-item">
 
-                <div class="question-top">
-
-                    <span class="question-number">
-                        Question 01
-                    </span>
-
-                    <span class="status active">
-                        1 Mark
-                    </span>
-
+                <div class="question-number">
+                    QUESTION 01
                 </div>
 
                 <div class="question-text">
-                    Computer-এর প্রধান processing unit কোনটি?
+                    Computer-এর brain বলা হয় কোনটিকে?
                 </div>
 
-                <div class="question-options">
+                <div class="option">
+                    A. Monitor
+                </div>
 
-                    <div class="option">
-                        A. Monitor
-                    </div>
+                <div class="option correct">
+                    B. CPU ✓
+                </div>
 
-                    <div class="option correct">
-                        B. CPU ✓
-                    </div>
+                <div class="option">
+                    C. Keyboard
+                </div>
 
-                    <div class="option">
-                        C. Keyboard
-                    </div>
-
-                    <div class="option">
-                        D. Mouse
-                    </div>
-
+                <div class="option">
+                    D. Mouse
                 </div>
 
             </div>
@@ -2525,81 +2693,57 @@ id="previewModal">
 
             <div class="question-item">
 
-                <div class="question-top">
+                <div class="question-number">
+                    QUESTION 02
+                </div>
 
-                    <span class="question-number">
-                        Question 02
-                    </span>
+                <div class="question-text">
+                    কোনটি একটি input device?
+                </div>
 
-                    <span class="status active">
-                        1 Mark
-                    </span>
+                <div class="option correct">
+                    A. Keyboard ✓
+                </div>
 
+                <div class="option">
+                    B. Monitor
+                </div>
+
+                <div class="option">
+                    C. Speaker
+                </div>
+
+                <div class="option">
+                    D. Projector
+                </div>
+
+            </div>
+
+
+            <div class="question-item">
+
+                <div class="question-number">
+                    QUESTION 03
                 </div>
 
                 <div class="question-text">
                     RAM-এর পূর্ণরূপ কী?
                 </div>
 
-                <div class="question-options">
-
-                    <div class="option correct">
-                        A. Random Access Memory ✓
-                    </div>
-
-                    <div class="option">
-                        B. Read Access Memory
-                    </div>
-
-                    <div class="option">
-                        C. Rapid Access Machine
-                    </div>
-
-                    <div class="option">
-                        D. Random Active Memory
-                    </div>
-
+                <div class="option correct">
+                    A. Random Access Memory ✓
                 </div>
 
-            </div>
-
-
-            <div class="question-item">
-
-                <div class="question-top">
-
-                    <span class="question-number">
-                        Question 03
-                    </span>
-
-                    <span class="status active">
-                        1 Mark
-                    </span>
-
+                <div class="option">
+                    B. Read Access Memory
                 </div>
 
-                <div class="question-text">
-                    নিচের কোনটি একটি input device?
+                <div class="option">
+                    C. Run Access Machine
                 </div>
 
-                <div class="question-options">
-
-                    <div class="option">
-                        A. Monitor
-                    </div>
-
-                    <div class="option correct">
-                        B. Keyboard ✓
-                    </div>
-
-                    <div class="option">
-                        C. Speaker
-                    </div>
-
-                    <div class="option">
-                        D. Projector
-                    </div>
-
+                <div class="option">
+                    D. Random Application Memory
                 </div>
 
             </div>
@@ -2610,11 +2754,220 @@ id="previewModal">
         <div class="form-actions">
 
             <button
-            class="secondary-btn"
-            onclick="closePreview()">
-
+                class="secondary-btn"
+                onclick="closeModal('questionsModal')"
+            >
                 Close
+            </button>
 
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ATTEMPTS MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="attemptsModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3 id="attemptsTitle">
+                    Student Attempts
+                </h3>
+
+                <p>
+                    Student quiz submission
+                </p>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                onclick="closeModal('attemptsModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="attempt-list">
+
+
+            <div class="attempt-item">
+
+                <div class="student-info">
+
+                    <div class="student-avatar">
+                        RA
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Rahim Ahmed
+                        </strong>
+
+                        <span>
+                            SNK-1001 • 08 Sep 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="score">
+                    18/20
+                </div>
+
+
+                <button
+                    class="view-btn"
+                    onclick="showDemo('Attempt Details')"
+                >
+                    View
+                </button>
+
+            </div>
+
+
+            <div class="attempt-item">
+
+                <div class="student-info">
+
+                    <div class="student-avatar">
+                        NJ
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Nusrat Jahan
+                        </strong>
+
+                        <span>
+                            SNK-1002 • 09 Sep 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="score">
+                    17/20
+                </div>
+
+
+                <button
+                    class="view-btn"
+                    onclick="showDemo('Attempt Details')"
+                >
+                    View
+                </button>
+
+            </div>
+
+
+            <div class="attempt-item">
+
+                <div class="student-info">
+
+                    <div class="student-avatar">
+                        SA
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Sadia Akter
+                        </strong>
+
+                        <span>
+                            SNK-1003 • 10 Sep 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="score">
+                    20/20
+                </div>
+
+
+                <button
+                    class="view-btn"
+                    onclick="showDemo('Attempt Details')"
+                >
+                    View
+                </button>
+
+            </div>
+
+
+            <div class="attempt-item">
+
+                <div class="student-info">
+
+                    <div class="student-avatar">
+                        TH
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Tanvir Hasan
+                        </strong>
+
+                        <span>
+                            SNK-1004 • 10 Sep 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="score">
+                    16/20
+                </div>
+
+
+                <button
+                    class="view-btn"
+                    onclick="showDemo('Attempt Details')"
+                >
+                    View
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeModal('attemptsModal')"
+            >
+                Close
             </button>
 
         </div>
@@ -2626,6 +2979,7 @@ id="previewModal">
 
 <script>
 
+
 /* =========================
    THEME
 ========================= */
@@ -2634,25 +2988,25 @@ function toggleTheme(){
 
     document.body.classList.toggle("dark");
 
-    const isDark =
+    const dark =
         document.body.classList.contains("dark");
 
     localStorage.setItem(
         "snkQuizTheme",
-        isDark ? "dark" : "light"
+        dark ? "dark" : "light"
     );
 
     document.getElementById("themeBtn").textContent =
-        isDark ? "☀️" : "🌙";
+        dark ? "☀️" : "🌙";
 }
 
 
 function loadTheme(){
 
-    const savedTheme =
+    const theme =
         localStorage.getItem("snkQuizTheme");
 
-    if(savedTheme === "dark"){
+    if(theme === "dark"){
 
         document.body.classList.add("dark");
 
@@ -2661,12 +3015,11 @@ function loadTheme(){
     }
 }
 
-
 loadTheme();
 
 
 /* =========================
-   MOBILE SIDEBAR
+   SIDEBAR
 ========================= */
 
 function toggleSidebar(){
@@ -2694,192 +3047,217 @@ function closeSidebar(){
 
 
 /* =========================
-   SEARCH + FILTER
+   FILTER
 ========================= */
 
-function filterQuizzes(){
+function filterQuiz(){
 
     const search =
         document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
 
     const course =
         document
-        .getElementById("courseFilter")
-        .value;
+            .getElementById("courseFilter")
+            .value;
 
     const status =
         document
-        .getElementById("statusFilter")
-        .value;
+            .getElementById("statusFilter")
+            .value;
 
-    const cards =
-        document.querySelectorAll(".quiz-card");
+    const rows =
+        document.querySelectorAll(
+            "#quizTable tr"
+        );
 
-    let visibleCount = 0;
+    let visible = 0;
 
-    cards.forEach(card => {
 
-        const title =
-            card.dataset.title.toLowerCase();
+    rows.forEach(row => {
 
-        const cardCourse =
-            card.dataset.course;
+        const name =
+            row.dataset.name.toLowerCase();
 
-        const cardStatus =
-            card.dataset.status;
+        const rowCourse =
+            row.dataset.course;
 
-        const matchesSearch =
-            title.includes(search);
+        const rowStatus =
+            row.dataset.status;
 
-        const matchesCourse =
+
+        const searchMatch =
+            name.includes(search) ||
+            row.innerText
+                .toLowerCase()
+                .includes(search);
+
+
+        const courseMatch =
             course === "all" ||
-            cardCourse === course;
+            rowCourse === course;
 
-        const matchesStatus =
+
+        const statusMatch =
             status === "all" ||
-            cardStatus === status;
+            rowStatus === status;
+
 
         if(
-            matchesSearch &&
-            matchesCourse &&
-            matchesStatus
+            searchMatch &&
+            courseMatch &&
+            statusMatch
         ){
 
-            card.style.display = "";
-
-            visibleCount++;
+            row.style.display = "";
+            visible++;
 
         }else{
 
-            card.style.display = "none";
+            row.style.display = "none";
         }
 
     });
 
 
-    document.getElementById("noResult").style.display =
-        visibleCount === 0 ? "block" : "none";
-}
-
-
-function resetFilters(){
-
-    document.getElementById("searchInput").value = "";
-
-    document.getElementById("courseFilter").value = "all";
-
-    document.getElementById("statusFilter").value = "all";
-
-    filterQuizzes();
+    document.getElementById("emptyState").style.display =
+        visible === 0 ? "block" : "none";
 }
 
 
 /* =========================
-   QUIZ MODAL
+   VIEW QUIZ
 ========================= */
 
-function openQuizModal(){
+function viewQuiz(
+    name,
+    course,
+    time,
+    deadline,
+    marks,
+    status
+){
+
+    document.getElementById("viewName").value =
+        name;
+
+    document.getElementById("viewCourse").value =
+        course;
+
+    document.getElementById("viewTime").value =
+        time + " Minutes";
+
+    document.getElementById("viewDeadline").value =
+        deadline;
+
+    document.getElementById("viewMarks").value =
+        marks;
+
+    document.getElementById("viewStatus").value =
+        status;
+
 
     document
-        .getElementById("quizModal")
+        .getElementById("viewModal")
         .classList.add("show");
 }
 
 
-function closeQuizModal(){
+/* =========================
+   ADD QUIZ
+========================= */
+
+function openAddQuiz(){
 
     document
-        .getElementById("quizModal")
-        .classList.remove("show");
+        .getElementById("addModal")
+        .classList.add("show");
 }
 
-
-/* =========================
-   SAVE QUIZ DEMO
-========================= */
 
 function saveQuiz(event){
 
     event.preventDefault();
 
+
     const name =
-        document.getElementById("quizName").value.trim();
+        document.getElementById("newName").value.trim();
 
     const course =
-        document.getElementById("quizCourse").value;
-
-    const status =
-        document.getElementById("quizStatus").value;
-
-    const questions =
-        document.getElementById("questionCount").value;
+        document.getElementById("newCourse").value;
 
     const time =
-        document.getElementById("timeLimit").value;
+        document.getElementById("newTime").value;
 
     const marks =
-        document.getElementById("totalMarks").value;
+        document.getElementById("newMarks").value;
 
     const deadline =
-        document.getElementById("deadlineDate").value;
+        document.getElementById("newDeadline").value;
 
-    if(!name || !course || !deadline){
+    const status =
+        document.getElementById("newStatus").value;
 
-        alert("দয়া করে প্রয়োজনীয় তথ্য পূরণ করুন।");
+    const description =
+        document
+            .getElementById("newDescription")
+            .value
+            .trim();
+
+
+    if(
+        !name ||
+        !course ||
+        !time ||
+        !marks ||
+        !deadline
+    ){
+
+        alert(
+            "সব প্রয়োজনীয় তথ্য পূরণ করুন।"
+        );
 
         return;
     }
 
 
-    /*
-       আপাতত demo localStorage storage.
-       পরবর্তীতে Firebase-এর সঙ্গে connect করা হবে।
-    */
+    const quizzes =
+        JSON.parse(
+            localStorage.getItem(
+                "snkQuizList"
+            ) || "[]"
+        );
 
-    const quizData = {
+
+    quizzes.push({
 
         id:Date.now(),
 
-        name:name,
+        name,
 
-        course:course,
+        course,
 
-        status:status,
+        time,
 
-        questions:Number(questions),
+        marks,
 
-        time:Number(time),
+        deadline,
 
-        marks:Number(marks),
+        status,
 
-        attempts:
-            document.getElementById("maxAttempts").value,
+        description,
 
-        startDate:
-            document.getElementById("startDate").value,
+        questions:[],
 
-        deadline:deadline,
-
-        description:
-            document.getElementById("quizDescription").value.trim(),
+        attempts:0,
 
         createdAt:
             new Date().toISOString()
 
-    };
-
-
-    let quizzes =
-        JSON.parse(
-            localStorage.getItem("snkQuizList") || "[]"
-        );
-
-
-    quizzes.push(quizData);
+    });
 
 
     localStorage.setItem(
@@ -2889,123 +3267,85 @@ function saveQuiz(event){
 
 
     alert(
-        "✅ Quiz সফলভাবে Save হয়েছে।\n\n" +
-        "পরবর্তী ধাপে Question Builder-এর মাধ্যমে প্রশ্ন যোগ করা হবে।"
+        "✅ Quiz save হয়েছে।"
     );
 
 
     document
-        .getElementById("quizForm")
+        .getElementById("addModal")
+        .querySelector("form")
         .reset();
 
-    closeQuizModal();
+
+    closeModal("addModal");
+
 }
 
 
 /* =========================
-   EDIT QUIZ
+   QUESTIONS
 ========================= */
 
-function editQuiz(name){
+function showQuestions(name){
 
-    alert(
-        "✏️ Edit Quiz\n\n" +
-        name +
-        "\n\nপরবর্তী ধাপে সম্পূর্ণ Edit System যুক্ত করা হবে।"
-    );
-}
+    document.getElementById(
+        "questionsTitle"
+    ).textContent =
+        name + " — Questions";
 
-
-/* =========================
-   DELETE QUIZ
-========================= */
-
-function deleteQuiz(button){
-
-    const card =
-        button.closest(".quiz-card");
-
-    const title =
-        card.dataset.title;
-
-    const confirmed =
-        confirm(
-            "আপনি কি এই Quiz delete করতে চান?\n\n" +
-            title
-        );
-
-    if(!confirmed){
-        return;
-    }
-
-    card.remove();
-
-    updateStats();
-
-    alert("🗑️ Quiz deleted.");
-}
-
-
-/* =========================
-   TOGGLE STATUS
-========================= */
-
-function toggleQuizStatus(button){
-
-    const card =
-        button.closest(".quiz-card");
-
-    const statusElement =
-        card.querySelector(".status");
-
-    const currentStatus =
-        card.dataset.status;
-
-    if(currentStatus === "active"){
-
-        card.dataset.status = "inactive";
-
-        statusElement.className =
-            "status inactive";
-
-        statusElement.textContent =
-            "● Inactive";
-
-    }else{
-
-        card.dataset.status = "active";
-
-        statusElement.className =
-            "status active";
-
-        statusElement.textContent =
-            "● Active";
-    }
-
-    updateStats();
-}
-
-
-/* =========================
-   PREVIEW
-========================= */
-
-function previewQuiz(name){
-
-    document.getElementById("previewTitle").textContent =
-        name;
 
     document
-        .getElementById("previewModal")
+        .getElementById("questionsModal")
         .classList.add("show");
 }
 
 
-function closePreview(){
+/* =========================
+   ATTEMPTS
+========================= */
+
+function showAttempts(name){
+
+    document.getElementById(
+        "attemptsTitle"
+    ).textContent =
+        name + " — Student Attempts";
+
 
     document
-        .getElementById("previewModal")
-        .classList.remove("show");
+        .getElementById("attemptsModal")
+        .classList.add("show");
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+function deleteQuiz(button){
+
+    const ok =
+        confirm(
+            "আপনি কি এই Quiz delete করতে চান?"
+        );
+
+
+    if(!ok){
+        return;
+    }
+
+
+    button
+        .closest("tr")
+        .remove();
+
+
+    updateStats();
+
+
+    alert(
+        "🗑️ Quiz deleted."
+    );
 }
 
 
@@ -3015,58 +3355,77 @@ function closePreview(){
 
 function updateStats(){
 
-    const cards =
-        document.querySelectorAll(".quiz-card");
+    const rows =
+        document.querySelectorAll(
+            "#quizTable tr"
+        );
+
 
     let active = 0;
-    let upcoming = 0;
-    let questions = 0;
+    let attempts = 0;
 
-    cards.forEach(card => {
 
-        const status =
-            card.dataset.status;
+    rows.forEach(row => {
 
-        if(status === "active"){
+        if(
+            row.dataset.status ===
+            "Active"
+        ){
+
             active++;
         }
 
-        if(status === "upcoming"){
-            upcoming++;
-        }
 
-        const number =
-            card.querySelector(".info-box .info-value");
+        const count =
+            row.querySelector(
+                ".attempt-count"
+            );
 
-        if(number){
-            questions +=
-                Number(number.textContent) || 0;
+
+        if(count){
+
+            attempts +=
+                Number(
+                    count.textContent
+                ) || 0;
         }
 
     });
 
 
-    document.getElementById("totalQuiz").textContent =
-        cards.length;
+    document.getElementById(
+        "totalQuiz"
+    ).textContent =
+        rows.length;
 
-    document.getElementById("activeQuiz").textContent =
+
+    document.getElementById(
+        "activeQuiz"
+    ).textContent =
         active;
 
-    document.getElementById("upcomingQuiz").textContent =
-        upcoming;
 
-    /*
-       Demo statistic.
-       Later actual question database থেকে count হবে।
-    */
-
-    document.getElementById("totalQuestions").textContent =
-        questions;
+    document.getElementById(
+        "totalAttempts"
+    ).textContent =
+        attempts;
 }
 
 
 /* =========================
-   DEMO ACTION
+   MODAL
+========================= */
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+}
+
+
+/* =========================
+   DEMO
 ========================= */
 
 function showDemo(name){
@@ -3074,59 +3433,63 @@ function showDemo(name){
     alert(
         "📌 " +
         name +
-        " Management\n\n" +
-        "এই অংশটি পরবর্তী numbered step-এ তৈরি করা হবে।"
+        " feature পরবর্তী step-এ functional করা হবে।"
     );
 }
 
 
+/* =========================
+   LOGOUT
+========================= */
+
 function logoutDemo(){
 
-    const confirmed =
+    const ok =
         confirm(
-            "আপনি কি Admin Panel থেকে Logout করতে চান?"
+            "আপনি কি Logout করতে চান?"
         );
 
-    if(confirmed){
+
+    if(ok){
 
         sessionStorage.removeItem(
             "snkAdminLoggedIn"
         );
 
-        alert("আপনি Logout করেছেন।");
 
-        /*
-           পরবর্তীতে admin-login.html
-           এর সঙ্গে সম্পূর্ণ authentication
-           system connect করা হবে।
-        */
-
+        alert(
+            "আপনি Admin Panel থেকে Logout করেছেন।"
+        );
     }
 }
 
 
 /* =========================
-   MODAL OUTSIDE CLICK
+   OUTSIDE MODAL CLICK
 ========================= */
 
-document
-.getElementById("quizModal")
-.addEventListener("click", function(event){
+[
+    "viewModal",
+    "addModal",
+    "questionsModal",
+    "attemptsModal"
+].forEach(id => {
 
-    if(event.target === this){
-        closeQuizModal();
-    }
+    document
+        .getElementById(id)
+        .addEventListener(
+            "click",
+            function(event){
 
-});
+                if(
+                    event.target === this
+                ){
 
+                    closeModal(id);
+                }
 
-document
-.getElementById("previewModal")
-.addEventListener("click", function(event){
-
-    if(event.target === this){
-        closePreview();
-    }
+            }
+        );
 
 });
 
