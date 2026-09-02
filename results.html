@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,748 +20,1298 @@
 }
 
 :root{
+
     --bg:#f4f6fa;
     --card:#ffffff;
     --text:#172033;
     --muted:#667085;
     --border:#e5e7eb;
+
     --primary:#2563eb;
     --primary-dark:#1d4ed8;
+
     --soft:#eff6ff;
+
     --success:#16a34a;
+    --success-soft:#dcfce7;
+
     --warning:#d97706;
+    --warning-soft:#fef3c7;
+
     --danger:#dc2626;
+    --danger-soft:#fee2e2;
+
+    --purple:#7c3aed;
+
     --sidebar:#111827;
+
     --shadow:0 10px 30px rgba(15,23,42,.07);
 }
 
 body.dark{
+
     --bg:#080d18;
     --card:#111827;
     --text:#f8fafc;
     --muted:#94a3b8;
     --border:#1f2937;
+
     --soft:#172554;
+
     --sidebar:#020617;
+
     --shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
 body{
+
     font-family:"Noto Sans Bengali",Arial,sans-serif;
+
     background:var(--bg);
+
     color:var(--text);
+
     min-height:100vh;
+
     transition:.25s;
 }
 
 button,
 input,
-select{
+select,
+textarea{
+
     font-family:inherit;
 }
 
 button{
+
     cursor:pointer;
 }
 
 a{
+
     text-decoration:none;
+
     color:inherit;
 }
 
+
 /* =========================
-   SIDEBAR
+SIDEBAR
 ========================= */
 
 .sidebar{
+
     width:255px;
+
     min-width:255px;
+
     background:var(--sidebar);
+
     color:#fff;
+
     min-height:100vh;
+
     position:fixed;
+
     left:0;
     top:0;
     bottom:0;
+
     z-index:1000;
+
     display:flex;
+
     flex-direction:column;
+
     transition:.25s;
 }
 
 .sidebar-logo{
+
     height:76px;
+
     padding:13px 17px;
+
     display:flex;
+
     align-items:center;
+
     gap:10px;
+
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .sidebar-logo img{
+
     width:45px;
     height:45px;
+
     object-fit:contain;
 }
 
 .sidebar-logo-text{
+
     font-size:15px;
+
     font-weight:800;
 }
 
 .sidebar-logo-text small{
+
     display:block;
+
     color:#9ca3af;
+
     font-size:9px;
+
     font-weight:500;
 }
 
 .sidebar-menu{
+
     padding:18px 12px;
+
     flex:1;
+
     overflow-y:auto;
 }
 
 .menu-label{
+
     color:#6b7280;
+
     font-size:9px;
+
     font-weight:800;
+
     padding:8px 11px;
+
     letter-spacing:.5px;
 }
 
 .menu-item{
+
     width:100%;
+
     border:none;
+
     background:transparent;
+
     color:#d1d5db;
+
     display:flex;
+
     align-items:center;
+
     gap:11px;
+
     padding:11px 12px;
+
     border-radius:9px;
+
     margin-bottom:4px;
+
     font-size:11px;
+
     font-weight:600;
+
     text-align:left;
 }
 
 .menu-item:hover{
+
     background:rgba(255,255,255,.07);
+
     color:#fff;
 }
 
 .menu-item.active{
+
     background:#2563eb;
+
     color:#fff;
 }
 
 .menu-icon{
+
     width:22px;
+
     text-align:center;
+
     font-size:15px;
 }
 
 .sidebar-footer{
+
     padding:13px;
+
     border-top:1px solid rgba(255,255,255,.08);
 }
 
 .admin-mini{
+
     display:flex;
+
     align-items:center;
+
     gap:9px;
+
     padding:9px;
+
     background:rgba(255,255,255,.05);
+
     border-radius:10px;
 }
 
 .admin-avatar{
+
     width:34px;
     height:34px;
+
     border-radius:9px;
+
     background:#2563eb;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
 
 .admin-mini-info{
+
     flex:1;
 }
 
 .admin-mini-info strong{
+
     display:block;
+
     font-size:10px;
 }
 
 .admin-mini-info span{
+
     display:block;
+
     color:#9ca3af;
+
     font-size:8px;
 }
 
 .logout-small{
+
     border:none;
+
     background:transparent;
+
     color:#9ca3af;
+
     font-size:14px;
 }
 
+
 /* =========================
-   MAIN
+MAIN
 ========================= */
 
 .main{
+
     margin-left:255px;
+
     width:calc(100% - 255px);
+
     min-width:0;
 }
 
+
 /* =========================
-   TOPBAR
+TOPBAR
 ========================= */
 
 .topbar{
+
     height:76px;
+
     background:var(--card);
+
     border-bottom:1px solid var(--border);
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:0 25px;
+
     position:sticky;
+
     top:0;
+
     z-index:900;
 }
 
 .topbar-left{
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
 }
 
 .mobile-menu-btn{
+
     display:none;
+
     border:1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     width:38px;
     height:38px;
+
     border-radius:9px;
+
     font-size:18px;
 }
 
 .page-heading h1{
+
     font-size:20px;
 }
 
 .page-heading p{
+
     color:var(--muted);
+
     font-size:10px;
 }
 
 .topbar-actions{
+
     display:flex;
+
     align-items:center;
+
     gap:7px;
 }
 
 .topbar-btn{
+
     width:37px;
     height:37px;
+
     border:1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     border-radius:9px;
 }
 
 .admin-top-profile{
+
     display:flex;
+
     align-items:center;
+
     gap:9px;
+
     padding-left:9px;
+
     border-left:1px solid var(--border);
 }
 
 .top-avatar{
+
     width:36px;
     height:36px;
+
     border-radius:9px;
+
     background:var(--soft);
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
 
 .top-profile-text strong{
+
     display:block;
+
     font-size:10px;
 }
 
 .top-profile-text span{
+
     display:block;
+
     color:var(--muted);
+
     font-size:8px;
 }
 
+
 /* =========================
-   CONTENT
+CONTENT
 ========================= */
 
 .content{
+
     padding:25px;
 }
 
 .page-intro{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:15px;
+
     margin-bottom:20px;
 }
 
 .page-intro h2{
+
     font-size:21px;
+
     margin-bottom:4px;
 }
 
 .page-intro p{
+
     color:var(--muted);
+
     font-size:10px;
 }
 
 .primary-btn{
+
     border:none;
+
     background:var(--primary);
+
     color:#fff;
+
     padding:11px 16px;
+
     border-radius:9px;
+
     font-size:10px;
+
     font-weight:800;
 }
 
+
 /* =========================
-   STATS
+STATS
 ========================= */
 
 .stats-grid{
+
     display:grid;
+
     grid-template-columns:repeat(4,1fr);
+
     gap:15px;
+
     margin-bottom:20px;
 }
 
 .stat-card{
+
     background:var(--card);
+
     border:1px solid var(--border);
+
     border-radius:15px;
+
     padding:17px;
+
     box-shadow:var(--shadow);
 }
 
 .stat-icon{
+
     width:39px;
     height:39px;
+
     border-radius:10px;
+
     background:var(--soft);
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     font-size:17px;
+
     margin-bottom:11px;
 }
 
 .stat-number{
+
     font-size:23px;
+
     font-weight:800;
 }
 
 .stat-title{
+
     font-size:10px;
 }
 
 .stat-description{
+
     color:var(--muted);
+
     font-size:8px;
 }
 
+
 /* =========================
-   TOOLBAR
+TOOLBAR
 ========================= */
 
 .toolbar{
+
     background:var(--card);
+
     border:1px solid var(--border);
+
     border-radius:15px;
+
     padding:14px;
+
     box-shadow:var(--shadow);
+
     margin-bottom:15px;
 }
 
 .toolbar-row{
+
     display:flex;
+
     align-items:center;
+
     gap:9px;
+
     flex-wrap:wrap;
 }
 
 .search-box{
+
     flex:1;
+
     min-width:220px;
+
     position:relative;
 }
 
 .search-box span{
+
     position:absolute;
+
     left:11px;
+
     top:50%;
+
     transform:translateY(-50%);
+
     color:var(--muted);
 }
 
 .search-box input{
+
     width:100%;
+
     border:1px solid var(--border);
+
     background:var(--bg);
+
     color:var(--text);
+
     padding:10px 12px 10px 33px;
+
     border-radius:8px;
+
     outline:none;
+
     font-size:10px;
 }
 
 .filter-select{
+
     border:1px solid var(--border);
+
     background:var(--bg);
+
     color:var(--text);
+
     padding:10px 12px;
+
     border-radius:8px;
+
     outline:none;
+
     font-size:9px;
+
     min-width:140px;
 }
 
+
 /* =========================
-   TABLE
+TABLE
 ========================= */
 
 .table-card{
+
     background:var(--card);
+
     border:1px solid var(--border);
+
     border-radius:15px;
+
     box-shadow:var(--shadow);
+
     overflow:hidden;
 }
 
 .table-wrapper{
+
     width:100%;
+
     overflow-x:auto;
 }
 
 table{
+
     width:100%;
+
     border-collapse:collapse;
-    min-width:950px;
+
+    min-width:1100px;
 }
 
 thead{
+
     background:var(--bg);
 }
 
 th{
+
     color:var(--muted);
+
     font-size:8px;
+
     font-weight:800;
+
     text-align:left;
+
     padding:13px 14px;
+
     border-bottom:1px solid var(--border);
+
     white-space:nowrap;
 }
 
 td{
+
     padding:12px 14px;
+
     border-bottom:1px solid var(--border);
+
     font-size:9px;
+
     white-space:nowrap;
 }
 
 tbody tr:hover{
+
     background:var(--bg);
 }
 
+
+/* =========================
+STUDENT
+========================= */
+
 .student-cell{
+
     display:flex;
+
     align-items:center;
+
     gap:8px;
 }
 
 .student-avatar{
-    width:34px;
-    height:34px;
+
+    width:35px;
+    height:35px;
+
     border-radius:9px;
+
     background:var(--soft);
+
+    color:var(--primary);
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
+    font-size:9px;
+
     font-weight:800;
 }
 
-.student-name strong{
+.student-cell strong{
+
     display:block;
+
     font-size:9px;
 }
 
-.student-name span{
+.student-cell span{
+
     display:block;
+
     color:var(--muted);
+
     font-size:7px;
+
+    margin-top:2px;
 }
 
-.quiz-name{
-    font-weight:700;
-}
 
-.marks{
-    font-weight:800;
-}
+/* =========================
+TYPE
+========================= */
 
-.marks.good{
-    color:var(--success);
-}
+.type-badge{
 
-.marks.average{
-    color:var(--warning);
-}
-
-.marks.low{
-    color:var(--danger);
-}
-
-.result-status{
     display:inline-flex;
+
     padding:5px 8px;
+
     border-radius:20px;
+
     font-size:7px;
+
     font-weight:800;
 }
 
-.result-status.published{
-    background:#dcfce7;
-    color:#15803d;
+.type-badge.quiz{
+
+    background:#f5f3ff;
+
+    color:#7c3aed;
 }
 
-.result-status.pending{
-    background:#fef3c7;
+.type-badge.assignment{
+
+    background:#ecfeff;
+
+    color:#0891b2;
+}
+
+body.dark .type-badge.quiz{
+
+    background:#2e1065;
+
+    color:#c4b5fd;
+}
+
+body.dark .type-badge.assignment{
+
+    background:#083344;
+
+    color:#67e8f9;
+}
+
+
+/* =========================
+COURSE
+========================= */
+
+.course-badge{
+
+    display:inline-flex;
+
+    padding:5px 8px;
+
+    background:var(--soft);
+
+    color:var(--primary);
+
+    border-radius:20px;
+
+    font-size:7px;
+
+    font-weight:800;
+}
+
+
+/* =========================
+STATUS
+========================= */
+
+.status{
+
+    display:inline-flex;
+
+    padding:5px 8px;
+
+    border-radius:20px;
+
+    font-size:7px;
+
+    font-weight:800;
+}
+
+.status.pending{
+
+    background:var(--warning-soft);
+
     color:#a16207;
 }
 
-.result-status.review{
-    background:#dbeafe;
-    color:#1d4ed8;
+.status.reviewed{
+
+    background:var(--success-soft);
+
+    color:#15803d;
 }
 
+.status.missing{
+
+    background:var(--danger-soft);
+
+    color:#b91c1c;
+}
+
+
+/* =========================
+MARKS
+========================= */
+
+.marks{
+
+    font-weight:800;
+}
+
+.marks.pending{
+
+    color:var(--warning);
+}
+
+.marks.done{
+
+    color:var(--success);
+}
+
+
+/* =========================
+ACTIONS
+========================= */
+
 .row-actions{
+
     display:flex;
+
     gap:5px;
 }
 
 .action-btn{
+
     width:30px;
     height:30px;
+
     border:1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     border-radius:7px;
 }
 
 .action-btn:hover{
+
     background:var(--soft);
 }
 
-.action-btn.publish:hover{
+.action-btn.mark:hover{
+
     color:var(--success);
 }
 
-.action-btn.delete:hover{
-    color:var(--danger);
-}
-
-.empty-state{
-    display:none;
-    text-align:center;
-    padding:45px 20px;
-    color:var(--muted);
-    font-size:10px;
-}
 
 /* =========================
-   MODAL
+MODAL
 ========================= */
 
 .modal-overlay{
+
     position:fixed;
+
     inset:0;
+
     background:rgba(0,0,0,.55);
+
     display:none;
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
+
     z-index:3000;
 }
 
 .modal-overlay.show{
+
     display:flex;
 }
 
 .modal{
+
     width:100%;
-    max-width:560px;
+
+    max-width:620px;
+
     max-height:90vh;
+
     overflow-y:auto;
+
     background:var(--card);
+
     border:1px solid var(--border);
+
     border-radius:18px;
+
     padding:22px;
+
     box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
 .modal-header{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     margin-bottom:17px;
 }
 
 .modal-header h3{
+
     font-size:16px;
 }
 
 .modal-header p{
+
     color:var(--muted);
+
     font-size:8px;
+
     margin-top:2px;
 }
 
 .modal-close{
+
     width:30px;
     height:30px;
+
     border:none;
+
     background:var(--bg);
+
     color:var(--text);
+
     border-radius:8px;
+
     font-size:16px;
 }
 
+
+/* =========================
+FORM
+========================= */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+}
+
 .form-group{
+
     margin-bottom:12px;
 }
 
+.form-group.full{
+
+    grid-column:1 / -1;
+}
+
 .form-group label{
+
     display:block;
+
     font-size:9px;
+
     font-weight:800;
+
     margin-bottom:5px;
 }
 
 .form-group input,
-.form-group select{
+.form-group select,
+.form-group textarea{
+
     width:100%;
+
     border:1px solid var(--border);
+
     background:var(--bg);
+
     color:var(--text);
+
     padding:10px;
+
     border-radius:8px;
+
     outline:none;
+
     font-size:9px;
+}
+
+.form-group textarea{
+
+    min-height:85px;
+
+    resize:vertical;
 }
 
 .form-actions{
+
     display:flex;
+
     justify-content:flex-end;
+
     gap:7px;
-    margin-top:16px;
+
+    margin-top:8px;
 }
 
 .secondary-btn{
+
     border:1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     padding:10px 14px;
+
     border-radius:8px;
+
     font-size:9px;
+
     font-weight:700;
 }
 
 .save-btn{
+
     border:none;
+
     background:var(--primary);
+
     color:#fff;
+
     padding:10px 16px;
+
     border-radius:8px;
+
     font-size:9px;
+
     font-weight:800;
 }
 
-.result-summary{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:9px;
+
+/* =========================
+DETAIL BOX
+========================= */
+
+.detail-box{
+
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:13px;
+
     margin-bottom:15px;
 }
 
-.summary-box{
-    background:var(--bg);
-    border:1px solid var(--border);
-    padding:12px;
-    border-radius:9px;
-    text-align:center;
+.detail-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:7px 0;
+
+    border-bottom:1px dashed var(--border);
 }
 
-.summary-box span{
-    display:block;
+.detail-row:last-child{
+
+    border-bottom:none;
+}
+
+.detail-row span{
+
     color:var(--muted);
-    font-size:7px;
+
+    font-size:8px;
 }
 
-.summary-box strong{
-    display:block;
-    font-size:17px;
-    margin-top:3px;
+.detail-row strong{
+
+    font-size:9px;
+
+    text-align:right;
 }
+
 
 /* =========================
-   FOOTER
+RESULT PREVIEW
+========================= */
+
+.result-preview{
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:15px;
+
+    text-align:center;
+
+    margin-bottom:15px;
+}
+
+.result-preview .big-score{
+
+    font-size:32px;
+
+    font-weight:800;
+
+    color:var(--primary);
+}
+
+.result-preview p{
+
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+
+/* =========================
+EMPTY
+========================= */
+
+.empty-state{
+
+    display:none;
+
+    text-align:center;
+
+    padding:45px 20px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+
+/* =========================
+FOOTER
 ========================= */
 
 .footer{
+
     padding:20px 25px;
+
     border-top:1px solid var(--border);
+
     color:var(--muted);
+
     font-size:9px;
+
     text-align:center;
+
     margin-top:25px;
 }
 
+
 /* =========================
-   MOBILE
+MOBILE
 ========================= */
 
 .sidebar-overlay{
+
     position:fixed;
+
     inset:0;
+
     background:rgba(0,0,0,.45);
+
     z-index:950;
+
     display:none;
 }
 
 .sidebar-overlay.show{
+
     display:block;
 }
 
 @media(max-width:1100px){
 
     .stats-grid{
+
         grid-template-columns:repeat(2,1fr);
     }
 }
@@ -768,29 +1319,38 @@ tbody tr:hover{
 @media(max-width:800px){
 
     .sidebar{
+
         transform:translateX(-100%);
     }
 
     .sidebar.open{
+
         transform:translateX(0);
     }
 
     .main{
+
         margin-left:0;
+
         width:100%;
     }
 
     .mobile-menu-btn{
+
         display:flex;
+
         align-items:center;
+
         justify-content:center;
     }
 
     .top-profile-text{
+
         display:none;
     }
 
     .admin-top-profile{
+
         border-left:none;
     }
 }
@@ -798,70 +1358,97 @@ tbody tr:hover{
 @media(max-width:600px){
 
     .topbar{
+
         height:65px;
+
         padding:0 13px;
     }
 
     .content{
+
         padding:15px;
     }
 
     .page-heading h1{
+
         font-size:16px;
     }
 
     .page-heading p{
+
         display:none;
     }
 
     .page-intro{
+
         flex-direction:column;
+
         align-items:flex-start;
     }
 
     .stats-grid{
+
         grid-template-columns:1fr;
     }
 
     .toolbar-row{
+
         flex-direction:column;
+
         align-items:stretch;
     }
 
     .search-box{
+
         min-width:0;
     }
 
     .filter-select{
+
         width:100%;
     }
 
-    .result-summary{
+    .form-grid{
+
         grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+
+        grid-column:auto;
     }
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <!-- =========================
-     SIDEBAR
+SIDEBAR
 ========================= -->
 
 <aside class="sidebar" id="sidebar">
 
+
     <div class="sidebar-logo">
 
         <img
-        src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-        alt="SNK IT Institute Logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute Logo"
         >
 
         <div class="sidebar-logo-text">
+
             SNK IT Institute
-            <small>Admin Control Panel</small>
+
+            <small>
+                Admin Control Panel
+            </small>
+
         </div>
 
     </div>
@@ -869,23 +1456,51 @@ tbody tr:hover{
 
     <div class="sidebar-menu">
 
+
         <div class="menu-label">
             MAIN
         </div>
 
-        <a class="menu-item" href="admin.html">
-            <span class="menu-icon">📊</span>
-            <span>Dashboard</span>
+
+        <a
+            class="menu-item"
+            href="admin.html"
+        >
+
+            <span class="menu-icon">
+                📊
+            </span>
+
+            Dashboard
+
         </a>
 
-        <a class="menu-item" href="students.html">
-            <span class="menu-icon">👨‍🎓</span>
-            <span>Students</span>
+
+        <a
+            class="menu-item"
+            href="students.html"
+        >
+
+            <span class="menu-icon">
+                👨‍🎓
+            </span>
+
+            Students
+
         </a>
 
-        <a class="menu-item" href="courses.html">
-            <span class="menu-icon">🎓</span>
-            <span>Courses</span>
+
+        <a
+            class="menu-item"
+            href="courses.html"
+        >
+
+            <span class="menu-icon">
+                🎓
+            </span>
+
+            Courses
+
         </a>
 
 
@@ -893,19 +1508,46 @@ tbody tr:hover{
             ACADEMIC
         </div>
 
-        <a class="menu-item" href="assignments.html">
-            <span class="menu-icon">📝</span>
-            <span>Assignments</span>
+
+        <a
+            class="menu-item"
+            href="assignments.html"
+        >
+
+            <span class="menu-icon">
+                📝
+            </span>
+
+            Assignments
+
         </a>
 
-        <a class="menu-item" href="quiz.html">
-            <span class="menu-icon">🎯</span>
-            <span>Quiz</span>
+
+        <a
+            class="menu-item"
+            href="quiz.html"
+        >
+
+            <span class="menu-icon">
+                🎯
+            </span>
+
+            Quiz
+
         </a>
 
-        <a class="menu-item active" href="results.html">
-            <span class="menu-icon">🏆</span>
-            <span>Results</span>
+
+        <a
+            class="menu-item active"
+            href="results.html"
+        >
+
+            <span class="menu-icon">
+                🏆
+            </span>
+
+            Results
+
         </a>
 
 
@@ -913,17 +1555,31 @@ tbody tr:hover{
             CONTENT
         </div>
 
-        <a class="menu-item" href="resources.html">
-            <span class="menu-icon">📚</span>
-            <span>Resources</span>
+
+        <a
+            class="menu-item"
+            href="resources.html"
+        >
+
+            <span class="menu-icon">
+                📚
+            </span>
+
+            Resources
+
         </a>
 
-        <button
-        class="menu-item"
-        onclick="showDemo('Notices')">
 
-            <span class="menu-icon">📢</span>
-            <span>Notices</span>
+        <button
+            class="menu-item"
+            onclick="showDemo('Notices')"
+        >
+
+            <span class="menu-icon">
+                📢
+            </span>
+
+            Notices
 
         </button>
 
@@ -932,12 +1588,17 @@ tbody tr:hover{
             SYSTEM
         </div>
 
-        <button
-        class="menu-item"
-        onclick="showDemo('Settings')">
 
-            <span class="menu-icon">⚙️</span>
-            <span>Settings</span>
+        <button
+            class="menu-item"
+            onclick="showDemo('Settings')"
+        >
+
+            <span class="menu-icon">
+                ⚙️
+            </span>
+
+            Settings
 
         </button>
 
@@ -946,23 +1607,32 @@ tbody tr:hover{
 
     <div class="sidebar-footer">
 
+
         <div class="admin-mini">
 
             <div class="admin-avatar">
                 👨‍💼
             </div>
 
+
             <div class="admin-mini-info">
-                <strong>Super Admin</strong>
-                <span>Administrator</span>
+
+                <strong>
+                    Super Admin
+                </strong>
+
+                <span>
+                    Administrator
+                </span>
+
             </div>
 
+
             <button
-            class="logout-small"
-            onclick="logoutDemo()">
-
+                class="logout-small"
+                onclick="logoutDemo()"
+            >
                 🚪
-
             </button>
 
         </div>
@@ -973,29 +1643,32 @@ tbody tr:hover{
 
 
 <div
-class="sidebar-overlay"
-id="sidebarOverlay"
-onclick="closeSidebar()">
-</div>
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+    onclick="closeSidebar()"
+></div>
 
 
 <!-- =========================
-     MAIN
+MAIN
 ========================= -->
 
 <main class="main">
 
+
 <header class="topbar">
+
 
     <div class="topbar-left">
 
+
         <button
-        class="mobile-menu-btn"
-        onclick="toggleSidebar()">
-
+            class="mobile-menu-btn"
+            onclick="toggleSidebar()"
+        >
             ☰
-
         </button>
+
 
         <div class="page-heading">
 
@@ -1004,7 +1677,7 @@ onclick="closeSidebar()">
             </h1>
 
             <p>
-                SNK IT Institute • Student Result Control
+                SNK IT Institute • Marks & Results
             </p>
 
         </div>
@@ -1014,28 +1687,30 @@ onclick="closeSidebar()">
 
     <div class="topbar-actions">
 
-        <button
-        class="topbar-btn"
-        onclick="toggleTheme()"
-        id="themeBtn">
 
+        <button
+            class="topbar-btn"
+            onclick="toggleTheme()"
+            id="themeBtn"
+        >
             🌙
-
         </button>
+
 
         <button
-        class="topbar-btn"
-        onclick="showDemo('Notifications')">
-
+            class="topbar-btn"
+            onclick="showDemo('Notifications')"
+        >
             🔔
-
         </button>
+
 
         <div class="admin-top-profile">
 
             <div class="top-avatar">
                 👨‍💼
             </div>
+
 
             <div class="top-profile-text">
 
@@ -1058,7 +1733,9 @@ onclick="closeSidebar()">
 
 <section class="content">
 
+
     <div class="page-intro">
+
 
         <div>
 
@@ -1067,25 +1744,28 @@ onclick="closeSidebar()">
             </h2>
 
             <p>
-                Quiz ও Assignment-এর result review, marks এবং publish করুন।
+                Assignment ও Quiz-এর marks review এবং publish করুন।
             </p>
 
         </div>
 
+
         <button
-        class="primary-btn"
-        onclick="openAddResult()">
-
-            ＋ Add Result
-
+            class="primary-btn"
+            onclick="showDemo('Result Report')"
+        >
+            📊 Result Report
         </button>
 
     </div>
 
 
-    <!-- STATS -->
+    <!-- =========================
+    STATS
+    ========================= -->
 
     <div class="stats-grid">
+
 
         <div class="stat-card">
 
@@ -1094,40 +1774,18 @@ onclick="closeSidebar()">
             </div>
 
             <div
-            class="stat-number"
-            id="totalResults">
+                class="stat-number"
+                id="totalSubmissions"
+            >
                 6
             </div>
 
             <div class="stat-title">
-                Total Results
+                Total Submissions
             </div>
 
             <div class="stat-description">
-                মোট result
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🟢
-            </div>
-
-            <div
-            class="stat-number"
-            id="publishedResults">
-                3
-            </div>
-
-            <div class="stat-title">
-                Published
-            </div>
-
-            <div class="stat-description">
-                Student দেখতে পারবে
+                মোট submission
             </div>
 
         </div>
@@ -1140,17 +1798,18 @@ onclick="closeSidebar()">
             </div>
 
             <div
-            class="stat-number"
-            id="pendingResults">
-                2
+                class="stat-number"
+                id="pendingCount"
+            >
+                3
             </div>
 
             <div class="stat-title">
-                Pending
+                Pending Review
             </div>
 
             <div class="stat-description">
-                Review বাকি
+                marks দেওয়া হয়নি
             </div>
 
         </div>
@@ -1159,12 +1818,36 @@ onclick="closeSidebar()">
         <div class="stat-card">
 
             <div class="stat-icon">
-                ⭐
+                ✅
             </div>
 
             <div
-            class="stat-number"
-            id="averageMarks">
+                class="stat-number"
+                id="reviewedCount"
+            >
+                3
+            </div>
+
+            <div class="stat-title">
+                Reviewed
+            </div>
+
+            <div class="stat-description">
+                marks complete
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🏆
+            </div>
+
+            <div
+                class="stat-number"
+            >
                 78%
             </div>
 
@@ -1173,7 +1856,7 @@ onclick="closeSidebar()">
             </div>
 
             <div class="stat-description">
-                গড় নম্বর
+                current demo average
             </div>
 
         </div>
@@ -1181,11 +1864,15 @@ onclick="closeSidebar()">
     </div>
 
 
-    <!-- FILTER -->
+    <!-- =========================
+    TOOLBAR
+    ========================= -->
 
     <div class="toolbar">
 
+
         <div class="toolbar-row">
+
 
             <div class="search-box">
 
@@ -1194,19 +1881,20 @@ onclick="closeSidebar()">
                 </span>
 
                 <input
-                type="text"
-                id="searchInput"
-                placeholder="Student বা Quiz খুঁজুন..."
-                oninput="filterResults()"
+                    type="text"
+                    id="searchInput"
+                    placeholder="Student, ID বা assignment খুঁজুন..."
+                    oninput="filterResults()"
                 >
 
             </div>
 
 
             <select
-            class="filter-select"
-            id="typeFilter"
-            onchange="filterResults()">
+                class="filter-select"
+                id="typeFilter"
+                onchange="filterResults()"
+            >
 
                 <option value="all">
                     সব Type
@@ -1224,24 +1912,50 @@ onclick="closeSidebar()">
 
 
             <select
-            class="filter-select"
-            id="statusFilter"
-            onchange="filterResults()">
+                class="filter-select"
+                id="statusFilter"
+                onchange="filterResults()"
+            >
 
                 <option value="all">
                     সব Status
-                </option>
-
-                <option value="Published">
-                    Published
                 </option>
 
                 <option value="Pending">
                     Pending
                 </option>
 
-                <option value="Review">
-                    Under Review
+                <option value="Reviewed">
+                    Reviewed
+                </option>
+
+            </select>
+
+
+            <select
+                class="filter-select"
+                id="courseFilter"
+                onchange="filterResults()"
+            >
+
+                <option value="all">
+                    সব Course
+                </option>
+
+                <option value="Computer Basic">
+                    Computer Basic
+                </option>
+
+                <option value="MS Word">
+                    MS Word
+                </option>
+
+                <option value="MS Excel">
+                    MS Excel
+                </option>
+
+                <option value="Graphic Design">
+                    Graphic Design
                 </option>
 
             </select>
@@ -1251,13 +1965,18 @@ onclick="closeSidebar()">
     </div>
 
 
-    <!-- TABLE -->
+    <!-- =========================
+    TABLE
+    ========================= -->
 
     <div class="table-card">
 
+
         <div class="table-wrapper">
 
+
             <table>
+
 
                 <thead>
 
@@ -1268,23 +1987,23 @@ onclick="closeSidebar()">
                         </th>
 
                         <th>
+                            ACTIVITY
+                        </th>
+
+                        <th>
                             TYPE
                         </th>
 
                         <th>
-                            QUIZ / ASSIGNMENT
-                        </th>
-
-                        <th>
-                            MARKS
-                        </th>
-
-                        <th>
-                            PERCENTAGE
+                            COURSE
                         </th>
 
                         <th>
                             SUBMITTED
+                        </th>
+
+                        <th>
+                            MARKS
                         </th>
 
                         <th>
@@ -1303,12 +2022,16 @@ onclick="closeSidebar()">
                 <tbody id="resultTable">
 
 
-                    <!-- RESULT 1 -->
+                    <!-- ROW 1 -->
 
                     <tr
-                    data-name="Rahim Ahmed"
-                    data-type="Quiz"
-                    data-status="Published">
+                        data-name="Rahim Ahmed"
+                        data-id="SNK-1001"
+                        data-type="Quiz"
+                        data-course="Computer Basic"
+                        data-status="Reviewed"
+                    >
+
 
                         <td>
 
@@ -1318,7 +2041,7 @@ onclick="closeSidebar()">
                                     RA
                                 </div>
 
-                                <div class="student-name">
+                                <div>
 
                                     <strong>
                                         Rahim Ahmed
@@ -1336,30 +2059,25 @@ onclick="closeSidebar()">
 
 
                         <td>
-                            Quiz
+                            Computer Basic Quiz 01
                         </td>
 
 
                         <td>
 
-                            <div class="quiz-name">
-                                Computer Basic Quiz 01
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks good">
-                                9 / 10
+                            <span class="type-badge quiz">
+                                Quiz
                             </span>
 
                         </td>
 
 
                         <td>
-                            90%
+
+                            <span class="course-badge">
+                                Computer Basic
+                            </span>
+
                         </td>
 
 
@@ -1370,8 +2088,17 @@ onclick="closeSidebar()">
 
                         <td>
 
-                            <span class="result-status published">
-                                Published
+                            <span class="marks done">
+                                18 / 20
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status reviewed">
+                                Reviewed
                             </span>
 
                         </td>
@@ -1381,30 +2108,22 @@ onclick="closeSidebar()">
 
                             <div class="row-actions">
 
-                                <button
-                                class="action-btn"
-                                onclick="viewResult('Rahim Ahmed','Computer Basic Quiz 01','9','10','Published')">
 
+                                <button
+                                    class="action-btn"
+                                    onclick="viewResult(this)"
+                                    title="View"
+                                >
                                     👁
-
                                 </button>
 
 
                                 <button
-                                class="action-btn publish"
-                                onclick="editMarks(this)">
-
+                                    class="action-btn mark"
+                                    onclick="openMarks(this)"
+                                    title="Marks"
+                                >
                                     ✏️
-
-                                </button>
-
-
-                                <button
-                                class="action-btn delete"
-                                onclick="deleteResult(this)">
-
-                                    🗑️
-
                                 </button>
 
                             </div>
@@ -1414,12 +2133,16 @@ onclick="closeSidebar()">
                     </tr>
 
 
-                    <!-- RESULT 2 -->
+                    <!-- ROW 2 -->
 
                     <tr
-                    data-name="Nusrat Jahan"
-                    data-type="Quiz"
-                    data-status="Pending">
+                        data-name="Nusrat Jahan"
+                        data-id="SNK-1002"
+                        data-type="Quiz"
+                        data-course="MS Word"
+                        data-status="Pending"
+                    >
+
 
                         <td>
 
@@ -1429,7 +2152,7 @@ onclick="closeSidebar()">
                                     NJ
                                 </div>
 
-                                <div class="student-name">
+                                <div>
 
                                     <strong>
                                         Nusrat Jahan
@@ -1447,41 +2170,45 @@ onclick="closeSidebar()">
 
 
                         <td>
-                            Quiz
+                            MS Word Quiz 01
                         </td>
 
 
                         <td>
 
-                            <div class="quiz-name">
-                                MS Word Basic Test
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks average">
-                                7 / 10
+                            <span class="type-badge quiz">
+                                Quiz
                             </span>
 
                         </td>
 
 
                         <td>
-                            70%
+
+                            <span class="course-badge">
+                                MS Word
+                            </span>
+
                         </td>
 
 
                         <td>
-                            08 Sep 2026
+                            09 Sep 2026
                         </td>
 
 
                         <td>
 
-                            <span class="result-status pending">
+                            <span class="marks pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status pending">
                                 Pending
                             </span>
 
@@ -1492,28 +2219,20 @@ onclick="closeSidebar()">
 
                             <div class="row-actions">
 
-                                <button
-                                class="action-btn"
-                                onclick="viewResult('Nusrat Jahan','MS Word Basic Test','7','10','Pending')">
 
+                                <button
+                                    class="action-btn"
+                                    onclick="viewResult(this)"
+                                >
                                     👁
-
                                 </button>
 
-                                <button
-                                class="action-btn publish"
-                                onclick="publishResult(this)">
-
-                                    ✓
-
-                                </button>
 
                                 <button
-                                class="action-btn delete"
-                                onclick="deleteResult(this)">
-
-                                    🗑️
-
+                                    class="action-btn mark"
+                                    onclick="openMarks(this)"
+                                >
+                                    ✏️
                                 </button>
 
                             </div>
@@ -1523,12 +2242,16 @@ onclick="closeSidebar()">
                     </tr>
 
 
-                    <!-- RESULT 3 -->
+                    <!-- ROW 3 -->
 
                     <tr
-                    data-name="Sadia Akter"
-                    data-type="Assignment"
-                    data-status="Review">
+                        data-name="Sadia Akter"
+                        data-id="SNK-1003"
+                        data-type="Assignment"
+                        data-course="MS Excel"
+                        data-status="Reviewed"
+                    >
+
 
                         <td>
 
@@ -1538,7 +2261,7 @@ onclick="closeSidebar()">
                                     SA
                                 </div>
 
-                                <div class="student-name">
+                                <div>
 
                                     <strong>
                                         Sadia Akter
@@ -1556,42 +2279,46 @@ onclick="closeSidebar()">
 
 
                         <td>
-                            Assignment
+                            Excel Practical Assignment
                         </td>
 
 
                         <td>
 
-                            <div class="quiz-name">
-                                MS Word Assignment 01
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks good">
-                                18 / 20
+                            <span class="type-badge assignment">
+                                Assignment
                             </span>
 
                         </td>
 
 
                         <td>
-                            90%
+
+                            <span class="course-badge">
+                                MS Excel
+                            </span>
+
                         </td>
 
 
                         <td>
-                            07 Sep 2026
+                            10 Sep 2026
                         </td>
 
 
                         <td>
 
-                            <span class="result-status review">
-                                Under Review
+                            <span class="marks done">
+                                17 / 20
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status reviewed">
+                                Reviewed
                             </span>
 
                         </td>
@@ -1601,28 +2328,20 @@ onclick="closeSidebar()">
 
                             <div class="row-actions">
 
-                                <button
-                                class="action-btn"
-                                onclick="viewResult('Sadia Akter','MS Word Assignment 01','18','20','Review')">
 
+                                <button
+                                    class="action-btn"
+                                    onclick="viewResult(this)"
+                                >
                                     👁
-
                                 </button>
 
-                                <button
-                                class="action-btn publish"
-                                onclick="editMarks(this)">
 
+                                <button
+                                    class="action-btn mark"
+                                    onclick="openMarks(this)"
+                                >
                                     ✏️
-
-                                </button>
-
-                                <button
-                                class="action-btn delete"
-                                onclick="deleteResult(this)">
-
-                                    🗑️
-
                                 </button>
 
                             </div>
@@ -1632,12 +2351,16 @@ onclick="closeSidebar()">
                     </tr>
 
 
-                    <!-- RESULT 4 -->
+                    <!-- ROW 4 -->
 
                     <tr
-                    data-name="Tanvir Hasan"
-                    data-type="Quiz"
-                    data-status="Published">
+                        data-name="Tanvir Hasan"
+                        data-id="SNK-1004"
+                        data-type="Assignment"
+                        data-course="Graphic Design"
+                        data-status="Pending"
+                    >
+
 
                         <td>
 
@@ -1647,7 +2370,7 @@ onclick="closeSidebar()">
                                     TH
                                 </div>
 
-                                <div class="student-name">
+                                <div>
 
                                     <strong>
                                         Tanvir Hasan
@@ -1665,42 +2388,46 @@ onclick="closeSidebar()">
 
 
                         <td>
-                            Quiz
+                            Logo Design Assignment
                         </td>
 
 
                         <td>
 
-                            <div class="quiz-name">
-                                Excel Formula Practice
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks good">
-                                14 / 15
+                            <span class="type-badge assignment">
+                                Assignment
                             </span>
 
                         </td>
 
 
                         <td>
-                            93%
+
+                            <span class="course-badge">
+                                Graphic Design
+                            </span>
+
                         </td>
 
 
                         <td>
-                            06 Sep 2026
+                            10 Sep 2026
                         </td>
 
 
                         <td>
 
-                            <span class="result-status published">
-                                Published
+                            <span class="marks pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status pending">
+                                Pending
                             </span>
 
                         </td>
@@ -1710,28 +2437,20 @@ onclick="closeSidebar()">
 
                             <div class="row-actions">
 
-                                <button
-                                class="action-btn"
-                                onclick="viewResult('Tanvir Hasan','Excel Formula Practice','14','15','Published')">
 
+                                <button
+                                    class="action-btn"
+                                    onclick="viewResult(this)"
+                                >
                                     👁
-
                                 </button>
 
-                                <button
-                                class="action-btn publish"
-                                onclick="editMarks(this)">
 
+                                <button
+                                    class="action-btn mark"
+                                    onclick="openMarks(this)"
+                                >
                                     ✏️
-
-                                </button>
-
-                                <button
-                                class="action-btn delete"
-                                onclick="deleteResult(this)">
-
-                                    🗑️
-
                                 </button>
 
                             </div>
@@ -1741,12 +2460,16 @@ onclick="closeSidebar()">
                     </tr>
 
 
-                    <!-- RESULT 5 -->
+                    <!-- ROW 5 -->
 
                     <tr
-                    data-name="Jannatul Ferdous"
-                    data-type="Assignment"
-                    data-status="Published">
+                        data-name="Jannatul Ferdous"
+                        data-id="SNK-1005"
+                        data-type="Quiz"
+                        data-course="MS Excel"
+                        data-status="Reviewed"
+                    >
+
 
                         <td>
 
@@ -1756,7 +2479,7 @@ onclick="closeSidebar()">
                                     JF
                                 </div>
 
-                                <div class="student-name">
+                                <div>
 
                                     <strong>
                                         Jannatul Ferdous
@@ -1774,42 +2497,46 @@ onclick="closeSidebar()">
 
 
                         <td>
-                            Assignment
+                            Excel Formula Quiz
                         </td>
 
 
                         <td>
 
-                            <div class="quiz-name">
-                                Computer Practical 01
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks average">
-                                16 / 20
+                            <span class="type-badge quiz">
+                                Quiz
                             </span>
 
                         </td>
 
 
                         <td>
-                            80%
+
+                            <span class="course-badge">
+                                MS Excel
+                            </span>
+
                         </td>
 
 
                         <td>
-                            05 Sep 2026
+                            11 Sep 2026
                         </td>
 
 
                         <td>
 
-                            <span class="result-status published">
-                                Published
+                            <span class="marks done">
+                                22 / 25
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status reviewed">
+                                Reviewed
                             </span>
 
                         </td>
@@ -1819,28 +2546,20 @@ onclick="closeSidebar()">
 
                             <div class="row-actions">
 
-                                <button
-                                class="action-btn"
-                                onclick="viewResult('Jannatul Ferdous','Computer Practical 01','16','20','Published')">
 
+                                <button
+                                    class="action-btn"
+                                    onclick="viewResult(this)"
+                                >
                                     👁
-
                                 </button>
 
-                                <button
-                                class="action-btn publish"
-                                onclick="editMarks(this)">
 
+                                <button
+                                    class="action-btn mark"
+                                    onclick="openMarks(this)"
+                                >
                                     ✏️
-
-                                </button>
-
-                                <button
-                                class="action-btn delete"
-                                onclick="deleteResult(this)">
-
-                                    🗑️
-
                                 </button>
 
                             </div>
@@ -1850,25 +2569,29 @@ onclick="closeSidebar()">
                     </tr>
 
 
-                    <!-- RESULT 6 -->
+                    <!-- ROW 6 -->
 
                     <tr
-                    data-name="Arif Hossain"
-                    data-type="Quiz"
-                    data-status="Pending">
+                        data-name="Sabbir Hossain"
+                        data-id="SNK-1006"
+                        data-type="Assignment"
+                        data-course="Computer Basic"
+                        data-status="Pending"
+                    >
+
 
                         <td>
 
                             <div class="student-cell">
 
                                 <div class="student-avatar">
-                                    AH
+                                    SH
                                 </div>
 
-                                <div class="student-name">
+                                <div>
 
                                     <strong>
-                                        Arif Hossain
+                                        Sabbir Hossain
                                     </strong>
 
                                     <span>
@@ -1883,41 +2606,45 @@ onclick="closeSidebar()">
 
 
                         <td>
-                            Quiz
+                            Computer Practical Assignment
                         </td>
 
 
                         <td>
 
-                            <div class="quiz-name">
-                                Graphic Design Fundamentals
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks low">
-                                8 / 15
+                            <span class="type-badge assignment">
+                                Assignment
                             </span>
 
                         </td>
 
 
                         <td>
-                            53%
+
+                            <span class="course-badge">
+                                Computer Basic
+                            </span>
+
                         </td>
 
 
                         <td>
-                            04 Sep 2026
+                            11 Sep 2026
                         </td>
 
 
                         <td>
 
-                            <span class="result-status pending">
+                            <span class="marks pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status pending">
                                 Pending
                             </span>
 
@@ -1928,28 +2655,20 @@ onclick="closeSidebar()">
 
                             <div class="row-actions">
 
-                                <button
-                                class="action-btn"
-                                onclick="viewResult('Arif Hossain','Graphic Design Fundamentals','8','15','Pending')">
 
+                                <button
+                                    class="action-btn"
+                                    onclick="viewResult(this)"
+                                >
                                     👁
-
                                 </button>
 
-                                <button
-                                class="action-btn publish"
-                                onclick="publishResult(this)">
-
-                                    ✓
-
-                                </button>
 
                                 <button
-                                class="action-btn delete"
-                                onclick="deleteResult(this)">
-
-                                    🗑️
-
+                                    class="action-btn mark"
+                                    onclick="openMarks(this)"
+                                >
+                                    ✏️
                                 </button>
 
                             </div>
@@ -1967,11 +2686,10 @@ onclick="closeSidebar()">
 
 
         <div
-        class="empty-state"
-        id="emptyState">
-
+            class="empty-state"
+            id="emptyState"
+        >
             😕 কোনো result পাওয়া যায়নি।
-
         </div>
 
     </div>
@@ -1983,22 +2701,27 @@ onclick="closeSidebar()">
 
     </footer>
 
+
 </section>
 
 </main>
 
 
 <!-- =========================
-     VIEW RESULT MODAL
+VIEW RESULT MODAL
 ========================= -->
 
 <div
-class="modal-overlay"
-id="viewModal">
+    class="modal-overlay"
+    id="viewModal"
+>
+
 
     <div class="modal">
 
+
         <div class="modal-header">
+
 
             <div>
 
@@ -2007,25 +2730,26 @@ id="viewModal">
                 </h3>
 
                 <p>
-                    Student result information
+                    Student submission details
                 </p>
 
             </div>
 
+
             <button
-            class="modal-close"
-            onclick="closeModal('viewModal')">
-
+                class="modal-close"
+                onclick="closeModal('viewModal')"
+            >
                 ×
-
             </button>
 
         </div>
 
 
-        <div class="result-summary">
+        <div class="detail-box">
 
-            <div class="summary-box">
+
+            <div class="detail-row">
 
                 <span>
                     Student
@@ -2037,25 +2761,66 @@ id="viewModal">
 
             </div>
 
-            <div class="summary-box">
+
+            <div class="detail-row">
 
                 <span>
-                    Marks
+                    Student ID
                 </span>
 
-                <strong id="viewMarks">
+                <strong id="viewStudentId">
                     —
                 </strong>
 
             </div>
 
-            <div class="summary-box">
+
+            <div class="detail-row">
 
                 <span>
-                    Percentage
+                    Activity
                 </span>
 
-                <strong id="viewPercentage">
+                <strong id="viewActivity">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Type
+                </span>
+
+                <strong id="viewType">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Course
+                </span>
+
+                <strong id="viewCourse">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Submitted
+                </span>
+
+                <strong id="viewSubmitted">
                     —
                 </strong>
 
@@ -2064,30 +2829,36 @@ id="viewModal">
         </div>
 
 
-        <div class="form-group">
+        <div class="result-preview">
 
-            <label>
-                Quiz / Assignment
-            </label>
 
-            <input
-            id="viewExam"
-            type="text"
-            readonly>
+            <div
+                class="big-score"
+                id="viewScore"
+            >
+                —
+            </div>
+
+
+            <p>
+                Current Result
+            </p>
 
         </div>
 
 
         <div class="form-group">
 
+
             <label>
-                Status
+                Admin Feedback
             </label>
 
-            <input
-            id="viewStatus"
-            type="text"
-            readonly>
+
+            <textarea
+                id="viewFeedback"
+                readonly
+            ></textarea>
 
         </div>
 
@@ -2095,11 +2866,10 @@ id="viewModal">
         <div class="form-actions">
 
             <button
-            class="secondary-btn"
-            onclick="closeModal('viewModal')">
-
+                class="secondary-btn"
+                onclick="closeModal('viewModal')"
+            >
                 Close
-
             </button>
 
         </div>
@@ -2110,163 +2880,175 @@ id="viewModal">
 
 
 <!-- =========================
-     ADD RESULT MODAL
+MARKS MODAL
 ========================= -->
 
 <div
-class="modal-overlay"
-id="addResultModal">
+    class="modal-overlay"
+    id="marksModal"
+>
+
 
     <div class="modal">
 
+
         <div class="modal-header">
+
 
             <div>
 
                 <h3>
-                    Add Student Result
+                    Give Marks
                 </h3>
 
                 <p>
-                    Admin manually result যোগ করতে পারবেন।
+                    Student-এর result update করুন।
                 </p>
 
             </div>
 
+
             <button
-            class="modal-close"
-            onclick="closeModal('addResultModal')">
-
+                class="modal-close"
+                onclick="closeModal('marksModal')"
+            >
                 ×
-
             </button>
 
         </div>
 
 
+        <div class="detail-box">
+
+
+            <div class="detail-row">
+
+                <span>
+                    Student
+                </span>
+
+                <strong id="markStudent">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Activity
+                </span>
+
+                <strong id="markActivity">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Course
+                </span>
+
+                <strong id="markCourse">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
         <form
-        onsubmit="saveResult(event)">
-
-            <div class="form-group">
-
-                <label>
-                    Student Name
-                </label>
-
-                <input
-                id="newStudent"
-                type="text"
-                placeholder="Student name"
-                required>
-
-            </div>
+            onsubmit="saveMarks(event)"
+        >
 
 
-            <div class="form-group">
-
-                <label>
-                    Student ID
-                </label>
-
-                <input
-                id="newStudentId"
-                type="text"
-                placeholder="SNK-1007"
-                required>
-
-            </div>
+            <input
+                type="hidden"
+                id="markRowIndex"
+            >
 
 
-            <div class="form-group">
+            <div class="form-grid">
 
-                <label>
-                    Type
-                </label>
 
-                <select
-                id="newType"
-                required>
+                <div class="form-group">
 
-                    <option value="Quiz">
-                        Quiz
-                    </option>
+                    <label>
+                        Obtained Marks
+                    </label>
 
-                    <option value="Assignment">
-                        Assignment
-                    </option>
+                    <input
+                        type="number"
+                        id="obtainedMarks"
+                        min="0"
+                        required
+                        placeholder="18"
+                    >
 
-                </select>
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Total Marks
+                    </label>
+
+                    <input
+                        type="number"
+                        id="totalMarks"
+                        min="1"
+                        required
+                        placeholder="20"
+                    >
+
+                </div>
 
             </div>
 
 
             <div class="form-group">
 
-                <label>
-                    Quiz / Assignment Name
-                </label>
-
-                <input
-                id="newExam"
-                type="text"
-                placeholder="Exam name"
-                required>
-
-            </div>
-
-
-            <div class="form-group">
 
                 <label>
-                    Obtained Marks
+                    Admin Feedback
                 </label>
 
-                <input
-                id="newObtained"
-                type="number"
-                min="0"
-                placeholder="8"
-                required>
 
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Total Marks
-                </label>
-
-                <input
-                id="newTotal"
-                type="number"
-                min="1"
-                placeholder="10"
-                required>
+                <textarea
+                    id="adminFeedback"
+                    placeholder="Student-এর জন্য feedback লিখুন..."
+                ></textarea>
 
             </div>
 
 
             <div class="form-actions">
 
+
                 <button
-                type="button"
-                class="secondary-btn"
-                onclick="closeModal('addResultModal')">
-
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal('marksModal')"
+                >
                     Cancel
-
                 </button>
 
+
                 <button
-                type="submit"
-                class="save-btn">
-
+                    type="submit"
+                    class="save-btn"
+                >
                     💾 Save Result
-
                 </button>
 
             </div>
+
 
         </form>
 
@@ -2277,8 +3059,9 @@ id="addResultModal">
 
 <script>
 
+
 /* =========================
-   THEME
+THEME
 ========================= */
 
 function toggleTheme(){
@@ -2293,7 +3076,9 @@ function toggleTheme(){
         dark ? "dark" : "light"
     );
 
-    document.getElementById("themeBtn").textContent =
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
         dark ? "☀️" : "🌙";
 }
 
@@ -2301,103 +3086,141 @@ function toggleTheme(){
 function loadTheme(){
 
     const theme =
-        localStorage.getItem("snkResultsTheme");
+        localStorage.getItem(
+            "snkResultsTheme"
+        );
 
     if(theme === "dark"){
 
         document.body.classList.add("dark");
 
-        document.getElementById("themeBtn").textContent =
+        document.getElementById(
+            "themeBtn"
+        ).textContent =
             "☀️";
     }
 }
+
 
 loadTheme();
 
 
 /* =========================
-   MOBILE SIDEBAR
+SIDEBAR
 ========================= */
 
 function toggleSidebar(){
 
     document
-    .getElementById("sidebar")
-    .classList.toggle("open");
+        .getElementById("sidebar")
+        .classList.toggle("open");
 
     document
-    .getElementById("sidebarOverlay")
-    .classList.toggle("show");
+        .getElementById("sidebarOverlay")
+        .classList.toggle("show");
 }
 
 
 function closeSidebar(){
 
     document
-    .getElementById("sidebar")
-    .classList.remove("open");
+        .getElementById("sidebar")
+        .classList.remove("open");
 
     document
-    .getElementById("sidebarOverlay")
-    .classList.remove("show");
+        .getElementById("sidebarOverlay")
+        .classList.remove("show");
 }
 
 
 /* =========================
-   FILTER
+FILTER
 ========================= */
 
 function filterResults(){
 
     const search =
         document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
 
     const type =
         document
-        .getElementById("typeFilter")
-        .value;
+            .getElementById("typeFilter")
+            .value;
 
     const status =
         document
-        .getElementById("statusFilter")
-        .value;
+            .getElementById("statusFilter")
+            .value;
+
+    const course =
+        document
+            .getElementById("courseFilter")
+            .value;
+
 
     const rows =
-        document.querySelectorAll("#resultTable tr");
+        document.querySelectorAll(
+            "#resultTable tr"
+        );
+
 
     let visible = 0;
 
+
     rows.forEach(row => {
 
-        const name =
-            row.dataset.name.toLowerCase();
+
+        const rowText =
+            row.innerText.toLowerCase();
+
 
         const rowType =
             row.dataset.type;
 
+
         const rowStatus =
             row.dataset.status;
 
+
+        const rowCourse =
+            row.dataset.course;
+
+
         const searchMatch =
-            name.includes(search) ||
-            row.innerText.toLowerCase().includes(search);
+            !search ||
+            rowText.includes(search) ||
+            row.dataset.name
+                .toLowerCase()
+                .includes(search) ||
+            row.dataset.id
+                .toLowerCase()
+                .includes(search);
+
 
         const typeMatch =
             type === "all" ||
             rowType === type;
 
+
         const statusMatch =
             status === "all" ||
             rowStatus === status;
 
+
+        const courseMatch =
+            course === "all" ||
+            rowCourse === course;
+
+
         if(
             searchMatch &&
             typeMatch &&
-            statusMatch
+            statusMatch &&
+            courseMatch
         ){
 
             row.style.display = "";
@@ -2412,369 +3235,488 @@ function filterResults(){
     });
 
 
-    document.getElementById("emptyState").style.display =
-        visible === 0 ? "block" : "none";
+    document.getElementById(
+        "emptyState"
+    ).style.display =
+        visible === 0
+        ? "block"
+        : "none";
 }
 
 
 /* =========================
-   VIEW RESULT
+VIEW RESULT
 ========================= */
 
-function viewResult(
-    student,
-    exam,
-    obtained,
-    total,
-    status
-){
+function viewResult(button){
 
-    const percentage =
-        Math.round(
-            (Number(obtained) /
-            Number(total)) * 100
-        );
+    const row =
+        button.closest("tr");
 
 
-    document.getElementById("viewStudent").textContent =
-        student;
+    const cells =
+        row.querySelectorAll("td");
 
-    document.getElementById("viewMarks").textContent =
-        obtained + " / " + total;
-
-    document.getElementById("viewPercentage").textContent =
-        percentage + "%";
-
-    document.getElementById("viewExam").value =
-        exam;
-
-    document.getElementById("viewStatus").value =
-        status;
-
-
-    document
-    .getElementById("viewModal")
-    .classList.add("show");
-}
-
-
-/* =========================
-   ADD RESULT
-========================= */
-
-function openAddResult(){
-
-    document
-    .getElementById("addResultModal")
-    .classList.add("show");
-}
-
-
-function saveResult(event){
-
-    event.preventDefault();
 
     const student =
-        document.getElementById("newStudent").value.trim();
+        row.dataset.name;
+
 
     const studentId =
-        document.getElementById("newStudentId").value.trim();
+        row.dataset.id;
+
+
+    const activity =
+        cells[1].textContent.trim();
+
 
     const type =
-        document.getElementById("newType").value;
-
-    const exam =
-        document.getElementById("newExam").value.trim();
-
-    const obtained =
-        Number(
-            document.getElementById("newObtained").value
-        );
-
-    const total =
-        Number(
-            document.getElementById("newTotal").value
-        );
+        row.dataset.type;
 
 
-    if(obtained > total){
-
-        alert(
-            "Obtained marks Total marks-এর চেয়ে বেশি হতে পারবে না।"
-        );
-
-        return;
-    }
+    const course =
+        row.dataset.course;
 
 
-    const percentage =
-        Math.round(
-            (obtained / total) * 100
-        );
+    const submitted =
+        cells[4].textContent.trim();
 
 
-    let results =
-        JSON.parse(
-            localStorage.getItem("snkResultsList") || "[]"
-        );
+    const marks =
+        cells[5].textContent.trim();
 
 
-    results.push({
-
-        id:Date.now(),
-
-        student,
-
-        studentId,
-
-        type,
-
-        exam,
-
-        obtained,
-
-        total,
-
-        percentage,
-
-        status:"Pending",
-
-        date:
-            new Date().toLocaleDateString("en-GB")
-
-    });
+    document.getElementById(
+        "viewStudent"
+    ).textContent =
+        student;
 
 
-    localStorage.setItem(
-        "snkResultsList",
-        JSON.stringify(results)
-    );
+    document.getElementById(
+        "viewStudentId"
+    ).textContent =
+        studentId;
 
 
-    alert(
-        "✅ Result save হয়েছে।\n\n" +
-        "এটি এখন Pending হিসেবে থাকবে।"
-    );
+    document.getElementById(
+        "viewActivity"
+    ).textContent =
+        activity;
 
 
-    closeModal("addResultModal");
+    document.getElementById(
+        "viewType"
+    ).textContent =
+        type;
+
+
+    document.getElementById(
+        "viewCourse"
+    ).textContent =
+        course;
+
+
+    document.getElementById(
+        "viewSubmitted"
+    ).textContent =
+        submitted;
+
+
+    document.getElementById(
+        "viewScore"
+    ).textContent =
+        marks;
+
+
+    const feedback =
+        localStorage.getItem(
+            "resultFeedback_" + studentId
+        ) || "এখনো কোনো feedback নেই।";
+
+
+    document.getElementById(
+        "viewFeedback"
+    ).value =
+        feedback;
+
 
     document
-    .querySelector("#addResultModal form")
-    .reset();
+        .getElementById("viewModal")
+        .classList.add("show");
 }
 
 
 /* =========================
-   PUBLISH
+OPEN MARKS
 ========================= */
 
-function publishResult(button){
+function openMarks(button){
 
     const row =
         button.closest("tr");
 
-    const status =
-        row.querySelector(".result-status");
 
-    status.className =
-        "result-status published";
-
-    status.textContent =
-        "Published";
-
-    row.dataset.status =
-        "Published";
-
-    button.style.display =
-        "none";
-
-    updateStats();
-
-    alert(
-        "✅ Result Published!\n\n" +
-        "পরবর্তী Student Portal-এ এই result দেখানো যাবে।"
-    );
-}
+    const cells =
+        row.querySelectorAll("td");
 
 
-/* =========================
-   EDIT MARKS
-========================= */
-
-function editMarks(button){
-
-    const row =
-        button.closest("tr");
-
-    const current =
-        row.querySelector(".marks").textContent.trim();
-
-    const parts =
-        current.split("/");
-
-    const obtained =
-        parts[0].trim();
-
-    const total =
-        parts[1] ?
-        parts[1].trim() :
-        "10";
+    const student =
+        row.dataset.name;
 
 
-    const newMarks =
-        prompt(
-            "Obtained Marks দিন:",
-            obtained
-        );
+    const activity =
+        cells[1].textContent.trim();
 
 
-    if(newMarks === null){
-        return;
-    }
+    const course =
+        row.dataset.course;
 
 
-    const number =
-        Number(newMarks);
+    document.getElementById(
+        "markStudent"
+    ).textContent =
+        student;
+
+
+    document.getElementById(
+        "markActivity"
+    ).textContent =
+        activity;
+
+
+    document.getElementById(
+        "markCourse"
+    ).textContent =
+        course;
+
+
+    document.getElementById(
+        "markRowIndex"
+    ).value =
+        Array.from(
+            row.parentNode.children
+        ).indexOf(row);
+
+
+    const currentMarks =
+        cells[5].textContent.trim();
+
 
     if(
-        Number.isNaN(number) ||
-        number < 0 ||
-        number > Number(total)
+        currentMarks !== "Pending" &&
+        currentMarks.includes("/")
     ){
 
-        alert("সঠিক marks দিন।");
-
-        return;
-    }
-
-
-    const percentage =
-        Math.round(
-            (number / Number(total)) * 100
-        );
+        const parts =
+            currentMarks
+                .split("/")
+                .map(x => x.trim());
 
 
-    row.querySelector(".marks").textContent =
-        number + " / " + total;
+        document.getElementById(
+            "obtainedMarks"
+        ).value =
+            parts[0];
 
-    row.children[4].textContent =
-        percentage + "%";
 
-
-    if(percentage >= 80){
-
-        row.querySelector(".marks").className =
-            "marks good";
-
-    }else if(percentage >= 50){
-
-        row.querySelector(".marks").className =
-            "marks average";
+        document.getElementById(
+            "totalMarks"
+        ).value =
+            parts[1];
 
     }else{
 
-        row.querySelector(".marks").className =
-            "marks low";
+        document.getElementById(
+            "obtainedMarks"
+        ).value =
+            "";
+
+
+        document.getElementById(
+            "totalMarks"
+        ).value =
+            "20";
     }
 
 
-    alert(
-        "✅ Marks updated: " +
-        number +
-        " / " +
-        total
-    );
+    document.getElementById(
+        "adminFeedback"
+    ).value =
+        localStorage.getItem(
+            "resultFeedback_" +
+            row.dataset.id
+        ) || "";
+
+
+    document
+        .getElementById("marksModal")
+        .classList.add("show");
 }
 
 
 /* =========================
-   DELETE
+SAVE MARKS
 ========================= */
 
-function deleteResult(button){
+function saveMarks(event){
 
-    const confirmed =
-        confirm(
-            "আপনি কি এই result delete করতে চান?"
+    event.preventDefault();
+
+
+    const obtained =
+        Number(
+            document.getElementById(
+                "obtainedMarks"
+            ).value
         );
 
-    if(!confirmed){
+
+    const total =
+        Number(
+            document.getElementById(
+                "totalMarks"
+            ).value
+        );
+
+
+    const feedback =
+        document.getElementById(
+            "adminFeedback"
+        ).value.trim();
+
+
+    const rowIndex =
+        Number(
+            document.getElementById(
+                "markRowIndex"
+            ).value
+        );
+
+
+    if(
+        total <= 0 ||
+        obtained < 0 ||
+        obtained > total
+    ){
+
+        alert(
+            "⚠️ Marks সঠিকভাবে দিন।"
+        );
+
         return;
     }
 
 
-    button.closest("tr").remove();
+    const rows =
+        document.querySelectorAll(
+            "#resultTable tr"
+        );
+
+
+    const row =
+        rows[rowIndex];
+
+
+    if(!row){
+
+        alert(
+            "Result row পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    const cells =
+        row.querySelectorAll("td");
+
+
+    /* MARKS */
+
+    cells[5].innerHTML = `
+
+        <span class="marks done">
+
+            ${obtained} / ${total}
+
+        </span>
+
+    `;
+
+
+    /* STATUS */
+
+    cells[6].innerHTML = `
+
+        <span class="status reviewed">
+
+            Reviewed
+
+        </span>
+
+    `;
+
+
+    row.dataset.status =
+        "Reviewed";
+
+
+    /* FEEDBACK */
+
+    localStorage.setItem(
+
+        "resultFeedback_" +
+        row.dataset.id,
+
+        feedback
+
+    );
+
+
+    /* RESULT OBJECT */
+
+    const resultData = {
+
+        student:
+            row.dataset.name,
+
+        studentId:
+            row.dataset.id,
+
+        activity:
+            cells[1].textContent.trim(),
+
+        type:
+            row.dataset.type,
+
+        course:
+            row.dataset.course,
+
+        obtainedMarks:
+            obtained,
+
+        totalMarks:
+            total,
+
+        feedback:
+            feedback,
+
+        status:
+            "Reviewed",
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+
+        "snkResult_" +
+        row.dataset.id,
+
+        JSON.stringify(resultData)
+
+    );
+
+
+    closeModal("marksModal");
+
 
     updateStats();
 
+
     alert(
-        "🗑️ Result deleted."
+        "✅ Result successfully saved!"
     );
+
 }
 
 
 /* =========================
-   STATS
+STATS
 ========================= */
 
 function updateStats(){
 
     const rows =
-        document.querySelectorAll("#resultTable tr");
+        document.querySelectorAll(
+            "#resultTable tr"
+        );
 
-    let published = 0;
+
     let pending = 0;
+
+    let reviewed = 0;
+
 
     rows.forEach(row => {
 
-        if(row.dataset.status === "Published"){
-            published++;
-        }
+        if(
+            row.dataset.status ===
+            "Pending"
+        ){
 
-        if(row.dataset.status === "Pending"){
             pending++;
+
+        }else{
+
+            reviewed++;
         }
 
     });
 
 
-    document.getElementById("totalResults").textContent =
+    document.getElementById(
+        "totalSubmissions"
+    ).textContent =
         rows.length;
 
-    document.getElementById("publishedResults").textContent =
-        published;
 
-    document.getElementById("pendingResults").textContent =
+    document.getElementById(
+        "pendingCount"
+    ).textContent =
         pending;
+
+
+    document.getElementById(
+        "reviewedCount"
+    ).textContent =
+        reviewed;
 }
 
 
 /* =========================
-   MODAL
+MODAL CLOSE
 ========================= */
 
 function closeModal(id){
 
     document
-    .getElementById(id)
-    .classList.remove("show");
+        .getElementById(id)
+        .classList.remove("show");
 }
 
 
 /* =========================
-   DEMO
+DEMO
 ========================= */
 
 function showDemo(name){
 
     alert(
+
         "📌 " +
         name +
-        " section পরবর্তী step-এ তৈরি করা হবে।"
+        " feature পরবর্তী step-এ functional করা হবে।"
+
     );
 }
 
+
+/* =========================
+LOGOUT
+========================= */
 
 function logoutDemo(){
 
@@ -2783,11 +3725,13 @@ function logoutDemo(){
             "আপনি কি Logout করতে চান?"
         );
 
+
     if(ok){
 
         sessionStorage.removeItem(
             "snkAdminLoggedIn"
         );
+
 
         alert(
             "আপনি Admin Panel থেকে Logout করেছেন।"
@@ -2797,39 +3741,37 @@ function logoutDemo(){
 
 
 /* =========================
-   OUTSIDE CLICK
+OUTSIDE MODAL CLICK
 ========================= */
 
-document
-.getElementById("viewModal")
-.addEventListener(
-    "click",
-    function(event){
-
-        if(event.target === this){
-            closeModal("viewModal");
-        }
-
-    }
-);
+[
+    "viewModal",
+    "marksModal"
+].forEach(id => {
 
 
-document
-.getElementById("addResultModal")
-.addEventListener(
-    "click",
-    function(event){
+    document
+        .getElementById(id)
+        .addEventListener(
+            "click",
+            function(event){
 
-        if(event.target === this){
-            closeModal("addResultModal");
-        }
+                if(
+                    event.target === this
+                ){
 
-    }
-);
+                    closeModal(id);
+
+                }
+
+            }
+        );
+
+});
 
 
 /* =========================
-   INITIAL
+INITIAL
 ========================= */
 
 updateStats();
