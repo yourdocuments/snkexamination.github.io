@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SNK IT Institute | Attendance Alerts</title>
+<title>SNK IT Institute | Attendance Reports</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,6 @@
     --success-soft:#f0fdf4;
 
     --danger:#dc2626;
-    --danger-dark:#b91c1c;
     --danger-soft:#fef2f2;
 
     --warning:#d97706;
@@ -78,7 +77,7 @@ button{
 }
 
 /* =========================
-   HEADER
+HEADER
 ========================= */
 
 .header{
@@ -144,12 +143,8 @@ button{
     font-weight:900;
 }
 
-.header-btn:hover{
-    background:var(--primary-soft);
-}
-
 /* =========================
-   MAIN
+MAIN
 ========================= */
 
 .main{
@@ -195,10 +190,6 @@ button{
     font-weight:900;
 }
 
-.btn:hover{
-    background:var(--primary-soft);
-}
-
 .btn.primary{
     background:var(--primary);
     border-color:var(--primary);
@@ -209,28 +200,18 @@ button{
     background:var(--primary-dark);
 }
 
-.btn.danger{
-    background:var(--danger);
-    border-color:var(--danger);
-    color:#fff;
-}
-
-.btn.danger:hover{
-    background:var(--danger-dark);
-}
-
 /* =========================
-   ALERT OVERVIEW
+STATISTICS
 ========================= */
 
-.overview{
+.stats{
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:10px;
     margin-bottom:15px;
 }
 
-.overview-card{
+.stat-card{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:14px;
@@ -238,7 +219,7 @@ button{
     box-shadow:var(--shadow);
 }
 
-.overview-icon{
+.stat-icon{
     width:35px;
     height:35px;
     border-radius:9px;
@@ -251,64 +232,61 @@ button{
     margin-bottom:8px;
 }
 
-.overview-card.total .overview-icon{
+.stat-card.blue .stat-icon{
     background:var(--primary-soft);
 }
 
-.overview-card.critical .overview-icon{
-    background:var(--danger-soft);
-}
-
-.overview-card.warning .overview-icon{
-    background:var(--warning-soft);
-}
-
-.overview-card.good .overview-icon{
+.stat-card.green .stat-icon{
     background:var(--success-soft);
 }
 
-.overview-card.no-data .overview-icon{
+.stat-card.red .stat-icon{
+    background:var(--danger-soft);
+}
+
+.stat-card.yellow .stat-icon{
+    background:var(--warning-soft);
+}
+
+.stat-card.purple .stat-icon{
     background:var(--purple-soft);
 }
 
-.overview-number{
+.stat-number{
     font-size:21px;
     font-weight:900;
 }
 
-.overview-card.critical .overview-number{
-    color:var(--danger);
-}
-
-.overview-card.warning .overview-number{
-    color:var(--warning);
-}
-
-.overview-card.good .overview-number{
+.stat-card.green .stat-number{
     color:var(--success);
 }
 
-.overview-card.no-data .overview-number{
+.stat-card.red .stat-number{
+    color:var(--danger);
+}
+
+.stat-card.yellow .stat-number{
+    color:var(--warning);
+}
+
+.stat-card.purple .stat-number{
     color:var(--purple);
 }
 
-.overview-label{
+.stat-label{
     color:var(--muted);
     font-size:7px;
-    margin-top:2px;
 }
 
 /* =========================
-   FILTER
+FILTER
 ========================= */
 
 .filter-card{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:15px;
-
     padding:15px;
-
     box-shadow:var(--shadow);
     margin-bottom:15px;
 }
@@ -321,18 +299,16 @@ button{
 
 .filters{
     display:grid;
-    grid-template-columns:1.4fr 1fr 1fr 1fr 1fr auto;
+    grid-template-columns:1.2fr 1fr 1fr 1fr 1fr auto;
     gap:9px;
     align-items:end;
 }
 
 .field label{
     display:block;
-
     color:var(--muted);
     font-size:7px;
     font-weight:900;
-
     margin-bottom:5px;
 }
 
@@ -348,62 +324,21 @@ button{
     color:var(--text);
 
     padding:0 10px;
-
     outline:none;
+
     font-size:8px;
 }
 
-.field input:focus,
-.field select:focus{
-    border-color:var(--primary);
-}
-
 /* =========================
-   ALERT INFO
-========================= */
-
-.info-box{
-    background:var(--primary-soft);
-    border:1px solid rgba(37,99,235,.15);
-
-    color:var(--text);
-
-    border-radius:12px;
-
-    padding:12px 14px;
-
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-
-    margin-bottom:15px;
-}
-
-.info-icon{
-    font-size:18px;
-}
-
-.info-text{
-    font-size:8px;
-    line-height:1.6;
-}
-
-.info-text strong{
-    font-size:9px;
-}
-
-/* =========================
-   REPORT CARD
+REPORT CARD
 ========================= */
 
 .report-card{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:15px;
-
     box-shadow:var(--shadow);
     overflow:hidden;
-
     margin-bottom:15px;
 }
 
@@ -415,7 +350,6 @@ button{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
 }
 
 .report-header h2{
@@ -435,7 +369,7 @@ button{
 }
 
 /* =========================
-   TABLE
+TABLE
 ========================= */
 
 .table-wrap{
@@ -446,7 +380,7 @@ button{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1000px;
+    min-width:1050px;
 }
 
 thead{
@@ -473,7 +407,6 @@ td{
     border-bottom:1px solid var(--border);
 
     font-size:8px;
-    vertical-align:middle;
 }
 
 tbody tr:hover{
@@ -481,7 +414,7 @@ tbody tr:hover{
 }
 
 /* =========================
-   STUDENT
+STUDENT
 ========================= */
 
 .student-cell{
@@ -503,10 +436,8 @@ tbody tr:hover{
     align-items:center;
     justify-content:center;
 
-    font-size:11px;
+    font-size:10px;
     font-weight:900;
-
-    flex-shrink:0;
 }
 
 .student-name{
@@ -519,13 +450,8 @@ tbody tr:hover{
     margin-top:2px;
 }
 
-.course-text{
-    color:var(--muted);
-    font-size:7px;
-}
-
 /* =========================
-   PROGRESS
+PROGRESS
 ========================= */
 
 .progress-wrap{
@@ -535,14 +461,12 @@ tbody tr:hover{
 .progress-top{
     display:flex;
     justify-content:space-between;
-    gap:8px;
-
     margin-bottom:4px;
 }
 
 .progress-value{
-    font-size:8px;
     font-weight:900;
+    font-size:8px;
 }
 
 .progress-bar{
@@ -573,7 +497,7 @@ tbody tr:hover{
 }
 
 /* =========================
-   BADGES
+BADGES
 ========================= */
 
 .badge{
@@ -588,9 +512,9 @@ tbody tr:hover{
     font-weight:900;
 }
 
-.badge.critical{
-    background:var(--danger-soft);
-    color:var(--danger);
+.badge.good{
+    background:var(--success-soft);
+    color:var(--success);
 }
 
 .badge.warning{
@@ -598,9 +522,9 @@ tbody tr:hover{
     color:var(--warning);
 }
 
-.badge.good{
-    background:var(--success-soft);
-    color:var(--success);
+.badge.critical{
+    background:var(--danger-soft);
+    color:var(--danger);
 }
 
 .badge.none{
@@ -609,104 +533,67 @@ tbody tr:hover{
 }
 
 /* =========================
-   ACTION
-========================= */
-
-.small-btn{
-    min-height:30px;
-
-    padding:0 9px;
-
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-
-    border-radius:7px;
-
-    font-size:6.5px;
-    font-weight:900;
-}
-
-.small-btn:hover{
-    background:var(--primary-soft);
-}
-
-/* =========================
-   EMPTY
+EMPTY
 ========================= */
 
 .empty{
-    padding:50px 20px;
-
+    padding:55px 20px;
     text-align:center;
-
     color:var(--muted);
     font-size:9px;
 }
 
 .empty-icon{
     font-size:40px;
-    margin-bottom:9px;
-}
-
-/* =========================
-   LEGEND
-========================= */
-
-.legend-card{
-    background:var(--card);
-    border:1px solid var(--border);
-
-    border-radius:15px;
-
-    padding:15px;
-
-    box-shadow:var(--shadow);
-
-    margin-bottom:15px;
-}
-
-.legend-title{
-    font-size:10px;
-    font-weight:900;
     margin-bottom:10px;
 }
 
-.legend{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
+/* =========================
+SUMMARY
+========================= */
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:15px;
 }
 
-.legend-item{
-    display:flex;
-    align-items:center;
-    gap:6px;
+.summary-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:15px;
+    box-shadow:var(--shadow);
+}
 
-    color:var(--muted);
+.summary-card h3{
+    font-size:10px;
+    margin-bottom:8px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    padding:5px 0;
+    border-bottom:1px solid var(--border);
     font-size:7px;
 }
 
-.legend-dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
+.summary-row:last-child{
+    border-bottom:0;
 }
 
-.legend-dot.red{
-    background:var(--danger);
+.summary-row span:first-child{
+    color:var(--muted);
 }
 
-.legend-dot.orange{
-    background:var(--warning);
-}
-
-.legend-dot.green{
-    background:var(--success);
+.summary-row strong{
+    font-size:8px;
 }
 
 /* =========================
-   TOAST
+TOAST
 ========================= */
 
 .toast{
@@ -727,7 +614,6 @@ tbody tr:hover{
     font-size:9px;
 
     opacity:0;
-
     transform:translateY(20px);
 
     pointer-events:none;
@@ -741,26 +627,23 @@ tbody tr:hover{
 }
 
 /* =========================
-   FOOTER
+FOOTER
 ========================= */
 
 .footer{
     text-align:center;
-
     color:var(--muted);
-
     font-size:8px;
-
     padding:25px 10px 5px;
 }
 
 /* =========================
-   RESPONSIVE
+RESPONSIVE
 ========================= */
 
 @media(max-width:1150px){
 
-    .overview{
+    .stats{
         grid-template-columns:repeat(3,1fr);
     }
 
@@ -772,7 +655,7 @@ tbody tr:hover{
 
 @media(max-width:750px){
 
-    .overview{
+    .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
@@ -793,6 +676,10 @@ tbody tr:hover{
         grid-template-columns:1fr 1fr;
     }
 
+    .summary-grid{
+        grid-template-columns:1fr;
+    }
+
 }
 
 @media(max-width:500px){
@@ -805,10 +692,6 @@ tbody tr:hover{
         padding:18px 13px 35px;
     }
 
-    .overview{
-        grid-template-columns:1fr 1fr;
-    }
-
     .filters{
         grid-template-columns:1fr;
     }
@@ -816,7 +699,7 @@ tbody tr:hover{
 }
 
 /* =========================
-   PRINT
+PRINT
 ========================= */
 
 @media print{
@@ -834,11 +717,8 @@ tbody tr:hover{
     .header,
     .page-header .actions,
     .filter-card,
-    .info-box,
-    .legend-card,
-    .footer,
     .toast,
-    .action-column{
+    .footer{
         display:none !important;
     }
 
@@ -847,7 +727,8 @@ tbody tr:hover{
         padding:0;
     }
 
-    .overview-card,
+    .stat-card,
+    .summary-card,
     .report-card{
         box-shadow:none;
         border:1px solid #ddd;
@@ -859,15 +740,14 @@ tbody tr:hover{
     }
 
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<!-- =========================
+HEADER
+========================= -->
 
 <header class="header">
 
@@ -884,13 +764,12 @@ tbody tr:hover{
             SNK IT Institute
 
             <small>
-                Attendance Alerts & Management
+                Attendance Reports
             </small>
 
         </div>
 
     </div>
-
 
     <div class="header-actions">
 
@@ -901,7 +780,6 @@ tbody tr:hover{
         >
             🌙
         </button>
-
 
         <button
             class="header-btn"
@@ -915,38 +793,34 @@ tbody tr:hover{
 </header>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<!-- =========================
+MAIN
+========================= -->
 
 <main class="main">
-
-    <!-- PAGE HEADER -->
 
     <section class="page-header">
 
         <div class="page-title">
 
             <h1>
-                ⚠️ Attendance Alerts
+                📊 Attendance Reports
             </h1>
 
             <p>
-                যেসব student's attendance কম, তাদের দ্রুত শনাক্ত করুন।
+                Student attendance-এর সম্পূর্ণ রিপোর্ট দেখুন ও বিশ্লেষণ করুন।
             </p>
 
         </div>
-
 
         <div class="actions">
 
             <button
                 class="btn"
-                onclick="refreshAlerts()"
+                onclick="refreshReport()"
             >
                 ↻ Refresh
             </button>
-
 
             <button
                 class="btn primary"
@@ -960,107 +834,107 @@ tbody tr:hover{
     </section>
 
 
-    <!-- =================================================
-         OVERVIEW
-    ================================================= -->
+    <!-- =========================
+    STATISTICS
+    ========================= -->
 
-    <section class="overview">
+    <section class="stats">
 
-        <div class="overview-card total">
+        <div class="stat-card blue">
 
-            <div class="overview-icon">
+            <div class="stat-icon">
                 👨‍🎓
             </div>
 
             <div
-                class="overview-number"
+                class="stat-number"
                 id="totalStudents"
             >
                 0
             </div>
 
-            <div class="overview-label">
+            <div class="stat-label">
                 Total Students
             </div>
 
         </div>
 
 
-        <div class="overview-card critical">
+        <div class="stat-card green">
 
-            <div class="overview-icon">
-                🔴
+            <div class="stat-icon">
+                ✅
             </div>
 
             <div
-                class="overview-number"
-                id="criticalCount"
+                class="stat-number"
+                id="presentTotal"
             >
                 0
             </div>
 
-            <div class="overview-label">
-                Critical &lt; 60%
+            <div class="stat-label">
+                Present
             </div>
 
         </div>
 
 
-        <div class="overview-card warning">
+        <div class="stat-card red">
 
-            <div class="overview-icon">
-                🟡
+            <div class="stat-icon">
+                ❌
             </div>
 
             <div
-                class="overview-number"
-                id="warningCount"
+                class="stat-number"
+                id="absentTotal"
             >
                 0
             </div>
 
-            <div class="overview-label">
-                Warning 60–79%
+            <div class="stat-label">
+                Absent
             </div>
 
         </div>
 
 
-        <div class="overview-card good">
+        <div class="stat-card yellow">
 
-            <div class="overview-icon">
-                🟢
+            <div class="stat-icon">
+                ⏰
             </div>
 
             <div
-                class="overview-number"
-                id="goodCount"
+                class="stat-number"
+                id="lateTotal"
             >
                 0
             </div>
 
-            <div class="overview-label">
-                Good ≥ 80%
+            <div class="stat-label">
+                Late
             </div>
 
         </div>
 
 
-        <div class="overview-card no-data">
+        <div class="stat-card purple">
 
-            <div class="overview-icon">
-                📭
+            <div class="stat-icon">
+                📈
             </div>
 
             <div
-                class="overview-number"
-                id="noDataCount"
+                class="stat-number"
+                id="overallPercentage"
             >
-                0
+                0%
             </div>
 
-            <div class="overview-label">
-                No Attendance Data
+            <div class="stat-label">
+                Overall Attendance
             </div>
 
         </div>
@@ -1068,16 +942,15 @@ tbody tr:hover{
     </section>
 
 
-    <!-- =================================================
-         FILTER
-    ================================================= -->
+    <!-- =========================
+    FILTER
+    ========================= -->
 
     <section class="filter-card">
 
         <div class="filter-title">
-            🔎 Alert Filter
+            🔎 Report Filter
         </div>
-
 
         <div class="filters">
 
@@ -1091,7 +964,7 @@ tbody tr:hover{
                     type="search"
                     id="searchInput"
                     placeholder="Name, ID, phone..."
-                    oninput="renderAlerts()"
+                    oninput="renderReport()"
                 >
 
             </div>
@@ -1105,7 +978,7 @@ tbody tr:hover{
 
                 <select
                     id="courseFilter"
-                    onchange="renderAlerts()"
+                    onchange="renderReport()"
                 >
 
                     <option value="all">
@@ -1120,28 +993,28 @@ tbody tr:hover{
             <div class="field">
 
                 <label>
-                    Alert Level
+                    Status
                 </label>
 
                 <select
-                    id="levelFilter"
-                    onchange="renderAlerts()"
+                    id="statusFilter"
+                    onchange="renderReport()"
                 >
 
                     <option value="all">
-                        All Levels
+                        All
                     </option>
 
-                    <option value="critical">
-                        🔴 Critical
+                    <option value="good">
+                        🟢 Good
                     </option>
 
                     <option value="warning">
                         🟡 Warning
                     </option>
 
-                    <option value="good">
-                        🟢 Good
+                    <option value="critical">
+                        🔴 Critical
                     </option>
 
                     <option value="none">
@@ -1162,7 +1035,7 @@ tbody tr:hover{
                 <input
                     type="date"
                     id="fromDate"
-                    onchange="renderAlerts()"
+                    onchange="renderReport()"
                 >
 
             </div>
@@ -1177,7 +1050,7 @@ tbody tr:hover{
                 <input
                     type="date"
                     id="toDate"
-                    onchange="renderAlerts()"
+                    onchange="renderReport()"
                 >
 
             </div>
@@ -1195,46 +1068,145 @@ tbody tr:hover{
     </section>
 
 
-    <!-- =================================================
-         INFO
-    ================================================= -->
+    <!-- =========================
+    SUMMARY
+    ========================= -->
 
-    <section class="info-box">
+    <section class="summary-grid">
 
-        <div class="info-icon">
-            💡
+        <div class="summary-card">
+
+            <h3>
+                📅 Report Period
+            </h3>
+
+            <div class="summary-row">
+
+                <span>
+                    From
+                </span>
+
+                <strong id="summaryFrom">
+                    -
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    To
+                </span>
+
+                <strong id="summaryTo">
+                    -
+                </strong>
+
+            </div>
+
         </div>
 
-        <div class="info-text">
 
-            <strong>
-                Attendance Alert System
-            </strong>
+        <div class="summary-card">
 
-            <br>
+            <h3>
+                📊 Attendance Status
+            </h3>
 
-            60%-এর নিচে attendance হলে student-কে
-            <b>Critical</b> এবং 60% থেকে 79.9% হলে
-            <b>Warning</b> হিসেবে দেখানো হবে।
-            80% বা তার বেশি হলে <b>Good</b>।
+            <div class="summary-row">
+
+                <span>
+                    Good ≥ 80%
+                </span>
+
+                <strong
+                    id="goodStudents"
+                    style="color:var(--success)"
+                >
+                    0
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Warning 60–79%
+                </span>
+
+                <strong
+                    id="warningStudents"
+                    style="color:var(--warning)"
+                >
+                    0
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Critical &lt; 60%
+                </span>
+
+                <strong
+                    id="criticalStudents"
+                    style="color:var(--danger)"
+                >
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <h3>
+                ℹ️ Report Information
+            </h3>
+
+            <div class="summary-row">
+
+                <span>
+                    Showing
+                </span>
+
+                <strong id="showingStudents">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>
+                    Generated
+                </span>
+
+                <strong id="generatedDate">
+                    -
+                </strong>
+
+            </div>
 
         </div>
 
     </section>
 
 
-    <!-- =================================================
-         ALERT TABLE
-    ================================================= -->
+    <!-- =========================
+    REPORT TABLE
+    ========================= -->
 
     <section class="report-card">
 
         <div class="report-header">
 
             <h2>
-                🚨 Students Requiring Attention
+                📋 Student Attendance Report
             </h2>
-
 
             <span
                 class="result-count"
@@ -1287,20 +1259,15 @@ tbody tr:hover{
                         </th>
 
                         <th>
-                            Alert
-                        </th>
-
-                        <th class="action-column">
-                            Action
+                            Status
                         </th>
 
                     </tr>
 
                 </thead>
 
-
                 <tbody
-                    id="alertTableBody"
+                    id="reportTableBody"
                 ></tbody>
 
             </table>
@@ -1310,60 +1277,14 @@ tbody tr:hover{
     </section>
 
 
-    <!-- =================================================
-         LEGEND
-    ================================================= -->
-
-    <section class="legend-card">
-
-        <div class="legend-title">
-            📌 Alert Level Guide
-        </div>
-
-
-        <div class="legend">
-
-            <div class="legend-item">
-
-                <span class="legend-dot red"></span>
-
-                Critical — 60%-এর নিচে
-
-            </div>
-
-
-            <div class="legend-item">
-
-                <span class="legend-dot orange"></span>
-
-                Warning — 60% থেকে 79.9%
-
-            </div>
-
-
-            <div class="legend-item">
-
-                <span class="legend-dot green"></span>
-
-                Good — 80% বা তার বেশি
-
-            </div>
-
-        </div>
-
-    </section>
-
-
     <footer class="footer">
 
-        © 2026 SNK IT Institute • Attendance Alerts
+        © 2026 SNK IT Institute • Attendance Reports
 
     </footer>
 
 </main>
 
-
-<!-- TOAST -->
 
 <div
     class="toast"
@@ -1374,7 +1295,7 @@ tbody tr:hover{
 <script>
 
 /* =========================================================
-   STORAGE
+STORAGE
 ========================================================= */
 
 const STUDENTS_KEY =
@@ -1385,7 +1306,7 @@ const ATTENDANCE_KEY =
 
 
 /* =========================================================
-   STATE
+STATE
 ========================================================= */
 
 let students = [];
@@ -1394,7 +1315,7 @@ let attendance = {};
 
 
 /* =========================================================
-   INIT
+INIT
 ========================================================= */
 
 document.addEventListener(
@@ -1411,14 +1332,21 @@ document.addEventListener(
 
         buildCourseFilter();
 
-        renderAlerts();
+        document.getElementById(
+            "generatedDate"
+        ).textContent =
+            new Date().toLocaleDateString(
+                "bn-BD"
+            );
+
+        renderReport();
 
     }
 );
 
 
 /* =========================================================
-   LOAD STUDENTS
+LOAD STUDENTS
 ========================================================= */
 
 function loadStudents(){
@@ -1457,7 +1385,7 @@ function loadStudents(){
 
 
 /* =========================================================
-   LOAD ATTENDANCE
+LOAD ATTENDANCE
 ========================================================= */
 
 function loadAttendance(){
@@ -1498,7 +1426,7 @@ function loadAttendance(){
 
 
 /* =========================================================
-   STUDENT HELPERS
+HELPERS
 ========================================================= */
 
 function getStudentId(student){
@@ -1545,10 +1473,6 @@ function getPhone(student){
 }
 
 
-/* =========================================================
-   INITIALS
-========================================================= */
-
 function getInitials(name){
 
     const words =
@@ -1558,18 +1482,12 @@ function getInitials(name){
         .filter(Boolean);
 
 
-    if(
-        words.length === 0
-    ){
-
+    if(!words.length){
         return "ST";
-
     }
 
 
-    if(
-        words.length === 1
-    ){
+    if(words.length === 1){
 
         return words[0]
             .substring(0,2)
@@ -1587,7 +1505,7 @@ function getInitials(name){
 
 
 /* =========================================================
-   DATE
+DATE
 ========================================================= */
 
 function getLocalDateString(
@@ -1598,29 +1516,23 @@ function getLocalDateString(
         date || new Date();
 
 
-    const year =
-        d.getFullYear();
-
-
-    const month =
+    return (
+        d.getFullYear() +
+        "-" +
         String(
             d.getMonth()+1
-        ).padStart(2,"0");
-
-
-    const day =
+        ).padStart(2,"0") +
+        "-" +
         String(
             d.getDate()
-        ).padStart(2,"0");
-
-
-    return `${year}-${month}-${day}`;
+        ).padStart(2,"0")
+    );
 
 }
 
 
 /* =========================================================
-   DEFAULT DATE RANGE
+DEFAULT DATES
 ========================================================= */
 
 function setDefaultDates(){
@@ -1653,7 +1565,7 @@ function setDefaultDates(){
 
 
 /* =========================================================
-   COURSE FILTER
+COURSES
 ========================================================= */
 
 function buildCourseFilter(){
@@ -1703,14 +1615,11 @@ function buildCourseFilter(){
                     "option"
                 );
 
-
             option.value =
                 course;
 
-
             option.textContent =
                 course;
-
 
             select.appendChild(
                 option
@@ -1723,7 +1632,7 @@ function buildCourseFilter(){
 
 
 /* =========================================================
-   DATE RANGE
+DATE RANGE
 ========================================================= */
 
 function getDateRange(){
@@ -1744,10 +1653,6 @@ function getDateRange(){
 
 }
 
-
-/* =========================================================
-   DATE CHECK
-========================================================= */
 
 function isDateInRange(
     date,
@@ -1781,7 +1686,7 @@ function isDateInRange(
 
 
 /* =========================================================
-   STUDENT SUMMARY
+SUMMARY
 ========================================================= */
 
 function getStudentSummary(
@@ -1830,7 +1735,9 @@ function getStudentSummary(
 
 
             const status =
-                dayData[studentId];
+                dayData[
+                    studentId
+                ];
 
 
             if(
@@ -1872,12 +1779,9 @@ function getStudentSummary(
             (
                 present +
                 late
-            )
-            /
+            ) /
             total
-        )
-        *
-        100
+        ) * 100
         :
         0;
 
@@ -1896,10 +1800,10 @@ function getStudentSummary(
 
 
 /* =========================================================
-   LEVEL
+STATUS
 ========================================================= */
 
-function getLevel(
+function getStatus(
     percentage,
     total
 ){
@@ -1936,21 +1840,17 @@ function getLevel(
 }
 
 
-/* =========================================================
-   LEVEL LABEL
-========================================================= */
-
-function getLevelBadge(
-    level
+function statusBadge(
+    status
 ){
 
     if(
-        level === "critical"
+        status === "good"
     ){
 
         return `
-            <span class="badge critical">
-                🔴 Critical
+            <span class="badge good">
+                🟢 Good
             </span>
         `;
 
@@ -1958,7 +1858,7 @@ function getLevelBadge(
 
 
     if(
-        level === "warning"
+        status === "warning"
     ){
 
         return `
@@ -1971,12 +1871,12 @@ function getLevelBadge(
 
 
     if(
-        level === "good"
+        status === "critical"
     ){
 
         return `
-            <span class="badge good">
-                🟢 Good
+            <span class="badge critical">
+                🔴 Critical
             </span>
         `;
 
@@ -1993,7 +1893,7 @@ function getLevelBadge(
 
 
 /* =========================================================
-   FILTER STUDENTS
+FILTER
 ========================================================= */
 
 function getFilteredStudents(){
@@ -2013,9 +1913,9 @@ function getFilteredStudents(){
         ).value;
 
 
-    const level =
+    const statusFilter =
         document.getElementById(
-            "levelFilter"
+            "statusFilter"
         ).value;
 
 
@@ -2064,22 +1964,22 @@ function getFilteredStudents(){
                 );
 
 
-            const studentLevel =
-                getLevel(
+            const status =
+                getStatus(
                     summary.percentage,
                     summary.total
                 );
 
 
-            const levelMatch =
-                level === "all" ||
-                studentLevel === level;
+            const statusMatch =
+                statusFilter === "all" ||
+                status === statusFilter;
 
 
             return (
                 searchMatch &&
                 courseMatch &&
-                levelMatch
+                statusMatch
             );
 
         }
@@ -2089,10 +1989,10 @@ function getFilteredStudents(){
 
 
 /* =========================================================
-   RENDER ALERTS
+RENDER
 ========================================================= */
 
-function renderAlerts(){
+function renderReport(){
 
     const filtered =
         getFilteredStudents();
@@ -2103,13 +2003,17 @@ function renderAlerts(){
     );
 
 
-    updateOverview();
+    updateStatistics();
+
+    updateSummary(
+        filtered
+    );
 
 }
 
 
 /* =========================================================
-   RENDER TABLE
+TABLE
 ========================================================= */
 
 function renderTable(
@@ -2118,7 +2022,7 @@ function renderTable(
 
     const tbody =
         document.getElementById(
-            "alertTableBody"
+            "reportTableBody"
         );
 
 
@@ -2141,18 +2045,18 @@ function renderTable(
             <tr>
 
                 <td
-                    colspan="10"
+                    colspan="9"
                     style="padding:0;"
                 >
 
                     <div class="empty">
 
                         <div class="empty-icon">
-                            🎉
+                            📊
                         </div>
 
                         <strong>
-                            কোনো student পাওয়া যায়নি
+                            কোনো attendance report পাওয়া যায়নি
                         </strong>
 
                         <div
@@ -2161,7 +2065,7 @@ function renderTable(
                                 font-size:7px;
                             "
                         >
-                            Filter পরিবর্তন করে আবার চেষ্টা করুন।
+                            Student attendance data অথবা filter check করুন।
                         </div>
 
                     </div>
@@ -2204,27 +2108,33 @@ function renderTable(
                 );
 
 
-            const level =
-                getLevel(
+            const status =
+                getStatus(
                     summary.percentage,
                     summary.total
                 );
 
 
-            const progressClass =
-                level === "critical"
-                ?
-                "low"
-                :
-                level === "warning"
-                ?
-                "medium"
-                :
-                level === "good"
-                ?
-                "good"
-                :
-                "";
+            let progressClass =
+                "good";
+
+
+            if(
+                status === "critical"
+            ){
+
+                progressClass =
+                    "low";
+
+            }
+            else if(
+                status === "warning"
+            ){
+
+                progressClass =
+                    "medium";
+
+            }
 
 
             const row =
@@ -2236,7 +2146,7 @@ function renderTable(
             row.innerHTML = `
 
                 <td>
-                    ${index+1}
+                    ${index + 1}
                 </td>
 
 
@@ -2268,11 +2178,7 @@ function renderTable(
 
 
                 <td>
-
-                    <div class="course-text">
-                        ${escapeHtml(course)}
-                    </div>
-
+                    ${escapeHtml(course)}
                 </td>
 
 
@@ -2314,7 +2220,6 @@ function renderTable(
 
                         </div>
 
-
                         <div class="progress-bar">
 
                             <div
@@ -2333,19 +2238,7 @@ function renderTable(
 
 
                 <td>
-                    ${getLevelBadge(level)}
-                </td>
-
-
-                <td class="action-column">
-
-                    <button
-                        class="small-btn"
-                        onclick="viewStudent('${escapeJs(id)}')"
-                    >
-                        👁 View
-                    </button>
-
+                    ${statusBadge(status)}
                 </td>
 
             `;
@@ -2362,15 +2255,14 @@ function renderTable(
 
 
 /* =========================================================
-   OVERVIEW
+STATISTICS
 ========================================================= */
 
-function updateOverview(){
+function updateStatistics(){
 
-    let critical = 0;
-    let warning = 0;
-    let good = 0;
-    let noData = 0;
+    let present = 0;
+    let absent = 0;
+    let late = 0;
 
 
     students.forEach(
@@ -2382,42 +2274,39 @@ function updateOverview(){
                 );
 
 
-            const level =
-                getLevel(
-                    summary.percentage,
-                    summary.total
-                );
+            present +=
+                summary.present;
 
 
-            if(
-                level === "critical"
-            ){
+            absent +=
+                summary.absent;
 
-                critical++;
 
-            }
-            else if(
-                level === "warning"
-            ){
-
-                warning++;
-
-            }
-            else if(
-                level === "good"
-            ){
-
-                good++;
-
-            }
-            else{
-
-                noData++;
-
-            }
+            late +=
+                summary.late;
 
         }
     );
+
+
+    const total =
+        present +
+        absent +
+        late;
+
+
+    const percentage =
+        total > 0
+        ?
+        (
+            (
+                present +
+                late
+            ) /
+            total
+        ) * 100
+        :
+        0;
 
 
     document.getElementById(
@@ -2427,105 +2316,130 @@ function updateOverview(){
 
 
     document.getElementById(
-        "criticalCount"
+        "presentTotal"
     ).textContent =
-        critical;
+        present;
 
 
     document.getElementById(
-        "warningCount"
+        "absentTotal"
     ).textContent =
-        warning;
+        absent;
 
 
     document.getElementById(
-        "goodCount"
+        "lateTotal"
+    ).textContent =
+        late;
+
+
+    document.getElementById(
+        "overallPercentage"
+    ).textContent =
+        percentage.toFixed(1) + "%";
+
+}
+
+
+/* =========================================================
+SUMMARY
+========================================================= */
+
+function updateSummary(
+    filtered
+){
+
+    const range =
+        getDateRange();
+
+
+    document.getElementById(
+        "summaryFrom"
+    ).textContent =
+        range.from || "-";
+
+
+    document.getElementById(
+        "summaryTo"
+    ).textContent =
+        range.to || "-";
+
+
+    let good = 0;
+    let warning = 0;
+    let critical = 0;
+
+
+    filtered.forEach(
+        student => {
+
+            const summary =
+                getStudentSummary(
+                    getStudentId(student)
+                );
+
+
+            const status =
+                getStatus(
+                    summary.percentage,
+                    summary.total
+                );
+
+
+            if(
+                status === "good"
+            ){
+
+                good++;
+
+            }
+            else if(
+                status === "warning"
+            ){
+
+                warning++;
+
+            }
+            else if(
+                status === "critical"
+            ){
+
+                critical++;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "goodStudents"
     ).textContent =
         good;
 
 
     document.getElementById(
-        "noDataCount"
+        "warningStudents"
     ).textContent =
-        noData;
+        warning;
+
+
+    document.getElementById(
+        "criticalStudents"
+    ).textContent =
+        critical;
+
+
+    document.getElementById(
+        "showingStudents"
+    ).textContent =
+        filtered.length;
 
 }
 
 
 /* =========================================================
-   VIEW STUDENT
-========================================================= */
-
-function viewStudent(
-    studentId
-){
-
-    const student =
-        students.find(
-            item =>
-                getStudentId(item) ===
-                String(studentId)
-        );
-
-
-    if(
-        !student
-    ){
-
-        showToast(
-            "Student পাওয়া যায়নি"
-        );
-
-        return;
-
-    }
-
-
-    const summary =
-        getStudentSummary(
-            studentId
-        );
-
-
-    const level =
-        getLevel(
-            summary.percentage,
-            summary.total
-        );
-
-
-    const message =
-
-        `Student: ${getStudentName(student)}
-` +
-        `ID: ${getStudentId(student)}
-` +
-        `Course: ${getCourse(student)}
-
-` +
-        `Present: ${summary.present}
-` +
-        `Absent: ${summary.absent}
-` +
-        `Late: ${summary.late}
-` +
-        `Total: ${summary.total}
-
-` +
-        `Attendance: ${summary.percentage.toFixed(1)}%
-` +
-        `Status: ${level.toUpperCase()}`;
-
-
-    alert(
-        message
-    );
-
-}
-
-
-/* =========================================================
-   RESET
+RESET
 ========================================================= */
 
 function resetFilters(){
@@ -2543,14 +2457,14 @@ function resetFilters(){
 
 
     document.getElementById(
-        "levelFilter"
+        "statusFilter"
     ).value =
         "all";
 
 
     setDefaultDates();
 
-    renderAlerts();
+    renderReport();
 
     showToast(
         "Filters reset ✓"
@@ -2560,10 +2474,10 @@ function resetFilters(){
 
 
 /* =========================================================
-   REFRESH
+REFRESH
 ========================================================= */
 
-function refreshAlerts(){
+function refreshReport(){
 
     loadStudents();
 
@@ -2571,17 +2485,17 @@ function refreshAlerts(){
 
     buildCourseFilter();
 
-    renderAlerts();
+    renderReport();
 
     showToast(
-        "Attendance alerts refreshed ✓"
+        "Attendance report refreshed ✓"
     );
 
 }
 
 
 /* =========================================================
-   PRINT
+PRINT
 ========================================================= */
 
 function printReport(){
@@ -2592,7 +2506,7 @@ function printReport(){
 
 
 /* =========================================================
-   BACK
+BACK
 ========================================================= */
 
 function goBack(){
@@ -2615,7 +2529,7 @@ function goBack(){
 
 
 /* =========================================================
-   THEME
+THEME
 ========================================================= */
 
 function toggleTheme(){
@@ -2632,7 +2546,7 @@ function toggleTheme(){
 
 
     localStorage.setItem(
-        "snkAttendanceAlertsTheme",
+        "snkAttendanceReportsTheme",
         dark
         ?
         "dark"
@@ -2650,7 +2564,7 @@ function loadTheme(){
 
     const theme =
         localStorage.getItem(
-            "snkAttendanceAlertsTheme"
+            "snkAttendanceReportsTheme"
         );
 
 
@@ -2691,7 +2605,7 @@ function updateThemeButton(){
 
 
 /* =========================================================
-   ESCAPE HTML
+ESCAPE
 ========================================================= */
 
 function escapeHtml(
@@ -2718,25 +2632,7 @@ function escapeHtml(
 
 
 /* =========================================================
-   ESCAPE JS
-========================================================= */
-
-function escapeJs(
-    value
-){
-
-    return String(value)
-        .replace(/\\/g,"\\\\")
-        .replace(/'/g,"\\'")
-        .replace(/"/g,"&quot;")
-        .replace(/\n/g,"\\n")
-        .replace(/\r/g,"\\r");
-
-}
-
-
-/* =========================================================
-   TOAST
+TOAST
 ========================================================= */
 
 let toastTimer = null;
@@ -2782,7 +2678,7 @@ function showToast(
 
 
 /* =========================================================
-   STORAGE SYNC
+AUTO SYNC
 ========================================================= */
 
 window.addEventListener(
@@ -2794,7 +2690,7 @@ window.addEventListener(
             event.key === ATTENDANCE_KEY
         ){
 
-            refreshAlerts();
+            refreshReport();
 
         }
 
