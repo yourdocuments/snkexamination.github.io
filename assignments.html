@@ -1,1 +1,2938 @@
-#
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Assignments</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#f4f6fa;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --soft:#eff6ff;
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
+    --sidebar:#111827;
+    --shadow:0 10px 30px rgba(15,23,42,.07);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+    --soft:#172554;
+    --sidebar:#020617;
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.25s;
+}
+
+button,input,select,textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:255px;
+    min-width:255px;
+    background:var(--sidebar);
+    color:#fff;
+    min-height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+    transition:.25s;
+}
+
+.sidebar-logo{
+    height:76px;
+    padding:13px 17px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-logo img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+}
+
+.sidebar-logo-text{
+    font-size:15px;
+    font-weight:800;
+}
+
+.sidebar-logo-text small{
+    display:block;
+    color:#9ca3af;
+    font-size:9px;
+    font-weight:500;
+}
+
+.sidebar-menu{
+    padding:18px 12px;
+    flex:1;
+    overflow-y:auto;
+}
+
+.menu-label{
+    color:#6b7280;
+    font-size:9px;
+    font-weight:800;
+    padding:8px 11px;
+    letter-spacing:.5px;
+}
+
+.menu-item{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:#d1d5db;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 12px;
+    border-radius:9px;
+    margin-bottom:4px;
+    font-size:11px;
+    font-weight:600;
+    text-align:left;
+}
+
+.menu-item:hover{
+    background:rgba(255,255,255,.07);
+    color:#fff;
+}
+
+.menu-item.active{
+    background:#2563eb;
+    color:#fff;
+}
+
+.menu-icon{
+    width:22px;
+    text-align:center;
+    font-size:15px;
+}
+
+.sidebar-footer{
+    padding:13px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.admin-mini{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:9px;
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
+
+.admin-avatar{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.admin-mini-info{
+    flex:1;
+}
+
+.admin-mini-info strong{
+    display:block;
+    font-size:10px;
+}
+
+.admin-mini-info span{
+    display:block;
+    color:#9ca3af;
+    font-size:8px;
+}
+
+.logout-small{
+    border:none;
+    background:transparent;
+    color:#9ca3af;
+    font-size:14px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:255px;
+    width:calc(100% - 255px);
+    min-width:0;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    height:76px;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.mobile-menu-btn{
+    display:none;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    font-size:18px;
+}
+
+.page-heading h1{
+    font-size:20px;
+}
+
+.page-heading p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.topbar-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.topbar-btn{
+    width:37px;
+    height:37px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:9px;
+}
+
+.admin-top-profile{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding-left:9px;
+    border-left:1px solid var(--border);
+}
+
+.top-avatar{
+    width:36px;
+    height:36px;
+    border-radius:9px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.top-profile-text strong{
+    display:block;
+    font-size:10px;
+}
+
+.top-profile-text span{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:25px;
+}
+
+.page-intro{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.page-intro h2{
+    font-size:21px;
+    margin-bottom:4px;
+}
+
+.page-intro p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.primary-btn{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+    padding:11px 16px;
+    border-radius:9px;
+    font-size:10px;
+    font-weight:800;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:17px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:39px;
+    height:39px;
+    border-radius:10px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    margin-bottom:11px;
+}
+
+.stat-number{
+    font-size:23px;
+    font-weight:800;
+}
+
+.stat-title{
+    font-size:10px;
+}
+
+.stat-description{
+    color:var(--muted);
+    font-size:8px;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:14px;
+    box-shadow:var(--shadow);
+    margin-bottom:15px;
+}
+
+.toolbar-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.search-box{
+    flex:1;
+    min-width:220px;
+    position:relative;
+}
+
+.search-box span{
+    position:absolute;
+    left:11px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+}
+
+.search-box input{
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    padding:10px 12px 10px 33px;
+    border-radius:8px;
+    outline:none;
+    font-size:10px;
+}
+
+.filter-select{
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    padding:10px 12px;
+    border-radius:8px;
+    outline:none;
+    font-size:9px;
+    min-width:145px;
+}
+
+/* =========================
+   ASSIGNMENT TABLE
+========================= */
+
+.table-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1050px;
+}
+
+thead{
+    background:var(--bg);
+}
+
+th{
+    color:var(--muted);
+    font-size:8px;
+    font-weight:800;
+    text-align:left;
+    padding:13px 14px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+}
+
+td{
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    font-size:9px;
+    white-space:nowrap;
+}
+
+tbody tr:hover{
+    background:var(--bg);
+}
+
+.assignment-cell strong{
+    display:block;
+    font-size:10px;
+}
+
+.assignment-cell span{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.course-badge{
+    display:inline-flex;
+    padding:5px 8px;
+    background:var(--soft);
+    color:var(--primary);
+    border-radius:20px;
+    font-size:7px;
+    font-weight:800;
+}
+
+.deadline{
+    font-weight:700;
+}
+
+.deadline.overdue{
+    color:var(--danger);
+}
+
+.deadline.upcoming{
+    color:var(--warning);
+}
+
+.deadline.active{
+    color:var(--success);
+}
+
+.status{
+    display:inline-flex;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:7px;
+    font-weight:800;
+}
+
+.status.active{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.status.closed{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.status.draft{
+    background:#f3f4f6;
+    color:#4b5563;
+}
+
+body.dark .status.draft{
+    background:#1f2937;
+    color:#d1d5db;
+}
+
+.submission-count{
+    font-weight:800;
+}
+
+.row-actions{
+    display:flex;
+    gap:5px;
+}
+
+.action-btn{
+    width:30px;
+    height:30px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:7px;
+}
+
+.action-btn:hover{
+    background:var(--soft);
+}
+
+.action-btn.delete:hover{
+    color:var(--danger);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:3000;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:620px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:17px;
+}
+
+.modal-header h3{
+    font-size:16px;
+}
+
+.modal-header p{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:2px;
+}
+
+.modal-close{
+    width:30px;
+    height:30px;
+    border:none;
+    background:var(--bg);
+    color:var(--text);
+    border-radius:8px;
+    font-size:16px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+.form-group label{
+    display:block;
+    font-size:9px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    padding:10px;
+    border-radius:8px;
+    outline:none;
+    font-size:9px;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.form-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:7px;
+    margin-top:8px;
+}
+
+.secondary-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:9px;
+    font-weight:700;
+}
+
+.save-btn{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+    padding:10px 16px;
+    border-radius:8px;
+    font-size:9px;
+    font-weight:800;
+}
+
+/* =========================
+   SUBMISSIONS MODAL
+========================= */
+
+.submission-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.submission-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:11px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--bg);
+}
+
+.submission-student{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.submission-avatar{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:9px;
+}
+
+.submission-student strong{
+    display:block;
+    font-size:9px;
+}
+
+.submission-student span{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+}
+
+.view-submission{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:7px 10px;
+    border-radius:7px;
+    font-size:8px;
+    font-weight:700;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty-state{
+    display:none;
+    text-align:center;
+    padding:45px 20px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    padding:20px 25px;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-size:9px;
+    text-align:center;
+    margin-top:25px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+.sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:950;
+    display:none;
+}
+
+.sidebar-overlay.show{
+    display:block;
+}
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu-btn{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .top-profile-text{
+        display:none;
+    }
+
+    .admin-top-profile{
+        border-left:none;
+    }
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        height:65px;
+        padding:0 13px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .page-heading h1{
+        font-size:16px;
+    }
+
+    .page-heading p{
+        display:none;
+    }
+
+    .page-intro{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .toolbar-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search-box{
+        min-width:0;
+    }
+
+    .filter-select{
+        width:100%;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <img
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute Logo"
+        >
+
+        <div class="sidebar-logo-text">
+            SNK IT Institute
+            <small>Admin Control Panel</small>
+        </div>
+
+    </div>
+
+
+    <div class="sidebar-menu">
+
+        <div class="menu-label">
+            MAIN
+        </div>
+
+        <a class="menu-item" href="admin.html">
+            <span class="menu-icon">📊</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a class="menu-item" href="students.html">
+            <span class="menu-icon">👨‍🎓</span>
+            <span>Students</span>
+        </a>
+
+        <a class="menu-item" href="courses.html">
+            <span class="menu-icon">🎓</span>
+            <span>Courses</span>
+        </a>
+
+
+        <div class="menu-label">
+            ACADEMIC
+        </div>
+
+        <a class="menu-item active" href="assignments.html">
+            <span class="menu-icon">📝</span>
+            <span>Assignments</span>
+        </a>
+
+        <a class="menu-item" href="quiz.html">
+            <span class="menu-icon">🎯</span>
+            <span>Quiz</span>
+        </a>
+
+        <a class="menu-item" href="results.html">
+            <span class="menu-icon">🏆</span>
+            <span>Results</span>
+        </a>
+
+
+        <div class="menu-label">
+            CONTENT
+        </div>
+
+        <a class="menu-item" href="resources.html">
+            <span class="menu-icon">📚</span>
+            <span>Resources</span>
+        </a>
+
+        <button
+            class="menu-item"
+            onclick="showDemo('Notices')"
+        >
+            <span class="menu-icon">📢</span>
+            <span>Notices</span>
+        </button>
+
+
+        <div class="menu-label">
+            SYSTEM
+        </div>
+
+        <button
+            class="menu-item"
+            onclick="showDemo('Settings')"
+        >
+            <span class="menu-icon">⚙️</span>
+            <span>Settings</span>
+        </button>
+
+    </div>
+
+
+    <div class="sidebar-footer">
+
+        <div class="admin-mini">
+
+            <div class="admin-avatar">
+                👨‍💼
+            </div>
+
+            <div class="admin-mini-info">
+                <strong>Super Admin</strong>
+                <span>Administrator</span>
+            </div>
+
+            <button
+                class="logout-small"
+                onclick="logoutDemo()"
+            >
+                🚪
+            </button>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+    onclick="closeSidebar()"
+></div>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            class="mobile-menu-btn"
+            onclick="toggleSidebar()"
+        >
+            ☰
+        </button>
+
+        <div class="page-heading">
+
+            <h1>
+                Assignments Management
+            </h1>
+
+            <p>
+                SNK IT Institute • Assignment Control
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="topbar-actions">
+
+        <button
+            class="topbar-btn"
+            onclick="toggleTheme()"
+            id="themeBtn"
+        >
+            🌙
+        </button>
+
+        <button
+            class="topbar-btn"
+            onclick="showDemo('Notifications')"
+        >
+            🔔
+        </button>
+
+        <div class="admin-top-profile">
+
+            <div class="top-avatar">
+                👨‍💼
+            </div>
+
+            <div class="top-profile-text">
+
+                <strong>
+                    Super Admin
+                </strong>
+
+                <span>
+                    Administrator
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+    <div class="page-intro">
+
+        <div>
+
+            <h2>
+                Assignments
+            </h2>
+
+            <p>
+                Assignment তৈরি করুন, deadline দিন এবং student submission দেখুন।
+            </p>
+
+        </div>
+
+        <button
+            class="primary-btn"
+            onclick="openAddAssignment()"
+        >
+            ＋ New Assignment
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📝
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalAssignments"
+            >
+                6
+            </div>
+
+            <div class="stat-title">
+                Total Assignments
+            </div>
+
+            <div class="stat-description">
+                মোট assignment
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🟢
+            </div>
+
+            <div
+                class="stat-number"
+                id="activeAssignments"
+            >
+                4
+            </div>
+
+            <div class="stat-title">
+                Active
+            </div>
+
+            <div class="stat-description">
+                এখনো submission নেওয়া হচ্ছে
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📥
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalSubmissions"
+            >
+                37
+            </div>
+
+            <div class="stat-title">
+                Submissions
+            </div>
+
+            <div class="stat-description">
+                মোট student submission
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⏰
+            </div>
+
+            <div
+                class="stat-number"
+                id="upcomingAssignments"
+            >
+                3
+            </div>
+
+            <div class="stat-title">
+                Upcoming
+            </div>
+
+            <div class="stat-description">
+                deadline আসছে
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOOLBAR
+    ========================= -->
+
+    <div class="toolbar">
+
+        <div class="toolbar-row">
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Assignment বা course খুঁজুন..."
+                    oninput="filterAssignments()"
+                >
+
+            </div>
+
+
+            <select
+                class="filter-select"
+                id="courseFilter"
+                onchange="filterAssignments()"
+            >
+
+                <option value="all">
+                    সব Course
+                </option>
+
+                <option value="Computer Basic">
+                    Computer Basic
+                </option>
+
+                <option value="MS Word">
+                    MS Word
+                </option>
+
+                <option value="MS Excel">
+                    MS Excel
+                </option>
+
+                <option value="Graphic Design">
+                    Graphic Design
+                </option>
+
+            </select>
+
+
+            <select
+                class="filter-select"
+                id="statusFilter"
+                onchange="filterAssignments()"
+            >
+
+                <option value="all">
+                    সব Status
+                </option>
+
+                <option value="Active">
+                    Active
+                </option>
+
+                <option value="Closed">
+                    Closed
+                </option>
+
+                <option value="Draft">
+                    Draft
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TABLE
+    ========================= -->
+
+    <div class="table-card">
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            ASSIGNMENT
+                        </th>
+
+                        <th>
+                            COURSE
+                        </th>
+
+                        <th>
+                            DEADLINE
+                        </th>
+
+                        <th>
+                            MARKS
+                        </th>
+
+                        <th>
+                            SUBMISSIONS
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="assignmentTable">
+
+
+                    <!-- 1 -->
+
+                    <tr
+                        data-name="MS Word Assignment 01"
+                        data-course="MS Word"
+                        data-status="Active"
+                    >
+
+                        <td>
+
+                            <div class="assignment-cell">
+
+                                <strong>
+                                    MS Word Assignment 01
+                                </strong>
+
+                                <span>
+                                    Basic formatting practice
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <span class="course-badge">
+                                MS Word
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="deadline upcoming">
+                                15 Sep 2026
+                            </span>
+
+                        </td>
+
+                        <td>
+                            20
+                        </td>
+
+                        <td>
+
+                            <span class="submission-count">
+                                12
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewAssignment(
+                                        'MS Word Assignment 01',
+                                        'MS Word',
+                                        '15 Sep 2026',
+                                        '20',
+                                        'Active'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showSubmissions('MS Word Assignment 01')"
+                                >
+                                    📥
+                                </button>
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteAssignment(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- 2 -->
+
+                    <tr
+                        data-name="Computer Basic Assignment 01"
+                        data-course="Computer Basic"
+                        data-status="Active"
+                    >
+
+                        <td>
+
+                            <div class="assignment-cell">
+
+                                <strong>
+                                    Computer Basic Assignment 01
+                                </strong>
+
+                                <span>
+                                    Computer fundamentals
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <span class="course-badge">
+                                Computer Basic
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="deadline upcoming">
+                                18 Sep 2026
+                            </span>
+
+                        </td>
+
+                        <td>
+                            15
+                        </td>
+
+                        <td>
+                            <span class="submission-count">
+                                8
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewAssignment(
+                                        'Computer Basic Assignment 01',
+                                        'Computer Basic',
+                                        '18 Sep 2026',
+                                        '15',
+                                        'Active'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showSubmissions('Computer Basic Assignment 01')"
+                                >
+                                    📥
+                                </button>
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteAssignment(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- 3 -->
+
+                    <tr
+                        data-name="Excel Formula Assignment"
+                        data-course="MS Excel"
+                        data-status="Active"
+                    >
+
+                        <td>
+
+                            <div class="assignment-cell">
+
+                                <strong>
+                                    Excel Formula Assignment
+                                </strong>
+
+                                <span>
+                                    Formula practice
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <span class="course-badge">
+                                MS Excel
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="deadline active">
+                                20 Sep 2026
+                            </span>
+
+                        </td>
+
+                        <td>
+                            25
+                        </td>
+
+                        <td>
+                            <span class="submission-count">
+                                7
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewAssignment(
+                                        'Excel Formula Assignment',
+                                        'MS Excel',
+                                        '20 Sep 2026',
+                                        '25',
+                                        'Active'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showSubmissions('Excel Formula Assignment')"
+                                >
+                                    📥
+                                </button>
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteAssignment(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- 4 -->
+
+                    <tr
+                        data-name="Graphic Design Practical"
+                        data-course="Graphic Design"
+                        data-status="Active"
+                    >
+
+                        <td>
+
+                            <div class="assignment-cell">
+
+                                <strong>
+                                    Graphic Design Practical
+                                </strong>
+
+                                <span>
+                                    Poster design task
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <span class="course-badge">
+                                Graphic Design
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="deadline active">
+                                22 Sep 2026
+                            </span>
+
+                        </td>
+
+                        <td>
+                            30
+                        </td>
+
+                        <td>
+                            <span class="submission-count">
+                                5
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <span class="status active">
+                                Active
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewAssignment(
+                                        'Graphic Design Practical',
+                                        'Graphic Design',
+                                        '22 Sep 2026',
+                                        '30',
+                                        'Active'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showSubmissions('Graphic Design Practical')"
+                                >
+                                    📥
+                                </button>
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteAssignment(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- 5 -->
+
+                    <tr
+                        data-name="MS Word Assignment Old"
+                        data-course="MS Word"
+                        data-status="Closed"
+                    >
+
+                        <td>
+
+                            <div class="assignment-cell">
+
+                                <strong>
+                                    MS Word Assignment Old
+                                </strong>
+
+                                <span>
+                                    Previous batch assignment
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <span class="course-badge">
+                                MS Word
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="deadline overdue">
+                                01 Sep 2026
+                            </span>
+
+                        </td>
+
+                        <td>
+                            20
+                        </td>
+
+                        <td>
+                            <span class="submission-count">
+                                4
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <span class="status closed">
+                                Closed
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewAssignment(
+                                        'MS Word Assignment Old',
+                                        'MS Word',
+                                        '01 Sep 2026',
+                                        '20',
+                                        'Closed'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showSubmissions('MS Word Assignment Old')"
+                                >
+                                    📥
+                                </button>
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteAssignment(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- 6 -->
+
+                    <tr
+                        data-name="Computer Practical Final"
+                        data-course="Computer Basic"
+                        data-status="Draft"
+                    >
+
+                        <td>
+
+                            <div class="assignment-cell">
+
+                                <strong>
+                                    Computer Practical Final
+                                </strong>
+
+                                <span>
+                                    Final practical task
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <span class="course-badge">
+                                Computer Basic
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="deadline">
+                                30 Sep 2026
+                            </span>
+
+                        </td>
+
+                        <td>
+                            50
+                        </td>
+
+                        <td>
+                            <span class="submission-count">
+                                0
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <span class="status draft">
+                                Draft
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewAssignment(
+                                        'Computer Practical Final',
+                                        'Computer Basic',
+                                        '30 Sep 2026',
+                                        '50',
+                                        'Draft'
+                                    )"
+                                >
+                                    👁
+                                </button>
+
+                                <button
+                                    class="action-btn"
+                                    onclick="showSubmissions('Computer Practical Final')"
+                                >
+                                    📥
+                                </button>
+
+                                <button
+                                    class="action-btn delete"
+                                    onclick="deleteAssignment(this)"
+                                >
+                                    🗑️
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            class="empty-state"
+            id="emptyState"
+        >
+            😕 কোনো assignment পাওয়া যায়নি।
+        </div>
+
+    </div>
+
+
+    <footer class="footer">
+        © 2026 SNK IT Institute • Assignment Management
+    </footer>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     VIEW ASSIGNMENT MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="viewModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3>
+                    Assignment Details
+                </h3>
+
+                <p>
+                    Assignment information
+                </p>
+
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeModal('viewModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Assignment Name
+            </label>
+
+            <input
+                id="viewName"
+                type="text"
+                readonly
+            >
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>
+                    Course
+                </label>
+
+                <input
+                    id="viewCourse"
+                    type="text"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Total Marks
+                </label>
+
+                <input
+                    id="viewMarks"
+                    type="text"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Deadline
+                </label>
+
+                <input
+                    id="viewDeadline"
+                    type="text"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Status
+                </label>
+
+                <input
+                    id="viewStatus"
+                    type="text"
+                    readonly
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeModal('viewModal')"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ADD ASSIGNMENT MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="addModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3>
+                    Create Assignment
+                </h3>
+
+                <p>
+                    নতুন assignment তৈরি করুন।
+                </p>
+
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeModal('addModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            onsubmit="saveAssignment(event)"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Assignment Name
+                </label>
+
+                <input
+                    id="newName"
+                    type="text"
+                    placeholder="যেমন: MS Word Assignment 02"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Course
+                    </label>
+
+                    <select
+                        id="newCourse"
+                        required
+                    >
+
+                        <option value="">
+                            Select Course
+                        </option>
+
+                        <option value="Computer Basic">
+                            Computer Basic
+                        </option>
+
+                        <option value="MS Word">
+                            MS Word
+                        </option>
+
+                        <option value="MS Excel">
+                            MS Excel
+                        </option>
+
+                        <option value="Graphic Design">
+                            Graphic Design
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Total Marks
+                    </label>
+
+                    <input
+                        id="newMarks"
+                        type="number"
+                        min="1"
+                        placeholder="20"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Deadline
+                    </label>
+
+                    <input
+                        id="newDeadline"
+                        type="date"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Status
+                    </label>
+
+                    <select
+                        id="newStatus"
+                        required
+                    >
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Draft">
+                            Draft
+                        </option>
+
+                        <option value="Closed">
+                            Closed
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Assignment Instructions
+                </label>
+
+                <textarea
+                    id="newDescription"
+                    placeholder="Student কী করতে হবে লিখুন..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal('addModal')"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    💾 Save Assignment
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SUBMISSIONS MODAL
+========================= -->
+
+<div
+    class="modal-overlay"
+    id="submissionModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3 id="submissionTitle">
+                    Student Submissions
+                </h3>
+
+                <p>
+                    জমা দেওয়া assignment-এর তালিকা
+                </p>
+
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeModal('submissionModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="submission-list">
+
+            <div class="submission-item">
+
+                <div class="submission-student">
+
+                    <div class="submission-avatar">
+                        RA
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Rahim Ahmed
+                        </strong>
+
+                        <span>
+                            SNK-1001 • Submitted 08 Sep
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="view-submission"
+                    onclick="showDemo('Submission View')"
+                >
+                    👁 View
+                </button>
+
+            </div>
+
+
+            <div class="submission-item">
+
+                <div class="submission-student">
+
+                    <div class="submission-avatar">
+                        NJ
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Nusrat Jahan
+                        </strong>
+
+                        <span>
+                            SNK-1002 • Submitted 09 Sep
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="view-submission"
+                    onclick="showDemo('Submission View')"
+                >
+                    👁 View
+                </button>
+
+            </div>
+
+
+            <div class="submission-item">
+
+                <div class="submission-student">
+
+                    <div class="submission-avatar">
+                        SA
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Sadia Akter
+                        </strong>
+
+                        <span>
+                            SNK-1003 • Submitted 10 Sep
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="view-submission"
+                    onclick="showDemo('Submission View')"
+                >
+                    👁 View
+                </button>
+
+            </div>
+
+
+            <div class="submission-item">
+
+                <div class="submission-student">
+
+                    <div class="submission-avatar">
+                        TH
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Tanvir Hasan
+                        </strong>
+
+                        <span>
+                            SNK-1004 • Submitted 10 Sep
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="view-submission"
+                    onclick="showDemo('Submission View')"
+                >
+                    👁 View
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeModal('submissionModal')"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   THEME
+========================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("dark");
+
+    const dark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "snkAssignmentsTheme",
+        dark ? "dark" : "light"
+    );
+
+    document.getElementById("themeBtn").textContent =
+        dark ? "☀️" : "🌙";
+}
+
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem("snkAssignmentsTheme");
+
+    if(theme === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeBtn").textContent =
+            "☀️";
+    }
+}
+
+loadTheme();
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.toggle("show");
+}
+
+
+function closeSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.remove("show");
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filterAssignments(){
+
+    const search =
+        document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
+
+    const course =
+        document
+            .getElementById("courseFilter")
+            .value;
+
+    const status =
+        document
+            .getElementById("statusFilter")
+            .value;
+
+    const rows =
+        document.querySelectorAll(
+            "#assignmentTable tr"
+        );
+
+    let visible = 0;
+
+    rows.forEach(row => {
+
+        const name =
+            row.dataset.name.toLowerCase();
+
+        const rowCourse =
+            row.dataset.course;
+
+        const rowStatus =
+            row.dataset.status;
+
+        const searchMatch =
+            name.includes(search) ||
+            row.innerText
+                .toLowerCase()
+                .includes(search);
+
+        const courseMatch =
+            course === "all" ||
+            rowCourse === course;
+
+        const statusMatch =
+            status === "all" ||
+            rowStatus === status;
+
+        if(
+            searchMatch &&
+            courseMatch &&
+            statusMatch
+        ){
+
+            row.style.display = "";
+            visible++;
+
+        }else{
+
+            row.style.display = "none";
+        }
+
+    });
+
+
+    document.getElementById("emptyState").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+
+/* =========================
+   VIEW ASSIGNMENT
+========================= */
+
+function viewAssignment(
+    name,
+    course,
+    deadline,
+    marks,
+    status
+){
+
+    document.getElementById("viewName").value =
+        name;
+
+    document.getElementById("viewCourse").value =
+        course;
+
+    document.getElementById("viewDeadline").value =
+        deadline;
+
+    document.getElementById("viewMarks").value =
+        marks;
+
+    document.getElementById("viewStatus").value =
+        status;
+
+    document
+        .getElementById("viewModal")
+        .classList.add("show");
+}
+
+
+/* =========================
+   ADD ASSIGNMENT
+========================= */
+
+function openAddAssignment(){
+
+    document
+        .getElementById("addModal")
+        .classList.add("show");
+}
+
+
+function saveAssignment(event){
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("newName").value.trim();
+
+    const course =
+        document.getElementById("newCourse").value;
+
+    const marks =
+        document.getElementById("newMarks").value;
+
+    const deadline =
+        document.getElementById("newDeadline").value;
+
+    const status =
+        document.getElementById("newStatus").value;
+
+    const description =
+        document
+            .getElementById("newDescription")
+            .value
+            .trim();
+
+
+    if(!name || !course || !marks || !deadline){
+
+        alert("সব প্রয়োজনীয় তথ্য পূরণ করুন।");
+
+        return;
+    }
+
+
+    const assignments =
+        JSON.parse(
+            localStorage.getItem(
+                "snkAssignmentsList"
+            ) || "[]"
+        );
+
+
+    assignments.push({
+
+        id:Date.now(),
+
+        name,
+
+        course,
+
+        marks,
+
+        deadline,
+
+        status,
+
+        description,
+
+        submissions:0,
+
+        createdAt:
+            new Date().toISOString()
+
+    });
+
+
+    localStorage.setItem(
+        "snkAssignmentsList",
+        JSON.stringify(assignments)
+    );
+
+
+    alert(
+        "✅ Assignment save হয়েছে।\n\n" +
+        "পরবর্তী Student Portal step-এ এটি student-এর কাছে দেখানো যাবে।"
+    );
+
+
+    document
+        .getElementById("addModal")
+        .querySelector("form")
+        .reset();
+
+    closeModal("addModal");
+}
+
+
+/* =========================
+   SUBMISSIONS
+========================= */
+
+function showSubmissions(name){
+
+    document.getElementById(
+        "submissionTitle"
+    ).textContent =
+        name + " — Submissions";
+
+    document
+        .getElementById("submissionModal")
+        .classList.add("show");
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+function deleteAssignment(button){
+
+    const ok =
+        confirm(
+            "আপনি কি এই assignment delete করতে চান?"
+        );
+
+    if(!ok){
+        return;
+    }
+
+
+    button
+        .closest("tr")
+        .remove();
+
+
+    updateStats();
+
+
+    alert(
+        "🗑️ Assignment deleted."
+    );
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+    const rows =
+        document.querySelectorAll(
+            "#assignmentTable tr"
+        );
+
+    let active = 0;
+    let submissions = 0;
+
+
+    rows.forEach(row => {
+
+        if(row.dataset.status === "Active"){
+            active++;
+        }
+
+        const count =
+            row.querySelector(
+                ".submission-count"
+            );
+
+        if(count){
+
+            submissions +=
+                Number(count.textContent) || 0;
+        }
+
+    });
+
+
+    document.getElementById(
+        "totalAssignments"
+    ).textContent =
+        rows.length;
+
+    document.getElementById(
+        "activeAssignments"
+    ).textContent =
+        active;
+
+    document.getElementById(
+        "totalSubmissions"
+    ).textContent =
+        submissions;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+}
+
+
+/* =========================
+   DEMO BUTTON
+========================= */
+
+function showDemo(name){
+
+    alert(
+        "📌 " +
+        name +
+        " feature পরবর্তী step-এ আরও functional করা হবে।"
+    );
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutDemo(){
+
+    const ok =
+        confirm(
+            "আপনি কি Logout করতে চান?"
+        );
+
+    if(ok){
+
+        sessionStorage.removeItem(
+            "snkAdminLoggedIn"
+        );
+
+        alert(
+            "আপনি Admin Panel থেকে Logout করেছেন।"
+        );
+    }
+}
+
+
+/* =========================
+   OUTSIDE MODAL CLICK
+========================= */
+
+[
+    "viewModal",
+    "addModal",
+    "submissionModal"
+].forEach(id => {
+
+    document
+        .getElementById(id)
+        .addEventListener(
+            "click",
+            function(event){
+
+                if(event.target === this){
+
+                    closeModal(id);
+                }
+
+            }
+        );
+
+});
+
+
+/* =========================
+   INITIAL
+========================= */
+
+updateStats();
+
+</script>
+
+</body>
+</html>
+```
