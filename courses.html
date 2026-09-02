@@ -1,1 +1,3015 @@
-#
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Courses Management</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#f4f6fa;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --soft:#eff6ff;
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
+    --sidebar:#111827;
+    --shadow:0 10px 30px rgba(15,23,42,.07);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+    --soft:#172554;
+    --sidebar:#020617;
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.25s;
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =========================
+   APP
+========================= */
+
+.app{
+    min-height:100vh;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:255px;
+    min-width:255px;
+    background:var(--sidebar);
+    color:#fff;
+    min-height:100vh;
+
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+
+    z-index:1000;
+
+    display:flex;
+    flex-direction:column;
+
+    transition:.25s;
+}
+
+.sidebar-logo{
+    height:76px;
+    padding:13px 17px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-logo img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+}
+
+.sidebar-logo-text{
+    font-size:15px;
+    font-weight:800;
+}
+
+.sidebar-logo-text small{
+    display:block;
+    color:#9ca3af;
+    font-size:9px;
+    font-weight:500;
+    margin-top:2px;
+}
+
+.sidebar-menu{
+    padding:18px 12px;
+    flex:1;
+    overflow-y:auto;
+}
+
+.menu-label{
+    color:#6b7280;
+    font-size:9px;
+    font-weight:800;
+    padding:8px 11px;
+    letter-spacing:.5px;
+}
+
+.menu-item{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:#d1d5db;
+
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    padding:11px 12px;
+    border-radius:9px;
+    margin-bottom:4px;
+
+    font-size:11px;
+    font-weight:600;
+
+    text-align:left;
+}
+
+.menu-item:hover{
+    background:rgba(255,255,255,.07);
+    color:#fff;
+}
+
+.menu-item.active{
+    background:#2563eb;
+    color:#fff;
+}
+
+.menu-icon{
+    width:22px;
+    text-align:center;
+    font-size:15px;
+}
+
+.menu-badge{
+    margin-left:auto;
+    background:#ef4444;
+    color:#fff;
+
+    font-size:8px;
+
+    min-width:18px;
+    height:18px;
+
+    border-radius:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.sidebar-footer{
+    padding:13px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.admin-mini{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    padding:9px;
+
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
+
+.admin-avatar{
+    width:34px;
+    height:34px;
+
+    border-radius:9px;
+
+    background:#2563eb;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+}
+
+.admin-mini-info{
+    flex:1;
+    min-width:0;
+}
+
+.admin-mini-info strong{
+    display:block;
+    font-size:10px;
+}
+
+.admin-mini-info span{
+    display:block;
+    color:#9ca3af;
+    font-size:8px;
+}
+
+.logout-small{
+    border:none;
+    background:transparent;
+    color:#9ca3af;
+    font-size:14px;
+    padding:5px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:255px;
+    width:calc(100% - 255px);
+    min-width:0;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    height:76px;
+
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 25px;
+
+    position:sticky;
+    top:0;
+
+    z-index:900;
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.mobile-menu-btn{
+    display:none;
+
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+
+    width:38px;
+    height:38px;
+
+    border-radius:9px;
+    font-size:18px;
+}
+
+.page-heading h1{
+    font-size:20px;
+    margin-bottom:2px;
+}
+
+.page-heading p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.topbar-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.topbar-btn{
+    width:37px;
+    height:37px;
+
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:9px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:15px;
+}
+
+.admin-top-profile{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    padding-left:9px;
+    border-left:1px solid var(--border);
+}
+
+.top-avatar{
+    width:36px;
+    height:36px;
+
+    border-radius:9px;
+
+    background:var(--soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+}
+
+.top-profile-text strong{
+    display:block;
+    font-size:10px;
+}
+
+.top-profile-text span{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:25px;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.page-intro{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.page-intro h2{
+    font-size:21px;
+    margin-bottom:4px;
+}
+
+.page-intro p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.primary-btn{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+
+    padding:11px 16px;
+
+    border-radius:9px;
+
+    font-size:10px;
+    font-weight:800;
+
+    box-shadow:0 6px 16px rgba(37,99,235,.2);
+}
+
+.primary-btn:hover{
+    background:var(--primary-dark);
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:var(--card);
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:17px;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:39px;
+    height:39px;
+
+    border-radius:10px;
+
+    background:var(--soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+
+    margin-bottom:11px;
+}
+
+.stat-number{
+    font-size:23px;
+    font-weight:800;
+}
+
+.stat-title{
+    font-size:10px;
+    margin-top:2px;
+}
+
+.stat-description{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:14px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:15px;
+}
+
+.toolbar-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.search-box{
+    flex:1;
+    min-width:220px;
+    position:relative;
+}
+
+.search-box span{
+    position:absolute;
+    left:11px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+}
+
+.search-box input{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+    color:var(--text);
+
+    padding:10px 12px 10px 33px;
+
+    border-radius:8px;
+
+    outline:none;
+    font-size:10px;
+}
+
+.search-box input:focus{
+    border-color:var(--primary);
+}
+
+.filter-select{
+    border:1px solid var(--border);
+
+    background:var(--bg);
+    color:var(--text);
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:9px;
+
+    min-width:145px;
+}
+
+.filter-btn{
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    font-size:9px;
+    font-weight:700;
+}
+
+
+/* =========================
+   COURSE GRID
+========================= */
+
+.course-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.course-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    transition:.2s;
+}
+
+.course-card:hover{
+    transform:translateY(-3px);
+}
+
+.course-cover{
+    height:125px;
+
+    background:linear-gradient(
+        135deg,
+        #1d4ed8,
+        #7c3aed
+    );
+
+    padding:16px;
+
+    position:relative;
+
+    display:flex;
+    align-items:flex-end;
+}
+
+.course-card:nth-child(2) .course-cover{
+    background:linear-gradient(
+        135deg,
+        #059669,
+        #0891b2
+    );
+}
+
+.course-card:nth-child(3) .course-cover{
+    background:linear-gradient(
+        135deg,
+        #d97706,
+        #dc2626
+    );
+}
+
+.course-card:nth-child(4) .course-cover{
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #db2777
+    );
+}
+
+.course-card:nth-child(5) .course-cover{
+    background:linear-gradient(
+        135deg,
+        #0369a1,
+        #2563eb
+    );
+}
+
+.course-card:nth-child(6) .course-cover{
+    background:linear-gradient(
+        135deg,
+        #15803d,
+        #65a30d
+    );
+}
+
+.course-icon{
+    font-size:42px;
+    filter:drop-shadow(0 4px 5px rgba(0,0,0,.15));
+}
+
+.course-status{
+    position:absolute;
+    right:12px;
+    top:12px;
+
+    background:rgba(255,255,255,.95);
+
+    color:#166534;
+
+    padding:5px 8px;
+
+    border-radius:15px;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.course-status.inactive{
+    color:#991b1b;
+}
+
+.course-content{
+    padding:16px;
+}
+
+.course-title{
+    font-size:14px;
+    font-weight:800;
+
+    margin-bottom:4px;
+}
+
+.course-description{
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.6;
+
+    min-height:30px;
+
+    margin-bottom:13px;
+}
+
+.course-meta{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    margin-bottom:14px;
+}
+
+.meta-item{
+    background:var(--bg);
+
+    padding:8px;
+
+    border-radius:8px;
+}
+
+.meta-item span{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    margin-bottom:2px;
+}
+
+.meta-item strong{
+    font-size:9px;
+}
+
+.course-footer{
+    border-top:1px solid var(--border);
+
+    padding-top:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.student-count{
+    color:var(--muted);
+    font-size:8px;
+}
+
+.course-actions{
+    display:flex;
+    gap:5px;
+}
+
+.action-btn{
+    width:29px;
+    height:29px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:7px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:12px;
+}
+
+.action-btn:hover{
+    background:var(--soft);
+}
+
+.action-btn.delete:hover{
+    color:var(--danger);
+    background:#fef2f2;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.no-result{
+    display:none;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+.no-result-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:3000;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:570px;
+
+    max-height:90vh;
+    overflow-y:auto;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:17px;
+}
+
+.modal-header h3{
+    font-size:16px;
+}
+
+.modal-close{
+    width:30px;
+    height:30px;
+
+    border:none;
+
+    background:var(--bg);
+    color:var(--text);
+
+    border-radius:8px;
+
+    font-size:16px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.form-group{
+    margin-bottom:11px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    display:block;
+
+    font-size:9px;
+    font-weight:800;
+
+    margin-bottom:5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+    color:var(--text);
+
+    padding:10px;
+
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:9px;
+}
+
+.form-group textarea{
+    min-height:75px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:var(--primary);
+}
+
+.form-actions{
+    display:flex;
+    justify-content:flex-end;
+
+    gap:7px;
+
+    margin-top:8px;
+}
+
+.secondary-btn{
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    padding:10px 14px;
+
+    border-radius:8px;
+
+    font-size:9px;
+    font-weight:700;
+}
+
+.save-btn{
+    border:none;
+
+    background:var(--primary);
+    color:#fff;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    font-size:9px;
+    font-weight:800;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    padding:20px 25px;
+
+    border-top:1px solid var(--border);
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    text-align:center;
+
+    margin-top:25px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+.sidebar-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    z-index:950;
+
+    display:none;
+}
+
+.sidebar-overlay.show{
+    display:block;
+}
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .course-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu-btn{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .top-profile-text{
+        display:none;
+    }
+
+    .admin-top-profile{
+        border-left:none;
+        padding-left:0;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        height:65px;
+        padding:0 13px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .page-heading h1{
+        font-size:16px;
+    }
+
+    .page-heading p{
+        display:none;
+    }
+
+    .page-intro{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .page-intro h2{
+        font-size:18px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .course-grid{
+        grid-template-columns:1fr;
+    }
+
+    .toolbar-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search-box{
+        min-width:0;
+    }
+
+    .filter-select,
+    .filter-btn{
+        width:100%;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+<div class="sidebar-logo">
+
+<img
+src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+alt="SNK IT Institute Logo"
+>
+
+<div class="sidebar-logo-text">
+
+SNK IT Institute
+
+<small>
+Admin Control Panel
+</small>
+
+</div>
+
+</div>
+
+
+<div class="sidebar-menu">
+
+<div class="menu-label">
+MAIN
+</div>
+
+
+<a
+class="menu-item"
+href="admin.html">
+
+<span class="menu-icon">📊</span>
+<span>Dashboard</span>
+
+</a>
+
+
+<a
+class="menu-item"
+href="students.html">
+
+<span class="menu-icon">👨‍🎓</span>
+<span>Students</span>
+
+<span class="menu-badge">
+25
+</span>
+
+</a>
+
+
+<button
+class="menu-item active">
+
+<span class="menu-icon">🎓</span>
+<span>Courses</span>
+
+</button>
+
+
+<div class="menu-label">
+ACADEMIC
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Assignments')">
+
+<span class="menu-icon">📝</span>
+<span>Assignments</span>
+
+<span class="menu-badge">
+2
+</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Quiz')">
+
+<span class="menu-icon">🎯</span>
+<span>Quiz</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Results')">
+
+<span class="menu-icon">🏆</span>
+<span>Results</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Attendance')">
+
+<span class="menu-icon">📅</span>
+<span>Attendance</span>
+
+</button>
+
+
+<div class="menu-label">
+CONTENT
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Resources')">
+
+<span class="menu-icon">📚</span>
+<span>Resources</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Notices')">
+
+<span class="menu-icon">📢</span>
+<span>Notices</span>
+
+</button>
+
+
+<div class="menu-label">
+SYSTEM
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Settings')">
+
+<span class="menu-icon">⚙️</span>
+<span>Settings</span>
+
+</button>
+
+</div>
+
+
+<div class="sidebar-footer">
+
+<div class="admin-mini">
+
+<div class="admin-avatar">
+👨‍💼
+</div>
+
+<div class="admin-mini-info">
+
+<strong>
+Super Admin
+</strong>
+
+<span>
+Administrator
+</span>
+
+</div>
+
+<button
+class="logout-small"
+onclick="logoutDemo()">
+
+🚪
+
+</button>
+
+</div>
+
+</div>
+
+</aside>
+
+
+<div
+class="sidebar-overlay"
+id="sidebarOverlay"
+onclick="closeSidebar()">
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+<div class="topbar-left">
+
+<button
+class="mobile-menu-btn"
+onclick="toggleSidebar()">
+
+☰
+
+</button>
+
+
+<div class="page-heading">
+
+<h1>
+Courses Management
+</h1>
+
+<p>
+SNK IT Institute • Course Control Center
+</p>
+
+</div>
+
+</div>
+
+
+<div class="topbar-actions">
+
+<button
+class="topbar-btn"
+onclick="toggleTheme()"
+id="themeBtn">
+
+🌙
+
+</button>
+
+
+<button
+class="topbar-btn"
+onclick="showDemo('Notifications')">
+
+🔔
+
+</button>
+
+
+<div class="admin-top-profile">
+
+<div class="top-avatar">
+👨‍💼
+</div>
+
+<div class="top-profile-text">
+
+<strong>
+Super Admin
+</strong>
+
+<span>
+Online
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- INTRO -->
+
+<section class="page-intro">
+
+<div>
+
+<h2>
+🎓 Courses Management
+</h2>
+
+<p>
+আপনার Institute-এর সব course এখান থেকে পরিচালনা করুন।
+</p>
+
+</div>
+
+
+<button
+class="primary-btn"
+onclick="openAddCourse()">
+
+＋ Add New Course
+
+</button>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats-grid">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🎓
+</div>
+
+<div class="stat-number">
+6
+</div>
+
+<div class="stat-title">
+Total Courses
+</div>
+
+<div class="stat-description">
+All available courses
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🟢
+</div>
+
+<div class="stat-number">
+5
+</div>
+
+<div class="stat-title">
+Active Courses
+</div>
+
+<div class="stat-description">
+Currently running courses
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+👨‍🎓
+</div>
+
+<div class="stat-number">
+25
+</div>
+
+<div class="stat-title">
+Total Enrolled
+</div>
+
+<div class="stat-description">
+Students across courses
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+💰
+</div>
+
+<div class="stat-number">
+৳45K
+</div>
+
+<div class="stat-title">
+Course Revenue
+</div>
+
+<div class="stat-description">
+Demo overview
+</div>
+
+</div>
+
+
+</section>
+
+
+<!-- SEARCH -->
+
+<section class="toolbar">
+
+<div class="toolbar-row">
+
+
+<div class="search-box">
+
+<span>
+🔍
+</span>
+
+<input
+type="text"
+id="courseSearch"
+placeholder="Course name বা description দিয়ে search করুন..."
+oninput="filterCourses()"
+>
+
+</div>
+
+
+<select
+class="filter-select"
+id="courseStatusFilter"
+onchange="filterCourses()">
+
+<option value="all">
+All Status
+</option>
+
+<option value="Active">
+Active
+</option>
+
+<option value="Inactive">
+Inactive
+</option>
+
+</select>
+
+
+<button
+class="filter-btn"
+onclick="resetCourseFilter()">
+
+↻ Reset
+
+</button>
+
+
+</div>
+
+</section>
+
+
+<!-- COURSE GRID -->
+
+<section
+class="course-grid"
+id="courseGrid">
+
+
+<!-- COURSE 1 -->
+
+<article
+class="course-card"
+data-name="Computer Office Application"
+data-status="Active">
+
+<div class="course-cover">
+
+<div class="course-icon">
+💻
+</div>
+
+<span class="course-status">
+● Active
+</span>
+
+</div>
+
+
+<div class="course-content">
+
+<div class="course-title">
+Computer Office Application
+</div>
+
+<div class="course-description">
+Microsoft Word, Excel, PowerPoint, Internet এবং basic computer skills।
+</div>
+
+
+<div class="course-meta">
+
+<div class="meta-item">
+
+<span>
+Duration
+</span>
+
+<strong>
+3 Months
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Fee
+</span>
+
+<strong>
+৳3,000
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="course-footer">
+
+<div class="student-count">
+👨‍🎓 10 Students
+</div>
+
+
+<div class="course-actions">
+
+<button
+class="action-btn"
+onclick="viewCourse(
+'Computer Office Application',
+'3 Months',
+'৳3,000',
+'10',
+'Active'
+)">
+
+👁
+
+</button>
+
+
+<button
+class="action-btn"
+onclick="editCourse('Computer Office Application')">
+
+✏️
+
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteCourse('Computer Office Application')">
+
+🗑
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- COURSE 2 -->
+
+<article
+class="course-card"
+data-name="Graphics Design"
+data-status="Active">
+
+<div class="course-cover">
+
+<div class="course-icon">
+🎨
+</div>
+
+<span class="course-status">
+● Active
+</span>
+
+</div>
+
+
+<div class="course-content">
+
+<div class="course-title">
+Graphics Design
+</div>
+
+<div class="course-description">
+Photoshop, Illustrator, Canva এবং professional graphics design basics।
+</div>
+
+
+<div class="course-meta">
+
+<div class="meta-item">
+
+<span>
+Duration
+</span>
+
+<strong>
+4 Months
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Fee
+</span>
+
+<strong>
+৳5,000
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="course-footer">
+
+<div class="student-count">
+👨‍🎓 6 Students
+</div>
+
+
+<div class="course-actions">
+
+<button
+class="action-btn"
+onclick="viewCourse(
+'Graphics Design',
+'4 Months',
+'৳5,000',
+'6',
+'Active'
+)">
+
+👁
+
+</button>
+
+
+<button
+class="action-btn"
+onclick="editCourse('Graphics Design')">
+
+✏️
+
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteCourse('Graphics Design')">
+
+🗑
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- COURSE 3 -->
+
+<article
+class="course-card"
+data-name="Digital Marketing"
+data-status="Active">
+
+<div class="course-cover">
+
+<div class="course-icon">
+📱
+</div>
+
+<span class="course-status">
+● Active
+</span>
+
+</div>
+
+
+<div class="course-content">
+
+<div class="course-title">
+Digital Marketing
+</div>
+
+<div class="course-description">
+Facebook marketing, content strategy, SEO, advertising এবং online business।
+</div>
+
+
+<div class="course-meta">
+
+<div class="meta-item">
+
+<span>
+Duration
+</span>
+
+<strong>
+3 Months
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Fee
+</span>
+
+<strong>
+৳4,000
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="course-footer">
+
+<div class="student-count">
+👨‍🎓 4 Students
+</div>
+
+
+<div class="course-actions">
+
+<button
+class="action-btn"
+onclick="viewCourse(
+'Digital Marketing',
+'3 Months',
+'৳4,000',
+'4',
+'Active'
+)">
+
+👁
+
+</button>
+
+
+<button
+class="action-btn"
+onclick="editCourse('Digital Marketing')">
+
+✏️
+
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteCourse('Digital Marketing')">
+
+🗑
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- COURSE 4 -->
+
+<article
+class="course-card"
+data-name="Web Design"
+data-status="Active">
+
+<div class="course-cover">
+
+<div class="course-icon">
+🌐
+</div>
+
+<span class="course-status">
+● Active
+</span>
+
+</div>
+
+
+<div class="course-content">
+
+<div class="course-title">
+Web Design
+</div>
+
+<div class="course-description">
+HTML, CSS, JavaScript এবং modern responsive website design।
+</div>
+
+
+<div class="course-meta">
+
+<div class="meta-item">
+
+<span>
+Duration
+</span>
+
+<strong>
+4 Months
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Fee
+</span>
+
+<strong>
+৳6,000
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="course-footer">
+
+<div class="student-count">
+👨‍🎓 3 Students
+</div>
+
+
+<div class="course-actions">
+
+<button
+class="action-btn"
+onclick="viewCourse(
+'Web Design',
+'4 Months',
+'৳6,000',
+'3',
+'Active'
+)">
+
+👁
+
+</button>
+
+
+<button
+class="action-btn"
+onclick="editCourse('Web Design')">
+
+✏️
+
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteCourse('Web Design')">
+
+🗑
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- COURSE 5 -->
+
+<article
+class="course-card"
+data-name="Video Editing"
+data-status="Active">
+
+<div class="course-cover">
+
+<div class="course-icon">
+🎬
+</div>
+
+<span class="course-status">
+● Active
+</span>
+
+</div>
+
+
+<div class="course-content">
+
+<div class="course-title">
+Video Editing
+</div>
+
+<div class="course-description">
+Video editing fundamentals, social media video এবং basic production।
+</div>
+
+
+<div class="course-meta">
+
+<div class="meta-item">
+
+<span>
+Duration
+</span>
+
+<strong>
+3 Months
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Fee
+</span>
+
+<strong>
+৳4,500
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="course-footer">
+
+<div class="student-count">
+👨‍🎓 2 Students
+</div>
+
+
+<div class="course-actions">
+
+<button
+class="action-btn"
+onclick="viewCourse(
+'Video Editing',
+'3 Months',
+'৳4,500',
+'2',
+'Active'
+)">
+
+👁
+
+</button>
+
+
+<button
+class="action-btn"
+onclick="editCourse('Video Editing')">
+
+✏️
+
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteCourse('Video Editing')">
+
+🗑
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- COURSE 6 -->
+
+<article
+class="course-card"
+data-name="Basic Computer"
+data-status="Inactive">
+
+<div class="course-cover">
+
+<div class="course-icon">
+🖥️
+</div>
+
+<span class="course-status inactive">
+● Inactive
+</span>
+
+</div>
+
+
+<div class="course-content">
+
+<div class="course-title">
+Basic Computer
+</div>
+
+<div class="course-description">
+Computer fundamentals এবং beginner level digital skills training।
+</div>
+
+
+<div class="course-meta">
+
+<div class="meta-item">
+
+<span>
+Duration
+</span>
+
+<strong>
+2 Months
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Fee
+</span>
+
+<strong>
+৳2,000
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="course-footer">
+
+<div class="student-count">
+👨‍🎓 0 Students
+</div>
+
+
+<div class="course-actions">
+
+<button
+class="action-btn"
+onclick="viewCourse(
+'Basic Computer',
+'2 Months',
+'৳2,000',
+'0',
+'Inactive'
+)">
+
+👁
+
+</button>
+
+
+<button
+class="action-btn"
+onclick="editCourse('Basic Computer')">
+
+✏️
+
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteCourse('Basic Computer')">
+
+🗑
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+</section>
+
+
+<div
+class="no-result"
+id="noResult">
+
+<div class="no-result-icon">
+🔎
+</div>
+
+কোনো course পাওয়া যায়নি।
+
+</div>
+
+
+<footer class="footer">
+
+SNK IT Institute • Courses Management 1.11
+
+<br>
+
+© 2026 SNK IT Institute. All Rights Reserved.
+
+</footer>
+
+
+</div>
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     ADD COURSE MODAL
+===================================================== -->
+
+<div
+class="modal-overlay"
+id="courseModal"
+onclick="closeCourseOutside(event)">
+
+<div class="modal">
+
+<div class="modal-header">
+
+<h3>
+🎓 Add New Course
+</h3>
+
+<button
+class="modal-close"
+onclick="closeCourseModal()">
+
+×
+
+</button>
+
+</div>
+
+
+<form
+id="courseForm"
+onsubmit="saveCourse(event)">
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Course Name
+</label>
+
+<input
+type="text"
+id="courseName"
+placeholder="যেমন: Web Design"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Duration
+</label>
+
+<input
+type="text"
+id="courseDuration"
+placeholder="যেমন: 3 Months"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Course Fee
+</label>
+
+<input
+type="text"
+id="courseFee"
+placeholder="যেমন: ৳3,000"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Status
+</label>
+
+<select id="courseStatus">
+
+<option>
+Active
+</option>
+
+<option>
+Inactive
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Course Description
+</label>
+
+<textarea
+id="courseDescription"
+placeholder="Course সম্পর্কে সংক্ষিপ্ত description লিখুন..."
+required></textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+type="button"
+class="secondary-btn"
+onclick="closeCourseModal()">
+
+Cancel
+
+</button>
+
+
+<button
+type="submit"
+class="save-btn">
+
+Save Course
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW COURSE MODAL
+===================================================== -->
+
+<div
+class="modal-overlay"
+id="viewCourseModal">
+
+<div class="modal">
+
+<div class="modal-header">
+
+<h3>
+🎓 Course Details
+</h3>
+
+<button
+class="modal-close"
+onclick="closeViewCourse()">
+
+×
+
+</button>
+
+</div>
+
+
+<div style="text-align:center;padding:10px 0 18px;">
+
+<div style="font-size:48px;">
+🎓
+</div>
+
+<h3
+id="viewCourseName"
+style="font-size:17px;margin-top:8px;">
+Course Name
+</h3>
+
+</div>
+
+
+<div class="course-meta">
+
+<div class="meta-item">
+
+<span>
+Duration
+</span>
+
+<strong id="viewCourseDuration">
+3 Months
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Course Fee
+</span>
+
+<strong id="viewCourseFee">
+৳3,000
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Students
+</span>
+
+<strong id="viewCourseStudents">
+10
+</strong>
+
+</div>
+
+<div class="meta-item">
+
+<span>
+Status
+</span>
+
+<strong id="viewCourseStatus">
+Active
+</strong>
+
+</div>
+
+</div>
+
+
+<div
+style="border-top:1px solid var(--border);padding-top:13px;">
+
+<div
+style="font-size:9px;color:var(--muted);margin-bottom:5px;">
+Course Information
+</div>
+
+<div
+id="viewCourseDescription"
+style="font-size:10px;line-height:1.7;">
+Course description
+</div>
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+class="secondary-btn"
+onclick="closeViewCourse()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   THEME
+========================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("dark");
+
+    const isDark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "snkAdminTheme",
+        isDark ? "dark" : "light"
+    );
+
+    document.getElementById("themeBtn").textContent =
+        isDark ? "☀️" : "🌙";
+}
+
+
+(function(){
+
+    const savedTheme =
+        localStorage.getItem("snkAdminTheme");
+
+    if(savedTheme === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeBtn").textContent =
+            "☀️";
+
+    }
+
+})();
+
+
+/* =========================
+   MOBILE SIDEBAR
+========================= */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.toggle("show");
+
+}
+
+
+function closeSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   DEMO
+========================= */
+
+function showDemo(name){
+
+    alert(
+        name +
+        " section এখন Demo UI mode-এ আছে.\n\n" +
+        "পরবর্তী ধাপে working system তৈরি করা হবে।"
+    );
+
+}
+
+
+/* =========================
+   ADD COURSE MODAL
+========================= */
+
+function openAddCourse(){
+
+    document
+        .getElementById("courseModal")
+        .classList.add("show");
+
+}
+
+
+function closeCourseModal(){
+
+    document
+        .getElementById("courseModal")
+        .classList.remove("show");
+
+}
+
+
+function closeCourseOutside(event){
+
+    if(
+        event.target ===
+        document.getElementById("courseModal")
+    ){
+
+        closeCourseModal();
+
+    }
+
+}
+
+
+/* =========================
+   SAVE COURSE
+========================= */
+
+function saveCourse(event){
+
+    event.preventDefault();
+
+
+    const name =
+        document
+            .getElementById("courseName")
+            .value
+            .trim();
+
+
+    const duration =
+        document
+            .getElementById("courseDuration")
+            .value
+            .trim();
+
+
+    const fee =
+        document
+            .getElementById("courseFee")
+            .value
+            .trim();
+
+
+    const status =
+        document
+            .getElementById("courseStatus")
+            .value;
+
+
+    const description =
+        document
+            .getElementById("courseDescription")
+            .value
+            .trim();
+
+
+    if(
+        !name ||
+        !duration ||
+        !fee ||
+        !description
+    ){
+
+        alert(
+            "দয়া করে সব প্রয়োজনীয় তথ্য পূরণ করুন।"
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "Course information received!\n\n" +
+        "Course: " + name +
+        "\nDuration: " + duration +
+        "\nFee: " + fee +
+        "\nStatus: " + status +
+        "\n\nএটি এখন Demo UI mode।"
+    );
+
+
+    document
+        .getElementById("courseForm")
+        .reset();
+
+
+    closeCourseModal();
+
+}
+
+
+/* =========================
+   VIEW COURSE
+========================= */
+
+function viewCourse(
+    name,
+    duration,
+    fee,
+    students,
+    status
+){
+
+    document
+        .getElementById("viewCourseName")
+        .textContent = name;
+
+
+    document
+        .getElementById("viewCourseDuration")
+        .textContent = duration;
+
+
+    document
+        .getElementById("viewCourseFee")
+        .textContent = fee;
+
+
+    document
+        .getElementById("viewCourseStudents")
+        .textContent = students;
+
+
+    document
+        .getElementById("viewCourseStatus")
+        .textContent = status;
+
+
+    document
+        .getElementById("viewCourseDescription")
+        .textContent =
+        name +
+        " course-এর বিস্তারিত তথ্য এখানে পরবর্তীতে database থেকে আসবে।";
+
+
+    document
+        .getElementById("viewCourseModal")
+        .classList.add("show");
+
+}
+
+
+function closeViewCourse(){
+
+    document
+        .getElementById("viewCourseModal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   EDIT
+========================= */
+
+function editCourse(name){
+
+    alert(
+        "Edit Course\n\n" +
+        name +
+        "\n\nWorking edit system পরবর্তী step-এ যুক্ত হবে।"
+    );
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+function deleteCourse(name){
+
+    const confirmDelete =
+        confirm(
+            name +
+            " course টি delete করতে চান?"
+        );
+
+
+    if(confirmDelete){
+
+        alert(
+            "Demo mode-এ delete action selected হয়েছে।\n\n" +
+            "Real database delete system পরে যুক্ত হবে।"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   SEARCH + FILTER
+========================= */
+
+function filterCourses(){
+
+    const search =
+        document
+            .getElementById("courseSearch")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const status =
+        document
+            .getElementById("courseStatusFilter")
+            .value;
+
+
+    const cards =
+        document.querySelectorAll(
+            ".course-card"
+        );
+
+
+    let visible = 0;
+
+
+    cards.forEach(function(card){
+
+        const name =
+            card.dataset.name.toLowerCase();
+
+
+        const cardStatus =
+            card.dataset.status;
+
+
+        const searchMatch =
+            !search ||
+            name.includes(search);
+
+
+        const statusMatch =
+            status === "all" ||
+            cardStatus === status;
+
+
+        if(
+            searchMatch &&
+            statusMatch
+        ){
+
+            card.style.display = "";
+
+            visible++;
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    document
+        .getElementById("noResult")
+        .style.display =
+        visible === 0
+        ? "block"
+        : "none";
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetCourseFilter(){
+
+    document
+        .getElementById("courseSearch")
+        .value = "";
+
+
+    document
+        .getElementById("courseStatusFilter")
+        .value = "all";
+
+
+    filterCourses();
+
+}
+
+
+/* =========================
+   LOGOUT DEMO
+========================= */
+
+function logoutDemo(){
+
+    const answer =
+        confirm(
+            "Admin Logout করতে চান?"
+        );
+
+
+    if(answer){
+
+        alert(
+            "Demo Logout সম্পন্ন হয়েছে।\n\n" +
+            "Real Admin Login/Logout system 6.1 থেকে যুক্ত হবে।"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeCourseModal();
+            closeViewCourse();
+            closeSidebar();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
