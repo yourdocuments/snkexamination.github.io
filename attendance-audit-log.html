@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Attendance Audit Log</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --primary-soft:#eff6ff;
+
+    --success:#16a34a;
+    --success-soft:#f0fdf4;
+
+    --danger:#dc2626;
+    --danger-soft:#fef2f2;
+
+    --warning:#d97706;
+    --warning-soft:#fffbeb;
+
+    --purple:#7c3aed;
+    --purple-soft:#f5f3ff;
+
+    --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+
+    --primary-soft:#172554;
+    --success-soft:#052e16;
+    --danger-soft:#450a0a;
+    --warning-soft:#451a03;
+    --purple-soft:#2e1065;
+
+    --shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    min-height:70px;
+    padding:12px 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+
+    box-shadow:0 4px 20px rgba(15,23,42,.05);
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:14px;
+    font-weight:900;
+}
+
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:2px;
+}
+
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.btn{
+    min-height:38px;
+    padding:0 13px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-size:8px;
+    font-weight:900;
+
+    transition:.2s;
+}
+
+.btn:hover{
+    border-color:var(--primary);
+    transform:translateY(-1px);
+}
+
+.btn.primary{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+}
+
+.btn.primary:hover{
+    background:var(--primary-dark);
+}
+
+.btn.success{
+    background:var(--success);
+    border-color:var(--success);
+    color:#fff;
+}
+
+.btn.danger{
+    background:var(--danger);
+    border-color:var(--danger);
+    color:#fff;
+}
+
+.btn.warning{
+    background:var(--warning);
+    border-color:var(--warning);
+    color:#fff;
+}
+
+.btn.small{
+    min-height:32px;
+    padding:0 10px;
+    font-size:7px;
+}
+
+.main{
+    max-width:1250px;
+    margin:auto;
+    padding:28px 20px 50px;
+}
+
+.page-header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.page-title h1{
+    font-size:24px;
+    margin-bottom:4px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.info{
+    padding:12px 14px;
+
+    background:var(--primary-soft);
+    border:1px solid rgba(37,99,235,.15);
+
+    border-radius:11px;
+
+    font-size:8px;
+    line-height:1.8;
+
+    margin-bottom:15px;
+}
+
+.info strong{
+    display:block;
+    font-size:9px;
+    margin-bottom:3px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:14px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    font-size:18px;
+    margin-bottom:6px;
+}
+
+.stat-value{
+    font-size:20px;
+    font-weight:900;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    margin-bottom:15px;
+}
+
+.card-header{
+    padding:14px 15px;
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.card-header h2{
+    font-size:12px;
+}
+
+.card-header p{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:3px;
+}
+
+.card-body{
+    padding:15px;
+}
+
+.filter-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:10px;
+}
+
+.field label{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+    font-weight:900;
+    margin-bottom:5px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:39px;
+
+    padding:0 10px;
+
+    border:1px solid var(--border);
+    border-radius:8px;
+
+    background:var(--card);
+    color:var(--text);
+
+    outline:none;
+
+    font-size:8px;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.filter-actions{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+    flex-wrap:wrap;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+thead th{
+    background:var(--bg);
+    color:var(--muted);
+
+    text-align:left;
+
+    font-size:7px;
+    font-weight:900;
+
+    padding:11px 10px;
+
+    border-bottom:1px solid var(--border);
+
+    white-space:nowrap;
+}
+
+tbody td{
+    padding:11px 10px;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:7.5px;
+
+    vertical-align:middle;
+}
+
+tbody tr:hover{
+    background:rgba(37,99,235,.025);
+}
+
+tbody tr:last-child td{
+    border-bottom:0;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+
+    padding:4px 7px;
+
+    border-radius:20px;
+
+    font-size:6.5px;
+    font-weight:900;
+
+    white-space:nowrap;
+}
+
+.badge.add{
+    background:var(--success-soft);
+    color:var(--success);
+}
+
+.badge.update{
+    background:var(--primary-soft);
+    color:var(--primary);
+}
+
+.badge.delete{
+    background:var(--danger-soft);
+    color:var(--danger);
+}
+
+.badge.export{
+    background:var(--purple-soft);
+    color:var(--purple);
+}
+
+.badge.import{
+    background:var(--warning-soft);
+    color:var(--warning);
+}
+
+.badge.other{
+    background:var(--bg);
+    color:var(--muted);
+}
+
+.student-name{
+    font-weight:900;
+}
+
+.student-id{
+    color:var(--muted);
+    font-size:6.5px;
+    margin-top:2px;
+}
+
+.details{
+    max-width:280px;
+    color:var(--muted);
+    line-height:1.6;
+}
+
+.action-btn{
+    width:29px;
+    height:29px;
+
+    border:1px solid var(--border);
+    border-radius:7px;
+
+    background:var(--card);
+    color:var(--text);
+}
+
+.action-btn:hover{
+    border-color:var(--primary);
+}
+
+.empty{
+    padding:45px 20px;
+    text-align:center;
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.empty h3{
+    font-size:12px;
+    margin-bottom:4px;
+}
+
+.empty p{
+    color:var(--muted);
+    font-size:8px;
+}
+
+.pagination{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+
+    padding-top:13px;
+    margin-top:13px;
+
+    border-top:1px solid var(--border);
+}
+
+.page-info{
+    color:var(--muted);
+    font-size:7px;
+}
+
+.page-buttons{
+    display:flex;
+    gap:5px;
+}
+
+.page-btn{
+    min-width:32px;
+    height:31px;
+
+    border:1px solid var(--border);
+    border-radius:7px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-size:7px;
+    font-weight:900;
+}
+
+.page-btn.active{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+}
+
+.page-btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(15,23,42,.65);
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    z-index:4000;
+
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:520px;
+
+    max-height:90vh;
+    overflow:auto;
+
+    background:var(--card);
+
+    border-radius:15px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    padding:15px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.modal-header h3{
+    font-size:12px;
+}
+
+.close-btn{
+    width:30px;
+    height:30px;
+
+    border:1px solid var(--border);
+    border-radius:7px;
+
+    background:var(--card);
+    color:var(--text);
+}
+
+.modal-body{
+    padding:17px;
+}
+
+.detail-row{
+    display:grid;
+    grid-template-columns:130px 1fr;
+    gap:10px;
+
+    padding:9px 0;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:8px;
+}
+
+.detail-row:last-child{
+    border-bottom:0;
+}
+
+.detail-label{
+    color:var(--muted);
+    font-weight:900;
+}
+
+.detail-value{
+    word-break:break-word;
+}
+
+.modal-footer{
+    padding:12px 15px;
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+    justify-content:flex-end;
+    gap:7px;
+}
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:5000;
+
+    background:#111827;
+    color:#fff;
+
+    padding:11px 15px;
+
+    border-radius:9px;
+
+    font-size:8px;
+
+    opacity:0;
+    transform:translateY(20px);
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:950px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .filter-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .header{
+        padding:10px 13px;
+    }
+
+    .main{
+        padding:18px 13px 35px;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .actions{
+        width:100%;
+    }
+
+    .actions .btn{
+        flex:1;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+    }
+
+    .filter-grid{
+        grid-template-columns:1fr;
+    }
+
+    .filter-actions .btn{
+        flex:1;
+    }
+
+    .pagination{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .detail-row{
+        grid-template-columns:1fr;
+        gap:3px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+        >
+
+        <div class="logo-text">
+
+            SNK IT Institute
+
+            <small>
+                Attendance Audit Log
+            </small>
+
+        </div>
+
+    </div>
+
+    <div class="header-actions">
+
+        <button
+            class="btn"
+            id="themeBtn"
+            onclick="toggleTheme()"
+        >
+            🌙
+        </button>
+
+        <button
+            class="btn"
+            onclick="goBack()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="main">
+
+    <section class="page-header">
+
+        <div class="page-title">
+
+            <h1>
+                📋 Attendance Audit Log
+            </h1>
+
+            <p>
+                Attendance system-এর গুরুত্বপূর্ণ activity এবং change history দেখুন।
+            </p>
+
+        </div>
+
+        <div class="actions">
+
+            <button
+                class="btn primary"
+                onclick="exportLogs()"
+            >
+                📤 Export CSV
+            </button>
+
+            <button
+                class="btn danger"
+                onclick="clearLogs()"
+            >
+                🗑 Clear Logs
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <div class="info">
+
+        <strong>
+            🔐 Audit History
+        </strong>
+
+        এই page attendance system-এর activity history LocalStorage-এ
+        <b>snkAttendanceAuditLogs</b> key-এর মাধ্যমে সংরক্ষণ করে।
+        এখানে নতুন record, update, delete, import এবং export-এর মতো action দেখা যাবে।
+
+    </div>
+
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                📋
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalLogs"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Total Activities
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ➕
+            </div>
+
+            <div
+                class="stat-value"
+                id="addLogs"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Added
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ✏️
+            </div>
+
+            <div
+                class="stat-value"
+                id="updateLogs"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Updated
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🗑️
+            </div>
+
+            <div
+                class="stat-value"
+                id="deleteLogs"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Deleted
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FILTER -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    🔎 Search & Filter
+                </h2>
+
+                <p>
+                    Audit activity দ্রুত খুঁজে বের করুন।
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="filter-grid">
+
+                <div class="field">
+
+                    <label>
+                        Search
+                    </label>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Student ID, name, action, details..."
+                        oninput="applyFilters()"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Action
+                    </label>
+
+                    <select
+                        id="actionFilter"
+                        onchange="applyFilters()"
+                    >
+
+                        <option value="all">
+                            All Actions
+                        </option>
+
+                        <option value="add">
+                            Added
+                        </option>
+
+                        <option value="update">
+                            Updated
+                        </option>
+
+                        <option value="delete">
+                            Deleted
+                        </option>
+
+                        <option value="import">
+                            Imported
+                        </option>
+
+                        <option value="export">
+                            Exported
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        From Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fromDate"
+                        onchange="applyFilters()"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        To Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="toDate"
+                        onchange="applyFilters()"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-actions">
+
+                <button
+                    class="btn primary"
+                    onclick="applyFilters()"
+                >
+                    🔎 Apply Filter
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="resetFilters()"
+                >
+                    ↺ Reset
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="loadLogs()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOG TABLE -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    📝 Activity History
+                </h2>
+
+                <p id="resultText">
+                    Audit records
+                </p>
+
+            </div>
+
+            <button
+                class="btn small"
+                onclick="createDemoLog()"
+            >
+                + Test Log
+            </button>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <div
+                class="table-wrap"
+                id="tableContainer"
+            >
+            </div>
+
+            <div
+                class="pagination"
+                id="pagination"
+            >
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer
+        style="
+            text-align:center;
+            color:var(--muted);
+            font-size:8px;
+            padding:20px;
+        "
+    >
+
+        © 2026 SNK IT Institute • Attendance Audit Log
+
+    </footer>
+
+</main>
+
+
+<!-- DETAILS MODAL -->
+
+<div
+    class="modal"
+    id="detailsModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3>
+                🔎 Audit Details
+            </h3>
+
+            <button
+                class="close-btn"
+                onclick="closeDetails()"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div
+            class="modal-body"
+            id="detailsBody"
+        >
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn"
+                onclick="closeDetails()"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+/* =========================================================
+   1.42 ATTENDANCE AUDIT LOG
+========================================================= */
+
+const AUDIT_KEY =
+    "snkAttendanceAuditLogs";
+
+const THEME_KEY =
+    "snkAttendanceAuditTheme";
+
+
+let allLogs = [];
+
+let filteredLogs = [];
+
+let currentPage = 1;
+
+const PAGE_SIZE = 10;
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadTheme();
+
+        loadLogs();
+
+    }
+);
+
+
+/* =========================================================
+   LOAD LOGS
+========================================================= */
+
+function loadLogs(){
+
+    try{
+
+        const stored =
+            JSON.parse(
+                localStorage.getItem(
+                    AUDIT_KEY
+                ) || "[]"
+            );
+
+
+        if(
+            Array.isArray(
+                stored
+            )
+        ){
+
+            allLogs =
+                stored;
+
+        }
+        else{
+
+            allLogs = [];
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        allLogs = [];
+
+    }
+
+
+    normalizeLogs();
+
+    updateStats();
+
+    applyFilters();
+
+}
+
+
+/* =========================================================
+   NORMALIZE LOGS
+========================================================= */
+
+function normalizeLogs(){
+
+    allLogs =
+        allLogs.map(
+            function(log,index){
+
+                return {
+
+                    id:
+                        log.id ||
+                        (
+                            "AUDIT-" +
+                            Date.now() +
+                            "-" +
+                            index
+                        ),
+
+                    timestamp:
+                        log.timestamp ||
+                        log.date ||
+                        new Date().toISOString(),
+
+                    action:
+                        String(
+                            log.action ||
+                            "other"
+                        ).toLowerCase(),
+
+                    actor:
+                        log.actor ||
+                        log.admin ||
+                        "Admin",
+
+                    studentId:
+                        log.studentId ||
+                        log.studentID ||
+                        "",
+
+                    studentName:
+                        log.studentName ||
+                        log.name ||
+                        "",
+
+                    details:
+                        log.details ||
+                        log.description ||
+                        log.message ||
+                        "",
+
+                    oldValue:
+                        log.oldValue ??
+                        "",
+
+                    newValue:
+                        log.newValue ??
+                        ""
+
+                };
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   SAVE LOGS
+========================================================= */
+
+function saveLogs(){
+
+    localStorage.setItem(
+        AUDIT_KEY,
+        JSON.stringify(
+            allLogs
+        )
+    );
+
+}
+
+
+/* =========================================================
+   CREATE AUDIT LOG
+========================================================= */
+
+function addAuditLog(
+    action,
+    details,
+    studentId = "",
+    studentName = "",
+    actor = "Admin",
+    oldValue = "",
+    newValue = ""
+){
+
+    const log = {
+
+        id:
+            "AUD-" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .slice(2,7),
+
+        timestamp:
+            new Date().toISOString(),
+
+        action:
+            String(
+                action ||
+                "other"
+            ).toLowerCase(),
+
+        actor:
+            actor ||
+            "Admin",
+
+        studentId:
+            studentId ||
+            "",
+
+        studentName:
+            studentName ||
+            "",
+
+        details:
+            details ||
+            "",
+
+        oldValue:
+            oldValue,
+
+        newValue:
+            newValue
+
+    };
+
+
+    allLogs.unshift(
+        log
+    );
+
+
+    saveLogs();
+
+    updateStats();
+
+    applyFilters();
+
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+function applyFilters(){
+
+    const search =
+        (
+            document.getElementById(
+                "searchInput"
+            ).value ||
+            ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const action =
+        document.getElementById(
+            "actionFilter"
+        ).value;
+
+
+    const fromDate =
+        document.getElementById(
+            "fromDate"
+        ).value;
+
+
+    const toDate =
+        document.getElementById(
+            "toDate"
+        ).value;
+
+
+    filteredLogs =
+        allLogs.filter(
+            function(log){
+
+                const searchable = [
+
+                    log.id,
+
+                    log.action,
+
+                    log.actor,
+
+                    log.studentId,
+
+                    log.studentName,
+
+                    log.details,
+
+                    stringifyValue(
+                        log.oldValue
+                    ),
+
+                    stringifyValue(
+                        log.newValue
+                    )
+
+                ]
+                .join(" ")
+                .toLowerCase();
+
+
+                if(
+                    search &&
+                    !searchable.includes(
+                        search
+                    )
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    action !== "all" &&
+                    getActionType(
+                        log.action
+                    ) !== action
+                ){
+
+                    return false;
+
+                }
+
+
+                const logDate =
+                    getDateOnly(
+                        log.timestamp
+                    );
+
+
+                if(
+                    fromDate &&
+                    logDate < fromDate
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    toDate &&
+                    logDate > toDate
+                ){
+
+                    return false;
+
+                }
+
+
+                return true;
+
+            }
+        );
+
+
+    currentPage = 1;
+
+    renderTable();
+
+    renderPagination();
+
+}
+
+
+/* =========================================================
+   RESET FILTERS
+========================================================= */
+
+function resetFilters(){
+
+    document.getElementById(
+        "searchInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "actionFilter"
+    ).value = "all";
+
+
+    document.getElementById(
+        "fromDate"
+    ).value = "";
+
+
+    document.getElementById(
+        "toDate"
+    ).value = "";
+
+
+    applyFilters();
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderTable(){
+
+    const container =
+        document.getElementById(
+            "tableContainer"
+        );
+
+
+    const resultText =
+        document.getElementById(
+            "resultText"
+        );
+
+
+    resultText.textContent =
+        filteredLogs.length +
+        " টি record পাওয়া গেছে";
+
+
+    if(
+        filteredLogs.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <h3>
+                    কোনো audit record নেই
+                </h3>
+
+                <p>
+                    আপনার selected filter অনুযায়ী কোনো activity পাওয়া যায়নি।
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const start =
+        (
+            currentPage - 1
+        ) *
+        PAGE_SIZE;
+
+
+    const pageLogs =
+        filteredLogs.slice(
+            start,
+            start + PAGE_SIZE
+        );
+
+
+    let html = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Date & Time
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                    <th>
+                        Student
+                    </th>
+
+                    <th>
+                        Actor
+                    </th>
+
+                    <th>
+                        Details
+                    </th>
+
+                    <th>
+                        View
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    pageLogs.forEach(
+        function(log){
+
+            html += `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHTML(
+                                formatDate(
+                                    log.timestamp
+                                )
+                            )}
+                        </strong>
+
+                        <div class="student-id">
+                            ${escapeHTML(
+                                formatTime(
+                                    log.timestamp
+                                )
+                            )}
+                        </div>
+                    </td>
+
+
+                    <td>
+                        ${getActionBadge(
+                            log.action
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <div class="student-name">
+                            ${escapeHTML(
+                                log.studentName ||
+                                "—"
+                            )}
+                        </div>
+
+                        ${
+                            log.studentId
+                            ?
+                            `
+                            <div class="student-id">
+                                ID: ${escapeHTML(
+                                    log.studentId
+                                )}
+                            </div>
+                            `
+                            :
+                            ""
+                        }
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            log.actor ||
+                            "Admin"
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <div class="details">
+
+                            ${escapeHTML(
+                                log.details ||
+                                "No details"
+                            )}
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="action-btn"
+                            title="View Details"
+                            onclick="viewDetails('${escapeAttribute(log.id)}')"
+                        >
+                            👁
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPagination(){
+
+    const pagination =
+        document.getElementById(
+            "pagination"
+        );
+
+
+    const total =
+        filteredLogs.length;
+
+
+    const totalPages =
+        Math.max(
+            1,
+            Math.ceil(
+                total /
+                PAGE_SIZE
+            )
+        );
+
+
+    if(
+        total === 0
+    ){
+
+        pagination.innerHTML = "";
+
+        return;
+
+    }
+
+
+    if(
+        currentPage >
+        totalPages
+    ){
+
+        currentPage =
+            totalPages;
+
+    }
+
+
+    const start =
+        (
+            currentPage - 1
+        ) *
+        PAGE_SIZE +
+        1;
+
+
+    const end =
+        Math.min(
+            currentPage *
+            PAGE_SIZE,
+            total
+        );
+
+
+    let buttons = `
+
+        <button
+            class="page-btn"
+            onclick="changePage(${currentPage - 1})"
+            ${currentPage === 1 ? "disabled" : ""}
+        >
+            ‹
+        </button>
+
+    `;
+
+
+    const maxButtons = 5;
+
+    let firstPage =
+        Math.max(
+            1,
+            currentPage -
+            Math.floor(
+                maxButtons / 2
+            )
+        );
+
+
+    let lastPage =
+        Math.min(
+            totalPages,
+            firstPage +
+            maxButtons -
+            1
+        );
+
+
+    if(
+        lastPage -
+        firstPage +
+        1 <
+        maxButtons
+    ){
+
+        firstPage =
+            Math.max(
+                1,
+                lastPage -
+                maxButtons +
+                1
+            );
+
+    }
+
+
+    for(
+        let i = firstPage;
+        i <= lastPage;
+        i++
+    ){
+
+        buttons += `
+
+            <button
+                class="page-btn ${
+                    i === currentPage
+                    ? "active"
+                    : ""
+                }"
+                onclick="changePage(${i})"
+            >
+                ${i}
+            </button>
+
+        `;
+
+    }
+
+
+    buttons += `
+
+        <button
+            class="page-btn"
+            onclick="changePage(${currentPage + 1})"
+            ${
+                currentPage === totalPages
+                ? "disabled"
+                : ""
+            }
+        >
+            ›
+        </button>
+
+    `;
+
+
+    pagination.innerHTML = `
+
+        <div class="page-info">
+
+            Showing
+            <strong>
+                ${start}
+            </strong>
+            –
+            <strong>
+                ${end}
+            </strong>
+            of
+            <strong>
+                ${total}
+            </strong>
+
+        </div>
+
+
+        <div class="page-buttons">
+
+            ${buttons}
+
+        </div>
+
+    `;
+
+}
+
+
+function changePage(
+    page
+){
+
+    const totalPages =
+        Math.max(
+            1,
+            Math.ceil(
+                filteredLogs.length /
+                PAGE_SIZE
+            )
+        );
+
+
+    if(
+        page < 1 ||
+        page > totalPages
+    ){
+
+        return;
+
+    }
+
+
+    currentPage =
+        page;
+
+
+    renderTable();
+
+    renderPagination();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+    document.getElementById(
+        "totalLogs"
+    ).textContent =
+        allLogs.length;
+
+
+    document.getElementById(
+        "addLogs"
+    ).textContent =
+        countAction(
+            "add"
+        );
+
+
+    document.getElementById(
+        "updateLogs"
+    ).textContent =
+        countAction(
+            "update"
+        );
+
+
+    document.getElementById(
+        "deleteLogs"
+    ).textContent =
+        countAction(
+            "delete"
+        );
+
+}
+
+
+function countAction(
+    action
+){
+
+    return allLogs.filter(
+        log =>
+            getActionType(
+                log.action
+            ) === action
+    ).length;
+
+}
+
+
+/* =========================================================
+   ACTION TYPE
+========================================================= */
+
+function getActionType(
+    action
+){
+
+    const value =
+        String(
+            action ||
+            ""
+        )
+        .toLowerCase();
+
+
+    if(
+        value.includes(
+            "add"
+        ) ||
+        value.includes(
+            "create"
+        ) ||
+        value.includes(
+            "insert"
+        ) ||
+        value.includes(
+            "present"
+        )
+    ){
+
+        return "add";
+
+    }
+
+
+    if(
+        value.includes(
+            "update"
+        ) ||
+        value.includes(
+            "edit"
+        ) ||
+        value.includes(
+            "change"
+        )
+    ){
+
+        return "update";
+
+    }
+
+
+    if(
+        value.includes(
+            "delete"
+        ) ||
+        value.includes(
+            "remove"
+        )
+    ){
+
+        return "delete";
+
+    }
+
+
+    if(
+        value.includes(
+            "import"
+        )
+    ){
+
+        return "import";
+
+    }
+
+
+    if(
+        value.includes(
+            "export"
+        )
+    ){
+
+        return "export";
+
+    }
+
+
+    return "other";
+
+}
+
+
+/* =========================================================
+   ACTION BADGE
+========================================================= */
+
+function getActionBadge(
+    action
+){
+
+    const type =
+        getActionType(
+            action
+        );
+
+
+    const labels = {
+
+        add:
+            "➕ Added",
+
+        update:
+            "✏️ Updated",
+
+        delete:
+            "🗑 Deleted",
+
+        import:
+            "📥 Imported",
+
+        export:
+            "📤 Exported",
+
+        other:
+            "• Other"
+
+    };
+
+
+    return `
+
+        <span class="badge ${type}">
+
+            ${labels[type]}
+
+        </span>
+
+    `;
+
+}
+
+
+/* =========================================================
+   VIEW DETAILS
+========================================================= */
+
+function viewDetails(
+    id
+){
+
+    const log =
+        allLogs.find(
+            item =>
+                String(
+                    item.id
+                ) ===
+                String(id)
+        );
+
+
+    if(
+        !log
+    ){
+
+        showToast(
+            "Audit record পাওয়া যায়নি।"
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "detailsBody"
+    ).innerHTML = `
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Audit ID
+            </div>
+
+            <div class="detail-value">
+                ${escapeHTML(
+                    log.id
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Date
+            </div>
+
+            <div class="detail-value">
+                ${escapeHTML(
+                    formatDate(
+                        log.timestamp
+                    )
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Time
+            </div>
+
+            <div class="detail-value">
+                ${escapeHTML(
+                    formatTime(
+                        log.timestamp
+                    )
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Action
+            </div>
+
+            <div class="detail-value">
+                ${getActionBadge(
+                    log.action
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Actor
+            </div>
+
+            <div class="detail-value">
+                ${escapeHTML(
+                    log.actor ||
+                    "Admin"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Student ID
+            </div>
+
+            <div class="detail-value">
+                ${escapeHTML(
+                    log.studentId ||
+                    "—"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Student Name
+            </div>
+
+            <div class="detail-value">
+                ${escapeHTML(
+                    log.studentName ||
+                    "—"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Details
+            </div>
+
+            <div class="detail-value">
+                ${escapeHTML(
+                    log.details ||
+                    "—"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                Previous Value
+            </div>
+
+            <div class="detail-value">
+                <pre style="
+                    white-space:pre-wrap;
+                    font-family:inherit;
+                    font-size:7px;
+                ">${escapeHTML(
+                    stringifyValue(
+                        log.oldValue
+                    ) ||
+                    "—"
+                )}</pre>
+            </div>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <div class="detail-label">
+                New Value
+            </div>
+
+            <div class="detail-value">
+                <pre style="
+                    white-space:pre-wrap;
+                    font-family:inherit;
+                    font-size:7px;
+                ">${escapeHTML(
+                    stringifyValue(
+                        log.newValue
+                    ) ||
+                    "—"
+                )}</pre>
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "detailsModal"
+    )
+    .classList
+    .add(
+        "show"
+    );
+
+}
+
+
+function closeDetails(){
+
+    document.getElementById(
+        "detailsModal"
+    )
+    .classList
+    .remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT CSV
+========================================================= */
+
+function exportLogs(){
+
+    if(
+        filteredLogs.length === 0
+    ){
+
+        showToast(
+            "Export করার মতো কোনো record নেই।"
+        );
+
+        return;
+
+    }
+
+
+    const headers = [
+
+        "Audit ID",
+        "Date",
+        "Time",
+        "Action",
+        "Actor",
+        "Student ID",
+        "Student Name",
+        "Details",
+        "Previous Value",
+        "New Value"
+
+    ];
+
+
+    const rows =
+        filteredLogs.map(
+            function(log){
+
+                return [
+
+                    log.id,
+
+                    formatDate(
+                        log.timestamp
+                    ),
+
+                    formatTime(
+                        log.timestamp
+                    ),
+
+                    log.action,
+
+                    log.actor,
+
+                    log.studentId,
+
+                    log.studentName,
+
+                    log.details,
+
+                    stringifyValue(
+                        log.oldValue
+                    ),
+
+                    stringifyValue(
+                        log.newValue
+                    )
+
+                ];
+
+            }
+        );
+
+
+    const csv =
+        [
+            headers,
+            ...rows
+        ]
+        .map(
+            row =>
+                row
+                .map(
+                    csvEscape
+                )
+                .join(",")
+        )
+        .join("\n");
+
+
+    const blob =
+        new Blob(
+            [
+                "\uFEFF" +
+                csv
+            ],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "attendance-audit-log-" +
+        getToday() +
+        ".csv";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    addAuditLog(
+        "export",
+        "Attendance audit log exported as CSV."
+    );
+
+
+    showToast(
+        "Audit log CSV exported ✓"
+    );
+
+}
+
+
+/* =========================================================
+   CLEAR LOGS
+========================================================= */
+
+function clearLogs(){
+
+    if(
+        allLogs.length === 0
+    ){
+
+        showToast(
+            "Clear করার মতো কোনো log নেই।"
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+            "আপনি কি সব Attendance Audit Log মুছে ফেলতে চান?\n\nএই action undo করা যাবে না।"
+        );
+
+
+    if(
+        !confirmed
+    ){
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        AUDIT_KEY
+    );
+
+
+    allLogs = [];
+
+    filteredLogs = [];
+
+    currentPage = 1;
+
+
+    updateStats();
+
+    renderTable();
+
+    renderPagination();
+
+
+    showToast(
+        "সব audit logs clear করা হয়েছে।"
+    );
+
+}
+
+
+/* =========================================================
+   DEMO LOG
+========================================================= */
+
+function createDemoLog(){
+
+    addAuditLog(
+
+        "update",
+
+        "Attendance record updated from audit log test action.",
+
+        "STU-DEMO-001",
+
+        "Demo Student",
+
+        "Admin",
+
+        "Absent",
+
+        "Present"
+
+    );
+
+
+    showToast(
+        "Test audit log added ✓"
+    );
+
+}
+
+
+/* =========================================================
+   DATE / TIME
+========================================================= */
+
+function getDateOnly(
+    timestamp
+){
+
+    const date =
+        new Date(
+            timestamp
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "";
+
+    }
+
+
+    const y =
+        date.getFullYear();
+
+
+    const m =
+        String(
+            date.getMonth()+1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const d =
+        String(
+            date.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        y +
+        "-" +
+        m +
+        "-" +
+        d
+    );
+
+}
+
+
+function formatDate(
+    timestamp
+){
+
+    const date =
+        new Date(
+            timestamp
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Invalid Date";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+function formatTime(
+    timestamp
+){
+
+    const date =
+        new Date(
+            timestamp
+        );
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "--";
+
+    }
+
+
+    return date.toLocaleTimeString(
+        "en-US",
+        {
+            hour:"2-digit",
+            minute:"2-digit",
+            second:"2-digit"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CSV HELPERS
+========================================================= */
+
+function csvEscape(
+    value
+){
+
+    const text =
+        stringifyValue(
+            value
+        );
+
+
+    return '"' +
+        text
+        .replace(
+            /"/g,
+            '""'
+        ) +
+        '"';
+
+}
+
+
+function stringifyValue(
+    value
+){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    if(
+        typeof value ===
+            "object"
+    ){
+
+        try{
+
+            return JSON.stringify(
+                value
+            );
+
+        }
+        catch(error){
+
+            return String(
+                value
+            );
+
+        }
+
+    }
+
+
+    return String(
+        value
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ??
+        ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+function escapeAttribute(
+    value
+){
+
+    return String(
+        value ??
+        ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    );
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const isDark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        THEME_KEY,
+        isDark
+        ?
+        "dark"
+        :
+        "light"
+    );
+
+
+    updateThemeButton();
+
+}
+
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem(
+            THEME_KEY
+        );
+
+
+    if(
+        theme === "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+
+    updateThemeButton();
+
+}
+
+
+function updateThemeButton(){
+
+    document.getElementById(
+        "themeBtn"
+    )
+    .textContent =
+        document.body.classList.contains(
+            "dark"
+        )
+        ?
+        "☀️"
+        :
+        "🌙";
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+function goBack(){
+
+    if(
+        document.referrer
+    ){
+
+        history.back();
+
+    }
+    else{
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(
+    message
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2800
+        );
+
+}
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+document.getElementById(
+    "detailsModal"
+)
+.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            this
+        ){
+
+            closeDetails();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closeDetails();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CROSS-TAB STORAGE UPDATE
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            AUDIT_KEY
+        ){
+
+            loadLogs();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   EXPOSE FUNCTION FOR OTHER ATTENDANCE PAGES
+=========================================================
+
+Other pages can use:
+
+addAuditLog(
+    "add",
+    "Attendance marked Present",
+    "STU001",
+    "Student Name",
+    "Admin"
+);
+
+========================================================= */
+
+window.addAttendanceAuditLog =
+    addAuditLog;
+
+</script>
+
+</body>
+</html>
+```
