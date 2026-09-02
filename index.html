@@ -14,8 +14,9 @@
 
 /* =========================================================
    SNK IT INSTITUTE
-   VERSION 1.6
-   Assignment UI + Countdown
+   VERSION 1.7
+   Offline Course Portal
+   Assignment + Quiz UI + Timed Quiz
    ========================================================= */
 
 *{
@@ -52,6 +53,10 @@ body.dark{
     --shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:"Noto Sans Bengali",Arial,sans-serif;
     background:var(--bg);
@@ -68,6 +73,10 @@ a{
 button{
     font-family:inherit;
     cursor:pointer;
+}
+
+button:disabled{
+    cursor:not-allowed;
 }
 
 
@@ -563,7 +572,7 @@ header{
 
 
 /* =========================================================
-   ASSIGNMENT SECTION - NEW IN 1.6
+   ASSIGNMENT SECTION
    ========================================================= */
 
 .assignment-section{
@@ -594,9 +603,6 @@ header{
     gap:20px;
 }
 
-
-/* Assignment Card */
-
 .assignment-card{
     background:var(--card);
     border:1px solid var(--border);
@@ -608,11 +614,7 @@ header{
 
 .assignment-card:hover{
     transform:translateY(-4px);
-    box-shadow:var(--shadow);
 }
-
-
-/* Assignment Top */
 
 .assignment-top{
     display:flex;
@@ -650,9 +652,6 @@ header{
     font-size:11px;
 }
 
-
-/* Assignment Status */
-
 .assignment-status{
     font-size:10px;
     padding:6px 10px;
@@ -676,18 +675,12 @@ header{
     color:#991b1b;
 }
 
-
-/* Description */
-
 .assignment-description{
     color:var(--muted);
     font-size:13px;
     line-height:1.8;
     margin-bottom:18px;
 }
-
-
-/* Assignment Details */
 
 .assignment-details{
     display:grid;
@@ -715,9 +708,6 @@ header{
     font-size:12px;
 }
 
-
-/* Deadline */
-
 .deadline-box{
     border:1px solid var(--border);
     background:var(--soft);
@@ -731,6 +721,7 @@ header{
     justify-content:space-between;
     align-items:center;
     margin-bottom:9px;
+    gap:10px;
 }
 
 .deadline-title span{
@@ -742,9 +733,6 @@ header{
     font-size:12px;
     color:var(--danger);
 }
-
-
-/* Countdown */
 
 .countdown{
     display:grid;
@@ -770,9 +758,6 @@ header{
     font-size:8px;
     color:var(--muted);
 }
-
-
-/* Assignment Bottom */
 
 .assignment-bottom{
     display:flex;
@@ -804,7 +789,391 @@ header{
 .submit-btn.locked{
     background:var(--border);
     color:var(--muted);
-    cursor:not-allowed;
+}
+
+
+/* =========================================================
+   QUIZ SECTION - NEW IN 1.7
+   ========================================================= */
+
+.quiz-section{
+    background:var(--soft);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+}
+
+.quiz-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.quiz-count{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--purple);
+    padding:8px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.quiz-grid{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:20px;
+}
+
+
+/* Quiz Card */
+
+.quiz-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:26px;
+    box-shadow:var(--shadow);
+}
+
+
+/* Quiz Header */
+
+.quiz-card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    padding-bottom:20px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:20px;
+}
+
+.quiz-title-area{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.quiz-icon{
+    width:52px;
+    height:52px;
+    border-radius:14px;
+    background:#f3e8ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
+
+.quiz-title-area h3{
+    font-size:20px;
+    margin-bottom:4px;
+}
+
+.quiz-title-area p{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.quiz-status{
+    background:#dcfce7;
+    color:#166534;
+    font-size:10px;
+    padding:6px 10px;
+    border-radius:20px;
+    font-weight:700;
+}
+
+
+/* Quiz Timer */
+
+.quiz-timer-box{
+    background:#fff1f2;
+    border:1px solid #fecdd3;
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:20px;
+}
+
+.quiz-timer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+}
+
+.quiz-timer-top span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.quiz-timer-top strong{
+    color:var(--danger);
+    font-size:16px;
+}
+
+.quiz-timer{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.quiz-time{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:9px;
+    text-align:center;
+    padding:9px;
+}
+
+.quiz-time strong{
+    display:block;
+    font-size:20px;
+    color:var(--danger);
+}
+
+.quiz-time span{
+    font-size:9px;
+    color:var(--muted);
+}
+
+
+/* Question */
+
+.question-box{
+    margin-bottom:22px;
+}
+
+.question-number{
+    color:var(--primary);
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.question-text{
+    font-size:16px;
+    font-weight:700;
+    line-height:1.7;
+    margin-bottom:15px;
+}
+
+
+/* Options */
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.option{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:12px 14px;
+    background:var(--bg);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:var(--primary);
+    background:var(--soft);
+}
+
+.option input{
+    accent-color:var(--primary);
+    width:16px;
+    height:16px;
+}
+
+.option span{
+    font-size:13px;
+}
+
+
+/* Quiz Navigation */
+
+.quiz-navigation{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+}
+
+.quiz-nav-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:10px 15px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.quiz-nav-btn:hover{
+    background:var(--soft);
+}
+
+.quiz-submit{
+    border:none;
+    background:var(--primary);
+    color:white;
+    padding:10px 17px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.quiz-submit:hover{
+    background:var(--primary-dark);
+}
+
+
+/* Quiz Side Information */
+
+.quiz-info-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:var(--shadow);
+}
+
+.quiz-info-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.quiz-info-icon{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:#f3e8ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.quiz-info-title h3{
+    font-size:18px;
+}
+
+.quiz-info-title p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.quiz-rules{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.quiz-rule{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--border);
+}
+
+.quiz-rule:last-child{
+    border-bottom:none;
+    padding-bottom:0;
+}
+
+.rule-icon{
+    width:30px;
+    height:30px;
+    min-width:30px;
+    border-radius:8px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+}
+
+.quiz-rule strong{
+    display:block;
+    font-size:12px;
+    margin-bottom:3px;
+}
+
+.quiz-rule span{
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.5;
+}
+
+.quiz-login-note{
+    margin-top:20px;
+    background:var(--soft);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:14px;
+}
+
+.quiz-login-note strong{
+    display:block;
+    color:var(--primary);
+    font-size:12px;
+    margin-bottom:5px;
+}
+
+.quiz-login-note p{
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   QUIZ QUESTION STATUS
+   ========================================================= */
+
+.quiz-progress{
+    margin-bottom:20px;
+}
+
+.quiz-progress-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+}
+
+.quiz-progress-top span{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.quiz-progress-top strong{
+    font-size:11px;
+    color:var(--primary);
+}
+
+.quiz-progress-bar{
+    height:8px;
+    background:var(--border);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.quiz-progress-fill{
+    width:33.33%;
+    height:100%;
+    background:var(--purple);
+    border-radius:20px;
 }
 
 
@@ -813,9 +1182,7 @@ header{
    ========================================================= */
 
 .portal-section{
-    background:var(--soft);
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
+    background:var(--bg);
 }
 
 .portal-grid{
@@ -905,7 +1272,8 @@ header{
    ========================================================= */
 
 .resources-section{
-    background:var(--bg);
+    background:var(--soft);
+    border-top:1px solid var(--border);
 }
 
 .resource-grid{
@@ -1019,6 +1387,10 @@ footer p{
         grid-template-columns:1fr;
     }
 
+    .quiz-grid{
+        grid-template-columns:1fr;
+    }
+
     .portal-grid,
     .resource-grid{
         grid-template-columns:repeat(2,1fr);
@@ -1093,7 +1465,8 @@ footer p{
         font-size:18px;
     }
 
-    .assignment-header{
+    .assignment-header,
+    .quiz-header{
         flex-direction:column;
         align-items:flex-start;
     }
@@ -1108,6 +1481,19 @@ footer p{
     }
 
     .submit-btn{
+        width:100%;
+    }
+
+    .quiz-card-header{
+        flex-direction:column;
+    }
+
+    .quiz-navigation{
+        flex-direction:column;
+    }
+
+    .quiz-nav-btn,
+    .quiz-submit{
         width:100%;
     }
 
@@ -1371,8 +1757,6 @@ id="course">
 <div class="course-layout">
 
 
-<!-- COURSE -->
-
 <div class="course-main-card">
 
 
@@ -1534,8 +1918,6 @@ class="primary-action">
 
 
 
-<!-- BATCH -->
-
 <div class="batch-card">
 
 
@@ -1682,7 +2064,7 @@ Active
 
 
 <!-- =========================================================
-     ASSIGNMENT SECTION - VERSION 1.6
+     ASSIGNMENT SECTION
      ========================================================= -->
 
 <section
@@ -1718,9 +2100,7 @@ id="assignments">
 <div class="assignment-grid">
 
 
-<!-- =====================================================
-     ASSIGNMENT 01
-     ===================================================== -->
+<!-- ASSIGNMENT 01 -->
 
 <div class="assignment-card">
 
@@ -1823,8 +2203,6 @@ File Upload
 
 
 
-<!-- DEADLINE COUNTDOWN -->
-
 <div class="deadline-box">
 
 <div class="deadline-title">
@@ -1843,7 +2221,6 @@ Deadline: 10 Sep 2026
 <div
 class="countdown"
 id="assignmentCountdown">
-
 
 <div class="time-box">
 
@@ -1896,7 +2273,6 @@ Seconds
 
 </div>
 
-
 </div>
 
 </div>
@@ -1929,9 +2305,7 @@ onclick="loginRequired()">
 
 
 
-<!-- =====================================================
-     ASSIGNMENT 02
-     ===================================================== -->
+<!-- ASSIGNMENT 02 -->
 
 <div class="assignment-card">
 
@@ -2034,8 +2408,6 @@ File Upload
 
 
 
-<!-- UPCOMING COUNTDOWN -->
-
 <div class="deadline-box">
 
 <div class="deadline-title">
@@ -2052,7 +2424,6 @@ File Upload
 
 
 <div class="countdown">
-
 
 <div class="time-box">
 
@@ -2105,7 +2476,6 @@ Seconds
 
 </div>
 
-
 </div>
 
 </div>
@@ -2130,6 +2500,629 @@ disabled>
 🔒 Not Available
 
 </button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     QUIZ SECTION - VERSION 1.7
+     ========================================================= -->
+
+<section
+class="section quiz-section"
+id="quiz">
+
+<div class="container">
+
+
+<div class="quiz-header">
+
+<div class="section-title" style="margin-bottom:0;">
+
+<h2>
+🎯 Timed Quiz
+</h2>
+
+<p>
+সময় নির্ধারিত Quiz-এর Demo Interface।
+</p>
+
+</div>
+
+
+<div class="quiz-count">
+1 Quiz Available
+</div>
+
+</div>
+
+
+
+<div class="quiz-grid">
+
+
+<!-- =====================================================
+     QUIZ MAIN
+     ===================================================== -->
+
+<div class="quiz-card">
+
+
+<div class="quiz-card-header">
+
+<div class="quiz-title-area">
+
+<div class="quiz-icon">
+🎯
+</div>
+
+<div>
+
+<h3>
+Computer Basic Quiz
+</h3>
+
+<p>
+Computer Office Application
+</p>
+
+</div>
+
+</div>
+
+
+<span class="quiz-status">
+● Demo Quiz
+</span>
+
+</div>
+
+
+
+<!-- QUIZ TIMER -->
+
+<div class="quiz-timer-box">
+
+<div class="quiz-timer-top">
+
+<span>
+⏱️ Time Remaining
+</span>
+
+<strong id="quizTimerText">
+05:00
+</strong>
+
+</div>
+
+
+<div class="quiz-timer">
+
+
+<div class="quiz-time">
+
+<strong id="quizMinutes">
+05
+</strong>
+
+<span>
+Minutes
+</span>
+
+</div>
+
+
+<div class="quiz-time">
+
+<strong id="quizSeconds">
+00
+</strong>
+
+<span>
+Seconds
+</span>
+
+</div>
+
+
+<div class="quiz-time">
+
+<strong id="quizQuestionCount">
+1/3
+</strong>
+
+<span>
+Question
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- QUIZ PROGRESS -->
+
+<div class="quiz-progress">
+
+<div class="quiz-progress-top">
+
+<span>
+Quiz Progress
+</span>
+
+<strong id="quizProgressText">
+Question 1 of 3
+</strong>
+
+</div>
+
+
+<div class="quiz-progress-bar">
+
+<div
+class="quiz-progress-fill"
+id="quizProgressFill">
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- QUESTION 1 -->
+
+<div
+class="question-box"
+id="question1">
+
+<div class="question-number">
+Question 01
+</div>
+
+
+<div class="question-text">
+কম্পিউটারের প্রধান প্রসেসিং ইউনিট কোনটি?
+</div>
+
+
+<div class="options">
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q1"
+value="A">
+
+<span>
+A. Monitor
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q1"
+value="B">
+
+<span>
+B. CPU
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q1"
+value="C">
+
+<span>
+C. Keyboard
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q1"
+value="D">
+
+<span>
+D. Mouse
+</span>
+
+</label>
+
+
+</div>
+
+</div>
+
+
+
+<!-- QUESTION 2 -->
+
+<div
+class="question-box"
+id="question2"
+style="display:none;">
+
+<div class="question-number">
+Question 02
+</div>
+
+
+<div class="question-text">
+MS Word-এ লেখা Bold করার shortcut কোনটি?
+</div>
+
+
+<div class="options">
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q2"
+value="A">
+
+<span>
+A. Ctrl + B
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q2"
+value="B">
+
+<span>
+B. Ctrl + C
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q2"
+value="C">
+
+<span>
+C. Ctrl + V
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q2"
+value="D">
+
+<span>
+D. Ctrl + X
+</span>
+
+</label>
+
+
+</div>
+
+</div>
+
+
+
+<!-- QUESTION 3 -->
+
+<div
+class="question-box"
+id="question3"
+style="display:none;">
+
+<div class="question-number">
+Question 03
+</div>
+
+
+<div class="question-text">
+MS Excel-এ Formula সাধারণত কোন চিহ্ন দিয়ে শুরু হয়?
+</div>
+
+
+<div class="options">
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q3"
+value="A">
+
+<span>
+A. #
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q3"
+value="B">
+
+<span>
+B. @
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q3"
+value="C">
+
+<span>
+C. =
+</span>
+
+</label>
+
+
+<label class="option">
+
+<input
+type="radio"
+name="q3"
+value="D">
+
+<span>
+D. $
+</span>
+
+</label>
+
+
+</div>
+
+</div>
+
+
+
+<!-- QUIZ NAVIGATION -->
+
+<div class="quiz-navigation">
+
+
+<button
+class="quiz-nav-btn"
+id="previousBtn"
+onclick="previousQuestion()"
+disabled>
+
+← Previous
+
+</button>
+
+
+<button
+class="quiz-nav-btn"
+id="nextBtn"
+onclick="nextQuestion()">
+
+Next →
+
+</button>
+
+
+<button
+class="quiz-submit"
+id="quizSubmitBtn"
+onclick="submitQuiz()"
+style="display:none;">
+
+📤 Submit Quiz
+
+</button>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     QUIZ INFORMATION
+     ===================================================== -->
+
+<div class="quiz-info-card">
+
+
+<div class="quiz-info-title">
+
+<div class="quiz-info-icon">
+📋
+</div>
+
+<div>
+
+<h3>
+Quiz Information
+</h3>
+
+<p>
+Demo Rules
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="quiz-rules">
+
+
+<div class="quiz-rule">
+
+<div class="rule-icon">
+⏱️
+</div>
+
+<div>
+
+<strong>
+Time Limit
+</strong>
+
+<span>
+এই Demo Quiz-এর সময় ৫ মিনিট।
+</span>
+
+</div>
+
+</div>
+
+
+<div class="quiz-rule">
+
+<div class="rule-icon">
+❓
+</div>
+
+<div>
+
+<strong>
+Total Questions
+</strong>
+
+<span>
+মোট ৩টি প্রশ্ন থাকবে।
+</span>
+
+</div>
+
+</div>
+
+
+<div class="quiz-rule">
+
+<div class="rule-icon">
+🎯
+</div>
+
+<div>
+
+<strong>
+Total Marks
+</strong>
+
+<span>
+প্রতি প্রশ্ন ১ Mark।
+</span>
+
+</div>
+
+</div>
+
+
+<div class="quiz-rule">
+
+<div class="rule-icon">
+📤
+</div>
+
+<div>
+
+<strong>
+Submit
+</strong>
+
+<span>
+সব প্রশ্নের উত্তর দেওয়ার পর Submit করতে হবে।
+</span>
+
+</div>
+
+</div>
+
+
+<div class="quiz-rule">
+
+<div class="rule-icon">
+🏆
+</div>
+
+<div>
+
+<strong>
+Result
+</strong>
+
+<span>
+পরবর্তী ধাপে Admin Mark/Result System যুক্ত হবে।
+</span>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="quiz-login-note">
+
+<strong>
+🔐 Student Login Required
+</strong>
+
+<p>
+আসল Quiz দিতে Student ID দিয়ে Login করতে হবে।
+Login System আমাদের পরবর্তী নির্ধারিত ধাপে যুক্ত হবে।
+</p>
 
 </div>
 
@@ -2172,8 +3165,6 @@ Login করার পর শিক্ষার্থীরা এখান থ�
 <div class="portal-grid">
 
 
-<!-- COURSE -->
-
 <div class="portal-card">
 
 <div class="portal-top">
@@ -2205,7 +3196,6 @@ Open Course
 </div>
 
 
-<!-- ASSIGNMENT -->
 
 <div class="portal-card">
 
@@ -2238,7 +3228,6 @@ View Assignment
 </div>
 
 
-<!-- QUIZ -->
 
 <div class="portal-card">
 
@@ -2248,8 +3237,8 @@ View Assignment
 🎯
 </div>
 
-<span class="status pending">
-Coming
+<span class="status active">
+1 Available
 </span>
 
 </div>
@@ -2263,7 +3252,7 @@ Quiz
 </p>
 
 <a
-href="login.html"
+href="#quiz"
 class="portal-btn">
 Start Quiz
 </a>
@@ -2271,7 +3260,6 @@ Start Quiz
 </div>
 
 
-<!-- DEADLINE -->
 
 <div class="portal-card">
 
@@ -2361,7 +3349,6 @@ View Deadline
 </div>
 
 
-<!-- SUBMISSION -->
 
 <div class="portal-card">
 
@@ -2394,7 +3381,6 @@ My Submission
 </div>
 
 
-<!-- RESULT -->
 
 <div class="portal-card">
 
@@ -2524,9 +3510,9 @@ Timed Quiz এবং Quiz Submission-এর ব্যবস্থা থাক�
 </p>
 
 <a
-href="login.html"
+href="#quiz"
 class="resource-btn">
-Start Quiz
+Open Quiz
 </a>
 
 </div>
@@ -2633,14 +3619,15 @@ Read Guide
 <div class="notice">
 
 <strong>
-Student Portal Development
+Student Portal Development — Version 1.7
 </strong>
 
 <p>
 বর্তমানে Portal-এর UI প্রস্তুত করা হচ্ছে।
-Assignment-এর Title, Subject, Deadline, Countdown,
-Submission Button এবং Status যুক্ত হয়েছে।
-পরবর্তী ধাপে Quiz System তৈরি করা হবে।
+Assignment-এর পাশাপাশি Timed Quiz Interface,
+Question, Multiple Choice Options, Quiz Timer,
+Progress এবং Submit Button যুক্ত হয়েছে।
+পরবর্তী ধাপে Student Login ও অন্যান্য বাস্তব কার্যক্রম যুক্ত করা হবে।
 </p>
 
 </div>
@@ -2787,9 +3774,6 @@ function toggleLanguage(){
 
 /* =========================================================
    ASSIGNMENT COUNTDOWN
-   Deadline:
-   10 September 2026
-   11:59:59 PM
    ========================================================= */
 
 const assignmentDeadline =
@@ -2811,6 +3795,11 @@ function updateAssignmentCountdown(){
         document.getElementById("hours").textContent = "00";
         document.getElementById("minutes").textContent = "00";
         document.getElementById("seconds").textContent = "00";
+
+        document.getElementById("portalDays").textContent = "00";
+        document.getElementById("portalHours").textContent = "00";
+        document.getElementById("portalMinutes").textContent = "00";
+        document.getElementById("portalSeconds").textContent = "00";
 
         return;
     }
@@ -2860,8 +3849,6 @@ function updateAssignmentCountdown(){
         String(seconds).padStart(2,"0");
 
 
-    /* Same countdown for Student Portal */
-
     document.getElementById("portalDays").textContent =
         String(days).padStart(2,"0");
 
@@ -2887,7 +3874,221 @@ setInterval(
 
 
 /* =========================================================
-   DEMO RESOURCE
+   QUIZ SYSTEM - DEMO
+   ========================================================= */
+
+let currentQuestion = 1;
+
+const totalQuestions = 3;
+
+
+/* =========================================================
+   SHOW QUESTION
+   ========================================================= */
+
+function showQuestion(number){
+
+    for(let i = 1; i <= totalQuestions; i++){
+
+        const question =
+            document.getElementById("question" + i);
+
+        if(question){
+
+            question.style.display =
+                i === number ? "block" : "none";
+        }
+    }
+
+
+    currentQuestion = number;
+
+
+    /* Previous Button */
+
+    document.getElementById("previousBtn").disabled =
+        currentQuestion === 1;
+
+
+    /* Next / Submit */
+
+    if(currentQuestion === totalQuestions){
+
+        document.getElementById("nextBtn").style.display =
+            "none";
+
+        document.getElementById("quizSubmitBtn").style.display =
+            "block";
+
+    }else{
+
+        document.getElementById("nextBtn").style.display =
+            "block";
+
+        document.getElementById("quizSubmitBtn").style.display =
+            "none";
+    }
+
+
+    /* Progress */
+
+    const progress =
+        (currentQuestion / totalQuestions) * 100;
+
+
+    document.getElementById("quizProgressFill").style.width =
+        progress + "%";
+
+
+    document.getElementById("quizProgressText").textContent =
+        "Question " +
+        currentQuestion +
+        " of " +
+        totalQuestions;
+
+
+    document.getElementById("quizQuestionCount").textContent =
+        currentQuestion +
+        "/" +
+        totalQuestions;
+
+}
+
+
+
+/* =========================================================
+   NEXT QUESTION
+   ========================================================= */
+
+function nextQuestion(){
+
+    if(currentQuestion < totalQuestions){
+
+        showQuestion(
+            currentQuestion + 1
+        );
+    }
+
+}
+
+
+
+/* =========================================================
+   PREVIOUS QUESTION
+   ========================================================= */
+
+function previousQuestion(){
+
+    if(currentQuestion > 1){
+
+        showQuestion(
+            currentQuestion - 1
+        );
+    }
+
+}
+
+
+
+/* =========================================================
+   QUIZ TIMER
+   5 MINUTES
+   ========================================================= */
+
+let quizTimeRemaining = 5 * 60;
+
+let quizTimerRunning = true;
+
+
+function updateQuizTimer(){
+
+    if(!quizTimerRunning){
+        return;
+    }
+
+
+    if(quizTimeRemaining <= 0){
+
+        quizTimerRunning = false;
+
+        document.getElementById("quizTimerText").textContent =
+            "00:00";
+
+        document.getElementById("quizMinutes").textContent =
+            "00";
+
+        document.getElementById("quizSeconds").textContent =
+            "00";
+
+        alert(
+            "⏰ Quiz Time Over!\n\n" +
+            "Demo Quiz-এর সময় শেষ হয়েছে।"
+        );
+
+        return;
+    }
+
+
+    const minutes =
+        Math.floor(
+            quizTimeRemaining / 60
+        );
+
+
+    const seconds =
+        quizTimeRemaining % 60;
+
+
+    document.getElementById("quizTimerText").textContent =
+        String(minutes).padStart(2,"0") +
+        ":" +
+        String(seconds).padStart(2,"0");
+
+
+    document.getElementById("quizMinutes").textContent =
+        String(minutes).padStart(2,"0");
+
+
+    document.getElementById("quizSeconds").textContent =
+        String(seconds).padStart(2,"0");
+
+
+    quizTimeRemaining--;
+
+}
+
+
+updateQuizTimer();
+
+setInterval(
+    updateQuizTimer,
+    1000
+);
+
+
+
+/* =========================================================
+   SUBMIT QUIZ
+   ========================================================= */
+
+function submitQuiz(){
+
+    quizTimerRunning = false;
+
+
+    alert(
+        "🔐 Student Login Required\n\n" +
+        "এটি এখন Demo Quiz।\n\n" +
+        "আসল Quiz Submit করার জন্য Student ID/Login System প্রয়োজন হবে।\n\n" +
+        "পরবর্তী ধাপে এটি বাস্তব Submission System-এর সাথে যুক্ত করা হবে।"
+    );
+
+}
+
+
+
+/* =========================================================
+   RESOURCE DEMO
    ========================================================= */
 
 function showDemo(event){
@@ -2898,6 +4099,7 @@ function showDemo(event){
         "এই Resource বর্তমানে Demo অবস্থায় আছে।\n\n" +
         "পরবর্তী ধাপে Admin Panel থেকে Resource যোগ করার ব্যবস্থা তৈরি করা হবে।"
     );
+
 }
 
 
