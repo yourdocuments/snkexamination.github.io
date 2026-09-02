@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -26,6 +27,9 @@
     --primary-dark:#1d4ed8;
     --border:#e5e7eb;
     --soft:#eff6ff;
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
     --shadow:0 10px 30px rgba(15,23,42,.08);
 }
 
@@ -149,18 +153,18 @@ header{
 .hero-box:after{
     content:"";
     position:absolute;
-    width:300px;
-    height:300px;
+    width:320px;
+    height:320px;
     border-radius:50%;
     background:rgba(255,255,255,.08);
-    right:-80px;
-    top:-100px;
+    right:-90px;
+    top:-110px;
 }
 
 .hero-content{
     position:relative;
     z-index:2;
-    max-width:700px;
+    max-width:720px;
 }
 
 .badge{
@@ -276,12 +280,126 @@ header{
     line-height:1.6;
 }
 
-/* ================= RESOURCES ================= */
+/* ================= STUDENT PORTAL ================= */
 
-.resources-section{
+.portal-section{
     background:var(--soft);
     border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
+}
+
+.portal-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.portal-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+    box-shadow:var(--shadow);
+    transition:.25s;
+}
+
+.portal-card:hover{
+    transform:translateY(-4px);
+}
+
+.portal-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:16px;
+}
+
+.portal-icon{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
+
+.status{
+    font-size:11px;
+    padding:5px 9px;
+    border-radius:20px;
+    font-weight:700;
+}
+
+.status.active{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status.pending{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status.locked{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.portal-card h3{
+    font-size:18px;
+    margin-bottom:7px;
+}
+
+.portal-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.7;
+    margin-bottom:17px;
+}
+
+.portal-btn{
+    display:inline-block;
+    padding:9px 14px;
+    border-radius:9px;
+    background:var(--primary);
+    color:white;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* ================= COUNTDOWN ================= */
+
+.countdown{
+    display:flex;
+    gap:7px;
+    margin-bottom:16px;
+}
+
+.time-box{
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+    min-width:48px;
+    padding:7px 5px;
+    text-align:center;
+}
+
+.time-box strong{
+    display:block;
+    font-size:17px;
+}
+
+.time-box span{
+    font-size:9px;
+    color:var(--muted);
+}
+
+/* ================= RESOURCES ================= */
+
+.resources-section{
+    background:var(--card);
 }
 
 .resource-grid{
@@ -377,6 +495,7 @@ footer p{
         grid-template-columns:repeat(2,1fr);
     }
 
+    .portal-grid,
     .resource-grid{
         grid-template-columns:repeat(2,1fr);
     }
@@ -410,8 +529,8 @@ footer p{
     }
 
     .nav-btn{
-        padding:7px 9px;
-        font-size:11px;
+        padding:7px 8px;
+        font-size:10px;
     }
 
     .hero{
@@ -432,6 +551,7 @@ footer p{
     }
 
     .quick-grid,
+    .portal-grid,
     .resource-grid{
         grid-template-columns:1fr;
     }
@@ -440,6 +560,7 @@ footer p{
         font-size:23px;
     }
 }
+
 </style>
 </head>
 
@@ -467,19 +588,29 @@ SNK IT Institute
 
 <div class="nav-actions">
 
-<button class="nav-btn" onclick="toggleLanguage()" id="languageBtn">
+<button
+class="nav-btn"
+onclick="toggleLanguage()"
+id="languageBtn">
 English
 </button>
 
-<button class="nav-btn" onclick="toggleTheme()" id="themeBtn">
+<button
+class="nav-btn"
+onclick="toggleTheme()"
+id="themeBtn">
 🌙
 </button>
 
-<a href="#resources" class="nav-btn">
+<a
+href="#resources"
+class="nav-btn">
 📚 Resources
 </a>
 
-<a href="login.html" class="nav-btn login-btn">
+<a
+href="login.html"
+class="nav-btn login-btn">
 🔐 Login
 </a>
 
@@ -507,17 +638,23 @@ SNK IT Institute
 </h1>
 
 <p id="heroText">
-আপনার Offline Course-এর Class, Assignment, Quiz,
+Offline Course-এর Class, Assignment, Quiz,
 Resources এবং Result এক জায়গা থেকে সহজে পরিচালনা করুন।
 </p>
 
 <div class="hero-buttons">
 
-<a href="#resources" class="hero-btn" id="resourceHeroBtn">
-📚 Resources দেখুন
+<a
+href="#studentPortal"
+class="hero-btn"
+id="portalHeroBtn">
+👨‍🎓 Student Portal
 </a>
 
-<a href="login.html" class="hero-btn secondary" id="loginHeroBtn">
+<a
+href="login.html"
+class="hero-btn secondary"
+id="loginHeroBtn">
 🔐 Student Login
 </a>
 
@@ -548,18 +685,17 @@ Student Portal-এর গুরুত্বপূর্ণ অংশগুলো
 
 </div>
 
-
 <div class="quick-grid">
 
 <div class="quick-card">
 
 <div class="icon">📚</div>
 
-<h3 id="courseTitle">
+<h3>
 My Course
 </h3>
 
-<p id="courseText">
+<p>
 আপনার ভর্তি করা Offline Course-এর তথ্য দেখুন।
 </p>
 
@@ -570,11 +706,11 @@ My Course
 
 <div class="icon">📝</div>
 
-<h3 id="assignmentTitle">
+<h3>
 Assignment
 </h3>
 
-<p id="assignmentText">
+<p>
 Assignment দেখুন, Deadline দেখুন এবং Submit করুন।
 </p>
 
@@ -585,12 +721,12 @@ Assignment দেখুন, Deadline দেখুন এবং Submit করু�
 
 <div class="icon">🎯</div>
 
-<h3 id="quizTitle">
+<h3>
 Quiz
 </h3>
 
-<p id="quizText">
-Online Quiz দিন এবং নির্দিষ্ট সময়ের মধ্যে Submit করুন।
+<p>
+সময় নির্ধারিত Quiz দিন এবং Submit করুন।
 </p>
 
 </div>
@@ -600,11 +736,11 @@ Online Quiz দিন এবং নির্দিষ্ট সময়ের ম�
 
 <div class="icon">🏆</div>
 
-<h3 id="resultTitle">
+<h3>
 Result
 </h3>
 
-<p id="resultText">
+<p>
 Admin Mark দেওয়ার পর আপনার Result দেখতে পারবেন।
 </p>
 
@@ -617,20 +753,275 @@ Admin Mark দেওয়ার পর আপনার Result দেখতে প�
 </section>
 
 
-<!-- ================= RESOURCES ================= -->
+<!-- ================= STUDENT PORTAL ================= -->
 
-<section class="section resources-section" id="resources">
+<section
+class="section portal-section"
+id="studentPortal">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2 id="resourcesTitle">
+<h2>
+👨‍🎓 Student Portal
+</h2>
+
+<p>
+Login করার পর শিক্ষার্থীরা এখান থেকেই Course-এর কাজগুলো পরিচালনা করবে।
+</p>
+
+</div>
+
+
+<div class="portal-grid">
+
+
+<!-- COURSE -->
+
+<div class="portal-card">
+
+<div class="portal-top">
+
+<div class="portal-icon">
+📚
+</div>
+
+<span class="status active">
+Active
+</span>
+
+</div>
+
+<h3>
+My Course
+</h3>
+
+<p>
+আপনার Course Name, Batch, Class Schedule এবং Course Progress দেখতে পারবেন।
+</p>
+
+<a
+href="login.html"
+class="portal-btn">
+Open Course
+</a>
+
+</div>
+
+
+<!-- ASSIGNMENT -->
+
+<div class="portal-card">
+
+<div class="portal-top">
+
+<div class="portal-icon">
+📝
+</div>
+
+<span class="status pending">
+Demo
+</span>
+
+</div>
+
+<h3>
+Assignment
+</h3>
+
+<p>
+Teacher-এর দেওয়া Assignment দেখুন এবং Deadline-এর আগে Submit করুন।
+</p>
+
+<a
+href="login.html"
+class="portal-btn">
+View Assignment
+</a>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div class="portal-card">
+
+<div class="portal-top">
+
+<div class="portal-icon">
+🎯
+</div>
+
+<span class="status pending">
+Demo
+</span>
+
+</div>
+
+<h3>
+Quiz
+</h3>
+
+<p>
+নির্দিষ্ট সময়ের মধ্যে Quiz সম্পন্ন করে Submit করুন।
+</p>
+
+<a
+href="login.html"
+class="portal-btn">
+Start Quiz
+</a>
+
+</div>
+
+
+<!-- DEADLINE -->
+
+<div class="portal-card">
+
+<div class="portal-top">
+
+<div class="portal-icon">
+⏱️
+</div>
+
+<span class="status pending">
+Coming
+</span>
+
+</div>
+
+<h3>
+Deadline & Countdown
+</h3>
+
+<p>
+Assignment বা Quiz-এর শেষ সময় এবং বাকি সময় এখানে দেখা যাবে।
+</p>
+
+<div class="countdown">
+
+<div class="time-box">
+<strong>00</strong>
+<span>Days</span>
+</div>
+
+<div class="time-box">
+<strong>00</strong>
+<span>Hours</span>
+</div>
+
+<div class="time-box">
+<strong>00</strong>
+<span>Min</span>
+</div>
+
+<div class="time-box">
+<strong>00</strong>
+<span>Sec</span>
+</div>
+
+</div>
+
+<a
+href="login.html"
+class="portal-btn">
+View Deadline
+</a>
+
+</div>
+
+
+<!-- SUBMISSION -->
+
+<div class="portal-card">
+
+<div class="portal-top">
+
+<div class="portal-icon">
+📤
+</div>
+
+<span class="status pending">
+Coming
+</span>
+
+</div>
+
+<h3>
+Submission
+</h3>
+
+<p>
+Assignment/Quiz সম্পন্ন করার পর Submit করার ব্যবস্থা থাকবে।
+</p>
+
+<a
+href="login.html"
+class="portal-btn">
+My Submission
+</a>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div class="portal-card">
+
+<div class="portal-top">
+
+<div class="portal-icon">
+🏆
+</div>
+
+<span class="status locked">
+Locked
+</span>
+
+</div>
+
+<h3>
+Result
+</h3>
+
+<p>
+Admin Mark দেওয়ার পর শিক্ষার্থী নিজের Result দেখতে পারবে।
+</p>
+
+<a
+href="login.html"
+class="portal-btn">
+View Result
+</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= RESOURCES ================= -->
+
+<section
+class="section resources-section"
+id="resources">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
 📚 Course Resources
 </h2>
 
-<p id="resourcesText">
-আপনার কোর্সের প্রয়োজনীয় সব Resource এখানে পাওয়া যাবে।
+<p>
+কোর্সের প্রয়োজনীয় সব Resource এখানে থাকবে।
 </p>
 
 </div>
@@ -639,30 +1030,29 @@ Admin Mark দেওয়ার পর আপনার Result দেখতে প�
 <div class="resource-grid">
 
 
-<!-- Notes -->
-
 <div class="resource-card">
 
 <div class="resource-icon">
 📄
 </div>
 
-<h3 id="notesTitle">
+<h3>
 Course Notes
 </h3>
 
-<p id="notesText">
-Teacher-এর দেওয়া গুরুত্বপূর্ণ Notes ও Study Materials এখানে থাকবে।
+<p>
+Teacher-এর দেওয়া Notes ও Study Materials এখানে পাওয়া যাবে।
 </p>
 
-<a href="#" class="resource-btn" onclick="showDemo(event)">
+<a
+href="#"
+class="resource-btn"
+onclick="showDemo(event)">
 Open Notes
 </a>
 
 </div>
 
-
-<!-- Assignment -->
 
 <div class="resource-card">
 
@@ -670,22 +1060,22 @@ Open Notes
 📝
 </div>
 
-<h3 id="resourceAssignmentTitle">
+<h3>
 Assignments
 </h3>
 
-<p id="resourceAssignmentText">
-আপনার Assignment দেখুন এবং নির্দিষ্ট Deadline-এর মধ্যে Submit করুন।
+<p>
+Course Assignment, Deadline এবং Submission-এর তথ্য।
 </p>
 
-<a href="login.html" class="resource-btn">
+<a
+href="login.html"
+class="resource-btn">
 View Assignment
 </a>
 
 </div>
 
-
-<!-- Quiz -->
 
 <div class="resource-card">
 
@@ -698,17 +1088,17 @@ Quiz
 </h3>
 
 <p>
-সময় নির্ধারিত Quiz দিন এবং Submit করার পর Result দেখুন।
+Timed Quiz এবং Quiz Submission-এর ব্যবস্থা থাকবে।
 </p>
 
-<a href="login.html" class="resource-btn">
+<a
+href="login.html"
+class="resource-btn">
 Start Quiz
 </a>
 
 </div>
 
-
-<!-- Class Materials -->
 
 <div class="resource-card">
 
@@ -721,17 +1111,18 @@ Class Materials
 </h3>
 
 <p>
-Offline Class-এর প্রয়োজনীয় Video, Image ও অন্যান্য Learning Materials।
+Class-এর প্রয়োজনীয় Video, Image ও অন্যান্য Learning Materials।
 </p>
 
-<a href="#" class="resource-btn" onclick="showDemo(event)">
+<a
+href="#"
+class="resource-btn"
+onclick="showDemo(event)">
 View Materials
 </a>
 
 </div>
 
-
-<!-- Important Links -->
 
 <div class="resource-card">
 
@@ -744,17 +1135,18 @@ Important Links
 </h3>
 
 <p>
-Course সম্পর্কিত প্রয়োজনীয় Website ও External Learning Links এখানে থাকবে।
+Course-এর প্রয়োজনীয় External Learning Links এখানে থাকবে।
 </p>
 
-<a href="#" class="resource-btn" onclick="showDemo(event)">
+<a
+href="#"
+class="resource-btn"
+onclick="showDemo(event)">
 Open Links
 </a>
 
 </div>
 
-
-<!-- Student Guide -->
 
 <div class="resource-card">
 
@@ -767,10 +1159,13 @@ Student Guide
 </h3>
 
 <p>
-Login, Assignment, Quiz, Submission ও Result ব্যবহারের সহজ নির্দেশনা।
+Login, Assignment, Quiz, Submission ও Result ব্যবহারের নির্দেশনা।
 </p>
 
-<a href="#" class="resource-btn" onclick="showDemo(event)">
+<a
+href="#"
+class="resource-btn"
+onclick="showDemo(event)">
 Read Guide
 </a>
 
@@ -800,13 +1195,14 @@ Read Guide
 
 <div class="notice">
 
-<strong id="noticeTitle">
-Student Portal Coming Soon
+<strong>
+Student Portal Development
 </strong>
 
-<p id="noticeText">
-Student Login করার পর Assignment, Quiz, Deadline,
-Submission এবং Result-এর সম্পূর্ণ ব্যবস্থা ব্যবহার করা যাবে।
+<p>
+বর্তমানে Portal-এর UI প্রস্তুত করা হচ্ছে।
+Login, Student ID, Admin Panel, Assignment, Quiz,
+Countdown, Submission এবং Result system পরবর্তী ধাপে যুক্ত হবে।
 </p>
 
 </div>
@@ -824,7 +1220,7 @@ Submission এবং Result-এর সম্পূর্ণ ব্যবস্�
 SNK IT Institute
 </h3>
 
-<p id="footerText">
+<p>
 Offline Course Student Portal
 </p>
 
@@ -855,8 +1251,6 @@ function toggleTheme(){
         isDark ? "☀️" : "🌙";
 }
 
-
-/* Load saved theme */
 
 (function(){
 
@@ -890,14 +1284,11 @@ function toggleLanguage(){
         document.getElementById("heroBadge").textContent =
             "🎓 Offline Course Student Portal";
 
-        document.getElementById("heroTitle").textContent =
-            "SNK IT Institute";
-
         document.getElementById("heroText").textContent =
             "Manage your Offline Course classes, assignments, quizzes, resources and results from one place.";
 
-        document.getElementById("resourceHeroBtn").textContent =
-            "📚 View Resources";
+        document.getElementById("portalHeroBtn").textContent =
+            "👨‍🎓 Student Portal";
 
         document.getElementById("loginHeroBtn").textContent =
             "🔐 Student Login";
@@ -907,57 +1298,6 @@ function toggleLanguage(){
 
         document.getElementById("quickText").textContent =
             "Important sections of the Student Portal";
-
-        document.getElementById("courseTitle").textContent =
-            "My Course";
-
-        document.getElementById("courseText").textContent =
-            "View information about your enrolled Offline Course.";
-
-        document.getElementById("assignmentTitle").textContent =
-            "Assignment";
-
-        document.getElementById("assignmentText").textContent =
-            "View assignments, deadlines and submit your work.";
-
-        document.getElementById("quizTitle").textContent =
-            "Quiz";
-
-        document.getElementById("quizText").textContent =
-            "Take timed quizzes and submit within the given time.";
-
-        document.getElementById("resultTitle").textContent =
-            "Result";
-
-        document.getElementById("resultText").textContent =
-            "View your result after the admin gives marks.";
-
-        document.getElementById("resourcesTitle").textContent =
-            "📚 Course Resources";
-
-        document.getElementById("resourcesText").textContent =
-            "All important resources for your course will be available here.";
-
-        document.getElementById("notesTitle").textContent =
-            "Course Notes";
-
-        document.getElementById("notesText").textContent =
-            "Important notes and study materials provided by the teacher.";
-
-        document.getElementById("resourceAssignmentTitle").textContent =
-            "Assignments";
-
-        document.getElementById("resourceAssignmentText").textContent =
-            "View assignments and submit them before the deadline.";
-
-        document.getElementById("noticeTitle").textContent =
-            "Student Portal Coming Soon";
-
-        document.getElementById("noticeText").textContent =
-            "After Student Login, you will be able to use Assignment, Quiz, Deadline, Submission and Result features.";
-
-        document.getElementById("footerText").textContent =
-            "Offline Course Student Portal";
 
     }else{
 
@@ -969,14 +1309,11 @@ function toggleLanguage(){
         document.getElementById("heroBadge").textContent =
             "🎓 Offline Course Student Portal";
 
-        document.getElementById("heroTitle").textContent =
-            "SNK IT Institute";
-
         document.getElementById("heroText").textContent =
-            "আপনার Offline Course-এর Class, Assignment, Quiz, Resources এবং Result এক জায়গা থেকে সহজে পরিচালনা করুন।";
+            "Offline Course-এর Class, Assignment, Quiz, Resources এবং Result এক জায়গা থেকে সহজে পরিচালনা করুন।";
 
-        document.getElementById("resourceHeroBtn").textContent =
-            "📚 Resources দেখুন";
+        document.getElementById("portalHeroBtn").textContent =
+            "👨‍🎓 Student Portal";
 
         document.getElementById("loginHeroBtn").textContent =
             "🔐 Student Login";
@@ -986,69 +1323,18 @@ function toggleLanguage(){
 
         document.getElementById("quickText").textContent =
             "Student Portal-এর গুরুত্বপূর্ণ অংশগুলো";
-
-        document.getElementById("courseTitle").textContent =
-            "My Course";
-
-        document.getElementById("courseText").textContent =
-            "আপনার ভর্তি করা Offline Course-এর তথ্য দেখুন।";
-
-        document.getElementById("assignmentTitle").textContent =
-            "Assignment";
-
-        document.getElementById("assignmentText").textContent =
-            "Assignment দেখুন, Deadline দেখুন এবং Submit করুন।";
-
-        document.getElementById("quizTitle").textContent =
-            "Quiz";
-
-        document.getElementById("quizText").textContent =
-            "Online Quiz দিন এবং নির্দিষ্ট সময়ের মধ্যে Submit করুন।";
-
-        document.getElementById("resultTitle").textContent =
-            "Result";
-
-        document.getElementById("resultText").textContent =
-            "Admin Mark দেওয়ার পর আপনার Result দেখতে পারবেন।";
-
-        document.getElementById("resourcesTitle").textContent =
-            "📚 Course Resources";
-
-        document.getElementById("resourcesText").textContent =
-            "আপনার কোর্সের প্রয়োজনীয় সব Resource এখানে পাওয়া যাবে।";
-
-        document.getElementById("notesTitle").textContent =
-            "Course Notes";
-
-        document.getElementById("notesText").textContent =
-            "Teacher-এর দেওয়া গুরুত্বপূর্ণ Notes ও Study Materials এখানে থাকবে।";
-
-        document.getElementById("resourceAssignmentTitle").textContent =
-            "Assignments";
-
-        document.getElementById("resourceAssignmentText").textContent =
-            "আপনার Assignment দেখুন এবং নির্দিষ্ট Deadline-এর মধ্যে Submit করুন।";
-
-        document.getElementById("noticeTitle").textContent =
-            "Student Portal Coming Soon";
-
-        document.getElementById("noticeText").textContent =
-            "Student Login করার পর Assignment, Quiz, Deadline, Submission এবং Result-এর সম্পূর্ণ ব্যবস্থা ব্যবহার করা যাবে।";
-
-        document.getElementById("footerText").textContent =
-            "Offline Course Student Portal";
     }
 }
 
 
-/* ================= DEMO BUTTON ================= */
+/* ================= DEMO ================= */
 
 function showDemo(event){
 
     event.preventDefault();
 
     alert(
-        "এই Resource বর্তমানে Demo অবস্থায় আছে।\n\n" +
+        "এই অংশটি এখন Demo অবস্থায় আছে।\n\n" +
         "পরবর্তী ধাপে Admin Panel থেকে Resource যোগ করার ব্যবস্থা তৈরি করা হবে।"
     );
 }
