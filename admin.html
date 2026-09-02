@@ -1,0 +1,3570 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Admin Dashboard 1.9</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   SNK IT INSTITUTE
+   ADMIN DASHBOARD
+   VERSION 1.9
+
+   IMPORTANT:
+   This is UI/Demo version.
+   Real Admin Login will be connected later.
+   ========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg:#f4f6fa;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+
+    --soft:#eff6ff;
+
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
+    --purple:#7c3aed;
+    --orange:#ea580c;
+
+    --sidebar:#111827;
+
+    --shadow:0 10px 30px rgba(15,23,42,.07);
+}
+
+body.dark{
+
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+    --soft:#172554;
+
+    --sidebar:#020617;
+
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    transition:.25s;
+}
+
+button,
+input,
+select,
+textarea{
+
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.app{
+
+    min-height:100vh;
+
+    display:flex;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar{
+
+    width:255px;
+
+    min-width:255px;
+
+    background:var(--sidebar);
+
+    color:#fff;
+
+    min-height:100vh;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    flex-direction:column;
+
+    transition:.25s;
+}
+
+
+.sidebar-logo{
+
+    height:76px;
+
+    padding:13px 17px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+
+.sidebar-logo img{
+
+    width:45px;
+    height:45px;
+
+    object-fit:contain;
+}
+
+
+.sidebar-logo-text{
+
+    font-size:15px;
+
+    font-weight:800;
+}
+
+
+.sidebar-logo-text small{
+
+    display:block;
+
+    color:#9ca3af;
+
+    font-size:9px;
+
+    font-weight:500;
+
+    margin-top:2px;
+}
+
+
+/* Sidebar menu */
+
+.sidebar-menu{
+
+    padding:18px 12px;
+
+    flex:1;
+
+    overflow-y:auto;
+}
+
+
+.menu-label{
+
+    color:#6b7280;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    padding:8px 11px;
+
+    letter-spacing:.5px;
+
+    text-transform:uppercase;
+}
+
+
+.menu-item{
+
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    color:#d1d5db;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:11px 12px;
+
+    border-radius:9px;
+
+    margin-bottom:4px;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    text-align:left;
+}
+
+
+.menu-item:hover{
+
+    background:rgba(255,255,255,.07);
+
+    color:#fff;
+}
+
+
+.menu-item.active{
+
+    background:#2563eb;
+
+    color:#fff;
+}
+
+
+.menu-icon{
+
+    width:22px;
+
+    text-align:center;
+
+    font-size:15px;
+}
+
+
+.menu-badge{
+
+    margin-left:auto;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    font-size:8px;
+
+    min-width:18px;
+
+    height:18px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+.sidebar-footer{
+
+    padding:13px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+
+.admin-mini{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:9px;
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:10px;
+}
+
+
+.admin-avatar{
+
+    width:34px;
+    height:34px;
+
+    border-radius:9px;
+
+    background:#2563eb;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:17px;
+}
+
+
+.admin-mini-info{
+
+    flex:1;
+
+    min-width:0;
+}
+
+
+.admin-mini-info strong{
+
+    display:block;
+
+    font-size:10px;
+}
+
+
+.admin-mini-info span{
+
+    display:block;
+
+    color:#9ca3af;
+
+    font-size:8px;
+}
+
+
+.logout-small{
+
+    border:none;
+
+    background:transparent;
+
+    color:#9ca3af;
+
+    font-size:14px;
+
+    padding:5px;
+}
+
+
+.logout-small:hover{
+
+    color:#fff;
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main{
+
+    margin-left:255px;
+
+    width:calc(100% - 255px);
+
+    min-width:0;
+}
+
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar{
+
+    height:76px;
+
+    background:var(--card);
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:0 25px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:900;
+}
+
+
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+
+.mobile-menu-btn{
+
+    display:none;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    width:38px;
+    height:38px;
+
+    border-radius:9px;
+
+    font-size:18px;
+}
+
+
+.page-heading h1{
+
+    font-size:20px;
+
+    margin-bottom:2px;
+}
+
+
+.page-heading p{
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+
+.topbar-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+}
+
+
+.topbar-btn{
+
+    width:37px;
+    height:37px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:9px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:15px;
+}
+
+
+.topbar-btn:hover{
+
+    background:var(--soft);
+}
+
+
+.admin-top-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding-left:9px;
+
+    border-left:1px solid var(--border);
+}
+
+
+.top-avatar{
+
+    width:36px;
+    height:36px;
+
+    border-radius:9px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:17px;
+}
+
+
+.top-profile-text strong{
+
+    display:block;
+
+    font-size:10px;
+}
+
+
+.top-profile-text span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.content{
+
+    padding:25px;
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+.welcome{
+
+    background:linear-gradient(135deg,#172554,#2563eb);
+
+    color:#fff;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-bottom:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+.welcome:after{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.07);
+
+    right:-80px;
+    top:-120px;
+}
+
+
+.welcome-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+.welcome h2{
+
+    font-size:24px;
+
+    margin-bottom:6px;
+}
+
+
+.welcome p{
+
+    opacity:.9;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+
+.welcome-badge{
+
+    position:relative;
+
+    z-index:2;
+
+    background:rgba(255,255,255,.13);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    padding:9px 13px;
+
+    border-radius:20px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:15px;
+
+    margin-bottom:24px;
+}
+
+
+.stat-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:18px;
+
+    box-shadow:var(--shadow);
+
+    transition:.2s;
+}
+
+
+.stat-card:hover{
+
+    transform:translateY(-2px);
+}
+
+
+.stat-top{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:12px;
+}
+
+
+.stat-icon{
+
+    width:40px;
+    height:40px;
+
+    border-radius:10px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:18px;
+}
+
+
+.stat-change{
+
+    font-size:8px;
+
+    padding:4px 7px;
+
+    border-radius:15px;
+
+    font-weight:800;
+}
+
+
+.stat-change.up{
+
+    background:#dcfce7;
+
+    color:#166534;
+}
+
+
+.stat-change.warning{
+
+    background:#fef3c7;
+
+    color:#92400e;
+}
+
+
+.stat-number{
+
+    font-size:25px;
+
+    font-weight:800;
+
+    margin-bottom:2px;
+}
+
+
+.stat-card h3{
+
+    font-size:12px;
+
+    margin-bottom:3px;
+}
+
+
+.stat-card p{
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:14px;
+}
+
+
+.section-header h2{
+
+    font-size:17px;
+}
+
+
+.section-header p{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:3px;
+}
+
+
+.view-all{
+
+    color:var(--primary);
+
+    font-size:10px;
+
+    font-weight:800;
+
+    background:var(--soft);
+
+    padding:7px 10px;
+
+    border-radius:7px;
+}
+
+
+/* =========================================================
+   DASHBOARD GRID
+   ========================================================= */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:1.35fr .65fr;
+
+    gap:18px;
+
+    margin-bottom:24px;
+}
+
+
+.panel{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+}
+
+
+.panel-header{
+
+    padding:17px 18px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+
+.panel-header h3{
+
+    font-size:14px;
+}
+
+
+.panel-header span{
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+
+.panel-body{
+
+    padding:17px 18px;
+}
+
+
+/* =========================================================
+   RECENT ASSIGNMENTS
+   ========================================================= */
+
+.assignment-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:12px 0;
+
+    border-bottom:1px solid var(--border);
+}
+
+
+.assignment-row:last-child{
+
+    border-bottom:none;
+}
+
+
+.assignment-row-icon{
+
+    width:37px;
+    height:37px;
+
+    border-radius:9px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:16px;
+}
+
+
+.assignment-row-info{
+
+    flex:1;
+
+    min-width:0;
+}
+
+
+.assignment-row-info strong{
+
+    display:block;
+
+    font-size:11px;
+
+    margin-bottom:3px;
+}
+
+
+.assignment-row-info span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+
+.assignment-status{
+
+    font-size:8px;
+
+    font-weight:800;
+
+    padding:5px 8px;
+
+    border-radius:15px;
+
+    white-space:nowrap;
+}
+
+
+.status-open{
+
+    background:#dcfce7;
+
+    color:#166534;
+}
+
+
+.status-pending{
+
+    background:#fef3c7;
+
+    color:#92400e;
+}
+
+
+.status-closed{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+}
+
+
+/* =========================================================
+   COURSE PROGRESS
+   ========================================================= */
+
+.progress-item{
+
+    margin-bottom:18px;
+}
+
+
+.progress-item:last-child{
+
+    margin-bottom:0;
+}
+
+
+.progress-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:8px;
+
+    margin-bottom:7px;
+}
+
+
+.progress-title span{
+
+    font-size:10px;
+}
+
+
+.progress-title strong{
+
+    color:var(--primary);
+
+    font-size:10px;
+}
+
+
+.progress-bar{
+
+    height:8px;
+
+    background:var(--border);
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+
+.progress-fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:var(--primary);
+}
+
+
+.progress-fill.green{
+
+    background:var(--success);
+}
+
+
+.progress-fill.purple{
+
+    background:var(--purple);
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.quick-actions{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:8px;
+}
+
+
+.quick-action{
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+
+    border-radius:10px;
+
+    padding:12px 7px;
+
+    text-align:center;
+
+    color:var(--text);
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+
+.quick-action:hover{
+
+    background:var(--soft);
+
+    border-color:var(--primary);
+}
+
+
+.quick-action-icon{
+
+    display:block;
+
+    font-size:18px;
+
+    margin-bottom:5px;
+}
+
+
+/* =========================================================
+   STUDENTS TABLE
+   ========================================================= */
+
+.table-panel{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
+    margin-bottom:24px;
+}
+
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+}
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:650px;
+}
+
+
+th,
+td{
+
+    padding:12px 15px;
+
+    text-align:left;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:9px;
+}
+
+
+th{
+
+    color:var(--muted);
+
+    font-weight:700;
+
+    background:var(--bg);
+}
+
+
+td{
+
+    font-weight:600;
+}
+
+
+.student-cell{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+
+.table-avatar{
+
+    width:31px;
+    height:31px;
+
+    border-radius:8px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:14px;
+}
+
+
+.student-name strong{
+
+    display:block;
+
+    font-size:10px;
+}
+
+
+.student-name span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    margin-top:2px;
+}
+
+
+.active-dot{
+
+    display:inline-block;
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--success);
+
+    margin-right:4px;
+}
+
+
+.table-action{
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--primary);
+
+    padding:5px 8px;
+
+    border-radius:6px;
+
+    font-size:8px;
+
+    font-weight:800;
+}
+
+
+.table-action:hover{
+
+    background:var(--soft);
+}
+
+
+/* =========================================================
+   LOWER GRID
+   ========================================================= */
+
+.lower-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+    margin-bottom:24px;
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.result-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:11px 0;
+
+    border-bottom:1px solid var(--border);
+}
+
+
+.result-row:last-child{
+
+    border-bottom:none;
+}
+
+
+.result-avatar{
+
+    width:34px;
+    height:34px;
+
+    border-radius:9px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+.result-info{
+
+    flex:1;
+}
+
+
+.result-info strong{
+
+    display:block;
+
+    font-size:10px;
+
+    margin-bottom:2px;
+}
+
+
+.result-info span{
+
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+
+.mark{
+
+    font-size:12px;
+
+    font-weight:800;
+
+    color:var(--primary);
+}
+
+
+.mark.pending{
+
+    color:var(--warning);
+
+    font-size:9px;
+}
+
+
+/* =========================================================
+   NOTICES
+   ========================================================= */
+
+.notice-row{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+    padding:11px 0;
+
+    border-bottom:1px solid var(--border);
+}
+
+
+.notice-row:last-child{
+
+    border-bottom:none;
+}
+
+
+.notice-icon{
+
+    width:32px;
+    height:32px;
+
+    min-width:32px;
+
+    border-radius:8px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+.notice-info strong{
+
+    display:block;
+
+    font-size:10px;
+
+    margin-bottom:3px;
+}
+
+
+.notice-info span{
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer{
+
+    padding:20px 25px;
+
+    border-top:1px solid var(--border);
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   DEMO MODAL
+   ========================================================= */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:3000;
+}
+
+
+.modal-overlay.show{
+
+    display:flex;
+}
+
+
+.modal{
+
+    width:100%;
+
+    max-width:430px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:23px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:17px;
+}
+
+
+.modal-header h3{
+
+    font-size:16px;
+}
+
+
+.modal-close{
+
+    width:30px;
+    height:30px;
+
+    border:none;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    border-radius:8px;
+
+    font-size:15px;
+}
+
+
+.modal p{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.7;
+
+    margin-bottom:15px;
+}
+
+
+.demo-box{
+
+    background:var(--soft);
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    padding:12px;
+
+    margin-bottom:15px;
+}
+
+
+.demo-box strong{
+
+    display:block;
+
+    font-size:11px;
+
+    margin-bottom:3px;
+}
+
+
+.demo-box span{
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+
+.modal-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   SIDEBAR OVERLAY
+   ========================================================= */
+
+.sidebar-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    z-index:950;
+
+    display:none;
+}
+
+
+.sidebar-overlay.show{
+
+    display:block;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1100px){
+
+    .stats-grid{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:800px){
+
+    .sidebar{
+
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+
+        transform:translateX(0);
+    }
+
+    .main{
+
+        margin-left:0;
+
+        width:100%;
+    }
+
+    .mobile-menu-btn{
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+    }
+
+    .top-profile-text{
+
+        display:none;
+    }
+
+    .admin-top-profile{
+
+        border-left:none;
+
+        padding-left:0;
+    }
+
+    .lower-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .topbar{
+
+        height:65px;
+
+        padding:0 13px;
+    }
+
+    .content{
+
+        padding:15px;
+    }
+
+    .page-heading h1{
+
+        font-size:16px;
+    }
+
+    .page-heading p{
+
+        display:none;
+    }
+
+    .topbar-actions{
+
+        gap:4px;
+    }
+
+    .topbar-btn{
+
+        width:33px;
+        height:33px;
+
+        font-size:13px;
+    }
+
+    .welcome{
+
+        padding:20px;
+
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .welcome h2{
+
+        font-size:20px;
+    }
+
+    .welcome-badge{
+
+        font-size:8px;
+    }
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+
+        gap:10px;
+    }
+
+    .stat-card{
+
+        padding:15px;
+    }
+
+    .quick-actions{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .section-header{
+
+        align-items:flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print{
+
+    .sidebar,
+    .topbar,
+    .quick-actions,
+    .footer{
+
+        display:none !important;
+    }
+
+    .main{
+
+        margin:0;
+
+        width:100%;
+    }
+
+    .content{
+
+        padding:0;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     APP
+     ========================================================= -->
+
+<div class="app">
+
+
+<!-- =========================================================
+     SIDEBAR
+     ========================================================= -->
+
+<aside
+class="sidebar"
+id="sidebar">
+
+
+<div class="sidebar-logo">
+
+<img
+src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+alt="SNK IT Institute Logo"
+>
+
+<div class="sidebar-logo-text">
+
+SNK IT Institute
+
+<small>
+Admin Control Panel
+</small>
+
+</div>
+
+</div>
+
+
+
+<div class="sidebar-menu">
+
+
+<div class="menu-label">
+Main
+</div>
+
+
+<button
+class="menu-item active"
+onclick="showDemo('Dashboard')">
+
+<span class="menu-icon">
+📊
+</span>
+
+<span>
+Dashboard
+</span>
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="showDemo('Students')">
+
+<span class="menu-icon">
+👨‍🎓
+</span>
+
+<span>
+Students
+</span>
+
+<span class="menu-badge">
+25
+</span>
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="showDemo('Courses')">
+
+<span class="menu-icon">
+🎓
+</span>
+
+<span>
+Courses
+</span>
+
+</button>
+
+
+
+<div class="menu-label">
+Academic
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Assignments')">
+
+<span class="menu-icon">
+📝
+</span>
+
+<span>
+Assignments
+</span>
+
+<span class="menu-badge">
+2
+</span>
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="showDemo('Quiz')">
+
+<span class="menu-icon">
+🎯
+</span>
+
+<span>
+Quiz
+</span>
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="showDemo('Results')">
+
+<span class="menu-icon">
+🏆
+</span>
+
+<span>
+Results
+</span>
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="showDemo('Attendance')">
+
+<span class="menu-icon">
+📅
+</span>
+
+<span>
+Attendance
+</span>
+
+</button>
+
+
+
+<div class="menu-label">
+Content
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Resources')">
+
+<span class="menu-icon">
+📚
+</span>
+
+<span>
+Resources
+</span>
+
+</button>
+
+
+
+<button
+class="menu-item"
+onclick="showDemo('Notices')">
+
+<span class="menu-icon">
+📢
+</span>
+
+<span>
+Notices
+</span>
+
+</button>
+
+
+
+<div class="menu-label">
+System
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Settings')">
+
+<span class="menu-icon">
+⚙️
+</span>
+
+<span>
+Settings
+</span>
+
+</button>
+
+
+</div>
+
+
+
+<div class="sidebar-footer">
+
+
+<div class="admin-mini">
+
+<div class="admin-avatar">
+👨‍💼
+</div>
+
+
+<div class="admin-mini-info">
+
+<strong>
+Super Admin
+</strong>
+
+<span>
+Administrator
+</span>
+
+</div>
+
+
+<button
+class="logout-small"
+onclick="logoutDemo()"
+title="Logout">
+🚪
+</button>
+
+</div>
+
+
+</div>
+
+</aside>
+
+
+
+<div
+class="sidebar-overlay"
+id="sidebarOverlay"
+onclick="closeSidebar()">
+</div>
+
+
+
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
+
+<main class="main">
+
+
+<!-- =====================================================
+     TOPBAR
+     ===================================================== -->
+
+<header class="topbar">
+
+
+<div class="topbar-left">
+
+
+<button
+class="mobile-menu-btn"
+onclick="toggleSidebar()">
+☰
+</button>
+
+
+<div class="page-heading">
+
+<h1>
+Admin Dashboard
+</h1>
+
+<p>
+SNK IT Institute • Offline Course Management
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="topbar-actions">
+
+
+<button
+class="topbar-btn"
+onclick="toggleTheme()"
+id="themeBtn"
+title="Theme">
+🌙
+</button>
+
+
+<button
+class="topbar-btn"
+onclick="showDemo('Notifications')"
+title="Notifications">
+🔔
+</button>
+
+
+<div class="admin-top-profile">
+
+<div class="top-avatar">
+👨‍💼
+</div>
+
+
+<div class="top-profile-text">
+
+<strong>
+Super Admin
+</strong>
+
+<span>
+Online
+</span>
+
+</div>
+
+</div>
+
+
+</div>
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTENT
+     ===================================================== -->
+
+<div class="content">
+
+
+<!-- =====================================================
+     WELCOME
+     ===================================================== -->
+
+<section class="welcome">
+
+
+<div class="welcome-content">
+
+<h2>
+👋 Welcome, Super Admin
+</h2>
+
+<p>
+SNK IT Institute-এর Offline Course Management
+Dashboard থেকে Students, Assignments, Quiz,
+Marks, Results ও Resources পরিচালনা করা যাবে।
+</p>
+
+</div>
+
+
+<div class="welcome-badge">
+VERSION 1.9 • DEMO UI
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     STATISTICS
+     ===================================================== -->
+
+<section>
+
+
+<div class="stats-grid">
+
+
+<!-- STUDENTS -->
+
+<div class="stat-card">
+
+<div class="stat-top">
+
+<div class="stat-icon">
+👨‍🎓
+</div>
+
+<span class="stat-change up">
++3
+</span>
+
+</div>
+
+
+<div class="stat-number">
+25
+</div>
+
+<h3>
+Total Students
+</h3>
+
+<p>
+Active student accounts
+</p>
+
+</div>
+
+
+
+<!-- COURSES -->
+
+<div class="stat-card">
+
+<div class="stat-top">
+
+<div class="stat-icon">
+🎓
+</div>
+
+<span class="stat-change up">
+Active
+</span>
+
+</div>
+
+
+<div class="stat-number">
+3
+</div>
+
+<h3>
+Active Courses
+</h3>
+
+<p>
+Offline courses
+</p>
+
+</div>
+
+
+
+<!-- ASSIGNMENTS -->
+
+<div class="stat-card">
+
+<div class="stat-top">
+
+<div class="stat-icon">
+📝
+</div>
+
+<span class="stat-change warning">
+2
+</span>
+
+</div>
+
+
+<div class="stat-number">
+2
+</div>
+
+<h3>
+Open Assignments
+</h3>
+
+<p>
+Waiting for submission
+</p>
+
+</div>
+
+
+
+<!-- RESULTS -->
+
+<div class="stat-card">
+
+<div class="stat-top">
+
+<div class="stat-icon">
+🏆
+</div>
+
+<span class="stat-change warning">
+Pending
+</span>
+
+</div>
+
+
+<div class="stat-number">
+8
+</div>
+
+<h3>
+Pending Results
+</h3>
+
+<p>
+Need admin marking
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DASHBOARD MAIN GRID
+     ===================================================== -->
+
+<section class="dashboard-grid">
+
+
+<!-- RECENT ASSIGNMENTS -->
+
+<div class="panel">
+
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+📝 Recent Assignments
+</h3>
+
+<span>
+Latest academic activities
+</span>
+
+</div>
+
+
+<button
+class="view-all"
+onclick="showDemo('All Assignments')">
+View All
+</button>
+
+</div>
+
+
+<div class="panel-body">
+
+
+<div class="assignment-row">
+
+<div class="assignment-row-icon">
+📄
+</div>
+
+
+<div class="assignment-row-info">
+
+<strong>
+MS Word Assignment
+</strong>
+
+<span>
+Computer Office Application • 20 Marks
+</span>
+
+</div>
+
+
+<span class="assignment-status status-open">
+Open
+</span>
+
+</div>
+
+
+
+<div class="assignment-row">
+
+<div class="assignment-row-icon">
+📊
+</div>
+
+
+<div class="assignment-row-info">
+
+<strong>
+MS Excel Assignment
+</strong>
+
+<span>
+Computer Office Application • 25 Marks
+</span>
+
+</div>
+
+
+<span class="assignment-status status-pending">
+Upcoming
+</span>
+
+</div>
+
+
+
+<div class="assignment-row">
+
+<div class="assignment-row-icon">
+📑
+</div>
+
+
+<div class="assignment-row-info">
+
+<strong>
+PowerPoint Assignment
+</strong>
+
+<span>
+Presentation Basics • 20 Marks
+</span>
+
+</div>
+
+
+<span class="assignment-status status-closed">
+Closed
+</span>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+
+<!-- COURSE PROGRESS -->
+
+<div class="panel">
+
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+📈 Course Progress
+</h3>
+
+<span>
+Current batch overview
+</span>
+
+</div>
+
+</div>
+
+
+<div class="panel-body">
+
+
+<div class="progress-item">
+
+<div class="progress-title">
+
+<span>
+Computer Office Application
+</span>
+
+<strong>
+65%
+</strong>
+
+</div>
+
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:65%">
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="progress-item">
+
+<div class="progress-title">
+
+<span>
+Graphics Design
+</span>
+
+<strong>
+42%
+</strong>
+
+</div>
+
+
+<div class="progress-bar">
+
+<div
+class="progress-fill purple"
+style="width:42%">
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="progress-item">
+
+<div class="progress-title">
+
+<span>
+Digital Marketing
+</span>
+
+<strong>
+28%
+</strong>
+
+</div>
+
+
+<div class="progress-bar">
+
+<div
+class="progress-fill green"
+style="width:28%">
+</div>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     QUICK ACTIONS
+     ===================================================== -->
+
+<section class="panel" style="margin-bottom:24px;">
+
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+⚡ Quick Actions
+</h3>
+
+<span>
+Frequently used admin functions
+</span>
+
+</div>
+
+</div>
+
+
+<div class="panel-body">
+
+
+<div class="quick-actions">
+
+
+<button
+class="quick-action"
+onclick="showDemo('Add Student')">
+
+<span class="quick-action-icon">
+👨‍🎓
+</span>
+
+Add Student
+
+</button>
+
+
+
+<button
+class="quick-action"
+onclick="showDemo('Create Assignment')">
+
+<span class="quick-action-icon">
+📝
+</span>
+
+Create Assignment
+
+</button>
+
+
+
+<button
+class="quick-action"
+onclick="showDemo('Create Quiz')">
+
+<span class="quick-action-icon">
+🎯
+</span>
+
+Create Quiz
+
+</button>
+
+
+
+<button
+class="quick-action"
+onclick="showDemo('Give Marks')">
+
+<span class="quick-action-icon">
+✏️
+</span>
+
+Give Marks
+
+</button>
+
+
+
+<button
+class="quick-action"
+onclick="showDemo('Add Resource')">
+
+<span class="quick-action-icon">
+📚
+</span>
+
+Add Resource
+
+</button>
+
+
+
+<button
+class="quick-action"
+onclick="showDemo('Notice')">
+
+<span class="quick-action-icon">
+📢
+</span>
+
+Publish Notice
+
+</button>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STUDENTS TABLE
+     ===================================================== -->
+
+<section class="table-panel">
+
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+👨‍🎓 Recent Students
+</h3>
+
+<span>
+Recently registered / active students
+</span>
+
+</div>
+
+
+<button
+class="view-all"
+onclick="showDemo('Students')">
+Manage Students
+</button>
+
+</div>
+
+
+<div class="table-wrapper">
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>
+Student
+</th>
+
+<th>
+Student ID
+</th>
+
+<th>
+Course
+</th>
+
+<th>
+Batch
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+<tr>
+
+<td>
+
+<div class="student-cell">
+
+<div class="table-avatar">
+👨‍🎓
+</div>
+
+
+<div class="student-name">
+
+<strong>
+Demo Student
+</strong>
+
+<span>
+demo@student.com
+</span>
+
+</div>
+
+</div>
+
+</td>
+
+
+<td>
+SNK-1001
+</td>
+
+
+<td>
+Computer Office
+</td>
+
+
+<td>
+Batch 01
+</td>
+
+
+<td>
+
+<span style="color:var(--success);font-size:8px;">
+<span class="active-dot"></span>
+Active
+</span>
+
+</td>
+
+
+<td>
+
+<button
+class="table-action"
+onclick="showDemo('Student SNK-1001')">
+View
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="student-cell">
+
+<div class="table-avatar">
+👩‍🎓
+</div>
+
+
+<div class="student-name">
+
+<strong>
+Student Two
+</strong>
+
+<span>
+student2@example.com
+</span>
+
+</div>
+
+</div>
+
+</td>
+
+
+<td>
+SNK-1002
+</td>
+
+
+<td>
+Graphics Design
+</td>
+
+
+<td>
+Batch 01
+</td>
+
+
+<td>
+
+<span style="color:var(--success);font-size:8px;">
+<span class="active-dot"></span>
+Active
+</span>
+
+</td>
+
+
+<td>
+
+<button
+class="table-action"
+onclick="showDemo('Student SNK-1002')">
+View
+</button>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="student-cell">
+
+<div class="table-avatar">
+👨‍🎓
+</div>
+
+
+<div class="student-name">
+
+<strong>
+Student Three
+</strong>
+
+<span>
+student3@example.com
+</span>
+
+</div>
+
+</div>
+
+</td>
+
+
+<td>
+SNK-1003
+</td>
+
+
+<td>
+Digital Marketing
+</td>
+
+
+<td>
+Batch 02
+</td>
+
+
+<td>
+
+<span style="color:var(--warning);font-size:8px;">
+● Pending
+</span>
+
+</td>
+
+
+<td>
+
+<button
+class="table-action"
+onclick="showDemo('Student SNK-1003')">
+View
+</button>
+
+</td>
+
+</tr>
+
+
+
+</tbody>
+
+</table>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LOWER GRID
+     ===================================================== -->
+
+<section class="lower-grid">
+
+
+<!-- PENDING RESULTS -->
+
+<div class="panel">
+
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+🏆 Pending Results
+</h3>
+
+<span>
+Assignments waiting for marking
+</span>
+
+</div>
+
+
+<button
+class="view-all"
+onclick="showDemo('Pending Results')">
+View All
+</button>
+
+</div>
+
+
+<div class="panel-body">
+
+
+<div class="result-row">
+
+<div class="result-avatar">
+👨‍🎓
+</div>
+
+
+<div class="result-info">
+
+<strong>
+Demo Student
+</strong>
+
+<span>
+MS Word Assignment • SNK-1001
+</span>
+
+</div>
+
+
+<div class="mark pending">
+Pending
+</div>
+
+</div>
+
+
+
+<div class="result-row">
+
+<div class="result-avatar">
+👩‍🎓
+</div>
+
+
+<div class="result-info">
+
+<strong>
+Student Two
+</strong>
+
+<span>
+MS Word Assignment • SNK-1002
+</span>
+
+</div>
+
+
+<div class="mark pending">
+Pending
+</div>
+
+</div>
+
+
+
+<div class="result-row">
+
+<div class="result-avatar">
+👨‍🎓
+</div>
+
+
+<div class="result-info">
+
+<strong>
+Student Three
+</strong>
+
+<span>
+PowerPoint Assignment • SNK-1003
+</span>
+
+</div>
+
+
+<div class="mark">
+18/20
+</div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+
+<!-- NOTICES -->
+
+<div class="panel">
+
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+📢 Recent Notices
+</h3>
+
+<span>
+Institute announcements
+</span>
+
+</div>
+
+
+<button
+class="view-all"
+onclick="showDemo('Notices')">
+Manage
+</button>
+
+</div>
+
+
+<div class="panel-body">
+
+
+<div class="notice-row">
+
+<div class="notice-icon">
+📢
+</div>
+
+
+<div class="notice-info">
+
+<strong>
+Assignment Deadline Reminder
+</strong>
+
+<span>
+MS Word Assignment-এর deadline 10 September 2026।
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="notice-row">
+
+<div class="notice-icon">
+🎯
+</div>
+
+
+<div class="notice-info">
+
+<strong>
+New Quiz Available
+</strong>
+
+<span>
+Computer Basic Quiz এখন Student Portal-এ available।
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="notice-row">
+
+<div class="notice-icon">
+📅
+</div>
+
+
+<div class="notice-info">
+
+<strong>
+Class Schedule Updated
+</strong>
+
+<span>
+Batch 01-এর নতুন class schedule update করা হয়েছে।
+</span>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="footer">
+
+SNK IT Institute • Admin Dashboard 1.9 • Offline Course Management
+
+<br>
+
+© 2026 SNK IT Institute. All Rights Reserved.
+
+</footer>
+
+
+</div>
+
+</main>
+
+</div>
+
+
+
+<!-- =========================================================
+     DEMO MODAL
+     ========================================================= -->
+
+<div
+class="modal-overlay"
+id="demoModal"
+onclick="closeModalOutside(event)">
+
+
+<div class="modal">
+
+
+<div class="modal-header">
+
+<h3 id="modalTitle">
+Demo Function
+</h3>
+
+
+<button
+class="modal-close"
+onclick="closeModal()">
+×
+</button>
+
+</div>
+
+
+<p id="modalText">
+এই function পরবর্তী ধাপে তৈরি করা হবে।
+</p>
+
+
+<div class="demo-box">
+
+<strong>
+🔧 Current Version: 1.9
+</strong>
+
+<span>
+এটি এখন UI/Demo mode-এ আছে। Real data ও database পরে যুক্ত হবে।
+</span>
+
+</div>
+
+
+<button
+class="modal-btn"
+onclick="closeModal()">
+ঠিক আছে
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   THEME
+   ========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("dark");
+
+    const isDark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "snkAdminTheme",
+        isDark ? "dark" : "light"
+    );
+
+    document.getElementById("themeBtn").textContent =
+        isDark ? "☀️" : "🌙";
+}
+
+
+(function(){
+
+    const savedTheme =
+        localStorage.getItem("snkAdminTheme");
+
+    if(savedTheme === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeBtn").textContent =
+            "☀️";
+    }
+
+})();
+
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+   ========================================================= */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.toggle("show");
+}
+
+
+function closeSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.remove("show");
+}
+
+
+
+/* =========================================================
+   SIDEBAR MENU
+   ========================================================= */
+
+const menuItems =
+    document.querySelectorAll(".menu-item");
+
+
+menuItems.forEach(function(item){
+
+    item.addEventListener(
+        "click",
+        function(){
+
+            menuItems.forEach(function(menu){
+
+                menu.classList.remove("active");
+
+            });
+
+            item.classList.add("active");
+
+            if(window.innerWidth <= 800){
+
+                closeSidebar();
+
+            }
+
+        }
+    );
+
+});
+
+
+
+/* =========================================================
+   DEMO MODAL
+   ========================================================= */
+
+function showDemo(name){
+
+    document.getElementById("modalTitle").textContent =
+        name;
+
+    document.getElementById("modalText").textContent =
+        name +
+        " management function এখন Demo UI হিসেবে দেখানো হচ্ছে। পরবর্তী development step-এ এই function-এর real working system তৈরি করা হবে।";
+
+    document
+        .getElementById("demoModal")
+        .classList.add("show");
+}
+
+
+function closeModal(){
+
+    document
+        .getElementById("demoModal")
+        .classList.remove("show");
+}
+
+
+function closeModalOutside(event){
+
+    if(
+        event.target ===
+        document.getElementById("demoModal")
+    ){
+
+        closeModal();
+
+    }
+
+}
+
+
+
+/* =========================================================
+   DEMO LOGOUT
+   ========================================================= */
+
+function logoutDemo(){
+
+    const confirmLogout =
+        confirm(
+            "Demo Admin Logout করতে চান?"
+        );
+
+    if(confirmLogout){
+
+        alert(
+            "Demo Logout সম্পন্ন হয়েছে।\n\nReal Admin Login/Logout system পরবর্তী নির্ধারিত ধাপে যুক্ত হবে।"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   ESC KEY
+   ========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeModal();
+
+            closeSidebar();
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+</html>
+```
