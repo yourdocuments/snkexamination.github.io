@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Results Management</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#f4f6fa;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --soft:#eff6ff;
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
+    --sidebar:#111827;
+    --shadow:0 10px 30px rgba(15,23,42,.07);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+    --soft:#172554;
+    --sidebar:#020617;
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.25s;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:255px;
+    min-width:255px;
+    background:var(--sidebar);
+    color:#fff;
+    min-height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+    transition:.25s;
+}
+
+.sidebar-logo{
+    height:76px;
+    padding:13px 17px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-logo img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+}
+
+.sidebar-logo-text{
+    font-size:15px;
+    font-weight:800;
+}
+
+.sidebar-logo-text small{
+    display:block;
+    color:#9ca3af;
+    font-size:9px;
+    font-weight:500;
+}
+
+.sidebar-menu{
+    padding:18px 12px;
+    flex:1;
+    overflow-y:auto;
+}
+
+.menu-label{
+    color:#6b7280;
+    font-size:9px;
+    font-weight:800;
+    padding:8px 11px;
+    letter-spacing:.5px;
+}
+
+.menu-item{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:#d1d5db;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 12px;
+    border-radius:9px;
+    margin-bottom:4px;
+    font-size:11px;
+    font-weight:600;
+    text-align:left;
+}
+
+.menu-item:hover{
+    background:rgba(255,255,255,.07);
+    color:#fff;
+}
+
+.menu-item.active{
+    background:#2563eb;
+    color:#fff;
+}
+
+.menu-icon{
+    width:22px;
+    text-align:center;
+    font-size:15px;
+}
+
+.sidebar-footer{
+    padding:13px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.admin-mini{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:9px;
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
+
+.admin-avatar{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.admin-mini-info{
+    flex:1;
+}
+
+.admin-mini-info strong{
+    display:block;
+    font-size:10px;
+}
+
+.admin-mini-info span{
+    display:block;
+    color:#9ca3af;
+    font-size:8px;
+}
+
+.logout-small{
+    border:none;
+    background:transparent;
+    color:#9ca3af;
+    font-size:14px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:255px;
+    width:calc(100% - 255px);
+    min-width:0;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    height:76px;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:900;
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.mobile-menu-btn{
+    display:none;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    font-size:18px;
+}
+
+.page-heading h1{
+    font-size:20px;
+}
+
+.page-heading p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.topbar-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.topbar-btn{
+    width:37px;
+    height:37px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:9px;
+}
+
+.admin-top-profile{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding-left:9px;
+    border-left:1px solid var(--border);
+}
+
+.top-avatar{
+    width:36px;
+    height:36px;
+    border-radius:9px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.top-profile-text strong{
+    display:block;
+    font-size:10px;
+}
+
+.top-profile-text span{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:25px;
+}
+
+.page-intro{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.page-intro h2{
+    font-size:21px;
+    margin-bottom:4px;
+}
+
+.page-intro p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.primary-btn{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+    padding:11px 16px;
+    border-radius:9px;
+    font-size:10px;
+    font-weight:800;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:17px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:39px;
+    height:39px;
+    border-radius:10px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    margin-bottom:11px;
+}
+
+.stat-number{
+    font-size:23px;
+    font-weight:800;
+}
+
+.stat-title{
+    font-size:10px;
+}
+
+.stat-description{
+    color:var(--muted);
+    font-size:8px;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:14px;
+    box-shadow:var(--shadow);
+    margin-bottom:15px;
+}
+
+.toolbar-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.search-box{
+    flex:1;
+    min-width:220px;
+    position:relative;
+}
+
+.search-box span{
+    position:absolute;
+    left:11px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+}
+
+.search-box input{
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    padding:10px 12px 10px 33px;
+    border-radius:8px;
+    outline:none;
+    font-size:10px;
+}
+
+.filter-select{
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    padding:10px 12px;
+    border-radius:8px;
+    outline:none;
+    font-size:9px;
+    min-width:140px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+thead{
+    background:var(--bg);
+}
+
+th{
+    color:var(--muted);
+    font-size:8px;
+    font-weight:800;
+    text-align:left;
+    padding:13px 14px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+}
+
+td{
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    font-size:9px;
+    white-space:nowrap;
+}
+
+tbody tr:hover{
+    background:var(--bg);
+}
+
+.student-cell{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.student-avatar{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+}
+
+.student-name strong{
+    display:block;
+    font-size:9px;
+}
+
+.student-name span{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+}
+
+.quiz-name{
+    font-weight:700;
+}
+
+.marks{
+    font-weight:800;
+}
+
+.marks.good{
+    color:var(--success);
+}
+
+.marks.average{
+    color:var(--warning);
+}
+
+.marks.low{
+    color:var(--danger);
+}
+
+.result-status{
+    display:inline-flex;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:7px;
+    font-weight:800;
+}
+
+.result-status.published{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.result-status.pending{
+    background:#fef3c7;
+    color:#a16207;
+}
+
+.result-status.review{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.row-actions{
+    display:flex;
+    gap:5px;
+}
+
+.action-btn{
+    width:30px;
+    height:30px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:7px;
+}
+
+.action-btn:hover{
+    background:var(--soft);
+}
+
+.action-btn.publish:hover{
+    color:var(--success);
+}
+
+.action-btn.delete:hover{
+    color:var(--danger);
+}
+
+.empty-state{
+    display:none;
+    text-align:center;
+    padding:45px 20px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:3000;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:560px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:17px;
+}
+
+.modal-header h3{
+    font-size:16px;
+}
+
+.modal-header p{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:2px;
+}
+
+.modal-close{
+    width:30px;
+    height:30px;
+    border:none;
+    background:var(--bg);
+    color:var(--text);
+    border-radius:8px;
+    font-size:16px;
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+.form-group label{
+    display:block;
+    font-size:9px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    padding:10px;
+    border-radius:8px;
+    outline:none;
+    font-size:9px;
+}
+
+.form-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:7px;
+    margin-top:16px;
+}
+
+.secondary-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:9px;
+    font-weight:700;
+}
+
+.save-btn{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+    padding:10px 16px;
+    border-radius:8px;
+    font-size:9px;
+    font-weight:800;
+}
+
+.result-summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin-bottom:15px;
+}
+
+.summary-box{
+    background:var(--bg);
+    border:1px solid var(--border);
+    padding:12px;
+    border-radius:9px;
+    text-align:center;
+}
+
+.summary-box span{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+}
+
+.summary-box strong{
+    display:block;
+    font-size:17px;
+    margin-top:3px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    padding:20px 25px;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-size:9px;
+    text-align:center;
+    margin-top:25px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+.sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:950;
+    display:none;
+}
+
+.sidebar-overlay.show{
+    display:block;
+}
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu-btn{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .top-profile-text{
+        display:none;
+    }
+
+    .admin-top-profile{
+        border-left:none;
+    }
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        height:65px;
+        padding:0 13px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .page-heading h1{
+        font-size:16px;
+    }
+
+    .page-heading p{
+        display:none;
+    }
+
+    .page-intro{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .toolbar-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search-box{
+        min-width:0;
+    }
+
+    .filter-select{
+        width:100%;
+    }
+
+    .result-summary{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <img
+        src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+        alt="SNK IT Institute Logo"
+        >
+
+        <div class="sidebar-logo-text">
+            SNK IT Institute
+            <small>Admin Control Panel</small>
+        </div>
+
+    </div>
+
+
+    <div class="sidebar-menu">
+
+        <div class="menu-label">
+            MAIN
+        </div>
+
+        <a class="menu-item" href="admin.html">
+            <span class="menu-icon">📊</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a class="menu-item" href="students.html">
+            <span class="menu-icon">👨‍🎓</span>
+            <span>Students</span>
+        </a>
+
+        <a class="menu-item" href="courses.html">
+            <span class="menu-icon">🎓</span>
+            <span>Courses</span>
+        </a>
+
+
+        <div class="menu-label">
+            ACADEMIC
+        </div>
+
+        <a class="menu-item" href="assignments.html">
+            <span class="menu-icon">📝</span>
+            <span>Assignments</span>
+        </a>
+
+        <a class="menu-item" href="quiz.html">
+            <span class="menu-icon">🎯</span>
+            <span>Quiz</span>
+        </a>
+
+        <a class="menu-item active" href="results.html">
+            <span class="menu-icon">🏆</span>
+            <span>Results</span>
+        </a>
+
+
+        <div class="menu-label">
+            CONTENT
+        </div>
+
+        <a class="menu-item" href="resources.html">
+            <span class="menu-icon">📚</span>
+            <span>Resources</span>
+        </a>
+
+        <button
+        class="menu-item"
+        onclick="showDemo('Notices')">
+
+            <span class="menu-icon">📢</span>
+            <span>Notices</span>
+
+        </button>
+
+
+        <div class="menu-label">
+            SYSTEM
+        </div>
+
+        <button
+        class="menu-item"
+        onclick="showDemo('Settings')">
+
+            <span class="menu-icon">⚙️</span>
+            <span>Settings</span>
+
+        </button>
+
+    </div>
+
+
+    <div class="sidebar-footer">
+
+        <div class="admin-mini">
+
+            <div class="admin-avatar">
+                👨‍💼
+            </div>
+
+            <div class="admin-mini-info">
+                <strong>Super Admin</strong>
+                <span>Administrator</span>
+            </div>
+
+            <button
+            class="logout-small"
+            onclick="logoutDemo()">
+
+                🚪
+
+            </button>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<div
+class="sidebar-overlay"
+id="sidebarOverlay"
+onclick="closeSidebar()">
+</div>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+        class="mobile-menu-btn"
+        onclick="toggleSidebar()">
+
+            ☰
+
+        </button>
+
+        <div class="page-heading">
+
+            <h1>
+                Results Management
+            </h1>
+
+            <p>
+                SNK IT Institute • Student Result Control
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="topbar-actions">
+
+        <button
+        class="topbar-btn"
+        onclick="toggleTheme()"
+        id="themeBtn">
+
+            🌙
+
+        </button>
+
+        <button
+        class="topbar-btn"
+        onclick="showDemo('Notifications')">
+
+            🔔
+
+        </button>
+
+        <div class="admin-top-profile">
+
+            <div class="top-avatar">
+                👨‍💼
+            </div>
+
+            <div class="top-profile-text">
+
+                <strong>
+                    Super Admin
+                </strong>
+
+                <span>
+                    Administrator
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+    <div class="page-intro">
+
+        <div>
+
+            <h2>
+                Student Results
+            </h2>
+
+            <p>
+                Quiz ও Assignment-এর result review, marks এবং publish করুন।
+            </p>
+
+        </div>
+
+        <button
+        class="primary-btn"
+        onclick="openAddResult()">
+
+            ＋ Add Result
+
+        </button>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📋
+            </div>
+
+            <div
+            class="stat-number"
+            id="totalResults">
+                6
+            </div>
+
+            <div class="stat-title">
+                Total Results
+            </div>
+
+            <div class="stat-description">
+                মোট result
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🟢
+            </div>
+
+            <div
+            class="stat-number"
+            id="publishedResults">
+                3
+            </div>
+
+            <div class="stat-title">
+                Published
+            </div>
+
+            <div class="stat-description">
+                Student দেখতে পারবে
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⏳
+            </div>
+
+            <div
+            class="stat-number"
+            id="pendingResults">
+                2
+            </div>
+
+            <div class="stat-title">
+                Pending
+            </div>
+
+            <div class="stat-description">
+                Review বাকি
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ⭐
+            </div>
+
+            <div
+            class="stat-number"
+            id="averageMarks">
+                78%
+            </div>
+
+            <div class="stat-title">
+                Average Score
+            </div>
+
+            <div class="stat-description">
+                গড় নম্বর
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="toolbar">
+
+        <div class="toolbar-row">
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                type="text"
+                id="searchInput"
+                placeholder="Student বা Quiz খুঁজুন..."
+                oninput="filterResults()"
+                >
+
+            </div>
+
+
+            <select
+            class="filter-select"
+            id="typeFilter"
+            onchange="filterResults()">
+
+                <option value="all">
+                    সব Type
+                </option>
+
+                <option value="Quiz">
+                    Quiz
+                </option>
+
+                <option value="Assignment">
+                    Assignment
+                </option>
+
+            </select>
+
+
+            <select
+            class="filter-select"
+            id="statusFilter"
+            onchange="filterResults()">
+
+                <option value="all">
+                    সব Status
+                </option>
+
+                <option value="Published">
+                    Published
+                </option>
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+                <option value="Review">
+                    Under Review
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            STUDENT
+                        </th>
+
+                        <th>
+                            TYPE
+                        </th>
+
+                        <th>
+                            QUIZ / ASSIGNMENT
+                        </th>
+
+                        <th>
+                            MARKS
+                        </th>
+
+                        <th>
+                            PERCENTAGE
+                        </th>
+
+                        <th>
+                            SUBMITTED
+                        </th>
+
+                        <th>
+                            STATUS
+                        </th>
+
+                        <th>
+                            ACTION
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="resultTable">
+
+
+                    <!-- RESULT 1 -->
+
+                    <tr
+                    data-name="Rahim Ahmed"
+                    data-type="Quiz"
+                    data-status="Published">
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    RA
+                                </div>
+
+                                <div class="student-name">
+
+                                    <strong>
+                                        Rahim Ahmed
+                                    </strong>
+
+                                    <span>
+                                        SNK-1001
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Quiz
+                        </td>
+
+
+                        <td>
+
+                            <div class="quiz-name">
+                                Computer Basic Quiz 01
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="marks good">
+                                9 / 10
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            90%
+                        </td>
+
+
+                        <td>
+                            08 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status published">
+                                Published
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                class="action-btn"
+                                onclick="viewResult('Rahim Ahmed','Computer Basic Quiz 01','9','10','Published')">
+
+                                    👁
+
+                                </button>
+
+
+                                <button
+                                class="action-btn publish"
+                                onclick="editMarks(this)">
+
+                                    ✏️
+
+                                </button>
+
+
+                                <button
+                                class="action-btn delete"
+                                onclick="deleteResult(this)">
+
+                                    🗑️
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RESULT 2 -->
+
+                    <tr
+                    data-name="Nusrat Jahan"
+                    data-type="Quiz"
+                    data-status="Pending">
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    NJ
+                                </div>
+
+                                <div class="student-name">
+
+                                    <strong>
+                                        Nusrat Jahan
+                                    </strong>
+
+                                    <span>
+                                        SNK-1002
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Quiz
+                        </td>
+
+
+                        <td>
+
+                            <div class="quiz-name">
+                                MS Word Basic Test
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="marks average">
+                                7 / 10
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            70%
+                        </td>
+
+
+                        <td>
+                            08 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                class="action-btn"
+                                onclick="viewResult('Nusrat Jahan','MS Word Basic Test','7','10','Pending')">
+
+                                    👁
+
+                                </button>
+
+                                <button
+                                class="action-btn publish"
+                                onclick="publishResult(this)">
+
+                                    ✓
+
+                                </button>
+
+                                <button
+                                class="action-btn delete"
+                                onclick="deleteResult(this)">
+
+                                    🗑️
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RESULT 3 -->
+
+                    <tr
+                    data-name="Sadia Akter"
+                    data-type="Assignment"
+                    data-status="Review">
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    SA
+                                </div>
+
+                                <div class="student-name">
+
+                                    <strong>
+                                        Sadia Akter
+                                    </strong>
+
+                                    <span>
+                                        SNK-1003
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Assignment
+                        </td>
+
+
+                        <td>
+
+                            <div class="quiz-name">
+                                MS Word Assignment 01
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="marks good">
+                                18 / 20
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            90%
+                        </td>
+
+
+                        <td>
+                            07 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status review">
+                                Under Review
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                class="action-btn"
+                                onclick="viewResult('Sadia Akter','MS Word Assignment 01','18','20','Review')">
+
+                                    👁
+
+                                </button>
+
+                                <button
+                                class="action-btn publish"
+                                onclick="editMarks(this)">
+
+                                    ✏️
+
+                                </button>
+
+                                <button
+                                class="action-btn delete"
+                                onclick="deleteResult(this)">
+
+                                    🗑️
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RESULT 4 -->
+
+                    <tr
+                    data-name="Tanvir Hasan"
+                    data-type="Quiz"
+                    data-status="Published">
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    TH
+                                </div>
+
+                                <div class="student-name">
+
+                                    <strong>
+                                        Tanvir Hasan
+                                    </strong>
+
+                                    <span>
+                                        SNK-1004
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Quiz
+                        </td>
+
+
+                        <td>
+
+                            <div class="quiz-name">
+                                Excel Formula Practice
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="marks good">
+                                14 / 15
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            93%
+                        </td>
+
+
+                        <td>
+                            06 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status published">
+                                Published
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                class="action-btn"
+                                onclick="viewResult('Tanvir Hasan','Excel Formula Practice','14','15','Published')">
+
+                                    👁
+
+                                </button>
+
+                                <button
+                                class="action-btn publish"
+                                onclick="editMarks(this)">
+
+                                    ✏️
+
+                                </button>
+
+                                <button
+                                class="action-btn delete"
+                                onclick="deleteResult(this)">
+
+                                    🗑️
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RESULT 5 -->
+
+                    <tr
+                    data-name="Jannatul Ferdous"
+                    data-type="Assignment"
+                    data-status="Published">
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    JF
+                                </div>
+
+                                <div class="student-name">
+
+                                    <strong>
+                                        Jannatul Ferdous
+                                    </strong>
+
+                                    <span>
+                                        SNK-1005
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Assignment
+                        </td>
+
+
+                        <td>
+
+                            <div class="quiz-name">
+                                Computer Practical 01
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="marks average">
+                                16 / 20
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            80%
+                        </td>
+
+
+                        <td>
+                            05 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status published">
+                                Published
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                class="action-btn"
+                                onclick="viewResult('Jannatul Ferdous','Computer Practical 01','16','20','Published')">
+
+                                    👁
+
+                                </button>
+
+                                <button
+                                class="action-btn publish"
+                                onclick="editMarks(this)">
+
+                                    ✏️
+
+                                </button>
+
+                                <button
+                                class="action-btn delete"
+                                onclick="deleteResult(this)">
+
+                                    🗑️
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- RESULT 6 -->
+
+                    <tr
+                    data-name="Arif Hossain"
+                    data-type="Quiz"
+                    data-status="Pending">
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    AH
+                                </div>
+
+                                <div class="student-name">
+
+                                    <strong>
+                                        Arif Hossain
+                                    </strong>
+
+                                    <span>
+                                        SNK-1006
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            Quiz
+                        </td>
+
+
+                        <td>
+
+                            <div class="quiz-name">
+                                Graphic Design Fundamentals
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="marks low">
+                                8 / 15
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            53%
+                        </td>
+
+
+                        <td>
+                            04 Sep 2026
+                        </td>
+
+
+                        <td>
+
+                            <span class="result-status pending">
+                                Pending
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="row-actions">
+
+                                <button
+                                class="action-btn"
+                                onclick="viewResult('Arif Hossain','Graphic Design Fundamentals','8','15','Pending')">
+
+                                    👁
+
+                                </button>
+
+                                <button
+                                class="action-btn publish"
+                                onclick="publishResult(this)">
+
+                                    ✓
+
+                                </button>
+
+                                <button
+                                class="action-btn delete"
+                                onclick="deleteResult(this)">
+
+                                    🗑️
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+        class="empty-state"
+        id="emptyState">
+
+            😕 কোনো result পাওয়া যায়নি।
+
+        </div>
+
+    </div>
+
+
+    <footer class="footer">
+
+        © 2026 SNK IT Institute • Results Management
+
+    </footer>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     VIEW RESULT MODAL
+========================= -->
+
+<div
+class="modal-overlay"
+id="viewModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3>
+                    Result Details
+                </h3>
+
+                <p>
+                    Student result information
+                </p>
+
+            </div>
+
+            <button
+            class="modal-close"
+            onclick="closeModal('viewModal')">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="result-summary">
+
+            <div class="summary-box">
+
+                <span>
+                    Student
+                </span>
+
+                <strong id="viewStudent">
+                    —
+                </strong>
+
+            </div>
+
+            <div class="summary-box">
+
+                <span>
+                    Marks
+                </span>
+
+                <strong id="viewMarks">
+                    —
+                </strong>
+
+            </div>
+
+            <div class="summary-box">
+
+                <span>
+                    Percentage
+                </span>
+
+                <strong id="viewPercentage">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Quiz / Assignment
+            </label>
+
+            <input
+            id="viewExam"
+            type="text"
+            readonly>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Status
+            </label>
+
+            <input
+            id="viewStatus"
+            type="text"
+            readonly>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+            class="secondary-btn"
+            onclick="closeModal('viewModal')">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ADD RESULT MODAL
+========================= -->
+
+<div
+class="modal-overlay"
+id="addResultModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3>
+                    Add Student Result
+                </h3>
+
+                <p>
+                    Admin manually result যোগ করতে পারবেন।
+                </p>
+
+            </div>
+
+            <button
+            class="modal-close"
+            onclick="closeModal('addResultModal')">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form
+        onsubmit="saveResult(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Student Name
+                </label>
+
+                <input
+                id="newStudent"
+                type="text"
+                placeholder="Student name"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Student ID
+                </label>
+
+                <input
+                id="newStudentId"
+                type="text"
+                placeholder="SNK-1007"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Type
+                </label>
+
+                <select
+                id="newType"
+                required>
+
+                    <option value="Quiz">
+                        Quiz
+                    </option>
+
+                    <option value="Assignment">
+                        Assignment
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Quiz / Assignment Name
+                </label>
+
+                <input
+                id="newExam"
+                type="text"
+                placeholder="Exam name"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Obtained Marks
+                </label>
+
+                <input
+                id="newObtained"
+                type="number"
+                min="0"
+                placeholder="8"
+                required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Total Marks
+                </label>
+
+                <input
+                id="newTotal"
+                type="number"
+                min="1"
+                placeholder="10"
+                required>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                type="button"
+                class="secondary-btn"
+                onclick="closeModal('addResultModal')">
+
+                    Cancel
+
+                </button>
+
+                <button
+                type="submit"
+                class="save-btn">
+
+                    💾 Save Result
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   THEME
+========================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("dark");
+
+    const dark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "snkResultsTheme",
+        dark ? "dark" : "light"
+    );
+
+    document.getElementById("themeBtn").textContent =
+        dark ? "☀️" : "🌙";
+}
+
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem("snkResultsTheme");
+
+    if(theme === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeBtn").textContent =
+            "☀️";
+    }
+}
+
+loadTheme();
+
+
+/* =========================
+   MOBILE SIDEBAR
+========================= */
+
+function toggleSidebar(){
+
+    document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+    document
+    .getElementById("sidebarOverlay")
+    .classList.toggle("show");
+}
+
+
+function closeSidebar(){
+
+    document
+    .getElementById("sidebar")
+    .classList.remove("open");
+
+    document
+    .getElementById("sidebarOverlay")
+    .classList.remove("show");
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filterResults(){
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const type =
+        document
+        .getElementById("typeFilter")
+        .value;
+
+    const status =
+        document
+        .getElementById("statusFilter")
+        .value;
+
+    const rows =
+        document.querySelectorAll("#resultTable tr");
+
+    let visible = 0;
+
+    rows.forEach(row => {
+
+        const name =
+            row.dataset.name.toLowerCase();
+
+        const rowType =
+            row.dataset.type;
+
+        const rowStatus =
+            row.dataset.status;
+
+        const searchMatch =
+            name.includes(search) ||
+            row.innerText.toLowerCase().includes(search);
+
+        const typeMatch =
+            type === "all" ||
+            rowType === type;
+
+        const statusMatch =
+            status === "all" ||
+            rowStatus === status;
+
+        if(
+            searchMatch &&
+            typeMatch &&
+            statusMatch
+        ){
+
+            row.style.display = "";
+
+            visible++;
+
+        }else{
+
+            row.style.display = "none";
+        }
+
+    });
+
+
+    document.getElementById("emptyState").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+
+/* =========================
+   VIEW RESULT
+========================= */
+
+function viewResult(
+    student,
+    exam,
+    obtained,
+    total,
+    status
+){
+
+    const percentage =
+        Math.round(
+            (Number(obtained) /
+            Number(total)) * 100
+        );
+
+
+    document.getElementById("viewStudent").textContent =
+        student;
+
+    document.getElementById("viewMarks").textContent =
+        obtained + " / " + total;
+
+    document.getElementById("viewPercentage").textContent =
+        percentage + "%";
+
+    document.getElementById("viewExam").value =
+        exam;
+
+    document.getElementById("viewStatus").value =
+        status;
+
+
+    document
+    .getElementById("viewModal")
+    .classList.add("show");
+}
+
+
+/* =========================
+   ADD RESULT
+========================= */
+
+function openAddResult(){
+
+    document
+    .getElementById("addResultModal")
+    .classList.add("show");
+}
+
+
+function saveResult(event){
+
+    event.preventDefault();
+
+    const student =
+        document.getElementById("newStudent").value.trim();
+
+    const studentId =
+        document.getElementById("newStudentId").value.trim();
+
+    const type =
+        document.getElementById("newType").value;
+
+    const exam =
+        document.getElementById("newExam").value.trim();
+
+    const obtained =
+        Number(
+            document.getElementById("newObtained").value
+        );
+
+    const total =
+        Number(
+            document.getElementById("newTotal").value
+        );
+
+
+    if(obtained > total){
+
+        alert(
+            "Obtained marks Total marks-এর চেয়ে বেশি হতে পারবে না।"
+        );
+
+        return;
+    }
+
+
+    const percentage =
+        Math.round(
+            (obtained / total) * 100
+        );
+
+
+    let results =
+        JSON.parse(
+            localStorage.getItem("snkResultsList") || "[]"
+        );
+
+
+    results.push({
+
+        id:Date.now(),
+
+        student,
+
+        studentId,
+
+        type,
+
+        exam,
+
+        obtained,
+
+        total,
+
+        percentage,
+
+        status:"Pending",
+
+        date:
+            new Date().toLocaleDateString("en-GB")
+
+    });
+
+
+    localStorage.setItem(
+        "snkResultsList",
+        JSON.stringify(results)
+    );
+
+
+    alert(
+        "✅ Result save হয়েছে।\n\n" +
+        "এটি এখন Pending হিসেবে থাকবে।"
+    );
+
+
+    closeModal("addResultModal");
+
+    document
+    .querySelector("#addResultModal form")
+    .reset();
+}
+
+
+/* =========================
+   PUBLISH
+========================= */
+
+function publishResult(button){
+
+    const row =
+        button.closest("tr");
+
+    const status =
+        row.querySelector(".result-status");
+
+    status.className =
+        "result-status published";
+
+    status.textContent =
+        "Published";
+
+    row.dataset.status =
+        "Published";
+
+    button.style.display =
+        "none";
+
+    updateStats();
+
+    alert(
+        "✅ Result Published!\n\n" +
+        "পরবর্তী Student Portal-এ এই result দেখানো যাবে।"
+    );
+}
+
+
+/* =========================
+   EDIT MARKS
+========================= */
+
+function editMarks(button){
+
+    const row =
+        button.closest("tr");
+
+    const current =
+        row.querySelector(".marks").textContent.trim();
+
+    const parts =
+        current.split("/");
+
+    const obtained =
+        parts[0].trim();
+
+    const total =
+        parts[1] ?
+        parts[1].trim() :
+        "10";
+
+
+    const newMarks =
+        prompt(
+            "Obtained Marks দিন:",
+            obtained
+        );
+
+
+    if(newMarks === null){
+        return;
+    }
+
+
+    const number =
+        Number(newMarks);
+
+    if(
+        Number.isNaN(number) ||
+        number < 0 ||
+        number > Number(total)
+    ){
+
+        alert("সঠিক marks দিন।");
+
+        return;
+    }
+
+
+    const percentage =
+        Math.round(
+            (number / Number(total)) * 100
+        );
+
+
+    row.querySelector(".marks").textContent =
+        number + " / " + total;
+
+    row.children[4].textContent =
+        percentage + "%";
+
+
+    if(percentage >= 80){
+
+        row.querySelector(".marks").className =
+            "marks good";
+
+    }else if(percentage >= 50){
+
+        row.querySelector(".marks").className =
+            "marks average";
+
+    }else{
+
+        row.querySelector(".marks").className =
+            "marks low";
+    }
+
+
+    alert(
+        "✅ Marks updated: " +
+        number +
+        " / " +
+        total
+    );
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+function deleteResult(button){
+
+    const confirmed =
+        confirm(
+            "আপনি কি এই result delete করতে চান?"
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+
+    button.closest("tr").remove();
+
+    updateStats();
+
+    alert(
+        "🗑️ Result deleted."
+    );
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+    const rows =
+        document.querySelectorAll("#resultTable tr");
+
+    let published = 0;
+    let pending = 0;
+
+    rows.forEach(row => {
+
+        if(row.dataset.status === "Published"){
+            published++;
+        }
+
+        if(row.dataset.status === "Pending"){
+            pending++;
+        }
+
+    });
+
+
+    document.getElementById("totalResults").textContent =
+        rows.length;
+
+    document.getElementById("publishedResults").textContent =
+        published;
+
+    document.getElementById("pendingResults").textContent =
+        pending;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function closeModal(id){
+
+    document
+    .getElementById(id)
+    .classList.remove("show");
+}
+
+
+/* =========================
+   DEMO
+========================= */
+
+function showDemo(name){
+
+    alert(
+        "📌 " +
+        name +
+        " section পরবর্তী step-এ তৈরি করা হবে।"
+    );
+}
+
+
+function logoutDemo(){
+
+    const ok =
+        confirm(
+            "আপনি কি Logout করতে চান?"
+        );
+
+    if(ok){
+
+        sessionStorage.removeItem(
+            "snkAdminLoggedIn"
+        );
+
+        alert(
+            "আপনি Admin Panel থেকে Logout করেছেন।"
+        );
+    }
+}
+
+
+/* =========================
+   OUTSIDE CLICK
+========================= */
+
+document
+.getElementById("viewModal")
+.addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+            closeModal("viewModal");
+        }
+
+    }
+);
+
+
+document
+.getElementById("addResultModal")
+.addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+            closeModal("addResultModal");
+        }
+
+    }
+);
+
+
+/* =========================
+   INITIAL
+========================= */
+
+updateStats();
+
+</script>
+
+</body>
+</html>
+```
