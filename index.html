@@ -4,4785 +4,1054 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SNK IT Institute - Student Portal</title>
+<title>SNK IT Institute | Offline Course</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-   1. RESET
-========================================================= */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+:root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --border:#e5e7eb;
+    --soft:#eff6ff;
+    --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+
+body.dark{
+    --bg:#0b1120;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --primary:#3b82f6;
+    --primary-dark:#2563eb;
+    --border:#1f2937;
+    --soft:#172554;
+    --shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
 body{
     font-family:"Noto Sans Bengali",Arial,sans-serif;
-    background:#f5f7fb;
-    color:#172033;
-    min-height:100vh;
-    transition:.3s ease;
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
 }
 
-body.dark{
-    background:#0b1120;
-    color:#f1f5f9;
+a{
+    text-decoration:none;
+    color:inherit;
 }
 
 button{
     font-family:inherit;
+    cursor:pointer;
 }
 
+/* ================= HEADER ================= */
 
-/* =========================================================
-   2. HEADER
-========================================================= */
-
-.header{
-    width:100%;
-    background:#fff;
-    border-bottom:1px solid #e7eaf0;
+header{
     position:sticky;
     top:0;
     z-index:1000;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
 }
 
-body.dark .header{
-    background:#111827;
-    border-color:#273244;
-}
-
-.header-inner{
+.navbar{
     max-width:1200px;
     margin:auto;
-    padding:12px 20px;
+    padding:14px 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:20px;
 }
 
-.brand{
+.logo{
     display:flex;
     align-items:center;
     gap:12px;
-    text-decoration:none;
-    color:inherit;
+    font-weight:800;
+    font-size:18px;
 }
 
-.brand-logo{
-    width:52px;
-    height:52px;
-    border-radius:12px;
-    background:#fff;
-    border:1px solid #e5e7eb;
-    padding:5px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-}
-
-.brand-logo img{
-    width:100%;
-    height:100%;
+.logo img{
+    width:48px;
+    height:48px;
     object-fit:contain;
 }
 
-.brand-text h1{
-    font-size:18px;
-    font-weight:800;
-    line-height:1.2;
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    font-weight:500;
 }
 
-.brand-text p{
-    font-size:12px;
-    color:#667085;
-    margin-top:3px;
-}
-
-body.dark .brand-text p{
-    color:#94a3b8;
-}
-
-.header-actions{
+.nav-actions{
     display:flex;
     align-items:center;
     gap:8px;
-    flex-wrap:wrap;
 }
 
-.header-btn{
-    border:1px solid #e1e5eb;
-    background:#fff;
-    color:#344054;
+.nav-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
     padding:9px 13px;
-    border-radius:9px;
-    cursor:pointer;
+    border-radius:10px;
     font-size:13px;
-    transition:.2s ease;
+    font-weight:600;
 }
 
-.header-btn:hover{
-    background:#f4f6f8;
+.nav-btn:hover{
+    background:var(--soft);
 }
 
-body.dark .header-btn{
-    background:#172033;
-    border-color:#344054;
-    color:#f8fafc;
+.login-btn{
+    background:var(--primary);
+    color:white;
+    border-color:var(--primary);
 }
 
-.theme-btn{
-    width:40px;
-    height:40px;
-    padding:0;
-    font-size:18px;
+.login-btn:hover{
+    background:var(--primary-dark);
 }
 
+/* ================= HERO ================= */
 
-/* =========================================================
-   3. MAIN
-========================================================= */
+.hero{
+    max-width:1200px;
+    margin:35px auto;
+    padding:0 20px;
+}
 
-.main{
+.hero-box{
+    background:linear-gradient(135deg,#172554,#2563eb);
+    border-radius:24px;
+    padding:55px 45px;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-box:after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    right:-80px;
+    top:-100px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+}
+
+.badge{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:42px;
+    line-height:1.2;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:16px;
+    line-height:1.8;
+    opacity:.9;
+    margin-bottom:25px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.hero-btn{
+    padding:12px 20px;
+    border-radius:10px;
+    border:none;
+    font-weight:700;
+    background:white;
+    color:#172554;
+}
+
+.hero-btn.secondary{
+    background:rgba(255,255,255,.12);
+    color:white;
+    border:1px solid rgba(255,255,255,.25);
+}
+
+/* ================= COMMON ================= */
+
+.container{
     max-width:1200px;
     margin:auto;
-    padding:30px 20px 60px;
+    padding:0 20px;
 }
 
-.page-title{
-    margin-bottom:22px;
+.section{
+    padding:25px 0 45px;
 }
-
-.page-title h2{
-    font-size:26px;
-    font-weight:800;
-}
-
-.page-title p{
-    margin-top:5px;
-    font-size:12px;
-    color:#667085;
-}
-
-body.dark .page-title p{
-    color:#94a3b8;
-}
-
-
-/* =========================================================
-   4. COMMON CARDS
-========================================================= */
-
-.profile-card,
-.course-card,
-.assignment-card,
-.quiz-card,
-.resource-card,
-.resource-notice,
-.result-card,
-.notice-card,
-.routine-card,
-.attendance-card{
-    background:#fff;
-    border:1px solid #e7eaf0;
-}
-
-body.dark .profile-card,
-body.dark .course-card,
-body.dark .assignment-card,
-body.dark .quiz-card,
-body.dark .resource-card,
-body.dark .resource-notice,
-body.dark .result-card,
-body.dark .notice-card,
-body.dark .routine-card,
-body.dark .attendance-card{
-    background:#111827;
-    border-color:#273244;
-}
-
-
-/* =========================================================
-   5. PROFILE
-========================================================= */
-
-.profile-card{
-    border-radius:20px;
-    padding:25px;
-    margin-bottom:22px;
-}
-
-.profile-header{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    margin-bottom:22px;
-}
-
-.avatar{
-    width:78px;
-    height:78px;
-    border-radius:50%;
-    background:#f2f4f7;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:36px;
-}
-
-body.dark .avatar{
-    background:#1e293b;
-}
-
-.profile-header h3{
-    font-size:21px;
-    margin-bottom:4px;
-}
-
-.profile-header p{
-    color:#667085;
-    font-size:12px;
-}
-
-body.dark .profile-header p{
-    color:#94a3b8;
-}
-
-.student-badge{
-    display:inline-block;
-    margin-top:7px;
-    padding:5px 9px;
-    border-radius:7px;
-    background:#f2f4f7;
-    font-size:10px;
-    font-weight:700;
-}
-
-body.dark .student-badge{
-    background:#1e293b;
-}
-
-.info-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:13px;
-}
-
-.info-box{
-    background:#f8fafc;
-    border-radius:12px;
-    padding:15px;
-}
-
-body.dark .info-box{
-    background:#172033;
-}
-
-.info-box span{
-    display:block;
-    color:#667085;
-    font-size:10px;
-    margin-bottom:5px;
-}
-
-body.dark .info-box span{
-    color:#94a3b8;
-}
-
-.info-box strong{
-    font-size:13px;
-}
-
-
-/* =========================================================
-   6. SECTION TITLE
-========================================================= */
 
 .section-title{
-    margin:28px 0 15px;
+    margin-bottom:22px;
 }
 
-.section-title h3{
-    font-size:20px;
-    font-weight:800;
+.section-title h2{
+    font-size:27px;
+    margin-bottom:5px;
 }
 
 .section-title p{
-    color:#667085;
-    font-size:12px;
-    margin-top:3px;
+    color:var(--muted);
+    font-size:14px;
 }
 
-body.dark .section-title p{
-    color:#94a3b8;
-}
+/* ================= QUICK ACCESS ================= */
 
-
-/* =========================================================
-   7. NOTICE BOARD — NEW 1.11
-========================================================= */
-
-.notice-list{
-    display:grid;
-    gap:14px;
-}
-
-.notice-card{
-    border-radius:17px;
-    padding:20px;
-}
-
-.notice-top{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.notice-left{
-    display:flex;
-    align-items:flex-start;
-    gap:13px;
-}
-
-.notice-icon{
-    width:46px;
-    height:46px;
-    border-radius:11px;
-    background:#f2f4f7;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:21px;
-    flex-shrink:0;
-}
-
-body.dark .notice-icon{
-    background:#1e293b;
-}
-
-.notice-card h4{
-    font-size:15px;
-    margin-bottom:4px;
-}
-
-.notice-card p{
-    color:#667085;
-    font-size:11px;
-    line-height:1.8;
-}
-
-body.dark .notice-card p{
-    color:#94a3b8;
-}
-
-.notice-date{
-    padding:6px 9px;
-    border-radius:7px;
-    background:#f8fafc;
-    color:#667085;
-    font-size:9px;
-    white-space:nowrap;
-}
-
-body.dark .notice-date{
-    background:#172033;
-    color:#94a3b8;
-}
-
-.notice-details{
-    margin-top:14px;
-    padding-top:13px;
-    border-top:1px solid #eef0f3;
-    color:#475467;
-    font-size:10px;
-    line-height:1.8;
-}
-
-body.dark .notice-details{
-    border-color:#273244;
-    color:#cbd5e1;
-}
-
-.notice-important{
-    border-left:3px solid #172033;
-}
-
-body.dark .notice-important{
-    border-left-color:#fff;
-}
-
-
-/* =========================================================
-   8. CLASS ROUTINE — NEW 1.11
-========================================================= */
-
-.routine-card{
-    border-radius:18px;
-    padding:22px;
-    overflow:hidden;
-}
-
-.routine-header{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:18px;
-}
-
-.routine-header h4{
-    font-size:17px;
-}
-
-.routine-header p{
-    color:#667085;
-    font-size:10px;
-    margin-top:4px;
-}
-
-body.dark .routine-header p{
-    color:#94a3b8;
-}
-
-.routine-badge{
-    padding:6px 10px;
-    border-radius:8px;
-    background:#f2f4f7;
-    font-size:9px;
-    font-weight:700;
-}
-
-body.dark .routine-badge{
-    background:#1e293b;
-}
-
-.routine-table-wrapper{
-    overflow-x:auto;
-}
-
-.routine-table{
-    width:100%;
-    min-width:700px;
-    border-collapse:collapse;
-}
-
-.routine-table th{
-    text-align:left;
-    padding:13px;
-    background:#f8fafc;
-    color:#667085;
-    font-size:10px;
-}
-
-body.dark .routine-table th{
-    background:#172033;
-    color:#94a3b8;
-}
-
-.routine-table td{
-    padding:14px 13px;
-    border-bottom:1px solid #eef0f3;
-    font-size:11px;
-}
-
-body.dark .routine-table td{
-    border-color:#273244;
-}
-
-.routine-day{
-    font-weight:800;
-}
-
-.routine-time{
-    font-weight:700;
-}
-
-.routine-subject{
-    font-weight:700;
-}
-
-.class-type{
-    display:inline-block;
-    padding:5px 8px;
-    border-radius:7px;
-    background:#f2f4f7;
-    font-size:9px;
-    font-weight:700;
-}
-
-body.dark .class-type{
-    background:#273244;
-}
-
-
-/* =========================================================
-   9. ATTENDANCE — NEW 1.11
-========================================================= */
-
-.attendance-card{
-    border-radius:20px;
-    padding:24px;
-}
-
-.attendance-summary{
+.quick-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:13px;
-}
-
-.attendance-box{
-    background:#f8fafc;
-    border-radius:13px;
-    padding:17px;
-}
-
-body.dark .attendance-box{
-    background:#172033;
-}
-
-.attendance-box span{
-    display:block;
-    color:#667085;
-    font-size:10px;
-    margin-bottom:5px;
-}
-
-body.dark .attendance-box span{
-    color:#94a3b8;
-}
-
-.attendance-box strong{
-    font-size:21px;
-}
-
-.attendance-progress{
-    margin-top:20px;
-}
-
-.attendance-progress-top{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:7px;
-    font-size:10px;
-}
-
-.attendance-bar{
-    width:100%;
-    height:10px;
-    background:#e5e7eb;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-body.dark .attendance-bar{
-    background:#273244;
-}
-
-.attendance-fill{
-    width:92%;
-    height:100%;
-    background:#111827;
-    border-radius:20px;
-}
-
-body.dark .attendance-fill{
-    background:#fff;
-}
-
-.attendance-message{
-    margin-top:16px;
-    padding:14px;
-    background:#f8fafc;
-    border-radius:11px;
-    color:#475467;
-    font-size:10px;
-    line-height:1.7;
-}
-
-body.dark .attendance-message{
-    background:#172033;
-    color:#cbd5e1;
-}
-
-.attendance-history{
-    margin-top:20px;
-    overflow-x:auto;
-}
-
-.attendance-history table{
-    width:100%;
-    min-width:600px;
-    border-collapse:collapse;
-}
-
-.attendance-history th{
-    text-align:left;
-    padding:12px;
-    background:#f8fafc;
-    font-size:10px;
-    color:#667085;
-}
-
-body.dark .attendance-history th{
-    background:#172033;
-    color:#94a3b8;
-}
-
-.attendance-history td{
-    padding:13px 12px;
-    border-bottom:1px solid #eef0f3;
-    font-size:10px;
-}
-
-body.dark .attendance-history td{
-    border-color:#273244;
-}
-
-.present{
-    color:#18794e;
-    font-weight:800;
-}
-
-.absent{
-    color:#b42318;
-    font-weight:800;
-}
-
-.attendance-demo{
-    margin-top:16px;
-    padding:13px;
-    background:#f8fafc;
-    border-radius:10px;
-    color:#667085;
-    font-size:9px;
-}
-
-body.dark .attendance-demo{
-    background:#172033;
-    color:#94a3b8;
-}
-
-
-/* =========================================================
-   10. COURSE
-========================================================= */
-
-.course-card{
-    border-radius:18px;
-    padding:23px;
-    margin-bottom:22px;
-}
-
-.course-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-}
-
-.course-top h4{
-    font-size:18px;
-}
-
-.course-top p{
-    color:#667085;
-    font-size:11px;
-    margin-top:4px;
-}
-
-body.dark .course-top p{
-    color:#94a3b8;
-}
-
-.course-status{
-    padding:6px 10px;
-    border-radius:8px;
-    background:#f2f4f7;
-    font-size:10px;
-    font-weight:700;
-}
-
-body.dark .course-status{
-    background:#1e293b;
-}
-
-.progress-row{
-    margin-top:20px;
-}
-
-.progress-info{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:7px;
-    font-size:11px;
-}
-
-.progress-bar{
-    width:100%;
-    height:10px;
-    background:#e5e7eb;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-body.dark .progress-bar{
-    background:#273244;
-}
-
-.progress-fill{
-    width:65%;
-    height:100%;
-    background:#111827;
-    border-radius:20px;
-}
-
-body.dark .progress-fill{
-    background:#fff;
-}
-
-.course-details{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-top:20px;
-}
-
-.course-detail{
-    padding:14px;
-    background:#f8fafc;
-    border-radius:11px;
-}
-
-body.dark .course-detail{
-    background:#172033;
-}
-
-.course-detail span{
-    display:block;
-    font-size:10px;
-    color:#667085;
-    margin-bottom:4px;
-}
-
-body.dark .course-detail span{
-    color:#94a3b8;
-}
-
-.course-detail strong{
-    font-size:12px;
-}
-
-
-/* =========================================================
-   11. ASSIGNMENT
-========================================================= */
-
-.assignment-card{
-    border-radius:18px;
-    padding:23px;
-    margin-bottom:18px;
-}
-
-.assignment-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-}
-
-.assignment-heading{
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
-
-.assignment-icon{
-    width:48px;
-    height:48px;
-    border-radius:12px;
-    background:#f2f4f7;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-}
-
-body.dark .assignment-icon{
-    background:#1e293b;
-}
-
-.assignment-heading h4{
-    font-size:16px;
-}
-
-.assignment-heading p{
-    color:#667085;
-    font-size:11px;
-    margin-top:4px;
-}
-
-body.dark .assignment-heading p{
-    color:#94a3b8;
-}
-
-.assignment-status{
-    padding:6px 10px;
-    border-radius:8px;
-    font-size:10px;
-    font-weight:700;
-    background:#f2f4f7;
-}
-
-body.dark .assignment-status{
-    background:#1e293b;
-}
-
-.assignment-description{
-    margin-top:18px;
-    padding:15px;
-    background:#f8fafc;
-    border-radius:11px;
-    font-size:11px;
-    line-height:1.8;
-    color:#475467;
-}
-
-body.dark .assignment-description{
-    background:#172033;
-    color:#cbd5e1;
-}
-
-.assignment-meta{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:15px;
-}
-
-.meta-box{
-    background:#f8fafc;
-    padding:13px;
-    border-radius:10px;
-}
-
-body.dark .meta-box{
-    background:#172033;
-}
-
-.meta-box span{
-    display:block;
-    font-size:9px;
-    color:#667085;
-    margin-bottom:4px;
-}
-
-body.dark .meta-box span{
-    color:#94a3b8;
-}
-
-.meta-box strong{
-    font-size:11px;
-}
-
-.countdown-box{
-    margin-top:15px;
-    padding:15px;
-    border-radius:11px;
-    background:#f8fafc;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-body.dark .countdown-box{
-    background:#172033;
-}
-
-.countdown-label{
-    font-size:11px;
-    font-weight:700;
-}
-
-.countdown{
-    font-size:17px;
-    font-weight:800;
-}
-
-.submit-area{
-    margin-top:18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-.submit-info{
-    color:#667085;
-    font-size:10px;
-}
-
-body.dark .submit-info{
-    color:#94a3b8;
-}
-
-.submit-btn{
-    border:none;
-    background:#111827;
-    color:#fff;
-    padding:10px 18px;
-    border-radius:9px;
-    cursor:pointer;
-    font-size:12px;
-    font-weight:700;
-}
-
-body.dark .submit-btn{
-    background:#fff;
-    color:#111827;
-}
-
-.submit-btn.submitted{
-    background:#e7f6ec;
-    color:#18794e;
-    cursor:default;
-}
-
-
-/* =========================================================
-   12. RESOURCES
-========================================================= */
-
-.resources-wrapper{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
     gap:16px;
-    margin-bottom:22px;
 }
 
-.resource-card{
-    border-radius:17px;
-    padding:20px;
+.quick-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    transition:.2s;
 }
 
-.resource-icon{
-    width:48px;
-    height:48px;
+.quick-card:hover{
+    transform:translateY(-3px);
+}
+
+.icon{
+    width:45px;
+    height:45px;
     border-radius:12px;
-    background:#f2f4f7;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:23px;
+    background:var(--soft);
+    font-size:22px;
     margin-bottom:14px;
 }
 
-body.dark .resource-icon{
-    background:#1e293b;
-}
-
-.resource-card h4{
-    font-size:15px;
-    margin-bottom:5px;
-}
-
-.resource-card p{
-    color:#667085;
-    font-size:10px;
-    line-height:1.7;
-    min-height:48px;
-}
-
-body.dark .resource-card p{
-    color:#94a3b8;
-}
-
-.resource-info{
-    display:flex;
-    justify-content:space-between;
-    gap:8px;
-    margin-top:13px;
-    padding-top:12px;
-    border-top:1px solid #eef0f3;
-    font-size:9px;
-    color:#667085;
-}
-
-body.dark .resource-info{
-    border-color:#273244;
-    color:#94a3b8;
-}
-
-.resource-actions{
-    display:flex;
-    gap:8px;
-    margin-top:14px;
-}
-
-.resource-btn{
-    flex:1;
-    border:1px solid #e1e5eb;
-    background:#fff;
-    color:#344054;
-    padding:9px 10px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:10px;
-    font-weight:700;
-    text-align:center;
-}
-
-.resource-btn.primary{
-    background:#111827;
-    color:#fff;
-    border-color:#111827;
-}
-
-body.dark .resource-btn{
-    background:#172033;
-    border-color:#344054;
-    color:#f8fafc;
-}
-
-body.dark .resource-btn.primary{
-    background:#fff;
-    color:#111827;
-    border-color:#fff;
-}
-
-.resource-notice{
-    border-radius:16px;
-    padding:18px;
-    margin-bottom:22px;
-}
-
-.resource-notice h4{
-    font-size:14px;
-    margin-bottom:5px;
-}
-
-.resource-notice p{
-    color:#667085;
-    font-size:10px;
-    line-height:1.7;
-}
-
-body.dark .resource-notice p{
-    color:#94a3b8;
-}
-
-
-/* =========================================================
-   13. QUIZ
-========================================================= */
-
-.quiz-card{
-    border-radius:18px;
-    padding:23px;
-    margin-bottom:22px;
-}
-
-.quiz-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:15px;
-    padding-bottom:18px;
-    border-bottom:1px solid #e7eaf0;
-}
-
-body.dark .quiz-header{
-    border-color:#273244;
-}
-
-.quiz-header h4{
-    font-size:18px;
-}
-
-.quiz-header p{
-    margin-top:4px;
-    color:#667085;
-    font-size:11px;
-}
-
-body.dark .quiz-header p{
-    color:#94a3b8;
-}
-
-.quiz-timer{
-    min-width:130px;
-    text-align:center;
-    padding:12px 15px;
-    border-radius:11px;
-    background:#f8fafc;
-}
-
-body.dark .quiz-timer{
-    background:#172033;
-}
-
-.quiz-timer span{
-    display:block;
-    color:#667085;
-    font-size:9px;
-    margin-bottom:3px;
-}
-
-body.dark .quiz-timer span{
-    color:#94a3b8;
-}
-
-.quiz-timer strong{
-    font-size:19px;
-}
-
-.quiz-progress{
-    margin-top:18px;
-}
-
-.quiz-progress-top{
-    display:flex;
-    justify-content:space-between;
-    font-size:10px;
+.quick-card h3{
+    font-size:17px;
     margin-bottom:7px;
 }
 
-.quiz-progress-bar{
-    width:100%;
-    height:8px;
-    background:#e5e7eb;
-    border-radius:20px;
-    overflow:hidden;
+.quick-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
 }
 
-body.dark .quiz-progress-bar{
-    background:#273244;
+/* ================= RESOURCES ================= */
+
+.resources-section{
+    background:var(--soft);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
 }
 
-.quiz-progress-fill{
-    width:33.33%;
-    height:100%;
-    background:#111827;
-    transition:.3s ease;
-}
-
-body.dark .quiz-progress-fill{
-    background:#fff;
-}
-
-.question-card{
-    margin-top:20px;
-    padding:20px;
-    background:#f8fafc;
-    border-radius:14px;
-}
-
-body.dark .question-card{
-    background:#172033;
-}
-
-.question-number{
-    font-size:10px;
-    color:#667085;
-    margin-bottom:7px;
-}
-
-body.dark .question-number{
-    color:#94a3b8;
-}
-
-.question-text{
-    font-size:16px;
-    font-weight:700;
-    line-height:1.7;
-}
-
-.options{
+.resource-grid{
     display:grid;
-    gap:10px;
-    margin-top:18px;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
-.option{
-    position:relative;
+.resource-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+    transition:.25s;
 }
 
-.option input{
-    position:absolute;
-    opacity:0;
+.resource-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
 }
 
-.option label{
-    display:block;
-    padding:13px 15px;
-    background:#fff;
-    border:1px solid #dfe3e8;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:11px;
+.resource-icon{
+    font-size:30px;
+    margin-bottom:15px;
 }
 
-.option input:checked + label{
-    border-color:#111827;
-    background:#f1f3f5;
-    font-weight:700;
-}
-
-body.dark .option label{
-    background:#111827;
-    border-color:#344054;
-}
-
-body.dark .option input:checked + label{
-    background:#273244;
-    border-color:#fff;
-}
-
-.quiz-navigation{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    margin-top:18px;
-}
-
-.quiz-nav-btn{
-    border:1px solid #dfe3e8;
-    background:#fff;
-    color:#344054;
-    padding:10px 17px;
-    border-radius:9px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:700;
-}
-
-.quiz-nav-btn.primary{
-    background:#111827;
-    color:#fff;
-    border-color:#111827;
-}
-
-body.dark .quiz-nav-btn{
-    background:#172033;
-    color:#fff;
-    border-color:#344054;
-}
-
-body.dark .quiz-nav-btn.primary{
-    background:#fff;
-    color:#111827;
-}
-
-.quiz-submit-area{
-    margin-top:20px;
-    padding-top:20px;
-    border-top:1px solid #e7eaf0;
-    display:none;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-body.dark .quiz-submit-area{
-    border-color:#273244;
-}
-
-.quiz-submit-area.show{
-    display:flex;
-}
-
-.quiz-submit{
-    border:none;
-    background:#111827;
-    color:#fff;
-    padding:11px 20px;
-    border-radius:9px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:700;
-}
-
-body.dark .quiz-submit{
-    background:#fff;
-    color:#111827;
-}
-
-.quiz-result{
-    display:none;
-    margin-top:20px;
-    padding:22px;
-    background:#f8fafc;
-    border-radius:14px;
-    text-align:center;
-}
-
-body.dark .quiz-result{
-    background:#172033;
-}
-
-.quiz-result.show{
-    display:block;
-}
-
-.result-icon{
-    font-size:40px;
+.resource-card h3{
+    font-size:18px;
     margin-bottom:8px;
 }
 
-.quiz-result h4{
-    font-size:20px;
+.resource-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.7;
+    margin-bottom:18px;
 }
 
-.quiz-result p{
-    margin-top:5px;
-    color:#667085;
-    font-size:11px;
-}
-
-body.dark .quiz-result p{
-    color:#94a3b8;
-}
-
-.result-score{
-    font-size:30px;
-    font-weight:800;
-    margin-top:10px;
-}
-
-
-/* =========================================================
-   14. RESULT
-========================================================= */
-
-.result-card{
-    border-radius:20px;
-    padding:25px;
-    margin-bottom:22px;
-}
-
-.result-summary{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:13px;
-}
-
-.result-box{
-    background:#f8fafc;
-    border-radius:13px;
-    padding:17px;
-}
-
-body.dark .result-box{
-    background:#172033;
-}
-
-.result-box span{
-    display:block;
-    color:#667085;
-    font-size:10px;
-    margin-bottom:5px;
-}
-
-body.dark .result-box span{
-    color:#94a3b8;
-}
-
-.result-box strong{
-    font-size:20px;
-}
-
-.result-table-wrapper{
-    margin-top:20px;
-    overflow-x:auto;
-}
-
-.result-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:600px;
-}
-
-.result-table th{
-    text-align:left;
-    background:#f8fafc;
-    padding:13px;
-    font-size:10px;
-    color:#667085;
-}
-
-body.dark .result-table th{
-    background:#172033;
-    color:#94a3b8;
-}
-
-.result-table td{
-    padding:14px 13px;
-    border-bottom:1px solid #eef0f3;
-    font-size:11px;
-}
-
-body.dark .result-table td{
-    border-color:#273244;
-}
-
-.result-pending{
+.resource-btn{
     display:inline-block;
-    padding:5px 8px;
-    border-radius:7px;
-    background:#f2f4f7;
-    font-size:9px;
+    padding:9px 14px;
+    border-radius:9px;
+    background:var(--primary);
+    color:white;
+    font-size:13px;
     font-weight:700;
 }
 
-body.dark .result-pending{
-    background:#273244;
-}
+/* ================= NOTICE ================= */
 
-.result-demo{
-    margin-top:18px;
-    padding:14px;
-    background:#f8fafc;
-    border-radius:11px;
-    color:#667085;
-    font-size:10px;
-    line-height:1.7;
-}
-
-body.dark .result-demo{
-    background:#172033;
-    color:#94a3b8;
-}
-
-.grade-card{
-    margin-top:20px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.grade-panel{
-    padding:20px;
-    background:#f8fafc;
+.notice{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:4px solid var(--primary);
     border-radius:14px;
+    padding:18px 20px;
+}
+
+.notice strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.notice p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    margin-top:30px;
+    background:var(--card);
+    border-top:1px solid var(--border);
+    padding:30px 20px;
     text-align:center;
 }
 
-body.dark .grade-panel{
-    background:#172033;
-}
-
-.grade-panel span{
-    display:block;
-    color:#667085;
-    font-size:10px;
+footer h3{
     margin-bottom:7px;
 }
 
-body.dark .grade-panel span{
-    color:#94a3b8;
+footer p{
+    color:var(--muted);
+    font-size:13px;
 }
 
-.grade-panel strong{
-    font-size:28px;
-}
+/* ================= MOBILE ================= */
 
-.grade-status{
-    margin-top:8px;
-    font-size:11px;
-    font-weight:700;
-}
+@media(max-width:850px){
 
-
-/* =========================================================
-   15. LEARNING CENTER
-========================================================= */
-
-.learning-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    margin-bottom:22px;
-}
-
-.learning-card{
-    background:#fff;
-    border:1px solid #e7eaf0;
-    border-radius:16px;
-    padding:20px;
-}
-
-body.dark .learning-card{
-    background:#111827;
-    border-color:#273244;
-}
-
-.learning-icon{
-    width:44px;
-    height:44px;
-    background:#f2f4f7;
-    border-radius:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:21px;
-    margin-bottom:12px;
-}
-
-body.dark .learning-icon{
-    background:#1e293b;
-}
-
-.learning-card h4{
-    font-size:15px;
-    margin-bottom:5px;
-}
-
-.learning-card p{
-    color:#667085;
-    font-size:11px;
-    line-height:1.7;
-}
-
-body.dark .learning-card p{
-    color:#94a3b8;
-}
-
-
-/* =========================================================
-   16. FOOTER
-========================================================= */
-
-.footer{
-    text-align:center;
-    padding:25px 20px;
-    color:#667085;
-    font-size:11px;
-    border-top:1px solid #e7eaf0;
-    background:#fff;
-}
-
-body.dark .footer{
-    background:#111827;
-    border-color:#273244;
-    color:#94a3b8;
-}
-
-
-/* =========================================================
-   17. RESPONSIVE
-========================================================= */
-
-@media(max-width:950px){
-
-    .info-grid{
+    .quick-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .course-details{
+    .resource-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .resources-wrapper{
-        grid-template-columns:repeat(2,1fr);
+    .hero h1{
+        font-size:34px;
     }
-
-    .learning-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .result-summary{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .attendance-summary{
-        grid-template-columns:repeat(2,1fr);
-    }
-
 }
 
-@media(max-width:650px){
+@media(max-width:600px){
 
-    .header-inner{
-        padding:10px 15px;
+    .navbar{
+        padding:10px 14px;
     }
 
-    .brand-logo{
-        width:43px;
-        height:43px;
+    .logo img{
+        width:42px;
+        height:42px;
     }
 
-    .brand-text h1{
-        font-size:14px;
+    .logo{
+        font-size:15px;
     }
 
-    .brand-text p{
+    .logo-text small{
         font-size:9px;
     }
 
-    .header-btn{
-        padding:7px 8px;
-        font-size:10px;
+    .nav-actions{
+        gap:5px;
     }
 
-    .theme-btn{
-        width:34px;
-        height:34px;
+    .nav-btn{
+        padding:7px 9px;
+        font-size:11px;
     }
 
-    .main{
-        padding:20px 15px 40px;
+    .hero{
+        margin:20px auto;
     }
 
-    .page-title h2{
-        font-size:22px;
+    .hero-box{
+        padding:35px 23px;
+        border-radius:20px;
     }
 
-    .profile-card,
-    .course-card,
-    .assignment-card,
-    .quiz-card,
-    .result-card,
-    .attendance-card,
-    .routine-card,
-    .notice-card{
-        padding:18px;
+    .hero h1{
+        font-size:29px;
     }
 
-    .profile-header{
-        align-items:flex-start;
+    .hero p{
+        font-size:14px;
     }
 
-    .avatar{
-        width:60px;
-        height:60px;
-        font-size:28px;
-    }
-
-    .profile-header h3{
-        font-size:17px;
-    }
-
-    .info-grid{
+    .quick-grid,
+    .resource-grid{
         grid-template-columns:1fr;
     }
 
-    .notice-top{
-        flex-direction:column;
+    .section-title h2{
+        font-size:23px;
     }
-
-    .notice-date{
-        align-self:flex-start;
-    }
-
-    .routine-header{
-        flex-direction:column;
-    }
-
-    .attendance-summary{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .course-top{
-        flex-direction:column;
-    }
-
-    .course-details{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .assignment-top{
-        flex-direction:column;
-    }
-
-    .assignment-meta{
-        grid-template-columns:1fr;
-    }
-
-    .countdown-box{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .submit-area{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .submit-btn{
-        width:100%;
-    }
-
-    .resources-wrapper{
-        grid-template-columns:1fr;
-    }
-
-    .quiz-header{
-        flex-direction:column;
-    }
-
-    .quiz-timer{
-        width:100%;
-    }
-
-    .quiz-navigation{
-        flex-direction:column;
-    }
-
-    .quiz-nav-btn{
-        width:100%;
-    }
-
-    .quiz-submit-area{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .quiz-submit{
-        width:100%;
-    }
-
-    .learning-grid{
-        grid-template-columns:1fr;
-    }
-
-    .result-summary{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .grade-card{
-        grid-template-columns:1fr;
-    }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
+<!-- ================= HEADER ================= -->
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
+<header>
 
-<header class="header">
+<nav class="navbar">
 
-    <div class="header-inner">
+<a href="#" class="logo">
 
-        <a href="#" class="brand">
+<img
+src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+alt="SNK IT Institute Logo"
+>
 
-            <div class="brand-logo">
+<div class="logo-text">
+SNK IT Institute
+<small>Offline Course Portal</small>
+</div>
 
-                <img
-                    src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-                    alt="SNK IT Institute Logo"
-                >
+</a>
 
-            </div>
+<div class="nav-actions">
 
-            <div class="brand-text">
+<button class="nav-btn" onclick="toggleLanguage()" id="languageBtn">
+English
+</button>
 
-                <h1>
-                    SNK IT Institute
-                </h1>
+<button class="nav-btn" onclick="toggleTheme()" id="themeBtn">
+🌙
+</button>
 
-                <p>
-                    Student Portal
-                </p>
+<a href="#resources" class="nav-btn">
+📚 Resources
+</a>
 
-            </div>
+<a href="login.html" class="nav-btn login-btn">
+🔐 Login
+</a>
 
-        </a>
+</div>
 
-
-        <div class="header-actions">
-
-            <button
-                class="header-btn theme-btn"
-                id="themeButton"
-                onclick="toggleTheme()"
-            >
-                🌙
-            </button>
-
-            <button
-                class="header-btn"
-                onclick="toggleLanguage()"
-                id="languageButton"
-            >
-                English
-            </button>
-
-            <button
-                class="header-btn"
-                onclick="showLoginMessage()"
-            >
-                Login
-            </button>
-
-        </div>
-
-    </div>
+</nav>
 
 </header>
 
 
+<!-- ================= HERO ================= -->
 
-<!-- =========================================================
-     MAIN
-========================================================= -->
+<section class="hero">
 
-<main class="main">
+<div class="hero-box">
 
+<div class="hero-content">
 
-    <!-- PAGE TITLE -->
+<span class="badge" id="heroBadge">
+🎓 Offline Course Student Portal
+</span>
 
-    <section class="page-title">
+<h1 id="heroTitle">
+SNK IT Institute
+</h1>
 
-        <h2>
-            Student Portal
-        </h2>
+<p id="heroText">
+আপনার Offline Course-এর Class, Assignment, Quiz,
+Resources এবং Result এক জায়গা থেকে সহজে পরিচালনা করুন।
+</p>
 
-        <p>
-            আপনার course, notice, routine, attendance,
-            assignment, resources, quiz এবং result এক জায়গায়।
-        </p>
+<div class="hero-buttons">
 
-    </section>
+<a href="#resources" class="hero-btn" id="resourceHeroBtn">
+📚 Resources দেখুন
+</a>
 
+<a href="login.html" class="hero-btn secondary" id="loginHeroBtn">
+🔐 Student Login
+</a>
 
+</div>
 
-    <!-- =====================================================
-         PROFILE
-    ====================================================== -->
+</div>
 
-    <section class="profile-card">
+</div>
 
-        <div class="profile-header">
+</section>
 
-            <div class="avatar">
-                👨‍🎓
-            </div>
 
-            <div>
+<!-- ================= QUICK ACCESS ================= -->
 
-                <h3>
-                    Student Name
-                </h3>
+<section class="section">
 
-                <p>
-                    Student ID: SNK-0001
-                </p>
+<div class="container">
 
-                <span class="student-badge">
-                    Active Student
-                </span>
+<div class="section-title">
 
-            </div>
+<h2 id="quickTitle">
+Quick Access
+</h2>
 
-        </div>
+<p id="quickText">
+Student Portal-এর গুরুত্বপূর্ণ অংশগুলো
+</p>
 
+</div>
 
-        <div class="info-grid">
 
-            <div class="info-box">
+<div class="quick-grid">
 
-                <span>
-                    Phone
-                </span>
+<div class="quick-card">
 
-                <strong>
-                    01XXXXXXXXX
-                </strong>
+<div class="icon">📚</div>
 
-            </div>
+<h3 id="courseTitle">
+My Course
+</h3>
 
+<p id="courseText">
+আপনার ভর্তি করা Offline Course-এর তথ্য দেখুন।
+</p>
 
-            <div class="info-box">
+</div>
 
-                <span>
-                    Email
-                </span>
 
-                <strong>
-                    student@example.com
-                </strong>
+<div class="quick-card">
 
-            </div>
+<div class="icon">📝</div>
 
+<h3 id="assignmentTitle">
+Assignment
+</h3>
 
-            <div class="info-box">
+<p id="assignmentText">
+Assignment দেখুন, Deadline দেখুন এবং Submit করুন।
+</p>
 
-                <span>
-                    Batch
-                </span>
+</div>
 
-                <strong>
-                    2026
-                </strong>
 
-            </div>
+<div class="quick-card">
 
+<div class="icon">🎯</div>
 
-            <div class="info-box">
+<h3 id="quizTitle">
+Quiz
+</h3>
 
-                <span>
-                    Class Type
-                </span>
+<p id="quizText">
+Online Quiz দিন এবং নির্দিষ্ট সময়ের মধ্যে Submit করুন।
+</p>
 
-                <strong>
-                    Offline
-                </strong>
+</div>
 
-            </div>
 
+<div class="quick-card">
 
-            <div class="info-box">
+<div class="icon">🏆</div>
 
-                <span>
-                    Joining Date
-                </span>
+<h3 id="resultTitle">
+Result
+</h3>
 
-                <strong>
-                    Coming Soon
-                </strong>
+<p id="resultText">
+Admin Mark দেওয়ার পর আপনার Result দেখতে পারবেন।
+</p>
 
-            </div>
+</div>
 
+</div>
 
-            <div class="info-box">
+</div>
 
-                <span>
-                    Account Status
-                </span>
+</section>
 
-                <strong>
-                    Active
-                </strong>
 
-            </div>
+<!-- ================= RESOURCES ================= -->
 
-        </div>
+<section class="section resources-section" id="resources">
 
-    </section>
+<div class="container">
 
+<div class="section-title">
 
+<h2 id="resourcesTitle">
+📚 Course Resources
+</h2>
 
-    <!-- =====================================================
-         1.11 NOTICE BOARD
-    ====================================================== -->
+<p id="resourcesText">
+আপনার কোর্সের প্রয়োজনীয় সব Resource এখানে পাওয়া যাবে।
+</p>
 
-    <div class="section-title">
+</div>
 
-        <h3>
-            📢 Notice Board
-        </h3>
 
-        <p>
-            Institute-এর গুরুত্বপূর্ণ notice এখানে থাকবে।
-        </p>
+<div class="resource-grid">
 
-    </div>
 
+<!-- Notes -->
 
-    <section class="notice-list">
+<div class="resource-card">
 
+<div class="resource-icon">
+📄
+</div>
 
-        <article class="notice-card notice-important">
+<h3 id="notesTitle">
+Course Notes
+</h3>
 
-            <div class="notice-top">
+<p id="notesText">
+Teacher-এর দেওয়া গুরুত্বপূর্ণ Notes ও Study Materials এখানে থাকবে।
+</p>
 
-                <div class="notice-left">
+<a href="#" class="resource-btn" onclick="showDemo(event)">
+Open Notes
+</a>
 
-                    <div class="notice-icon">
-                        📢
-                    </div>
+</div>
 
-                    <div>
 
-                        <h4>
-                            Assignment Submission Notice
-                        </h4>
+<!-- Assignment -->
 
-                        <p>
-                            সকল student-কে deadline-এর মধ্যে
-                            assignment submit করতে বলা হচ্ছে।
-                        </p>
+<div class="resource-card">
 
-                    </div>
+<div class="resource-icon">
+📝
+</div>
 
-                </div>
+<h3 id="resourceAssignmentTitle">
+Assignments
+</h3>
 
+<p id="resourceAssignmentText">
+আপনার Assignment দেখুন এবং নির্দিষ্ট Deadline-এর মধ্যে Submit করুন।
+</p>
 
-                <span class="notice-date">
-                    02 Sep 2026
-                </span>
+<a href="login.html" class="resource-btn">
+View Assignment
+</a>
 
-            </div>
+</div>
 
 
-            <div class="notice-details">
+<!-- Quiz -->
 
-                Assignment 01-এর deadline:
-                <strong>10 September 2026</strong>।
-                দেরিতে submission করলে Admin approval প্রয়োজন হতে পারে।
+<div class="resource-card">
 
-            </div>
+<div class="resource-icon">
+🎯
+</div>
 
-        </article>
+<h3>
+Quiz
+</h3>
 
+<p>
+সময় নির্ধারিত Quiz দিন এবং Submit করার পর Result দেখুন।
+</p>
 
+<a href="login.html" class="resource-btn">
+Start Quiz
+</a>
 
-        <article class="notice-card">
+</div>
 
-            <div class="notice-top">
 
-                <div class="notice-left">
+<!-- Class Materials -->
 
-                    <div class="notice-icon">
-                        🏫
-                    </div>
+<div class="resource-card">
 
-                    <div>
+<div class="resource-icon">
+🎥
+</div>
 
-                        <h4>
-                            Offline Class Notice
-                        </h4>
+<h3>
+Class Materials
+</h3>
 
-                        <p>
-                            পরবর্তী offline class routine অনুযায়ী অনুষ্ঠিত হবে।
-                        </p>
+<p>
+Offline Class-এর প্রয়োজনীয় Video, Image ও অন্যান্য Learning Materials।
+</p>
 
-                    </div>
+<a href="#" class="resource-btn" onclick="showDemo(event)">
+View Materials
+</a>
 
-                </div>
+</div>
 
 
-                <span class="notice-date">
-                    01 Sep 2026
-                </span>
+<!-- Important Links -->
 
-            </div>
+<div class="resource-card">
 
+<div class="resource-icon">
+🔗
+</div>
 
-            <div class="notice-details">
+<h3>
+Important Links
+</h3>
 
-                Studentদের class শুরুর কমপক্ষে 10 মিনিট আগে
-                institute-এ উপস্থিত থাকার অনুরোধ করা হচ্ছে।
+<p>
+Course সম্পর্কিত প্রয়োজনীয় Website ও External Learning Links এখানে থাকবে।
+</p>
 
-            </div>
+<a href="#" class="resource-btn" onclick="showDemo(event)">
+Open Links
+</a>
 
-        </article>
+</div>
 
 
+<!-- Student Guide -->
 
-        <article class="notice-card">
+<div class="resource-card">
 
-            <div class="notice-top">
+<div class="resource-icon">
+📘
+</div>
 
-                <div class="notice-left">
+<h3>
+Student Guide
+</h3>
 
-                    <div class="notice-icon">
-                        📚
-                    </div>
+<p>
+Login, Assignment, Quiz, Submission ও Result ব্যবহারের সহজ নির্দেশনা।
+</p>
 
-                    <div>
+<a href="#" class="resource-btn" onclick="showDemo(event)">
+Read Guide
+</a>
 
-                        <h4>
-                            New Resources Added
-                        </h4>
+</div>
 
-                        <p>
-                            Course-এর জন্য নতুন learning materials যোগ করা হয়েছে।
-                        </p>
 
-                    </div>
+</div>
 
-                </div>
+</div>
 
+</section>
 
-                <span class="notice-date">
-                    30 Aug 2026
-                </span>
 
-            </div>
+<!-- ================= NOTICE ================= -->
 
+<section class="section">
 
-            <div class="notice-details">
+<div class="container">
 
-                Resources section থেকে class notes, practice
-                materials এবং অন্যান্য learning resources দেখা যাবে।
+<div class="section-title">
 
-            </div>
+<h2>
+📢 Notice
+</h2>
 
-        </article>
+</div>
 
-    </section>
+<div class="notice">
 
+<strong id="noticeTitle">
+Student Portal Coming Soon
+</strong>
 
+<p id="noticeText">
+Student Login করার পর Assignment, Quiz, Deadline,
+Submission এবং Result-এর সম্পূর্ণ ব্যবস্থা ব্যবহার করা যাবে।
+</p>
 
-    <!-- =====================================================
-         1.11 CLASS ROUTINE
-    ====================================================== -->
+</div>
 
-    <div class="section-title">
+</div>
 
-        <h3>
-            📅 Class Routine
-        </h3>
+</section>
 
-        <p>
-            আপনার offline class-এর weekly routine।
-        </p>
 
-    </div>
+<!-- ================= FOOTER ================= -->
 
+<footer>
 
-    <section class="routine-card">
+<h3>
+SNK IT Institute
+</h3>
 
+<p id="footerText">
+Offline Course Student Portal
+</p>
 
-        <div class="routine-header">
-
-            <div>
-
-                <h4>
-                    Computer & IT Course
-                </h4>
-
-                <p>
-                    Weekly Offline Class Routine
-                </p>
-
-            </div>
-
-
-            <span class="routine-badge">
-                Active Routine
-            </span>
-
-        </div>
-
-
-        <div class="routine-table-wrapper">
-
-            <table class="routine-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Day
-                        </th>
-
-                        <th>
-                            Time
-                        </th>
-
-                        <th>
-                            Subject
-                        </th>
-
-                        <th>
-                            Instructor
-                        </th>
-
-                        <th>
-                            Type
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-
-                    <tr>
-
-                        <td class="routine-day">
-                            Saturday
-                        </td>
-
-                        <td class="routine-time">
-                            10:00 AM – 12:00 PM
-                        </td>
-
-                        <td class="routine-subject">
-                            Computer Basics
-                        </td>
-
-                        <td>
-                            SNK IT Team
-                        </td>
-
-                        <td>
-                            <span class="class-type">
-                                Offline
-                            </span>
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td class="routine-day">
-                            Monday
-                        </td>
-
-                        <td class="routine-time">
-                            10:00 AM – 12:00 PM
-                        </td>
-
-                        <td class="routine-subject">
-                            MS Word
-                        </td>
-
-                        <td>
-                            SNK IT Team
-                        </td>
-
-                        <td>
-                            <span class="class-type">
-                                Offline
-                            </span>
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td class="routine-day">
-                            Wednesday
-                        </td>
-
-                        <td class="routine-time">
-                            10:00 AM – 12:00 PM
-                        </td>
-
-                        <td class="routine-subject">
-                            MS Excel
-                        </td>
-
-                        <td>
-                            SNK IT Team
-                        </td>
-
-                        <td>
-                            <span class="class-type">
-                                Offline
-                            </span>
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td class="routine-day">
-                            Thursday
-                        </td>
-
-                        <td class="routine-time">
-                            10:00 AM – 12:00 PM
-                        </td>
-
-                        <td class="routine-subject">
-                            Internet & Practical
-                        </td>
-
-                        <td>
-                            SNK IT Team
-                        </td>
-
-                        <td>
-                            <span class="class-type">
-                                Offline
-                            </span>
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         1.11 ATTENDANCE
-    ====================================================== -->
-
-    <div class="section-title">
-
-        <h3>
-            ✅ My Attendance
-        </h3>
-
-        <p>
-            আপনার class attendance summary এবং history।
-        </p>
-
-    </div>
-
-
-    <section class="attendance-card">
-
-
-        <div class="attendance-summary">
-
-
-            <div class="attendance-box">
-
-                <span>
-                    Total Classes
-                </span>
-
-                <strong>
-                    25
-                </strong>
-
-            </div>
-
-
-            <div class="attendance-box">
-
-                <span>
-                    Present
-                </span>
-
-                <strong>
-                    23
-                </strong>
-
-            </div>
-
-
-            <div class="attendance-box">
-
-                <span>
-                    Absent
-                </span>
-
-                <strong>
-                    2
-                </strong>
-
-            </div>
-
-
-            <div class="attendance-box">
-
-                <span>
-                    Attendance
-                </span>
-
-                <strong>
-                    92%
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="attendance-progress">
-
-            <div class="attendance-progress-top">
-
-                <span>
-                    Attendance Progress
-                </span>
-
-                <strong>
-                    92%
-                </strong>
-
-            </div>
-
-
-            <div class="attendance-bar">
-
-                <div class="attendance-fill"></div>
-
-            </div>
-
-        </div>
-
-
-        <div class="attendance-message">
-
-            👍 আপনার attendance ভালো আছে।
-            নিয়মিত class করলে course progress আরও ভালো হবে।
-
-        </div>
-
-
-        <div class="attendance-history">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Date
-                        </th>
-
-                        <th>
-                            Class
-                        </th>
-
-                        <th>
-                            Subject
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-
-                    <tr>
-
-                        <td>
-                            01 Sep 2026
-                        </td>
-
-                        <td>
-                            Class 25
-                        </td>
-
-                        <td>
-                            MS Excel
-                        </td>
-
-                        <td class="present">
-                            ✓ Present
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>
-                            30 Aug 2026
-                        </td>
-
-                        <td>
-                            Class 24
-                        </td>
-
-                        <td>
-                            MS Word
-                        </td>
-
-                        <td class="present">
-                            ✓ Present
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>
-                            28 Aug 2026
-                        </td>
-
-                        <td>
-                            Class 23
-                        </td>
-
-                        <td>
-                            Computer Basics
-                        </td>
-
-                        <td class="absent">
-                            ✕ Absent
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>
-                            26 Aug 2026
-                        </td>
-
-                        <td>
-                            Class 22
-                        </td>
-
-                        <td>
-                            Internet
-                        </td>
-
-                        <td class="present">
-                            ✓ Present
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <div class="attendance-demo">
-
-            📌 Attendance এখন Demo data।
-            পরবর্তী Admin system তৈরি হলে Admin এখান থেকে
-            student attendance update করতে পারবে।
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         COURSE
-    ====================================================== -->
-
-    <div class="section-title">
-
-        <h3>
-            🎓 My Course
-        </h3>
-
-        <p>
-            আপনার বর্তমানে চলমান course-এর তথ্য।
-        </p>
-
-    </div>
-
-
-    <section class="course-card">
-
-        <div class="course-top">
-
-            <div>
-
-                <h4>
-                    Computer & IT Course
-                </h4>
-
-                <p>
-                    Basic computer, office application,
-                    internet এবং practical IT learning।
-                </p>
-
-            </div>
-
-            <span class="course-status">
-                Active Course
-            </span>
-
-        </div>
-
-
-        <div class="progress-row">
-
-            <div class="progress-info">
-
-                <span>
-                    Course Progress
-                </span>
-
-                <strong>
-                    65%
-                </strong>
-
-            </div>
-
-
-            <div class="progress-bar">
-
-                <div class="progress-fill"></div>
-
-            </div>
-
-        </div>
-
-
-        <div class="course-details">
-
-
-            <div class="course-detail">
-
-                <span>
-                    Duration
-                </span>
-
-                <strong>
-                    6 Months
-                </strong>
-
-            </div>
-
-
-            <div class="course-detail">
-
-                <span>
-                    Mode
-                </span>
-
-                <strong>
-                    Offline
-                </strong>
-
-            </div>
-
-
-            <div class="course-detail">
-
-                <span>
-                    Class Days
-                </span>
-
-                <strong>
-                    4 Days / Week
-                </strong>
-
-            </div>
-
-
-            <div class="course-detail">
-
-                <span>
-                    Instructor
-                </span>
-
-                <strong>
-                    SNK IT Team
-                </strong>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         ASSIGNMENT
-    ====================================================== -->
-
-    <div class="section-title">
-
-        <h3>
-            📝 Assignments
-        </h3>
-
-        <p>
-            আপনার দেওয়া assignment এবং deadline এখানে দেখা যাবে।
-        </p>
-
-    </div>
-
-
-    <section class="assignment-card">
-
-
-        <div class="assignment-top">
-
-            <div class="assignment-heading">
-
-                <div class="assignment-icon">
-                    📝
-                </div>
-
-                <div>
-
-                    <h4>
-                        Assignment 01 — Basic Computer
-                    </h4>
-
-                    <p>
-                        Computer & IT Course
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <span
-                class="assignment-status"
-                id="assignment1Status"
-            >
-                Pending
-            </span>
-
-        </div>
-
-
-        <div class="assignment-description">
-
-            MS Word ব্যবহার করে একটি simple document
-            তৈরি করুন। Document-এ আপনার নাম, ঠিকানা,
-            শিক্ষাগত যোগ্যতা এবং একটি ছোট paragraph লিখুন।
-
-        </div>
-
-
-        <div class="assignment-meta">
-
-            <div class="meta-box">
-
-                <span>
-                    Deadline
-                </span>
-
-                <strong>
-                    10 September 2026, 11:59 PM
-                </strong>
-
-            </div>
-
-
-            <div class="meta-box">
-
-                <span>
-                    Total Mark
-                </span>
-
-                <strong>
-                    20 Marks
-                </strong>
-
-            </div>
-
-
-            <div class="meta-box">
-
-                <span>
-                    Submission
-                </span>
-
-                <strong id="submission1">
-                    Not Submitted
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="countdown-box">
-
-            <span class="countdown-label">
-                ⏳ Time Remaining
-            </span>
-
-            <span
-                class="countdown"
-                id="countdown1"
-            >
-                Loading...
-            </span>
-
-        </div>
-
-
-        <div class="submit-area">
-
-            <span class="submit-info">
-                Deadline-এর আগে assignment submit করুন।
-            </span>
-
-            <button
-                class="submit-btn"
-                id="submitButton1"
-                onclick="submitAssignment(1)"
-            >
-                📤 Submit Assignment
-            </button>
-
-        </div>
-
-    </section>
-
-
-
-    <section class="assignment-card">
-
-
-        <div class="assignment-top">
-
-            <div class="assignment-heading">
-
-                <div class="assignment-icon">
-                    📊
-                </div>
-
-                <div>
-
-                    <h4>
-                        Assignment 02 — Excel Practice
-                    </h4>
-
-                    <p>
-                        Computer & IT Course
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <span
-                class="assignment-status"
-                id="assignment2Status"
-            >
-                Pending
-            </span>
-
-        </div>
-
-
-        <div class="assignment-description">
-
-            MS Excel ব্যবহার করে একটি student marks
-            sheet তৈরি করুন এবং Total ও Average বের করুন।
-
-        </div>
-
-
-        <div class="assignment-meta">
-
-            <div class="meta-box">
-
-                <span>
-                    Deadline
-                </span>
-
-                <strong>
-                    15 September 2026, 11:59 PM
-                </strong>
-
-            </div>
-
-
-            <div class="meta-box">
-
-                <span>
-                    Total Mark
-                </span>
-
-                <strong>
-                    30 Marks
-                </strong>
-
-            </div>
-
-
-            <div class="meta-box">
-
-                <span>
-                    Submission
-                </span>
-
-                <strong id="submission2">
-                    Not Submitted
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="countdown-box">
-
-            <span class="countdown-label">
-                ⏳ Time Remaining
-            </span>
-
-            <span
-                class="countdown"
-                id="countdown2"
-            >
-                Loading...
-            </span>
-
-        </div>
-
-
-        <div class="submit-area">
-
-            <span class="submit-info">
-                Deadline-এর আগে assignment submit করুন।
-            </span>
-
-            <button
-                class="submit-btn"
-                id="submitButton2"
-                onclick="submitAssignment(2)"
-            >
-                📤 Submit Assignment
-            </button>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         RESOURCES
-    ====================================================== -->
-
-    <div class="section-title">
-
-        <h3>
-            📚 Resources
-        </h3>
-
-        <p>
-            আপনার course-এর প্রয়োজনীয় learning materials এখানে থাকবে।
-        </p>
-
-    </div>
-
-
-    <section class="resources-wrapper">
-
-
-        <article class="resource-card">
-
-            <div class="resource-icon">
-                📄
-            </div>
-
-            <h4>
-                Computer Basics Notes
-            </h4>
-
-            <p>
-                Basic computer-এর গুরুত্বপূর্ণ notes
-                এবং class materials।
-            </p>
-
-            <div class="resource-info">
-
-                <span>
-                    PDF
-                </span>
-
-                <span>
-                    Course Material
-                </span>
-
-            </div>
-
-            <div class="resource-actions">
-
-                <button
-                    class="resource-btn"
-                    onclick="openResource('Computer Basics Notes')"
-                >
-                    👁 Open
-                </button>
-
-                <button
-                    class="resource-btn primary"
-                    onclick="downloadResource('Computer Basics Notes')"
-                >
-                    ⬇ Download
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <article class="resource-card">
-
-            <div class="resource-icon">
-                📝
-            </div>
-
-            <h4>
-                MS Word Practice
-            </h4>
-
-            <p>
-                MS Word practice করার জন্য class
-                notes এবং examples।
-            </p>
-
-            <div class="resource-info">
-
-                <span>
-                    Notes
-                </span>
-
-                <span>
-                    Practice
-                </span>
-
-            </div>
-
-            <div class="resource-actions">
-
-                <button
-                    class="resource-btn"
-                    onclick="openResource('MS Word Practice')"
-                >
-                    👁 Open
-                </button>
-
-                <button
-                    class="resource-btn primary"
-                    onclick="downloadResource('MS Word Practice')"
-                >
-                    ⬇ Download
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <article class="resource-card">
-
-            <div class="resource-icon">
-                🎥
-            </div>
-
-            <h4>
-                Computer Class Video
-            </h4>
-
-            <p>
-                Missed class-এর জন্য recorded learning
-                video এখানে রাখা যাবে।
-            </p>
-
-            <div class="resource-info">
-
-                <span>
-                    Video
-                </span>
-
-                <span>
-                    Recorded
-                </span>
-
-            </div>
-
-            <div class="resource-actions">
-
-                <button
-                    class="resource-btn"
-                    onclick="openResource('Computer Class Video')"
-                >
-                    ▶ Watch
-                </button>
-
-                <button
-                    class="resource-btn primary"
-                    onclick="resourceInfo()"
-                >
-                    ℹ Details
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <article class="resource-card">
-
-            <div class="resource-icon">
-                📊
-            </div>
-
-            <h4>
-                Excel Practice Sheet
-            </h4>
-
-            <p>
-                Excel assignment ও practice করার
-                জন্য sample sheet।
-            </p>
-
-            <div class="resource-info">
-
-                <span>
-                    Excel
-                </span>
-
-                <span>
-                    Practice
-                </span>
-
-            </div>
-
-            <div class="resource-actions">
-
-                <button
-                    class="resource-btn"
-                    onclick="openResource('Excel Practice Sheet')"
-                >
-                    👁 Open
-                </button>
-
-                <button
-                    class="resource-btn primary"
-                    onclick="downloadResource('Excel Practice Sheet')"
-                >
-                    ⬇ Download
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <article class="resource-card">
-
-            <div class="resource-icon">
-                📖
-            </div>
-
-            <h4>
-                Class Handbook
-            </h4>
-
-            <p>
-                Course rules, class routine এবং
-                important instructions।
-            </p>
-
-            <div class="resource-info">
-
-                <span>
-                    PDF
-                </span>
-
-                <span>
-                    Handbook
-                </span>
-
-            </div>
-
-            <div class="resource-actions">
-
-                <button
-                    class="resource-btn"
-                    onclick="openResource('Class Handbook')"
-                >
-                    👁 Open
-                </button>
-
-                <button
-                    class="resource-btn primary"
-                    onclick="downloadResource('Class Handbook')"
-                >
-                    ⬇ Download
-                </button>
-
-            </div>
-
-        </article>
-
-
-        <article class="resource-card">
-
-            <div class="resource-icon">
-                🔗
-            </div>
-
-            <h4>
-                Useful Learning Links
-            </h4>
-
-            <p>
-                Studentদের প্রয়োজনীয় website এবং
-                learning links।
-            </p>
-
-            <div class="resource-info">
-
-                <span>
-                    Links
-                </span>
-
-                <span>
-                    Learning
-                </span>
-
-            </div>
-
-            <div class="resource-actions">
-
-                <button
-                    class="resource-btn primary"
-                    onclick="openResource('Useful Learning Links')"
-                >
-                    🔗 Open Links
-                </button>
-
-            </div>
-
-        </article>
-
-    </section>
-
-
-    <section class="resource-notice">
-
-        <h4>
-            📌 Resource Update
-        </h4>
-
-        <p>
-            পরবর্তী Admin system তৈরি হলে Admin এখান থেকে
-            নতুন PDF, notes, video এবং অন্যান্য resources
-            publish করতে পারবে।
-        </p>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         QUIZ
-    ====================================================== -->
-
-    <div class="section-title">
-
-        <h3>
-            🧠 Quiz
-        </h3>
-
-        <p>
-            আপনার course-এর practice quiz।
-        </p>
-
-    </div>
-
-
-    <section class="quiz-card">
-
-
-        <div class="quiz-header">
-
-            <div>
-
-                <h4>
-                    Basic Computer Quiz
-                </h4>
-
-                <p>
-                    মোট 3টি প্রশ্ন • প্রতিটি প্রশ্ন 1 নম্বর
-                </p>
-
-            </div>
-
-
-            <div class="quiz-timer">
-
-                <span>
-                    ⏱️ Time Remaining
-                </span>
-
-                <strong id="quizTimer">
-                    05:00
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="quiz-progress">
-
-            <div class="quiz-progress-top">
-
-                <span id="questionProgress">
-                    Question 1 of 3
-                </span>
-
-                <strong id="questionPercent">
-                    33%
-                </strong>
-
-            </div>
-
-
-            <div class="quiz-progress-bar">
-
-                <div
-                    class="quiz-progress-fill"
-                    id="quizProgressFill"
-                ></div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="question-card"
-            id="questionCard"
-        >
-
-            <div
-                class="question-number"
-                id="questionNumber"
-            >
-                Question 01
-            </div>
-
-
-            <div
-                class="question-text"
-                id="questionText"
-            >
-                Computer-এর brain বলা হয় কোন অংশকে?
-            </div>
-
-
-            <div
-                class="options"
-                id="optionsContainer"
-            ></div>
-
-
-            <div class="quiz-navigation">
-
-                <button
-                    class="quiz-nav-btn"
-                    id="previousButton"
-                    onclick="previousQuestion()"
-                >
-                    ← Previous
-                </button>
-
-                <button
-                    class="quiz-nav-btn primary"
-                    id="nextButton"
-                    onclick="nextQuestion()"
-                >
-                    Next →
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="quiz-submit-area"
-            id="quizSubmitArea"
-        >
-
-            <div>
-
-                <strong>
-                    Quiz শেষ করার জন্য প্রস্তুত?
-                </strong>
-
-                <p style="font-size:10px;margin-top:3px;color:#667085;">
-                    সব প্রশ্নের উত্তর দেওয়ার চেষ্টা করুন।
-                </p>
-
-            </div>
-
-
-            <button
-                class="quiz-submit"
-                onclick="submitQuiz(false)"
-            >
-                📤 Submit Quiz
-            </button>
-
-        </div>
-
-
-        <div
-            class="quiz-result"
-            id="quizResult"
-        >
-
-            <div class="result-icon">
-                🏆
-            </div>
-
-            <h4>
-                Quiz Submitted
-            </h4>
-
-            <p>
-                আপনার quiz result নিচে দেওয়া হলো।
-            </p>
-
-            <div
-                class="result-score"
-                id="resultScore"
-            >
-                0 / 3
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         RESULT
-    ====================================================== -->
-
-    <div class="section-title">
-
-        <h3>
-            🏆 My Result
-        </h3>
-
-        <p>
-            Assignment এবং Quiz-এর result এখানে দেখা যাবে।
-        </p>
-
-    </div>
-
-
-    <section class="result-card">
-
-
-        <div class="result-summary">
-
-
-            <div class="result-box">
-
-                <span>
-                    Total Marks
-                </span>
-
-                <strong>
-                    53
-                </strong>
-
-            </div>
-
-
-            <div class="result-box">
-
-                <span>
-                    Obtained
-                </span>
-
-                <strong id="obtainedMarks">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="result-box">
-
-                <span>
-                    Percentage
-                </span>
-
-                <strong id="percentage">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="result-box">
-
-                <span>
-                    Grade
-                </span>
-
-                <strong id="grade">
-                    —
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="result-table-wrapper">
-
-            <table class="result-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Assessment
-                        </th>
-
-                        <th>
-                            Total Mark
-                        </th>
-
-                        <th>
-                            Obtained
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-
-                    <tr>
-
-                        <td>
-                            📝 Assignment 01
-                        </td>
-
-                        <td>
-                            20
-                        </td>
-
-                        <td id="assignment1Mark">
-                            —
-                        </td>
-
-                        <td>
-
-                            <span
-                                class="result-pending"
-                                id="assignment1ResultStatus"
-                            >
-                                Pending Admin Mark
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>
-                            📊 Assignment 02
-                        </td>
-
-                        <td>
-                            30
-                        </td>
-
-                        <td id="assignment2Mark">
-                            —
-                        </td>
-
-                        <td>
-
-                            <span
-                                class="result-pending"
-                                id="assignment2ResultStatus"
-                            >
-                                Pending Admin Mark
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td>
-                            🧠 Basic Computer Quiz
-                        </td>
-
-                        <td>
-                            3
-                        </td>
-
-                        <td id="quizMark">
-                            —
-                        </td>
-
-                        <td>
-
-                            <span
-                                class="result-pending"
-                                id="quizResultStatus"
-                            >
-                                Not Submitted
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <div class="result-demo">
-
-            📌 Result system এখন Demo mode-এ আছে।
-            Admin Login তৈরি হওয়ার পরে Admin student-এর
-            assignment mark দিতে পারবে এবং সেই mark এখানে
-            automatically দেখা যাবে।
-
-        </div>
-
-
-        <div class="grade-card">
-
-
-            <div class="grade-panel">
-
-                <span>
-                    Current Grade
-                </span>
-
-                <strong id="bigGrade">
-                    —
-                </strong>
-
-                <div
-                    class="grade-status"
-                    id="gradeStatus"
-                >
-                    Admin mark অপেক্ষমাণ
-                </div>
-
-            </div>
-
-
-            <div class="grade-panel">
-
-                <span>
-                    Result Status
-                </span>
-
-                <strong id="resultStatus">
-                    —
-                </strong>
-
-                <div
-                    class="grade-status"
-                    id="resultStatusText"
-                >
-                    সব mark প্রয়োজন
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         LEARNING CENTER
-    ====================================================== -->
-
-    <div class="section-title">
-
-        <h3>
-            📚 Learning Center
-        </h3>
-
-        <p>
-            আপনার পড়াশোনার প্রয়োজনীয় section।
-        </p>
-
-    </div>
-
-
-    <section class="learning-grid">
-
-
-        <div class="learning-card">
-
-            <div class="learning-icon">
-                🧠
-            </div>
-
-            <h4>
-                Quiz
-            </h4>
-
-            <p>
-                Quiz, questions, countdown timer এবং
-                submit option এখানে থাকবে।
-            </p>
-
-        </div>
-
-
-        <div class="learning-card">
-
-            <div class="learning-icon">
-                📚
-            </div>
-
-            <h4>
-                Resources
-            </h4>
-
-            <p>
-                PDF, notes, video এবং অন্যান্য
-                learning resources এখানে থাকবে।
-            </p>
-
-        </div>
-
-
-        <div class="learning-card">
-
-            <div class="learning-icon">
-                🏆
-            </div>
-
-            <h4>
-                Result
-            </h4>
-
-            <p>
-                Admin mark দেওয়ার পরে assignment
-                ও quiz result এখানে দেখা যাবে।
-            </p>
-
-        </div>
-
-    </section>
-
-
-
-</main>
-
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer class="footer">
-
-    © 2026 SNK IT Institute
-    <br>
-    Student Learning Portal
+<p style="margin-top:8px;">
+© 2026 SNK IT Institute. All Rights Reserved.
+</p>
 
 </footer>
 
 
-
 <script>
 
-/* =========================================================
-   1. THEME
-========================================================= */
+/* ================= THEME ================= */
 
 function toggleTheme(){
 
     document.body.classList.toggle("dark");
 
-    const button =
-        document.getElementById("themeButton");
+    const isDark =
+        document.body.classList.contains("dark");
 
-    if(
-        document.body.classList.contains("dark")
-    ){
+    localStorage.setItem(
+        "snkTheme",
+        isDark ? "dark" : "light"
+    );
 
-        button.textContent="☀️";
-
-        localStorage.setItem(
-            "snkTheme",
-            "dark"
-        );
-
-    }else{
-
-        button.textContent="🌙";
-
-        localStorage.setItem(
-            "snkTheme",
-            "light"
-        );
-
-    }
-
+    document.getElementById("themeBtn").textContent =
+        isDark ? "☀️" : "🌙";
 }
 
 
-function loadTheme(){
+/* Load saved theme */
 
-    const saved =
+(function(){
+
+    const savedTheme =
         localStorage.getItem("snkTheme");
 
-    const button =
-        document.getElementById("themeButton");
-
-    if(saved==="dark"){
+    if(savedTheme === "dark"){
 
         document.body.classList.add("dark");
 
-        button.textContent="☀️";
-
+        document.getElementById("themeBtn").textContent =
+            "☀️";
     }
 
-}
+})();
 
 
-/* =========================================================
-   2. LANGUAGE
-========================================================= */
+/* ================= LANGUAGE ================= */
 
-let currentLanguage =
-    localStorage.getItem("snkLanguage") || "bn";
-
+let currentLanguage = "bn";
 
 function toggleLanguage(){
 
-    currentLanguage =
-        currentLanguage==="bn"
-        ? "en"
-        : "bn";
+    if(currentLanguage === "bn"){
 
-    localStorage.setItem(
-        "snkLanguage",
-        currentLanguage
-    );
+        currentLanguage = "en";
 
-    alert(
-        currentLanguage==="en"
-        ? "English mode selected. Full translation will be connected later."
-        : "বাংলা mode selected."
-    );
+        document.getElementById("languageBtn").textContent =
+            "বাংলা";
 
-}
+        document.getElementById("heroBadge").textContent =
+            "🎓 Offline Course Student Portal";
 
+        document.getElementById("heroTitle").textContent =
+            "SNK IT Institute";
 
-/* =========================================================
-   3. LOGIN DEMO
-========================================================= */
+        document.getElementById("heroText").textContent =
+            "Manage your Offline Course classes, assignments, quizzes, resources and results from one place.";
 
-function showLoginMessage(){
+        document.getElementById("resourceHeroBtn").textContent =
+            "📚 View Resources";
 
-    alert(
-        "Student Login system 6.1 ধাপে তৈরি করা হবে।"
-    );
+        document.getElementById("loginHeroBtn").textContent =
+            "🔐 Student Login";
 
-}
+        document.getElementById("quickTitle").textContent =
+            "Quick Access";
 
+        document.getElementById("quickText").textContent =
+            "Important sections of the Student Portal";
 
-/* =========================================================
-   4. ASSIGNMENT DEADLINES
-========================================================= */
+        document.getElementById("courseTitle").textContent =
+            "My Course";
 
-const assignmentDeadlines={
+        document.getElementById("courseText").textContent =
+            "View information about your enrolled Offline Course.";
 
-    1:new Date(
-        "2026-09-10T23:59:00+06:00"
-    ).getTime(),
+        document.getElementById("assignmentTitle").textContent =
+            "Assignment";
 
-    2:new Date(
-        "2026-09-15T23:59:00+06:00"
-    ).getTime()
+        document.getElementById("assignmentText").textContent =
+            "View assignments, deadlines and submit your work.";
 
-};
+        document.getElementById("quizTitle").textContent =
+            "Quiz";
 
+        document.getElementById("quizText").textContent =
+            "Take timed quizzes and submit within the given time.";
 
-/* =========================================================
-   5. COUNTDOWN
-========================================================= */
+        document.getElementById("resultTitle").textContent =
+            "Result";
 
-function updateCountdown(
-    number,
-    deadline
-){
+        document.getElementById("resultText").textContent =
+            "View your result after the admin gives marks.";
 
-    const now=
-        new Date().getTime();
+        document.getElementById("resourcesTitle").textContent =
+            "📚 Course Resources";
 
-    const distance=
-        deadline-now;
+        document.getElementById("resourcesText").textContent =
+            "All important resources for your course will be available here.";
 
-    const element=
-        document.getElementById(
-            "countdown"+number
-        );
+        document.getElementById("notesTitle").textContent =
+            "Course Notes";
 
+        document.getElementById("notesText").textContent =
+            "Important notes and study materials provided by the teacher.";
 
-    if(!element){
+        document.getElementById("resourceAssignmentTitle").textContent =
+            "Assignments";
 
-        return;
+        document.getElementById("resourceAssignmentText").textContent =
+            "View assignments and submit them before the deadline.";
 
-    }
+        document.getElementById("noticeTitle").textContent =
+            "Student Portal Coming Soon";
 
+        document.getElementById("noticeText").textContent =
+            "After Student Login, you will be able to use Assignment, Quiz, Deadline, Submission and Result features.";
 
-    if(distance<=0){
-
-        element.textContent=
-            "Deadline শেষ";
-
-        return;
-
-    }
-
-
-    const days=
-        Math.floor(
-            distance/
-            (1000*60*60*24)
-        );
-
-    const hours=
-        Math.floor(
-            (distance%
-            (1000*60*60*24))/
-            (1000*60*60)
-        );
-
-    const minutes=
-        Math.floor(
-            (distance%
-            (1000*60*60))/
-            (1000*60)
-        );
-
-    const seconds=
-        Math.floor(
-            (distance%
-            (1000*60))/
-            1000
-        );
-
-
-    element.textContent=
-        days+"d "+
-        hours+"h "+
-        minutes+"m "+
-        seconds+"s";
-
-}
-
-
-setInterval(function(){
-
-    Object.keys(
-        assignmentDeadlines
-    ).forEach(function(number){
-
-        updateCountdown(
-            number,
-            assignmentDeadlines[number]
-        );
-
-    });
-
-},1000);
-
-
-/* =========================================================
-   6. ASSIGNMENT SUBMIT
-========================================================= */
-
-function submitAssignment(number){
-
-    if(
-        localStorage.getItem(
-            "snkAssignment"+number
-        )==="submitted"
-    ){
-
-        return;
-
-    }
-
-
-    const confirmed=
-        confirm(
-            "আপনি কি এই assignment submit করতে চান?"
-        );
-
-
-    if(!confirmed){
-
-        return;
-
-    }
-
-
-    localStorage.setItem(
-        "snkAssignment"+number,
-        "submitted"
-    );
-
-
-    markAssignmentSubmitted(
-        number
-    );
-
-
-    alert(
-        "Assignment successfully submitted।"
-    );
-
-}
-
-
-function markAssignmentSubmitted(number){
-
-    const button=
-        document.getElementById(
-            "submitButton"+number
-        );
-
-    const submission=
-        document.getElementById(
-            "submission"+number
-        );
-
-    const status=
-        document.getElementById(
-            "assignment"+number+"Status"
-        );
-
-
-    if(button){
-
-        button.classList.add("submitted");
-
-        button.textContent=
-            "✅ Submitted";
-
-    }
-
-
-    if(submission){
-
-        submission.textContent=
-            "Submitted";
-
-    }
-
-
-    if(status){
-
-        status.textContent=
-            "Submitted";
-
-    }
-
-}
-
-
-function loadSubmissionStatus(){
-
-    [1,2].forEach(function(number){
-
-        if(
-            localStorage.getItem(
-                "snkAssignment"+number
-            )==="submitted"
-        ){
-
-            markAssignmentSubmitted(
-                number
-            );
-
-        }
-
-    });
-
-}
-
-
-/* =========================================================
-   7. RESOURCES
-========================================================= */
-
-function openResource(name){
-
-    alert(
-        name+
-        " এখন Demo resource। Admin system-এর পরে real link/file যোগ হবে।"
-    );
-
-}
-
-
-function downloadResource(name){
-
-    alert(
-        name+
-        " এর download link এখনো যুক্ত হয়নি।"
-    );
-
-}
-
-
-function resourceInfo(){
-
-    alert(
-        "এই resource-এর বিস্তারিত তথ্য Admin system থেকে পরে আসবে।"
-    );
-
-}
-
-
-/* =========================================================
-   8. QUIZ
-========================================================= */
-
-const quizQuestions=[
-
-    {
-
-        question:
-        "Computer-এর brain বলা হয় কোন অংশকে?",
-
-        options:[
-            "Monitor",
-            "CPU",
-            "Keyboard",
-            "Mouse"
-        ],
-
-        correct:1
-
-    },
-
-
-    {
-
-        question:
-        "MS Word মূলত কোন কাজের জন্য ব্যবহৃত হয়?",
-
-        options:[
-            "Document তৈরি",
-            "Video Editing",
-            "Gaming",
-            "Internet Connection"
-        ],
-
-        correct:0
-
-    },
-
-
-    {
-
-        question:
-        "Keyboard-এর কোন key দিয়ে নতুন line শুরু করা হয়?",
-
-        options:[
-            "Shift",
-            "Ctrl",
-            "Enter",
-            "Alt"
-        ],
-
-        correct:2
-
-    }
-
-];
-
-
-let currentQuestion=0;
-
-let quizAnswers=
-    new Array(
-        quizQuestions.length
-    ).fill(null);
-
-let quizTime=300;
-
-let quizTimerInterval=null;
-
-let quizFinished=false;
-
-
-/* =========================================================
-   9. RENDER QUESTION
-========================================================= */
-
-function renderQuestion(){
-
-    if(quizFinished){
-
-        return;
-
-    }
-
-
-    const question=
-        quizQuestions[currentQuestion];
-
-
-    document.getElementById(
-        "questionNumber"
-    ).textContent=
-        "Question "+
-        String(currentQuestion+1)
-        .padStart(2,"0");
-
-
-    document.getElementById(
-        "questionText"
-    ).textContent=
-        question.question;
-
-
-    const container=
-        document.getElementById(
-            "optionsContainer"
-        );
-
-
-    container.innerHTML="";
-
-
-    question.options.forEach(
-        function(option,index){
-
-            const wrapper=
-                document.createElement("div");
-
-            wrapper.className="option";
-
-
-            const input=
-                document.createElement("input");
-
-            input.type="radio";
-
-            input.name="quizOption";
-
-            input.id=
-                "option"+
-                currentQuestion+
-                "_"+
-                index;
-
-            input.value=index;
-
-
-            if(
-                quizAnswers[currentQuestion]===
-                index
-            ){
-
-                input.checked=true;
-
-            }
-
-
-            input.addEventListener(
-                "change",
-                function(){
-
-                    quizAnswers[
-                        currentQuestion
-                    ]=index;
-
-                }
-            );
-
-
-            const label=
-                document.createElement("label");
-
-            label.htmlFor=
-                input.id;
-
-            label.textContent=
-                option;
-
-
-            wrapper.appendChild(input);
-
-            wrapper.appendChild(label);
-
-            container.appendChild(wrapper);
-
-        }
-    );
-
-
-    updateQuizProgress();
-
-    updateQuizButtons();
-
-}
-
-
-/* =========================================================
-   10. QUIZ PROGRESS
-========================================================= */
-
-function updateQuizProgress(){
-
-    const current=
-        currentQuestion+1;
-
-    const total=
-        quizQuestions.length;
-
-    const percent=
-        Math.round(
-            (current/total)*100
-        );
-
-
-    document.getElementById(
-        "questionProgress"
-    ).textContent=
-        "Question "+
-        current+
-        " of "+
-        total;
-
-
-    document.getElementById(
-        "questionPercent"
-    ).textContent=
-        percent+"%";
-
-
-    document.getElementById(
-        "quizProgressFill"
-    ).style.width=
-        percent+"%";
-
-}
-
-
-/* =========================================================
-   11. QUIZ BUTTONS
-========================================================= */
-
-function updateQuizButtons(){
-
-    const previous=
-        document.getElementById(
-            "previousButton"
-        );
-
-    const next=
-        document.getElementById(
-            "nextButton"
-        );
-
-    const submitArea=
-        document.getElementById(
-            "quizSubmitArea"
-        );
-
-
-    previous.disabled=
-        currentQuestion===0;
-
-    previous.style.opacity=
-        currentQuestion===0
-        ? ".5"
-        : "1";
-
-
-    if(
-        currentQuestion===
-        quizQuestions.length-1
-    ){
-
-        next.style.display="none";
-
-        submitArea.classList.add("show");
+        document.getElementById("footerText").textContent =
+            "Offline Course Student Portal";
 
     }else{
 
-        next.style.display="block";
+        currentLanguage = "bn";
 
-        submitArea.classList.remove("show");
+        document.getElementById("languageBtn").textContent =
+            "English";
 
+        document.getElementById("heroBadge").textContent =
+            "🎓 Offline Course Student Portal";
+
+        document.getElementById("heroTitle").textContent =
+            "SNK IT Institute";
+
+        document.getElementById("heroText").textContent =
+            "আপনার Offline Course-এর Class, Assignment, Quiz, Resources এবং Result এক জায়গা থেকে সহজে পরিচালনা করুন।";
+
+        document.getElementById("resourceHeroBtn").textContent =
+            "📚 Resources দেখুন";
+
+        document.getElementById("loginHeroBtn").textContent =
+            "🔐 Student Login";
+
+        document.getElementById("quickTitle").textContent =
+            "Quick Access";
+
+        document.getElementById("quickText").textContent =
+            "Student Portal-এর গুরুত্বপূর্ণ অংশগুলো";
+
+        document.getElementById("courseTitle").textContent =
+            "My Course";
+
+        document.getElementById("courseText").textContent =
+            "আপনার ভর্তি করা Offline Course-এর তথ্য দেখুন।";
+
+        document.getElementById("assignmentTitle").textContent =
+            "Assignment";
+
+        document.getElementById("assignmentText").textContent =
+            "Assignment দেখুন, Deadline দেখুন এবং Submit করুন।";
+
+        document.getElementById("quizTitle").textContent =
+            "Quiz";
+
+        document.getElementById("quizText").textContent =
+            "Online Quiz দিন এবং নির্দিষ্ট সময়ের মধ্যে Submit করুন।";
+
+        document.getElementById("resultTitle").textContent =
+            "Result";
+
+        document.getElementById("resultText").textContent =
+            "Admin Mark দেওয়ার পর আপনার Result দেখতে পারবেন।";
+
+        document.getElementById("resourcesTitle").textContent =
+            "📚 Course Resources";
+
+        document.getElementById("resourcesText").textContent =
+            "আপনার কোর্সের প্রয়োজনীয় সব Resource এখানে পাওয়া যাবে।";
+
+        document.getElementById("notesTitle").textContent =
+            "Course Notes";
+
+        document.getElementById("notesText").textContent =
+            "Teacher-এর দেওয়া গুরুত্বপূর্ণ Notes ও Study Materials এখানে থাকবে।";
+
+        document.getElementById("resourceAssignmentTitle").textContent =
+            "Assignments";
+
+        document.getElementById("resourceAssignmentText").textContent =
+            "আপনার Assignment দেখুন এবং নির্দিষ্ট Deadline-এর মধ্যে Submit করুন।";
+
+        document.getElementById("noticeTitle").textContent =
+            "Student Portal Coming Soon";
+
+        document.getElementById("noticeText").textContent =
+            "Student Login করার পর Assignment, Quiz, Deadline, Submission এবং Result-এর সম্পূর্ণ ব্যবস্থা ব্যবহার করা যাবে।";
+
+        document.getElementById("footerText").textContent =
+            "Offline Course Student Portal";
     }
-
 }
 
 
-/* =========================================================
-   12. NEXT / PREVIOUS
-========================================================= */
+/* ================= DEMO BUTTON ================= */
 
-function nextQuestion(){
+function showDemo(event){
 
-    if(
-        currentQuestion<
-        quizQuestions.length-1
-    ){
+    event.preventDefault();
 
-        currentQuestion++;
-
-        renderQuestion();
-
-    }
-
-}
-
-
-function previousQuestion(){
-
-    if(currentQuestion>0){
-
-        currentQuestion--;
-
-        renderQuestion();
-
-    }
-
-}
-
-
-/* =========================================================
-   13. QUIZ TIMER
-========================================================= */
-
-function updateQuizTimer(){
-
-    const minutes=
-        Math.floor(
-            quizTime/60
-        );
-
-    const seconds=
-        quizTime%60;
-
-
-    document.getElementById(
-        "quizTimer"
-    ).textContent=
-
-        String(minutes)
-        .padStart(2,"0")
-        +":"+
-        String(seconds)
-        .padStart(2,"0");
-
-}
-
-
-function startQuizTimer(){
-
-    updateQuizTimer();
-
-
-    quizTimerInterval=
-        setInterval(function(){
-
-            if(quizFinished){
-
-                clearInterval(
-                    quizTimerInterval
-                );
-
-                return;
-
-            }
-
-
-            quizTime--;
-
-            updateQuizTimer();
-
-
-            if(quizTime<=0){
-
-                clearInterval(
-                    quizTimerInterval
-                );
-
-                submitQuiz(true);
-
-            }
-
-        },1000);
-
-}
-
-
-/* =========================================================
-   14. SUBMIT QUIZ
-========================================================= */
-
-function submitQuiz(autoSubmit){
-
-    if(quizFinished){
-
-        return;
-
-    }
-
-
-    if(!autoSubmit){
-
-        const answered=
-            quizAnswers.filter(
-                function(answer){
-
-                    return answer!==null;
-
-                }
-            ).length;
-
-
-        if(
-            answered<
-            quizQuestions.length
-        ){
-
-            const confirmSubmit=
-                confirm(
-                    "Some questions are unanswered. Submit anyway?"
-                );
-
-
-            if(!confirmSubmit){
-
-                return;
-
-            }
-
-        }
-
-    }
-
-
-    quizFinished=true;
-
-
-    clearInterval(
-        quizTimerInterval
+    alert(
+        "এই Resource বর্তমানে Demo অবস্থায় আছে।\n\n" +
+        "পরবর্তী ধাপে Admin Panel থেকে Resource যোগ করার ব্যবস্থা তৈরি করা হবে।"
     );
-
-
-    let score=0;
-
-
-    quizQuestions.forEach(
-        function(question,index){
-
-            if(
-                quizAnswers[index]===
-                question.correct
-            ){
-
-                score++;
-
-            }
-
-        }
-    );
-
-
-    localStorage.setItem(
-        "snkQuizScore",
-        score
-    );
-
-
-    localStorage.setItem(
-        "snkQuizSubmitted",
-        "yes"
-    );
-
-
-    document.getElementById(
-        "questionCard"
-    ).style.display="none";
-
-
-    document.getElementById(
-        "quizSubmitArea"
-    ).style.display="none";
-
-
-    document.getElementById(
-        "quizResult"
-    ).classList.add("show");
-
-
-    document.getElementById(
-        "resultScore"
-    ).textContent=
-        score+" / 3";
-
-
-    updateResultSystem();
-
 }
-
-
-/* =========================================================
-   15. RESULT SYSTEM
-========================================================= */
-
-function updateResultSystem(){
-
-    const quizSubmitted=
-        localStorage.getItem(
-            "snkQuizSubmitted"
-        )==="yes";
-
-
-    const quizScore=
-        Number(
-            localStorage.getItem(
-                "snkQuizScore"
-            ) || 0
-        );
-
-
-    if(quizSubmitted){
-
-        document.getElementById(
-            "quizMark"
-        ).textContent=
-            quizScore;
-
-
-        const quizStatus=
-            document.getElementById(
-                "quizResultStatus"
-            );
-
-
-        if(quizStatus){
-
-            quizStatus.textContent=
-                "Completed";
-
-            quizStatus.style.background=
-                "#e7f6ec";
-
-            quizStatus.style.color=
-                "#18794e";
-
-        }
-
-    }
-
-
-    document.getElementById(
-        "obtainedMarks"
-    ).textContent=
-        "—";
-
-
-    document.getElementById(
-        "percentage"
-    ).textContent=
-        "—";
-
-
-    document.getElementById(
-        "grade"
-    ).textContent=
-        "—";
-
-
-    document.getElementById(
-        "bigGrade"
-    ).textContent=
-        "—";
-
-
-    document.getElementById(
-        "resultStatus"
-    ).textContent=
-        "—";
-
-}
-
-
-/* =========================================================
-   16. PAGE LOAD
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        loadTheme();
-
-        loadSubmissionStatus();
-
-
-        Object.keys(
-            assignmentDeadlines
-        ).forEach(function(number){
-
-            updateCountdown(
-                number,
-                assignmentDeadlines[number]
-            );
-
-        });
-
-
-        renderQuestion();
-
-        startQuizTimer();
-
-        updateResultSystem();
-
-    }
-);
 
 </script>
 
