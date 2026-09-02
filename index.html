@@ -12,6 +12,10 @@
 
 <style>
 
+/* =====================================================
+   1.5 - SNK IT INSTITUTE OFFLINE COURSE PORTAL
+   ===================================================== */
+
 *{
     margin:0;
     padding:0;
@@ -30,6 +34,7 @@
     --success:#16a34a;
     --warning:#d97706;
     --danger:#dc2626;
+    --purple:#7c3aed;
     --shadow:0 10px 30px rgba(15,23,42,.08);
 }
 
@@ -50,6 +55,7 @@ body{
     background:var(--bg);
     color:var(--text);
     transition:.3s;
+    min-height:100vh;
 }
 
 a{
@@ -62,7 +68,10 @@ button{
     cursor:pointer;
 }
 
-/* ================= HEADER ================= */
+
+/* =====================================================
+   HEADER
+   ===================================================== */
 
 header{
     position:sticky;
@@ -133,7 +142,10 @@ header{
     background:var(--primary-dark);
 }
 
-/* ================= HERO ================= */
+
+/* =====================================================
+   HERO
+   ===================================================== */
 
 .hero{
     max-width:1200px;
@@ -159,6 +171,17 @@ header{
     background:rgba(255,255,255,.08);
     right:-90px;
     top:-110px;
+}
+
+.hero-box:before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(255,255,255,.05);
+    right:170px;
+    bottom:-100px;
 }
 
 .hero-content{
@@ -210,7 +233,14 @@ header{
     border:1px solid rgba(255,255,255,.25);
 }
 
-/* ================= COMMON ================= */
+.hero-btn:hover{
+    transform:translateY(-2px);
+}
+
+
+/* =====================================================
+   COMMON
+   ===================================================== */
 
 .container{
     max-width:1200px;
@@ -236,7 +266,10 @@ header{
     font-size:14px;
 }
 
-/* ================= QUICK ACCESS ================= */
+
+/* =====================================================
+   QUICK ACCESS
+   ===================================================== */
 
 .quick-grid{
     display:grid;
@@ -280,12 +313,269 @@ header{
     line-height:1.6;
 }
 
-/* ================= STUDENT PORTAL ================= */
 
-.portal-section{
+/* =====================================================
+   COURSE & BATCH SECTION - NEW IN 1.5
+   ===================================================== */
+
+.course-section{
     background:var(--soft);
     border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
+}
+
+.course-layout{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:20px;
+}
+
+
+/* Course Main Card */
+
+.course-main-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:26px;
+    box-shadow:var(--shadow);
+}
+
+.course-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.course-heading{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.course-icon{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+}
+
+.course-heading h3{
+    font-size:21px;
+    margin-bottom:5px;
+}
+
+.course-heading p{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.course-status{
+    background:#dcfce7;
+    color:#166534;
+    padding:6px 11px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+
+/* Course Information Grid */
+
+.course-info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.info-item{
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:14px;
+    background:var(--bg);
+}
+
+.info-label{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.info-value{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+}
+
+
+/* Progress */
+
+.progress-area{
+    margin-top:22px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+}
+
+.progress-top strong{
+    font-size:14px;
+}
+
+.progress-percent{
+    color:var(--primary);
+    font-weight:800;
+    font-size:14px;
+}
+
+.progress-bar{
+    width:100%;
+    height:10px;
+    background:var(--border);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:65%;
+    height:100%;
+    background:var(--primary);
+    border-radius:20px;
+}
+
+.progress-note{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:7px;
+}
+
+
+/* Course Button */
+
+.course-action{
+    margin-top:20px;
+}
+
+.primary-action{
+    display:inline-block;
+    background:var(--primary);
+    color:white;
+    padding:11px 18px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.primary-action:hover{
+    background:var(--primary-dark);
+}
+
+
+/* Batch Card */
+
+.batch-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:26px;
+    box-shadow:var(--shadow);
+}
+
+.batch-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.batch-title-icon{
+    width:48px;
+    height:48px;
+    border-radius:13px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.batch-title h3{
+    font-size:19px;
+}
+
+.batch-title p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:2px;
+}
+
+.batch-list{
+    display:flex;
+    flex-direction:column;
+    gap:13px;
+}
+
+.batch-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:12px;
+}
+
+.batch-row:last-child{
+    border-bottom:none;
+    padding-bottom:0;
+}
+
+.batch-row-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.batch-row-icon{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:var(--soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+}
+
+.batch-row span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.batch-row strong{
+    font-size:13px;
+    text-align:right;
+}
+
+
+/* =====================================================
+   STUDENT PORTAL
+   ===================================================== */
+
+.portal-section{
+    background:var(--bg);
 }
 
 .portal-grid{
@@ -369,7 +659,10 @@ header{
     font-weight:700;
 }
 
-/* ================= COUNTDOWN ================= */
+
+/* =====================================================
+   COUNTDOWN
+   ===================================================== */
 
 .countdown{
     display:flex;
@@ -396,10 +689,15 @@ header{
     color:var(--muted);
 }
 
-/* ================= RESOURCES ================= */
+
+/* =====================================================
+   RESOURCES
+   ===================================================== */
 
 .resources-section{
-    background:var(--card);
+    background:var(--soft);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
 }
 
 .resource-grid{
@@ -448,7 +746,10 @@ header{
     font-weight:700;
 }
 
-/* ================= NOTICE ================= */
+
+/* =====================================================
+   NOTICE
+   ===================================================== */
 
 .notice{
     background:var(--card);
@@ -466,9 +767,13 @@ header{
 .notice p{
     color:var(--muted);
     font-size:13px;
+    line-height:1.7;
 }
 
-/* ================= FOOTER ================= */
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
 
 footer{
     margin-top:30px;
@@ -487,12 +792,19 @@ footer p{
     font-size:13px;
 }
 
-/* ================= MOBILE ================= */
 
-@media(max-width:850px){
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:900px){
 
     .quick-grid{
         grid-template-columns:repeat(2,1fr);
+    }
+
+    .course-layout{
+        grid-template-columns:1fr;
     }
 
     .portal-grid,
@@ -504,6 +816,7 @@ footer p{
         font-size:34px;
     }
 }
+
 
 @media(max-width:600px){
 
@@ -556,17 +869,41 @@ footer p{
         grid-template-columns:1fr;
     }
 
+    .course-header{
+        flex-direction:column;
+    }
+
+    .course-info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .course-heading h3{
+        font-size:18px;
+    }
+
     .section-title h2{
         font-size:23px;
+    }
+
+    .batch-row strong{
+        font-size:12px;
+    }
+
+    .countdown{
+        flex-wrap:wrap;
     }
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= HEADER ================= -->
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
 
 <header>
 
@@ -580,11 +917,17 @@ alt="SNK IT Institute Logo"
 >
 
 <div class="logo-text">
+
 SNK IT Institute
-<small>Offline Course Portal</small>
+
+<small>
+Offline Course Portal
+</small>
+
 </div>
 
 </a>
+
 
 <div class="nav-actions">
 
@@ -595,6 +938,7 @@ id="languageBtn">
 English
 </button>
 
+
 <button
 class="nav-btn"
 onclick="toggleTheme()"
@@ -602,11 +946,13 @@ id="themeBtn">
 🌙
 </button>
 
+
 <a
 href="#resources"
 class="nav-btn">
 📚 Resources
 </a>
+
 
 <a
 href="login.html"
@@ -621,7 +967,10 @@ class="nav-btn login-btn">
 </header>
 
 
-<!-- ================= HERO ================= -->
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
 
 <section class="hero">
 
@@ -633,23 +982,27 @@ class="nav-btn login-btn">
 🎓 Offline Course Student Portal
 </span>
 
+
 <h1 id="heroTitle">
 SNK IT Institute
 </h1>
+
 
 <p id="heroText">
 Offline Course-এর Class, Assignment, Quiz,
 Resources এবং Result এক জায়গা থেকে সহজে পরিচালনা করুন।
 </p>
 
+
 <div class="hero-buttons">
 
 <a
-href="#studentPortal"
+href="#course"
 class="hero-btn"
-id="portalHeroBtn">
-👨‍🎓 Student Portal
+id="courseHeroBtn">
+🎓 Course Information
 </a>
+
 
 <a
 href="login.html"
@@ -667,7 +1020,10 @@ id="loginHeroBtn">
 </section>
 
 
-<!-- ================= QUICK ACCESS ================= -->
+
+<!-- =====================================================
+     QUICK ACCESS
+     ===================================================== -->
 
 <section class="section">
 
@@ -685,11 +1041,15 @@ Student Portal-এর গুরুত্বপূর্ণ অংশগুলো
 
 </div>
 
+
 <div class="quick-grid">
+
 
 <div class="quick-card">
 
-<div class="icon">📚</div>
+<div class="icon">
+📚
+</div>
 
 <h3>
 My Course
@@ -704,7 +1064,9 @@ My Course
 
 <div class="quick-card">
 
-<div class="icon">📝</div>
+<div class="icon">
+📝
+</div>
 
 <h3>
 Assignment
@@ -719,7 +1081,9 @@ Assignment দেখুন, Deadline দেখুন এবং Submit করু�
 
 <div class="quick-card">
 
-<div class="icon">🎯</div>
+<div class="icon">
+🎯
+</div>
 
 <h3>
 Quiz
@@ -734,7 +1098,9 @@ Quiz
 
 <div class="quick-card">
 
-<div class="icon">🏆</div>
+<div class="icon">
+🏆
+</div>
 
 <h3>
 Result
@@ -746,6 +1112,7 @@ Admin Mark দেওয়ার পর আপনার Result দেখতে প�
 
 </div>
 
+
 </div>
 
 </div>
@@ -753,13 +1120,358 @@ Admin Mark দেওয়ার পর আপনার Result দেখতে প�
 </section>
 
 
-<!-- ================= STUDENT PORTAL ================= -->
+
+<!-- =====================================================
+     COURSE & BATCH - 1.5 NEW
+     ===================================================== -->
+
+<section
+class="section course-section"
+id="course">
+
+<div class="container">
+
+
+<div class="section-title">
+
+<h2>
+🎓 Course & Batch
+</h2>
+
+<p>
+আপনার Offline Course ও Batch-এর গুরুত্বপূর্ণ তথ্য।
+</p>
+
+</div>
+
+
+<div class="course-layout">
+
+
+<!-- COURSE MAIN CARD -->
+
+<div class="course-main-card">
+
+
+<div class="course-header">
+
+<div class="course-heading">
+
+<div class="course-icon">
+💻
+</div>
+
+<div>
+
+<h3>
+Computer Office Application
+</h3>
+
+<p>
+SNK IT Institute • Offline Course
+</p>
+
+</div>
+
+</div>
+
+
+<span class="course-status">
+● Active
+</span>
+
+</div>
+
+
+<!-- COURSE INFO -->
+
+<div class="course-info-grid">
+
+
+<div class="info-item">
+
+<span class="info-label">
+Course Duration
+</span>
+
+<span class="info-value">
+6 Months
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<span class="info-label">
+Course Type
+</span>
+
+<span class="info-value">
+Offline
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<span class="info-label">
+Class Days
+</span>
+
+<span class="info-value">
+Saturday – Monday
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<span class="info-label">
+Class Time
+</span>
+
+<span class="info-value">
+4:00 PM – 6:00 PM
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<span class="info-label">
+Instructor
+</span>
+
+<span class="info-value">
+SNK IT Instructor
+</span>
+
+</div>
+
+
+<div class="info-item">
+
+<span class="info-label">
+Batch
+</span>
+
+<span class="info-value">
+Batch – 01
+</span>
+
+</div>
+
+
+</div>
+
+
+<!-- PROGRESS -->
+
+<div class="progress-area">
+
+<div class="progress-top">
+
+<strong>
+Course Progress
+</strong>
+
+<span class="progress-percent">
+65%
+</span>
+
+</div>
+
+
+<div class="progress-bar">
+
+<div class="progress-fill"></div>
+
+</div>
+
+
+<p class="progress-note">
+Demo progress — পরে Student Login-এর মাধ্যমে বাস্তব Progress দেখানো হবে।
+</p>
+
+</div>
+
+
+<div class="course-action">
+
+<a
+href="login.html"
+class="primary-action">
+📚 Open My Course
+</a>
+
+</div>
+
+
+</div>
+
+
+
+<!-- BATCH CARD -->
+
+<div class="batch-card">
+
+
+<div class="batch-title">
+
+<div class="batch-title-icon">
+👥
+</div>
+
+<div>
+
+<h3>
+Batch Information
+</h3>
+
+<p>
+Current Course Batch
+</p>
+
+</div>
+
+</div>
+
+
+<div class="batch-list">
+
+
+<div class="batch-row">
+
+<div class="batch-row-left">
+
+<div class="batch-row-icon">
+👥
+</div>
+
+<span>
+Batch Name
+</span>
+
+</div>
+
+<strong>
+Batch – 01
+</strong>
+
+</div>
+
+
+<div class="batch-row">
+
+<div class="batch-row-left">
+
+<div class="batch-row-icon">
+📅
+</div>
+
+<span>
+Start Date
+</span>
+
+</div>
+
+<strong>
+01 January 2026
+</strong>
+
+</div>
+
+
+<div class="batch-row">
+
+<div class="batch-row-left">
+
+<div class="batch-row-icon">
+🕓
+</div>
+
+<span>
+Class Time
+</span>
+
+</div>
+
+<strong>
+4:00 PM
+</strong>
+
+</div>
+
+
+<div class="batch-row">
+
+<div class="batch-row-left">
+
+<div class="batch-row-icon">
+📍
+</div>
+
+<span>
+Mode
+</span>
+
+</div>
+
+<strong>
+Offline
+</strong>
+
+</div>
+
+
+<div class="batch-row">
+
+<div class="batch-row-left">
+
+<div class="batch-row-icon">
+🟢
+</div>
+
+<span>
+Status
+</span>
+
+</div>
+
+<strong style="color:var(--success);">
+Active
+</strong>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STUDENT PORTAL
+     ===================================================== -->
 
 <section
 class="section portal-section"
 id="studentPortal">
 
 <div class="container">
+
 
 <div class="section-title">
 
@@ -798,7 +1510,7 @@ My Course
 </h3>
 
 <p>
-আপনার Course Name, Batch, Class Schedule এবং Course Progress দেখতে পারবেন।
+Course Name, Batch, Class Schedule এবং Course Progress দেখতে পারবেন।
 </p>
 
 <a
@@ -821,7 +1533,7 @@ Open Course
 </div>
 
 <span class="status pending">
-Demo
+Coming
 </span>
 
 </div>
@@ -854,7 +1566,7 @@ View Assignment
 </div>
 
 <span class="status pending">
-Demo
+Coming
 </span>
 
 </div>
@@ -900,29 +1612,62 @@ Deadline & Countdown
 Assignment বা Quiz-এর শেষ সময় এবং বাকি সময় এখানে দেখা যাবে।
 </p>
 
+
 <div class="countdown">
 
 <div class="time-box">
-<strong>00</strong>
-<span>Days</span>
+
+<strong>
+00
+</strong>
+
+<span>
+Days
+</span>
+
 </div>
+
 
 <div class="time-box">
-<strong>00</strong>
-<span>Hours</span>
+
+<strong>
+00
+</strong>
+
+<span>
+Hours
+</span>
+
 </div>
+
 
 <div class="time-box">
-<strong>00</strong>
-<span>Min</span>
+
+<strong>
+00
+</strong>
+
+<span>
+Min
+</span>
+
 </div>
+
 
 <div class="time-box">
-<strong>00</strong>
-<span>Sec</span>
+
+<strong>
+00
+</strong>
+
+<span>
+Sec
+</span>
+
 </div>
 
 </div>
+
 
 <a
 href="login.html"
@@ -1006,13 +1751,17 @@ View Result
 </section>
 
 
-<!-- ================= RESOURCES ================= -->
+
+<!-- =====================================================
+     RESOURCES
+     ===================================================== -->
 
 <section
 class="section resources-section"
 id="resources">
 
 <div class="container">
+
 
 <div class="section-title">
 
@@ -1029,6 +1778,8 @@ id="resources">
 
 <div class="resource-grid">
 
+
+<!-- NOTES -->
 
 <div class="resource-card">
 
@@ -1054,6 +1805,8 @@ Open Notes
 </div>
 
 
+<!-- ASSIGNMENT -->
+
 <div class="resource-card">
 
 <div class="resource-icon">
@@ -1077,6 +1830,8 @@ View Assignment
 </div>
 
 
+<!-- QUIZ -->
+
 <div class="resource-card">
 
 <div class="resource-icon">
@@ -1099,6 +1854,8 @@ Start Quiz
 
 </div>
 
+
+<!-- CLASS MATERIAL -->
 
 <div class="resource-card">
 
@@ -1124,6 +1881,8 @@ View Materials
 </div>
 
 
+<!-- IMPORTANT LINKS -->
+
 <div class="resource-card">
 
 <div class="resource-icon">
@@ -1147,6 +1906,8 @@ Open Links
 
 </div>
 
+
+<!-- GUIDE -->
 
 <div class="resource-card">
 
@@ -1179,11 +1940,15 @@ Read Guide
 </section>
 
 
-<!-- ================= NOTICE ================= -->
+
+<!-- =====================================================
+     NOTICE
+     ===================================================== -->
 
 <section class="section">
 
 <div class="container">
+
 
 <div class="section-title">
 
@@ -1193,6 +1958,7 @@ Read Guide
 
 </div>
 
+
 <div class="notice">
 
 <strong>
@@ -1201,18 +1967,22 @@ Student Portal Development
 
 <p>
 বর্তমানে Portal-এর UI প্রস্তুত করা হচ্ছে।
-Login, Student ID, Admin Panel, Assignment, Quiz,
-Countdown, Submission এবং Result system পরবর্তী ধাপে যুক্ত হবে।
+Student ID/Login, Assignment, Quiz, Countdown,
+Submission এবং Result system পরবর্তী ধাপে যুক্ত হবে।
 </p>
 
 </div>
+
 
 </div>
 
 </section>
 
 
-<!-- ================= FOOTER ================= -->
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
 
 <footer>
 
@@ -1231,9 +2001,17 @@ Offline Course Student Portal
 </footer>
 
 
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
 <script>
 
-/* ================= THEME ================= */
+
+/* =====================================================
+   THEME
+   ===================================================== */
 
 function toggleTheme(){
 
@@ -1252,6 +2030,8 @@ function toggleTheme(){
 }
 
 
+/* Load Saved Theme */
+
 (function(){
 
     const savedTheme =
@@ -1268,9 +2048,13 @@ function toggleTheme(){
 })();
 
 
-/* ================= LANGUAGE ================= */
+
+/* =====================================================
+   LANGUAGE
+   ===================================================== */
 
 let currentLanguage = "bn";
+
 
 function toggleLanguage(){
 
@@ -1287,8 +2071,8 @@ function toggleLanguage(){
         document.getElementById("heroText").textContent =
             "Manage your Offline Course classes, assignments, quizzes, resources and results from one place.";
 
-        document.getElementById("portalHeroBtn").textContent =
-            "👨‍🎓 Student Portal";
+        document.getElementById("courseHeroBtn").textContent =
+            "🎓 Course Information";
 
         document.getElementById("loginHeroBtn").textContent =
             "🔐 Student Login";
@@ -1298,6 +2082,7 @@ function toggleLanguage(){
 
         document.getElementById("quickText").textContent =
             "Important sections of the Student Portal";
+
 
     }else{
 
@@ -1312,8 +2097,8 @@ function toggleLanguage(){
         document.getElementById("heroText").textContent =
             "Offline Course-এর Class, Assignment, Quiz, Resources এবং Result এক জায়গা থেকে সহজে পরিচালনা করুন।";
 
-        document.getElementById("portalHeroBtn").textContent =
-            "👨‍🎓 Student Portal";
+        document.getElementById("courseHeroBtn").textContent =
+            "🎓 Course Information";
 
         document.getElementById("loginHeroBtn").textContent =
             "🔐 Student Login";
@@ -1324,22 +2109,28 @@ function toggleLanguage(){
         document.getElementById("quickText").textContent =
             "Student Portal-এর গুরুত্বপূর্ণ অংশগুলো";
     }
+
 }
 
 
-/* ================= DEMO ================= */
+
+/* =====================================================
+   DEMO RESOURCE
+   ===================================================== */
 
 function showDemo(event){
 
     event.preventDefault();
 
     alert(
-        "এই অংশটি এখন Demo অবস্থায় আছে।\n\n" +
+        "এই Resource বর্তমানে Demo অবস্থায় আছে।\n\n" +
         "পরবর্তী ধাপে Admin Panel থেকে Resource যোগ করার ব্যবস্থা তৈরি করা হবে।"
     );
 }
 
+
 </script>
+
 
 </body>
 </html>
