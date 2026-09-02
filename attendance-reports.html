@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Attendance Reports</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --soft:#eff6ff;
+    --success:#16a34a;
+    --success-soft:#dcfce7;
+    --warning:#d97706;
+    --warning-soft:#fef3c7;
+    --danger:#dc2626;
+    --danger-soft:#fee2e2;
+    --shadow:0 10px 30px rgba(15,23,42,.07);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+    --soft:#172554;
+    --success-soft:#052e16;
+    --warning-soft:#451a03;
+    --danger-soft:#450a0a;
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    min-height:70px;
+    padding:12px 25px;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    box-shadow:0 4px 20px rgba(15,23,42,.04);
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:43px;
+    height:43px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:14px;
+    font-weight:900;
+    line-height:1.2;
+}
+
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.header-btn{
+    height:38px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:9px;
+    padding:0 12px;
+    font-size:9px;
+    font-weight:800;
+}
+
+.header-btn:hover{
+    background:var(--soft);
+}
+
+.main{
+    max-width:1250px;
+    margin:auto;
+    padding:28px 20px 50px;
+}
+
+.page-header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.page-title h1{
+    font-size:22px;
+    margin-bottom:4px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.btn{
+    height:38px;
+    padding:0 13px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    background:var(--card);
+    color:var(--text);
+    font-size:8px;
+    font-weight:900;
+}
+
+.btn:hover{
+    background:var(--soft);
+}
+
+.btn.primary{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+}
+
+.btn.primary:hover{
+    background:var(--primary-dark);
+}
+
+.btn.success{
+    background:var(--success);
+    color:#fff;
+    border-color:var(--success);
+}
+
+/* FILTER */
+
+.filter-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:15px;
+    box-shadow:var(--shadow);
+    margin-bottom:15px;
+}
+
+.filter-title{
+    font-size:11px;
+    font-weight:900;
+    margin-bottom:12px;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr 1.5fr auto;
+    gap:9px;
+    align-items:end;
+}
+
+.field label{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+    font-weight:900;
+    margin-bottom:5px;
+}
+
+.field input,
+.field select{
+    width:100%;
+    height:38px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:var(--card);
+    color:var(--text);
+    padding:0 10px;
+    outline:none;
+    font-size:8px;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:var(--primary);
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--soft);
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.stat-number{
+    font-size:21px;
+    font-weight:900;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.stat.present .stat-number{
+    color:var(--success);
+}
+
+.stat.absent .stat-number{
+    color:var(--danger);
+}
+
+.stat.late .stat-number{
+    color:var(--warning);
+}
+
+.stat.rate .stat-number{
+    color:var(--primary);
+}
+
+/* REPORT */
+
+.report-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.report-head{
+    padding:15px 17px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.report-head h2{
+    font-size:13px;
+}
+
+.report-head span{
+    color:var(--muted);
+    font-size:7px;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+th{
+    background:var(--bg);
+    color:var(--muted);
+    padding:11px 13px;
+    text-align:left;
+    font-size:7px;
+    font-weight:900;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+}
+
+td{
+    padding:11px 13px;
+    font-size:8px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+}
+
+tr:last-child td{
+    border-bottom:none;
+}
+
+.student-name{
+    font-weight:900;
+}
+
+.student-id{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.status{
+    display:inline-flex;
+    padding:4px 7px;
+    border-radius:20px;
+    font-size:7px;
+    font-weight:900;
+}
+
+.status.good{
+    background:var(--success-soft);
+    color:var(--success);
+}
+
+.status.warning{
+    background:var(--warning-soft);
+    color:var(--warning);
+}
+
+.status.bad{
+    background:var(--danger-soft);
+    color:var(--danger);
+}
+
+.progress{
+    width:90px;
+    height:7px;
+    background:var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:5px;
+}
+
+.progress-fill{
+    height:100%;
+    border-radius:20px;
+    background:var(--success);
+}
+
+.empty{
+    text-align:center;
+    padding:50px 15px;
+    color:var(--muted);
+    font-size:8px;
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:8px;
+    padding:20px 10px 5px;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:5000;
+    background:#111827;
+    color:#fff;
+    padding:11px 15px;
+    border-radius:9px;
+    font-size:9px;
+    opacity:0;
+    transform:translateY(20px);
+    pointer-events:none;
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+
+    .filters{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .header{
+        padding:10px 13px;
+    }
+
+    .main{
+        padding:18px 13px 35px;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:420px){
+
+    .logo{
+        width:37px;
+        height:37px;
+    }
+
+    .logo-text{
+        font-size:11px;
+    }
+
+    .header-btn{
+        padding:0 8px;
+    }
+
+}
+
+/* PRINT */
+
+@media print{
+
+    .header-actions,
+    .actions,
+    .filter-card{
+        display:none!important;
+    }
+
+    body{
+        background:#fff;
+    }
+
+    .main{
+        max-width:none;
+        padding:0;
+    }
+
+    .report-card,
+    .stat{
+        box-shadow:none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+        >
+
+        <div class="logo-text">
+
+            SNK IT Institute
+
+            <small>
+                Admin Attendance Reports
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="header-btn"
+            onclick="toggleTheme()"
+            id="themeBtn"
+        >
+            🌙
+        </button>
+
+        <button
+            class="header-btn"
+            onclick="goBack()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main class="main">
+
+
+<section class="page-header">
+
+    <div class="page-title">
+
+        <h1>
+            📊 Attendance Reports
+        </h1>
+
+        <p>
+            Student attendance-এর সম্পূর্ণ report এবং summary।
+        </p>
+
+    </div>
+
+
+    <div class="actions">
+
+        <button
+            class="btn"
+            onclick="refreshReport()"
+        >
+            🔄 Refresh
+        </button>
+
+        <button
+            class="btn primary"
+            onclick="printReport()"
+        >
+            🖨️ Print
+        </button>
+
+        <button
+            class="btn success"
+            onclick="exportCSV()"
+        >
+            📥 CSV
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- FILTER -->
+
+<section class="filter-card">
+
+    <div class="filter-title">
+        🔎 Report Filter
+    </div>
+
+
+    <div class="filters">
+
+
+        <div class="field">
+
+            <label>
+                Month
+            </label>
+
+            <select
+                id="monthFilter"
+                onchange="renderReport()"
+            ></select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Student
+            </label>
+
+            <select
+                id="studentFilter"
+                onchange="renderReport()"
+            >
+
+                <option value="all">
+                    All Students
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Attendance Status
+            </label>
+
+            <select
+                id="statusFilter"
+                onchange="renderReport()"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="present">
+                    Present
+                </option>
+
+                <option value="absent">
+                    Absent
+                </option>
+
+                <option value="late">
+                    Late
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Search Student
+            </label>
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Student name বা ID লিখুন..."
+                oninput="renderReport()"
+            >
+
+        </div>
+
+
+        <button
+            class="btn"
+            onclick="resetFilters()"
+        >
+            Reset
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            👨‍🎓
+        </div>
+
+        <div
+            class="stat-number"
+            id="totalStudents"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Students
+        </div>
+
+    </div>
+
+
+    <div class="stat present">
+
+        <div class="stat-icon">
+            ✅
+        </div>
+
+        <div
+            class="stat-number"
+            id="totalPresent"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Present
+        </div>
+
+    </div>
+
+
+    <div class="stat absent">
+
+        <div class="stat-icon">
+            ❌
+        </div>
+
+        <div
+            class="stat-number"
+            id="totalAbsent"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Absent
+        </div>
+
+    </div>
+
+
+    <div class="stat late">
+
+        <div class="stat-icon">
+            🕐
+        </div>
+
+        <div
+            class="stat-number"
+            id="totalLate"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Late
+        </div>
+
+    </div>
+
+
+    <div class="stat rate">
+
+        <div class="stat-icon">
+            📈
+        </div>
+
+        <div
+            class="stat-number"
+            id="overallRate"
+        >
+            0%
+        </div>
+
+        <div class="stat-label">
+            Overall Attendance
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- REPORT TABLE -->
+
+<section class="report-card">
+
+    <div class="report-head">
+
+        <h2>
+            📋 Student Attendance Summary
+        </h2>
+
+        <span id="reportInfo">
+            0 students
+        </span>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+
+                    <th>
+                        Student
+                    </th>
+
+                    <th>
+                        Course
+                    </th>
+
+                    <th>
+                        Total
+                    </th>
+
+                    <th>
+                        Present
+                    </th>
+
+                    <th>
+                        Absent
+                    </th>
+
+                    <th>
+                        Late
+                    </th>
+
+                    <th>
+                        Attendance
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody
+                id="reportBody"
+            ></tbody>
+
+        </table>
+
+
+        <div
+            class="empty"
+            id="emptyState"
+            style="display:none;"
+        >
+
+            <div class="empty-icon">
+                📊
+            </div>
+
+            <div>
+                কোনো attendance report পাওয়া যায়নি।
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<footer class="footer">
+
+    © 2026 SNK IT Institute • Attendance Reports
+
+</footer>
+
+
+</main>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const ATTENDANCE_KEY =
+    "snkStudentAttendance";
+
+const STUDENTS_KEY =
+    "snkStudents";
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let attendance = {};
+
+let students = [];
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+function loadData(){
+
+    attendance =
+        JSON.parse(
+            localStorage.getItem(
+                ATTENDANCE_KEY
+            )
+        ) || {};
+
+
+    students =
+        JSON.parse(
+            localStorage.getItem(
+                STUDENTS_KEY
+            )
+        ) || [];
+
+
+    /*
+       Demo fallback
+    */
+
+    if(
+        !Array.isArray(students) ||
+        students.length === 0
+    ){
+
+        students = [
+
+            {
+                id:"SNK001",
+                name:"Demo Student",
+                email:"student@example.com",
+                course:"Computer Basic",
+                className:"Class 01"
+            },
+
+            {
+                id:"SNK002",
+                name:"Demo Student 2",
+                email:"student2@example.com",
+                course:"Web Design",
+                className:"Class 02"
+            }
+
+        ];
+
+    }
+
+}
+
+
+/* =========================================================
+   MONTH OPTIONS
+========================================================= */
+
+function buildMonthOptions(){
+
+    const select =
+        document.getElementById(
+            "monthFilter"
+        );
+
+
+    select.innerHTML =
+        "";
+
+
+    const now =
+        new Date();
+
+
+    for(
+        let i = 0;
+        i < 12;
+        i++
+    ){
+
+        const date =
+            new Date(
+                now.getFullYear(),
+                now.getMonth() - i,
+                1
+            );
+
+
+        const year =
+            date.getFullYear();
+
+
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+
+        const value =
+            `${year}-${month}`;
+
+
+        const label =
+            date.toLocaleDateString(
+                "en-US",
+                {
+                    month:"long",
+                    year:"numeric"
+                }
+            );
+
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            value;
+
+
+        option.textContent =
+            label;
+
+
+        select.appendChild(
+            option
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   STUDENT OPTIONS
+========================================================= */
+
+function buildStudentOptions(){
+
+    const select =
+        document.getElementById(
+            "studentFilter"
+        );
+
+
+    select.innerHTML = `
+
+        <option value="all">
+            All Students
+        </option>
+
+    `;
+
+
+    students.forEach(
+        student => {
+
+            const id =
+                String(
+                    student.id ||
+                    student.studentId ||
+                    ""
+                );
+
+
+            const name =
+                student.name ||
+                student.studentName ||
+                "Student";
+
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                id;
+
+
+            option.textContent =
+                `${name} (${id})`;
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   GET SELECTED MONTH
+========================================================= */
+
+function getMonth(){
+
+    return document.getElementById(
+        "monthFilter"
+    ).value;
+
+}
+
+
+/* =========================================================
+   STUDENT ID
+========================================================= */
+
+function getStudentId(
+    student
+){
+
+    return String(
+        student.id ||
+        student.studentId ||
+        ""
+    );
+
+}
+
+
+/* =========================================================
+   STUDENT NAME
+========================================================= */
+
+function getStudentName(
+    student
+){
+
+    return (
+        student.name ||
+        student.studentName ||
+        "Student"
+    );
+
+}
+
+
+/* =========================================================
+   COURSE
+========================================================= */
+
+function getCourse(
+    student
+){
+
+    return (
+        student.course ||
+        student.courseName ||
+        "-"
+    );
+
+}
+
+
+/* =========================================================
+   GET RECORDS
+========================================================= */
+
+function getStudentRecords(
+    student,
+    month
+){
+
+    const id =
+        getStudentId(
+            student
+        );
+
+
+    const record =
+        attendance[id] || {};
+
+
+    const result = [];
+
+
+    Object.keys(
+        record
+    ).forEach(
+        date => {
+
+            if(
+                date.startsWith(
+                    month
+                )
+            ){
+
+                result.push({
+
+                    date,
+
+                    status:
+                        String(
+                            record[date]
+                        ).toLowerCase()
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   STUDENT SUMMARY
+========================================================= */
+
+function getSummary(
+    student,
+    month
+){
+
+    const records =
+        getStudentRecords(
+            student,
+            month
+        );
+
+
+    let present = 0;
+
+    let absent = 0;
+
+    let late = 0;
+
+
+    records.forEach(
+        record => {
+
+            if(
+                record.status ===
+                "present"
+            ){
+
+                present++;
+
+            }
+
+            else if(
+                record.status ===
+                "absent"
+            ){
+
+                absent++;
+
+            }
+
+            else if(
+                record.status ===
+                "late"
+            ){
+
+                late++;
+
+            }
+
+        }
+    );
+
+
+    const total =
+        records.length;
+
+
+    const rate =
+        total > 0
+        ?
+        (
+            (
+                present +
+                late
+            ) /
+            total
+        ) * 100
+        :
+        0;
+
+
+    return {
+        total,
+        present,
+        absent,
+        late,
+        rate
+    };
+
+}
+
+
+/* =========================================================
+   FILTER STUDENTS
+========================================================= */
+
+function getFilteredStudents(){
+
+    const selectedStudent =
+        document.getElementById(
+            "studentFilter"
+        ).value;
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    return students.filter(
+        student => {
+
+            const id =
+                getStudentId(
+                    student
+                )
+                .toLowerCase();
+
+
+            const name =
+                getStudentName(
+                    student
+                )
+                .toLowerCase();
+
+
+            /*
+               Student filter
+            */
+
+            if(
+                selectedStudent !==
+                "all" &&
+                id !==
+                selectedStudent
+            ){
+
+                return false;
+
+            }
+
+
+            /*
+               Search
+            */
+
+            if(
+                search &&
+                !name.includes(
+                    search
+                ) &&
+                !id.includes(
+                    search
+                )
+            ){
+
+                return false;
+
+            }
+
+
+            /*
+               Status filter
+            */
+
+            if(
+                status !==
+                "all"
+            ){
+
+                const records =
+                    getStudentRecords(
+                        student,
+                        getMonth()
+                    );
+
+
+                const found =
+                    records.some(
+                        record =>
+                            record.status ===
+                            status
+                    );
+
+
+                if(!found){
+
+                    return false;
+
+                }
+
+            }
+
+
+            return true;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER REPORT
+========================================================= */
+
+function renderReport(){
+
+    const month =
+        getMonth();
+
+
+    const filteredStudents =
+        getFilteredStudents();
+
+
+    const body =
+        document.getElementById(
+            "reportBody"
+        );
+
+
+    const empty =
+        document.getElementById(
+            "emptyState"
+        );
+
+
+    body.innerHTML =
+        "";
+
+
+    let totalPresent = 0;
+
+    let totalAbsent = 0;
+
+    let totalLate = 0;
+
+    let totalRecorded = 0;
+
+
+    filteredStudents.forEach(
+        (
+            student,
+            index
+        ) => {
+
+            const summary =
+                getSummary(
+                    student,
+                    month
+                );
+
+
+            totalPresent +=
+                summary.present;
+
+
+            totalAbsent +=
+                summary.absent;
+
+
+            totalLate +=
+                summary.late;
+
+
+            totalRecorded +=
+                summary.total;
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            let statusClass =
+                "good";
+
+
+            let statusText =
+                "Good";
+
+
+            if(
+                summary.rate < 60
+            ){
+
+                statusClass =
+                    "bad";
+
+                statusText =
+                    "Low";
+
+            }
+
+            else if(
+                summary.rate < 80
+            ){
+
+                statusClass =
+                    "warning";
+
+                statusText =
+                    "Needs Improvement";
+
+            }
+
+
+            const safeName =
+                escapeHtml(
+                    getStudentName(
+                        student
+                    )
+                );
+
+
+            const safeId =
+                escapeHtml(
+                    getStudentId(
+                        student
+                    )
+                );
+
+
+            const safeCourse =
+                escapeHtml(
+                    getCourse(
+                        student
+                    )
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+
+                    <div class="student-name">
+                        ${safeName}
+                    </div>
+
+                    <div class="student-id">
+                        ${safeId}
+                    </div>
+
+                </td>
+
+                <td>
+                    ${safeCourse}
+                </td>
+
+                <td>
+                    ${summary.total}
+                </td>
+
+                <td>
+                    <strong style="color:var(--success)">
+                        ${summary.present}
+                    </strong>
+                </td>
+
+                <td>
+                    <strong style="color:var(--danger)">
+                        ${summary.absent}
+                    </strong>
+                </td>
+
+                <td>
+                    <strong style="color:var(--warning)">
+                        ${summary.late}
+                    </strong>
+                </td>
+
+                <td>
+
+                    <span
+                        class="progress"
+                        title="${summary.rate.toFixed(1)}%"
+                    >
+
+                        <span
+                            class="progress-fill"
+                            style="width:${Math.min(
+                                summary.rate,
+                                100
+                            )}%"
+                        ></span>
+
+                    </span>
+
+                    <strong>
+                        ${summary.rate.toFixed(1)}%
+                    </strong>
+
+                </td>
+
+                <td>
+
+                    <span class="status ${statusClass}">
+                        ${statusText}
+                    </span>
+
+                </td>
+
+            `;
+
+
+            body.appendChild(
+                row
+            );
+
+        }
+    );
+
+
+    /*
+       Empty
+    */
+
+    if(
+        filteredStudents.length === 0
+    ){
+
+        empty.style.display =
+            "block";
+
+    }
+    else{
+
+        empty.style.display =
+            "none";
+
+    }
+
+
+    /*
+       Overall rate
+    */
+
+    const overallRate =
+        totalRecorded > 0
+        ?
+        (
+            (
+                totalPresent +
+                totalLate
+            ) /
+            totalRecorded
+        ) * 100
+        :
+        0;
+
+
+    /*
+       Stats
+    */
+
+    document.getElementById(
+        "totalStudents"
+    ).textContent =
+        filteredStudents.length;
+
+
+    document.getElementById(
+        "totalPresent"
+    ).textContent =
+        totalPresent;
+
+
+    document.getElementById(
+        "totalAbsent"
+    ).textContent =
+        totalAbsent;
+
+
+    document.getElementById(
+        "totalLate"
+    ).textContent =
+        totalLate;
+
+
+    document.getElementById(
+        "overallRate"
+    ).textContent =
+        overallRate.toFixed(
+            1
+        ) + "%";
+
+
+    document.getElementById(
+        "reportInfo"
+    ).textContent =
+        `${filteredStudents.length} students`;
+
+}
+
+
+/* =========================================================
+   RESET FILTER
+========================================================= */
+
+function resetFilters(){
+
+    const now =
+        new Date();
+
+
+    const year =
+        now.getFullYear();
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    document.getElementById(
+        "monthFilter"
+    ).value =
+        `${year}-${month}`;
+
+
+    document.getElementById(
+        "studentFilter"
+    ).value =
+        "all";
+
+
+    document.getElementById(
+        "statusFilter"
+    ).value =
+        "all";
+
+
+    document.getElementById(
+        "searchInput"
+    ).value =
+        "";
+
+
+    renderReport();
+
+
+    showToast(
+        "Filters reset ✓"
+    );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshReport(){
+
+    loadData();
+
+    renderReport();
+
+    showToast(
+        "Report refreshed ✓"
+    );
+
+}
+
+
+/* =========================================================
+   CSV EXPORT
+========================================================= */
+
+function exportCSV(){
+
+    const month =
+        getMonth();
+
+
+    const filteredStudents =
+        getFilteredStudents();
+
+
+    if(
+        filteredStudents.length === 0
+    ){
+
+        showToast(
+            "Export করার মতো data নেই!"
+        );
+
+        return;
+
+    }
+
+
+    const rows = [];
+
+
+    rows.push([
+        "No",
+        "Student ID",
+        "Student Name",
+        "Course",
+        "Total",
+        "Present",
+        "Absent",
+        "Late",
+        "Attendance %",
+        "Status"
+    ]);
+
+
+    filteredStudents.forEach(
+        (
+            student,
+            index
+        ) => {
+
+            const summary =
+                getSummary(
+                    student,
+                    month
+                );
+
+
+            let status =
+                "Good";
+
+
+            if(
+                summary.rate < 60
+            ){
+
+                status =
+                    "Low";
+
+            }
+
+            else if(
+                summary.rate < 80
+            ){
+
+                status =
+                    "Needs Improvement";
+
+            }
+
+
+            rows.push([
+
+                index + 1,
+
+                getStudentId(
+                    student
+                ),
+
+                getStudentName(
+                    student
+                ),
+
+                getCourse(
+                    student
+                ),
+
+                summary.total,
+
+                summary.present,
+
+                summary.absent,
+
+                summary.late,
+
+                summary.rate.toFixed(
+                    1
+                ) + "%",
+
+                status
+
+            ]);
+
+        }
+    );
+
+
+    const csv =
+        rows
+        .map(
+            row =>
+                row
+                .map(
+                    value =>
+                        `"${String(
+                            value
+                        ).replace(
+                            /"/g,
+                            '""'
+                        )}"`
+                )
+                .join(",")
+        )
+        .join("\n");
+
+
+    const blob =
+        new Blob(
+            [
+                "\uFEFF" +
+                csv
+            ],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        `attendance-report-${month}.csv`;
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    showToast(
+        "CSV exported successfully ✓"
+    );
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printReport(){
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        "snkAttendanceReportTheme",
+        dark
+        ?
+        "dark"
+        :
+        "light"
+    );
+
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        dark
+        ?
+        "☀️"
+        :
+        "🌙";
+
+}
+
+
+function loadTheme(){
+
+    if(
+        localStorage.getItem(
+            "snkAttendanceReportTheme"
+        ) ===
+        "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+
+        document.getElementById(
+            "themeBtn"
+        ).textContent =
+            "☀️";
+
+    }
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+function goBack(){
+
+    if(
+        document.referrer
+    ){
+
+        history.back();
+
+    }
+    else{
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+    message
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value == null
+        ?
+        ""
+        :
+        String(value);
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   STORAGE CHANGE
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            ATTENDANCE_KEY ||
+            event.key ===
+            STUDENTS_KEY
+        ){
+
+            refreshReport();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadTheme();
+
+        loadData();
+
+        buildMonthOptions();
+
+        buildStudentOptions();
+
+        renderReport();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
