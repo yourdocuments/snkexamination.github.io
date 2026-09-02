@@ -8,13 +8,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-   ROOT
-========================================================= */
 
 :root{
     --bg:#f4f7fb;
@@ -30,21 +26,14 @@
     --success:#16a34a;
     --success-soft:#dcfce7;
 
-    --danger:#dc2626;
-    --danger-soft:#fee2e2;
-
     --warning:#d97706;
     --warning-soft:#fef3c7;
 
-    --purple:#7c3aed;
-    --purple-soft:#f5f3ff;
+    --danger:#dc2626;
+    --danger-soft:#fee2e2;
 
     --shadow:0 10px 30px rgba(15,23,42,.07);
 }
-
-/* =========================================================
-   DARK MODE
-========================================================= */
 
 body.dark{
     --bg:#080d18;
@@ -52,15 +41,11 @@ body.dark{
     --text:#f8fafc;
     --muted:#94a3b8;
     --border:#1f2937;
+
     --soft:#172554;
-    --purple-soft:#2e1065;
 
     --shadow:0 10px 30px rgba(0,0,0,.25);
 }
-
-/* =========================================================
-   RESET
-========================================================= */
 
 *{
     margin:0;
@@ -68,37 +53,23 @@ body.dark{
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
     font-family:"Noto Sans Bengali",Arial,sans-serif;
     background:var(--bg);
     color:var(--text);
     min-height:100vh;
-    transition:.25s;
 }
 
 button,
 input,
-textarea,
-select{
+select,
+textarea{
     font-family:inherit;
 }
 
 button{
     cursor:pointer;
 }
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
 
 .header{
     position:sticky;
@@ -133,7 +104,7 @@ a{
 
 .logo-text{
     font-size:14px;
-    font-weight:800;
+    font-weight:900;
     line-height:1.2;
 }
 
@@ -141,13 +112,11 @@ a{
     display:block;
     color:var(--muted);
     font-size:8px;
-    font-weight:500;
     margin-top:2px;
 }
 
 .header-actions{
     display:flex;
-    align-items:center;
     gap:7px;
 }
 
@@ -163,39 +132,30 @@ a{
     padding:0 11px;
 
     font-size:9px;
-    font-weight:700;
+    font-weight:800;
 }
 
 .header-btn:hover{
     background:var(--soft);
 }
 
-/* =========================================================
-   MAIN
-========================================================= */
-
 .main{
     max-width:1250px;
-    margin:0 auto;
-
+    margin:auto;
     padding:28px 20px 50px;
 }
-
-/* =========================================================
-   PAGE HEADER
-========================================================= */
 
 .page-header{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     gap:15px;
-    margin-bottom:20px;
+
+    margin-bottom:18px;
 }
 
 .page-title h1{
-    font-size:24px;
+    font-size:25px;
     margin-bottom:4px;
 }
 
@@ -214,56 +174,13 @@ a{
     border-radius:9px;
 
     font-size:9px;
-    font-weight:700;
+    font-weight:800;
 }
-
-.back-btn:hover{
-    background:var(--soft);
-}
-
-/* =========================================================
-   INFO BANNER
-========================================================= */
-
-.info-banner{
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            #4f46e5
-        );
-
-    color:#fff;
-
-    border-radius:15px;
-
-    padding:17px 19px;
-
-    margin-bottom:18px;
-
-    box-shadow:
-        0 12px 30px
-        rgba(37,99,235,.18);
-}
-
-.info-banner h2{
-    font-size:13px;
-    margin-bottom:3px;
-}
-
-.info-banner p{
-    font-size:8px;
-    opacity:.88;
-}
-
-/* =========================================================
-   STATS
-========================================================= */
 
 .stats{
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    gap:12px;
+    gap:11px;
 
     margin-bottom:20px;
 }
@@ -271,63 +188,57 @@ a{
 .stat{
     background:var(--card);
     border:1px solid var(--border);
-
     border-radius:13px;
 
-    padding:14px;
+    padding:13px;
 
     box-shadow:var(--shadow);
 }
 
 .stat-icon{
-    width:35px;
-    height:35px;
-
-    border-radius:9px;
-
-    background:var(--soft);
+    width:34px;
+    height:34px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-size:16px;
+    background:var(--soft);
 
-    margin-bottom:8px;
+    border-radius:9px;
+
+    font-size:15px;
+
+    margin-bottom:7px;
 }
 
 .stat-number{
     font-size:20px;
-    font-weight:800;
+    font-weight:900;
 }
 
 .stat-label{
     color:var(--muted);
-    font-size:8px;
+    font-size:7px;
 }
 
-/* =========================================================
-   TOOLBAR
-========================================================= */
-
 .toolbar{
+    background:var(--card);
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    padding:12px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
 
     gap:10px;
 
-    margin-bottom:15px;
-}
+    margin-bottom:13px;
 
-.toolbar-title h2{
-    font-size:14px;
-}
-
-.toolbar-title p{
-    color:var(--muted);
-    font-size:7px;
-    margin-top:2px;
+    box-shadow:var(--shadow);
 }
 
 .filters{
@@ -336,10 +247,12 @@ a{
     flex-wrap:wrap;
 }
 
-.filter{
-    height:34px;
+.input,
+.select{
+    height:36px;
 
     border:1px solid var(--border);
+
     background:var(--card);
     color:var(--text);
 
@@ -352,72 +265,100 @@ a{
     font-size:8px;
 }
 
-.filter:focus{
+.input{
+    min-width:230px;
+}
+
+.input:focus,
+.select:focus{
     border-color:var(--primary);
 }
 
-.search{
-    min-width:190px;
+.refresh-btn{
+    height:36px;
+
+    border:1px solid var(--border);
+
+    background:var(--soft);
+    color:var(--primary);
+
+    border-radius:8px;
+
+    padding:0 12px;
+
+    font-size:8px;
+    font-weight:900;
 }
 
-/* =========================================================
-   SUBMISSION GRID
-========================================================= */
-
-.submission-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-}
-
-/* =========================================================
-   SUBMISSION CARD
-========================================================= */
-
-.submission-card{
+.table-wrap{
     background:var(--card);
 
     border:1px solid var(--border);
 
     border-radius:15px;
 
-    padding:16px;
+    overflow:hidden;
 
     box-shadow:var(--shadow);
-
-    transition:.2s;
 }
 
-.submission-card:hover{
-    transform:translateY(-2px);
-    border-color:rgba(37,99,235,.3);
+.table-scroll{
+    overflow-x:auto;
 }
 
-/* =========================================================
-   CARD TOP
-========================================================= */
+table{
+    width:100%;
+    min-width:1050px;
 
-.card-top{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-
-    gap:12px;
-
-    margin-bottom:13px;
+    border-collapse:collapse;
 }
 
-.student-area{
+th{
+    background:var(--bg);
+
+    color:var(--muted);
+
+    text-align:left;
+
+    padding:12px;
+
+    font-size:7px;
+    font-weight:900;
+
+    border-bottom:1px solid var(--border);
+
+    white-space:nowrap;
+}
+
+td{
+    padding:11px 12px;
+
+    border-bottom:1px solid var(--border);
+
+    font-size:8px;
+
+    vertical-align:middle;
+}
+
+tr:last-child td{
+    border-bottom:none;
+}
+
+tbody tr:hover{
+    background:var(--bg);
+}
+
+.student{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:8px;
 }
 
-.student-avatar{
-    width:43px;
-    height:43px;
+.avatar{
+    width:34px;
+    height:34px;
 
-    border-radius:11px;
+    border-radius:9px;
 
     background:var(--soft);
 
@@ -425,233 +366,109 @@ a{
     align-items:center;
     justify-content:center;
 
-    font-size:18px;
+    font-size:14px;
+
+    flex-shrink:0;
 }
 
-.student-info h3{
-    font-size:11px;
-    margin-bottom:2px;
+.student-name{
+    font-size:8px;
+    font-weight:900;
 }
 
-.student-info p{
+.student-id{
+    color:var(--muted);
+    font-size:6px;
+    margin-top:2px;
+}
+
+.assignment-title{
+    font-weight:900;
+    font-size:8px;
+}
+
+.course{
+    color:var(--muted);
+    font-size:6px;
+    margin-top:2px;
+}
+
+.date{
     color:var(--muted);
     font-size:7px;
 }
 
-.status-badge{
+.status{
     display:inline-flex;
+    align-items:center;
 
     padding:5px 8px;
 
     border-radius:20px;
 
     font-size:6px;
-
-    font-weight:800;
-
-    white-space:nowrap;
+    font-weight:900;
 }
 
-.status-badge.pending{
-    color:var(--warning);
+.status.pending{
     background:var(--warning-soft);
+    color:var(--warning);
 }
 
-.status-badge.marked{
-    color:var(--success);
+.status.graded{
     background:var(--success-soft);
+    color:var(--success);
 }
 
-/* =========================================================
-   ASSIGNMENT INFO
-========================================================= */
-
-.assignment-info{
-    background:var(--bg);
-
-    border:1px solid var(--border);
-
-    border-radius:10px;
-
-    padding:10px;
-
-    margin-bottom:10px;
+.mark-display{
+    font-weight:900;
 }
 
-.assignment-name{
-    font-size:10px;
-    font-weight:800;
-    margin-bottom:2px;
+.mark-display.pending{
+    color:var(--warning);
 }
 
-.assignment-course{
-    color:var(--muted);
-    font-size:7px;
-}
-
-/* =========================================================
-   DETAILS
-========================================================= */
-
-.details{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-
-    gap:7px;
-
-    margin-bottom:11px;
-}
-
-.detail{
-    background:var(--bg);
-
-    border:1px solid var(--border);
-
-    border-radius:8px;
-
-    padding:8px;
-}
-
-.detail span{
-    display:block;
-
-    color:var(--muted);
-
-    font-size:6px;
-
-    margin-bottom:2px;
-}
-
-.detail strong{
-    display:block;
-
-    font-size:8px;
-
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-/* =========================================================
-   ANSWER PREVIEW
-========================================================= */
-
-.answer-preview{
-    background:var(--bg);
-
-    border:1px solid var(--border);
-
-    border-radius:10px;
-
-    padding:10px;
-
-    margin-bottom:10px;
-}
-
-.answer-preview-title{
-    font-size:7px;
-    font-weight:800;
-
-    margin-bottom:5px;
-}
-
-.answer-preview-text{
-    color:var(--muted);
-
-    font-size:8px;
-
-    line-height:1.6;
-
-    display:-webkit-box;
-    -webkit-line-clamp:4;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-}
-
-/* =========================================================
-   FILE LINK
-========================================================= */
-
-.file-link{
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-
-    color:var(--primary);
-
-    font-size:8px;
-
-    font-weight:800;
-
-    margin-bottom:10px;
-}
-
-/* =========================================================
-   CARD ACTIONS
-========================================================= */
-
-.card-actions{
+.action-group{
     display:flex;
-    gap:7px;
-
-    padding-top:11px;
-
-    border-top:1px solid var(--border);
+    gap:5px;
 }
 
 .action-btn{
-    flex:1;
-
     border:1px solid var(--border);
 
     background:var(--card);
     color:var(--text);
 
-    border-radius:8px;
+    border-radius:7px;
 
-    padding:9px 8px;
+    padding:6px 8px;
 
-    font-size:8px;
-    font-weight:800;
+    font-size:7px;
+    font-weight:900;
 }
 
 .action-btn:hover{
     background:var(--soft);
+    color:var(--primary);
 }
 
-.action-btn.primary{
-    background:var(--primary);
-    border-color:var(--primary);
-    color:#fff;
-}
-
-.action-btn.primary:hover{
-    background:var(--primary-dark);
-}
-
-.action-btn.danger{
+.action-btn.delete:hover{
+    background:var(--danger-soft);
     color:var(--danger);
 }
-
-.action-btn.danger:hover{
-    background:var(--danger-soft);
-}
-
-/* =========================================================
-   EMPTY
-========================================================= */
 
 .empty{
     display:none;
 
     text-align:center;
 
+    padding:55px 20px;
+
     background:var(--card);
 
     border:1px solid var(--border);
 
     border-radius:15px;
-
-    padding:55px 20px;
 }
 
 .empty-icon{
@@ -670,17 +487,14 @@ a{
     font-size:8px;
 }
 
-/* =========================================================
-   MODAL
-========================================================= */
-
 .modal{
     position:fixed;
     inset:0;
 
-    background:rgba(15,23,42,.6);
+    background:rgba(15,23,42,.65);
 
     display:none;
+
     align-items:center;
     justify-content:center;
 
@@ -698,7 +512,6 @@ a{
     max-width:650px;
 
     max-height:90vh;
-
     overflow:auto;
 
     background:var(--card);
@@ -707,9 +520,7 @@ a{
 
     padding:20px;
 
-    box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.3);
+    box-shadow:0 25px 70px rgba(0,0,0,.3);
 }
 
 .modal-header{
@@ -717,19 +528,17 @@ a{
     align-items:flex-start;
     justify-content:space-between;
 
-    gap:10px;
-
     margin-bottom:15px;
 }
 
 .modal-header h2{
     font-size:15px;
-    margin-bottom:3px;
 }
 
 .modal-header p{
     color:var(--muted);
     font-size:8px;
+    margin-top:3px;
 }
 
 .close-btn{
@@ -743,67 +552,50 @@ a{
 
     border-radius:8px;
 
-    font-size:16px;
+    font-size:17px;
 }
 
-/* =========================================================
-   MODAL STUDENT
-========================================================= */
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
 
-.modal-student{
-    display:flex;
-    align-items:center;
-    gap:10px;
+    margin-bottom:13px;
+}
 
+.info{
     background:var(--bg);
 
     border:1px solid var(--border);
 
-    border-radius:10px;
+    border-radius:9px;
 
-    padding:11px;
-
-    margin-bottom:12px;
+    padding:10px;
 }
 
-.modal-student-avatar{
-    width:42px;
-    height:42px;
+.info span{
+    display:block;
 
-    border-radius:10px;
-
-    background:var(--soft);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:18px;
-}
-
-.modal-student h3{
-    font-size:10px;
-    margin-bottom:2px;
-}
-
-.modal-student p{
     color:var(--muted);
-    font-size:7px;
+
+    font-size:6px;
+
+    margin-bottom:3px;
 }
 
-/* =========================================================
-   FORM
-========================================================= */
+.info strong{
+    font-size:8px;
+}
 
 .form-group{
-    margin-bottom:13px;
+    margin-bottom:11px;
 }
 
 .form-group label{
     display:block;
 
-    font-size:9px;
-    font-weight:800;
+    font-size:8px;
+    font-weight:900;
 
     margin-bottom:5px;
 }
@@ -813,42 +605,48 @@ a{
 
     border:1px solid var(--border);
 
-    background:var(--bg);
+    background:var(--card);
     color:var(--text);
 
-    border-radius:9px;
+    border-radius:8px;
 
-    padding:10px 11px;
+    padding:9px;
 
     outline:none;
 
-    font-size:9px;
+    font-size:8px;
 }
 
 .form-control:focus{
     border-color:var(--primary);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,.08);
 }
 
 textarea.form-control{
-    min-height:110px;
+    min-height:90px;
     resize:vertical;
 }
 
-.form-help{
-    color:var(--muted);
-    font-size:7px;
-    margin-top:4px;
+.save-btn{
+    width:100%;
+
+    height:40px;
+
+    border:none;
+
+    background:var(--primary);
+    color:#fff;
+
+    border-radius:9px;
+
+    font-size:9px;
+    font-weight:900;
 }
 
-/* =========================================================
-   ANSWER FULL
-========================================================= */
+.save-btn:hover{
+    background:var(--primary-dark);
+}
 
-.answer-full{
+.view-box{
     background:var(--bg);
 
     border:1px solid var(--border);
@@ -857,132 +655,21 @@ textarea.form-control{
 
     padding:12px;
 
-    margin-bottom:13px;
+    margin-bottom:12px;
 }
 
-.answer-full-title{
+.view-title{
     font-size:8px;
-    font-weight:800;
+    font-weight:900;
     margin-bottom:6px;
 }
 
-.answer-full-text{
+.view-text{
     color:var(--muted);
-
     font-size:8px;
-
     line-height:1.7;
-
     white-space:pre-wrap;
-
-    word-break:break-word;
 }
-
-/* =========================================================
-   MODAL ACTIONS
-========================================================= */
-
-.modal-actions{
-    display:flex;
-    gap:8px;
-}
-
-.save-btn{
-    flex:1;
-
-    border:none;
-
-    background:var(--primary);
-    color:#fff;
-
-    padding:11px;
-
-    border-radius:9px;
-
-    font-size:9px;
-    font-weight:800;
-}
-
-.save-btn:hover{
-    background:var(--primary-dark);
-}
-
-.cancel-btn{
-    border:1px solid var(--border);
-
-    background:var(--card);
-    color:var(--text);
-
-    padding:11px 15px;
-
-    border-radius:9px;
-
-    font-size:9px;
-    font-weight:700;
-}
-
-/* =========================================================
-   CONFIRM MODAL
-========================================================= */
-
-.confirm-content{
-    text-align:center;
-    padding:10px 5px;
-}
-
-.confirm-icon{
-    width:60px;
-    height:60px;
-
-    border-radius:50%;
-
-    background:var(--danger-soft);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    margin:0 auto 12px;
-
-    font-size:26px;
-}
-
-.confirm-content h2{
-    font-size:15px;
-    margin-bottom:5px;
-}
-
-.confirm-content p{
-    color:var(--muted);
-    font-size:8px;
-    line-height:1.6;
-    margin-bottom:17px;
-}
-
-.confirm-actions{
-    display:flex;
-    gap:8px;
-}
-
-.confirm-delete{
-    flex:1;
-
-    border:none;
-
-    background:var(--danger);
-    color:#fff;
-
-    padding:11px;
-
-    border-radius:9px;
-
-    font-size:9px;
-    font-weight:800;
-}
-
-/* =========================================================
-   TOAST
-========================================================= */
 
 .toast{
     position:fixed;
@@ -999,13 +686,8 @@ textarea.form-control{
 
     font-size:9px;
 
-    box-shadow:
-        0 12px 35px
-        rgba(0,0,0,.25);
-
-    transform:translateY(20px);
-
     opacity:0;
+    transform:translateY(20px);
 
     pointer-events:none;
 
@@ -1015,13 +697,9 @@ textarea.form-control{
 }
 
 .toast.show{
-    transform:translateY(0);
     opacity:1;
+    transform:translateY(0);
 }
-
-/* =========================================================
-   FOOTER
-========================================================= */
 
 .footer{
     text-align:center;
@@ -1033,22 +711,15 @@ textarea.form-control{
     padding:25px 10px 5px;
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
 @media(max-width:1000px){
 
     .stats{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .submission-grid{
-        grid-template-columns:1fr;
-    }
 }
 
-@media(max-width:700px){
+@media(max-width:750px){
 
     .header{
         height:64px;
@@ -1060,8 +731,8 @@ textarea.form-control{
         height:38px;
     }
 
-    .logo-text{
-        font-size:12px;
+    .header-btn{
+        padding:0 8px;
     }
 
     .main{
@@ -1074,46 +745,35 @@ textarea.form-control{
     }
 
     .toolbar{
-        align-items:flex-start;
+        align-items:stretch;
         flex-direction:column;
+    }
+
+    .input{
+        min-width:0;
+        width:100%;
     }
 
     .filters{
         width:100%;
     }
 
-    .filter{
+    .select{
         flex:1;
-        min-width:0;
     }
 
-    .search{
-        min-width:0;
-        width:100%;
-    }
-
-    .details{
-        grid-template-columns:1fr 1fr;
-    }
 }
 
-@media(max-width:480px){
+@media(max-width:500px){
 
     .stats{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .card-actions{
-        flex-direction:column;
-    }
-
-    .details{
+    .info-grid{
         grid-template-columns:1fr;
     }
 
-    .student-info{
-        max-width:170px;
-    }
 }
 
 </style>
@@ -1123,9 +783,9 @@ textarea.form-control{
 <body>
 
 
-<!-- =========================================================
+<!-- =====================================================
      HEADER
-========================================================= -->
+===================================================== -->
 
 <header class="header">
 
@@ -1142,7 +802,7 @@ textarea.form-control{
             SNK IT Institute
 
             <small>
-                Admin Assignment Management
+                Admin Submissions Management
             </small>
 
         </div>
@@ -1154,19 +814,12 @@ textarea.form-control{
 
         <button
             class="header-btn"
-            onclick="toggleLanguage()"
-            id="languageButton"
-        >
-            বাংলা
-        </button>
-
-        <button
-            class="header-btn"
             onclick="toggleTheme()"
-            id="themeButton"
+            id="themeBtn"
         >
             🌙
         </button>
+
 
         <button
             class="header-btn"
@@ -1181,25 +834,23 @@ textarea.form-control{
 
 
 
-<!-- =========================================================
+<!-- =====================================================
      MAIN
-========================================================= -->
+===================================================== -->
 
 <main class="main">
 
-
-    <!-- PAGE HEADER -->
 
     <section class="page-header">
 
         <div class="page-title">
 
             <h1>
-                📤 Assignment Submissions
+                📤 Student Submissions
             </h1>
 
             <p>
-                Student submissions দেখুন, mark দিন এবং feedback publish করুন।
+                Student assignment submission review, marking এবং feedback management।
             </p>
 
         </div>
@@ -1207,36 +858,18 @@ textarea.form-control{
 
         <button
             class="back-btn"
-            onclick="goDashboard()"
+            onclick="goAssignments()"
         >
-            ← Back
+            ← Assignments
         </button>
 
     </section>
 
 
 
-    <!-- =====================================================
-         INFO
-    ====================================================== -->
-
-    <section class="info-banner">
-
-        <h2>
-            🎓 Student Submission Management
-        </h2>
-
-        <p>
-            এই page থেকে submitted assignment review করে mark ও teacher feedback দিতে পারবেন।
-        </p>
-
-    </section>
-
-
-
-    <!-- =====================================================
+    <!-- =================================================
          STATS
-    ====================================================== -->
+    ================================================== -->
 
     <section class="stats">
 
@@ -1289,13 +922,13 @@ textarea.form-control{
 
             <div
                 class="stat-number"
-                id="markedSubmissions"
+                id="gradedSubmissions"
             >
                 0
             </div>
 
             <div class="stat-label">
-                Marked
+                Graded
             </div>
 
         </div>
@@ -1304,18 +937,18 @@ textarea.form-control{
         <div class="stat">
 
             <div class="stat-icon">
-                🎓
+                🎯
             </div>
 
             <div
                 class="stat-number"
-                id="studentCount"
+                id="totalObtained"
             >
                 0
             </div>
 
             <div class="stat-label">
-                Students
+                Total Marks Given
             </div>
 
         </div>
@@ -1324,18 +957,18 @@ textarea.form-control{
         <div class="stat">
 
             <div class="stat-icon">
-                📚
+                📊
             </div>
 
             <div
                 class="stat-number"
-                id="assignmentCount"
+                id="averagePercentage"
             >
-                0
+                0%
             </div>
 
             <div class="stat-label">
-                Assignments
+                Average Result
             </div>
 
         </div>
@@ -1344,40 +977,25 @@ textarea.form-control{
 
 
 
-    <!-- =====================================================
+    <!-- =================================================
          TOOLBAR
-    ====================================================== -->
+    ================================================== -->
 
-    <div class="toolbar">
-
-
-        <div class="toolbar-title">
-
-            <h2>
-                📋 Submission List
-            </h2>
-
-            <p>
-                Student submission search এবং filter করুন।
-            </p>
-
-        </div>
-
+    <section class="toolbar">
 
         <div class="filters">
 
-
             <input
-                class="filter search"
-                id="searchInput"
                 type="search"
-                placeholder="🔍 Student / ID / Assignment..."
+                class="input"
+                id="searchInput"
+                placeholder="🔍 Student / ID / Assignment search..."
                 oninput="renderSubmissions()"
             >
 
 
             <select
-                class="filter"
+                class="select"
                 id="statusFilter"
                 onchange="renderSubmissions()"
             >
@@ -1390,48 +1008,81 @@ textarea.form-control{
                     Pending
                 </option>
 
-                <option value="marked">
-                    Marked
+                <option value="graded">
+                    Graded
                 </option>
 
             </select>
 
+        </div>
 
-            <select
-                class="filter"
-                id="courseFilter"
-                onchange="renderSubmissions()"
-            >
 
-                <option value="all">
-                    সব Course
-                </option>
+        <button
+            class="refresh-btn"
+            onclick="loadData()"
+        >
+            🔄 Refresh
+        </button>
 
-                <option value="Computer Basic">
-                    Computer Basic
-                </option>
+    </section>
 
-                <option value="MS Word">
-                    MS Word
-                </option>
 
-                <option value="MS Excel">
-                    MS Excel
-                </option>
 
-                <option value="Graphic Design">
-                    Graphic Design
-                </option>
+    <!-- =================================================
+         TABLE
+    ================================================== -->
 
-                <option value="Web Design">
-                    Web Design
-                </option>
+    <div
+        class="table-wrap"
+        id="tableWrap"
+    >
 
-                <option value="Other">
-                    Other
-                </option>
+        <div class="table-scroll">
 
-            </select>
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Student
+                        </th>
+
+                        <th>
+                            Assignment
+                        </th>
+
+                        <th>
+                            Submitted
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Marks
+                        </th>
+
+                        <th>
+                            Feedback
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="submissionBody"
+                ></tbody>
+
+            </table>
 
         </div>
 
@@ -1439,21 +1090,9 @@ textarea.form-control{
 
 
 
-    <!-- =====================================================
-         GRID
-    ====================================================== -->
+    <!-- EMPTY -->
 
-    <section
-        class="submission-grid"
-        id="submissionGrid"
-    ></section>
-
-
-
-    <!-- EMPTY
-    ====================================================== -->
-
-    <section
+    <div
         class="empty"
         id="emptyState"
     >
@@ -1470,16 +1109,14 @@ textarea.form-control{
             Student assignment submit করলে এখানে দেখা যাবে।
         </span>
 
-    </section>
+    </div>
 
 
-
-    <!-- FOOTER -->
 
     <footer class="footer">
 
         © 2026 SNK IT Institute
-        • Admin Assignment Management
+        • Admin Submission Management
 
     </footer>
 
@@ -1487,13 +1124,13 @@ textarea.form-control{
 
 
 
-<!-- =========================================================
-     REVIEW / MARK MODAL
-========================================================= -->
+<!-- =====================================================
+     MARK MODAL
+===================================================== -->
 
 <div
     class="modal"
-    id="reviewModal"
+    id="markModal"
 >
 
     <div class="modal-box">
@@ -1504,11 +1141,11 @@ textarea.form-control{
             <div>
 
                 <h2>
-                    🎯 Review Submission
+                    🎯 Grade Submission
                 </h2>
 
                 <p>
-                    Student-এর answer review করে mark ও feedback দিন।
+                    Student-এর assignment mark এবং feedback দিন।
                 </p>
 
             </div>
@@ -1516,7 +1153,7 @@ textarea.form-control{
 
             <button
                 class="close-btn"
-                onclick="closeReviewModal()"
+                onclick="closeMarkModal()"
             >
                 ×
             </button>
@@ -1524,64 +1161,164 @@ textarea.form-control{
         </div>
 
 
+        <div class="info-grid">
 
-        <!-- STUDENT -->
+            <div class="info">
 
-        <div class="modal-student">
+                <span>
+                    Student
+                </span>
 
-            <div class="modal-student-avatar">
-                🎓
+                <strong
+                    id="markStudent"
+                >
+                    -
+                </strong>
+
             </div>
+
+
+            <div class="info">
+
+                <span>
+                    Assignment
+                </span>
+
+                <strong
+                    id="markAssignment"
+                >
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <span>
+                    Total Marks
+                </span>
+
+                <strong
+                    id="markTotal"
+                >
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info">
+
+                <span>
+                    Submission Date
+                </span>
+
+                <strong
+                    id="markDate"
+                >
+                    -
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Obtained Marks
+            </label>
+
+            <input
+                type="number"
+                class="form-control"
+                id="obtainedMark"
+                min="0"
+                step="0.01"
+                placeholder="যেমন: 85"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Teacher Feedback
+            </label>
+
+            <textarea
+                class="form-control"
+                id="teacherFeedback"
+                placeholder="Student-এর জন্য feedback লিখুন..."
+            ></textarea>
+
+        </div>
+
+
+        <button
+            class="save-btn"
+            onclick="saveGrade()"
+        >
+            💾 Save Grade & Feedback
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     VIEW MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="viewModal"
+>
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
 
             <div>
 
-                <h3 id="reviewStudentName">
-                    Student
-                </h3>
+                <h2>
+                    👁 Submission Details
+                </h2>
 
-                <p id="reviewStudentId">
-                    STUDENT-001
+                <p>
+                    Student submission details।
                 </p>
 
             </div>
 
-        </div>
 
-
-
-        <!-- ASSIGNMENT -->
-
-        <div class="assignment-info">
-
-            <div
-                class="assignment-name"
-                id="reviewAssignmentName"
+            <button
+                class="close-btn"
+                onclick="closeViewModal()"
             >
-                Assignment
-            </div>
-
-            <div
-                class="assignment-course"
-                id="reviewAssignmentCourse"
-            >
-                Course
-            </div>
+                ×
+            </button>
 
         </div>
 
 
+        <div
+            class="view-box"
+        >
 
-        <!-- ANSWER -->
-
-        <div class="answer-full">
-
-            <div class="answer-full-title">
-                📝 Student Answer
+            <div class="view-title">
+                Student
             </div>
 
             <div
-                class="answer-full-text"
-                id="reviewAnswer"
+                class="view-text"
+                id="viewStudent"
             >
                 -
             </div>
@@ -1589,141 +1326,55 @@ textarea.form-control{
         </div>
 
 
-
-        <!-- FILE -->
-
         <div
-            id="reviewFileArea"
-            style="margin-bottom:13px;"
-        ></div>
-
-
-
-        <!-- MARK -->
-
-        <div class="form-group">
-
-            <label>
-                🎯 Mark
-            </label>
-
-            <input
-                class="form-control"
-                id="markInput"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="যেমন: 85"
-            >
-
-            <div class="form-help">
-                Assignment-এর Total Marks-এর বেশি mark দেওয়া যাবে না।
-            </div>
-
-        </div>
-
-
-
-        <!-- FEEDBACK -->
-
-        <div class="form-group">
-
-            <label>
-                💬 Teacher Feedback
-            </label>
-
-            <textarea
-                class="form-control"
-                id="feedbackInput"
-                placeholder="Student-এর জন্য feedback লিখুন..."
-            ></textarea>
-
-        </div>
-
-
-
-        <input
-            type="hidden"
-            id="reviewSubmissionId"
+            class="view-box"
         >
 
+            <div class="view-title">
+                Assignment
+            </div>
 
-
-        <!-- ACTIONS -->
-
-        <div class="modal-actions">
-
-            <button
-                class="save-btn"
-                onclick="saveReview()"
+            <div
+                class="view-text"
+                id="viewAssignment"
             >
-                💾 Save & Publish Result
-            </button>
-
-            <button
-                class="cancel-btn"
-                onclick="closeReviewModal()"
-            >
-                Cancel
-            </button>
+                -
+            </div>
 
         </div>
 
-    </div>
 
-</div>
+        <div
+            class="view-box"
+        >
 
-
-
-<!-- =========================================================
-     CONFIRM DELETE MODAL
-========================================================= -->
-
-<div
-    class="modal"
-    id="deleteModal"
->
-
-    <div class="modal-box">
-
-        <div class="confirm-content">
-
-            <div class="confirm-icon">
-                🗑️
+            <div class="view-title">
+                Student Answer / Submission
             </div>
 
-            <h2>
-                Delete Submission?
-            </h2>
-
-            <p>
-                এই submission delete করলে এটি Student-এর submission list থেকেও মুছে যাবে।
-                এই action undo করা যাবে না।
-            </p>
-
-
-            <input
-                type="hidden"
-                id="deleteSubmissionId"
+            <div
+                class="view-text"
+                id="viewContent"
             >
+                -
+            </div>
+
+        </div>
 
 
-            <div class="confirm-actions">
+        <div
+            class="view-box"
+        >
 
-                <button
-                    class="confirm-delete"
-                    onclick="confirmDelete()"
-                >
-                    🗑️ Delete
-                </button>
+            <div class="view-title">
+                Current Feedback
+            </div>
 
-                <button
-                    class="cancel-btn"
-                    onclick="closeDeleteModal()"
-                >
-                    Cancel
-                </button>
-
+            <div
+                class="view-text"
+                id="viewFeedback"
+            >
+                No feedback yet.
             </div>
 
         </div>
@@ -1733,10 +1384,6 @@ textarea.form-control{
 </div>
 
 
-
-<!-- =========================================================
-     TOAST
-========================================================= -->
 
 <div
     class="toast"
@@ -1747,9 +1394,9 @@ textarea.form-control{
 
 <script>
 
-/* =========================================================
-   STORAGE KEYS
-========================================================= */
+/* =====================================================
+   STORAGE
+===================================================== */
 
 const ASSIGNMENT_KEY =
     "snkAssignments";
@@ -1758,118 +1405,148 @@ const SUBMISSION_KEY =
     "snkAssignmentSubmissions";
 
 
-/* =========================================================
-   DATA
-========================================================= */
+let assignments = [];
 
-let assignments =
-    JSON.parse(
-        localStorage.getItem(
-            ASSIGNMENT_KEY
-        )
-    ) || [];
+let submissions = [];
+
+let editingSubmissionId = null;
 
 
-let submissions =
-    JSON.parse(
-        localStorage.getItem(
-            SUBMISSION_KEY
-        )
-    ) || [];
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData(){
+
+    assignments =
+        JSON.parse(
+            localStorage.getItem(
+                ASSIGNMENT_KEY
+            )
+        ) || [];
 
 
-/* =========================================================
-   THEME
-========================================================= */
+    submissions =
+        JSON.parse(
+            localStorage.getItem(
+                SUBMISSION_KEY
+            )
+        ) || [];
 
-function toggleTheme(){
 
-    document.body.classList.toggle(
-        "dark"
-    );
+    renderStats();
 
-    const dark =
-        document.body.classList.contains(
-            "dark"
-        );
-
-    localStorage.setItem(
-        "snkAdminSubmissionTheme",
-        dark
-        ? "dark"
-        : "light"
-    );
-
-    document.getElementById(
-        "themeButton"
-    ).textContent =
-        dark
-        ? "☀️"
-        : "🌙";
+    renderSubmissions();
 
 }
 
 
-function loadTheme(){
+/* =====================================================
+   SAVE SUBMISSIONS
+===================================================== */
 
-    const theme =
-        localStorage.getItem(
-            "snkAdminSubmissionTheme"
-        );
+function saveSubmissions(){
 
-    if(theme === "dark"){
+    localStorage.setItem(
+        SUBMISSION_KEY,
+        JSON.stringify(
+            submissions
+        )
+    );
 
-        document.body.classList.add(
-            "dark"
-        );
+}
 
-        document.getElementById(
-            "themeButton"
-        ).textContent =
-            "☀️";
+
+/* =====================================================
+   GET ASSIGNMENT
+===================================================== */
+
+function getAssignment(
+    assignmentId
+){
+
+    return assignments.find(
+        item =>
+            String(
+                item.id
+            ) ===
+            String(
+                assignmentId
+            )
+    );
+
+}
+
+
+/* =====================================================
+   GET SUBMISSION STATUS
+===================================================== */
+
+function isGraded(
+    submission
+){
+
+    return !!(
+        submission &&
+        submission.mark !== null &&
+        submission.mark !== undefined &&
+        submission.mark !== ""
+    );
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(
+    date
+){
+
+    if(!date){
+
+        return "-";
 
     }
 
-}
+
+    const d =
+        new Date(
+            date
+        );
 
 
-/* =========================================================
-   LANGUAGE
-========================================================= */
+    if(
+        Number.isNaN(
+            d.getTime()
+        )
+    ){
 
-let currentLanguage =
-    localStorage.getItem(
-        "snkAdminSubmissionLanguage"
-    ) || "bn";
+        return "-";
+
+    }
 
 
-function toggleLanguage(){
-
-    currentLanguage =
-        currentLanguage === "bn"
-        ? "en"
-        : "bn";
-
-    localStorage.setItem(
-        "snkAdminSubmissionLanguage",
-        currentLanguage
+    return d.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
     );
 
-    document.getElementById(
-        "languageButton"
-    ).textContent =
-        currentLanguage === "bn"
-        ? "English"
-        : "বাংলা";
-
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+/* =====================================================
+   ESCAPE
+===================================================== */
 
-function escapeHtml(value){
+function escapeHtml(
+    value
+){
 
     const div =
         document.createElement(
@@ -1886,115 +1563,162 @@ function escapeHtml(value){
 }
 
 
-/* =========================================================
-   SAVE DATA
-========================================================= */
+/* =====================================================
+   STATS
+===================================================== */
 
-function saveSubmissions(){
+function renderStats(){
 
-    localStorage.setItem(
-        SUBMISSION_KEY,
-        JSON.stringify(
-            submissions
-        )
-    );
-
-}
+    const total =
+        submissions.length;
 
 
-/* =========================================================
-   GET ASSIGNMENT
-========================================================= */
+    let pending =
+        0;
 
-function getAssignment(
-    assignmentId
-){
+    let graded =
+        0;
 
-    return assignments.find(
-        assignment =>
-            String(
-                assignment.id
-            ) ===
-            String(
-                assignmentId
-            )
-    );
+    let obtained =
+        0;
 
-}
+    let percentageSum =
+        0;
+
+    let percentageCount =
+        0;
 
 
-/* =========================================================
-   CHECK MARKED
-========================================================= */
+    submissions.forEach(
+        submission => {
 
-function isMarked(
-    submission
-){
+            if(
+                isGraded(
+                    submission
+                )
+            ){
 
-    return (
-        submission.mark !== null &&
-        submission.mark !== undefined &&
-        submission.mark !== ""
-    );
-
-}
+                graded++;
 
 
-/* =========================================================
-   FORMAT DATE
-========================================================= */
+                const assignment =
+                    getAssignment(
+                        submission.assignmentId
+                    );
 
-function formatDateTime(
-    dateString
-){
 
-    const date =
-        new Date(
-            dateString
-        );
+                const mark =
+                    Number(
+                        submission.mark
+                    );
 
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
 
-        return "-";
+                if(
+                    !Number.isNaN(
+                        mark
+                    )
+                ){
 
-    }
+                    obtained +=
+                        mark;
 
-    return date.toLocaleDateString(
-        "en-GB",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric"
+                }
+
+
+                if(
+                    assignment &&
+                    Number(
+                        assignment.marks
+                    ) > 0
+                ){
+
+                    const percent =
+                        (
+                            mark /
+                            Number(
+                                assignment.marks
+                            )
+                        ) *
+                        100;
+
+
+                    percentageSum +=
+                        percent;
+
+                    percentageCount++;
+
+                }
+
+            }
+            else{
+
+                pending++;
+
+            }
+
         }
-    )
-    +
-    " • "
-    +
-    date.toLocaleTimeString(
-        "en-US",
-        {
-            hour:"2-digit",
-            minute:"2-digit"
-        }
     );
+
+
+    const average =
+        percentageCount
+        ?
+        percentageSum /
+        percentageCount
+        :
+        0;
+
+
+    document.getElementById(
+        "totalSubmissions"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "pendingSubmissions"
+    ).textContent =
+        pending;
+
+
+    document.getElementById(
+        "gradedSubmissions"
+    ).textContent =
+        graded;
+
+
+    document.getElementById(
+        "totalObtained"
+    ).textContent =
+        obtained;
+
+
+    document.getElementById(
+        "averagePercentage"
+    ).textContent =
+        average.toFixed(1) +
+        "%";
 
 }
 
 
-/* =========================================================
-   RENDER
-========================================================= */
+/* =====================================================
+   RENDER TABLE
+===================================================== */
 
 function renderSubmissions(){
 
-    const grid =
+    const tbody =
         document.getElementById(
-            "submissionGrid"
+            "submissionBody"
         );
+
+
+    const tableWrap =
+        document.getElementById(
+            "tableWrap"
+        );
+
 
     const empty =
         document.getElementById(
@@ -2016,13 +1740,7 @@ function renderSubmissions(){
         ).value;
 
 
-    const course =
-        document.getElementById(
-            "courseFilter"
-        ).value;
-
-
-    const filtered =
+    let list =
         submissions.filter(
             submission => {
 
@@ -2032,110 +1750,86 @@ function renderSubmissions(){
                     );
 
 
-                const assignmentTitle =
-                    assignment
-                    ? assignment.title
-                    : "";
-
-
-                const assignmentCourse =
-                    assignment
-                    ? assignment.course
-                    : "";
-
-
-                const searchMatch =
-                    !search ||
+                const studentName =
                     String(
                         submission.studentName ||
                         ""
                     )
-                    .toLowerCase()
-                    .includes(search) ||
+                    .toLowerCase();
 
+
+                const studentId =
                     String(
                         submission.studentId ||
                         ""
                     )
-                    .toLowerCase()
-                    .includes(search) ||
+                    .toLowerCase();
 
+
+                const assignmentTitle =
                     String(
-                        assignmentTitle
+                        assignment?.title ||
+                        submission.assignmentTitle ||
+                        ""
                     )
-                    .toLowerCase()
-                    .includes(search);
+                    .toLowerCase();
 
 
-                let statusMatch =
-                    true;
+                const matchesSearch =
+                    !search ||
+                    studentName.includes(
+                        search
+                    ) ||
+                    studentId.includes(
+                        search
+                    ) ||
+                    assignmentTitle.includes(
+                        search
+                    );
 
 
-                if(
-                    status === "pending"
-                ){
-
-                    statusMatch =
-                        !isMarked(
-                            submission
-                        );
-
-                }
+                const graded =
+                    isGraded(
+                        submission
+                    );
 
 
-                if(
-                    status === "marked"
-                ){
-
-                    statusMatch =
-                        isMarked(
-                            submission
-                        );
-
-                }
-
-
-                const courseMatch =
-                    course === "all" ||
-                    assignmentCourse ===
-                    course;
+                const matchesStatus =
+                    status === "all" ||
+                    (
+                        status === "graded" &&
+                        graded
+                    ) ||
+                    (
+                        status === "pending" &&
+                        !graded
+                    );
 
 
                 return (
-                    searchMatch &&
-                    statusMatch &&
-                    courseMatch
+                    matchesSearch &&
+                    matchesStatus
                 );
 
             }
         );
 
 
-    /*
-       Latest submissions first
-    */
+    tbody.innerHTML = "";
 
-    filtered.sort(
-        (
-            a,
-            b
-        ) => {
 
-            return new Date(
-                b.submittedAt
+    list.sort(
+        (a,b) =>
+            new Date(
+                b.submittedAt || 0
             ) -
             new Date(
-                a.submittedAt
-            );
-
-        }
+                a.submittedAt || 0
+            )
     );
 
 
-    grid.innerHTML = "";
-
-
-    filtered.forEach(
+    list.forEach(
         submission => {
 
             const assignment =
@@ -2144,352 +1838,257 @@ function renderSubmissions(){
                 );
 
 
-            const marked =
-                isMarked(
+            const assignmentTitle =
+                assignment?.title ||
+                submission.assignmentTitle ||
+                "Assignment";
+
+
+            const course =
+                assignment?.course ||
+                submission.course ||
+                "Course";
+
+
+            const totalMarks =
+                assignment?.marks ??
+                submission.totalMarks ??
+                "-";
+
+
+            const graded =
+                isGraded(
                     submission
                 );
 
 
-            const card =
+            const mark =
+                graded
+                ?
+                submission.mark
+                :
+                "-";
+
+
+            const feedback =
+                submission.teacherFeedback ||
+                "No feedback";
+
+
+            const row =
                 document.createElement(
-                    "article"
+                    "tr"
                 );
 
 
-            card.className =
-                "submission-card";
+            row.innerHTML = `
 
+                <td>
 
-            const assignmentTitle =
-                assignment
-                ? assignment.title
-                : "Deleted Assignment";
+                    <div class="student">
 
-
-            const assignmentCourse =
-                assignment
-                ? assignment.course
-                : "Unknown";
-
-
-            const totalMarks =
-                assignment
-                ? assignment.marks
-                : "-";
-
-
-            const statusText =
-                marked
-                ? "MARKED"
-                : "PENDING";
-
-
-            const statusClass =
-                marked
-                ? "marked"
-                : "pending";
-
-
-            card.innerHTML = `
-
-                <div class="card-top">
-
-                    <div class="student-area">
-
-                        <div class="student-avatar">
+                        <div class="avatar">
                             🎓
                         </div>
 
-                        <div class="student-info">
+                        <div>
 
-                            <h3>
+                            <div class="student-name">
                                 ${escapeHtml(
                                     submission.studentName ||
                                     "Student"
                                 )}
-                            </h3>
+                            </div>
 
-                            <p>
+                            <div class="student-id">
                                 ID:
                                 ${escapeHtml(
                                     submission.studentId ||
                                     "-"
                                 )}
-                            </p>
+                            </div>
 
                         </div>
 
                     </div>
 
-
-                    <span
-                        class="status-badge ${statusClass}"
-                    >
-                        ${statusText}
-                    </span>
-
-                </div>
+                </td>
 
 
-                <div class="assignment-info">
+                <td>
 
-                    <div class="assignment-name">
-                        📝
+                    <div class="assignment-title">
                         ${escapeHtml(
                             assignmentTitle
                         )}
                     </div>
 
-                    <div class="assignment-course">
-                        🎓
+                    <div class="course">
                         ${escapeHtml(
-                            assignmentCourse
+                            course
                         )}
                     </div>
 
-                </div>
+                </td>
 
 
-                <div class="details">
+                <td>
 
-
-                    <div class="detail">
-
-                        <span>
-                            🕐 Submitted
-                        </span>
-
-                        <strong>
-                            ${formatDateTime(
-                                submission.submittedAt
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail">
-
-                        <span>
-                            🎯 Marks
-                        </span>
-
-                        <strong>
-                            ${
-                                marked
-                                ? (
-                                    escapeHtml(
-                                        submission.mark
-                                    ) +
-                                    " / " +
-                                    escapeHtml(
-                                        totalMarks
-                                    )
-                                )
-                                : "Not marked"
-                            }
-                        </strong>
-
-                    </div>
-
-
-                    <div class="detail">
-
-                        <span>
-                            💬 Feedback
-                        </span>
-
-                        <strong>
-                            ${
-                                submission.teacherFeedback
-                                ? "Available"
-                                : "None"
-                            }
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <div class="answer-preview">
-
-                    <div class="answer-preview-title">
-                        📝 Student Answer
-                    </div>
-
-                    <div class="answer-preview-text">
-                        ${escapeHtml(
-                            submission.answer ||
-                            "No answer provided."
+                    <div class="date">
+                        ${formatDate(
+                            submission.submittedAt
                         )}
                     </div>
 
-                </div>
+                </td>
 
 
-                ${
-                    submission.fileUrl
-                    ?
-                    `
-                    <a
-                        class="file-link"
-                        href="${escapeHtml(
-                            submission.fileUrl
-                        )}"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                <td>
+
+                    ${
+                        graded
+                        ?
+                        `
+                        <span class="status graded">
+                            ● Graded
+                        </span>
+                        `
+                        :
+                        `
+                        <span class="status pending">
+                            ● Pending
+                        </span>
+                        `
+                    }
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="
+                            mark-display
+                            ${graded ? "" : "pending"}
+                        "
                     >
-                        🔗 Open Submitted File
-                    </a>
-                    `
-                    :
-                    ""
-                }
 
-
-                <div class="card-actions">
-
-                    <button
-                        class="action-btn primary"
-                        onclick="openReviewModal('${escapeHtml(
-                            submission.id
-                        )}')"
-                    >
-                        🎯 ${
-                            marked
-                            ? "Edit Result"
-                            : "Review & Mark"
+                        ${
+                            graded
+                            ?
+                            escapeHtml(
+                                submission.mark
+                            ) +
+                            " / " +
+                            escapeHtml(
+                                totalMarks
+                            )
+                            :
+                            "Pending"
                         }
-                    </button>
+
+                    </span>
+
+                </td>
 
 
-                    <button
-                        class="action-btn"
-                        onclick="viewSubmission('${escapeHtml(
-                            submission.id
-                        )}')"
+                <td>
+
+                    <div
+                        style="
+                            max-width:150px;
+                            color:var(--muted);
+                            font-size:7px;
+                            line-height:1.5;
+                        "
                     >
-                        👁 View
-                    </button>
+
+                        ${escapeHtml(
+                            feedback
+                        )}
+
+                    </div>
+
+                </td>
 
 
-                    <button
-                        class="action-btn danger"
-                        onclick="openDeleteModal('${escapeHtml(
-                            submission.id
-                        )}')"
-                    >
-                        🗑 Delete
-                    </button>
+                <td>
 
-                </div>
+                    <div class="action-group">
+
+                        <button
+                            class="action-btn"
+                            onclick="viewSubmission('${escapeHtml(
+                                submission.id
+                            )}')"
+                        >
+                            👁 View
+                        </button>
+
+
+                        <button
+                            class="action-btn"
+                            onclick="openMarkModal('${escapeHtml(
+                                submission.id
+                            )}')"
+                        >
+                            🎯 ${graded ? "Edit" : "Mark"}
+                        </button>
+
+
+                        <button
+                            class="action-btn delete"
+                            onclick="deleteSubmission('${escapeHtml(
+                                submission.id
+                            )}')"
+                        >
+                            🗑
+                        </button>
+
+                    </div>
+
+                </td>
 
             `;
 
 
-            grid.appendChild(
-                card
+            tbody.appendChild(
+                row
             );
 
         }
     );
 
 
-    empty.style.display =
-        filtered.length === 0
-        ? "block"
-        : "none";
+    if(
+        list.length === 0
+    ){
 
+        tableWrap.style.display =
+            "none";
 
-    updateStats();
+        empty.style.display =
+            "block";
 
-}
+    }
+    else{
 
+        tableWrap.style.display =
+            "block";
 
-/* =========================================================
-   UPDATE STATS
-========================================================= */
+        empty.style.display =
+            "none";
 
-function updateStats(){
-
-    const total =
-        submissions.length;
-
-
-    const pending =
-        submissions.filter(
-            submission =>
-                !isMarked(
-                    submission
-                )
-        ).length;
-
-
-    const marked =
-        submissions.filter(
-            submission =>
-                isMarked(
-                    submission
-                )
-        ).length;
-
-
-    const students =
-        new Set(
-            submissions.map(
-                submission =>
-                    submission.studentId
-            )
-        ).size;
-
-
-    const assignmentIds =
-        new Set(
-            submissions.map(
-                submission =>
-                    submission.assignmentId
-            )
-        ).size;
-
-
-    document.getElementById(
-        "totalSubmissions"
-    ).textContent =
-        total;
-
-
-    document.getElementById(
-        "pendingSubmissions"
-    ).textContent =
-        pending;
-
-
-    document.getElementById(
-        "markedSubmissions"
-    ).textContent =
-        marked;
-
-
-    document.getElementById(
-        "studentCount"
-    ).textContent =
-        students;
-
-
-    document.getElementById(
-        "assignmentCount"
-    ).textContent =
-        assignmentIds;
+    }
 
 }
 
 
-/* =========================================================
-   OPEN REVIEW
-========================================================= */
+/* =====================================================
+   OPEN MARK MODAL
+===================================================== */
 
-function openReviewModal(
+function openMarkModal(
     submissionId
 ){
 
@@ -2522,119 +2121,57 @@ function openReviewModal(
         );
 
 
-    document.getElementById(
-        "reviewSubmissionId"
-    ).value =
-        submission.id;
+    editingSubmissionId =
+        submissionId;
 
 
     document.getElementById(
-        "reviewStudentName"
+        "markStudent"
     ).textContent =
         submission.studentName ||
         "Student";
 
 
     document.getElementById(
-        "reviewStudentId"
+        "markAssignment"
     ).textContent =
-        "ID: " +
-        (
-            submission.studentId ||
-            "-"
+        assignment?.title ||
+        submission.assignmentTitle ||
+        "Assignment";
+
+
+    document.getElementById(
+        "markTotal"
+    ).textContent =
+        assignment?.marks ??
+        submission.totalMarks ??
+        "-";
+
+
+    document.getElementById(
+        "markDate"
+    ).textContent =
+        formatDate(
+            submission.submittedAt
         );
 
 
     document.getElementById(
-        "reviewAssignmentName"
-    ).textContent =
-        assignment
-        ? assignment.title
-        : "Deleted Assignment";
-
-
-    document.getElementById(
-        "reviewAssignmentCourse"
-    ).textContent =
-        assignment
-        ? (
-            "Course: " +
-            assignment.course +
-            " • Total Marks: " +
-            assignment.marks
-        )
-        : "Assignment information unavailable";
-
-
-    document.getElementById(
-        "reviewAnswer"
-    ).textContent =
-        submission.answer ||
-        "No answer provided.";
-
-
-    const fileArea =
-        document.getElementById(
-            "reviewFileArea"
-        );
-
-
-    if(
-        submission.fileUrl
-    ){
-
-        fileArea.innerHTML = `
-
-            <a
-                class="file-link"
-                href="${escapeHtml(
-                    submission.fileUrl
-                )}"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                🔗 Open Submitted File
-            </a>
-
-        `;
-
-    }
-    else{
-
-        fileArea.innerHTML =
-            `
-            <div
-                style="
-                    color:var(--muted);
-                    font-size:8px;
-                    margin-bottom:13px;
-                "
-            >
-                📎 No submission file attached.
-            </div>
-            `;
-
-    }
-
-
-    document.getElementById(
-        "markInput"
+        "obtainedMark"
     ).value =
-        submission.mark !== null &&
-        submission.mark !== undefined
-        ? submission.mark
-        : "";
+        submission.mark ??
+        "";
 
 
     document.getElementById(
-        "feedbackInput"
+        "teacherFeedback"
     ).value =
         submission.teacherFeedback ||
         "";
 
 
     document.getElementById(
-        "reviewModal"
+        "markModal"
     ).classList.add(
         "show"
     );
@@ -2642,31 +2179,19 @@ function openReviewModal(
 }
 
 
-/* =========================================================
-   CLOSE REVIEW
-========================================================= */
+/* =====================================================
+   SAVE GRADE
+===================================================== */
 
-function closeReviewModal(){
+function saveGrade(){
 
-    document.getElementById(
-        "reviewModal"
-    ).classList.remove(
-        "show"
-    );
+    if(
+        !editingSubmissionId
+    ){
 
-}
+        return;
 
-
-/* =========================================================
-   SAVE REVIEW
-========================================================= */
-
-function saveReview(){
-
-    const submissionId =
-        document.getElementById(
-            "reviewSubmissionId"
-        ).value;
+    }
 
 
     const submission =
@@ -2676,16 +2201,12 @@ function saveReview(){
                     item.id
                 ) ===
                 String(
-                    submissionId
+                    editingSubmissionId
                 )
         );
 
 
     if(!submission){
-
-        showToast(
-            "Submission পাওয়া যায়নি।"
-        );
 
         return;
 
@@ -2698,61 +2219,43 @@ function saveReview(){
         );
 
 
-    if(!assignment){
-
-        showToast(
-            "Assignment information পাওয়া যায়নি।"
-        );
-
-        return;
-
-    }
-
-
-    const markRaw =
+    const input =
         document.getElementById(
-            "markInput"
-        ).value.trim();
+            "obtainedMark"
+        );
 
 
     const feedback =
         document.getElementById(
-            "feedbackInput"
-        ).value.trim();
-
-
-    if(
-        markRaw === ""
-    ){
-
-        showToast(
-            "Mark দিন।"
-        );
-
-        return;
-
-    }
+            "teacherFeedback"
+        ).value
+        .trim();
 
 
     const mark =
         Number(
-            markRaw
+            input.value
         );
 
 
-    const maxMark =
+    const total =
         Number(
-            assignment.marks
+            assignment?.marks ??
+            submission.totalMarks ??
+            0
         );
 
 
     if(
+        input.value === "" ||
         Number.isNaN(mark)
     ){
 
         showToast(
-            "Valid mark দিন।"
+            "Obtained marks দিন।"
         );
+
+        input.focus();
 
         return;
 
@@ -2773,14 +2276,12 @@ function saveReview(){
 
 
     if(
-        !Number.isNaN(
-            maxMark
-        ) &&
-        mark > maxMark
+        total > 0 &&
+        mark > total
     ){
 
         showToast(
-            "Total Marks-এর বেশি দেওয়া যাবে না।"
+            "Obtained mark total marks-এর বেশি হতে পারবে না।"
         );
 
         return;
@@ -2796,33 +2297,128 @@ function saveReview(){
         feedback;
 
 
-    submission.markedAt =
-        new Date().toISOString();
-
-
     submission.status =
-        "marked";
+        "graded";
+
+
+    submission.gradedAt =
+        new Date().toISOString();
 
 
     saveSubmissions();
 
-    closeReviewModal();
 
-    renderSubmissions();
+    closeMarkModal();
+
+
+    loadData();
 
 
     showToast(
-        "Result সফলভাবে save ও publish হয়েছে।"
+        "Grade এবং feedback successfully saved।"
     );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    VIEW SUBMISSION
-========================================================= */
+===================================================== */
 
 function viewSubmission(
+    submissionId
+){
+
+    const submission =
+        submissions.find(
+            item =>
+                String(
+                    item.id
+                ) ===
+                String(
+                    submissionId
+                )
+        );
+
+
+    if(!submission){
+
+        showToast(
+            "Submission পাওয়া যায়নি।"
+        );
+
+        return;
+
+    }
+
+
+    const assignment =
+        getAssignment(
+            submission.assignmentId
+        );
+
+
+    document.getElementById(
+        "viewStudent"
+    ).textContent =
+        (
+            submission.studentName ||
+            "Student"
+        ) +
+        " • ID: " +
+        (
+            submission.studentId ||
+            "-"
+        );
+
+
+    document.getElementById(
+        "viewAssignment"
+    ).textContent =
+        (
+            assignment?.title ||
+            submission.assignmentTitle ||
+            "Assignment"
+        ) +
+        " • " +
+        (
+            assignment?.course ||
+            submission.course ||
+            "Course"
+        );
+
+
+    document.getElementById(
+        "viewContent"
+    ).textContent =
+        submission.content ||
+        submission.answer ||
+        submission.text ||
+        submission.fileName ||
+        "No submission content available.";
+
+
+    document.getElementById(
+        "viewFeedback"
+    ).textContent =
+        submission.teacherFeedback ||
+        "No feedback yet.";
+
+
+    document.getElementById(
+        "viewModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+function deleteSubmission(
     submissionId
 ){
 
@@ -2845,135 +2441,24 @@ function viewSubmission(
     }
 
 
-    const assignment =
-        getAssignment(
-            submission.assignmentId
+    const confirmed =
+        confirm(
+            "এই submission delete করতে চান?"
         );
 
 
-    let message =
+    if(!confirmed){
 
-        "Student: " +
-        (
-            submission.studentName ||
-            "-"
-        ) +
-
-        "\nStudent ID: " +
-        (
-            submission.studentId ||
-            "-"
-        ) +
-
-        "\n\nAssignment: " +
-        (
-            assignment
-            ? assignment.title
-            : "Unknown"
-        ) +
-
-        "\n\nSubmitted: " +
-        formatDateTime(
-            submission.submittedAt
-        ) +
-
-        "\n\nAnswer:\n" +
-
-        (
-            submission.answer ||
-            "-"
-        );
-
-
-    if(
-        isMarked(
-            submission
-        )
-    ){
-
-        message +=
-
-            "\n\nMark: " +
-            submission.mark +
-            " / " +
-            (
-                assignment
-                ? assignment.marks
-                : "-"
-            ) +
-
-            "\n\nTeacher Feedback:\n" +
-
-            (
-                submission.teacherFeedback ||
-                "No feedback"
-            );
+        return;
 
     }
 
 
-    alert(
-        message
-    );
-
-}
-
-
-/* =========================================================
-   DELETE MODAL
-========================================================= */
-
-function openDeleteModal(
-    submissionId
-){
-
-    document.getElementById(
-        "deleteSubmissionId"
-    ).value =
-        submissionId;
-
-
-    document.getElementById(
-        "deleteModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-function closeDeleteModal(){
-
-    document.getElementById(
-        "deleteModal"
-    ).classList.remove(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   CONFIRM DELETE
-========================================================= */
-
-function confirmDelete(){
-
-    const submissionId =
-        document.getElementById(
-            "deleteSubmissionId"
-        ).value;
-
-
-    const before =
-        submissions.length;
-
-
     submissions =
         submissions.filter(
-            submission =>
+            item =>
                 String(
-                    submission.id
+                    item.id
                 ) !==
                 String(
                     submissionId
@@ -2981,39 +2466,114 @@ function confirmDelete(){
         );
 
 
-    if(
-        submissions.length ===
-        before
-    ){
-
-        showToast(
-            "Submission পাওয়া যায়নি।"
-        );
-
-        closeDeleteModal();
-
-        return;
-
-    }
-
-
     saveSubmissions();
 
-    closeDeleteModal();
-
-    renderSubmissions();
-
+    loadData();
 
     showToast(
-        "Submission delete করা হয়েছে।"
+        "Submission deleted।"
     );
 
 }
 
 
-/* =========================================================
-   DASHBOARD
-========================================================= */
+/* =====================================================
+   CLOSE MARK
+===================================================== */
+
+function closeMarkModal(){
+
+    document.getElementById(
+        "markModal"
+    ).classList.remove(
+        "show"
+    );
+
+    editingSubmissionId =
+        null;
+
+}
+
+
+/* =====================================================
+   CLOSE VIEW
+===================================================== */
+
+function closeViewModal(){
+
+    document.getElementById(
+        "viewModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        "snkAdminSubmissionsTheme",
+        dark
+        ? "dark"
+        : "light"
+    );
+
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        dark
+        ? "☀️"
+        : "🌙";
+
+}
+
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem(
+            "snkAdminSubmissionsTheme"
+        );
+
+
+    if(
+        theme === "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+        document.getElementById(
+            "themeBtn"
+        ).textContent =
+            "☀️";
+
+    }
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 function goDashboard(){
 
@@ -3023,9 +2583,17 @@ function goDashboard(){
 }
 
 
-/* =========================================================
+function goAssignments(){
+
+    window.location.href =
+        "admin-assignments.html";
+
+}
+
+
+/* =====================================================
    TOAST
-========================================================= */
+===================================================== */
 
 let toastTimer;
 
@@ -3063,18 +2631,18 @@ function showToast(
                 );
 
             },
-            2800
+            2500
         );
 
 }
 
 
-/* =========================================================
-   OUTSIDE CLICK
-========================================================= */
+/* =====================================================
+   MODAL OUTSIDE CLICK
+===================================================== */
 
 document.getElementById(
-    "reviewModal"
+    "markModal"
 ).addEventListener(
     "click",
     function(event){
@@ -3083,7 +2651,7 @@ document.getElementById(
             event.target === this
         ){
 
-            closeReviewModal();
+            closeMarkModal();
 
         }
 
@@ -3092,7 +2660,7 @@ document.getElementById(
 
 
 document.getElementById(
-    "deleteModal"
+    "viewModal"
 ).addEventListener(
     "click",
     function(event){
@@ -3101,7 +2669,7 @@ document.getElementById(
             event.target === this
         ){
 
-            closeDeleteModal();
+            closeViewModal();
 
         }
 
@@ -3109,9 +2677,9 @@ document.getElementById(
 );
 
 
-/* =========================================================
-   KEYBOARD ESC
-========================================================= */
+/* =====================================================
+   ESC KEY
+===================================================== */
 
 document.addEventListener(
     "keydown",
@@ -3121,9 +2689,9 @@ document.addEventListener(
             event.key === "Escape"
         ){
 
-            closeReviewModal();
+            closeMarkModal();
 
-            closeDeleteModal();
+            closeViewModal();
 
         }
 
@@ -3131,52 +2699,27 @@ document.addEventListener(
 );
 
 
-/* =========================================================
-   REFRESH DATA
-========================================================= */
+/* =====================================================
+   AUTO REFRESH
+===================================================== */
 
 setInterval(
     function(){
 
-        assignments =
-            JSON.parse(
-                localStorage.getItem(
-                    ASSIGNMENT_KEY
-                )
-            ) || [];
-
-
-        submissions =
-            JSON.parse(
-                localStorage.getItem(
-                    SUBMISSION_KEY
-                )
-            ) || [];
-
-
-        renderSubmissions();
+        loadData();
 
     },
     5000
 );
 
 
-/* =========================================================
+/* =====================================================
    INITIALIZE
-========================================================= */
+===================================================== */
 
 loadTheme();
 
-
-document.getElementById(
-    "languageButton"
-).textContent =
-    currentLanguage === "bn"
-    ? "English"
-    : "বাংলা";
-
-
-renderSubmissions();
+loadData();
 
 </script>
 
