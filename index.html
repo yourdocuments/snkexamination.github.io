@@ -1,1853 +1,1523 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>SNK IT Institute - Student Portal</title>
-
-    <meta name="description" content="SNK IT Institute Student Portal">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-
-    <style>
-
-        /* =====================================================
-           RESET
-        ====================================================== */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Noto Sans Bengali", Arial, sans-serif;
-
-            background: #f5f7fb;
-            color: #172033;
-
-            min-height: 100vh;
-
-            transition:
-                background 0.3s ease,
-                color 0.3s ease;
-        }
-
-
-        /* =====================================================
-           DARK MODE
-        ====================================================== */
-
-        body.dark {
-            background: #0b1120;
-            color: #f1f5f9;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ====================================================== */
-
-        .header {
-
-            width: 100%;
-
-            background: #ffffff;
-
-            border-bottom: 1px solid #e7eaf0;
-
-            position: sticky;
-            top: 0;
-
-            z-index: 1000;
-
-            transition:
-                background 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-
-        body.dark .header {
-
-            background: #111827;
-
-            border-color: #273244;
-        }
-
-
-        .header-inner {
-
-            max-width: 1200px;
-
-            margin: auto;
-
-            padding: 12px 20px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-        }
-
-
-        /* =====================================================
-           BRAND / LOGO
-        ====================================================== */
-
-        .brand {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            text-decoration: none;
-
-            color: inherit;
-        }
-
-
-        .brand-logo {
-
-            width: 52px;
-
-            height: 52px;
-
-            border-radius: 12px;
-
-            background: #ffffff;
-
-            border: 1px solid #e5e7eb;
-
-            padding: 5px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            overflow: hidden;
-
-            transition: 0.3s ease;
-        }
-
-
-        .brand-logo img {
-
-            width: 100%;
-
-            height: 100%;
-
-            object-fit: contain;
-        }
-
-
-        body.dark .brand-logo {
-
-            background: #ffffff;
-
-            border-color: #374151;
-        }
-
-
-        .brand-text h1 {
-
-            font-size: 18px;
-
-            font-weight: 800;
-
-            line-height: 1.2;
-        }
-
-
-        .brand-text p {
-
-            font-size: 12px;
-
-            color: #667085;
-
-            margin-top: 3px;
-
-            transition: color 0.3s ease;
-        }
-
-
-        body.dark .brand-text p {
-
-            color: #94a3b8;
-        }
-
-
-        /* =====================================================
-           HEADER ACTIONS
-        ====================================================== */
-
-        .header-actions {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            flex-wrap: wrap;
-        }
-
-
-        .header-btn {
-
-            border: 1px solid #e1e5eb;
-
-            background: #ffffff;
-
-            color: #344054;
-
-            padding: 9px 13px;
-
-            border-radius: 9px;
-
-            cursor: pointer;
-
-            font-family: inherit;
-
-            font-size: 13px;
-
-            text-decoration: none;
-
-            transition: 0.2s ease;
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 5px;
-        }
-
-
-        .header-btn:hover {
-
-            background: #f4f6f8;
-
-            transform: translateY(-1px);
-        }
-
-
-        body.dark .header-btn {
-
-            background: #172033;
-
-            border-color: #344054;
-
-            color: #f8fafc;
-        }
-
-
-        body.dark .header-btn:hover {
-
-            background: #1e293b;
-        }
-
-
-        /* =====================================================
-           THEME BUTTON
-        ====================================================== */
-
-        .theme-btn {
-
-            width: 40px;
-
-            height: 40px;
-
-            padding: 0;
-
-            font-size: 18px;
-        }
-
-
-        /* =====================================================
-           MAIN
-        ====================================================== */
-
-        .main {
-
-            max-width: 1200px;
-
-            margin: auto;
-
-            padding: 35px 20px 60px;
-        }
-
-
-        /* =====================================================
-           WELCOME
-        ====================================================== */
-
-        .welcome {
-
-            background: #111827;
-
-            color: #ffffff;
-
-            border-radius: 20px;
-
-            padding: 38px;
-
-            margin-bottom: 28px;
-
-            position: relative;
-
-            overflow: hidden;
-        }
-
-
-        .welcome::after {
-
-            content: "";
-
-            position: absolute;
-
-            width: 250px;
-
-            height: 250px;
-
-            border-radius: 50%;
-
-            background: rgba(255, 255, 255, 0.05);
-
-            right: -80px;
-
-            top: -90px;
-        }
-
-
-        .welcome::before {
-
-            content: "";
-
-            position: absolute;
-
-            width: 130px;
-
-            height: 130px;
-
-            border-radius: 50%;
-
-            background: rgba(255, 255, 255, 0.04);
-
-            right: 150px;
-
-            bottom: -80px;
-        }
-
-
-        .welcome-content {
-
-            position: relative;
-
-            z-index: 2;
-        }
-
-
-        .welcome small {
-
-            color: #cbd5e1;
-
-            font-size: 13px;
-        }
-
-
-        .welcome h2 {
-
-            font-size: 30px;
-
-            margin-top: 8px;
-
-            margin-bottom: 8px;
-        }
-
-
-        .welcome p {
-
-            color: #d1d5db;
-
-            font-size: 14px;
-
-            max-width: 700px;
-
-            line-height: 1.8;
-        }
-
-
-        /* =====================================================
-           SECTION TITLE
-        ====================================================== */
-
-        .section-title {
-
-            margin-bottom: 16px;
-        }
-
-
-        .section-title h3 {
-
-            font-size: 21px;
-
-            font-weight: 800;
-        }
-
-
-        .section-title p {
-
-            color: #667085;
-
-            font-size: 13px;
-
-            margin-top: 4px;
-        }
-
-
-        body.dark .section-title p {
-
-            color: #94a3b8;
-        }
-
-
-        /* =====================================================
-           PORTAL CARDS
-        ====================================================== */
-
-        .cards {
-
-            display: grid;
-
-            grid-template-columns: repeat(4, 1fr);
-
-            gap: 16px;
-        }
-
-
-        .card {
-
-            background: #ffffff;
-
-            border: 1px solid #e7eaf0;
-
-            border-radius: 16px;
-
-            padding: 22px;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                background 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-
-        .card:hover {
-
-            transform: translateY(-3px);
-
-            box-shadow:
-                0 10px 30px rgba(16, 24, 40, 0.07);
-        }
-
-
-        body.dark .card {
-
-            background: #111827;
-
-            border-color: #273244;
-        }
-
-
-        body.dark .card:hover {
-
-            box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.25);
-        }
-
-
-        .card-icon {
-
-            width: 44px;
-
-            height: 44px;
-
-            border-radius: 12px;
-
-            background: #f2f4f7;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 21px;
-
-            margin-bottom: 15px;
-
-            transition: background 0.3s ease;
-        }
-
-
-        body.dark .card-icon {
-
-            background: #1e293b;
-        }
-
-
-        .card h4 {
-
-            font-size: 16px;
-
-            margin-bottom: 6px;
-        }
-
-
-        .card p {
-
-            font-size: 12px;
-
-            color: #667085;
-
-            line-height: 1.6;
-        }
-
-
-        body.dark .card p {
-
-            color: #94a3b8;
-        }
-
-
-        /* =====================================================
-           RESOURCE SECTION
-        ====================================================== */
-
-        .resource-section {
-
-            margin-top: 30px;
-        }
-
-
-        .resource-grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(4, 1fr);
-
-            gap: 16px;
-        }
-
-
-        .resource-card {
-
-            background: #ffffff;
-
-            border: 1px solid #e7eaf0;
-
-            border-radius: 16px;
-
-            padding: 20px;
-
-            text-decoration: none;
-
-            color: inherit;
-
-            display: block;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                background 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-
-        .resource-card:hover {
-
-            transform: translateY(-3px);
-
-            box-shadow:
-                0 10px 30px rgba(16, 24, 40, 0.07);
-        }
-
-
-        body.dark .resource-card {
-
-            background: #111827;
-
-            border-color: #273244;
-        }
-
-
-        .resource-icon {
-
-            width: 45px;
-
-            height: 45px;
-
-            border-radius: 12px;
-
-            background: #f2f4f7;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 21px;
-
-            margin-bottom: 13px;
-        }
-
-
-        body.dark .resource-icon {
-
-            background: #1e293b;
-        }
-
-
-        .resource-card h4 {
-
-            font-size: 15px;
-
-            margin-bottom: 5px;
-        }
-
-
-        .resource-card p {
-
-            font-size: 12px;
-
-            color: #667085;
-
-            line-height: 1.6;
-        }
-
-
-        body.dark .resource-card p {
-
-            color: #94a3b8;
-        }
-
-
-        .resource-arrow {
-
-            display: inline-block;
-
-            margin-top: 12px;
-
-            font-size: 12px;
-
-            font-weight: 700;
-        }
-
-
-        /* =====================================================
-           NOTICE
-        ====================================================== */
-
-        .notice {
-
-            margin-top: 30px;
-
-            background: #ffffff;
-
-            border: 1px solid #e7eaf0;
-
-            border-radius: 16px;
-
-            padding: 22px;
-
-            transition:
-                background 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-
-        body.dark .notice {
-
-            background: #111827;
-
-            border-color: #273244;
-        }
-
-
-        .notice h3 {
-
-            font-size: 18px;
-
-            margin-bottom: 10px;
-        }
-
-
-        .notice-box {
-
-            background: #f8fafc;
-
-            border-radius: 12px;
-
-            padding: 15px;
-
-            color: #475467;
-
-            font-size: 13px;
-
-            line-height: 1.8;
-
-            transition:
-                background 0.3s ease,
-                color 0.3s ease;
-        }
-
-
-        body.dark .notice-box {
-
-            background: #172033;
-
-            color: #cbd5e1;
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ====================================================== */
-
-        .footer {
-
-            text-align: center;
-
-            padding: 25px 20px;
-
-            color: #667085;
-
-            font-size: 12px;
-
-            border-top: 1px solid #e7eaf0;
-
-            background: #ffffff;
-
-            transition:
-                background 0.3s ease,
-                border-color 0.3s ease,
-                color 0.3s ease;
-        }
-
-
-        body.dark .footer {
-
-            background: #111827;
-
-            border-color: #273244;
-
-            color: #94a3b8;
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ====================================================== */
-
-        @media (max-width: 1000px) {
-
-            .cards,
-            .resource-grid {
-
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-
-        @media (max-width: 650px) {
-
-            .header-inner {
-
-                padding: 10px 15px;
-
-                align-items: flex-start;
-            }
-
-
-            .brand {
-
-                gap: 8px;
-            }
-
-
-            .brand-logo {
-
-                width: 43px;
-
-                height: 43px;
-            }
-
-
-            .brand-text h1 {
-
-                font-size: 14px;
-            }
-
-
-            .brand-text p {
-
-                font-size: 9px;
-            }
-
-
-            .header-actions {
-
-                justify-content: flex-end;
-            }
-
-
-            .header-btn {
-
-                padding: 7px 8px;
-
-                font-size: 10px;
-            }
-
-
-            .theme-btn {
-
-                width: 34px;
-
-                height: 34px;
-
-                font-size: 15px;
-            }
-
-
-            .main {
-
-                padding: 20px 15px 40px;
-            }
-
-
-            .welcome {
-
-                padding: 28px 22px;
-
-                border-radius: 16px;
-            }
-
-
-            .welcome h2 {
-
-                font-size: 23px;
-            }
-
-
-            .welcome p {
-
-                font-size: 12px;
-            }
-
-
-            .cards,
-            .resource-grid {
-
-                grid-template-columns: 1fr;
-            }
-
-
-            .section-title h3 {
-
-                font-size: 18px;
-            }
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute - Student Portal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:#f5f7fb;
+    color:#172033;
+    min-height:100vh;
+    transition:.3s ease;
+}
+
+body.dark{
+    background:#0b1120;
+    color:#f1f5f9;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    width:100%;
+    background:#fff;
+    border-bottom:1px solid #e7eaf0;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    transition:.3s ease;
+}
+
+body.dark .header{
+    background:#111827;
+    border-color:#273244;
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:12px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:inherit;
+}
+
+.brand-logo{
+    width:52px;
+    height:52px;
+    border-radius:12px;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    padding:5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.brand-logo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.brand-text h1{
+    font-size:18px;
+    font-weight:800;
+    line-height:1.2;
+}
+
+.brand-text p{
+    font-size:12px;
+    color:#667085;
+    margin-top:3px;
+}
+
+body.dark .brand-text p{
+    color:#94a3b8;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.header-btn{
+    border:1px solid #e1e5eb;
+    background:#fff;
+    color:#344054;
+    padding:9px 13px;
+    border-radius:9px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13px;
+    text-decoration:none;
+    transition:.2s ease;
+}
+
+.header-btn:hover{
+    background:#f4f6f8;
+    transform:translateY(-1px);
+}
+
+body.dark .header-btn{
+    background:#172033;
+    border-color:#344054;
+    color:#f8fafc;
+}
+
+.theme-btn{
+    width:40px;
+    height:40px;
+    padding:0;
+    font-size:18px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+    max-width:1200px;
+    margin:auto;
+    padding:30px 20px 60px;
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-title{
+    margin-bottom:22px;
+}
+
+.page-title h2{
+    font-size:26px;
+    font-weight:800;
+}
+
+.page-title p{
+    margin-top:5px;
+    font-size:12px;
+    color:#667085;
+}
+
+body.dark .page-title p{
+    color:#94a3b8;
+}
+
+
+/* =====================================================
+   PROFILE CARD
+===================================================== */
+
+.profile-card{
+    background:#fff;
+    border:1px solid #e7eaf0;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:22px;
+    transition:.3s ease;
+}
+
+body.dark .profile-card{
+    background:#111827;
+    border-color:#273244;
+}
+
+.profile-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:22px;
+}
+
+.avatar{
+    width:78px;
+    height:78px;
+    border-radius:50%;
+    background:#f2f4f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:36px;
+    border:3px solid #fff;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+body.dark .avatar{
+    background:#1e293b;
+    border-color:#111827;
+}
+
+.profile-header h3{
+    font-size:21px;
+    margin-bottom:4px;
+}
+
+.profile-header p{
+    color:#667085;
+    font-size:12px;
+}
+
+body.dark .profile-header p{
+    color:#94a3b8;
+}
+
+.student-badge{
+    display:inline-block;
+    margin-top:7px;
+    padding:5px 9px;
+    border-radius:7px;
+    background:#f2f4f7;
+    font-size:10px;
+    font-weight:700;
+}
+
+body.dark .student-badge{
+    background:#1e293b;
+}
+
+
+/* =====================================================
+   INFORMATION GRID
+===================================================== */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+.info-box{
+    background:#f8fafc;
+    border-radius:12px;
+    padding:15px;
+}
+
+body.dark .info-box{
+    background:#172033;
+}
+
+.info-box span{
+    display:block;
+    color:#667085;
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+body.dark .info-box span{
+    color:#94a3b8;
+}
+
+.info-box strong{
+    font-size:13px;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title{
+    margin-bottom:15px;
+}
+
+.section-title h3{
+    font-size:20px;
+    font-weight:800;
+}
+
+.section-title p{
+    color:#667085;
+    font-size:12px;
+    margin-top:3px;
+}
+
+body.dark .section-title p{
+    color:#94a3b8;
+}
+
+
+/* =====================================================
+   COURSE CARD
+===================================================== */
+
+.course-card{
+    background:#fff;
+    border:1px solid #e7eaf0;
+    border-radius:18px;
+    padding:23px;
+    margin-bottom:22px;
+    transition:.3s ease;
+}
+
+body.dark .course-card{
+    background:#111827;
+    border-color:#273244;
+}
+
+.course-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.course-top h4{
+    font-size:18px;
+}
+
+.course-top p{
+    color:#667085;
+    font-size:11px;
+    margin-top:4px;
+}
+
+body.dark .course-top p{
+    color:#94a3b8;
+}
+
+.course-status{
+    padding:6px 10px;
+    border-radius:8px;
+    background:#f2f4f7;
+    font-size:10px;
+    font-weight:700;
+}
+
+body.dark .course-status{
+    background:#1e293b;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-row{
+    margin-top:12px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:11px;
+}
+
+.progress-bar{
+    width:100%;
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+body.dark .progress-bar{
+    background:#273244;
+}
+
+.progress-fill{
+    width:65%;
+    height:100%;
+    background:#111827;
+    border-radius:20px;
+}
+
+body.dark .progress-fill{
+    background:#fff;
+}
+
+
+/* =====================================================
+   COURSE DETAILS
+===================================================== */
+
+.course-details{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:20px;
+}
+
+.course-detail{
+    padding:14px;
+    background:#f8fafc;
+    border-radius:11px;
+}
+
+body.dark .course-detail{
+    background:#172033;
+}
+
+.course-detail span{
+    display:block;
+    font-size:10px;
+    color:#667085;
+    margin-bottom:4px;
+}
+
+body.dark .course-detail span{
+    color:#94a3b8;
+}
+
+.course-detail strong{
+    font-size:12px;
+}
+
+
+/* =====================================================
+   LEARNING FEATURES
+===================================================== */
+
+.learning-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.learning-card{
+    background:#fff;
+    border:1px solid #e7eaf0;
+    border-radius:16px;
+    padding:20px;
+    transition:.2s ease;
+}
+
+.learning-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(16,24,40,.06);
+}
+
+body.dark .learning-card{
+    background:#111827;
+    border-color:#273244;
+}
+
+.learning-icon{
+    width:44px;
+    height:44px;
+    background:#f2f4f7;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    margin-bottom:12px;
+}
+
+body.dark .learning-icon{
+    background:#1e293b;
+}
+
+.learning-card h4{
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.learning-card p{
+    color:#667085;
+    font-size:11px;
+    line-height:1.7;
+}
+
+body.dark .learning-card p{
+    color:#94a3b8;
+}
+
+
+/* =====================================================
+   NOTICE
+===================================================== */
+
+.notice{
+    background:#fff;
+    border:1px solid #e7eaf0;
+    border-radius:16px;
+    padding:20px;
+}
+
+body.dark .notice{
+    background:#111827;
+    border-color:#273244;
+}
+
+.notice h3{
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.notice-box{
+    background:#f8fafc;
+    border-radius:11px;
+    padding:14px;
+    color:#475467;
+    font-size:11px;
+    line-height:1.8;
+}
+
+body.dark .notice-box{
+    background:#172033;
+    color:#cbd5e1;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+    text-align:center;
+    padding:25px 20px;
+    color:#667085;
+    font-size:11px;
+    border-top:1px solid #e7eaf0;
+    background:#fff;
+}
+
+body.dark .footer{
+    background:#111827;
+    border-color:#273244;
+    color:#94a3b8;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:950px){
+
+    .info-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .course-details{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:650px){
+
+    .header-inner{
+        padding:10px 15px;
+    }
+
+    .brand-logo{
+        width:43px;
+        height:43px;
+    }
+
+    .brand-text h1{
+        font-size:14px;
+    }
+
+    .brand-text p{
+        font-size:9px;
+    }
+
+    .header-btn{
+        padding:7px 8px;
+        font-size:10px;
+    }
+
+    .theme-btn{
+        width:34px;
+        height:34px;
+    }
+
+    .main{
+        padding:20px 15px 40px;
+    }
+
+    .page-title h2{
+        font-size:22px;
+    }
+
+    .profile-card,
+    .course-card{
+        padding:18px;
+        border-radius:16px;
+    }
+
+    .profile-header{
+        align-items:flex-start;
+    }
+
+    .avatar{
+        width:60px;
+        height:60px;
+        font-size:28px;
+    }
+
+    .profile-header h3{
+        font-size:17px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .course-top{
+        flex-direction:column;
+    }
+
+    .course-details{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .learning-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
 </head>
 
 
 <body>
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <header class="header">
+<header class="header">
 
-        <div class="header-inner">
+    <div class="header-inner">
+
+        <a href="#" class="brand">
+
+            <div class="brand-logo">
+
+                <img
+                    src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+                    alt="SNK IT Institute Logo"
+                >
+
+            </div>
+
+            <div class="brand-text">
+
+                <h1 id="brandTitle">
+                    SNK IT Institute
+                </h1>
+
+                <p id="brandSubtitle">
+                    Student Portal
+                </p>
+
+            </div>
+
+        </a>
 
 
-            <!-- BRAND -->
+        <div class="header-actions">
 
-            <a
-                href="#"
-                class="brand"
+            <button
+                class="header-btn theme-btn"
+                id="themeButton"
+                onclick="toggleTheme()"
             >
+                🌙
+            </button>
 
-                <div class="brand-logo">
+            <button
+                class="header-btn"
+                id="languageButton"
+                onclick="toggleLanguage()"
+            >
+                English
+            </button>
 
-                    <img
-                        src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-                        alt="SNK IT Institute Logo"
-                    >
+            <button
+                class="header-btn"
+                id="loginButton"
+                onclick="showLoginMessage()"
+            >
+                Login
+            </button>
 
-                </div>
+        </div>
 
+    </div>
 
-                <div class="brand-text">
-
-                    <h1 id="brandTitle">
-                        SNK IT Institute
-                    </h1>
-
-                    <p id="brandSubtitle">
-                        Student Portal
-                    </p>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- HEADER ACTIONS -->
-
-            <div class="header-actions">
+</header>
 
 
-                <!-- THEME -->
 
-                <button
-                    class="header-btn theme-btn"
-                    id="themeButton"
-                    onclick="toggleTheme()"
-                    title="Change Theme"
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- PAGE TITLE -->
+
+    <section class="page-title">
+
+        <h2 id="pageTitle">
+            Student Profile
+        </h2>
+
+        <p id="pageSubtitle">
+            আপনার student information এবং course details।
+        </p>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STUDENT PROFILE
+    ================================================== -->
+
+    <section class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="avatar">
+                👨‍🎓
+            </div>
+
+            <div>
+
+                <h3 id="studentName">
+                    Student Name
+                </h3>
+
+                <p id="studentId">
+                    Student ID: SNK-0001
+                </p>
+
+                <span
+                    class="student-badge"
+                    id="studentStatus"
                 >
-                    🌙
-                </button>
-
-
-                <!-- LANGUAGE -->
-
-                <button
-                    class="header-btn"
-                    id="languageButton"
-                    onclick="toggleLanguage()"
-                >
-                    English
-                </button>
-
-
-                <!-- LOGIN -->
-
-                <button
-                    class="header-btn"
-                    id="loginButton"
-                    onclick="showLoginMessage()"
-                >
-                    Login
-                </button>
+                    Active Student
+                </span>
 
             </div>
 
         </div>
 
-    </header>
+
+        <div class="info-grid">
 
 
+            <div class="info-box">
 
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
+                <span id="phoneLabel">
+                    Phone
+                </span>
 
-    <main class="main">
-
-
-        <!-- =================================================
-             WELCOME
-        ================================================== -->
-
-        <section class="welcome">
-
-            <div class="welcome-content">
-
-                <small id="welcomeSmall">
-                    Student Portal
-                </small>
-
-                <h2 id="welcomeTitle">
-                    SNK IT Institute
-                </h2>
-
-                <p id="welcomeText">
-                    আপনার কোর্সের Assignment, Quiz,
-                    Deadline, Submission এবং Result
-                    সহজে দেখার জন্য এই Student Portal
-                    তৈরি করা হচ্ছে।
-                </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             PORTAL FEATURES
-        ================================================== -->
-
-        <section>
-
-            <div class="section-title">
-
-                <h3 id="portalTitle">
-                    Student Portal
-                </h3>
-
-                <p id="portalSubtitle">
-                    আপনার প্রয়োজনীয় বিষয়গুলো এখানে পাওয়া যাবে।
-                </p>
+                <strong id="phoneValue">
+                    01XXXXXXXXX
+                </strong>
 
             </div>
 
 
+            <div class="info-box">
 
-            <div class="cards">
+                <span id="emailLabel">
+                    Email
+                </span>
 
-
-                <!-- PROFILE -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        👨‍🎓
-                    </div>
-
-                    <h4 id="profileTitle">
-                        Student Profile
-                    </h4>
-
-                    <p id="profileText">
-                        Student ID এবং নিজের basic
-                        information এখানে দেখা যাবে।
-                    </p>
-
-                </div>
-
-
-
-                <!-- ASSIGNMENT -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        📝
-                    </div>
-
-                    <h4 id="assignmentTitle">
-                        Assignment
-                    </h4>
-
-                    <p id="assignmentText">
-                        Assignment, deadline এবং
-                        submission পরবর্তীতে এখানে থাকবে।
-                    </p>
-
-                </div>
-
-
-
-                <!-- QUIZ -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        🧠
-                    </div>
-
-                    <h4 id="quizTitle">
-                        Quiz
-                    </h4>
-
-                    <p id="quizText">
-                        Online quiz এবং countdown timer
-                        পরবর্তীতে এখানে যুক্ত হবে।
-                    </p>
-
-                </div>
-
-
-
-                <!-- RESULT -->
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        🏆
-                    </div>
-
-                    <h4 id="resultTitle">
-                        Result
-                    </h4>
-
-                    <p id="resultText">
-                        Admin mark দেওয়ার পরে আপনার
-                        result এখানে দেখা যাবে।
-                    </p>
-
-                </div>
-
+                <strong id="emailValue">
+                    student@example.com
+                </strong>
 
             </div>
 
-        </section>
+
+            <div class="info-box">
+
+                <span id="batchLabel">
+                    Batch
+                </span>
+
+                <strong id="batchValue">
+                    2026
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span id="classLabel">
+                    Class Type
+                </span>
+
+                <strong id="classValue">
+                    Offline
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span id="joinLabel">
+                    Joining Date
+                </span>
+
+                <strong id="joinValue">
+                    Coming Soon
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span id="statusLabel">
+                    Account Status
+                </span>
+
+                <strong id="statusValue">
+                    Active
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
 
 
 
-        <!-- =================================================
-             RESOURCE SECTION
-        ================================================== -->
+    <!-- =================================================
+         COURSE INFORMATION
+    ================================================== -->
 
-        <section
-            class="resource-section"
-            id="resources"
-        >
+    <div class="section-title">
 
-            <div class="section-title">
+        <h3 id="courseSectionTitle">
+            🎓 My Course
+        </h3>
 
-                <h3 id="resourceTitle">
-                    📚 Resources
-                </h3>
+        <p id="courseSectionSubtitle">
+            আপনার বর্তমানে চলমান course-এর তথ্য।
+        </p>
 
-                <p id="resourceSubtitle">
-                    আপনার কোর্সের প্রয়োজনীয় learning materials।
+    </div>
+
+
+    <section class="course-card">
+
+
+        <div class="course-top">
+
+            <div>
+
+                <h4 id="courseName">
+                    Computer & IT Course
+                </h4>
+
+                <p id="courseDescription">
+                    Basic computer, office application,
+                    internet এবং practical IT learning।
                 </p>
 
             </div>
 
 
-
-            <div class="resource-grid">
-
-
-                <!-- COURSE NOTES -->
-
-                <a
-                    href="#"
-                    class="resource-card"
-                    onclick="resourceMessage(event)"
-                >
-
-                    <div class="resource-icon">
-                        📄
-                    </div>
-
-                    <h4 id="notesTitle">
-                        Course Notes
-                    </h4>
-
-                    <p id="notesText">
-                        Course-এর গুরুত্বপূর্ণ notes
-                        ও study materials এখানে থাকবে।
-                    </p>
-
-                    <span
-                        class="resource-arrow"
-                        id="notesArrow"
-                    >
-                        View Resource →
-                    </span>
-
-                </a>
-
-
-
-                <!-- PDF -->
-
-                <a
-                    href="#"
-                    class="resource-card"
-                    onclick="resourceMessage(event)"
-                >
-
-                    <div class="resource-icon">
-                        📕
-                    </div>
-
-                    <h4 id="pdfTitle">
-                        PDF / Documents
-                    </h4>
-
-                    <p id="pdfText">
-                        PDF এবং অন্যান্য প্রয়োজনীয়
-                        documents এখানে পাওয়া যাবে।
-                    </p>
-
-                    <span
-                        class="resource-arrow"
-                        id="pdfArrow"
-                    >
-                        View Resource →
-                    </span>
-
-                </a>
-
-
-
-                <!-- VIDEOS -->
-
-                <a
-                    href="#"
-                    class="resource-card"
-                    onclick="resourceMessage(event)"
-                >
-
-                    <div class="resource-icon">
-                        🎥
-                    </div>
-
-                    <h4 id="videoTitle">
-                        Class Videos
-                    </h4>
-
-                    <p id="videoText">
-                        Recorded class এবং learning
-                        videos এখানে থাকবে।
-                    </p>
-
-                    <span
-                        class="resource-arrow"
-                        id="videoArrow"
-                    >
-                        View Resource →
-                    </span>
-
-                </a>
-
-
-
-                <!-- LINKS -->
-
-                <a
-                    href="#"
-                    class="resource-card"
-                    onclick="resourceMessage(event)"
-                >
-
-                    <div class="resource-icon">
-                        🔗
-                    </div>
-
-                    <h4 id="linksTitle">
-                        Useful Links
-                    </h4>
-
-                    <p id="linksText">
-                        Course সম্পর্কিত গুরুত্বপূর্ণ
-                        links এখানে থাকবে।
-                    </p>
-
-                    <span
-                        class="resource-arrow"
-                        id="linksArrow"
-                    >
-                        View Resource →
-                    </span>
-
-                </a>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             NOTICE
-        ================================================== -->
-
-        <section class="notice">
-
-            <h3 id="noticeTitle">
-                📢 Notice
-            </h3>
-
-            <div
-                class="notice-box"
-                id="noticeText"
+            <span
+                class="course-status"
+                id="courseStatus"
             >
-                Student Portal-এর নতুন system তৈরি করা হচ্ছে।
-                খুব শীঘ্রই Student Login, Assignment, Quiz,
-                Deadline, Submission এবং Result system যুক্ত হবে।
+                Active Course
+            </span>
+
+        </div>
+
+
+
+        <!-- COURSE PROGRESS -->
+
+        <div class="progress-row">
+
+            <div class="progress-info">
+
+                <span id="progressLabel">
+                    Course Progress
+                </span>
+
+                <strong>
+                    65%
+                </strong>
+
             </div>
 
-        </section>
 
+            <div class="progress-bar">
 
-    </main>
+                <div class="progress-fill"></div>
 
+            </div>
 
+        </div>
 
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
 
-    <footer class="footer">
 
-        <span id="footerText">
-            © 2026 SNK IT Institute
-            <br>
-            Student Learning Portal
-        </span>
+        <!-- COURSE DETAILS -->
 
-    </footer>
+        <div class="course-details">
 
 
+            <div class="course-detail">
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
+                <span id="durationLabel">
+                    Duration
+                </span>
 
-    <script>
+                <strong id="durationValue">
+                    6 Months
+                </strong>
 
+            </div>
 
-        /* =====================================================
-           THEME
-        ====================================================== */
 
-        function toggleTheme() {
+            <div class="course-detail">
 
-            document.body.classList.toggle("dark");
+                <span id="modeLabel">
+                    Mode
+                </span>
 
-            const themeButton =
-                document.getElementById("themeButton");
+                <strong id="modeValue">
+                    Offline
+                </strong>
 
+            </div>
 
-            if (
-                document.body.classList.contains("dark")
-            ) {
 
-                themeButton.textContent = "☀️";
+            <div class="course-detail">
 
-                localStorage.setItem(
-                    "snkTheme",
-                    "dark"
-                );
+                <span id="classDaysLabel">
+                    Class Days
+                </span>
 
-            } else {
+                <strong id="classDaysValue">
+                    As Scheduled
+                </strong>
 
-                themeButton.textContent = "🌙";
+            </div>
 
-                localStorage.setItem(
-                    "snkTheme",
-                    "light"
-                );
 
-            }
+            <div class="course-detail">
 
-        }
+                <span id="teacherLabel">
+                    Instructor
+                </span>
 
+                <strong id="teacherValue">
+                    SNK IT Team
+                </strong>
 
-        function loadTheme() {
+            </div>
 
-            const savedTheme =
-                localStorage.getItem("snkTheme");
 
-            const themeButton =
-                document.getElementById("themeButton");
+        </div>
 
+    </section>
 
-            if (savedTheme === "dark") {
 
-                document.body.classList.add("dark");
 
-                themeButton.textContent = "☀️";
+    <!-- =================================================
+         LEARNING FEATURES
+    ================================================== -->
 
-            } else {
+    <div class="section-title">
 
-                document.body.classList.remove("dark");
+        <h3 id="learningTitle">
+            📚 Learning Center
+        </h3>
 
-                themeButton.textContent = "🌙";
+        <p id="learningSubtitle">
+            আপনার পড়াশোনার প্রয়োজনীয় section।
+        </p>
 
-            }
+    </div>
 
-        }
 
+    <section class="learning-grid">
 
 
-        /* =====================================================
-           LANGUAGE
-        ====================================================== */
+        <!-- ASSIGNMENT -->
 
-        let currentLanguage =
-            localStorage.getItem("snkLanguage") || "bn";
+        <div class="learning-card">
 
+            <div class="learning-icon">
+                📝
+            </div>
 
-        const translations = {
+            <h4 id="assignmentTitle">
+                Assignment
+            </h4>
 
-            bn: {
+            <p id="assignmentText">
+                Admin assignment দিলে এখানে
+                assignment, deadline এবং submission
+                দেখা যাবে।
+            </p>
 
-                brandTitle:
-                    "SNK IT Institute",
+        </div>
 
-                brandSubtitle:
-                    "Student Portal",
 
-                languageButton:
-                    "English",
 
-                loginButton:
-                    "Login",
+        <!-- QUIZ -->
 
-                welcomeSmall:
-                    "Student Portal",
+        <div class="learning-card">
 
-                welcomeTitle:
-                    "SNK IT Institute",
+            <div class="learning-icon">
+                🧠
+            </div>
 
-                welcomeText:
-                    "আপনার কোর্সের Assignment, Quiz, Deadline, Submission এবং Result সহজে দেখার জন্য এই Student Portal তৈরি করা হচ্ছে।",
+            <h4 id="quizTitle">
+                Quiz
+            </h4>
 
-                portalTitle:
-                    "Student Portal",
+            <p id="quizText">
+                Quiz, questions, countdown timer এবং
+                submit option এখানে থাকবে।
+            </p>
 
-                portalSubtitle:
-                    "আপনার প্রয়োজনীয় বিষয়গুলো এখানে পাওয়া যাবে।",
+        </div>
 
-                profileTitle:
-                    "Student Profile",
 
-                profileText:
-                    "Student ID এবং নিজের basic information এখানে দেখা যাবে।",
 
-                assignmentTitle:
-                    "Assignment",
+        <!-- RESOURCE -->
 
-                assignmentText:
-                    "Assignment, deadline এবং submission পরবর্তীতে এখানে থাকবে।",
+        <div class="learning-card">
 
-                quizTitle:
-                    "Quiz",
+            <div class="learning-icon">
+                📚
+            </div>
 
-                quizText:
-                    "Online quiz এবং countdown timer পরবর্তীতে এখানে যুক্ত হবে।",
+            <h4 id="resourceTitle">
+                Resources
+            </h4>
 
-                resultTitle:
-                    "Result",
+            <p id="resourceText">
+                PDF, notes, video এবং অন্যান্য
+                learning resources এখানে থাকবে।
+            </p>
 
-                resultText:
-                    "Admin mark দেওয়ার পরে আপনার result এখানে দেখা যাবে।",
+        </div>
 
-                resourceTitle:
-                    "📚 Resources",
 
-                resourceSubtitle:
-                    "আপনার কোর্সের প্রয়োজনীয় learning materials।",
 
-                notesTitle:
-                    "Course Notes",
+        <!-- RESULT -->
 
-                notesText:
-                    "Course-এর গুরুত্বপূর্ণ notes ও study materials এখানে থাকবে।",
+        <div class="learning-card">
 
-                pdfTitle:
-                    "PDF / Documents",
+            <div class="learning-icon">
+                🏆
+            </div>
 
-                pdfText:
-                    "PDF এবং অন্যান্য প্রয়োজনীয় documents এখানে পাওয়া যাবে।",
+            <h4 id="resultTitle">
+                Result
+            </h4>
 
-                videoTitle:
-                    "Class Videos",
+            <p id="resultText">
+                Admin mark দেওয়ার পরে assignment
+                ও quiz result এখানে দেখা যাবে।
+            </p>
 
-                videoText:
-                    "Recorded class এবং learning videos এখানে থাকবে।",
+        </div>
 
-                linksTitle:
-                    "Useful Links",
 
-                linksText:
-                    "Course সম্পর্কিত গুরুত্বপূর্ণ links এখানে থাকবে।",
+    </section>
 
-                resourceArrow:
-                    "View Resource →",
 
-                noticeTitle:
-                    "📢 Notice",
 
-                noticeText:
-                    "Student Portal-এর নতুন system তৈরি করা হচ্ছে। খুব শীঘ্রই Student Login, Assignment, Quiz, Deadline, Submission এবং Result system যুক্ত হবে।",
+    <!-- =================================================
+         NOTICE
+    ================================================== -->
 
-                footerText:
-                    "© 2026 SNK IT Institute<br>Student Learning Portal"
+    <section class="notice">
 
-            },
+        <h3 id="noticeTitle">
+            📢 Notice
+        </h3>
 
+        <div
+            class="notice-box"
+            id="noticeText"
+        >
+            Student Profile এবং Course Information-এর
+            বর্তমান তথ্যগুলো demo। Student Login system
+            তৈরি হওয়ার পরে এগুলো database থেকে automatically
+            আসবে।
+        </div>
 
-            en: {
+    </section>
 
-                brandTitle:
-                    "SNK IT Institute",
 
-                brandSubtitle:
-                    "Student Portal",
+</main>
 
-                languageButton:
-                    "বাংলা",
 
-                loginButton:
-                    "Login",
 
-                welcomeSmall:
-                    "Student Portal",
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-                welcomeTitle:
-                    "SNK IT Institute",
+<footer class="footer">
 
-                welcomeText:
-                    "This Student Portal is being created so you can easily access your course assignments, quizzes, deadlines, submissions and results.",
+    <span id="footerText">
+        © 2026 SNK IT Institute
+        <br>
+        Student Learning Portal
+    </span>
 
-                portalTitle:
-                    "Student Portal",
+</footer>
 
-                portalSubtitle:
-                    "Everything you need will be available here.",
 
-                profileTitle:
-                    "Student Profile",
 
-                profileText:
-                    "Your Student ID and basic information will be available here.",
+<script>
 
-                assignmentTitle:
-                    "Assignment",
+/* =====================================================
+   THEME
+===================================================== */
 
-                assignmentText:
-                    "Assignments, deadlines and submissions will be available here.",
+function toggleTheme(){
 
-                quizTitle:
-                    "Quiz",
+    document.body.classList.toggle("dark");
 
-                quizText:
-                    "Online quizzes and countdown timers will be available here.",
+    const button =
+        document.getElementById("themeButton");
 
-                resultTitle:
-                    "Result",
+    if(document.body.classList.contains("dark")){
 
-                resultText:
-                    "Your result will be displayed here after the admin gives marks.",
+        button.textContent="☀️";
 
-                resourceTitle:
-                    "📚 Resources",
-
-                resourceSubtitle:
-                    "Important learning materials for your course.",
-
-                notesTitle:
-                    "Course Notes",
-
-                notesText:
-                    "Important course notes and study materials will be available here.",
-
-                pdfTitle:
-                    "PDF / Documents",
-
-                pdfText:
-                    "PDF files and other important documents will be available here.",
-
-                videoTitle:
-                    "Class Videos",
-
-                videoText:
-                    "Recorded classes and learning videos will be available here.",
-
-                linksTitle:
-                    "Useful Links",
-
-                linksText:
-                    "Important links related to your course will be available here.",
-
-                resourceArrow:
-                    "View Resource →",
-
-                noticeTitle:
-                    "📢 Notice",
-
-                noticeText:
-                    "The new Student Portal system is being developed. Student Login, Assignment, Quiz, Deadline, Submission and Result systems will be added soon.",
-
-                footerText:
-                    "© 2026 SNK IT Institute<br>Student Learning Portal"
-
-            }
-
-        };
-
-
-
-        /* =====================================================
-           APPLY LANGUAGE
-        ====================================================== */
-
-        function applyLanguage() {
-
-            const data =
-                translations[currentLanguage];
-
-
-            document.getElementById("brandTitle").textContent =
-                data.brandTitle;
-
-
-            document.getElementById("brandSubtitle").textContent =
-                data.brandSubtitle;
-
-
-            document.getElementById("languageButton").textContent =
-                data.languageButton;
-
-
-            document.getElementById("loginButton").textContent =
-                data.loginButton;
-
-
-            document.getElementById("welcomeSmall").textContent =
-                data.welcomeSmall;
-
-
-            document.getElementById("welcomeTitle").textContent =
-                data.welcomeTitle;
-
-
-            document.getElementById("welcomeText").textContent =
-                data.welcomeText;
-
-
-            document.getElementById("portalTitle").textContent =
-                data.portalTitle;
-
-
-            document.getElementById("portalSubtitle").textContent =
-                data.portalSubtitle;
-
-
-            document.getElementById("profileTitle").textContent =
-                data.profileTitle;
-
-
-            document.getElementById("profileText").textContent =
-                data.profileText;
-
-
-            document.getElementById("assignmentTitle").textContent =
-                data.assignmentTitle;
-
-
-            document.getElementById("assignmentText").textContent =
-                data.assignmentText;
-
-
-            document.getElementById("quizTitle").textContent =
-                data.quizTitle;
-
-
-            document.getElementById("quizText").textContent =
-                data.quizText;
-
-
-            document.getElementById("resultTitle").textContent =
-                data.resultTitle;
-
-
-            document.getElementById("resultText").textContent =
-                data.resultText;
-
-
-            document.getElementById("resourceTitle").textContent =
-                data.resourceTitle;
-
-
-            document.getElementById("resourceSubtitle").textContent =
-                data.resourceSubtitle;
-
-
-            document.getElementById("notesTitle").textContent =
-                data.notesTitle;
-
-
-            document.getElementById("notesText").textContent =
-                data.notesText;
-
-
-            document.getElementById("pdfTitle").textContent =
-                data.pdfTitle;
-
-
-            document.getElementById("pdfText").textContent =
-                data.pdfText;
-
-
-            document.getElementById("videoTitle").textContent =
-                data.videoTitle;
-
-
-            document.getElementById("videoText").textContent =
-                data.videoText;
-
-
-            document.getElementById("linksTitle").textContent =
-                data.linksTitle;
-
-
-            document.getElementById("linksText").textContent =
-                data.linksText;
-
-
-            document.querySelectorAll(
-                ".resource-arrow"
-            ).forEach(function(element) {
-
-                element.textContent =
-                    data.resourceArrow;
-
-            });
-
-
-            document.getElementById("noticeTitle").textContent =
-                data.noticeTitle;
-
-
-            document.getElementById("noticeText").textContent =
-                data.noticeText;
-
-
-            document.getElementById("footerText").innerHTML =
-                data.footerText;
-
-
-            document.documentElement.lang =
-                currentLanguage;
-
-        }
-
-
-
-        /* =====================================================
-           TOGGLE LANGUAGE
-        ====================================================== */
-
-        function toggleLanguage() {
-
-            if (currentLanguage === "bn") {
-
-                currentLanguage = "en";
-
-            } else {
-
-                currentLanguage = "bn";
-
-            }
-
-
-            localStorage.setItem(
-                "snkLanguage",
-                currentLanguage
-            );
-
-
-            applyLanguage();
-
-        }
-
-
-
-        /* =====================================================
-           LOGIN PLACEHOLDER
-        ====================================================== */
-
-        function showLoginMessage() {
-
-            if (currentLanguage === "bn") {
-
-                alert(
-                    "Student Login system 6.1 ধাপে তৈরি করা হবে।"
-                );
-
-            } else {
-
-                alert(
-                    "Student Login system will be created in Step 6.1."
-                );
-
-            }
-
-        }
-
-
-
-        /* =====================================================
-           RESOURCE PLACEHOLDER
-        ====================================================== */
-
-        function resourceMessage(event) {
-
-            event.preventDefault();
-
-
-            if (currentLanguage === "bn") {
-
-                alert(
-                    "Resource system পরবর্তী ধাপে আরও কার্যকর করা হবে।"
-                );
-
-            } else {
-
-                alert(
-                    "The Resource system will be fully activated in the next steps."
-                );
-
-            }
-
-        }
-
-
-
-        /* =====================================================
-           PAGE LOAD
-        ====================================================== */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function() {
-
-                loadTheme();
-
-                applyLanguage();
-
-            }
+        localStorage.setItem(
+            "snkTheme",
+            "dark"
         );
 
-    </script>
+    }else{
 
+        button.textContent="🌙";
+
+        localStorage.setItem(
+            "snkTheme",
+            "light"
+        );
+
+    }
+
+}
+
+
+function loadTheme(){
+
+    const saved =
+        localStorage.getItem("snkTheme");
+
+    const button =
+        document.getElementById("themeButton");
+
+    if(saved==="dark"){
+
+        document.body.classList.add("dark");
+
+        button.textContent="☀️";
+
+    }else{
+
+        document.body.classList.remove("dark");
+
+        button.textContent="🌙";
+
+    }
+
+}
+
+
+/* =====================================================
+   LANGUAGE
+===================================================== */
+
+let currentLanguage =
+    localStorage.getItem("snkLanguage") || "bn";
+
+
+const translations={
+
+    bn:{
+
+        brandTitle:"SNK IT Institute",
+        brandSubtitle:"Student Portal",
+        languageButton:"English",
+        loginButton:"Login",
+
+        pageTitle:"Student Profile",
+        pageSubtitle:"আপনার student information এবং course details।",
+
+        studentName:"Student Name",
+        studentId:"Student ID: SNK-0001",
+        studentStatus:"Active Student",
+
+        phoneLabel:"Phone",
+        phoneValue:"01XXXXXXXXX",
+
+        emailLabel:"Email",
+        emailValue:"student@example.com",
+
+        batchLabel:"Batch",
+        batchValue:"2026",
+
+        classLabel:"Class Type",
+        classValue:"Offline",
+
+        joinLabel:"Joining Date",
+        joinValue:"Coming Soon",
+
+        statusLabel:"Account Status",
+        statusValue:"Active",
+
+        courseSectionTitle:"🎓 My Course",
+        courseSectionSubtitle:"আপনার বর্তমানে চলমান course-এর তথ্য।",
+
+        courseName:"Computer & IT Course",
+
+        courseDescription:
+        "Basic computer, office application, internet এবং practical IT learning।",
+
+        courseStatus:"Active Course",
+
+        progressLabel:"Course Progress",
+
+        durationLabel:"Duration",
+        durationValue:"6 Months",
+
+        modeLabel:"Mode",
+        modeValue:"Offline",
+
+        classDaysLabel:"Class Days",
+        classDaysValue:"As Scheduled",
+
+        teacherLabel:"Instructor",
+        teacherValue:"SNK IT Team",
+
+        learningTitle:"📚 Learning Center",
+        learningSubtitle:"আপনার পড়াশোনার প্রয়োজনীয় section।",
+
+        assignmentTitle:"Assignment",
+
+        assignmentText:
+        "Admin assignment দিলে এখানে assignment, deadline এবং submission দেখা যাবে।",
+
+        quizTitle:"Quiz",
+
+        quizText:
+        "Quiz, questions, countdown timer এবং submit option এখানে থাকবে।",
+
+        resourceTitle:"Resources",
+
+        resourceText:
+        "PDF, notes, video এবং অন্যান্য learning resources এখানে থাকবে।",
+
+        resultTitle:"Result",
+
+        resultText:
+        "Admin mark দেওয়ার পরে assignment ও quiz result এখানে দেখা যাবে।",
+
+        noticeTitle:"📢 Notice",
+
+        noticeText:
+        "Student Profile এবং Course Information-এর বর্তমান তথ্যগুলো demo। Student Login system তৈরি হওয়ার পরে এগুলো database থেকে automatically আসবে।",
+
+        footerText:
+        "© 2026 SNK IT Institute<br>Student Learning Portal"
+
+    },
+
+
+    en:{
+
+        brandTitle:"SNK IT Institute",
+        brandSubtitle:"Student Portal",
+        languageButton:"বাংলা",
+        loginButton:"Login",
+
+        pageTitle:"Student Profile",
+        pageSubtitle:"Your student information and course details.",
+
+        studentName:"Student Name",
+        studentId:"Student ID: SNK-0001",
+        studentStatus:"Active Student",
+
+        phoneLabel:"Phone",
+        phoneValue:"01XXXXXXXXX",
+
+        emailLabel:"Email",
+        emailValue:"student@example.com",
+
+        batchLabel:"Batch",
+        batchValue:"2026",
+
+        classLabel:"Class Type",
+        classValue:"Offline",
+
+        joinLabel:"Joining Date",
+        joinValue:"Coming Soon",
+
+        statusLabel:"Account Status",
+        statusValue:"Active",
+
+        courseSectionTitle:"🎓 My Course",
+        courseSectionSubtitle:"Information about your current course.",
+
+        courseName:"Computer & IT Course",
+
+        courseDescription:
+        "Basic computer, office applications, internet and practical IT learning.",
+
+        courseStatus:"Active Course",
+
+        progressLabel:"Course Progress",
+
+        durationLabel:"Duration",
+        durationValue:"6 Months",
+
+        modeLabel:"Mode",
+        modeValue:"Offline",
+
+        classDaysLabel:"Class Days",
+        classDaysValue:"As Scheduled",
+
+        teacherLabel:"Instructor",
+        teacherValue:"SNK IT Team",
+
+        learningTitle:"📚 Learning Center",
+        learningSubtitle:"Important sections for your learning.",
+
+        assignmentTitle:"Assignment",
+
+        assignmentText:
+        "Assignments, deadlines and submission options will appear here.",
+
+        quizTitle:"Quiz",
+
+        quizText:
+        "Quiz questions, countdown timer and submit option will be available here.",
+
+        resourceTitle:"Resources",
+
+        resourceText:
+        "PDFs, notes, videos and other learning resources will be available here.",
+
+        resultTitle:"Result",
+
+        resultText:
+        "Assignment and quiz results will appear here after the admin gives marks.",
+
+        noticeTitle:"📢 Notice",
+
+        noticeText:
+        "The current Student Profile and Course Information are demo data. After the Student Login system is created, these details will come automatically from the database.",
+
+        footerText:
+        "© 2026 SNK IT Institute<br>Student Learning Portal"
+
+    }
+
+};
+
+
+/* =====================================================
+   APPLY LANGUAGE
+===================================================== */
+
+function applyLanguage(){
+
+    const data=
+        translations[currentLanguage];
+
+    Object.keys(data).forEach(function(id){
+
+        const element=
+            document.getElementById(id);
+
+        if(element){
+
+            if(id==="footerText"){
+
+                element.innerHTML=data[id];
+
+            }else{
+
+                element.textContent=data[id];
+
+            }
+
+        }
+
+    });
+
+    document.documentElement.lang=
+        currentLanguage;
+
+}
+
+
+/* =====================================================
+   TOGGLE LANGUAGE
+===================================================== */
+
+function toggleLanguage(){
+
+    if(currentLanguage==="bn"){
+
+        currentLanguage="en";
+
+    }else{
+
+        currentLanguage="bn";
+
+    }
+
+    localStorage.setItem(
+        "snkLanguage",
+        currentLanguage
+    );
+
+    applyLanguage();
+
+}
+
+
+/* =====================================================
+   LOGIN PLACEHOLDER
+===================================================== */
+
+function showLoginMessage(){
+
+    if(currentLanguage==="bn"){
+
+        alert(
+            "Student Login system 6.1 ধাপে তৈরি করা হবে।"
+        );
+
+    }else{
+
+        alert(
+            "Student Login system will be created in Step 6.1."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadTheme();
+
+        applyLanguage();
+
+    }
+);
+
+</script>
 
 </body>
 </html>
