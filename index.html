@@ -184,20 +184,40 @@ body.dark .page-title p{
 
 
 /* =====================================================
+   COMMON CARD
+===================================================== */
+
+.profile-card,
+.course-card,
+.assignment-card,
+.quiz-card,
+.resource-notice,
+.notice,
+.result-card{
+    background:#fff;
+    border:1px solid #e7eaf0;
+}
+
+body.dark .profile-card,
+body.dark .course-card,
+body.dark .assignment-card,
+body.dark .quiz-card,
+body.dark .resource-notice,
+body.dark .notice,
+body.dark .result-card{
+    background:#111827;
+    border-color:#273244;
+}
+
+
+/* =====================================================
    PROFILE
 ===================================================== */
 
 .profile-card{
-    background:#fff;
-    border:1px solid #e7eaf0;
     border-radius:20px;
     padding:25px;
     margin-bottom:22px;
-}
-
-body.dark .profile-card{
-    background:#111827;
-    border-color:#273244;
 }
 
 .profile-header{
@@ -311,16 +331,9 @@ body.dark .section-title p{
 ===================================================== */
 
 .course-card{
-    background:#fff;
-    border:1px solid #e7eaf0;
     border-radius:18px;
     padding:23px;
     margin-bottom:22px;
-}
-
-body.dark .course-card{
-    background:#111827;
-    border-color:#273244;
 }
 
 .course-top{
@@ -428,16 +441,9 @@ body.dark .course-detail span{
 ===================================================== */
 
 .assignment-card{
-    background:#fff;
-    border:1px solid #e7eaf0;
     border-radius:18px;
     padding:23px;
     margin-bottom:18px;
-}
-
-body.dark .assignment-card{
-    background:#111827;
-    border-color:#273244;
 }
 
 .assignment-top{
@@ -623,12 +629,6 @@ body.dark .submit-btn{
     border:1px solid #e7eaf0;
     border-radius:17px;
     padding:20px;
-    transition:.2s ease;
-}
-
-.resource-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(16,24,40,.07);
 }
 
 body.dark .resource-card{
@@ -702,7 +702,6 @@ body.dark .resource-info{
     font-size:10px;
     font-weight:700;
     text-align:center;
-    text-decoration:none;
 }
 
 .resource-btn.primary{
@@ -723,22 +722,10 @@ body.dark .resource-btn.primary{
     border-color:#fff;
 }
 
-
-/* =====================================================
-   RESOURCE NOTICE
-===================================================== */
-
 .resource-notice{
-    background:#fff;
-    border:1px solid #e7eaf0;
     border-radius:16px;
     padding:18px;
     margin-bottom:22px;
-}
-
-body.dark .resource-notice{
-    background:#111827;
-    border-color:#273244;
 }
 
 .resource-notice h4{
@@ -762,16 +749,9 @@ body.dark .resource-notice p{
 ===================================================== */
 
 .quiz-card{
-    background:#fff;
-    border:1px solid #e7eaf0;
     border-radius:18px;
     padding:23px;
     margin-bottom:22px;
-}
-
-body.dark .quiz-card{
-    background:#111827;
-    border-color:#273244;
 }
 
 .quiz-header{
@@ -862,9 +842,6 @@ body.dark .quiz-progress-fill{
     background:#fff;
 }
 
-
-/* QUESTION */
-
 .question-card{
     margin-top:20px;
     padding:20px;
@@ -915,11 +892,6 @@ body.dark .question-number{
     border-radius:10px;
     cursor:pointer;
     font-size:11px;
-    transition:.2s ease;
-}
-
-.option label:hover{
-    border-color:#98a2b3;
 }
 
 .option input:checked + label{
@@ -972,7 +944,6 @@ body.dark .quiz-nav-btn{
 body.dark .quiz-nav-btn.primary{
     background:#fff;
     color:#111827;
-    border-color:#fff;
 }
 
 .quiz-submit-area{
@@ -1059,7 +1030,150 @@ body.dark .quiz-result p{
 
 
 /* =====================================================
-   LEARNING
+   RESULT SYSTEM
+===================================================== */
+
+.result-card{
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:22px;
+}
+
+.result-summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+}
+
+.result-box{
+    background:#f8fafc;
+    border-radius:13px;
+    padding:17px;
+}
+
+body.dark .result-box{
+    background:#172033;
+}
+
+.result-box span{
+    display:block;
+    color:#667085;
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+body.dark .result-box span{
+    color:#94a3b8;
+}
+
+.result-box strong{
+    font-size:20px;
+}
+
+.result-table-wrapper{
+    margin-top:20px;
+    overflow-x:auto;
+}
+
+.result-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+.result-table th{
+    text-align:left;
+    background:#f8fafc;
+    padding:13px;
+    font-size:10px;
+    color:#667085;
+}
+
+body.dark .result-table th{
+    background:#172033;
+    color:#94a3b8;
+}
+
+.result-table td{
+    padding:14px 13px;
+    border-bottom:1px solid #eef0f3;
+    font-size:11px;
+}
+
+body.dark .result-table td{
+    border-color:#273244;
+}
+
+.result-pending{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:7px;
+    background:#f2f4f7;
+    font-size:9px;
+    font-weight:700;
+}
+
+body.dark .result-pending{
+    background:#273244;
+}
+
+.result-demo{
+    margin-top:18px;
+    padding:14px;
+    background:#f8fafc;
+    border-radius:11px;
+    color:#667085;
+    font-size:10px;
+    line-height:1.7;
+}
+
+body.dark .result-demo{
+    background:#172033;
+    color:#94a3b8;
+}
+
+.grade-card{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.grade-panel{
+    padding:20px;
+    background:#f8fafc;
+    border-radius:14px;
+    text-align:center;
+}
+
+body.dark .grade-panel{
+    background:#172033;
+}
+
+.grade-panel span{
+    display:block;
+    color:#667085;
+    font-size:10px;
+    margin-bottom:7px;
+}
+
+body.dark .grade-panel span{
+    color:#94a3b8;
+}
+
+.grade-panel strong{
+    font-size:28px;
+}
+
+.grade-status{
+    margin-top:8px;
+    font-size:11px;
+    font-weight:700;
+}
+
+
+/* =====================================================
+   LEARNING CENTER
 ===================================================== */
 
 .learning-grid{
@@ -1118,15 +1232,8 @@ body.dark .learning-card p{
 ===================================================== */
 
 .notice{
-    background:#fff;
-    border:1px solid #e7eaf0;
     border-radius:16px;
     padding:20px;
-}
-
-body.dark .notice{
-    background:#111827;
-    border-color:#273244;
 }
 
 .notice h3{
@@ -1191,6 +1298,10 @@ body.dark .footer{
         grid-template-columns:repeat(2,1fr);
     }
 
+    .result-summary{
+        grid-template-columns:repeat(2,1fr);
+    }
+
 }
 
 @media(max-width:650px){
@@ -1233,7 +1344,8 @@ body.dark .footer{
     .profile-card,
     .course-card,
     .assignment-card,
-    .quiz-card{
+    .quiz-card,
+    .result-card{
         padding:18px;
     }
 
@@ -1315,6 +1427,14 @@ body.dark .footer{
     }
 
     .learning-grid{
+        grid-template-columns:1fr;
+    }
+
+    .result-summary{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .grade-card{
         grid-template-columns:1fr;
     }
 
@@ -1594,7 +1714,6 @@ body.dark .footer{
     </div>
 
 
-
     <!-- ASSIGNMENT 01 -->
 
     <section class="assignment-card">
@@ -1609,11 +1728,11 @@ body.dark .footer{
 
                 <div>
 
-                    <h4 id="assignment1Title">
+                    <h4>
                         Assignment 01 — Basic Computer
                     </h4>
 
-                    <p id="assignment1Course">
+                    <p>
                         Computer & IT Course
                     </p>
 
@@ -1631,13 +1750,12 @@ body.dark .footer{
         </div>
 
 
-        <div
-            class="assignment-description"
-            id="assignment1Description"
-        >
+        <div class="assignment-description">
+
             MS Word ব্যবহার করে একটি simple document
             তৈরি করুন। Document-এ আপনার নাম, ঠিকানা,
             শিক্ষাগত যোগ্যতা এবং একটি ছোট paragraph লিখুন।
+
         </div>
 
 
@@ -1645,7 +1763,9 @@ body.dark .footer{
 
             <div class="meta-box">
 
-                <span>Deadline</span>
+                <span id="deadline1Label">
+                    Deadline
+                </span>
 
                 <strong>
                     10 September 2026, 11:59 PM
@@ -1655,7 +1775,9 @@ body.dark .footer{
 
             <div class="meta-box">
 
-                <span>Total Mark</span>
+                <span id="totalMark1Label">
+                    Total Mark
+                </span>
 
                 <strong>
                     20 Marks
@@ -1665,7 +1787,9 @@ body.dark .footer{
 
             <div class="meta-box">
 
-                <span>Submission</span>
+                <span id="submission1Label">
+                    Submission
+                </span>
 
                 <strong id="submission1">
                     Not Submitted
@@ -1678,10 +1802,7 @@ body.dark .footer{
 
         <div class="countdown-box">
 
-            <span
-                class="countdown-label"
-                id="countdownLabel1"
-            >
+            <span class="countdown-label">
                 ⏳ Time Remaining
             </span>
 
@@ -1729,11 +1850,11 @@ body.dark .footer{
 
                 <div>
 
-                    <h4 id="assignment2Title">
+                    <h4>
                         Assignment 02 — Excel Practice
                     </h4>
 
-                    <p id="assignment2Course">
+                    <p>
                         Computer & IT Course
                     </p>
 
@@ -1751,12 +1872,11 @@ body.dark .footer{
         </div>
 
 
-        <div
-            class="assignment-description"
-            id="assignment2Description"
-        >
+        <div class="assignment-description">
+
             MS Excel ব্যবহার করে একটি student marks
             sheet তৈরি করুন এবং Total ও Average বের করুন।
+
         </div>
 
 
@@ -1764,7 +1884,9 @@ body.dark .footer{
 
             <div class="meta-box">
 
-                <span>Deadline</span>
+                <span>
+                    Deadline
+                </span>
 
                 <strong>
                     15 September 2026, 11:59 PM
@@ -1774,7 +1896,9 @@ body.dark .footer{
 
             <div class="meta-box">
 
-                <span>Total Mark</span>
+                <span>
+                    Total Mark
+                </span>
 
                 <strong>
                     30 Marks
@@ -1784,7 +1908,9 @@ body.dark .footer{
 
             <div class="meta-box">
 
-                <span>Submission</span>
+                <span>
+                    Submission
+                </span>
 
                 <strong id="submission2">
                     Not Submitted
@@ -1797,10 +1923,7 @@ body.dark .footer{
 
         <div class="countdown-box">
 
-            <span
-                class="countdown-label"
-                id="countdownLabel2"
-            >
+            <span class="countdown-label">
                 ⏳ Time Remaining
             </span>
 
@@ -1860,24 +1983,20 @@ body.dark .footer{
                 📄
             </div>
 
-            <h4 id="resource1Title">
+            <h4>
                 Computer Basics Notes
             </h4>
 
-            <p id="resource1Description">
+            <p>
                 Basic computer-এর গুরুত্বপূর্ণ notes
                 এবং class materials।
             </p>
 
             <div class="resource-info">
 
-                <span>
-                    PDF
-                </span>
+                <span>PDF</span>
 
-                <span>
-                    Course Material
-                </span>
+                <span>Course Material</span>
 
             </div>
 
@@ -1908,24 +2027,20 @@ body.dark .footer{
                 📝
             </div>
 
-            <h4 id="resource2Title">
+            <h4>
                 MS Word Practice
             </h4>
 
-            <p id="resource2Description">
+            <p>
                 MS Word practice করার জন্য class
                 notes এবং examples।
             </p>
 
             <div class="resource-info">
 
-                <span>
-                    Notes
-                </span>
+                <span>Notes</span>
 
-                <span>
-                    Practice Material
-                </span>
+                <span>Practice Material</span>
 
             </div>
 
@@ -1956,24 +2071,20 @@ body.dark .footer{
                 🎥
             </div>
 
-            <h4 id="resource3Title">
+            <h4>
                 Computer Class Video
             </h4>
 
-            <p id="resource3Description">
+            <p>
                 Missed class-এর জন্য recorded learning
                 video এখানে রাখা যাবে।
             </p>
 
             <div class="resource-info">
 
-                <span>
-                    Video
-                </span>
+                <span>Video</span>
 
-                <span>
-                    Recorded Class
-                </span>
+                <span>Recorded Class</span>
 
             </div>
 
@@ -2004,24 +2115,20 @@ body.dark .footer{
                 📊
             </div>
 
-            <h4 id="resource4Title">
+            <h4>
                 Excel Practice Sheet
             </h4>
 
-            <p id="resource4Description">
+            <p>
                 Excel assignment ও practice করার
                 জন্য sample sheet।
             </p>
 
             <div class="resource-info">
 
-                <span>
-                    Excel
-                </span>
+                <span>Excel</span>
 
-                <span>
-                    Practice File
-                </span>
+                <span>Practice File</span>
 
             </div>
 
@@ -2052,24 +2159,20 @@ body.dark .footer{
                 📖
             </div>
 
-            <h4 id="resource5Title">
+            <h4>
                 Class Handbook
             </h4>
 
-            <p id="resource5Description">
+            <p>
                 Course rules, class routine এবং
                 important instructions।
             </p>
 
             <div class="resource-info">
 
-                <span>
-                    PDF
-                </span>
+                <span>PDF</span>
 
-                <span>
-                    Handbook
-                </span>
+                <span>Handbook</span>
 
             </div>
 
@@ -2100,24 +2203,20 @@ body.dark .footer{
                 🔗
             </div>
 
-            <h4 id="resource6Title">
+            <h4>
                 Useful Learning Links
             </h4>
 
-            <p id="resource6Description">
+            <p>
                 Studentদের প্রয়োজনীয় website এবং
                 learning links।
             </p>
 
             <div class="resource-info">
 
-                <span>
-                    Links
-                </span>
+                <span>Links</span>
 
-                <span>
-                    Learning
-                </span>
+                <span>Learning</span>
 
             </div>
 
@@ -2139,15 +2238,14 @@ body.dark .footer{
 
     <section class="resource-notice">
 
-        <h4 id="resourceNoticeTitle">
+        <h4>
             📌 Resource Update
         </h4>
 
-        <p id="resourceNoticeText">
+        <p>
             পরবর্তী Admin system তৈরি হলে Admin এখান থেকে
             নতুন PDF, notes, video এবং অন্যান্য resources
-            publish করতে পারবে। Student login করার পরে
-            তার course অনুযায়ী resources দেখতে পারবে।
+            publish করতে পারবে।
         </p>
 
     </section>
@@ -2155,16 +2253,16 @@ body.dark .footer{
 
 
     <!-- =================================================
-         QUIZ SECTION
+         QUIZ
     ================================================== -->
 
     <div class="section-title">
 
-        <h3 id="quizSectionTitle">
+        <h3>
             🧠 Quiz
         </h3>
 
-        <p id="quizSectionSubtitle">
+        <p>
             আপনার course-এর ছোট practice quiz।
         </p>
 
@@ -2173,18 +2271,15 @@ body.dark .footer{
 
     <section class="quiz-card" id="quizCard">
 
-
-        <!-- QUIZ HEADER -->
-
         <div class="quiz-header">
 
             <div>
 
-                <h4 id="quizTitle">
+                <h4>
                     Basic Computer Quiz
                 </h4>
 
-                <p id="quizDescription">
+                <p>
                     মোট 3টি প্রশ্ন • প্রতিটি প্রশ্ন 1 নম্বর
                 </p>
 
@@ -2193,7 +2288,7 @@ body.dark .footer{
 
             <div class="quiz-timer">
 
-                <span id="quizTimerLabel">
+                <span>
                     ⏱️ Time Remaining
                 </span>
 
@@ -2205,8 +2300,6 @@ body.dark .footer{
 
         </div>
 
-
-        <!-- QUIZ PROGRESS -->
 
         <div class="quiz-progress">
 
@@ -2235,8 +2328,6 @@ body.dark .footer{
         </div>
 
 
-        <!-- QUESTION -->
-
         <div
             class="question-card"
             id="questionCard"
@@ -2261,9 +2352,7 @@ body.dark .footer{
             <div
                 class="options"
                 id="optionsContainer"
-            >
-
-            </div>
+            ></div>
 
 
             <div class="quiz-navigation">
@@ -2289,8 +2378,6 @@ body.dark .footer{
         </div>
 
 
-        <!-- SUBMIT -->
-
         <div
             class="quiz-submit-area"
             id="quizSubmitArea"
@@ -2298,14 +2385,11 @@ body.dark .footer{
 
             <div>
 
-                <strong id="readyText">
+                <strong>
                     Quiz শেষ করার জন্য প্রস্তুত?
                 </strong>
 
-                <p
-                    id="answeredText"
-                    style="font-size:10px;margin-top:3px;color:#667085;"
-                >
+                <p style="font-size:10px;margin-top:3px;color:#667085;">
                     সব প্রশ্নের উত্তর দেওয়ার চেষ্টা করুন।
                 </p>
 
@@ -2315,15 +2399,12 @@ body.dark .footer{
             <button
                 class="quiz-submit"
                 onclick="submitQuiz(false)"
-                id="quizSubmitButton"
             >
                 📤 Submit Quiz
             </button>
 
         </div>
 
-
-        <!-- RESULT -->
 
         <div
             class="quiz-result"
@@ -2334,12 +2415,12 @@ body.dark .footer{
                 🏆
             </div>
 
-            <h4 id="resultHeading">
+            <h4>
                 Quiz Submitted
             </h4>
 
-            <p id="resultMessage">
-                আপনার demo result নিচে দেওয়া হলো।
+            <p>
+                আপনার quiz result নিচে দেওয়া হলো।
             </p>
 
             <div
@@ -2351,6 +2432,276 @@ body.dark .footer{
 
         </div>
 
+    </section>
+
+
+
+    <!-- =================================================
+         RESULT SECTION — 1.10
+    ================================================== -->
+
+    <div class="section-title">
+
+        <h3 id="resultSectionTitle">
+            🏆 My Result
+        </h3>
+
+        <p id="resultSectionSubtitle">
+            Assignment এবং Quiz-এর result এখানে দেখা যাবে।
+        </p>
+
+    </div>
+
+
+    <section class="result-card">
+
+
+        <!-- SUMMARY -->
+
+        <div class="result-summary">
+
+
+            <div class="result-box">
+
+                <span id="resultTotalLabel">
+                    Total Marks
+                </span>
+
+                <strong id="totalMarks">
+                    50
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span id="resultObtainedLabel">
+                    Obtained
+                </span>
+
+                <strong id="obtainedMarks">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span id="resultPercentageLabel">
+                    Percentage
+                </span>
+
+                <strong id="percentage">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span id="resultGradeLabel">
+                    Grade
+                </span>
+
+                <strong id="grade">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RESULT TABLE -->
+
+        <div class="result-table-wrapper">
+
+            <table class="result-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th id="thItem">
+                            Assessment
+                        </th>
+
+                        <th id="thTotal">
+                            Total Mark
+                        </th>
+
+                        <th id="thObtained">
+                            Obtained
+                        </th>
+
+                        <th id="thStatus">
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+                            📝 Assignment 01
+                        </td>
+
+                        <td>
+                            20
+                        </td>
+
+                        <td id="assignment1Mark">
+                            —
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="result-pending"
+                                id="assignment1ResultStatus"
+                            >
+                                Pending Admin Mark
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            📊 Assignment 02
+                        </td>
+
+                        <td>
+                            30
+                        </td>
+
+                        <td id="assignment2Mark">
+                            —
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="result-pending"
+                                id="assignment2ResultStatus"
+                            >
+                                Pending Admin Mark
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            🧠 Basic Computer Quiz
+                        </td>
+
+                        <td>
+                            3
+                        </td>
+
+                        <td id="quizMark">
+                            —
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="result-pending"
+                                id="quizResultStatus"
+                            >
+                                Not Submitted
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <!-- DEMO NOTICE -->
+
+        <div
+            class="result-demo"
+            id="resultDemo"
+        >
+            📌 Result system এখন Demo mode-এ আছে।
+            Admin Login তৈরি হওয়ার পরে Admin student-এর
+            assignment mark দিতে পারবে এবং সেই mark এখানে
+            automatically দেখা যাবে।
+        </div>
+
+
+
+        <!-- GRADE -->
+
+        <div class="grade-card">
+
+
+            <div class="grade-panel">
+
+                <span id="gradePanelLabel">
+                    Current Grade
+                </span>
+
+                <strong id="bigGrade">
+                    —
+                </strong>
+
+                <div
+                    class="grade-status"
+                    id="gradeStatus"
+                >
+                    Mark Pending
+                </div>
+
+            </div>
+
+
+            <div class="grade-panel">
+
+                <span id="resultStatusLabel">
+                    Result Status
+                </span>
+
+                <strong id="resultStatus">
+                    —
+                </strong>
+
+                <div
+                    class="grade-status"
+                    id="resultStatusText"
+                >
+                    Admin mark required
+                </div>
+
+            </div>
+
+
+        </div>
 
     </section>
 
@@ -2362,11 +2713,11 @@ body.dark .footer{
 
     <div class="section-title">
 
-        <h3 id="learningTitle">
+        <h3>
             📚 Learning Center
         </h3>
 
-        <p id="learningSubtitle">
+        <p>
             আপনার পড়াশোনার প্রয়োজনীয় section।
         </p>
 
@@ -2386,7 +2737,7 @@ body.dark .footer{
                 Quiz
             </h4>
 
-            <p id="quizLearningText">
+            <p>
                 Quiz, questions, countdown timer এবং
                 submit option এখানে থাকবে।
             </p>
@@ -2406,7 +2757,7 @@ body.dark .footer{
 
             <p>
                 PDF, notes, video এবং অন্যান্য
-                learning resources উপরের section-এ থাকবে।
+                learning resources এখানে থাকবে।
             </p>
 
         </div>
@@ -2422,7 +2773,7 @@ body.dark .footer{
                 Result
             </h4>
 
-            <p id="resultLearningText">
+            <p>
                 Admin mark দেওয়ার পরে assignment
                 ও quiz result এখানে দেখা যাবে।
             </p>
@@ -2440,17 +2791,16 @@ body.dark .footer{
 
     <section class="notice">
 
-        <h3 id="noticeTitle">
+        <h3>
             📢 Notice
         </h3>
 
-        <div
-            class="notice-box"
-            id="noticeText"
-        >
-            Assignment, Resources ও Quiz system এখন
-            demo mode-এ আছে। পরবর্তী ধাপে Student Login
+        <div class="notice-box">
+
+            Assignment, Resources, Quiz এবং Result system
+            এখন demo mode-এ আছে। পরবর্তী ধাপে Student Login
             এবং Admin system-এর সঙ্গে এগুলো connect করা হবে।
+
         </div>
 
     </section>
@@ -2466,11 +2816,9 @@ body.dark .footer{
 
 <footer class="footer">
 
-    <span id="footerText">
-        © 2026 SNK IT Institute
-        <br>
-        Student Learning Portal
-    </span>
+    © 2026 SNK IT Institute
+    <br>
+    Student Learning Portal
 
 </footer>
 
@@ -2489,7 +2837,9 @@ function toggleTheme(){
     const button =
         document.getElementById("themeButton");
 
-    if(document.body.classList.contains("dark")){
+    if(
+        document.body.classList.contains("dark")
+    ){
 
         button.textContent="☀️";
 
@@ -2526,12 +2876,6 @@ function loadTheme(){
 
         button.textContent="☀️";
 
-    }else{
-
-        document.body.classList.remove("dark");
-
-        button.textContent="🌙";
-
     }
 
 }
@@ -2545,338 +2889,6 @@ let currentLanguage =
     localStorage.getItem("snkLanguage") || "bn";
 
 
-const translations={
-
-    bn:{
-
-        brandTitle:"SNK IT Institute",
-        brandSubtitle:"Student Portal",
-        languageButton:"English",
-        loginButton:"Login",
-
-        pageTitle:"Student Portal",
-
-        pageSubtitle:
-        "আপনার student information, course এবং assignment এখানে থাকবে।",
-
-        studentStatus:"Active Student",
-
-        phoneLabel:"Phone",
-        emailLabel:"Email",
-        batchLabel:"Batch",
-        classLabel:"Class Type",
-        joinLabel:"Joining Date",
-        statusLabel:"Account Status",
-
-        courseSectionTitle:"🎓 My Course",
-
-        courseSectionSubtitle:
-        "আপনার বর্তমানে চলমান course-এর তথ্য।",
-
-        courseName:"Computer & IT Course",
-
-        courseDescription:
-        "Basic computer, office application, internet এবং practical IT learning।",
-
-        courseStatus:"Active Course",
-
-        progressLabel:"Course Progress",
-
-        durationLabel:"Duration",
-        durationValue:"6 Months",
-
-        modeLabel:"Mode",
-        modeValue:"Offline",
-
-        classDaysLabel:"Class Days",
-        classDaysValue:"As Scheduled",
-
-        teacherLabel:"Instructor",
-        teacherValue:"SNK IT Team",
-
-        assignmentSectionTitle:"📝 Assignments",
-
-        assignmentSectionSubtitle:
-        "আপনার দেওয়া assignment এবং deadline এখানে দেখা যাবে।",
-
-        assignment1Title:
-        "Assignment 01 — Basic Computer",
-
-        assignment1Course:
-        "Computer & IT Course",
-
-        assignment1Status:
-        "Pending",
-
-        assignment1Description:
-        "MS Word ব্যবহার করে একটি simple document তৈরি করুন। Document-এ আপনার নাম, ঠিকানা, শিক্ষাগত যোগ্যতা এবং একটি ছোট paragraph লিখুন।",
-
-        assignment2Title:
-        "Assignment 02 — Excel Practice",
-
-        assignment2Course:
-        "Computer & IT Course",
-
-        assignment2Status:
-        "Pending",
-
-        assignment2Description:
-        "MS Excel ব্যবহার করে একটি student marks sheet তৈরি করুন এবং Total ও Average বের করুন।",
-
-        countdownLabel1:"⏳ Time Remaining",
-        countdownLabel2:"⏳ Time Remaining",
-
-        resourceSectionTitle:"📚 Resources",
-
-        resourceSectionSubtitle:
-        "আপনার course-এর প্রয়োজনীয় learning materials এখানে থাকবে।",
-
-        resource1Title:"Computer Basics Notes",
-        resource1Description:"Basic computer-এর গুরুত্বপূর্ণ notes এবং class materials।",
-
-        resource2Title:"MS Word Practice",
-        resource2Description:"MS Word practice করার জন্য class notes এবং examples।",
-
-        resource3Title:"Computer Class Video",
-        resource3Description:"Missed class-এর জন্য recorded learning video এখানে রাখা যাবে।",
-
-        resource4Title:"Excel Practice Sheet",
-        resource4Description:"Excel assignment ও practice করার জন্য sample sheet।",
-
-        resource5Title:"Class Handbook",
-        resource5Description:"Course rules, class routine এবং important instructions।",
-
-        resource6Title:"Useful Learning Links",
-        resource6Description:"Studentদের প্রয়োজনীয় website এবং learning links।",
-
-        resourceNoticeTitle:"📌 Resource Update",
-
-        resourceNoticeText:
-        "পরবর্তী Admin system তৈরি হলে Admin এখান থেকে নতুন PDF, notes, video এবং অন্যান্য resources publish করতে পারবে। Student login করার পরে তার course অনুযায়ী resources দেখতে পারবে।",
-
-        quizSectionTitle:"🧠 Quiz",
-
-        quizSectionSubtitle:
-        "আপনার course-এর ছোট practice quiz।",
-
-        quizTitle:"Basic Computer Quiz",
-
-        quizDescription:
-        "মোট 3টি প্রশ্ন • প্রতিটি প্রশ্ন 1 নম্বর",
-
-        quizTimerLabel:"⏱️ Time Remaining",
-
-        readyText:
-        "Quiz শেষ করার জন্য প্রস্তুত?",
-
-        answeredText:
-        "সব প্রশ্নের উত্তর দেওয়ার চেষ্টা করুন।",
-
-        quizLearningText:
-        "Quiz, questions, countdown timer এবং submit option এখানে থাকবে।",
-
-        resultLearningText:
-        "Admin mark দেওয়ার পরে assignment ও quiz result এখানে দেখা যাবে।",
-
-        noticeTitle:"📢 Notice",
-
-        noticeText:
-        "Assignment, Resources ও Quiz system এখন demo mode-এ আছে। পরবর্তী ধাপে Student Login এবং Admin system-এর সঙ্গে এগুলো connect করা হবে।",
-
-        footerText:
-        "© 2026 SNK IT Institute<br>Student Learning Portal"
-
-    },
-
-
-    en:{
-
-        brandTitle:"SNK IT Institute",
-        brandSubtitle:"Student Portal",
-        languageButton:"বাংলা",
-        loginButton:"Login",
-
-        pageTitle:"Student Portal",
-
-        pageSubtitle:
-        "Your student information, course and assignments will appear here.",
-
-        studentStatus:"Active Student",
-
-        phoneLabel:"Phone",
-        emailLabel:"Email",
-        batchLabel:"Batch",
-        classLabel:"Class Type",
-        joinLabel:"Joining Date",
-        statusLabel:"Account Status",
-
-        courseSectionTitle:"🎓 My Course",
-
-        courseSectionSubtitle:
-        "Information about your current course.",
-
-        courseName:"Computer & IT Course",
-
-        courseDescription:
-        "Basic computer, office applications, internet and practical IT learning.",
-
-        courseStatus:"Active Course",
-
-        progressLabel:"Course Progress",
-
-        durationLabel:"Duration",
-        durationValue:"6 Months",
-
-        modeLabel:"Mode",
-        modeValue:"Offline",
-
-        classDaysLabel:"Class Days",
-        classDaysValue:"As Scheduled",
-
-        teacherLabel:"Instructor",
-        teacherValue:"SNK IT Team",
-
-        assignmentSectionTitle:"📝 Assignments",
-
-        assignmentSectionSubtitle:
-        "Your assignments and deadlines will appear here.",
-
-        assignment1Title:
-        "Assignment 01 — Basic Computer",
-
-        assignment1Course:
-        "Computer & IT Course",
-
-        assignment1Status:
-        "Pending",
-
-        assignment1Description:
-        "Create a simple document using MS Word. Write your name, address, educational qualification and a short paragraph.",
-
-        assignment2Title:
-        "Assignment 02 — Excel Practice",
-
-        assignment2Course:
-        "Computer & IT Course",
-
-        assignment2Status:
-        "Pending",
-
-        assignment2Description:
-        "Create a student marks sheet using MS Excel and calculate Total and Average.",
-
-        countdownLabel1:"⏳ Time Remaining",
-        countdownLabel2:"⏳ Time Remaining",
-
-        resourceSectionTitle:"📚 Resources",
-
-        resourceSectionSubtitle:
-        "Your course learning materials will be available here.",
-
-        resource1Title:"Computer Basics Notes",
-        resource1Description:"Important notes and class materials for basic computer learning.",
-
-        resource2Title:"MS Word Practice",
-        resource2Description:"Class notes and examples for MS Word practice.",
-
-        resource3Title:"Computer Class Video",
-        resource3Description:"Recorded learning videos can be placed here for missed classes.",
-
-        resource4Title:"Excel Practice Sheet",
-        resource4Description:"Sample Excel sheet for assignment and practice.",
-
-        resource5Title:"Class Handbook",
-        resource5Description:"Course rules, class routine and important instructions.",
-
-        resource6Title:"Useful Learning Links",
-        resource6Description:"Useful websites and learning links for students.",
-
-        resourceNoticeTitle:"📌 Resource Update",
-
-        resourceNoticeText:
-        "After the Admin system is created, the Admin will be able to publish new PDFs, notes, videos and other resources here. Students will see resources according to their course after login.",
-
-        quizSectionTitle:"🧠 Quiz",
-
-        quizSectionSubtitle:
-        "A short practice quiz for your course.",
-
-        quizTitle:"Basic Computer Quiz",
-
-        quizDescription:
-        "3 questions • 1 mark for each question",
-
-        quizTimerLabel:"⏱️ Time Remaining",
-
-        readyText:
-        "Ready to finish the quiz?",
-
-        answeredText:
-        "Try to answer all questions.",
-
-        quizLearningText:
-        "Quiz questions, countdown timer and submit option will be available here.",
-
-        resultLearningText:
-        "Assignment and quiz results will appear here after the admin gives marks.",
-
-        noticeTitle:"📢 Notice",
-
-        noticeText:
-        "Assignment, Resources and Quiz are currently in demo mode. Student Login and Admin integration will be added in later steps.",
-
-        footerText:
-        "© 2026 SNK IT Institute<br>Student Learning Portal"
-
-    }
-
-};
-
-
-/* =====================================================
-   APPLY LANGUAGE
-===================================================== */
-
-function applyLanguage(){
-
-    const data =
-        translations[currentLanguage];
-
-    Object.keys(data).forEach(function(id){
-
-        const element =
-            document.getElementById(id);
-
-        if(element){
-
-            if(id==="footerText"){
-
-                element.innerHTML =
-                    data[id];
-
-            }else{
-
-                element.textContent =
-                    data[id];
-
-            }
-
-        }
-
-    });
-
-    document.documentElement.lang =
-        currentLanguage;
-
-    updateQuizLanguage();
-
-}
-
-
-/* =====================================================
-   LANGUAGE TOGGLE
-===================================================== */
-
 function toggleLanguage(){
 
     currentLanguage =
@@ -2889,13 +2901,13 @@ function toggleLanguage(){
         currentLanguage
     );
 
-    applyLanguage();
+    location.reload();
 
 }
 
 
 /* =====================================================
-   LOGIN PLACEHOLDER
+   LOGIN
 ===================================================== */
 
 function showLoginMessage(){
@@ -2935,7 +2947,7 @@ const assignmentDeadlines={
 ===================================================== */
 
 function updateCountdown(
-    assignmentNumber,
+    number,
     deadline
 ){
 
@@ -2945,26 +2957,18 @@ function updateCountdown(
     const distance =
         deadline-now;
 
-    const countdownElement =
+    const element =
         document.getElementById(
-            "countdown"+assignmentNumber
+            "countdown"+number
         );
 
-    const button =
-        document.getElementById(
-            "submitButton"+assignmentNumber
-        );
 
     if(distance<=0){
 
-        countdownElement.textContent =
+        element.textContent=
             currentLanguage==="bn"
             ? "Deadline শেষ"
             : "Deadline ended";
-
-        button.disabled=true;
-
-        button.style.opacity="0.5";
 
         return;
 
@@ -2999,7 +3003,7 @@ function updateCountdown(
         );
 
 
-    countdownElement.textContent =
+    element.textContent=
         days+"d "+
         hours+"h "+
         minutes+"m "+
@@ -3028,24 +3032,20 @@ setInterval(function(){
    ASSIGNMENT SUBMIT
 ===================================================== */
 
-function submitAssignment(
-    assignmentNumber
-){
+function submitAssignment(number){
 
-    const alreadySubmitted =
+    if(
         localStorage.getItem(
-            "snkAssignment"+
-            assignmentNumber
-        );
-
-    if(alreadySubmitted==="submitted"){
+            "snkAssignment"+number
+        )==="submitted"
+    ){
 
         return;
 
     }
 
 
-    const confirmed =
+    const confirmed=
         confirm(
 
             currentLanguage==="bn"
@@ -3065,14 +3065,13 @@ function submitAssignment(
 
 
     localStorage.setItem(
-        "snkAssignment"+
-        assignmentNumber,
+        "snkAssignment"+number,
         "submitted"
     );
 
 
     markAssignmentSubmitted(
-        assignmentNumber
+        number
     );
 
 
@@ -3093,27 +3092,21 @@ function submitAssignment(
    MARK ASSIGNMENT SUBMITTED
 ===================================================== */
 
-function markAssignmentSubmitted(
-    assignmentNumber
-){
+function markAssignmentSubmitted(number){
 
     const button =
         document.getElementById(
-            "submitButton"+
-            assignmentNumber
+            "submitButton"+number
         );
 
     const submission =
         document.getElementById(
-            "submission"+
-            assignmentNumber
+            "submission"+number
         );
 
     const status =
         document.getElementById(
-            "assignment"+
-            assignmentNumber+
-            "Status"
+            "assignment"+number+"Status"
         );
 
 
@@ -3123,7 +3116,7 @@ function markAssignmentSubmitted(
             "submitted"
         );
 
-        button.textContent =
+        button.textContent=
             "✅ Submitted";
 
     }
@@ -3131,7 +3124,7 @@ function markAssignmentSubmitted(
 
     if(submission){
 
-        submission.textContent =
+        submission.textContent=
             "Submitted";
 
     }
@@ -3139,7 +3132,7 @@ function markAssignmentSubmitted(
 
     if(status){
 
-        status.textContent =
+        status.textContent=
             "Submitted";
 
     }
@@ -3148,19 +3141,18 @@ function markAssignmentSubmitted(
 
 
 /* =====================================================
-   LOAD ASSIGNMENT STATUS
+   LOAD SUBMISSIONS
 ===================================================== */
 
 function loadSubmissionStatus(){
 
     [1,2].forEach(function(number){
 
-        const status =
+        if(
             localStorage.getItem(
                 "snkAssignment"+number
-            );
-
-        if(status==="submitted"){
+            )==="submitted"
+        ){
 
             markAssignmentSubmitted(
                 number
@@ -3174,38 +3166,38 @@ function loadSubmissionStatus(){
 
 
 /* =====================================================
-   RESOURCE ACTIONS
+   RESOURCES
 ===================================================== */
 
-function openResource(resourceName){
+function openResource(name){
 
     alert(
 
         currentLanguage==="bn"
 
-        ? resourceName+
-          " এখন demo resource। পরে Admin এখান থেকে আসল PDF/Video/Link যুক্ত করতে পারবে।"
+        ? name+
+          " এখন demo resource। পরবর্তী Admin system-এ আসল file/link যুক্ত হবে।"
 
-        : resourceName+
-          " is currently a demo resource. The Admin will later connect the real PDF/Video/Link."
+        : name+
+          " is a demo resource. The real file/link will be connected later."
 
     );
 
 }
 
 
-function downloadResource(resourceName){
+function downloadResource(name){
 
     alert(
 
         currentLanguage==="bn"
 
-        ? resourceName+
-          " download link এখনো যুক্ত করা হয়নি। পরবর্তী Admin system-এ আসল file যুক্ত করা হবে।"
+        ? name+
+          " এর download link এখনো যুক্ত হয়নি।"
 
         : "The download link for "+
-          resourceName+
-          " has not been connected yet. The real file will be added through the Admin system later."
+          name+
+          " has not been connected yet."
 
     );
 
@@ -3220,7 +3212,7 @@ function resourceInfo(){
 
         ? "এই resource-এর বিস্তারিত তথ্য পরবর্তী ধাপে Admin system থেকে আসবে।"
 
-        : "Detailed information for this resource will come from the Admin system in a later step."
+        : "Detailed resource information will be added through the Admin system later."
 
     );
 
@@ -3235,20 +3227,10 @@ const quizQuestions=[
 
     {
 
-        bnQuestion:
+        question:
         "Computer-এর brain বলা হয় কোন অংশকে?",
 
-        enQuestion:
-        "Which part is called the brain of a computer?",
-
-        bnOptions:[
-            "Monitor",
-            "CPU",
-            "Keyboard",
-            "Mouse"
-        ],
-
-        enOptions:[
+        options:[
             "Monitor",
             "CPU",
             "Keyboard",
@@ -3262,21 +3244,11 @@ const quizQuestions=[
 
     {
 
-        bnQuestion:
+        question:
         "MS Word মূলত কোন কাজের জন্য ব্যবহৃত হয়?",
 
-        enQuestion:
-        "What is MS Word mainly used for?",
-
-        bnOptions:[
+        options:[
             "Document তৈরি",
-            "Video Editing",
-            "Gaming",
-            "Internet Connection"
-        ],
-
-        enOptions:[
-            "Creating documents",
             "Video Editing",
             "Gaming",
             "Internet Connection"
@@ -3289,20 +3261,10 @@ const quizQuestions=[
 
     {
 
-        bnQuestion:
+        question:
         "Keyboard-এর কোন key দিয়ে নতুন line শুরু করা হয়?",
 
-        enQuestion:
-        "Which keyboard key is used to start a new line?",
-
-        bnOptions:[
-            "Shift",
-            "Ctrl",
-            "Enter",
-            "Alt"
-        ],
-
-        enOptions:[
+        options:[
             "Shift",
             "Ctrl",
             "Enter",
@@ -3315,10 +3277,6 @@ const quizQuestions=[
 
 ];
 
-
-/* =====================================================
-   QUIZ VARIABLES
-===================================================== */
 
 let currentQuestion=0;
 
@@ -3335,7 +3293,7 @@ let quizFinished=false;
 
 
 /* =====================================================
-   RENDER QUESTION
+   RENDER QUIZ
 ===================================================== */
 
 function renderQuestion(){
@@ -3347,111 +3305,98 @@ function renderQuestion(){
     }
 
 
-    const question =
+    const question=
         quizQuestions[currentQuestion];
-
-
-    const questionText =
-        currentLanguage==="bn"
-        ? question.bnQuestion
-        : question.enQuestion;
-
-
-    const options =
-        currentLanguage==="bn"
-        ? question.bnOptions
-        : question.enOptions;
 
 
     document.getElementById(
         "questionNumber"
-    ).textContent =
-        currentLanguage==="bn"
-
-        ? "প্রশ্ন "+String(currentQuestion+1).padStart(2,"0")
-
-        : "Question "+
-          String(currentQuestion+1).padStart(2,"0");
+    ).textContent=
+        "Question "+
+        String(currentQuestion+1)
+        .padStart(2,"0");
 
 
     document.getElementById(
         "questionText"
-    ).textContent =
-        questionText;
+    ).textContent=
+        question.question;
 
 
-    const optionsContainer =
+    const container=
         document.getElementById(
             "optionsContainer"
         );
 
 
-    optionsContainer.innerHTML="";
+    container.innerHTML="";
 
 
-    options.forEach(function(option,index){
+    question.options.forEach(
+        function(option,index){
 
-        const wrapper =
-            document.createElement("div");
+            const wrapper=
+                document.createElement("div");
 
-        wrapper.className="option";
-
-
-        const input =
-            document.createElement("input");
-
-        input.type="radio";
-
-        input.name="quizOption";
-
-        input.id=
-            "option"+
-            currentQuestion+
-            "_"+
-            index;
-
-        input.value=index;
+            wrapper.className="option";
 
 
-        if(
-            quizAnswers[currentQuestion]===
-            index
-        ){
+            const input=
+                document.createElement("input");
 
-            input.checked=true;
+            input.type="radio";
 
-        }
+            input.name="quizOption";
+
+            input.id=
+                "option"+
+                currentQuestion+
+                "_"+
+                index;
+
+            input.value=index;
 
 
-        input.addEventListener(
-            "change",
-            function(){
+            if(
+                quizAnswers[currentQuestion]===
+                index
+            ){
 
-                quizAnswers[
-                    currentQuestion
-                ]=index;
+                input.checked=true;
 
             }
-        );
 
 
-        const label =
-            document.createElement("label");
+            input.addEventListener(
+                "change",
+                function(){
 
-        label.htmlFor=
-            input.id;
+                    quizAnswers[
+                        currentQuestion
+                    ]=index;
 
-        label.textContent=
-            option;
+                }
+            );
 
 
-        wrapper.appendChild(input);
+            const label=
+                document.createElement("label");
 
-        wrapper.appendChild(label);
+            label.htmlFor=
+                input.id;
 
-        optionsContainer.appendChild(wrapper);
+            label.textContent=
+                option;
 
-    });
+
+            wrapper.appendChild(input);
+
+            wrapper.appendChild(label);
+
+            container.appendChild(wrapper);
+
+        }
+    );
 
 
     updateQuizProgress();
@@ -3467,13 +3412,13 @@ function renderQuestion(){
 
 function updateQuizProgress(){
 
-    const total =
-        quizQuestions.length;
-
-    const current =
+    const current=
         currentQuestion+1;
 
-    const percent =
+    const total=
+        quizQuestions.length;
+
+    const percent=
         Math.round(
             (current/total)*100
         );
@@ -3482,16 +3427,10 @@ function updateQuizProgress(){
     document.getElementById(
         "questionProgress"
     ).textContent=
-
-        currentLanguage==="bn"
-
-        ? "প্রশ্ন "+current+
-          " / "+total
-
-        : "Question "+
-          current+
-          " of "+
-          total;
+        "Question "+
+        current+
+        " of "+
+        total;
 
 
     document.getElementById(
@@ -3514,29 +3453,29 @@ function updateQuizProgress(){
 
 function updateQuizButtons(){
 
-    const previous =
+    const previous=
         document.getElementById(
             "previousButton"
         );
 
-    const next =
+    const next=
         document.getElementById(
             "nextButton"
         );
 
-    const submitArea =
+    const submitArea=
         document.getElementById(
             "quizSubmitArea"
         );
 
 
-    previous.disabled =
+    previous.disabled=
         currentQuestion===0;
 
 
-    previous.style.opacity =
+    previous.style.opacity=
         currentQuestion===0
-        ? "0.5"
+        ? ".5"
         : "1";
 
 
@@ -3555,10 +3494,7 @@ function updateQuizButtons(){
 
         next.style.display="block";
 
-        next.textContent =
-            currentLanguage==="bn"
-            ? "পরের প্রশ্ন →"
-            : "Next →";
+        next.textContent="Next →";
 
         submitArea.classList.remove(
             "show"
@@ -3570,7 +3506,7 @@ function updateQuizButtons(){
 
 
 /* =====================================================
-   NEXT QUESTION
+   NEXT
 ===================================================== */
 
 function nextQuestion(){
@@ -3590,7 +3526,7 @@ function nextQuestion(){
 
 
 /* =====================================================
-   PREVIOUS QUESTION
+   PREVIOUS
 ===================================================== */
 
 function previousQuestion(){
@@ -3610,12 +3546,31 @@ function previousQuestion(){
    QUIZ TIMER
 ===================================================== */
 
+function updateQuizTimer(){
+
+    const minutes=
+        Math.floor(
+            quizTime/60
+        );
+
+    const seconds=
+        quizTime%60;
+
+
+    document.getElementById(
+        "quizTimer"
+    ).textContent=
+
+        String(minutes)
+        .padStart(2,"0")
+        +":"+
+        String(seconds)
+        .padStart(2,"0");
+
+}
+
+
 function startQuizTimer(){
-
-    clearInterval(
-        quizTimerInterval
-    );
-
 
     updateQuizTimer();
 
@@ -3655,47 +3610,10 @@ function startQuizTimer(){
 
 
 /* =====================================================
-   UPDATE QUIZ TIMER
-===================================================== */
-
-function updateQuizTimer(){
-
-    let minutes =
-        Math.floor(
-            quizTime/60
-        );
-
-    let seconds =
-        quizTime%60;
-
-
-    const formattedMinutes =
-        String(minutes)
-        .padStart(2,"0");
-
-    const formattedSeconds =
-        String(seconds)
-        .padStart(2,"0");
-
-
-    document.getElementById(
-        "quizTimer"
-    ).textContent=
-
-        formattedMinutes+
-        ":"+
-        formattedSeconds;
-
-}
-
-
-/* =====================================================
    SUBMIT QUIZ
 ===================================================== */
 
-function submitQuiz(
-    autoSubmit
-){
+function submitQuiz(autoSubmit){
 
     if(quizFinished){
 
@@ -3706,31 +3624,28 @@ function submitQuiz(
 
     if(!autoSubmit){
 
-        const answered =
+        const answered=
             quizAnswers.filter(
                 function(answer){
+
                     return answer!==null;
+
                 }
             ).length;
 
 
-        if(answered<
-           quizQuestions.length
+        if(
+            answered<
+            quizQuestions.length
         ){
 
-            const continueSubmit=
+            const confirmSubmit=
                 confirm(
-
-                    currentLanguage==="bn"
-
-                    ? "কিছু প্রশ্নের উত্তর দেওয়া হয়নি। তবুও submit করবেন?"
-
-                    : "Some questions are unanswered. Submit anyway?"
-
+                    "Some questions are unanswered. Submit anyway?"
                 );
 
 
-            if(!continueSubmit){
+            if(!confirmSubmit){
 
                 return;
 
@@ -3798,68 +3713,221 @@ function submitQuiz(
     document.getElementById(
         "resultScore"
     ).textContent=
-        score+
-        " / "+
-        quizQuestions.length;
+        score+" / 3";
 
 
-    document.getElementById(
-        "resultMessage"
-    ).textContent=
-
-        autoSubmit
-
-        ? (
-            currentLanguage==="bn"
-            ? "সময় শেষ হওয়ায় Quiz automatically submit হয়েছে।"
-            : "The quiz was automatically submitted because time ended."
-        )
-
-        : (
-            currentLanguage==="bn"
-            ? "আপনার demo quiz result এখানে দেখানো হয়েছে।"
-            : "Your demo quiz result is shown here."
-        );
+    updateResultSystem();
 
 }
 
 
 /* =====================================================
-   QUIZ LANGUAGE
+   RESULT SYSTEM
 ===================================================== */
 
-function updateQuizLanguage(){
+function updateResultSystem(){
 
-    if(quizFinished){
+    const quizSubmitted=
+        localStorage.getItem(
+            "snkQuizSubmitted"
+        )==="yes";
 
-        return;
+
+    const quizScore=
+        Number(
+            localStorage.getItem(
+                "snkQuizScore"
+            ) || 0
+        );
+
+
+    if(quizSubmitted){
+
+        document.getElementById(
+            "quizMark"
+        ).textContent=
+            quizScore;
+
+
+        const quizStatus=
+            document.getElementById(
+                "quizResultStatus"
+            );
+
+        quizStatus.textContent=
+            "Completed";
+
+        quizStatus.style.background=
+            "#e7f6ec";
+
+        quizStatus.style.color=
+            "#18794e";
 
     }
 
 
-    const data=
-        translations[currentLanguage];
+    /*
+       এখন Assignment mark Admin থেকে আসবে।
+       তাই Demo অবস্থায় Assignment marks 0 ধরা হচ্ছে না।
+    */
 
 
     document.getElementById(
-        "quizTimerLabel"
+        "totalMarks"
     ).textContent=
-        data.quizTimerLabel;
+        "53";
 
 
     document.getElementById(
-        "readyText"
+        "obtainedMarks"
     ).textContent=
-        data.readyText;
+        "—";
 
 
     document.getElementById(
-        "answeredText"
+        "percentage"
     ).textContent=
-        data.answeredText;
+        "—";
 
 
-    renderQuestion();
+    document.getElementById(
+        "grade"
+    ).textContent=
+        "—";
+
+
+    document.getElementById(
+        "bigGrade"
+    ).textContent=
+        "—";
+
+
+    document.getElementById(
+        "gradeStatus"
+    ).textContent=
+        currentLanguage==="bn"
+        ? "Admin mark অপেক্ষমাণ"
+        : "Waiting for admin marks";
+
+
+    document.getElementById(
+        "resultStatus"
+    ).textContent=
+        "—";
+
+
+    document.getElementById(
+        "resultStatusText"
+    ).textContent=
+        currentLanguage==="bn"
+        ? "সব mark প্রয়োজন"
+        : "All marks required";
+
+}
+
+
+/* =====================================================
+   FUTURE ADMIN MARK FUNCTION
+===================================================== */
+
+function calculateFinalResult(
+    assignment1,
+    assignment2,
+    quiz
+){
+
+    const total=
+        20+
+        30+
+        3;
+
+
+    const obtained=
+        Number(assignment1)+
+        Number(assignment2)+
+        Number(quiz);
+
+
+    const percentage=
+        (obtained/total)*100;
+
+
+    let grade="F";
+
+
+    if(percentage>=80){
+
+        grade="A+";
+
+    }else if(percentage>=70){
+
+        grade="A";
+
+    }else if(percentage>=60){
+
+        grade="A-";
+
+    }else if(percentage>=50){
+
+        grade="B";
+
+    }else if(percentage>=40){
+
+        grade="C";
+
+    }else if(percentage>=33){
+
+        grade="D";
+
+    }
+
+
+    document.getElementById(
+        "obtainedMarks"
+    ).textContent=
+        obtained;
+
+
+    document.getElementById(
+        "percentage"
+    ).textContent=
+        percentage.toFixed(1)+"%";
+
+
+    document.getElementById(
+        "grade"
+    ).textContent=
+        grade;
+
+
+    document.getElementById(
+        "bigGrade"
+    ).textContent=
+        grade;
+
+
+    document.getElementById(
+        "resultStatus"
+    ).textContent=
+        percentage>=33
+        ? "PASS"
+        : "FAIL";
+
+
+    document.getElementById(
+        "resultStatusText"
+    ).textContent=
+        percentage>=33
+        ? "Congratulations!"
+        : "Need Improvement";
+
+
+    document.getElementById(
+        "gradeStatus"
+    ).textContent=
+        percentage>=33
+        ? "Result completed"
+        : "Result completed";
 
 }
 
@@ -3873,8 +3941,6 @@ document.addEventListener(
     function(){
 
         loadTheme();
-
-        applyLanguage();
 
         loadSubmissionStatus();
 
@@ -3893,6 +3959,8 @@ document.addEventListener(
         renderQuestion();
 
         startQuizTimer();
+
+        updateResultSystem();
 
     }
 );
