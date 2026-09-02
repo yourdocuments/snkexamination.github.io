@@ -12,9 +12,9 @@
 
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
+/* =========================================================
+   1. RESET
+========================================================= */
 
 *{
     margin:0;
@@ -39,10 +39,14 @@ body.dark{
     color:#f1f5f9;
 }
 
+button{
+    font-family:inherit;
+}
 
-/* =====================================================
-   HEADER
-===================================================== */
+
+/* =========================================================
+   2. HEADER
+========================================================= */
 
 .header{
     width:100%;
@@ -125,7 +129,6 @@ body.dark .brand-text p{
     padding:9px 13px;
     border-radius:9px;
     cursor:pointer;
-    font-family:inherit;
     font-size:13px;
     transition:.2s ease;
 }
@@ -148,20 +151,15 @@ body.dark .header-btn{
 }
 
 
-/* =====================================================
-   MAIN
-===================================================== */
+/* =========================================================
+   3. MAIN
+========================================================= */
 
 .main{
     max-width:1200px;
     margin:auto;
     padding:30px 20px 60px;
 }
-
-
-/* =====================================================
-   PAGE TITLE
-===================================================== */
 
 .page-title{
     margin-bottom:22px;
@@ -183,17 +181,20 @@ body.dark .page-title p{
 }
 
 
-/* =====================================================
-   COMMON CARD
-===================================================== */
+/* =========================================================
+   4. COMMON CARDS
+========================================================= */
 
 .profile-card,
 .course-card,
 .assignment-card,
 .quiz-card,
+.resource-card,
 .resource-notice,
-.notice,
-.result-card{
+.result-card,
+.notice-card,
+.routine-card,
+.attendance-card{
     background:#fff;
     border:1px solid #e7eaf0;
 }
@@ -202,17 +203,20 @@ body.dark .profile-card,
 body.dark .course-card,
 body.dark .assignment-card,
 body.dark .quiz-card,
+body.dark .resource-card,
 body.dark .resource-notice,
-body.dark .notice,
-body.dark .result-card{
+body.dark .result-card,
+body.dark .notice-card,
+body.dark .routine-card,
+body.dark .attendance-card{
     background:#111827;
     border-color:#273244;
 }
 
 
-/* =====================================================
-   PROFILE
-===================================================== */
+/* =========================================================
+   5. PROFILE
+========================================================= */
 
 .profile-card{
     border-radius:20px;
@@ -302,9 +306,9 @@ body.dark .info-box span{
 }
 
 
-/* =====================================================
-   SECTION TITLE
-===================================================== */
+/* =========================================================
+   6. SECTION TITLE
+========================================================= */
 
 .section-title{
     margin:28px 0 15px;
@@ -326,9 +330,355 @@ body.dark .section-title p{
 }
 
 
-/* =====================================================
-   COURSE
-===================================================== */
+/* =========================================================
+   7. NOTICE BOARD — NEW 1.11
+========================================================= */
+
+.notice-list{
+    display:grid;
+    gap:14px;
+}
+
+.notice-card{
+    border-radius:17px;
+    padding:20px;
+}
+
+.notice-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.notice-left{
+    display:flex;
+    align-items:flex-start;
+    gap:13px;
+}
+
+.notice-icon{
+    width:46px;
+    height:46px;
+    border-radius:11px;
+    background:#f2f4f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    flex-shrink:0;
+}
+
+body.dark .notice-icon{
+    background:#1e293b;
+}
+
+.notice-card h4{
+    font-size:15px;
+    margin-bottom:4px;
+}
+
+.notice-card p{
+    color:#667085;
+    font-size:11px;
+    line-height:1.8;
+}
+
+body.dark .notice-card p{
+    color:#94a3b8;
+}
+
+.notice-date{
+    padding:6px 9px;
+    border-radius:7px;
+    background:#f8fafc;
+    color:#667085;
+    font-size:9px;
+    white-space:nowrap;
+}
+
+body.dark .notice-date{
+    background:#172033;
+    color:#94a3b8;
+}
+
+.notice-details{
+    margin-top:14px;
+    padding-top:13px;
+    border-top:1px solid #eef0f3;
+    color:#475467;
+    font-size:10px;
+    line-height:1.8;
+}
+
+body.dark .notice-details{
+    border-color:#273244;
+    color:#cbd5e1;
+}
+
+.notice-important{
+    border-left:3px solid #172033;
+}
+
+body.dark .notice-important{
+    border-left-color:#fff;
+}
+
+
+/* =========================================================
+   8. CLASS ROUTINE — NEW 1.11
+========================================================= */
+
+.routine-card{
+    border-radius:18px;
+    padding:22px;
+    overflow:hidden;
+}
+
+.routine-header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.routine-header h4{
+    font-size:17px;
+}
+
+.routine-header p{
+    color:#667085;
+    font-size:10px;
+    margin-top:4px;
+}
+
+body.dark .routine-header p{
+    color:#94a3b8;
+}
+
+.routine-badge{
+    padding:6px 10px;
+    border-radius:8px;
+    background:#f2f4f7;
+    font-size:9px;
+    font-weight:700;
+}
+
+body.dark .routine-badge{
+    background:#1e293b;
+}
+
+.routine-table-wrapper{
+    overflow-x:auto;
+}
+
+.routine-table{
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
+}
+
+.routine-table th{
+    text-align:left;
+    padding:13px;
+    background:#f8fafc;
+    color:#667085;
+    font-size:10px;
+}
+
+body.dark .routine-table th{
+    background:#172033;
+    color:#94a3b8;
+}
+
+.routine-table td{
+    padding:14px 13px;
+    border-bottom:1px solid #eef0f3;
+    font-size:11px;
+}
+
+body.dark .routine-table td{
+    border-color:#273244;
+}
+
+.routine-day{
+    font-weight:800;
+}
+
+.routine-time{
+    font-weight:700;
+}
+
+.routine-subject{
+    font-weight:700;
+}
+
+.class-type{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:7px;
+    background:#f2f4f7;
+    font-size:9px;
+    font-weight:700;
+}
+
+body.dark .class-type{
+    background:#273244;
+}
+
+
+/* =========================================================
+   9. ATTENDANCE — NEW 1.11
+========================================================= */
+
+.attendance-card{
+    border-radius:20px;
+    padding:24px;
+}
+
+.attendance-summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+}
+
+.attendance-box{
+    background:#f8fafc;
+    border-radius:13px;
+    padding:17px;
+}
+
+body.dark .attendance-box{
+    background:#172033;
+}
+
+.attendance-box span{
+    display:block;
+    color:#667085;
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+body.dark .attendance-box span{
+    color:#94a3b8;
+}
+
+.attendance-box strong{
+    font-size:21px;
+}
+
+.attendance-progress{
+    margin-top:20px;
+}
+
+.attendance-progress-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:10px;
+}
+
+.attendance-bar{
+    width:100%;
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+body.dark .attendance-bar{
+    background:#273244;
+}
+
+.attendance-fill{
+    width:92%;
+    height:100%;
+    background:#111827;
+    border-radius:20px;
+}
+
+body.dark .attendance-fill{
+    background:#fff;
+}
+
+.attendance-message{
+    margin-top:16px;
+    padding:14px;
+    background:#f8fafc;
+    border-radius:11px;
+    color:#475467;
+    font-size:10px;
+    line-height:1.7;
+}
+
+body.dark .attendance-message{
+    background:#172033;
+    color:#cbd5e1;
+}
+
+.attendance-history{
+    margin-top:20px;
+    overflow-x:auto;
+}
+
+.attendance-history table{
+    width:100%;
+    min-width:600px;
+    border-collapse:collapse;
+}
+
+.attendance-history th{
+    text-align:left;
+    padding:12px;
+    background:#f8fafc;
+    font-size:10px;
+    color:#667085;
+}
+
+body.dark .attendance-history th{
+    background:#172033;
+    color:#94a3b8;
+}
+
+.attendance-history td{
+    padding:13px 12px;
+    border-bottom:1px solid #eef0f3;
+    font-size:10px;
+}
+
+body.dark .attendance-history td{
+    border-color:#273244;
+}
+
+.present{
+    color:#18794e;
+    font-weight:800;
+}
+
+.absent{
+    color:#b42318;
+    font-weight:800;
+}
+
+.attendance-demo{
+    margin-top:16px;
+    padding:13px;
+    background:#f8fafc;
+    border-radius:10px;
+    color:#667085;
+    font-size:9px;
+}
+
+body.dark .attendance-demo{
+    background:#172033;
+    color:#94a3b8;
+}
+
+
+/* =========================================================
+   10. COURSE
+========================================================= */
 
 .course-card{
     border-radius:18px;
@@ -436,9 +786,9 @@ body.dark .course-detail span{
 }
 
 
-/* =====================================================
-   ASSIGNMENT
-===================================================== */
+/* =========================================================
+   11. ASSIGNMENT
+========================================================= */
 
 .assignment-card{
     border-radius:18px;
@@ -596,7 +946,6 @@ body.dark .submit-info{
     padding:10px 18px;
     border-radius:9px;
     cursor:pointer;
-    font-family:inherit;
     font-size:12px;
     font-weight:700;
 }
@@ -613,9 +962,9 @@ body.dark .submit-btn{
 }
 
 
-/* =====================================================
-   RESOURCES
-===================================================== */
+/* =========================================================
+   12. RESOURCES
+========================================================= */
 
 .resources-wrapper{
     display:grid;
@@ -625,15 +974,8 @@ body.dark .submit-btn{
 }
 
 .resource-card{
-    background:#fff;
-    border:1px solid #e7eaf0;
     border-radius:17px;
     padding:20px;
-}
-
-body.dark .resource-card{
-    background:#111827;
-    border-color:#273244;
 }
 
 .resource-icon{
@@ -698,7 +1040,6 @@ body.dark .resource-info{
     padding:9px 10px;
     border-radius:8px;
     cursor:pointer;
-    font-family:inherit;
     font-size:10px;
     font-weight:700;
     text-align:center;
@@ -744,9 +1085,9 @@ body.dark .resource-notice p{
 }
 
 
-/* =====================================================
-   QUIZ
-===================================================== */
+/* =========================================================
+   13. QUIZ
+========================================================= */
 
 .quiz-card{
     border-radius:18px;
@@ -924,7 +1265,6 @@ body.dark .option input:checked + label{
     padding:10px 17px;
     border-radius:9px;
     cursor:pointer;
-    font-family:inherit;
     font-size:11px;
     font-weight:700;
 }
@@ -971,7 +1311,6 @@ body.dark .quiz-submit-area{
     padding:11px 20px;
     border-radius:9px;
     cursor:pointer;
-    font-family:inherit;
     font-size:11px;
     font-weight:700;
 }
@@ -980,11 +1319,6 @@ body.dark .quiz-submit{
     background:#fff;
     color:#111827;
 }
-
-
-/* =====================================================
-   QUIZ RESULT
-===================================================== */
 
 .quiz-result{
     display:none;
@@ -1029,9 +1363,9 @@ body.dark .quiz-result p{
 }
 
 
-/* =====================================================
-   RESULT SYSTEM
-===================================================== */
+/* =========================================================
+   14. RESULT
+========================================================= */
 
 .result-card{
     border-radius:20px;
@@ -1172,9 +1506,9 @@ body.dark .grade-panel span{
 }
 
 
-/* =====================================================
-   LEARNING CENTER
-===================================================== */
+/* =========================================================
+   15. LEARNING CENTER
+========================================================= */
 
 .learning-grid{
     display:grid;
@@ -1227,38 +1561,9 @@ body.dark .learning-card p{
 }
 
 
-/* =====================================================
-   NOTICE
-===================================================== */
-
-.notice{
-    border-radius:16px;
-    padding:20px;
-}
-
-.notice h3{
-    font-size:17px;
-    margin-bottom:10px;
-}
-
-.notice-box{
-    background:#f8fafc;
-    border-radius:11px;
-    padding:14px;
-    color:#475467;
-    font-size:11px;
-    line-height:1.8;
-}
-
-body.dark .notice-box{
-    background:#172033;
-    color:#cbd5e1;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
+/* =========================================================
+   16. FOOTER
+========================================================= */
 
 .footer{
     text-align:center;
@@ -1276,9 +1581,9 @@ body.dark .footer{
 }
 
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/* =========================================================
+   17. RESPONSIVE
+========================================================= */
 
 @media(max-width:950px){
 
@@ -1299,6 +1604,10 @@ body.dark .footer{
     }
 
     .result-summary{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .attendance-summary{
         grid-template-columns:repeat(2,1fr);
     }
 
@@ -1345,7 +1654,10 @@ body.dark .footer{
     .course-card,
     .assignment-card,
     .quiz-card,
-    .result-card{
+    .result-card,
+    .attendance-card,
+    .routine-card,
+    .notice-card{
         padding:18px;
     }
 
@@ -1365,6 +1677,22 @@ body.dark .footer{
 
     .info-grid{
         grid-template-columns:1fr;
+    }
+
+    .notice-top{
+        flex-direction:column;
+    }
+
+    .notice-date{
+        align-self:flex-start;
+    }
+
+    .routine-header{
+        flex-direction:column;
+    }
+
+    .attendance-summary{
+        grid-template-columns:1fr 1fr;
     }
 
     .course-top{
@@ -1447,9 +1775,9 @@ body.dark .footer{
 <body>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-===================================================== -->
+========================================================= -->
 
 <header class="header">
 
@@ -1468,11 +1796,11 @@ body.dark .footer{
 
             <div class="brand-text">
 
-                <h1 id="brandTitle">
+                <h1>
                     SNK IT Institute
                 </h1>
 
-                <p id="brandSubtitle">
+                <p>
                     Student Portal
                 </p>
 
@@ -1493,15 +1821,14 @@ body.dark .footer{
 
             <button
                 class="header-btn"
-                id="languageButton"
                 onclick="toggleLanguage()"
+                id="languageButton"
             >
                 English
             </button>
 
             <button
                 class="header-btn"
-                id="loginButton"
                 onclick="showLoginMessage()"
             >
                 Login
@@ -1515,9 +1842,9 @@ body.dark .footer{
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      MAIN
-===================================================== -->
+========================================================= -->
 
 <main class="main">
 
@@ -1526,21 +1853,22 @@ body.dark .footer{
 
     <section class="page-title">
 
-        <h2 id="pageTitle">
+        <h2>
             Student Portal
         </h2>
 
-        <p id="pageSubtitle">
-            আপনার student information, course এবং assignment এখানে থাকবে।
+        <p>
+            আপনার course, notice, routine, attendance,
+            assignment, resources, quiz এবং result এক জায়গায়।
         </p>
 
     </section>
 
 
 
-    <!-- =================================================
+    <!-- =====================================================
          PROFILE
-    ================================================== -->
+    ====================================================== -->
 
     <section class="profile-card">
 
@@ -1552,15 +1880,15 @@ body.dark .footer{
 
             <div>
 
-                <h3 id="studentName">
+                <h3>
                     Student Name
                 </h3>
 
-                <p id="studentId">
+                <p>
                     Student ID: SNK-0001
                 </p>
 
-                <span class="student-badge" id="studentStatus">
+                <span class="student-badge">
                     Active Student
                 </span>
 
@@ -1572,33 +1900,80 @@ body.dark .footer{
         <div class="info-grid">
 
             <div class="info-box">
-                <span id="phoneLabel">Phone</span>
-                <strong id="phoneValue">01XXXXXXXXX</strong>
+
+                <span>
+                    Phone
+                </span>
+
+                <strong>
+                    01XXXXXXXXX
+                </strong>
+
             </div>
 
-            <div class="info-box">
-                <span id="emailLabel">Email</span>
-                <strong id="emailValue">student@example.com</strong>
-            </div>
 
             <div class="info-box">
-                <span id="batchLabel">Batch</span>
-                <strong id="batchValue">2026</strong>
+
+                <span>
+                    Email
+                </span>
+
+                <strong>
+                    student@example.com
+                </strong>
+
             </div>
 
-            <div class="info-box">
-                <span id="classLabel">Class Type</span>
-                <strong id="classValue">Offline</strong>
-            </div>
 
             <div class="info-box">
-                <span id="joinLabel">Joining Date</span>
-                <strong id="joinValue">Coming Soon</strong>
+
+                <span>
+                    Batch
+                </span>
+
+                <strong>
+                    2026
+                </strong>
+
             </div>
 
+
             <div class="info-box">
-                <span id="statusLabel">Account Status</span>
-                <strong id="statusValue">Active</strong>
+
+                <span>
+                    Class Type
+                </span>
+
+                <strong>
+                    Offline
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>
+                    Joining Date
+                </span>
+
+                <strong>
+                    Coming Soon
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>
+                    Account Status
+                </span>
+
+                <strong>
+                    Active
+                </strong>
+
             </div>
 
         </div>
@@ -1607,17 +1982,610 @@ body.dark .footer{
 
 
 
-    <!-- =================================================
-         COURSE
-    ================================================== -->
+    <!-- =====================================================
+         1.11 NOTICE BOARD
+    ====================================================== -->
 
     <div class="section-title">
 
-        <h3 id="courseSectionTitle">
+        <h3>
+            📢 Notice Board
+        </h3>
+
+        <p>
+            Institute-এর গুরুত্বপূর্ণ notice এখানে থাকবে।
+        </p>
+
+    </div>
+
+
+    <section class="notice-list">
+
+
+        <article class="notice-card notice-important">
+
+            <div class="notice-top">
+
+                <div class="notice-left">
+
+                    <div class="notice-icon">
+                        📢
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Assignment Submission Notice
+                        </h4>
+
+                        <p>
+                            সকল student-কে deadline-এর মধ্যে
+                            assignment submit করতে বলা হচ্ছে।
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="notice-date">
+                    02 Sep 2026
+                </span>
+
+            </div>
+
+
+            <div class="notice-details">
+
+                Assignment 01-এর deadline:
+                <strong>10 September 2026</strong>।
+                দেরিতে submission করলে Admin approval প্রয়োজন হতে পারে।
+
+            </div>
+
+        </article>
+
+
+
+        <article class="notice-card">
+
+            <div class="notice-top">
+
+                <div class="notice-left">
+
+                    <div class="notice-icon">
+                        🏫
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Offline Class Notice
+                        </h4>
+
+                        <p>
+                            পরবর্তী offline class routine অনুযায়ী অনুষ্ঠিত হবে।
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="notice-date">
+                    01 Sep 2026
+                </span>
+
+            </div>
+
+
+            <div class="notice-details">
+
+                Studentদের class শুরুর কমপক্ষে 10 মিনিট আগে
+                institute-এ উপস্থিত থাকার অনুরোধ করা হচ্ছে।
+
+            </div>
+
+        </article>
+
+
+
+        <article class="notice-card">
+
+            <div class="notice-top">
+
+                <div class="notice-left">
+
+                    <div class="notice-icon">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            New Resources Added
+                        </h4>
+
+                        <p>
+                            Course-এর জন্য নতুন learning materials যোগ করা হয়েছে।
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="notice-date">
+                    30 Aug 2026
+                </span>
+
+            </div>
+
+
+            <div class="notice-details">
+
+                Resources section থেকে class notes, practice
+                materials এবং অন্যান্য learning resources দেখা যাবে।
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         1.11 CLASS ROUTINE
+    ====================================================== -->
+
+    <div class="section-title">
+
+        <h3>
+            📅 Class Routine
+        </h3>
+
+        <p>
+            আপনার offline class-এর weekly routine।
+        </p>
+
+    </div>
+
+
+    <section class="routine-card">
+
+
+        <div class="routine-header">
+
+            <div>
+
+                <h4>
+                    Computer & IT Course
+                </h4>
+
+                <p>
+                    Weekly Offline Class Routine
+                </p>
+
+            </div>
+
+
+            <span class="routine-badge">
+                Active Routine
+            </span>
+
+        </div>
+
+
+        <div class="routine-table-wrapper">
+
+            <table class="routine-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Day
+                        </th>
+
+                        <th>
+                            Time
+                        </th>
+
+                        <th>
+                            Subject
+                        </th>
+
+                        <th>
+                            Instructor
+                        </th>
+
+                        <th>
+                            Type
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td class="routine-day">
+                            Saturday
+                        </td>
+
+                        <td class="routine-time">
+                            10:00 AM – 12:00 PM
+                        </td>
+
+                        <td class="routine-subject">
+                            Computer Basics
+                        </td>
+
+                        <td>
+                            SNK IT Team
+                        </td>
+
+                        <td>
+                            <span class="class-type">
+                                Offline
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="routine-day">
+                            Monday
+                        </td>
+
+                        <td class="routine-time">
+                            10:00 AM – 12:00 PM
+                        </td>
+
+                        <td class="routine-subject">
+                            MS Word
+                        </td>
+
+                        <td>
+                            SNK IT Team
+                        </td>
+
+                        <td>
+                            <span class="class-type">
+                                Offline
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="routine-day">
+                            Wednesday
+                        </td>
+
+                        <td class="routine-time">
+                            10:00 AM – 12:00 PM
+                        </td>
+
+                        <td class="routine-subject">
+                            MS Excel
+                        </td>
+
+                        <td>
+                            SNK IT Team
+                        </td>
+
+                        <td>
+                            <span class="class-type">
+                                Offline
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td class="routine-day">
+                            Thursday
+                        </td>
+
+                        <td class="routine-time">
+                            10:00 AM – 12:00 PM
+                        </td>
+
+                        <td class="routine-subject">
+                            Internet & Practical
+                        </td>
+
+                        <td>
+                            SNK IT Team
+                        </td>
+
+                        <td>
+                            <span class="class-type">
+                                Offline
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         1.11 ATTENDANCE
+    ====================================================== -->
+
+    <div class="section-title">
+
+        <h3>
+            ✅ My Attendance
+        </h3>
+
+        <p>
+            আপনার class attendance summary এবং history।
+        </p>
+
+    </div>
+
+
+    <section class="attendance-card">
+
+
+        <div class="attendance-summary">
+
+
+            <div class="attendance-box">
+
+                <span>
+                    Total Classes
+                </span>
+
+                <strong>
+                    25
+                </strong>
+
+            </div>
+
+
+            <div class="attendance-box">
+
+                <span>
+                    Present
+                </span>
+
+                <strong>
+                    23
+                </strong>
+
+            </div>
+
+
+            <div class="attendance-box">
+
+                <span>
+                    Absent
+                </span>
+
+                <strong>
+                    2
+                </strong>
+
+            </div>
+
+
+            <div class="attendance-box">
+
+                <span>
+                    Attendance
+                </span>
+
+                <strong>
+                    92%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="attendance-progress">
+
+            <div class="attendance-progress-top">
+
+                <span>
+                    Attendance Progress
+                </span>
+
+                <strong>
+                    92%
+                </strong>
+
+            </div>
+
+
+            <div class="attendance-bar">
+
+                <div class="attendance-fill"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="attendance-message">
+
+            👍 আপনার attendance ভালো আছে।
+            নিয়মিত class করলে course progress আরও ভালো হবে।
+
+        </div>
+
+
+        <div class="attendance-history">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Class
+                        </th>
+
+                        <th>
+                            Subject
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+                            01 Sep 2026
+                        </td>
+
+                        <td>
+                            Class 25
+                        </td>
+
+                        <td>
+                            MS Excel
+                        </td>
+
+                        <td class="present">
+                            ✓ Present
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            30 Aug 2026
+                        </td>
+
+                        <td>
+                            Class 24
+                        </td>
+
+                        <td>
+                            MS Word
+                        </td>
+
+                        <td class="present">
+                            ✓ Present
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            28 Aug 2026
+                        </td>
+
+                        <td>
+                            Class 23
+                        </td>
+
+                        <td>
+                            Computer Basics
+                        </td>
+
+                        <td class="absent">
+                            ✕ Absent
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            26 Aug 2026
+                        </td>
+
+                        <td>
+                            Class 22
+                        </td>
+
+                        <td>
+                            Internet
+                        </td>
+
+                        <td class="present">
+                            ✓ Present
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="attendance-demo">
+
+            📌 Attendance এখন Demo data।
+            পরবর্তী Admin system তৈরি হলে Admin এখান থেকে
+            student attendance update করতে পারবে।
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COURSE
+    ====================================================== -->
+
+    <div class="section-title">
+
+        <h3>
             🎓 My Course
         </h3>
 
-        <p id="courseSectionSubtitle">
+        <p>
             আপনার বর্তমানে চলমান course-এর তথ্য।
         </p>
 
@@ -1630,18 +2598,18 @@ body.dark .footer{
 
             <div>
 
-                <h4 id="courseName">
+                <h4>
                     Computer & IT Course
                 </h4>
 
-                <p id="courseDescription">
+                <p>
                     Basic computer, office application,
                     internet এবং practical IT learning।
                 </p>
 
             </div>
 
-            <span class="course-status" id="courseStatus">
+            <span class="course-status">
                 Active Course
             </span>
 
@@ -1652,13 +2620,16 @@ body.dark .footer{
 
             <div class="progress-info">
 
-                <span id="progressLabel">
+                <span>
                     Course Progress
                 </span>
 
-                <strong>65%</strong>
+                <strong>
+                    65%
+                </strong>
 
             </div>
+
 
             <div class="progress-bar">
 
@@ -1671,24 +2642,56 @@ body.dark .footer{
 
         <div class="course-details">
 
-            <div class="course-detail">
-                <span id="durationLabel">Duration</span>
-                <strong id="durationValue">6 Months</strong>
-            </div>
 
             <div class="course-detail">
-                <span id="modeLabel">Mode</span>
-                <strong id="modeValue">Offline</strong>
+
+                <span>
+                    Duration
+                </span>
+
+                <strong>
+                    6 Months
+                </strong>
+
             </div>
 
-            <div class="course-detail">
-                <span id="classDaysLabel">Class Days</span>
-                <strong id="classDaysValue">As Scheduled</strong>
-            </div>
 
             <div class="course-detail">
-                <span id="teacherLabel">Instructor</span>
-                <strong id="teacherValue">SNK IT Team</strong>
+
+                <span>
+                    Mode
+                </span>
+
+                <strong>
+                    Offline
+                </strong>
+
+            </div>
+
+
+            <div class="course-detail">
+
+                <span>
+                    Class Days
+                </span>
+
+                <strong>
+                    4 Days / Week
+                </strong>
+
+            </div>
+
+
+            <div class="course-detail">
+
+                <span>
+                    Instructor
+                </span>
+
+                <strong>
+                    SNK IT Team
+                </strong>
+
             </div>
 
         </div>
@@ -1697,26 +2700,25 @@ body.dark .footer{
 
 
 
-    <!-- =================================================
-         ASSIGNMENTS
-    ================================================== -->
+    <!-- =====================================================
+         ASSIGNMENT
+    ====================================================== -->
 
     <div class="section-title">
 
-        <h3 id="assignmentSectionTitle">
+        <h3>
             📝 Assignments
         </h3>
 
-        <p id="assignmentSectionSubtitle">
+        <p>
             আপনার দেওয়া assignment এবং deadline এখানে দেখা যাবে।
         </p>
 
     </div>
 
 
-    <!-- ASSIGNMENT 01 -->
-
     <section class="assignment-card">
+
 
         <div class="assignment-top">
 
@@ -1739,6 +2741,7 @@ body.dark .footer{
                 </div>
 
             </div>
+
 
             <span
                 class="assignment-status"
@@ -1763,7 +2766,7 @@ body.dark .footer{
 
             <div class="meta-box">
 
-                <span id="deadline1Label">
+                <span>
                     Deadline
                 </span>
 
@@ -1773,9 +2776,10 @@ body.dark .footer{
 
             </div>
 
+
             <div class="meta-box">
 
-                <span id="totalMark1Label">
+                <span>
                     Total Mark
                 </span>
 
@@ -1785,9 +2789,10 @@ body.dark .footer{
 
             </div>
 
+
             <div class="meta-box">
 
-                <span id="submission1Label">
+                <span>
                     Submission
                 </span>
 
@@ -1836,9 +2841,8 @@ body.dark .footer{
 
 
 
-    <!-- ASSIGNMENT 02 -->
-
     <section class="assignment-card">
+
 
         <div class="assignment-top">
 
@@ -1861,6 +2865,7 @@ body.dark .footer{
                 </div>
 
             </div>
+
 
             <span
                 class="assignment-status"
@@ -1894,6 +2899,7 @@ body.dark .footer{
 
             </div>
 
+
             <div class="meta-box">
 
                 <span>
@@ -1905,6 +2911,7 @@ body.dark .footer{
                 </strong>
 
             </div>
+
 
             <div class="meta-box">
 
@@ -1957,17 +2964,17 @@ body.dark .footer{
 
 
 
-    <!-- =================================================
+    <!-- =====================================================
          RESOURCES
-    ================================================== -->
+    ====================================================== -->
 
     <div class="section-title">
 
-        <h3 id="resourceSectionTitle">
+        <h3>
             📚 Resources
         </h3>
 
-        <p id="resourceSectionSubtitle">
+        <p>
             আপনার course-এর প্রয়োজনীয় learning materials এখানে থাকবে।
         </p>
 
@@ -1994,9 +3001,13 @@ body.dark .footer{
 
             <div class="resource-info">
 
-                <span>PDF</span>
+                <span>
+                    PDF
+                </span>
 
-                <span>Course Material</span>
+                <span>
+                    Course Material
+                </span>
 
             </div>
 
@@ -2038,9 +3049,13 @@ body.dark .footer{
 
             <div class="resource-info">
 
-                <span>Notes</span>
+                <span>
+                    Notes
+                </span>
 
-                <span>Practice Material</span>
+                <span>
+                    Practice
+                </span>
 
             </div>
 
@@ -2082,9 +3097,13 @@ body.dark .footer{
 
             <div class="resource-info">
 
-                <span>Video</span>
+                <span>
+                    Video
+                </span>
 
-                <span>Recorded Class</span>
+                <span>
+                    Recorded
+                </span>
 
             </div>
 
@@ -2126,9 +3145,13 @@ body.dark .footer{
 
             <div class="resource-info">
 
-                <span>Excel</span>
+                <span>
+                    Excel
+                </span>
 
-                <span>Practice File</span>
+                <span>
+                    Practice
+                </span>
 
             </div>
 
@@ -2170,9 +3193,13 @@ body.dark .footer{
 
             <div class="resource-info">
 
-                <span>PDF</span>
+                <span>
+                    PDF
+                </span>
 
-                <span>Handbook</span>
+                <span>
+                    Handbook
+                </span>
 
             </div>
 
@@ -2214,9 +3241,13 @@ body.dark .footer{
 
             <div class="resource-info">
 
-                <span>Links</span>
+                <span>
+                    Links
+                </span>
 
-                <span>Learning</span>
+                <span>
+                    Learning
+                </span>
 
             </div>
 
@@ -2252,9 +3283,9 @@ body.dark .footer{
 
 
 
-    <!-- =================================================
+    <!-- =====================================================
          QUIZ
-    ================================================== -->
+    ====================================================== -->
 
     <div class="section-title">
 
@@ -2263,13 +3294,14 @@ body.dark .footer{
         </h3>
 
         <p>
-            আপনার course-এর ছোট practice quiz।
+            আপনার course-এর practice quiz।
         </p>
 
     </div>
 
 
-    <section class="quiz-card" id="quizCard">
+    <section class="quiz-card">
+
 
         <div class="quiz-header">
 
@@ -2436,17 +3468,17 @@ body.dark .footer{
 
 
 
-    <!-- =================================================
-         RESULT SECTION — 1.10
-    ================================================== -->
+    <!-- =====================================================
+         RESULT
+    ====================================================== -->
 
     <div class="section-title">
 
-        <h3 id="resultSectionTitle">
+        <h3>
             🏆 My Result
         </h3>
 
-        <p id="resultSectionSubtitle">
+        <p>
             Assignment এবং Quiz-এর result এখানে দেখা যাবে।
         </p>
 
@@ -2456,19 +3488,17 @@ body.dark .footer{
     <section class="result-card">
 
 
-        <!-- SUMMARY -->
-
         <div class="result-summary">
 
 
             <div class="result-box">
 
-                <span id="resultTotalLabel">
+                <span>
                     Total Marks
                 </span>
 
-                <strong id="totalMarks">
-                    50
+                <strong>
+                    53
                 </strong>
 
             </div>
@@ -2476,12 +3506,12 @@ body.dark .footer{
 
             <div class="result-box">
 
-                <span id="resultObtainedLabel">
+                <span>
                     Obtained
                 </span>
 
                 <strong id="obtainedMarks">
-                    0
+                    —
                 </strong>
 
             </div>
@@ -2489,12 +3519,12 @@ body.dark .footer{
 
             <div class="result-box">
 
-                <span id="resultPercentageLabel">
+                <span>
                     Percentage
                 </span>
 
                 <strong id="percentage">
-                    0%
+                    —
                 </strong>
 
             </div>
@@ -2502,7 +3532,7 @@ body.dark .footer{
 
             <div class="result-box">
 
-                <span id="resultGradeLabel">
+                <span>
                     Grade
                 </span>
 
@@ -2515,9 +3545,6 @@ body.dark .footer{
         </div>
 
 
-
-        <!-- RESULT TABLE -->
-
         <div class="result-table-wrapper">
 
             <table class="result-table">
@@ -2526,19 +3553,19 @@ body.dark .footer{
 
                     <tr>
 
-                        <th id="thItem">
+                        <th>
                             Assessment
                         </th>
 
-                        <th id="thTotal">
+                        <th>
                             Total Mark
                         </th>
 
-                        <th id="thObtained">
+                        <th>
                             Obtained
                         </th>
 
-                        <th id="thStatus">
+                        <th>
                             Status
                         </th>
 
@@ -2641,29 +3668,22 @@ body.dark .footer{
         </div>
 
 
+        <div class="result-demo">
 
-        <!-- DEMO NOTICE -->
-
-        <div
-            class="result-demo"
-            id="resultDemo"
-        >
             📌 Result system এখন Demo mode-এ আছে।
             Admin Login তৈরি হওয়ার পরে Admin student-এর
             assignment mark দিতে পারবে এবং সেই mark এখানে
             automatically দেখা যাবে।
+
         </div>
 
-
-
-        <!-- GRADE -->
 
         <div class="grade-card">
 
 
             <div class="grade-panel">
 
-                <span id="gradePanelLabel">
+                <span>
                     Current Grade
                 </span>
 
@@ -2675,7 +3695,7 @@ body.dark .footer{
                     class="grade-status"
                     id="gradeStatus"
                 >
-                    Mark Pending
+                    Admin mark অপেক্ষমাণ
                 </div>
 
             </div>
@@ -2683,7 +3703,7 @@ body.dark .footer{
 
             <div class="grade-panel">
 
-                <span id="resultStatusLabel">
+                <span>
                     Result Status
                 </span>
 
@@ -2695,7 +3715,7 @@ body.dark .footer{
                     class="grade-status"
                     id="resultStatusText"
                 >
-                    Admin mark required
+                    সব mark প্রয়োজন
                 </div>
 
             </div>
@@ -2707,9 +3727,9 @@ body.dark .footer{
 
 
 
-    <!-- =================================================
+    <!-- =====================================================
          LEARNING CENTER
-    ================================================== -->
+    ====================================================== -->
 
     <div class="section-title">
 
@@ -2780,39 +3800,17 @@ body.dark .footer{
 
         </div>
 
-
     </section>
 
-
-
-    <!-- =================================================
-         NOTICE
-    ================================================== -->
-
-    <section class="notice">
-
-        <h3>
-            📢 Notice
-        </h3>
-
-        <div class="notice-box">
-
-            Assignment, Resources, Quiz এবং Result system
-            এখন demo mode-এ আছে। পরবর্তী ধাপে Student Login
-            এবং Admin system-এর সঙ্গে এগুলো connect করা হবে।
-
-        </div>
-
-    </section>
 
 
 </main>
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-===================================================== -->
+========================================================= -->
 
 <footer class="footer">
 
@@ -2826,9 +3824,9 @@ body.dark .footer{
 
 <script>
 
-/* =====================================================
-   THEME
-===================================================== */
+/* =========================================================
+   1. THEME
+========================================================= */
 
 function toggleTheme(){
 
@@ -2881,9 +3879,9 @@ function loadTheme(){
 }
 
 
-/* =====================================================
-   LANGUAGE
-===================================================== */
+/* =========================================================
+   2. LANGUAGE
+========================================================= */
 
 let currentLanguage =
     localStorage.getItem("snkLanguage") || "bn";
@@ -2901,33 +3899,31 @@ function toggleLanguage(){
         currentLanguage
     );
 
-    location.reload();
-
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-function showLoginMessage(){
-
     alert(
-
-        currentLanguage==="bn"
-
-        ? "Student Login system 6.1 ধাপে তৈরি করা হবে।"
-
-        : "Student Login system will be created in Step 6.1."
-
+        currentLanguage==="en"
+        ? "English mode selected. Full translation will be connected later."
+        : "বাংলা mode selected."
     );
 
 }
 
 
-/* =====================================================
-   ASSIGNMENT DEADLINES
-===================================================== */
+/* =========================================================
+   3. LOGIN DEMO
+========================================================= */
+
+function showLoginMessage(){
+
+    alert(
+        "Student Login system 6.1 ধাপে তৈরি করা হবে।"
+    );
+
+}
+
+
+/* =========================================================
+   4. ASSIGNMENT DEADLINES
+========================================================= */
 
 const assignmentDeadlines={
 
@@ -2942,60 +3938,65 @@ const assignmentDeadlines={
 };
 
 
-/* =====================================================
-   ASSIGNMENT COUNTDOWN
-===================================================== */
+/* =========================================================
+   5. COUNTDOWN
+========================================================= */
 
 function updateCountdown(
     number,
     deadline
 ){
 
-    const now =
+    const now=
         new Date().getTime();
 
-    const distance =
+    const distance=
         deadline-now;
 
-    const element =
+    const element=
         document.getElementById(
             "countdown"+number
         );
 
 
-    if(distance<=0){
-
-        element.textContent=
-            currentLanguage==="bn"
-            ? "Deadline শেষ"
-            : "Deadline ended";
+    if(!element){
 
         return;
 
     }
 
 
-    const days =
+    if(distance<=0){
+
+        element.textContent=
+            "Deadline শেষ";
+
+        return;
+
+    }
+
+
+    const days=
         Math.floor(
             distance/
             (1000*60*60*24)
         );
 
-    const hours =
+    const hours=
         Math.floor(
             (distance%
             (1000*60*60*24))/
             (1000*60*60)
         );
 
-    const minutes =
+    const minutes=
         Math.floor(
             (distance%
             (1000*60*60))/
             (1000*60)
         );
 
-    const seconds =
+    const seconds=
         Math.floor(
             (distance%
             (1000*60))/
@@ -3028,9 +4029,9 @@ setInterval(function(){
 },1000);
 
 
-/* =====================================================
-   ASSIGNMENT SUBMIT
-===================================================== */
+/* =========================================================
+   6. ASSIGNMENT SUBMIT
+========================================================= */
 
 function submitAssignment(number){
 
@@ -3047,13 +4048,7 @@ function submitAssignment(number){
 
     const confirmed=
         confirm(
-
-            currentLanguage==="bn"
-
-            ? "আপনি কি এই assignment submit করতে চান?"
-
-            : "Do you want to submit this assignment?"
-
+            "আপনি কি এই assignment submit করতে চান?"
         );
 
 
@@ -3076,35 +4071,25 @@ function submitAssignment(number){
 
 
     alert(
-
-        currentLanguage==="bn"
-
-        ? "Assignment successfully submitted।"
-
-        : "Assignment successfully submitted."
-
+        "Assignment successfully submitted।"
     );
 
 }
 
 
-/* =====================================================
-   MARK ASSIGNMENT SUBMITTED
-===================================================== */
-
 function markAssignmentSubmitted(number){
 
-    const button =
+    const button=
         document.getElementById(
             "submitButton"+number
         );
 
-    const submission =
+    const submission=
         document.getElementById(
             "submission"+number
         );
 
-    const status =
+    const status=
         document.getElementById(
             "assignment"+number+"Status"
         );
@@ -3112,9 +4097,7 @@ function markAssignmentSubmitted(number){
 
     if(button){
 
-        button.classList.add(
-            "submitted"
-        );
+        button.classList.add("submitted");
 
         button.textContent=
             "✅ Submitted";
@@ -3140,10 +4123,6 @@ function markAssignmentSubmitted(number){
 }
 
 
-/* =====================================================
-   LOAD SUBMISSIONS
-===================================================== */
-
 function loadSubmissionStatus(){
 
     [1,2].forEach(function(number){
@@ -3165,22 +4144,15 @@ function loadSubmissionStatus(){
 }
 
 
-/* =====================================================
-   RESOURCES
-===================================================== */
+/* =========================================================
+   7. RESOURCES
+========================================================= */
 
 function openResource(name){
 
     alert(
-
-        currentLanguage==="bn"
-
-        ? name+
-          " এখন demo resource। পরবর্তী Admin system-এ আসল file/link যুক্ত হবে।"
-
-        : name+
-          " is a demo resource. The real file/link will be connected later."
-
+        name+
+        " এখন Demo resource। Admin system-এর পরে real link/file যোগ হবে।"
     );
 
 }
@@ -3189,16 +4161,8 @@ function openResource(name){
 function downloadResource(name){
 
     alert(
-
-        currentLanguage==="bn"
-
-        ? name+
-          " এর download link এখনো যুক্ত হয়নি।"
-
-        : "The download link for "+
-          name+
-          " has not been connected yet."
-
+        name+
+        " এর download link এখনো যুক্ত হয়নি।"
     );
 
 }
@@ -3207,21 +4171,15 @@ function downloadResource(name){
 function resourceInfo(){
 
     alert(
-
-        currentLanguage==="bn"
-
-        ? "এই resource-এর বিস্তারিত তথ্য পরবর্তী ধাপে Admin system থেকে আসবে।"
-
-        : "Detailed resource information will be added through the Admin system later."
-
+        "এই resource-এর বিস্তারিত তথ্য Admin system থেকে পরে আসবে।"
     );
 
 }
 
 
-/* =====================================================
-   QUIZ DATA
-===================================================== */
+/* =========================================================
+   8. QUIZ
+========================================================= */
 
 const quizQuestions=[
 
@@ -3292,9 +4250,9 @@ let quizTimerInterval=null;
 let quizFinished=false;
 
 
-/* =====================================================
-   RENDER QUIZ
-===================================================== */
+/* =========================================================
+   9. RENDER QUESTION
+========================================================= */
 
 function renderQuestion(){
 
@@ -3406,9 +4364,9 @@ function renderQuestion(){
 }
 
 
-/* =====================================================
-   QUIZ PROGRESS
-===================================================== */
+/* =========================================================
+   10. QUIZ PROGRESS
+========================================================= */
 
 function updateQuizProgress(){
 
@@ -3447,9 +4405,9 @@ function updateQuizProgress(){
 }
 
 
-/* =====================================================
-   QUIZ BUTTONS
-===================================================== */
+/* =========================================================
+   11. QUIZ BUTTONS
+========================================================= */
 
 function updateQuizButtons(){
 
@@ -3472,7 +4430,6 @@ function updateQuizButtons(){
     previous.disabled=
         currentQuestion===0;
 
-
     previous.style.opacity=
         currentQuestion===0
         ? ".5"
@@ -3486,28 +4443,22 @@ function updateQuizButtons(){
 
         next.style.display="none";
 
-        submitArea.classList.add(
-            "show"
-        );
+        submitArea.classList.add("show");
 
     }else{
 
         next.style.display="block";
 
-        next.textContent="Next →";
-
-        submitArea.classList.remove(
-            "show"
-        );
+        submitArea.classList.remove("show");
 
     }
 
 }
 
 
-/* =====================================================
-   NEXT
-===================================================== */
+/* =========================================================
+   12. NEXT / PREVIOUS
+========================================================= */
 
 function nextQuestion(){
 
@@ -3525,10 +4476,6 @@ function nextQuestion(){
 }
 
 
-/* =====================================================
-   PREVIOUS
-===================================================== */
-
 function previousQuestion(){
 
     if(currentQuestion>0){
@@ -3542,9 +4489,9 @@ function previousQuestion(){
 }
 
 
-/* =====================================================
-   QUIZ TIMER
-===================================================== */
+/* =========================================================
+   13. QUIZ TIMER
+========================================================= */
 
 function updateQuizTimer(){
 
@@ -3609,9 +4556,9 @@ function startQuizTimer(){
 }
 
 
-/* =====================================================
-   SUBMIT QUIZ
-===================================================== */
+/* =========================================================
+   14. SUBMIT QUIZ
+========================================================= */
 
 function submitQuiz(autoSubmit){
 
@@ -3721,9 +4668,9 @@ function submitQuiz(autoSubmit){
 }
 
 
-/* =====================================================
-   RESULT SYSTEM
-===================================================== */
+/* =========================================================
+   15. RESULT SYSTEM
+========================================================= */
 
 function updateResultSystem(){
 
@@ -3754,28 +4701,21 @@ function updateResultSystem(){
                 "quizResultStatus"
             );
 
-        quizStatus.textContent=
-            "Completed";
 
-        quizStatus.style.background=
-            "#e7f6ec";
+        if(quizStatus){
 
-        quizStatus.style.color=
-            "#18794e";
+            quizStatus.textContent=
+                "Completed";
+
+            quizStatus.style.background=
+                "#e7f6ec";
+
+            quizStatus.style.color=
+                "#18794e";
+
+        }
 
     }
-
-
-    /*
-       এখন Assignment mark Admin থেকে আসবে।
-       তাই Demo অবস্থায় Assignment marks 0 ধরা হচ্ছে না।
-    */
-
-
-    document.getElementById(
-        "totalMarks"
-    ).textContent=
-        "53";
 
 
     document.getElementById(
@@ -3803,138 +4743,16 @@ function updateResultSystem(){
 
 
     document.getElementById(
-        "gradeStatus"
-    ).textContent=
-        currentLanguage==="bn"
-        ? "Admin mark অপেক্ষমাণ"
-        : "Waiting for admin marks";
-
-
-    document.getElementById(
         "resultStatus"
     ).textContent=
         "—";
 
-
-    document.getElementById(
-        "resultStatusText"
-    ).textContent=
-        currentLanguage==="bn"
-        ? "সব mark প্রয়োজন"
-        : "All marks required";
-
 }
 
 
-/* =====================================================
-   FUTURE ADMIN MARK FUNCTION
-===================================================== */
-
-function calculateFinalResult(
-    assignment1,
-    assignment2,
-    quiz
-){
-
-    const total=
-        20+
-        30+
-        3;
-
-
-    const obtained=
-        Number(assignment1)+
-        Number(assignment2)+
-        Number(quiz);
-
-
-    const percentage=
-        (obtained/total)*100;
-
-
-    let grade="F";
-
-
-    if(percentage>=80){
-
-        grade="A+";
-
-    }else if(percentage>=70){
-
-        grade="A";
-
-    }else if(percentage>=60){
-
-        grade="A-";
-
-    }else if(percentage>=50){
-
-        grade="B";
-
-    }else if(percentage>=40){
-
-        grade="C";
-
-    }else if(percentage>=33){
-
-        grade="D";
-
-    }
-
-
-    document.getElementById(
-        "obtainedMarks"
-    ).textContent=
-        obtained;
-
-
-    document.getElementById(
-        "percentage"
-    ).textContent=
-        percentage.toFixed(1)+"%";
-
-
-    document.getElementById(
-        "grade"
-    ).textContent=
-        grade;
-
-
-    document.getElementById(
-        "bigGrade"
-    ).textContent=
-        grade;
-
-
-    document.getElementById(
-        "resultStatus"
-    ).textContent=
-        percentage>=33
-        ? "PASS"
-        : "FAIL";
-
-
-    document.getElementById(
-        "resultStatusText"
-    ).textContent=
-        percentage>=33
-        ? "Congratulations!"
-        : "Need Improvement";
-
-
-    document.getElementById(
-        "gradeStatus"
-    ).textContent=
-        percentage>=33
-        ? "Result completed"
-        : "Result completed";
-
-}
-
-
-/* =====================================================
-   PAGE LOAD
-===================================================== */
+/* =========================================================
+   16. PAGE LOAD
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -3943,6 +4761,7 @@ document.addEventListener(
         loadTheme();
 
         loadSubmissionStatus();
+
 
         Object.keys(
             assignmentDeadlines
