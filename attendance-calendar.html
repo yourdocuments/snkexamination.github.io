@@ -1,0 +1,3924 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Attendance Calendar</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --primary-soft:#eff6ff;
+
+    --success:#16a34a;
+    --success-soft:#f0fdf4;
+
+    --danger:#dc2626;
+    --danger-soft:#fef2f2;
+
+    --warning:#d97706;
+    --warning-soft:#fffbeb;
+
+    --purple:#7c3aed;
+    --purple-soft:#f5f3ff;
+
+    --cyan:#0891b2;
+    --cyan-soft:#ecfeff;
+
+    --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+
+    --primary-soft:#172554;
+    --success-soft:#052e16;
+    --danger-soft:#450a0a;
+    --warning-soft:#451a03;
+    --purple-soft:#2e1065;
+    --cyan-soft:#083344;
+
+    --shadow:0 10px 30px rgba(0,0,0,.30);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    min-height:70px;
+    padding:12px 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+
+    box-shadow:0 4px 20px rgba(15,23,42,.05);
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:14px;
+    font-weight:900;
+}
+
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:2px;
+}
+
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.btn{
+    min-height:38px;
+    padding:0 13px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-size:8px;
+    font-weight:900;
+
+    transition:.2s;
+}
+
+.btn:hover{
+    border-color:var(--primary);
+    transform:translateY(-1px);
+}
+
+.btn.primary{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+}
+
+.btn.primary:hover{
+    background:var(--primary-dark);
+}
+
+.btn.small{
+    min-height:32px;
+    padding:0 10px;
+    font-size:7px;
+}
+
+.main{
+    max-width:1250px;
+    margin:auto;
+    padding:28px 20px 50px;
+}
+
+.page-header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.page-title h1{
+    font-size:24px;
+    margin-bottom:4px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.info{
+    padding:12px 14px;
+
+    background:var(--primary-soft);
+    border:1px solid rgba(37,99,235,.15);
+
+    border-radius:11px;
+
+    font-size:8px;
+    line-height:1.8;
+
+    margin-bottom:15px;
+}
+
+.info strong{
+    display:block;
+    font-size:9px;
+    margin-bottom:3px;
+}
+
+.toolbar{
+    display:grid;
+    grid-template-columns:1fr 1.4fr 1fr;
+    gap:10px;
+
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    padding:13px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:15px;
+}
+
+.field label{
+    display:block;
+    font-size:7px;
+    font-weight:900;
+    margin-bottom:5px;
+}
+
+.field select,
+.field input{
+    width:100%;
+    height:38px;
+
+    padding:0 10px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    background:var(--card);
+    color:var(--text);
+
+    outline:none;
+
+    font-size:8px;
+}
+
+.field select:focus,
+.field input:focus{
+    border-color:var(--primary);
+}
+
+.month-control{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.month-control button{
+    width:38px;
+    height:38px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-weight:900;
+}
+
+.month-control button:hover{
+    border-color:var(--primary);
+}
+
+.month-title{
+    flex:1;
+    height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--primary-soft);
+
+    border-radius:9px;
+
+    font-size:10px;
+    font-weight:900;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:13px;
+
+    padding:13px;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    font-size:17px;
+    margin-bottom:5px;
+}
+
+.stat-value{
+    font-size:19px;
+    font-weight:900;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.calendar-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
+    margin-bottom:15px;
+}
+
+.calendar-header{
+    padding:14px 15px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.calendar-header h2{
+    font-size:12px;
+}
+
+.calendar-header p{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:3px;
+}
+
+.legend{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:4px;
+
+    color:var(--muted);
+
+    font-size:6.5px;
+}
+
+.dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+}
+
+.dot.present{
+    background:var(--success);
+}
+
+.dot.absent{
+    background:var(--danger);
+}
+
+.dot.late{
+    background:var(--warning);
+}
+
+.dot.leave{
+    background:var(--purple);
+}
+
+.dot.none{
+    background:var(--border);
+}
+
+.calendar{
+    padding:12px;
+}
+
+.weekdays{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:6px;
+
+    margin-bottom:6px;
+}
+
+.weekday{
+    text-align:center;
+
+    padding:8px 3px;
+
+    color:var(--muted);
+
+    font-size:7px;
+    font-weight:900;
+}
+
+.days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:6px;
+}
+
+.day{
+    min-height:82px;
+
+    padding:7px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    background:var(--card);
+
+    cursor:pointer;
+
+    transition:.18s;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.day:hover{
+    border-color:var(--primary);
+    transform:translateY(-1px);
+}
+
+.day.empty{
+    cursor:default;
+    background:var(--bg);
+    opacity:.45;
+}
+
+.day.empty:hover{
+    border-color:var(--border);
+    transform:none;
+}
+
+.day.today{
+    border:2px solid var(--primary);
+}
+
+.day.selected{
+    box-shadow:0 0 0 2px rgba(37,99,235,.18);
+}
+
+.day-number{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    font-size:9px;
+    font-weight:900;
+
+    margin-bottom:7px;
+}
+
+.today-label{
+    color:var(--primary);
+    font-size:5.5px;
+}
+
+.day-status{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+}
+
+.status-line{
+    display:flex;
+    align-items:center;
+    gap:4px;
+
+    font-size:6px;
+    font-weight:800;
+
+    padding:3px 4px;
+
+    border-radius:5px;
+}
+
+.status-line.present{
+    background:var(--success-soft);
+    color:var(--success);
+}
+
+.status-line.absent{
+    background:var(--danger-soft);
+    color:var(--danger);
+}
+
+.status-line.late{
+    background:var(--warning-soft);
+    color:var(--warning);
+}
+
+.status-line.leave{
+    background:var(--purple-soft);
+    color:var(--purple);
+}
+
+.day-summary{
+    color:var(--muted);
+    font-size:5.8px;
+    margin-top:4px;
+}
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+}
+
+.card-header{
+    padding:14px 15px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.card-header h2{
+    font-size:12px;
+}
+
+.card-header p{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:3px;
+}
+
+.card-body{
+    padding:15px;
+}
+
+.selected-date{
+    padding:12px;
+
+    background:var(--primary-soft);
+
+    border-radius:10px;
+
+    margin-bottom:10px;
+}
+
+.selected-date strong{
+    display:block;
+    font-size:11px;
+}
+
+.selected-date span{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.detail-stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.detail-stat{
+    padding:10px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+}
+
+.detail-stat strong{
+    display:block;
+    font-size:14px;
+}
+
+.detail-stat span{
+    color:var(--muted);
+    font-size:6.5px;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th{
+    background:var(--bg);
+    color:var(--muted);
+
+    text-align:left;
+
+    padding:10px;
+
+    font-size:7px;
+    font-weight:900;
+
+    border-bottom:1px solid var(--border);
+}
+
+td{
+    padding:10px;
+
+    font-size:7.5px;
+
+    border-bottom:1px solid var(--border);
+}
+
+tr:last-child td{
+    border-bottom:0;
+}
+
+.student-name{
+    font-weight:900;
+}
+
+.student-id{
+    color:var(--muted);
+    font-size:6px;
+    margin-top:2px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+
+    padding:4px 7px;
+
+    border-radius:20px;
+
+    font-size:6.5px;
+    font-weight:900;
+}
+
+.badge.present{
+    color:var(--success);
+    background:var(--success-soft);
+}
+
+.badge.absent{
+    color:var(--danger);
+    background:var(--danger-soft);
+}
+
+.badge.late{
+    color:var(--warning);
+    background:var(--warning-soft);
+}
+
+.badge.leave{
+    color:var(--purple);
+    background:var(--purple-soft);
+}
+
+.badge.none{
+    color:var(--muted);
+    background:var(--bg);
+}
+
+.empty-state{
+    text-align:center;
+    padding:30px 15px;
+}
+
+.empty-state .icon{
+    font-size:28px;
+    margin-bottom:7px;
+}
+
+.empty-state h3{
+    font-size:10px;
+    margin-bottom:3px;
+}
+
+.empty-state p{
+    color:var(--muted);
+    font-size:7px;
+}
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+
+    margin-top:15px;
+}
+
+.quick-link{
+    text-decoration:none;
+
+    min-height:70px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    color:var(--text);
+    background:var(--card);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    transition:.18s;
+}
+
+.quick-link:hover{
+    border-color:var(--primary);
+    background:var(--primary-soft);
+    transform:translateY(-1px);
+}
+
+.quick-link .icon{
+    font-size:17px;
+    margin-bottom:5px;
+}
+
+.quick-link strong{
+    font-size:6.8px;
+}
+
+.quick-link span{
+    color:var(--muted);
+    font-size:5.8px;
+    margin-top:2px;
+}
+
+.toast{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    z-index:5000;
+
+    background:#111827;
+    color:#fff;
+
+    padding:11px 15px;
+
+    border-radius:9px;
+
+    font-size:8px;
+
+    opacity:0;
+    transform:translateY(20px);
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:1050px){
+
+    .stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .toolbar{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .toolbar .field:last-child{
+        grid-column:1/-1;
+    }
+
+}
+
+@media(max-width:900px){
+
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
+
+    .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .day{
+        min-height:70px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .header{
+        padding:10px 13px;
+    }
+
+    .main{
+        padding:18px 12px 35px;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .actions{
+        width:100%;
+    }
+
+    .actions .btn{
+        flex:1;
+    }
+
+    .toolbar{
+        grid-template-columns:1fr;
+    }
+
+    .toolbar .field:last-child{
+        grid-column:auto;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .calendar{
+        padding:7px;
+    }
+
+    .weekdays,
+    .days{
+        gap:3px;
+    }
+
+    .weekday{
+        font-size:6px;
+        padding:6px 1px;
+    }
+
+    .day{
+        min-height:58px;
+        padding:4px;
+        border-radius:7px;
+    }
+
+    .day-number{
+        font-size:7.5px;
+        margin-bottom:3px;
+    }
+
+    .status-line{
+        padding:2px 3px;
+        font-size:5px;
+    }
+
+    .day-summary{
+        font-size:4.8px;
+    }
+
+    .calendar-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .legend{
+        width:100%;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+        >
+
+        <div class="logo-text">
+
+            SNK IT Institute
+
+            <small>
+                Attendance Calendar
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="btn"
+            id="themeBtn"
+            onclick="toggleTheme()"
+        >
+            🌙
+        </button>
+
+        <button
+            class="btn"
+            onclick="goBack()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="main">
+
+    <section class="page-header">
+
+        <div class="page-title">
+
+            <h1>
+                📅 Attendance Calendar
+            </h1>
+
+            <p>
+                মাসভিত্তিক attendance status calendar আকারে দেখুন।
+            </p>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="btn"
+                onclick="goToday()"
+            >
+                📅 Today
+            </button>
+
+            <button
+                class="btn primary"
+                onclick="refreshCalendar()"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <div class="info">
+
+        <strong>
+            📌 Calendar Overview
+        </strong>
+
+        সবুজ = Present, লাল = Absent, কমলা = Late এবং বেগুনি = Leave।
+        Student নির্বাচন করলে সেই student-এর monthly attendance calendar
+        দেখা যাবে।
+
+    </div>
+
+
+    <!-- TOOLBAR -->
+
+    <section class="toolbar">
+
+        <div class="field">
+
+            <label>
+                👨‍🎓 Student
+            </label>
+
+            <select
+                id="studentSelect"
+                onchange="studentChanged()"
+            >
+
+                <option value="all">
+                    All Students
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                📅 Month
+            </label>
+
+            <div class="month-control">
+
+                <button
+                    onclick="changeMonth(-1)"
+                    title="Previous Month"
+                >
+                    ‹
+                </button>
+
+                <div
+                    class="month-title"
+                    id="monthTitle"
+                >
+                    —
+                </div>
+
+                <button
+                    onclick="changeMonth(1)"
+                    title="Next Month"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                🔎 Search Student
+            </label>
+
+            <input
+                type="search"
+                id="studentSearch"
+                placeholder="নাম / ID দিয়ে খুঁজুন..."
+                oninput="filterStudentOptions()"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- MONTHLY STATS -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                📅
+            </div>
+
+            <div
+                class="stat-value"
+                id="workingDays"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Marked Days
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+            <div
+                class="stat-value"
+                id="monthPresent"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Present
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ❌
+            </div>
+
+            <div
+                class="stat-value"
+                id="monthAbsent"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Absent
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🕒
+            </div>
+
+            <div
+                class="stat-value"
+                id="monthLate"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Late
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                📈
+            </div>
+
+            <div
+                class="stat-value"
+                id="monthRate"
+            >
+                0%
+            </div>
+
+            <div class="stat-label">
+                Attendance Rate
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CALENDAR -->
+
+    <section class="calendar-card">
+
+        <div class="calendar-header">
+
+            <div>
+
+                <h2>
+                    🗓️ Monthly Calendar
+                </h2>
+
+                <p id="calendarSubtitle">
+                    Attendance calendar
+                </p>
+
+            </div>
+
+
+            <div class="legend">
+
+                <div class="legend-item">
+                    <span class="dot present"></span>
+                    Present
+                </div>
+
+                <div class="legend-item">
+                    <span class="dot absent"></span>
+                    Absent
+                </div>
+
+                <div class="legend-item">
+                    <span class="dot late"></span>
+                    Late
+                </div>
+
+                <div class="legend-item">
+                    <span class="dot leave"></span>
+                    Leave
+                </div>
+
+                <div class="legend-item">
+                    <span class="dot none"></span>
+                    No Data
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="calendar">
+
+            <div class="weekdays">
+
+                <div class="weekday">
+                    Sun
+                </div>
+
+                <div class="weekday">
+                    Mon
+                </div>
+
+                <div class="weekday">
+                    Tue
+                </div>
+
+                <div class="weekday">
+                    Wed
+                </div>
+
+                <div class="weekday">
+                    Thu
+                </div>
+
+                <div class="weekday">
+                    Fri
+                </div>
+
+                <div class="weekday">
+                    Sat
+                </div>
+
+            </div>
+
+
+            <div
+                class="days"
+                id="calendarDays"
+            >
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SELECTED DATE -->
+
+    <section class="detail-grid">
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        📌 Selected Date
+                    </h2>
+
+                    <p>
+                        Calendar থেকে একটি দিন select করুন।
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-body">
+
+                <div class="selected-date">
+
+                    <strong id="selectedDateTitle">
+                        কোনো তারিখ নির্বাচন করা হয়নি
+                    </strong>
+
+                    <span id="selectedDateSub">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="detail-stats">
+
+                    <div class="detail-stat">
+
+                        <strong
+                            id="selectedPresent"
+                        >
+                            0
+                        </strong>
+
+                        <span>
+                            Present
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-stat">
+
+                        <strong
+                            id="selectedAbsent"
+                        >
+                            0
+                        </strong>
+
+                        <span>
+                            Absent
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-stat">
+
+                        <strong
+                            id="selectedLate"
+                        >
+                            0
+                        </strong>
+
+                        <span>
+                            Late
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-stat">
+
+                        <strong
+                            id="selectedLeave"
+                        >
+                            0
+                        </strong>
+
+                        <span>
+                            Leave
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DAY DETAILS -->
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        👨‍🎓 Day Details
+                    </h2>
+
+                    <p id="dayDetailsSubtitle">
+                        Selected date-এর student status
+                    </p>
+
+                </div>
+
+                <button
+                    class="btn small"
+                    onclick="openAttendance()"
+                >
+                    Open Attendance
+                </button>
+
+            </div>
+
+
+            <div
+                class="table-wrap"
+                id="dayDetailsContainer"
+            >
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK LINKS -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    ⚡ Attendance Quick Access
+                </h2>
+
+                <p>
+                    Attendance module-এর অন্যান্য pages
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="quick-grid">
+
+                <a
+                    class="quick-link"
+                    href="attendance-dashboard.html"
+                >
+
+                    <div class="icon">
+                        📊
+                    </div>
+
+                    <strong>
+                        Dashboard
+                    </strong>
+
+                    <span>
+                        Overview
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="quick-link"
+                    href="student-attendance.html"
+                >
+
+                    <div class="icon">
+                        📝
+                    </div>
+
+                    <strong>
+                        Student Attendance
+                    </strong>
+
+                    <span>
+                        Take attendance
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="quick-link"
+                    href="attendance-reports.html"
+                >
+
+                    <div class="icon">
+                        📈
+                    </div>
+
+                    <strong>
+                        Reports
+                    </strong>
+
+                    <span>
+                        View reports
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="quick-link"
+                    href="attendance-alerts.html"
+                >
+
+                    <div class="icon">
+                        🚨
+                    </div>
+
+                    <strong>
+                        Alerts
+                    </strong>
+
+                    <span>
+                        Manage alerts
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="quick-link"
+                    href="attendance-notifications.html"
+                >
+
+                    <div class="icon">
+                        🔔
+                    </div>
+
+                    <strong>
+                        Notifications
+                    </strong>
+
+                    <span>
+                        Notifications
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="quick-link"
+                    href="attendance-export.html"
+                >
+
+                    <div class="icon">
+                        📤
+                    </div>
+
+                    <strong>
+                        Export
+                    </strong>
+
+                    <span>
+                        Export data
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="quick-link"
+                    href="attendance-settings.html"
+                >
+
+                    <div class="icon">
+                        ⚙️
+                    </div>
+
+                    <strong>
+                        Settings
+                    </strong>
+
+                    <span>
+                        Attendance settings
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="quick-link"
+                    href="attendance-audit-log.html"
+                >
+
+                    <div class="icon">
+                        📋
+                    </div>
+
+                    <strong>
+                        Audit Log
+                    </strong>
+
+                    <span>
+                        Activity history
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer
+        style="
+            text-align:center;
+            color:var(--muted);
+            font-size:8px;
+            padding:20px;
+        "
+    >
+
+        © 2026 SNK IT Institute • Attendance Calendar • Step 1.44
+
+    </footer>
+
+</main>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+/* =========================================================
+   1.44 ATTENDANCE CALENDAR
+========================================================= */
+
+const THEME_KEY =
+    "snkAttendanceDashboardTheme";
+
+
+const ATTENDANCE_KEYS = [
+
+    "snkAttendanceRecords",
+
+    "snkAttendance",
+
+    "attendanceRecords",
+
+    "studentAttendance",
+
+    "studentAttendanceRecords",
+
+    "attendanceData",
+
+    "attendance",
+
+    "snkStudentAttendance"
+
+];
+
+
+const STUDENT_KEYS = [
+
+    "snkStudents",
+
+    "students",
+
+    "studentRecords",
+
+    "snkStudentRecords"
+
+];
+
+
+let attendanceRecords = [];
+
+let students = [];
+
+let currentMonth =
+    new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        1
+    );
+
+
+let selectedDate =
+    getToday();
+
+
+let selectedStudent =
+    "all";
+
+
+let studentOptions = [];
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadTheme();
+
+        loadStudents();
+
+        loadAttendance();
+
+        populateStudents();
+
+        updateMonthTitle();
+
+        renderCalendar();
+
+        updateMonthlyStats();
+
+        selectDate(
+            selectedDate,
+            false
+        );
+
+    }
+);
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshCalendar(){
+
+    loadStudents();
+
+    loadAttendance();
+
+    populateStudents();
+
+    updateMonthTitle();
+
+    renderCalendar();
+
+    updateMonthlyStats();
+
+    selectDate(
+        selectedDate,
+        false
+    );
+
+    showToast(
+        "Calendar refreshed successfully."
+    );
+
+}
+
+
+/* =========================================================
+   STUDENTS
+========================================================= */
+
+function loadStudents(){
+
+    students = [];
+
+
+    for(
+        const key of STUDENT_KEYS
+    ){
+
+        const raw =
+            localStorage.getItem(
+                key
+            );
+
+
+        if(
+            !raw
+        ){
+
+            continue;
+
+        }
+
+
+        try{
+
+            const data =
+                JSON.parse(
+                    raw
+                );
+
+
+            if(
+                Array.isArray(data)
+            ){
+
+                students =
+                    data;
+
+                break;
+
+            }
+
+
+            if(
+                data &&
+                Array.isArray(
+                    data.students
+                )
+            ){
+
+                students =
+                    data.students;
+
+                break;
+
+            }
+
+        }
+        catch(error){
+
+            console.warn(
+                "Student data error:",
+                key
+            );
+
+        }
+
+    }
+
+
+    students =
+        students.map(
+            function(student,index){
+
+                return {
+
+                    id:
+                        String(
+                            student.id ||
+                            student.studentId ||
+                            student.studentID ||
+                            student.roll ||
+                            (
+                                "STU-" +
+                                (index + 1)
+                            )
+                        ),
+
+                    name:
+                        student.name ||
+                        student.studentName ||
+                        student.fullName ||
+                        (
+                            "Student " +
+                            (index + 1)
+                        ),
+
+                    className:
+                        student.className ||
+                        student.class ||
+                        student.course ||
+                        "",
+
+                    section:
+                        student.section ||
+                        ""
+
+                };
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
+function loadAttendance(){
+
+    attendanceRecords = [];
+
+
+    for(
+        const key of ATTENDANCE_KEYS
+    ){
+
+        const raw =
+            localStorage.getItem(
+                key
+            );
+
+
+        if(
+            !raw
+        ){
+
+            continue;
+
+        }
+
+
+        try{
+
+            const data =
+                JSON.parse(
+                    raw
+                );
+
+
+            let records = [];
+
+
+            if(
+                Array.isArray(data)
+            ){
+
+                records =
+                    data;
+
+            }
+            else if(
+                data &&
+                Array.isArray(
+                    data.records
+                )
+            ){
+
+                records =
+                    data.records;
+
+            }
+            else if(
+                data &&
+                Array.isArray(
+                    data.attendance
+                )
+            ){
+
+                records =
+                    data.attendance;
+
+            }
+
+
+            if(
+                records.length
+            ){
+
+                attendanceRecords =
+                    records;
+
+                break;
+
+            }
+
+        }
+        catch(error){
+
+            console.warn(
+                "Attendance data error:",
+                key
+            );
+
+        }
+
+    }
+
+
+    attendanceRecords =
+        attendanceRecords.map(
+            function(record){
+
+                return {
+
+                    id:
+                        record.id ||
+                        (
+                            "ATT-" +
+                            Math.random()
+                                .toString(36)
+                                .slice(2)
+                        ),
+
+                    studentId:
+                        String(
+                            record.studentId ||
+                            record.studentID ||
+                            record.student_id ||
+                            record.roll ||
+                            record.id ||
+                            ""
+                        ),
+
+                    studentName:
+                        record.studentName ||
+                        record.name ||
+                        record.fullName ||
+                        "",
+
+                    date:
+                        normalizeDate(
+                            record.date ||
+                            record.attendanceDate ||
+                            record.day ||
+                            record.createdAt ||
+                            record.timestamp
+                        ),
+
+                    status:
+                        normalizeStatus(
+                            record.status ||
+                            record.attendance ||
+                            record.state ||
+                            ""
+                        ),
+
+                    time:
+                        record.time ||
+                        record.checkInTime ||
+                        record.markedAt ||
+                        "",
+
+                    note:
+                        record.note ||
+                        record.notes ||
+                        record.remarks ||
+                        "",
+
+                    className:
+                        record.className ||
+                        record.class ||
+                        ""
+
+                };
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function normalizeStatus(
+    status
+){
+
+    const value =
+        String(
+            status ||
+            ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    if(
+        value.includes("present") ||
+        value === "p" ||
+        value === "উপস্থিত"
+    ){
+
+        return "present";
+
+    }
+
+
+    if(
+        value.includes("absent") ||
+        value === "a" ||
+        value === "অনুপস্থিত"
+    ){
+
+        return "absent";
+
+    }
+
+
+    if(
+        value.includes("late") ||
+        value === "l" ||
+        value === "দেরি"
+    ){
+
+        return "late";
+
+    }
+
+
+    if(
+        value.includes("leave") ||
+        value === "lv" ||
+        value === "ছুটি"
+    ){
+
+        return "leave";
+
+    }
+
+
+    return "other";
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function normalizeDate(
+    value
+){
+
+    if(
+        !value
+    ){
+
+        return "";
+
+    }
+
+
+    const text =
+        String(value);
+
+
+    if(
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            text
+        )
+    ){
+
+        return text;
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "";
+
+    }
+
+
+    return formatLocalDate(
+        date
+    );
+
+}
+
+
+function formatLocalDate(
+    date
+){
+
+    const y =
+        date.getFullYear();
+
+
+    const m =
+        String(
+            date.getMonth()+1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const d =
+        String(
+            date.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        y +
+        "-" +
+        m +
+        "-" +
+        d
+    );
+
+}
+
+
+function parseLocalDate(
+    value
+){
+
+    if(
+        !value
+    ){
+
+        return null;
+
+    }
+
+
+    const parts =
+        String(value)
+        .split("-");
+
+
+    if(
+        parts.length !== 3
+    ){
+
+        return null;
+
+    }
+
+
+    return new Date(
+        Number(parts[0]),
+        Number(parts[1])-1,
+        Number(parts[2])
+    );
+
+}
+
+
+function getToday(){
+
+    return formatLocalDate(
+        new Date()
+    );
+
+}
+
+
+/* =========================================================
+   STUDENT DROPDOWN
+========================================================= */
+
+function populateStudents(){
+
+    const select =
+        document.getElementById(
+            "studentSelect"
+        );
+
+
+    const oldValue =
+        selectedStudent;
+
+
+    select.innerHTML = `
+
+        <option value="all">
+            All Students
+        </option>
+
+    `;
+
+
+    studentOptions = [];
+
+
+    students.forEach(
+        function(student){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                student.id;
+
+
+            option.textContent =
+                student.name +
+                " — " +
+                student.id;
+
+
+            option.dataset.search =
+                (
+                    student.name +
+                    " " +
+                    student.id +
+                    " " +
+                    student.className +
+                    " " +
+                    student.section
+                )
+                .toLowerCase();
+
+
+            select.appendChild(
+                option
+            );
+
+
+            studentOptions.push(
+                option
+            );
+
+        }
+    );
+
+
+    const exists =
+        Array.from(
+            select.options
+        )
+        .some(
+            option =>
+                option.value ===
+                oldValue
+        );
+
+
+    selectedStudent =
+        exists
+        ?
+        oldValue
+        :
+        "all";
+
+
+    select.value =
+        selectedStudent;
+
+}
+
+
+function studentChanged(){
+
+    selectedStudent =
+        document.getElementById(
+            "studentSelect"
+        ).value;
+
+
+    renderCalendar();
+
+    updateMonthlyStats();
+
+    selectDate(
+        selectedDate,
+        false
+    );
+
+}
+
+
+function filterStudentOptions(){
+
+    const query =
+        document.getElementById(
+            "studentSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    studentOptions.forEach(
+        function(option){
+
+            const matches =
+                !query ||
+                option.dataset.search.includes(
+                    query
+                );
+
+
+            option.hidden =
+                !matches;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MONTH
+========================================================= */
+
+function updateMonthTitle(){
+
+    const title =
+        currentMonth.toLocaleDateString(
+            "bn-BD",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+
+    document.getElementById(
+        "monthTitle"
+    ).textContent =
+        title;
+
+
+    document.getElementById(
+        "calendarSubtitle"
+    ).textContent =
+        currentMonth.toLocaleDateString(
+            "en-GB",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        ) +
+        " • Attendance overview";
+
+}
+
+
+function changeMonth(
+    amount
+){
+
+    currentMonth =
+        new Date(
+            currentMonth.getFullYear(),
+            currentMonth.getMonth() +
+                amount,
+            1
+        );
+
+
+    updateMonthTitle();
+
+    renderCalendar();
+
+    updateMonthlyStats();
+
+
+    const y =
+        currentMonth.getFullYear();
+
+
+    const m =
+        String(
+            currentMonth.getMonth()+1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const firstDay =
+        y +
+        "-" +
+        m +
+        "-01";
+
+
+    selectedDate =
+        firstDay;
+
+
+    selectDate(
+        selectedDate,
+        false
+    );
+
+}
+
+
+function goToday(){
+
+    const today =
+        new Date();
+
+
+    currentMonth =
+        new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            1
+        );
+
+
+    selectedDate =
+        getToday();
+
+
+    updateMonthTitle();
+
+    renderCalendar();
+
+    updateMonthlyStats();
+
+    selectDate(
+        selectedDate,
+        false
+    );
+
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+function renderCalendar(){
+
+    const container =
+        document.getElementById(
+            "calendarDays"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const year =
+        currentMonth.getFullYear();
+
+
+    const month =
+        currentMonth.getMonth();
+
+
+    const firstDay =
+        new Date(
+            year,
+            month,
+            1
+        )
+        .getDay();
+
+
+    const daysInMonth =
+        new Date(
+            year,
+            month + 1,
+            0
+        )
+        .getDate();
+
+
+    for(
+        let i = 0;
+        i < firstDay;
+        i++
+    ){
+
+        const empty =
+            document.createElement(
+                "div"
+            );
+
+
+        empty.className =
+            "day empty";
+
+
+        container.appendChild(
+            empty
+        );
+
+    }
+
+
+    for(
+        let day = 1;
+        day <= daysInMonth;
+        day++
+    ){
+
+        const date =
+            new Date(
+                year,
+                month,
+                day
+            );
+
+
+        const dateKey =
+            formatLocalDate(
+                date
+            );
+
+
+        const cell =
+            document.createElement(
+                "div"
+            );
+
+
+        cell.className =
+            "day";
+
+
+        if(
+            dateKey ===
+            getToday()
+        ){
+
+            cell.classList.add(
+                "today"
+            );
+
+        }
+
+
+        if(
+            dateKey ===
+            selectedDate
+        ){
+
+            cell.classList.add(
+                "selected"
+            );
+
+        }
+
+
+        const records =
+            getRecordsForDate(
+                dateKey
+            );
+
+
+        const counts =
+            getCounts(
+                records
+            );
+
+
+        let statusHTML = "";
+
+
+        if(
+            counts.present > 0
+        ){
+
+            statusHTML += `
+
+                <div class="status-line present">
+                    ✅ Present:
+                    ${counts.present}
+                </div>
+
+            `;
+
+        }
+
+
+        if(
+            counts.absent > 0
+        ){
+
+            statusHTML += `
+
+                <div class="status-line absent">
+                    ❌ Absent:
+                    ${counts.absent}
+                </div>
+
+            `;
+
+        }
+
+
+        if(
+            counts.late > 0
+        ){
+
+            statusHTML += `
+
+                <div class="status-line late">
+                    🕒 Late:
+                    ${counts.late}
+                </div>
+
+            `;
+
+        }
+
+
+        if(
+            counts.leave > 0
+        ){
+
+            statusHTML += `
+
+                <div class="status-line leave">
+                    🏖️ Leave:
+                    ${counts.leave}
+                </div>
+
+            `;
+
+        }
+
+
+        if(
+            !statusHTML
+        ){
+
+            statusHTML = `
+
+                <div class="day-summary">
+                    No attendance data
+                </div>
+
+            `;
+
+        }
+
+
+        cell.innerHTML = `
+
+            <div class="day-number">
+
+                <span>
+                    ${day}
+                </span>
+
+                ${
+                    dateKey === getToday()
+                    ?
+                    `<span class="today-label">TODAY</span>`
+                    :
+                    ""
+                }
+
+            </div>
+
+            <div class="day-status">
+
+                ${statusHTML}
+
+            </div>
+
+            ${
+                records.length
+                ?
+                `
+                    <div class="day-summary">
+                        ${records.length} record(s)
+                    </div>
+                `
+                :
+                ""
+            }
+
+        `;
+
+
+        cell.addEventListener(
+            "click",
+            function(){
+
+                selectDate(
+                    dateKey,
+                    true
+                );
+
+            }
+        );
+
+
+        container.appendChild(
+            cell
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RECORD FILTER
+========================================================= */
+
+function getRecordsForDate(
+    date
+){
+
+    let records =
+        attendanceRecords.filter(
+            function(record){
+
+                return (
+                    record.date ===
+                    date
+                );
+
+            }
+        );
+
+
+    if(
+        selectedStudent !==
+        "all"
+    ){
+
+        records =
+            records.filter(
+                function(record){
+
+                    return (
+                        String(
+                            record.studentId
+                        ) ===
+                        String(
+                            selectedStudent
+                        )
+                    );
+
+                }
+            );
+
+    }
+
+
+    /*
+       Keep the latest record per student.
+    */
+
+    const map =
+        new Map();
+
+
+    records.forEach(
+        function(record){
+
+            const key =
+                record.studentId ||
+                record.studentName ||
+                record.id;
+
+
+            map.set(
+                key,
+                record
+            );
+
+        }
+    );
+
+
+    return Array.from(
+        map.values()
+    );
+
+}
+
+
+/* =========================================================
+   COUNTS
+========================================================= */
+
+function getCounts(
+    records
+){
+
+    const counts = {
+
+        present:0,
+
+        absent:0,
+
+        late:0,
+
+        leave:0,
+
+        other:0
+
+    };
+
+
+    records.forEach(
+        function(record){
+
+            if(
+                counts[
+                    record.status
+                ] !== undefined
+            ){
+
+                counts[
+                    record.status
+                ]++;
+
+            }
+            else{
+
+                counts.other++;
+
+            }
+
+        }
+    );
+
+
+    return counts;
+
+}
+
+
+/* =========================================================
+   MONTHLY STATS
+========================================================= */
+
+function updateMonthlyStats(){
+
+    const year =
+        currentMonth.getFullYear();
+
+
+    const month =
+        currentMonth.getMonth();
+
+
+    let records =
+        attendanceRecords.filter(
+            function(record){
+
+                const date =
+                    parseLocalDate(
+                        record.date
+                    );
+
+
+                if(
+                    !date
+                ){
+
+                    return false;
+
+                }
+
+
+                return (
+                    date.getFullYear() ===
+                    year &&
+                    date.getMonth() ===
+                    month
+                );
+
+            }
+        );
+
+
+    if(
+        selectedStudent !==
+        "all"
+    ){
+
+        records =
+            records.filter(
+                function(record){
+
+                    return (
+                        String(
+                            record.studentId
+                        ) ===
+                        String(
+                            selectedStudent
+                        )
+                    );
+
+                }
+            );
+
+    }
+
+
+    /*
+       For a selected student, each date has one status.
+       For all students, count individual student-day records.
+    */
+
+    const map =
+        new Map();
+
+
+    records.forEach(
+        function(record){
+
+            const key =
+                (
+                    record.date +
+                    "|" +
+                    (
+                        selectedStudent === "all"
+                        ?
+                        (
+                            record.studentId ||
+                            record.studentName
+                        )
+                        :
+                        "selected"
+                    )
+                );
+
+
+            map.set(
+                key,
+                record
+            );
+
+        }
+    );
+
+
+    records =
+        Array.from(
+            map.values()
+        );
+
+
+    const counts =
+        getCounts(
+            records
+        );
+
+
+    /*
+       Marked Days:
+       - All students: unique dates with attendance
+       - Selected student: unique dates marked
+    */
+
+    const uniqueDates =
+        new Set(
+            records.map(
+                record =>
+                    record.date
+            )
+        );
+
+
+    const markedDays =
+        uniqueDates.size;
+
+
+    const attended =
+        counts.present +
+        counts.late;
+
+
+    let rate = 0;
+
+
+    if(
+        selectedStudent !==
+        "all"
+    ){
+
+        const totalPossible =
+            getPossibleStudentDays(
+                year,
+                month
+            );
+
+
+        rate =
+            totalPossible > 0
+            ?
+            Math.round(
+                (
+                    attended /
+                    totalPossible
+                ) *
+                100
+            )
+            :
+            0;
+
+    }
+    else{
+
+        /*
+           Overall monthly rate:
+           attended student-day records /
+           total marked student-day records.
+        */
+
+        const totalMarked =
+            records.length;
+
+
+        rate =
+            totalMarked > 0
+            ?
+            Math.round(
+                (
+                    attended /
+                    totalMarked
+                ) *
+                100
+            )
+            :
+            0;
+
+    }
+
+
+    setText(
+        "workingDays",
+        markedDays
+    );
+
+    setText(
+        "monthPresent",
+        counts.present
+    );
+
+    setText(
+        "monthAbsent",
+        counts.absent
+    );
+
+    setText(
+        "monthLate",
+        counts.late
+    );
+
+    setText(
+        "monthRate",
+        rate + "%"
+    );
+
+}
+
+
+/* =========================================================
+   POSSIBLE STUDENT DAYS
+========================================================= */
+
+function getPossibleStudentDays(
+    year,
+    month
+){
+
+    /*
+       This is based on days where attendance records
+       exist for the selected student.
+       If there is no record, we cannot safely assume
+       absent because working-day configuration may differ.
+    */
+
+    const dates =
+        new Set();
+
+
+    attendanceRecords.forEach(
+        function(record){
+
+            if(
+                String(
+                    record.studentId
+                ) !==
+                String(
+                    selectedStudent
+                )
+            ){
+
+                return;
+
+            }
+
+
+            const date =
+                parseLocalDate(
+                    record.date
+                );
+
+
+            if(
+                !date
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                date.getFullYear() ===
+                year &&
+                date.getMonth() ===
+                month
+            ){
+
+                dates.add(
+                    record.date
+                );
+
+            }
+
+        }
+    );
+
+
+    return dates.size;
+
+}
+
+
+/* =========================================================
+   SELECT DATE
+========================================================= */
+
+function selectDate(
+    date,
+    showMessage
+){
+
+    selectedDate =
+        date;
+
+
+    const parsed =
+        parseLocalDate(
+            date
+        );
+
+
+    if(
+        !parsed
+    ){
+
+        return;
+
+    }
+
+
+    /*
+       If selected date belongs to another month,
+       move calendar there.
+    */
+
+    if(
+        parsed.getFullYear() !==
+        currentMonth.getFullYear() ||
+        parsed.getMonth() !==
+        currentMonth.getMonth()
+    ){
+
+        currentMonth =
+            new Date(
+                parsed.getFullYear(),
+                parsed.getMonth(),
+                1
+            );
+
+
+        updateMonthTitle();
+
+        renderCalendar();
+
+    }
+    else{
+
+        document
+            .querySelectorAll(
+                ".day"
+            )
+            .forEach(
+                function(cell){
+
+                    cell.classList.remove(
+                        "selected"
+                    );
+
+                }
+            );
+
+    }
+
+
+    renderCalendar();
+
+    renderSelectedDate();
+
+    renderDayDetails();
+
+
+    if(
+        showMessage
+    ){
+
+        showToast(
+            "Date selected."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SELECTED DATE DETAILS
+========================================================= */
+
+function renderSelectedDate(){
+
+    const date =
+        parseLocalDate(
+            selectedDate
+        );
+
+
+    if(
+        !date
+    ){
+
+        return;
+
+    }
+
+
+    const records =
+        getRecordsForDate(
+            selectedDate
+        );
+
+
+    const counts =
+        getCounts(
+            records
+        );
+
+
+    setText(
+        "selectedDateTitle",
+        date.toLocaleDateString(
+            "bn-BD",
+            {
+                day:"numeric",
+                month:"long",
+                year:"numeric"
+            }
+        )
+    );
+
+
+    setText(
+        "selectedDateSub",
+        date.toLocaleDateString(
+            "en-GB",
+            {
+                weekday:"long"
+            }
+        ) +
+        " • " +
+        records.length +
+        " record(s)"
+    );
+
+
+    setText(
+        "selectedPresent",
+        counts.present
+    );
+
+    setText(
+        "selectedAbsent",
+        counts.absent
+    );
+
+    setText(
+        "selectedLate",
+        counts.late
+    );
+
+    setText(
+        "selectedLeave",
+        counts.leave
+    );
+
+}
+
+
+/* =========================================================
+   DAY DETAILS TABLE
+========================================================= */
+
+function renderDayDetails(){
+
+    const container =
+        document.getElementById(
+            "dayDetailsContainer"
+        );
+
+
+    const records =
+        getRecordsForDate(
+            selectedDate
+        );
+
+
+    setText(
+        "dayDetailsSubtitle",
+        selectedDate +
+        " • " +
+        records.length +
+        " record(s)"
+    );
+
+
+    if(
+        records.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="icon">
+                    📭
+                </div>
+
+                <h3>
+                    কোনো attendance record নেই
+                </h3>
+
+                <p>
+                    এই তারিখের জন্য attendance data পাওয়া যায়নি।
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const sorted =
+        [...records]
+        .sort(
+            function(a,b){
+
+                return String(
+                    a.studentName
+                )
+                .localeCompare(
+                    String(
+                        b.studentName
+                    )
+                );
+
+            }
+        );
+
+
+    let html = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Student
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Time
+                    </th>
+
+                    <th>
+                        Note
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    sorted.forEach(
+        function(record){
+
+            html += `
+
+                <tr>
+
+                    <td>
+
+                        <div class="student-name">
+                            ${escapeHTML(
+                                record.studentName ||
+                                "Unknown Student"
+                            )}
+                        </div>
+
+                        <div class="student-id">
+                            ID:
+                            ${escapeHTML(
+                                record.studentId ||
+                                "—"
+                            )}
+                        </div>
+
+                    </td>
+
+                    <td>
+                        ${getBadge(
+                            record.status
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            record.time ||
+                            "—"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            record.note ||
+                            "—"
+                        )}
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+function getBadge(
+    status
+){
+
+    if(
+        status ===
+        "present"
+    ){
+
+        return `
+            <span class="badge present">
+                ✅ Present
+            </span>
+        `;
+
+    }
+
+
+    if(
+        status ===
+        "absent"
+    ){
+
+        return `
+            <span class="badge absent">
+                ❌ Absent
+            </span>
+        `;
+
+    }
+
+
+    if(
+        status ===
+        "late"
+    ){
+
+        return `
+            <span class="badge late">
+                🕒 Late
+            </span>
+        `;
+
+    }
+
+
+    if(
+        status ===
+        "leave"
+    ){
+
+        return `
+            <span class="badge leave">
+                🏖️ Leave
+            </span>
+        `;
+
+    }
+
+
+    return `
+        <span class="badge none">
+            — Not Marked
+        </span>
+    `;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function openAttendance(){
+
+    window.location.href =
+        "student-attendance.html";
+
+}
+
+
+function goBack(){
+
+    if(
+        document.referrer
+    ){
+
+        history.back();
+
+    }
+    else{
+
+        window.location.href =
+            "attendance-dashboard.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const isDark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        THEME_KEY,
+        isDark
+        ?
+        "dark"
+        :
+        "light"
+    );
+
+
+    updateThemeButton();
+
+}
+
+
+function loadTheme(){
+
+    if(
+        localStorage.getItem(
+            THEME_KEY
+        ) ===
+        "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+
+    updateThemeButton();
+
+}
+
+
+function updateThemeButton(){
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        document.body.classList.contains(
+            "dark"
+        )
+        ?
+        "☀️"
+        :
+        "🌙";
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function setText(
+    id,
+    value
+){
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+
+    if(
+        element
+    ){
+
+        element.textContent =
+            value;
+
+    }
+
+}
+
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ??
+        ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(
+    message
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+/* =========================================================
+   STORAGE UPDATE
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            ATTENDANCE_KEYS.includes(
+                event.key
+            ) ||
+            STUDENT_KEYS.includes(
+                event.key
+            )
+        ){
+
+            refreshCalendar();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   GLOBAL API
+========================================================= */
+
+window.refreshAttendanceCalendar =
+    refreshCalendar;
+
+</script>
+
+</body>
+</html>
+```
