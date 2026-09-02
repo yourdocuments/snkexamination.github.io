@@ -1,1 +1,3265 @@
-#
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Students Management 1.10</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#f4f6fa;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --soft:#eff6ff;
+
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
+
+    --sidebar:#111827;
+
+    --shadow:0 10px 30px rgba(15,23,42,.07);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+    --soft:#172554;
+    --sidebar:#020617;
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.25s;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.app{
+    min-height:100vh;
+    display:flex;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:255px;
+    min-width:255px;
+    background:var(--sidebar);
+    color:#fff;
+    min-height:100vh;
+
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+
+    z-index:1000;
+
+    display:flex;
+    flex-direction:column;
+
+    transition:.25s;
+}
+
+.sidebar-logo{
+    height:76px;
+    padding:13px 17px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-logo img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+}
+
+.sidebar-logo-text{
+    font-size:15px;
+    font-weight:800;
+}
+
+.sidebar-logo-text small{
+    display:block;
+    color:#9ca3af;
+    font-size:9px;
+    font-weight:500;
+    margin-top:2px;
+}
+
+.sidebar-menu{
+    padding:18px 12px;
+    flex:1;
+    overflow-y:auto;
+}
+
+.menu-label{
+    color:#6b7280;
+    font-size:9px;
+    font-weight:800;
+    padding:8px 11px;
+    letter-spacing:.5px;
+}
+
+.menu-item{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:#d1d5db;
+
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    padding:11px 12px;
+    border-radius:9px;
+    margin-bottom:4px;
+
+    font-size:11px;
+    font-weight:600;
+
+    text-align:left;
+}
+
+.menu-item:hover{
+    background:rgba(255,255,255,.07);
+    color:#fff;
+}
+
+.menu-item.active{
+    background:#2563eb;
+    color:#fff;
+}
+
+.menu-icon{
+    width:22px;
+    text-align:center;
+    font-size:15px;
+}
+
+.menu-badge{
+    margin-left:auto;
+    background:#ef4444;
+    color:#fff;
+
+    font-size:8px;
+
+    min-width:18px;
+    height:18px;
+
+    border-radius:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.sidebar-footer{
+    padding:13px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.admin-mini{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    padding:9px;
+
+    background:rgba(255,255,255,.05);
+    border-radius:10px;
+}
+
+.admin-avatar{
+    width:34px;
+    height:34px;
+
+    border-radius:9px;
+
+    background:#2563eb;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+}
+
+.admin-mini-info{
+    flex:1;
+    min-width:0;
+}
+
+.admin-mini-info strong{
+    display:block;
+    font-size:10px;
+}
+
+.admin-mini-info span{
+    display:block;
+    color:#9ca3af;
+    font-size:8px;
+}
+
+.logout-small{
+    border:none;
+    background:transparent;
+    color:#9ca3af;
+    font-size:14px;
+    padding:5px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:255px;
+    width:calc(100% - 255px);
+    min-width:0;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    height:76px;
+
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 25px;
+
+    position:sticky;
+    top:0;
+
+    z-index:900;
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.mobile-menu-btn{
+    display:none;
+
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+
+    width:38px;
+    height:38px;
+
+    border-radius:9px;
+    font-size:18px;
+}
+
+.page-heading h1{
+    font-size:20px;
+    margin-bottom:2px;
+}
+
+.page-heading p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.topbar-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.topbar-btn{
+    width:37px;
+    height:37px;
+
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:9px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:15px;
+}
+
+.admin-top-profile{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    padding-left:9px;
+    border-left:1px solid var(--border);
+}
+
+.top-avatar{
+    width:36px;
+    height:36px;
+
+    border-radius:9px;
+
+    background:var(--soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+}
+
+.top-profile-text strong{
+    display:block;
+    font-size:10px;
+}
+
+.top-profile-text span{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:25px;
+}
+
+
+/* =========================
+   PAGE INTRO
+========================= */
+
+.page-intro{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.page-intro h2{
+    font-size:21px;
+    margin-bottom:4px;
+}
+
+.page-intro p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.primary-btn{
+    border:none;
+
+    background:var(--primary);
+    color:#fff;
+
+    padding:11px 16px;
+
+    border-radius:9px;
+
+    font-size:10px;
+    font-weight:800;
+
+    box-shadow:0 6px 16px rgba(37,99,235,.2);
+}
+
+.primary-btn:hover{
+    background:var(--primary-dark);
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:var(--card);
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:17px;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:39px;
+    height:39px;
+
+    border-radius:10px;
+
+    background:var(--soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+
+    margin-bottom:11px;
+}
+
+.stat-number{
+    font-size:23px;
+    font-weight:800;
+}
+
+.stat-title{
+    font-size:10px;
+    margin-top:2px;
+}
+
+.stat-description{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:14px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:15px;
+}
+
+.toolbar-row{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.search-box{
+    flex:1;
+    min-width:220px;
+
+    position:relative;
+}
+
+.search-box span{
+    position:absolute;
+
+    left:11px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:var(--muted);
+}
+
+.search-box input{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+    color:var(--text);
+
+    padding:10px 12px 10px 33px;
+
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:10px;
+}
+
+.search-box input:focus{
+    border-color:var(--primary);
+}
+
+.filter-select{
+    border:1px solid var(--border);
+
+    background:var(--bg);
+    color:var(--text);
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:9px;
+
+    min-width:145px;
+}
+
+.filter-btn{
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    font-size:9px;
+    font-weight:700;
+}
+
+.filter-btn:hover{
+    background:var(--soft);
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-panel{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+}
+
+.panel-header{
+    padding:16px 18px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.panel-header h3{
+    font-size:14px;
+}
+
+.panel-header p{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
+.selected-info{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    min-width:950px;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    font-size:9px;
+}
+
+th{
+    background:var(--bg);
+    color:var(--muted);
+    font-weight:800;
+}
+
+td{
+    font-weight:600;
+}
+
+.checkbox{
+    width:15px;
+    height:15px;
+    cursor:pointer;
+}
+
+.student-cell{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.student-avatar{
+    width:36px;
+    height:36px;
+
+    border-radius:9px;
+
+    background:var(--soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:16px;
+
+    flex-shrink:0;
+}
+
+.student-name strong{
+    display:block;
+    font-size:10px;
+}
+
+.student-name span{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:2px;
+}
+
+.id-badge{
+    display:inline-block;
+
+    background:var(--soft);
+    color:var(--primary);
+
+    padding:5px 7px;
+
+    border-radius:6px;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+
+    padding:5px 8px;
+
+    border-radius:15px;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.status.active{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status.pending{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status.inactive{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.action-buttons{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.action-btn{
+    width:29px;
+    height:29px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:7px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:12px;
+}
+
+.action-btn:hover{
+    background:var(--soft);
+}
+
+.action-btn.delete:hover{
+    color:var(--danger);
+    background:#fef2f2;
+}
+
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination{
+    padding:13px 16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.pagination-info{
+    color:var(--muted);
+    font-size:8px;
+}
+
+.pagination-buttons{
+    display:flex;
+    gap:5px;
+}
+
+.page-btn{
+    min-width:29px;
+    height:29px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:7px;
+
+    font-size:9px;
+}
+
+.page-btn.active{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:3000;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:550px;
+
+    max-height:90vh;
+    overflow-y:auto;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:17px;
+}
+
+.modal-header h3{
+    font-size:16px;
+}
+
+.modal-close{
+    width:30px;
+    height:30px;
+
+    border:none;
+
+    background:var(--bg);
+    color:var(--text);
+
+    border-radius:8px;
+
+    font-size:16px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    display:block;
+
+    font-size:9px;
+    font-weight:800;
+
+    margin-bottom:5px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+    color:var(--text);
+
+    padding:10px;
+
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:9px;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:var(--primary);
+}
+
+.form-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:7px;
+
+    margin-top:7px;
+}
+
+.secondary-btn{
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:var(--text);
+
+    padding:10px 14px;
+
+    border-radius:8px;
+
+    font-size:9px;
+    font-weight:700;
+}
+
+.save-btn{
+    border:none;
+
+    background:var(--primary);
+    color:#fff;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    font-size:9px;
+    font-weight:800;
+}
+
+
+/* =========================
+   DETAIL CARD
+========================= */
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:90px 1fr;
+    gap:15px;
+    margin-bottom:17px;
+}
+
+.detail-avatar{
+    width:80px;
+    height:80px;
+
+    border-radius:15px;
+
+    background:var(--soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:35px;
+}
+
+.detail-info h3{
+    font-size:16px;
+    margin-bottom:3px;
+}
+
+.detail-info p{
+    color:var(--muted);
+    font-size:9px;
+    margin-bottom:5px;
+}
+
+.detail-item{
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.detail-item:last-child{
+    border-bottom:none;
+}
+
+.detail-item span{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-bottom:2px;
+}
+
+.detail-item strong{
+    font-size:10px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    padding:20px 25px;
+
+    border-top:1px solid var(--border);
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    text-align:center;
+
+    margin-top:24px;
+}
+
+
+/* =========================
+   SIDEBAR OVERLAY
+========================= */
+
+.sidebar-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    z-index:950;
+
+    display:none;
+}
+
+.sidebar-overlay.show{
+    display:block;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+
+    .mobile-menu-btn{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .top-profile-text{
+        display:none;
+    }
+
+    .admin-top-profile{
+        border-left:none;
+        padding-left:0;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        height:65px;
+        padding:0 13px;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .page-heading h1{
+        font-size:16px;
+    }
+
+    .page-heading p{
+        display:none;
+    }
+
+    .page-intro{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .page-intro h2{
+        font-size:18px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+        gap:10px;
+    }
+
+    .toolbar-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search-box{
+        min-width:0;
+    }
+
+    .filter-select,
+    .filter-btn{
+        width:100%;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .pagination{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}
+
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+
+    .sidebar,
+    .topbar,
+    .toolbar,
+    .action-buttons,
+    .footer{
+        display:none !important;
+    }
+
+    .main{
+        margin:0;
+        width:100%;
+    }
+
+    .content{
+        padding:0;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+<div class="sidebar-logo">
+
+<img
+src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+alt="SNK IT Institute Logo"
+>
+
+<div class="sidebar-logo-text">
+
+SNK IT Institute
+
+<small>
+Admin Control Panel
+</small>
+
+</div>
+
+</div>
+
+
+<div class="sidebar-menu">
+
+<div class="menu-label">
+Main
+</div>
+
+
+<a class="menu-item" href="admin.html">
+
+<span class="menu-icon">📊</span>
+
+<span>Dashboard</span>
+
+</a>
+
+
+<button
+class="menu-item active"
+onclick="setActive(this)">
+
+<span class="menu-icon">👨‍🎓</span>
+
+<span>Students</span>
+
+<span class="menu-badge">25</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Courses')">
+
+<span class="menu-icon">🎓</span>
+
+<span>Courses</span>
+
+</button>
+
+
+<div class="menu-label">
+Academic
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Assignments')">
+
+<span class="menu-icon">📝</span>
+
+<span>Assignments</span>
+
+<span class="menu-badge">2</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Quiz')">
+
+<span class="menu-icon">🎯</span>
+
+<span>Quiz</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Results')">
+
+<span class="menu-icon">🏆</span>
+
+<span>Results</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Attendance')">
+
+<span class="menu-icon">📅</span>
+
+<span>Attendance</span>
+
+</button>
+
+
+<div class="menu-label">
+Content
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Resources')">
+
+<span class="menu-icon">📚</span>
+
+<span>Resources</span>
+
+</button>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Notices')">
+
+<span class="menu-icon">📢</span>
+
+<span>Notices</span>
+
+</button>
+
+
+<div class="menu-label">
+System
+</div>
+
+
+<button
+class="menu-item"
+onclick="showDemo('Settings')">
+
+<span class="menu-icon">⚙️</span>
+
+<span>Settings</span>
+
+</button>
+
+</div>
+
+
+<div class="sidebar-footer">
+
+<div class="admin-mini">
+
+<div class="admin-avatar">
+👨‍💼
+</div>
+
+<div class="admin-mini-info">
+
+<strong>
+Super Admin
+</strong>
+
+<span>
+Administrator
+</span>
+
+</div>
+
+<button
+class="logout-small"
+onclick="logoutDemo()">
+🚪
+</button>
+
+</div>
+
+</div>
+
+</aside>
+
+
+<div
+class="sidebar-overlay"
+id="sidebarOverlay"
+onclick="closeSidebar()">
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<!-- TOPBAR -->
+
+<header class="topbar">
+
+<div class="topbar-left">
+
+<button
+class="mobile-menu-btn"
+onclick="toggleSidebar()">
+☰
+</button>
+
+
+<div class="page-heading">
+
+<h1>
+Students Management
+</h1>
+
+<p>
+SNK IT Institute • Student Control Center
+</p>
+
+</div>
+
+</div>
+
+
+<div class="topbar-actions">
+
+<button
+class="topbar-btn"
+onclick="toggleTheme()"
+id="themeBtn">
+🌙
+</button>
+
+
+<button
+class="topbar-btn"
+onclick="showDemo('Notifications')">
+🔔
+</button>
+
+
+<div class="admin-top-profile">
+
+<div class="top-avatar">
+👨‍💼
+</div>
+
+<div class="top-profile-text">
+
+<strong>
+Super Admin
+</strong>
+
+<span>
+Online
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+
+<!-- PAGE INTRO -->
+
+<section class="page-intro">
+
+<div>
+
+<h2>
+👨‍🎓 Students Management
+</h2>
+
+<p>
+Student account, course, batch এবং status পরিচালনা করুন।
+</p>
+
+</div>
+
+
+<button
+class="primary-btn"
+onclick="openAddStudent()">
+
+＋ Add New Student
+
+</button>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="stats-grid">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+👨‍🎓
+</div>
+
+<div class="stat-number">
+25
+</div>
+
+<div class="stat-title">
+Total Students
+</div>
+
+<div class="stat-description">
+All registered students
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🟢
+</div>
+
+<div class="stat-number">
+21
+</div>
+
+<div class="stat-title">
+Active Students
+</div>
+
+<div class="stat-description">
+Currently active accounts
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+⏳
+</div>
+
+<div class="stat-number">
+2
+</div>
+
+<div class="stat-title">
+Pending Students
+</div>
+
+<div class="stat-description">
+Waiting for activation
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🔴
+</div>
+
+<div class="stat-number">
+2
+</div>
+
+<div class="stat-title">
+Inactive Students
+</div>
+
+<div class="stat-description">
+Inactive accounts
+</div>
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     SEARCH / FILTER
+===================================================== -->
+
+<section class="toolbar">
+
+<div class="toolbar-row">
+
+
+<div class="search-box">
+
+<span>
+🔍
+</span>
+
+<input
+type="text"
+id="studentSearch"
+placeholder="Student name, ID, email বা phone দিয়ে search করুন..."
+oninput="filterStudents()"
+>
+
+</div>
+
+
+<select
+class="filter-select"
+id="courseFilter"
+onchange="filterStudents()">
+
+<option value="all">
+All Courses
+</option>
+
+<option value="Computer Office">
+Computer Office
+</option>
+
+<option value="Graphics Design">
+Graphics Design
+</option>
+
+<option value="Digital Marketing">
+Digital Marketing
+</option>
+
+</select>
+
+
+<select
+class="filter-select"
+id="batchFilter"
+onchange="filterStudents()">
+
+<option value="all">
+All Batches
+</option>
+
+<option value="Batch 01">
+Batch 01
+</option>
+
+<option value="Batch 02">
+Batch 02
+</option>
+
+</select>
+
+
+<select
+class="filter-select"
+id="statusFilter"
+onchange="filterStudents()">
+
+<option value="all">
+All Status
+</option>
+
+<option value="Active">
+Active
+</option>
+
+<option value="Pending">
+Pending
+</option>
+
+<option value="Inactive">
+Inactive
+</option>
+
+</select>
+
+
+<button
+class="filter-btn"
+onclick="resetFilters()">
+↻ Reset
+</button>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     STUDENTS TABLE
+===================================================== -->
+
+<section class="table-panel">
+
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+📋 Student List
+</h3>
+
+<p>
+Student information overview
+</p>
+
+</div>
+
+
+<div class="selected-info" id="selectedInfo">
+0 selected
+</div>
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>
+<input
+type="checkbox"
+class="checkbox"
+id="selectAll"
+onclick="toggleSelectAll(this)"
+>
+</th>
+
+<th>
+Student
+</th>
+
+<th>
+Student ID
+</th>
+
+<th>
+Course
+</th>
+
+<th>
+Batch
+</th>
+
+<th>
+Phone
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Joined
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="studentTableBody">
+
+
+<tr
+data-name="Demo Student"
+data-id="SNK-1001"
+data-email="demo@student.com"
+data-phone="01700000001"
+data-course="Computer Office"
+data-batch="Batch 01"
+data-status="Active"
+>
+
+<td>
+
+<input
+type="checkbox"
+class="student-check checkbox"
+onchange="updateSelectedCount()"
+>
+
+</td>
+
+
+<td>
+
+<div class="student-cell">
+
+<div class="student-avatar">
+👨‍🎓
+</div>
+
+<div class="student-name">
+
+<strong>
+Demo Student
+</strong>
+
+<span>
+demo@student.com
+</span>
+
+</div>
+
+</div>
+
+</td>
+
+
+<td>
+
+<span class="id-badge">
+SNK-1001
+</span>
+
+</td>
+
+
+<td>
+Computer Office
+</td>
+
+
+<td>
+Batch 01
+</td>
+
+
+<td>
+01700000001
+</td>
+
+
+<td>
+
+<span class="status active">
+● Active
+</span>
+
+</td>
+
+
+<td>
+01 Sep 2026
+</td>
+
+
+<td>
+
+<div class="action-buttons">
+
+<button
+class="action-btn"
+title="View"
+onclick="viewStudent(
+'Demo Student',
+'SNK-1001',
+'Computer Office',
+'Batch 01',
+'01700000001',
+'demo@student.com',
+'Active',
+'01 Sep 2026'
+)">
+👁
+</button>
+
+
+<button
+class="action-btn"
+title="Edit"
+onclick="editStudent('Demo Student')">
+✏️
+</button>
+
+
+<button
+class="action-btn delete"
+title="Delete"
+onclick="deleteStudent('Demo Student')">
+🗑
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-name="Student Two"
+data-id="SNK-1002"
+data-email="student2@example.com"
+data-phone="01700000002"
+data-course="Graphics Design"
+data-batch="Batch 01"
+data-status="Active"
+>
+
+<td>
+
+<input
+type="checkbox"
+class="student-check checkbox"
+onchange="updateSelectedCount()"
+>
+
+</td>
+
+
+<td>
+
+<div class="student-cell">
+
+<div class="student-avatar">
+👩‍🎓
+</div>
+
+<div class="student-name">
+
+<strong>
+Student Two
+</strong>
+
+<span>
+student2@example.com
+</span>
+
+</div>
+
+</div>
+
+</td>
+
+
+<td>
+
+<span class="id-badge">
+SNK-1002
+</span>
+
+</td>
+
+
+<td>
+Graphics Design
+</td>
+
+
+<td>
+Batch 01
+</td>
+
+
+<td>
+01700000002
+</td>
+
+
+<td>
+
+<span class="status active">
+● Active
+</span>
+
+</td>
+
+
+<td>
+02 Sep 2026
+</td>
+
+
+<td>
+
+<div class="action-buttons">
+
+<button
+class="action-btn"
+onclick="viewStudent(
+'Student Two',
+'SNK-1002',
+'Graphics Design',
+'Batch 01',
+'01700000002',
+'student2@example.com',
+'Active',
+'02 Sep 2026'
+)">
+👁
+</button>
+
+
+<button
+class="action-btn"
+onclick="editStudent('Student Two')">
+✏️
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteStudent('Student Two')">
+🗑
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-name="Student Three"
+data-id="SNK-1003"
+data-email="student3@example.com"
+data-phone="01700000003"
+data-course="Digital Marketing"
+data-batch="Batch 02"
+data-status="Pending"
+>
+
+<td>
+
+<input
+type="checkbox"
+class="student-check checkbox"
+onchange="updateSelectedCount()"
+>
+
+</td>
+
+
+<td>
+
+<div class="student-cell">
+
+<div class="student-avatar">
+👨‍🎓
+</div>
+
+<div class="student-name">
+
+<strong>
+Student Three
+</strong>
+
+<span>
+student3@example.com
+</span>
+
+</div>
+
+</div>
+
+</td>
+
+
+<td>
+
+<span class="id-badge">
+SNK-1003
+</span>
+
+</td>
+
+
+<td>
+Digital Marketing
+</td>
+
+
+<td>
+Batch 02
+</td>
+
+
+<td>
+01700000003
+</td>
+
+
+<td>
+
+<span class="status pending">
+● Pending
+</span>
+
+</td>
+
+
+<td>
+02 Sep 2026
+</td>
+
+
+<td>
+
+<div class="action-buttons">
+
+<button
+class="action-btn"
+onclick="viewStudent(
+'Student Three',
+'SNK-1003',
+'Digital Marketing',
+'Batch 02',
+'01700000003',
+'student3@example.com',
+'Pending',
+'02 Sep 2026'
+)">
+👁
+</button>
+
+
+<button
+class="action-btn"
+onclick="editStudent('Student Three')">
+✏️
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteStudent('Student Three')">
+🗑
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+
+
+<tr
+data-name="Student Four"
+data-id="SNK-1004"
+data-email="student4@example.com"
+data-phone="01700000004"
+data-course="Computer Office"
+data-batch="Batch 02"
+data-status="Inactive"
+>
+
+<td>
+
+<input
+type="checkbox"
+class="student-check checkbox"
+onchange="updateSelectedCount()"
+>
+
+</td>
+
+
+<td>
+
+<div class="student-cell">
+
+<div class="student-avatar">
+👩‍🎓
+</div>
+
+<div class="student-name">
+
+<strong>
+Student Four
+</strong>
+
+<span>
+student4@example.com
+</span>
+
+</div>
+
+</div>
+
+</td>
+
+
+<td>
+
+<span class="id-badge">
+SNK-1004
+</span>
+
+</td>
+
+
+<td>
+Computer Office
+</td>
+
+
+<td>
+Batch 02
+</td>
+
+
+<td>
+01700000004
+</td>
+
+
+<td>
+
+<span class="status inactive">
+● Inactive
+</span>
+
+</td>
+
+
+<td>
+28 Aug 2026
+</td>
+
+
+<td>
+
+<div class="action-buttons">
+
+<button
+class="action-btn"
+onclick="viewStudent(
+'Student Four',
+'SNK-1004',
+'Computer Office',
+'Batch 02',
+'01700000004',
+'student4@example.com',
+'Inactive',
+'28 Aug 2026'
+)">
+👁
+</button>
+
+
+<button
+class="action-btn"
+onclick="editStudent('Student Four')">
+✏️
+</button>
+
+
+<button
+class="action-btn delete"
+onclick="deleteStudent('Student Four')">
+🗑
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="pagination">
+
+<div class="pagination-info">
+Showing 1–4 of 25 students
+</div>
+
+
+<div class="pagination-buttons">
+
+<button class="page-btn active">
+1
+</button>
+
+<button
+class="page-btn"
+onclick="showDemo('Page 2')">
+2
+</button>
+
+<button
+class="page-btn"
+onclick="showDemo('Page 3')">
+3
+</button>
+
+<button
+class="page-btn"
+onclick="showDemo('Next Page')">
+›
+</button>
+
+</div>
+
+</div>
+
+
+</section>
+
+
+<footer class="footer">
+
+SNK IT Institute • Students Management 1.10
+
+<br>
+
+© 2026 SNK IT Institute. All Rights Reserved.
+
+</footer>
+
+
+</div>
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     ADD STUDENT MODAL
+===================================================== -->
+
+<div
+class="modal-overlay"
+id="addStudentModal"
+onclick="closeModalOutside(event)">
+
+<div class="modal">
+
+<div class="modal-header">
+
+<h3>
+👨‍🎓 Add New Student
+</h3>
+
+<button
+class="modal-close"
+onclick="closeAddStudent()">
+×
+</button>
+
+</div>
+
+
+<form
+id="studentForm"
+onsubmit="saveStudent(event)">
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Student Name
+</label>
+
+<input
+type="text"
+id="studentName"
+placeholder="Student name"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Phone
+</label>
+
+<input
+type="tel"
+id="studentPhone"
+placeholder="01XXXXXXXXX"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Email
+</label>
+
+<input
+type="email"
+id="studentEmail"
+placeholder="student@email.com">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Course
+</label>
+
+<select
+id="studentCourse"
+required>
+
+<option value="">
+Select Course
+</option>
+
+<option>
+Computer Office
+</option>
+
+<option>
+Graphics Design
+</option>
+
+<option>
+Digital Marketing
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Batch
+</label>
+
+<select
+id="studentBatch"
+required>
+
+<option value="">
+Select Batch
+</option>
+
+<option>
+Batch 01
+</option>
+
+<option>
+Batch 02
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Account Status
+</label>
+
+<select
+id="studentStatus">
+
+<option>
+Active
+</option>
+
+<option>
+Pending
+</option>
+
+<option>
+Inactive
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+type="button"
+class="secondary-btn"
+onclick="closeAddStudent()">
+Cancel
+</button>
+
+
+<button
+type="submit"
+class="save-btn">
+Save Student
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     VIEW STUDENT MODAL
+===================================================== -->
+
+<div
+class="modal-overlay"
+id="viewStudentModal"
+onclick="closeViewOutside(event)">
+
+<div class="modal">
+
+<div class="modal-header">
+
+<h3>
+👤 Student Details
+</h3>
+
+<button
+class="modal-close"
+onclick="closeViewStudent()">
+×
+</button>
+
+</div>
+
+
+<div class="detail-grid">
+
+<div class="detail-avatar">
+👨‍🎓
+</div>
+
+
+<div class="detail-info">
+
+<h3 id="detailName">
+Student Name
+</h3>
+
+<p id="detailEmail">
+student@email.com
+</p>
+
+<span
+class="status active"
+id="detailStatus">
+● Active
+</span>
+
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<span>
+Student ID
+</span>
+
+<strong id="detailId">
+SNK-1001
+</strong>
+
+</div>
+
+
+<div class="detail-item">
+
+<span>
+Course
+</span>
+
+<strong id="detailCourse">
+Computer Office
+</strong>
+
+</div>
+
+
+<div class="detail-item">
+
+<span>
+Batch
+</span>
+
+<strong id="detailBatch">
+Batch 01
+</strong>
+
+</div>
+
+
+<div class="detail-item">
+
+<span>
+Phone
+</span>
+
+<strong id="detailPhone">
+01700000001
+</strong>
+
+</div>
+
+
+<div class="detail-item">
+
+<span>
+Joined Date
+</span>
+
+<strong id="detailJoined">
+01 Sep 2026
+</strong>
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+class="secondary-btn"
+onclick="closeViewStudent()">
+Close
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =========================
+   THEME
+========================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("dark");
+
+    const isDark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "snkAdminTheme",
+        isDark ? "dark" : "light"
+    );
+
+    document.getElementById("themeBtn").textContent =
+        isDark ? "☀️" : "🌙";
+}
+
+
+(function(){
+
+    const savedTheme =
+        localStorage.getItem("snkAdminTheme");
+
+    if(savedTheme === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeBtn").textContent =
+            "☀️";
+    }
+
+})();
+
+
+/* =========================
+   MOBILE SIDEBAR
+========================= */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.toggle("show");
+}
+
+
+function closeSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+    document
+        .getElementById("sidebarOverlay")
+        .classList.remove("show");
+}
+
+
+/* =========================
+   ACTIVE MENU
+========================= */
+
+function setActive(element){
+
+    document
+        .querySelectorAll(".menu-item")
+        .forEach(function(item){
+
+            item.classList.remove("active");
+
+        });
+
+    element.classList.add("active");
+
+}
+
+
+/* =========================
+   DEMO FUNCTION
+========================= */
+
+function showDemo(name){
+
+    alert(
+        name +
+        " section এখন Demo UI mode-এ আছে.\n\nপরবর্তী ধাপে এই feature-এর working system তৈরি করা হবে।"
+    );
+
+}
+
+
+/* =========================
+   ADD STUDENT
+========================= */
+
+function openAddStudent(){
+
+    document
+        .getElementById("addStudentModal")
+        .classList.add("show");
+
+}
+
+
+function closeAddStudent(){
+
+    document
+        .getElementById("addStudentModal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   SAVE STUDENT DEMO
+========================= */
+
+function saveStudent(event){
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("studentName").value.trim();
+
+    const phone =
+        document.getElementById("studentPhone").value.trim();
+
+    const email =
+        document.getElementById("studentEmail").value.trim();
+
+    const course =
+        document.getElementById("studentCourse").value;
+
+    const batch =
+        document.getElementById("studentBatch").value;
+
+    const status =
+        document.getElementById("studentStatus").value;
+
+
+    if(!name || !phone || !course || !batch){
+
+        alert(
+            "দয়া করে প্রয়োজনীয় তথ্য পূরণ করুন।"
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "Student information received!\n\n" +
+        "Name: " + name +
+        "\nPhone: " + phone +
+        "\nEmail: " + email +
+        "\nCourse: " + course +
+        "\nBatch: " + batch +
+        "\nStatus: " + status +
+        "\n\nএটি এখন Demo mode। Real student database পরে যুক্ত হবে।"
+    );
+
+
+    document
+        .getElementById("studentForm")
+        .reset();
+
+    closeAddStudent();
+
+}
+
+
+/* =========================
+   VIEW STUDENT
+========================= */
+
+function viewStudent(
+    name,
+    id,
+    course,
+    batch,
+    phone,
+    email,
+    status,
+    joined
+){
+
+    document.getElementById("detailName").textContent =
+        name;
+
+    document.getElementById("detailId").textContent =
+        id;
+
+    document.getElementById("detailCourse").textContent =
+        course;
+
+    document.getElementById("detailBatch").textContent =
+        batch;
+
+    document.getElementById("detailPhone").textContent =
+        phone;
+
+    document.getElementById("detailEmail").textContent =
+        email;
+
+    document.getElementById("detailJoined").textContent =
+        joined;
+
+
+    const statusElement =
+        document.getElementById("detailStatus");
+
+
+    statusElement.className =
+        "status " +
+        (
+            status === "Active"
+            ? "active"
+            : status === "Pending"
+            ? "pending"
+            : "inactive"
+        );
+
+
+    statusElement.textContent =
+        "● " + status;
+
+
+    document
+        .getElementById("viewStudentModal")
+        .classList.add("show");
+
+}
+
+
+function closeViewStudent(){
+
+    document
+        .getElementById("viewStudentModal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   EDIT DEMO
+========================= */
+
+function editStudent(name){
+
+    alert(
+        "Edit Student:\n\n" +
+        name +
+        "\n\nStudent edit system পরবর্তী working step-এ তৈরি হবে।"
+    );
+
+}
+
+
+/* =========================
+   DELETE DEMO
+========================= */
+
+function deleteStudent(name){
+
+    const answer =
+        confirm(
+            name +
+            " কে delete করতে চান?"
+        );
+
+
+    if(answer){
+
+        alert(
+            "Demo mode-এ delete action selected হয়েছে।\n\nReal database delete system পরে যুক্ত হবে।"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   SEARCH + FILTER
+========================= */
+
+function filterStudents(){
+
+    const search =
+        document
+            .getElementById("studentSearch")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const course =
+        document
+            .getElementById("courseFilter")
+            .value;
+
+
+    const batch =
+        document
+            .getElementById("batchFilter")
+            .value;
+
+
+    const status =
+        document
+            .getElementById("statusFilter")
+            .value;
+
+
+    const rows =
+        document.querySelectorAll(
+            "#studentTableBody tr"
+        );
+
+
+    let visibleCount = 0;
+
+
+    rows.forEach(function(row){
+
+        const text =
+            row.innerText.toLowerCase();
+
+
+        const rowCourse =
+            row.dataset.course;
+
+
+        const rowBatch =
+            row.dataset.batch;
+
+
+        const rowStatus =
+            row.dataset.status;
+
+
+        const matchesSearch =
+            !search ||
+            text.includes(search);
+
+
+        const matchesCourse =
+            course === "all" ||
+            rowCourse === course;
+
+
+        const matchesBatch =
+            batch === "all" ||
+            rowBatch === batch;
+
+
+        const matchesStatus =
+            status === "all" ||
+            rowStatus === status;
+
+
+        if(
+            matchesSearch &&
+            matchesCourse &&
+            matchesBatch &&
+            matchesStatus
+        ){
+
+            row.style.display = "";
+
+            visibleCount++;
+
+        }else{
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+
+    document
+        .querySelector(".pagination-info")
+        .textContent =
+        "Showing " +
+        visibleCount +
+        " matching students";
+
+}
+
+
+/* =========================
+   RESET FILTER
+========================= */
+
+function resetFilters(){
+
+    document
+        .getElementById("studentSearch")
+        .value = "";
+
+    document
+        .getElementById("courseFilter")
+        .value = "all";
+
+    document
+        .getElementById("batchFilter")
+        .value = "all";
+
+    document
+        .getElementById("statusFilter")
+        .value = "all";
+
+
+    filterStudents();
+
+}
+
+
+/* =========================
+   SELECT ALL
+========================= */
+
+function toggleSelectAll(master){
+
+    const checkboxes =
+        document.querySelectorAll(
+            ".student-check"
+        );
+
+
+    checkboxes.forEach(function(box){
+
+        box.checked =
+            master.checked;
+
+    });
+
+
+    updateSelectedCount();
+
+}
+
+
+/* =========================
+   SELECT COUNT
+========================= */
+
+function updateSelectedCount(){
+
+    const selected =
+        document.querySelectorAll(
+            ".student-check:checked"
+        ).length;
+
+
+    document
+        .getElementById("selectedInfo")
+        .textContent =
+        selected +
+        " selected";
+
+}
+
+
+/* =========================
+   MODAL OUTSIDE CLICK
+========================= */
+
+function closeModalOutside(event){
+
+    if(
+        event.target ===
+        document.getElementById("addStudentModal")
+    ){
+
+        closeAddStudent();
+
+    }
+
+}
+
+
+function closeViewOutside(event){
+
+    if(
+        event.target ===
+        document.getElementById("viewStudentModal")
+    ){
+
+        closeViewStudent();
+
+    }
+
+}
+
+
+/* =========================
+   LOGOUT DEMO
+========================= */
+
+function logoutDemo(){
+
+    const answer =
+        confirm(
+            "Admin Logout করতে চান?"
+        );
+
+
+    if(answer){
+
+        alert(
+            "Demo Logout সম্পন্ন হয়েছে।\n\nReal Admin Login/Logout system 6.1 থেকে যুক্ত হবে।"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeAddStudent();
+            closeViewStudent();
+            closeSidebar();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
