@@ -1,0 +1,2942 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Student ID Cards</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --primary-soft:#eff6ff;
+
+    --success:#16a34a;
+    --danger:#dc2626;
+    --warning:#d97706;
+
+    --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+
+    --primary-soft:#172554;
+
+    --shadow:0 10px 30px rgba(0,0,0,.28);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    min-height:70px;
+
+    padding:12px 25px;
+
+    background:var(--card);
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    box-shadow:0 4px 20px rgba(15,23,42,.04);
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:44px;
+    height:44px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:14px;
+    font-weight:900;
+    line-height:1.2;
+}
+
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.header-btn{
+    min-height:38px;
+
+    padding:0 12px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:9px;
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.header-btn:hover{
+    background:var(--primary-soft);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    max-width:1250px;
+    margin:auto;
+
+    padding:28px 20px 50px;
+}
+
+.page-header{
+    display:flex;
+
+    align-items:flex-end;
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:18px;
+}
+
+.page-title h1{
+    font-size:23px;
+    margin-bottom:4px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.btn{
+    min-height:38px;
+
+    padding:0 13px;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.btn:hover{
+    background:var(--primary-soft);
+}
+
+.btn.primary{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+}
+
+.btn.primary:hover{
+    background:var(--primary-dark);
+}
+
+.btn.success{
+    background:var(--success);
+    border-color:var(--success);
+    color:#fff;
+}
+
+.btn.danger{
+    background:var(--danger);
+    border-color:var(--danger);
+    color:#fff;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.stat{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:14px;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:35px;
+    height:35px;
+
+    border-radius:9px;
+
+    background:var(--primary-soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:16px;
+
+    margin-bottom:8px;
+}
+
+.stat-number{
+    font-size:22px;
+    font-weight:900;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.stat.blue .stat-number{
+    color:var(--primary);
+}
+
+.stat.green .stat-number{
+    color:var(--success);
+}
+
+.stat.orange .stat-number{
+    color:var(--warning);
+}
+
+.stat.red .stat-number{
+    color:var(--danger);
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:15px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:17px;
+}
+
+.filter-title{
+    font-size:11px;
+    font-weight:900;
+
+    margin-bottom:12px;
+}
+
+.filters{
+    display:grid;
+
+    grid-template-columns:
+        1.6fr 1fr auto;
+
+    gap:9px;
+
+    align-items:end;
+}
+
+.field label{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    font-weight:900;
+
+    margin-bottom:5px;
+}
+
+.field input,
+.field select{
+    width:100%;
+
+    height:38px;
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    background:var(--card);
+
+    color:var(--text);
+
+    padding:0 10px;
+
+    outline:none;
+
+    font-size:8px;
+}
+
+.field input:focus,
+.field select:focus{
+    border-color:var(--primary);
+}
+
+
+/* =========================================================
+   ID CARD GRID
+========================================================= */
+
+.card-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+}
+
+
+/* =========================================================
+   DIGITAL ID CARD
+========================================================= */
+
+.id-card{
+    width:100%;
+
+    max-width:390px;
+
+    margin:auto;
+
+    background:#fff;
+
+    color:#111827;
+
+    border-radius:17px;
+
+    overflow:hidden;
+
+    border:1px solid #dbe3ef;
+
+    box-shadow:
+        0 15px 35px rgba(15,23,42,.12);
+
+    position:relative;
+
+    transition:.2s;
+}
+
+.id-card:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 20px 42px rgba(15,23,42,.16);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.id-header{
+    min-height:84px;
+
+    padding:13px 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #2563eb
+        );
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.id-header::after{
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    border:20px solid rgba(255,255,255,.08);
+
+    right:-40px;
+    top:-45px;
+}
+
+.id-logo{
+    width:43px;
+    height:43px;
+
+    object-fit:contain;
+
+    background:#fff;
+
+    border-radius:9px;
+
+    padding:3px;
+
+    position:relative;
+
+    z-index:1;
+}
+
+.institute-info{
+    position:relative;
+    z-index:1;
+}
+
+.institute-info h3{
+    font-size:11px;
+    font-weight:900;
+}
+
+.institute-info p{
+    font-size:6px;
+    opacity:.9;
+    margin-top:3px;
+}
+
+.id-label{
+    position:absolute;
+
+    right:12px;
+    bottom:9px;
+
+    font-size:6px;
+
+    font-weight:900;
+
+    letter-spacing:.7px;
+
+    opacity:.95;
+
+    z-index:2;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.id-body{
+    padding:17px 16px 15px;
+
+    display:grid;
+
+    grid-template-columns:
+        85px 1fr;
+
+    gap:15px;
+
+    min-height:160px;
+}
+
+.student-photo{
+    width:82px;
+    height:100px;
+
+    border-radius:9px;
+
+    background:#eff6ff;
+
+    border:2px solid #dbeafe;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    color:#2563eb;
+
+    font-size:27px;
+
+    font-weight:900;
+}
+
+.student-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.student-info{
+    min-width:0;
+}
+
+.student-info h2{
+    font-size:13px;
+
+    font-weight:900;
+
+    line-height:1.3;
+
+    margin-bottom:3px;
+
+    word-break:break-word;
+}
+
+.student-course{
+    display:inline-block;
+
+    background:#eff6ff;
+
+    color:#1d4ed8;
+
+    padding:3px 7px;
+
+    border-radius:20px;
+
+    font-size:6px;
+
+    font-weight:900;
+
+    margin-bottom:9px;
+}
+
+.info-item{
+    display:flex;
+
+    gap:6px;
+
+    margin-bottom:6px;
+
+    font-size:6.5px;
+
+    line-height:1.35;
+}
+
+.info-item .label{
+    color:#6b7280;
+
+    width:54px;
+
+    flex:none;
+}
+
+.info-item .value{
+    font-weight:800;
+
+    overflow-wrap:anywhere;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+========================================================= */
+
+.id-footer{
+    border-top:1px dashed #d1d5db;
+
+    padding:10px 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:8px;
+
+    background:#fafafa;
+}
+
+.valid-text{
+    font-size:6px;
+    color:#6b7280;
+}
+
+.valid-text strong{
+    display:block;
+
+    color:#111827;
+
+    font-size:7px;
+
+    margin-top:2px;
+}
+
+.status-badge{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:4px;
+
+    font-size:6px;
+
+    font-weight:900;
+
+    padding:5px 8px;
+
+    border-radius:20px;
+}
+
+.status-active{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.status-inactive{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+========================================================= */
+
+.card-actions{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap:6px;
+
+    padding:10px 12px;
+
+    background:var(--card);
+
+    border-top:1px solid var(--border);
+}
+
+.card-action{
+    min-height:33px;
+
+    border:1px solid var(--border);
+
+    border-radius:7px;
+
+    background:var(--card);
+
+    color:var(--text);
+
+    font-size:7px;
+
+    font-weight:900;
+}
+
+.card-action:hover{
+    background:var(--primary-soft);
+}
+
+.card-action.primary{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:#fff;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+    grid-column:1/-1;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:55px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.empty-icon{
+    font-size:40px;
+    margin-bottom:9px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:3000;
+
+    background:rgba(15,23,42,.65);
+
+    backdrop-filter:blur(5px);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:15px;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+
+    max-width:720px;
+
+    max-height:94vh;
+
+    overflow:auto;
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.3);
+}
+
+.modal-header{
+    position:sticky;
+    top:0;
+
+    z-index:5;
+
+    background:var(--card);
+
+    padding:15px 18px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+}
+
+.modal-header h2{
+    font-size:13px;
+}
+
+.close-btn{
+    width:32px;
+    height:32px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:8px;
+
+    font-size:16px;
+}
+
+.close-btn:hover{
+    color:var(--danger);
+
+    background:#fee2e2;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+.preview-area{
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    padding:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    overflow:auto;
+}
+
+.preview-card{
+    width:390px;
+
+    min-width:390px;
+}
+
+
+/* =========================================================
+   PRINT AREA
+========================================================= */
+
+.print-wrapper{
+    display:none;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    z-index:5000;
+
+    background:#111827;
+
+    color:#fff;
+
+    padding:11px 15px;
+
+    border-radius:9px;
+
+    font-size:9px;
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    padding:25px 10px 5px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1050px){
+
+    .card-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .filters{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .filters .btn{
+        width:100%;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .header{
+        padding:10px 13px;
+    }
+
+    .main{
+        padding:18px 13px 35px;
+    }
+
+    .page-header{
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .actions{
+        width:100%;
+    }
+
+    .actions .btn{
+        flex:1;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .card-grid{
+        grid-template-columns:1fr;
+    }
+
+    .id-card{
+        max-width:390px;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .stats{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .stat{
+        padding:11px;
+    }
+
+    .stat-number{
+        font-size:18px;
+    }
+
+    .preview-area{
+        padding:10px;
+
+        justify-content:flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:12mm;
+    }
+
+    body{
+        background:#fff !important;
+    }
+
+    .header,
+    .page-header,
+    .stats,
+    .filter-card,
+    .card-actions,
+    .footer,
+    .modal-overlay,
+    .toast{
+        display:none !important;
+    }
+
+    .main{
+        max-width:none;
+        padding:0;
+    }
+
+    .card-grid{
+        display:block;
+    }
+
+    .profile-card{
+        display:block;
+
+        page-break-inside:avoid;
+
+        margin:0 auto 20px;
+    }
+
+    .id-card{
+        box-shadow:none;
+
+        border:1px solid #bbb;
+    }
+
+}
+
+
+/* =========================================================
+   SINGLE CARD PRINT
+========================================================= */
+
+body.single-print .header,
+body.single-print .main > *,
+body.single-print .footer,
+body.single-print .modal-overlay,
+body.single-print .toast{
+    display:none !important;
+}
+
+body.single-print .print-wrapper{
+    display:flex !important;
+
+    min-height:100vh;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#fff;
+}
+
+body.single-print{
+    background:#fff;
+}
+
+body.single-print .id-card{
+    box-shadow:none;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+        >
+
+        <div class="logo-text">
+
+            SNK IT Institute
+
+            <small>
+                Student ID Card Management
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="header-btn"
+            onclick="toggleTheme()"
+            id="themeBtn"
+        >
+            🌙
+        </button>
+
+        <button
+            class="header-btn"
+            onclick="goBack()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<main class="main">
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="page-title">
+
+            <h1>
+                🪪 Student ID Cards
+            </h1>
+
+            <p>
+                Student-এর digital ID card preview, print এবং management করুন।
+            </p>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="btn"
+                onclick="printAllCards()"
+            >
+                🖨️ Print All
+            </button>
+
+            <button
+                class="btn primary"
+                onclick="refreshStudents()"
+            >
+                🔄 Refresh
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <section class="stats">
+
+
+        <div class="stat blue">
+
+            <div class="stat-icon">
+                👨‍🎓
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalStudents"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Total Students
+            </div>
+
+        </div>
+
+
+        <div class="stat green">
+
+            <div class="stat-icon">
+                🪪
+            </div>
+
+            <div
+                class="stat-number"
+                id="activeCards"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Active ID Cards
+            </div>
+
+        </div>
+
+
+        <div class="stat orange">
+
+            <div class="stat-icon">
+                🎓
+            </div>
+
+            <div
+                class="stat-number"
+                id="courseCount"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Courses
+            </div>
+
+        </div>
+
+
+        <div class="stat red">
+
+            <div class="stat-icon">
+                ⛔
+            </div>
+
+            <div
+                class="stat-number"
+                id="inactiveCards"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Inactive Students
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FILTER
+    ====================================================== -->
+
+    <section class="filter-card">
+
+        <div class="filter-title">
+            🔎 Search & Filter ID Cards
+        </div>
+
+
+        <div class="filters">
+
+
+            <div class="field">
+
+                <label>
+                    Search
+                </label>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Name, Student ID, phone, email..."
+                    oninput="renderCards()"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Course
+                </label>
+
+                <select
+                    id="courseFilter"
+                    onchange="renderCards()"
+                >
+
+                    <option value="all">
+                        All Courses
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="btn"
+                onclick="resetFilters()"
+            >
+                Reset
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CARD GRID
+    ====================================================== -->
+
+    <section
+        class="card-grid"
+        id="cardGrid"
+    ></section>
+
+
+
+    <footer class="footer">
+
+        © 2026 SNK IT Institute • Student ID Card Management
+
+    </footer>
+
+</main>
+
+
+
+<!-- =======================================================
+     PREVIEW MODAL
+======================================================= -->
+
+<div
+    class="modal-overlay"
+    id="previewModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                🪪 ID Card Preview
+            </h2>
+
+            <button
+                class="close-btn"
+                onclick="closePreview()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div class="preview-area">
+
+                <div
+                    class="preview-card"
+                    id="previewContent"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-header"
+             style="
+                position:static;
+                border-top:1px solid var(--border);
+                border-bottom:0;
+                justify-content:flex-end;
+             "
+        >
+
+            <button
+                class="btn"
+                onclick="closePreview()"
+            >
+                Close
+            </button>
+
+            <button
+                class="btn primary"
+                onclick="printPreviewCard()"
+            >
+                🖨️ Print ID Card
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     SINGLE PRINT WRAPPER
+======================================================= -->
+
+<div
+    class="print-wrapper"
+    id="singlePrintWrapper"
+></div>
+
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const STUDENTS_KEY =
+    "snkStudents";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let students = [];
+
+let previewStudentId = null;
+
+
+/* =========================================================
+   LOAD STUDENTS
+========================================================= */
+
+function loadStudents(){
+
+    try{
+
+        const data =
+            localStorage.getItem(
+                STUDENTS_KEY
+            );
+
+
+        students =
+            data
+            ?
+            JSON.parse(data)
+            :
+            [];
+
+    }
+    catch(error){
+
+        console.error(
+            "Student data loading error:",
+            error
+        );
+
+        students = [];
+
+    }
+
+
+    if(
+        !Array.isArray(students)
+    ){
+
+        students = [];
+
+    }
+
+}
+
+
+/* =========================================================
+   STUDENT HELPERS
+========================================================= */
+
+function getStudentId(student){
+
+    return String(
+        student.id ||
+        student.studentId ||
+        ""
+    );
+
+}
+
+
+function getStudentName(student){
+
+    return (
+        student.name ||
+        student.studentName ||
+        "Student"
+    );
+
+}
+
+
+function getCourse(student){
+
+    return (
+        student.course ||
+        student.courseName ||
+        "-"
+    );
+
+}
+
+
+function getStatus(student){
+
+    return String(
+        student.status ||
+        "active"
+    ).toLowerCase();
+
+}
+
+
+function getEmail(student){
+
+    return (
+        student.email ||
+        "-"
+    );
+
+}
+
+
+function getPhone(student){
+
+    return (
+        student.phone ||
+        "-"
+    );
+
+}
+
+
+function getAdmissionDate(student){
+
+    return (
+        student.admissionDate ||
+        ""
+    );
+
+}
+
+
+function getPhoto(student){
+
+    return (
+        student.photo ||
+        student.photoUrl ||
+        ""
+    );
+
+}
+
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadTheme();
+
+        loadStudents();
+
+        buildCourseFilter();
+
+        renderCards();
+
+    }
+);
+
+
+/* =========================================================
+   BUILD COURSE FILTER
+========================================================= */
+
+function buildCourseFilter(){
+
+    const select =
+        document.getElementById(
+            "courseFilter"
+        );
+
+
+    const oldValue =
+        select.value;
+
+
+    const courses =
+        [
+            ...new Set(
+                students
+                .map(
+                    student =>
+                        getCourse(
+                            student
+                        )
+                )
+                .filter(
+                    course =>
+                        course &&
+                        course !== "-"
+                )
+            )
+        ]
+        .sort(
+            (a,b) =>
+                a.localeCompare(
+                    b
+                )
+        );
+
+
+    select.innerHTML = `
+
+        <option value="all">
+            All Courses
+        </option>
+
+    `;
+
+
+    courses.forEach(
+        course => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                course;
+
+
+            option.textContent =
+                course;
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    if(
+        courses.includes(
+            oldValue
+        )
+    ){
+
+        select.value =
+            oldValue;
+
+    }
+
+}
+
+
+/* =========================================================
+   FILTER STUDENTS
+========================================================= */
+
+function getFilteredStudents(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const course =
+        document.getElementById(
+            "courseFilter"
+        )
+        .value;
+
+
+    return students.filter(
+        student => {
+
+            const id =
+                getStudentId(
+                    student
+                )
+                .toLowerCase();
+
+
+            const name =
+                getStudentName(
+                    student
+                )
+                .toLowerCase();
+
+
+            const email =
+                getEmail(
+                    student
+                )
+                .toLowerCase();
+
+
+            const phone =
+                getPhone(
+                    student
+                )
+                .toLowerCase();
+
+
+            const studentCourse =
+                getCourse(
+                    student
+                );
+
+
+            const searchMatch =
+                !search ||
+                id.includes(search) ||
+                name.includes(search) ||
+                email.includes(search) ||
+                phone.includes(search);
+
+
+            const courseMatch =
+                course === "all" ||
+                studentCourse === course;
+
+
+            return (
+                searchMatch &&
+                courseMatch
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderCards(){
+
+    const grid =
+        document.getElementById(
+            "cardGrid"
+        );
+
+
+    grid.innerHTML =
+        "";
+
+
+    const data =
+        getFilteredStudents();
+
+
+    if(
+        data.length === 0
+    ){
+
+        grid.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    🪪
+                </div>
+
+                <strong>
+                    কোনো Student ID Card পাওয়া যায়নি
+                </strong>
+
+                <div
+                    style="
+                        margin-top:5px;
+                        font-size:7px;
+                    "
+                >
+                    প্রথমে Student Profile Management থেকে
+                    student যোগ করুন।
+                </div>
+
+            </div>
+
+        `;
+
+        updateStats();
+
+        return;
+
+    }
+
+
+    data.forEach(
+        student => {
+
+            grid.appendChild(
+                createStudentCard(
+                    student
+                )
+            );
+
+        }
+    );
+
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   CREATE ID CARD
+========================================================= */
+
+function createStudentCard(
+    student
+){
+
+    const wrapper =
+        document.createElement(
+            "div"
+        );
+
+
+    wrapper.className =
+        "profile-card";
+
+
+    wrapper.innerHTML = `
+
+        ${buildCardHTML(
+            student
+        )}
+
+
+        <div class="card-actions">
+
+            <button
+                class="card-action"
+                onclick="previewCard('${escapeAttribute(
+                    getStudentId(student)
+                )}')"
+            >
+                👁️ Preview
+            </button>
+
+            <button
+                class="card-action primary"
+                onclick="printSingleCard('${escapeAttribute(
+                    getStudentId(student)
+                )}')"
+            >
+                🖨️ Print
+            </button>
+
+            <button
+                class="card-action"
+                onclick="copyStudentId('${escapeAttribute(
+                    getStudentId(student)
+                )}')"
+            >
+                📋 Copy ID
+            </button>
+
+        </div>
+
+    `;
+
+
+    return wrapper;
+
+}
+
+
+/* =========================================================
+   BUILD CARD HTML
+========================================================= */
+
+function buildCardHTML(
+    student
+){
+
+    const name =
+        getStudentName(
+            student
+        );
+
+
+    const id =
+        getStudentId(
+            student
+        );
+
+
+    const course =
+        getCourse(
+            student
+        );
+
+
+    const email =
+        getEmail(
+            student
+        );
+
+
+    const phone =
+        getPhone(
+            student
+        );
+
+
+    const admission =
+        formatDate(
+            getAdmissionDate(
+                student
+            )
+        );
+
+
+    const photo =
+        getPhoto(
+            student
+        );
+
+
+    const status =
+        getStatus(
+            student
+        );
+
+
+    const initial =
+        getInitial(
+            name
+        );
+
+
+    const photoHTML =
+        photo
+        ?
+        `
+            <div class="student-photo">
+
+                <img
+                    src="${escapeAttribute(photo)}"
+                    alt="${escapeAttribute(name)}"
+                    onerror="this.parentElement.innerHTML='${escapeAttribute(initial)}'"
+                >
+
+            </div>
+        `
+        :
+        `
+            <div class="student-photo">
+                ${escapeHtml(initial)}
+            </div>
+        `;
+
+
+    const statusHTML =
+        status === "active"
+        ?
+        `
+            <span class="status-badge status-active">
+                ● Active
+            </span>
+        `
+        :
+        `
+            <span class="status-badge status-inactive">
+                ● Inactive
+            </span>
+        `;
+
+
+    return `
+
+        <div class="id-card">
+
+            <div class="id-header">
+
+                <img
+                    class="id-logo"
+                    src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+                    alt="SNK IT"
+                >
+
+
+                <div class="institute-info">
+
+                    <h3>
+                        SNK IT Institute
+                    </h3>
+
+                    <p>
+                        Technology • Education • Skills
+                    </p>
+
+                </div>
+
+
+                <div class="id-label">
+                    STUDENT ID CARD
+                </div>
+
+            </div>
+
+
+            <div class="id-body">
+
+                ${photoHTML}
+
+
+                <div class="student-info">
+
+                    <h2>
+                        ${escapeHtml(name)}
+                    </h2>
+
+
+                    <span class="student-course">
+                        ${escapeHtml(course)}
+                    </span>
+
+
+                    <div class="info-item">
+
+                        <span class="label">
+                            Student ID
+                        </span>
+
+                        <span class="value">
+                            ${escapeHtml(id || "-")}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="label">
+                            Phone
+                        </span>
+
+                        <span class="value">
+                            ${escapeHtml(phone)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="label">
+                            Email
+                        </span>
+
+                        <span class="value">
+                            ${escapeHtml(email)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span class="label">
+                            Admission
+                        </span>
+
+                        <span class="value">
+                            ${escapeHtml(admission)}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="id-footer">
+
+                <div class="valid-text">
+
+                    Issued by
+
+                    <strong>
+                        SNK IT Institute
+                    </strong>
+
+                </div>
+
+
+                ${statusHTML}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function previewCard(
+    id
+){
+
+    const student =
+        findStudent(
+            id
+        );
+
+
+    if(
+        !student
+    ){
+
+        showToast(
+            "Student পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
+
+
+    previewStudentId =
+        String(id);
+
+
+    document.getElementById(
+        "previewContent"
+    ).innerHTML =
+        buildCardHTML(
+            student
+        );
+
+
+    document.getElementById(
+        "previewModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE PREVIEW
+========================================================= */
+
+function closePreview(){
+
+    document.getElementById(
+        "previewModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    previewStudentId =
+        null;
+
+}
+
+
+/* =========================================================
+   PRINT PREVIEW
+========================================================= */
+
+function printPreviewCard(){
+
+    if(
+        !previewStudentId
+    ){
+
+        showToast(
+            "কোনো card selected নেই!"
+        );
+
+        return;
+
+    }
+
+
+    printSingleCard(
+        previewStudentId
+    );
+
+}
+
+
+/* =========================================================
+   PRINT SINGLE CARD
+========================================================= */
+
+function printSingleCard(
+    id
+){
+
+    const student =
+        findStudent(
+            id
+        );
+
+
+    if(
+        !student
+    ){
+
+        showToast(
+            "Student পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
+
+
+    const wrapper =
+        document.getElementById(
+            "singlePrintWrapper"
+        );
+
+
+    wrapper.innerHTML =
+        buildCardHTML(
+            student
+        );
+
+
+    document.body.classList.add(
+        "single-print"
+    );
+
+
+    setTimeout(
+        function(){
+
+            window.print();
+
+        },
+        150
+    );
+
+}
+
+
+/* =========================================================
+   AFTER PRINT
+========================================================= */
+
+window.addEventListener(
+    "afterprint",
+    function(){
+
+        document.body.classList.remove(
+            "single-print"
+        );
+
+
+        document.getElementById(
+            "singlePrintWrapper"
+        ).innerHTML =
+            "";
+
+    }
+);
+
+
+/* =========================================================
+   PRINT ALL
+========================================================= */
+
+function printAllCards(){
+
+    const data =
+        getFilteredStudents();
+
+
+    if(
+        data.length === 0
+    ){
+
+        showToast(
+            "Print করার মতো student নেই!"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       For print-all we temporarily
+       use the existing grid.
+    */
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   FIND STUDENT
+========================================================= */
+
+function findStudent(
+    id
+){
+
+    return students.find(
+        student =>
+            getStudentId(
+                student
+            ) ===
+            String(id)
+    );
+
+}
+
+
+/* =========================================================
+   COPY STUDENT ID
+========================================================= */
+
+async function copyStudentId(
+    id
+){
+
+    try{
+
+        await navigator.clipboard.writeText(
+            String(id)
+        );
+
+
+        showToast(
+            "Student ID copied ✓"
+        );
+
+    }
+    catch(error){
+
+        /*
+           Fallback for older browsers.
+        */
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+
+        textarea.value =
+            String(id);
+
+
+        document.body.appendChild(
+            textarea
+        );
+
+
+        textarea.select();
+
+
+        try{
+
+            document.execCommand(
+                "copy"
+            );
+
+            showToast(
+                "Student ID copied ✓"
+            );
+
+        }
+        catch(e){
+
+            showToast(
+                "Copy করা যায়নি!"
+            );
+
+        }
+
+
+        textarea.remove();
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE STATS
+========================================================= */
+
+function updateStats(){
+
+    const total =
+        students.length;
+
+
+    const active =
+        students.filter(
+            student =>
+                getStatus(
+                    student
+                ) ===
+                "active"
+        ).length;
+
+
+    const inactive =
+        total -
+        active;
+
+
+    const courses =
+        new Set(
+            students
+            .map(
+                student =>
+                    getCourse(
+                        student
+                    )
+            )
+            .filter(
+                course =>
+                    course &&
+                    course !== "-"
+            )
+        ).size;
+
+
+    document.getElementById(
+        "totalStudents"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "activeCards"
+    ).textContent =
+        active;
+
+
+    document.getElementById(
+        "courseCount"
+    ).textContent =
+        courses;
+
+
+    document.getElementById(
+        "inactiveCards"
+    ).textContent =
+        inactive;
+
+}
+
+
+/* =========================================================
+   RESET FILTERS
+========================================================= */
+
+function resetFilters(){
+
+    document.getElementById(
+        "searchInput"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "courseFilter"
+    ).value =
+        "all";
+
+
+    renderCards();
+
+
+    showToast(
+        "Filters reset ✓"
+    );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshStudents(){
+
+    loadStudents();
+
+    buildCourseFilter();
+
+    renderCards();
+
+
+    showToast(
+        "Student data refreshed ✓"
+    );
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const isDark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        "snkStudentIDTheme",
+        isDark
+        ?
+        "dark"
+        :
+        "light"
+    );
+
+
+    updateThemeButton();
+
+}
+
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem(
+            "snkStudentIDTheme"
+        );
+
+
+    if(
+        theme === "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+
+    updateThemeButton();
+
+}
+
+
+function updateThemeButton(){
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        dark
+        ?
+        "☀️"
+        :
+        "🌙";
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+function goBack(){
+
+    if(
+        document.referrer
+    ){
+
+        history.back();
+
+    }
+    else{
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(
+    value
+){
+
+    if(
+        !value
+    ){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(
+            value
+        );
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+function getInitial(
+    name
+){
+
+    const clean =
+        String(
+            name ||
+            "S"
+        ).trim();
+
+
+    if(
+        !clean
+    ){
+
+        return "S";
+
+    }
+
+
+    return clean
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value == null
+        ?
+        ""
+        :
+        String(value);
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   ESCAPE ATTRIBUTE
+========================================================= */
+
+function escapeAttribute(
+    value
+){
+
+    return String(
+        value == null
+        ?
+        ""
+        :
+        value
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#39;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    );
+
+}
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+document.getElementById(
+    "previewModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            this
+        ){
+
+            closePreview();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closePreview();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   STORAGE CHANGE
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            STUDENTS_KEY
+        ){
+
+            loadStudents();
+
+            buildCourseFilter();
+
+            renderCards();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
