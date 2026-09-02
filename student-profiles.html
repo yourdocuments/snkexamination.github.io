@@ -1,1 +1,4436 @@
-#
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute | Student Profile Management</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --soft:#eff6ff;
+
+    --success:#16a34a;
+    --success-soft:#dcfce7;
+
+    --warning:#d97706;
+    --warning-soft:#fef3c7;
+
+    --danger:#dc2626;
+    --danger-soft:#fee2e2;
+
+    --purple:#7c3aed;
+    --purple-soft:#ede9fe;
+
+    --shadow:0 10px 30px rgba(15,23,42,.07);
+}
+
+body.dark{
+    --bg:#080d18;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+
+    --soft:#172554;
+    --success-soft:#052e16;
+    --warning-soft:#451a03;
+    --danger-soft:#450a0a;
+    --purple-soft:#2e1065;
+
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    min-height:70px;
+
+    padding:12px 25px;
+
+    background:var(--card);
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    box-shadow:0 4px 20px rgba(15,23,42,.04);
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:43px;
+    height:43px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:14px;
+    font-weight:900;
+    line-height:1.2;
+}
+
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.header-btn{
+    height:38px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:9px;
+
+    padding:0 12px;
+
+    font-size:9px;
+    font-weight:800;
+}
+
+.header-btn:hover{
+    background:var(--soft);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    max-width:1250px;
+    margin:auto;
+
+    padding:28px 20px 50px;
+}
+
+.page-header{
+    display:flex;
+
+    align-items:flex-end;
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:18px;
+}
+
+.page-title h1{
+    font-size:23px;
+    margin-bottom:4px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.btn{
+    min-height:38px;
+
+    padding:0 13px;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.btn:hover{
+    background:var(--soft);
+}
+
+.btn.primary{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+}
+
+.btn.primary:hover{
+    background:var(--primary-dark);
+}
+
+.btn.success{
+    background:var(--success);
+    color:#fff;
+    border-color:var(--success);
+}
+
+.btn.danger{
+    background:var(--danger);
+    color:#fff;
+    border-color:var(--danger);
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+    margin-bottom:15px;
+}
+
+.stat{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:14px;
+
+    box-shadow:var(--shadow);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.stat-icon{
+    width:35px;
+    height:35px;
+
+    border-radius:9px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--soft);
+
+    font-size:16px;
+
+    margin-bottom:8px;
+}
+
+.stat-number{
+    font-size:22px;
+    font-weight:900;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.stat.blue .stat-number{
+    color:var(--primary);
+}
+
+.stat.green .stat-number{
+    color:var(--success);
+}
+
+.stat.purple .stat-number{
+    color:var(--purple);
+}
+
+.stat.orange .stat-number{
+    color:var(--warning);
+}
+
+
+/* =========================================================
+   FILTER CARD
+========================================================= */
+
+.filter-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:15px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:15px;
+}
+
+.filter-title{
+    font-size:11px;
+    font-weight:900;
+
+    margin-bottom:12px;
+}
+
+.filters{
+    display:grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr auto;
+
+    gap:9px;
+
+    align-items:end;
+}
+
+.field label{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+    font-weight:900;
+
+    margin-bottom:5px;
+}
+
+.field input,
+.field select,
+.field textarea{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    background:var(--card);
+
+    color:var(--text);
+
+    padding:0 10px;
+
+    outline:none;
+
+    font-size:8px;
+}
+
+.field input,
+.field select{
+    height:38px;
+}
+
+.field textarea{
+    min-height:85px;
+    padding:9px 10px;
+    resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:var(--primary);
+}
+
+
+/* =========================================================
+   PROFILE GRID
+========================================================= */
+
+.profile-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.profile-card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
+    transition:.2s;
+}
+
+.profile-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 35px rgba(15,23,42,.10);
+}
+
+.profile-top{
+    padding:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.avatar{
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:var(--soft);
+
+    color:var(--primary);
+
+    font-size:17px;
+
+    font-weight:900;
+
+    flex:none;
+
+    overflow:hidden;
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.profile-name{
+    min-width:0;
+    flex:1;
+}
+
+.profile-name h3{
+    font-size:10px;
+
+    font-weight:900;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.profile-name p{
+    color:var(--muted);
+
+    font-size:7px;
+
+    margin-top:3px;
+}
+
+.verify{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:15px;
+    height:15px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+    color:#fff;
+
+    font-size:8px;
+
+    margin-left:3px;
+}
+
+.profile-body{
+    padding:14px 16px;
+}
+
+.info-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:6px 0;
+
+    border-bottom:1px dashed var(--border);
+
+    font-size:7px;
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-label{
+    color:var(--muted);
+}
+
+.info-value{
+    font-weight:800;
+
+    text-align:right;
+
+    max-width:65%;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.attendance-box{
+    margin-top:10px;
+
+    padding:10px;
+
+    background:var(--bg);
+
+    border-radius:9px;
+}
+
+.attendance-head{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:6px;
+}
+
+.attendance-head span{
+    font-size:7px;
+    color:var(--muted);
+}
+
+.attendance-head strong{
+    font-size:8px;
+}
+
+.attendance-progress{
+    height:6px;
+
+    background:var(--border);
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.attendance-progress span{
+    display:block;
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:var(--success);
+}
+
+.profile-footer{
+    padding:11px 16px;
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+
+    gap:6px;
+}
+
+.profile-footer .btn{
+    flex:1;
+    min-height:34px;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:50px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    grid-column:1/-1;
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:3000;
+
+    background:rgba(15,23,42,.58);
+
+    backdrop-filter:blur(4px);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:15px;
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:720px;
+
+    max-height:92vh;
+
+    overflow:auto;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:17px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    padding:16px 18px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+
+    position:sticky;
+    top:0;
+
+    background:var(--card);
+
+    z-index:2;
+}
+
+.modal-header h2{
+    font-size:13px;
+}
+
+.close-btn{
+    width:32px;
+    height:32px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:8px;
+
+    font-size:15px;
+}
+
+.close-btn:hover{
+    background:var(--danger-soft);
+    color:var(--danger);
+}
+
+.modal-body{
+    padding:18px;
+}
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    font-weight:900;
+
+    margin-bottom:5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    background:var(--card);
+
+    color:var(--text);
+
+    outline:none;
+
+    font-size:8px;
+
+    padding:0 10px;
+}
+
+.form-group input,
+.form-group select{
+    height:39px;
+}
+
+.form-group textarea{
+    min-height:85px;
+    padding:9px 10px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:var(--primary);
+}
+
+.form-help{
+    color:var(--muted);
+    font-size:6px;
+    margin-top:4px;
+}
+
+.modal-footer{
+    padding:13px 18px;
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:7px;
+
+    position:sticky;
+    bottom:0;
+
+    background:var(--card);
+}
+
+
+/* =========================================================
+   VIEW PROFILE MODAL
+========================================================= */
+
+.view-profile{
+    text-align:center;
+}
+
+.view-avatar{
+    width:75px;
+    height:75px;
+
+    margin:0 auto 10px;
+
+    border-radius:50%;
+
+    background:var(--soft);
+
+    color:var(--primary);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:27px;
+    font-weight:900;
+
+    overflow:hidden;
+}
+
+.view-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.view-profile h2{
+    font-size:16px;
+}
+
+.view-profile p{
+    color:var(--muted);
+    font-size:8px;
+    margin-top:3px;
+}
+
+.view-info-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:8px;
+
+    margin-top:18px;
+
+    text-align:left;
+}
+
+.view-info{
+    padding:10px;
+
+    background:var(--bg);
+
+    border-radius:9px;
+}
+
+.view-info span{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:6px;
+
+    margin-bottom:3px;
+}
+
+.view-info strong{
+    display:block;
+
+    font-size:8px;
+
+    overflow-wrap:anywhere;
+}
+
+.view-note{
+    margin-top:10px;
+
+    padding:11px;
+
+    background:var(--bg);
+
+    border-radius:9px;
+
+    text-align:left;
+}
+
+.view-note span{
+    color:var(--muted);
+
+    font-size:7px;
+
+    display:block;
+
+    margin-bottom:4px;
+}
+
+.view-note p{
+    color:var(--text);
+
+    font-size:8px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    z-index:5000;
+
+    background:#111827;
+
+    color:#fff;
+
+    padding:11px 15px;
+
+    border-radius:9px;
+
+    font-size:9px;
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    padding:25px 10px 5px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .profile-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:750px){
+
+    .filters{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .header{
+        padding:10px 13px;
+    }
+
+    .main{
+        padding:18px 13px 35px;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .actions{
+        width:100%;
+    }
+
+    .actions .btn{
+        flex:1;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .modal-overlay{
+        padding:7px;
+    }
+
+    .modal{
+        max-height:96vh;
+    }
+
+    .view-info-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .logo{
+        width:37px;
+        height:37px;
+    }
+
+    .logo-text{
+        font-size:11px;
+    }
+
+    .header-btn{
+        padding:0 8px;
+    }
+
+    .stat-number{
+        font-size:18px;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    .header-actions,
+    .actions,
+    .filter-card,
+    .profile-footer,
+    .modal-overlay,
+    .toast{
+        display:none!important;
+    }
+
+    body{
+        background:#fff;
+    }
+
+    .main{
+        max-width:none;
+        padding:0;
+    }
+
+    .profile-card,
+    .stat{
+        box-shadow:none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+        >
+
+        <div class="logo-text">
+
+            SNK IT Institute
+
+            <small>
+                Student Profile Management
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="header-btn"
+            onclick="toggleTheme()"
+            id="themeBtn"
+            title="Toggle theme"
+        >
+            🌙
+        </button>
+
+        <button
+            class="header-btn"
+            onclick="goBack()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main class="main">
+
+
+<!-- =======================================================
+     PAGE HEADER
+======================================================= -->
+
+<section class="page-header">
+
+    <div class="page-title">
+
+        <h1>
+            👨‍🎓 Student Profiles
+        </h1>
+
+        <p>
+            সব শিক্ষার্থীর profile, academic information এবং basic details manage করুন।
+        </p>
+
+    </div>
+
+
+    <div class="actions">
+
+        <button
+            class="btn"
+            onclick="printProfiles()"
+        >
+            🖨️ Print
+        </button>
+
+        <button
+            class="btn success"
+            onclick="exportStudents()"
+        >
+            📥 Export
+        </button>
+
+        <button
+            class="btn primary"
+            onclick="openAddModal()"
+        >
+            ➕ Add Student
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     STATS
+======================================================= -->
+
+<section class="stats">
+
+
+    <div class="stat blue">
+
+        <div class="stat-icon">
+            👨‍🎓
+        </div>
+
+        <div
+            class="stat-number"
+            id="totalStudents"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Total Students
+        </div>
+
+    </div>
+
+
+    <div class="stat green">
+
+        <div class="stat-icon">
+            🟢
+        </div>
+
+        <div
+            class="stat-number"
+            id="activeStudents"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Active Students
+        </div>
+
+    </div>
+
+
+    <div class="stat purple">
+
+        <div class="stat-icon">
+            🎓
+        </div>
+
+        <div
+            class="stat-number"
+            id="totalCourses"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Courses
+        </div>
+
+    </div>
+
+
+    <div class="stat orange">
+
+        <div class="stat-icon">
+            📅
+        </div>
+
+        <div
+            class="stat-number"
+            id="recentAdmissions"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Recent Admissions
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FILTER
+======================================================= -->
+
+<section class="filter-card">
+
+    <div class="filter-title">
+        🔎 Search & Filter
+    </div>
+
+
+    <div class="filters">
+
+
+        <div class="field">
+
+            <label>
+                Search Student
+            </label>
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="নাম, Student ID, email বা phone..."
+                oninput="renderStudents()"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Course
+            </label>
+
+            <select
+                id="courseFilter"
+                onchange="renderStudents()"
+            >
+
+                <option value="all">
+                    All Courses
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Status
+            </label>
+
+            <select
+                id="statusFilter"
+                onchange="renderStudents()"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="active">
+                    Active
+                </option>
+
+                <option value="inactive">
+                    Inactive
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="btn"
+            onclick="resetFilters()"
+        >
+            Reset
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     PROFILE LIST
+======================================================= -->
+
+<section
+    class="profile-grid"
+    id="profileGrid"
+></section>
+
+
+
+<footer class="footer">
+
+    © 2026 SNK IT Institute • Student Profile Management
+
+</footer>
+
+
+</main>
+
+
+
+<!-- =======================================================
+     ADD / EDIT MODAL
+======================================================= -->
+
+<div
+    class="modal-overlay"
+    id="studentModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                ➕ Add New Student
+            </h2>
+
+            <button
+                class="close-btn"
+                onclick="closeStudentModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            id="studentForm"
+            onsubmit="saveStudent(event)"
+        >
+
+            <div class="modal-body">
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Student ID *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentId"
+                            required
+                            placeholder="SNK001"
+                        >
+
+                        <div class="form-help">
+                            প্রতিটি student-এর unique ID দিন।
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentName"
+                            required
+                            placeholder="Student name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="studentEmail"
+                            placeholder="student@example.com"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="studentPhone"
+                            placeholder="01XXXXXXXXX"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Course *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentCourse"
+                            required
+                            placeholder="Web Design"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select
+                            id="studentStatus"
+                        >
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="inactive">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Admission Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="admissionDate"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Date of Birth
+                        </label>
+
+                        <input
+                            type="date"
+                            id="studentDob"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Guardian Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="guardianName"
+                            placeholder="Guardian name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Guardian Phone
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="guardianPhone"
+                            placeholder="01XXXXXXXXX"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Profile Photo URL
+                        </label>
+
+                        <input
+                            type="url"
+                            id="studentPhoto"
+                            placeholder="https://example.com/photo.jpg"
+                        >
+
+                        <div class="form-help">
+                            চাইলে image URL দিতে পারেন।
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Address
+                        </label>
+
+                        <textarea
+                            id="studentAddress"
+                            placeholder="Student-এর address..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Notes
+                        </label>
+
+                        <textarea
+                            id="studentNotes"
+                            placeholder="Additional information..."
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn"
+                    onclick="closeStudentModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn primary"
+                >
+                    💾 Save Student
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     VIEW PROFILE MODAL
+======================================================= -->
+
+<div
+    class="modal-overlay"
+    id="viewModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <h2>
+                👤 Student Profile
+            </h2>
+
+            <button
+                class="close-btn"
+                onclick="closeViewModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div
+                class="view-profile"
+                id="viewProfileContent"
+            ></div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn"
+                onclick="closeViewModal()"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     DELETE MODAL
+======================================================= -->
+
+<div
+    class="modal-overlay"
+    id="deleteModal"
+>
+
+    <div
+        class="modal"
+        style="max-width:430px;"
+    >
+
+        <div class="modal-header">
+
+            <h2>
+                ⚠️ Delete Student
+            </h2>
+
+            <button
+                class="close-btn"
+                onclick="closeDeleteModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <p
+                style="
+                    font-size:9px;
+                    line-height:1.7;
+                    color:var(--muted);
+                "
+                id="deleteMessage"
+            >
+                আপনি কি এই student delete করতে চান?
+            </p>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                class="btn"
+                onclick="closeDeleteModal()"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="btn danger"
+                onclick="confirmDelete()"
+            >
+                🗑️ Delete
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+/* =========================================================
+   STORAGE KEYS
+========================================================= */
+
+const STUDENTS_KEY =
+    "snkStudents";
+
+const ATTENDANCE_KEY =
+    "snkStudentAttendance";
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let students = [];
+
+let attendance = {};
+
+let editingStudentId = null;
+
+let deletingStudentId = null;
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+function loadData(){
+
+    try{
+
+        students =
+            JSON.parse(
+                localStorage.getItem(
+                    STUDENTS_KEY
+                )
+            ) || [];
+
+    }
+    catch(error){
+
+        students = [];
+
+    }
+
+
+    try{
+
+        attendance =
+            JSON.parse(
+                localStorage.getItem(
+                    ATTENDANCE_KEY
+                )
+            ) || {};
+
+    }
+    catch(error){
+
+        attendance = {};
+
+    }
+
+
+    if(
+        !Array.isArray(students)
+    ){
+
+        students = [];
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE DATA
+========================================================= */
+
+function saveData(){
+
+    localStorage.setItem(
+        STUDENTS_KEY,
+        JSON.stringify(
+            students
+        )
+    );
+
+}
+
+
+/* =========================================================
+   GET STUDENT ID
+========================================================= */
+
+function getStudentId(
+    student
+){
+
+    return String(
+        student.id ||
+        student.studentId ||
+        ""
+    );
+
+}
+
+
+/* =========================================================
+   GET STUDENT NAME
+========================================================= */
+
+function getStudentName(
+    student
+){
+
+    return (
+        student.name ||
+        student.studentName ||
+        "Student"
+    );
+
+}
+
+
+/* =========================================================
+   GET COURSE
+========================================================= */
+
+function getStudentCourse(
+    student
+){
+
+    return (
+        student.course ||
+        student.courseName ||
+        "-"
+    );
+
+}
+
+
+/* =========================================================
+   GET STATUS
+========================================================= */
+
+function getStudentStatus(
+    student
+){
+
+    return String(
+        student.status ||
+        "active"
+    ).toLowerCase();
+
+}
+
+
+/* =========================================================
+   GET ATTENDANCE
+========================================================= */
+
+function getAttendanceRate(
+    student
+){
+
+    const id =
+        getStudentId(
+            student
+        );
+
+
+    const records =
+        attendance[id] || {};
+
+
+    const dates =
+        Object.keys(
+            records
+        );
+
+
+    if(
+        dates.length === 0
+    ){
+
+        return 0;
+
+    }
+
+
+    let present = 0;
+
+    let late = 0;
+
+
+    dates.forEach(
+        date => {
+
+            const status =
+                String(
+                    records[date]
+                ).toLowerCase();
+
+
+            if(
+                status ===
+                "present"
+            ){
+
+                present++;
+
+            }
+
+            else if(
+                status ===
+                "late"
+            ){
+
+                late++;
+
+            }
+
+        }
+    );
+
+
+    return (
+        (
+            present +
+            late
+        ) /
+        dates.length
+    ) * 100;
+
+}
+
+
+/* =========================================================
+   INITIAL DATA
+========================================================= */
+
+function createDemoStudents(){
+
+    if(
+        students.length > 0
+    ){
+
+        return;
+
+    }
+
+
+    /*
+       Empty by default.
+
+       This page does NOT force demo
+       students into the actual database.
+    */
+
+}
+
+
+/* =========================================================
+   COURSE FILTER
+========================================================= */
+
+function buildCourseFilter(){
+
+    const select =
+        document.getElementById(
+            "courseFilter"
+        );
+
+
+    const current =
+        select.value;
+
+
+    const courses =
+        [
+            ...new Set(
+                students
+                .map(
+                    student =>
+                        getStudentCourse(
+                            student
+                        )
+                )
+                .filter(
+                    course =>
+                        course &&
+                        course !== "-"
+                )
+            )
+        ]
+        .sort(
+            (a,b) =>
+                a.localeCompare(
+                    b
+                )
+        );
+
+
+    select.innerHTML = `
+
+        <option value="all">
+            All Courses
+        </option>
+
+    `;
+
+
+    courses.forEach(
+        course => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                course;
+
+
+            option.textContent =
+                course;
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    if(
+        courses.includes(
+            current
+        )
+    ){
+
+        select.value =
+            current;
+
+    }
+
+}
+
+
+/* =========================================================
+   FILTER DATA
+========================================================= */
+
+function getFilteredStudents(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    const course =
+        document.getElementById(
+            "courseFilter"
+        ).value;
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    return students.filter(
+        student => {
+
+            const id =
+                getStudentId(
+                    student
+                ).toLowerCase();
+
+
+            const name =
+                getStudentName(
+                    student
+                ).toLowerCase();
+
+
+            const email =
+                String(
+                    student.email ||
+                    ""
+                ).toLowerCase();
+
+
+            const phone =
+                String(
+                    student.phone ||
+                    ""
+                ).toLowerCase();
+
+
+            const studentCourse =
+                getStudentCourse(
+                    student
+                );
+
+
+            const studentStatus =
+                getStudentStatus(
+                    student
+                );
+
+
+            const matchesSearch =
+                !search ||
+                name.includes(
+                    search
+                ) ||
+                id.includes(
+                    search
+                ) ||
+                email.includes(
+                    search
+                ) ||
+                phone.includes(
+                    search
+                );
+
+
+            const matchesCourse =
+                course === "all" ||
+                studentCourse ===
+                course;
+
+
+            const matchesStatus =
+                status === "all" ||
+                studentStatus ===
+                status;
+
+
+            return (
+                matchesSearch &&
+                matchesCourse &&
+                matchesStatus
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   RENDER STUDENTS
+========================================================= */
+
+function renderStudents(){
+
+    const grid =
+        document.getElementById(
+            "profileGrid"
+        );
+
+
+    grid.innerHTML =
+        "";
+
+
+    const data =
+        getFilteredStudents();
+
+
+    if(
+        data.length === 0
+    ){
+
+        grid.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    👨‍🎓
+                </div>
+
+                <div>
+                    কোনো student profile পাওয়া যায়নি।
+                </div>
+
+                <div
+                    style="
+                        margin-top:5px;
+                        font-size:7px;
+                    "
+                >
+                    নতুন student যোগ করতে
+                    "Add Student" button ব্যবহার করুন।
+                </div>
+
+            </div>
+
+        `;
+
+        updateStats();
+
+        return;
+
+    }
+
+
+    data.forEach(
+        student => {
+
+            grid.appendChild(
+                createProfileCard(
+                    student
+                )
+            );
+
+        }
+    );
+
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+function createProfileCard(
+    student
+){
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+
+    card.className =
+        "profile-card";
+
+
+    const name =
+        getStudentName(
+            student
+        );
+
+
+    const id =
+        getStudentId(
+            student
+        );
+
+
+    const course =
+        getStudentCourse(
+            student
+        );
+
+
+    const status =
+        getStudentStatus(
+            student
+        );
+
+
+    const email =
+        student.email ||
+        "-";
+
+
+    const phone =
+        student.phone ||
+        "-";
+
+
+    const admission =
+        formatDate(
+            student.admissionDate
+        );
+
+
+    const rate =
+        getAttendanceRate(
+            student
+        );
+
+
+    const initial =
+        getInitial(
+            name
+        );
+
+
+    const photo =
+        student.photo ||
+        student.photoUrl ||
+        "";
+
+
+    const avatar =
+        photo
+        ?
+        `
+            <div class="avatar">
+                <img
+                    src="${escapeAttribute(photo)}"
+                    alt="${escapeAttribute(name)}"
+                    onerror="this.parentElement.innerHTML='${escapeAttribute(initial)}'"
+                >
+            </div>
+        `
+        :
+        `
+            <div class="avatar">
+                ${escapeHtml(initial)}
+            </div>
+        `;
+
+
+    const statusLabel =
+        status === "active"
+        ?
+        "Active"
+        :
+        "Inactive";
+
+
+    const statusColor =
+        status === "active"
+        ?
+        "var(--success)"
+        :
+        "var(--danger)";
+
+
+    card.innerHTML = `
+
+        <div class="profile-top">
+
+            ${avatar}
+
+            <div class="profile-name">
+
+                <h3>
+
+                    ${escapeHtml(name)}
+
+                    ${
+                        student.verified
+                        ?
+                        `<span
+                            class="verify"
+                            title="Verified"
+                        >✓</span>`
+                        :
+                        ""
+                    }
+
+                </h3>
+
+                <p>
+                    ${escapeHtml(id)}
+                </p>
+
+            </div>
+
+            <span
+                style="
+                    font-size:6px;
+                    font-weight:900;
+                    color:${statusColor};
+                "
+            >
+                ● ${statusLabel}
+            </span>
+
+        </div>
+
+
+        <div class="profile-body">
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Course
+                </span>
+
+                <span class="info-value">
+                    ${escapeHtml(course)}
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Email
+                </span>
+
+                <span class="info-value">
+                    ${escapeHtml(email)}
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Phone
+                </span>
+
+                <span class="info-value">
+                    ${escapeHtml(phone)}
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="info-label">
+                    Admission
+                </span>
+
+                <span class="info-value">
+                    ${escapeHtml(admission)}
+                </span>
+
+            </div>
+
+
+            <div class="attendance-box">
+
+                <div class="attendance-head">
+
+                    <span>
+                        Attendance
+                    </span>
+
+                    <strong>
+                        ${rate.toFixed(1)}%
+                    </strong>
+
+                </div>
+
+                <div class="attendance-progress">
+
+                    <span
+                        style="
+                            width:${Math.min(
+                                rate,
+                                100
+                            )}%;
+                            background:${
+                                rate < 60
+                                ?
+                                "var(--danger)"
+                                :
+                                rate < 80
+                                ?
+                                "var(--warning)"
+                                :
+                                "var(--success)"
+                            };
+                        "
+                    ></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-footer">
+
+            <button
+                class="btn"
+                onclick="viewStudent('${escapeAttribute(id)}')"
+            >
+                👁️ View
+            </button>
+
+            <button
+                class="btn"
+                onclick="editStudent('${escapeAttribute(id)}')"
+            >
+                ✏️ Edit
+            </button>
+
+            <button
+                class="btn"
+                onclick="openDeleteModal('${escapeAttribute(id)}')"
+            >
+                🗑️
+            </button>
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+    const total =
+        students.length;
+
+
+    const active =
+        students.filter(
+            student =>
+                getStudentStatus(
+                    student
+                ) === "active"
+        ).length;
+
+
+    const courses =
+        new Set(
+            students
+            .map(
+                student =>
+                    getStudentCourse(
+                        student
+                    )
+            )
+            .filter(
+                course =>
+                    course &&
+                    course !== "-"
+            )
+        ).size;
+
+
+    const now =
+        new Date();
+
+
+    const recentLimit =
+        new Date(
+            now.getFullYear(),
+            now.getMonth() - 1,
+            now.getDate()
+        );
+
+
+    const recent =
+        students.filter(
+            student => {
+
+                if(
+                    !student.admissionDate
+                ){
+
+                    return false;
+
+                }
+
+
+                const date =
+                    new Date(
+                        student.admissionDate
+                    );
+
+
+                return (
+                    !isNaN(
+                        date.getTime()
+                    ) &&
+                    date >=
+                    recentLimit
+                );
+
+            }
+        ).length;
+
+
+    document.getElementById(
+        "totalStudents"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "activeStudents"
+    ).textContent =
+        active;
+
+
+    document.getElementById(
+        "totalCourses"
+    ).textContent =
+        courses;
+
+
+    document.getElementById(
+        "recentAdmissions"
+    ).textContent =
+        recent;
+
+}
+
+
+/* =========================================================
+   ADD MODAL
+========================================================= */
+
+function openAddModal(){
+
+    editingStudentId =
+        null;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "➕ Add New Student";
+
+
+    document.getElementById(
+        "studentForm"
+    ).reset();
+
+
+    document.getElementById(
+        "studentStatus"
+    ).value =
+        "active";
+
+
+    document.getElementById(
+        "admissionDate"
+    ).value =
+        getToday();
+
+
+    document.getElementById(
+        "studentModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        () => {
+
+            document.getElementById(
+                "studentId"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE ADD / EDIT MODAL
+========================================================= */
+
+function closeStudentModal(){
+
+    document.getElementById(
+        "studentModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    editingStudentId =
+        null;
+
+}
+
+
+/* =========================================================
+   EDIT STUDENT
+========================================================= */
+
+function editStudent(
+    id
+){
+
+    const student =
+        students.find(
+            item =>
+                getStudentId(
+                    item
+                ) ===
+                String(id)
+        );
+
+
+    if(
+        !student
+    ){
+
+        showToast(
+            "Student পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
+
+
+    editingStudentId =
+        getStudentId(
+            student
+        );
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "✏️ Edit Student";
+
+
+    document.getElementById(
+        "studentId"
+    ).value =
+        getStudentId(
+            student
+        );
+
+
+    document.getElementById(
+        "studentName"
+    ).value =
+        getStudentName(
+            student
+        );
+
+
+    document.getElementById(
+        "studentEmail"
+    ).value =
+        student.email ||
+        "";
+
+
+    document.getElementById(
+        "studentPhone"
+    ).value =
+        student.phone ||
+        "";
+
+
+    document.getElementById(
+        "studentCourse"
+    ).value =
+        getStudentCourse(
+            student
+        );
+
+
+    document.getElementById(
+        "studentStatus"
+    ).value =
+        getStudentStatus(
+            student
+        );
+
+
+    document.getElementById(
+        "admissionDate"
+    ).value =
+        student.admissionDate ||
+        "";
+
+
+    document.getElementById(
+        "studentDob"
+    ).value =
+        student.dob ||
+        student.dateOfBirth ||
+        "";
+
+
+    document.getElementById(
+        "guardianName"
+    ).value =
+        student.guardianName ||
+        "";
+
+
+    document.getElementById(
+        "guardianPhone"
+    ).value =
+        student.guardianPhone ||
+        "";
+
+
+    document.getElementById(
+        "studentPhoto"
+    ).value =
+        student.photo ||
+        student.photoUrl ||
+        "";
+
+
+    document.getElementById(
+        "studentAddress"
+    ).value =
+        student.address ||
+        "";
+
+
+    document.getElementById(
+        "studentNotes"
+    ).value =
+        student.notes ||
+        "";
+
+
+    document.getElementById(
+        "studentModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   SAVE STUDENT
+========================================================= */
+
+function saveStudent(
+    event
+){
+
+    event.preventDefault();
+
+
+    const id =
+        document.getElementById(
+            "studentId"
+        ).value
+        .trim();
+
+
+    const name =
+        document.getElementById(
+            "studentName"
+        ).value
+        .trim();
+
+
+    const email =
+        document.getElementById(
+            "studentEmail"
+        ).value
+        .trim();
+
+
+    const phone =
+        document.getElementById(
+            "studentPhone"
+        ).value
+        .trim();
+
+
+    const course =
+        document.getElementById(
+            "studentCourse"
+        ).value
+        .trim();
+
+
+    const status =
+        document.getElementById(
+            "studentStatus"
+        ).value;
+
+
+    const admissionDate =
+        document.getElementById(
+            "admissionDate"
+        ).value;
+
+
+    const dob =
+        document.getElementById(
+            "studentDob"
+        ).value;
+
+
+    const guardianName =
+        document.getElementById(
+            "guardianName"
+        ).value
+        .trim();
+
+
+    const guardianPhone =
+        document.getElementById(
+            "guardianPhone"
+        ).value
+        .trim();
+
+
+    const photo =
+        document.getElementById(
+            "studentPhoto"
+        ).value
+        .trim();
+
+
+    const address =
+        document.getElementById(
+            "studentAddress"
+        ).value
+        .trim();
+
+
+    const notes =
+        document.getElementById(
+            "studentNotes"
+        ).value
+        .trim();
+
+
+    if(
+        !id ||
+        !name ||
+        !course
+    ){
+
+        showToast(
+            "Required information পূরণ করুন!"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Prevent duplicate IDs.
+    */
+
+    const duplicate =
+        students.find(
+            student =>
+                getStudentId(
+                    student
+                ) ===
+                id &&
+                getStudentId(
+                    student
+                ) !==
+                editingStudentId
+        );
+
+
+    if(
+        duplicate
+    ){
+
+        showToast(
+            "এই Student ID ইতিমধ্যে আছে!"
+        );
+
+        document.getElementById(
+            "studentId"
+        ).focus();
+
+        return;
+
+    }
+
+
+    if(
+        editingStudentId
+    ){
+
+        const index =
+            students.findIndex(
+                student =>
+                    getStudentId(
+                        student
+                    ) ===
+                    editingStudentId
+            );
+
+
+        if(
+            index === -1
+        ){
+
+            showToast(
+                "Student পাওয়া যায়নি!"
+            );
+
+            return;
+
+        }
+
+
+        /*
+           Preserve other existing fields.
+        */
+
+        students[index] = {
+
+            ...students[index],
+
+            id:id,
+
+            studentId:id,
+
+            name:name,
+
+            studentName:name,
+
+            email:email,
+
+            phone:phone,
+
+            course:course,
+
+            courseName:course,
+
+            status:status,
+
+            admissionDate:
+                admissionDate,
+
+            dob:dob,
+
+            dateOfBirth:dob,
+
+            guardianName:
+                guardianName,
+
+            guardianPhone:
+                guardianPhone,
+
+            photo:photo,
+
+            photoUrl:photo,
+
+            address:address,
+
+            notes:notes,
+
+            updatedAt:
+                new Date().toISOString()
+
+        };
+
+
+        showToast(
+            "Student profile updated ✓"
+        );
+
+    }
+    else{
+
+        students.push({
+
+            id:id,
+
+            studentId:id,
+
+            name:name,
+
+            studentName:name,
+
+            email:email,
+
+            phone:phone,
+
+            course:course,
+
+            courseName:course,
+
+            status:status,
+
+            admissionDate:
+                admissionDate,
+
+            dob:dob,
+
+            dateOfBirth:dob,
+
+            guardianName:
+                guardianName,
+
+            guardianPhone:
+                guardianPhone,
+
+            photo:photo,
+
+            photoUrl:photo,
+
+            address:address,
+
+            notes:notes,
+
+            verified:false,
+
+            createdAt:
+                new Date().toISOString(),
+
+            updatedAt:
+                new Date().toISOString()
+
+        });
+
+
+        showToast(
+            "New student added ✓"
+        );
+
+    }
+
+
+    saveData();
+
+    buildCourseFilter();
+
+    renderStudents();
+
+    closeStudentModal();
+
+}
+
+
+/* =========================================================
+   VIEW STUDENT
+========================================================= */
+
+function viewStudent(
+    id
+){
+
+    const student =
+        students.find(
+            item =>
+                getStudentId(
+                    item
+                ) ===
+                String(id)
+        );
+
+
+    if(
+        !student
+    ){
+
+        showToast(
+            "Student পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        getStudentName(
+            student
+        );
+
+
+    const photo =
+        student.photo ||
+        student.photoUrl ||
+        "";
+
+
+    const avatar =
+        photo
+        ?
+        `
+            <div class="view-avatar">
+                <img
+                    src="${escapeAttribute(photo)}"
+                    alt="${escapeAttribute(name)}"
+                    onerror="this.style.display='none';this.parentElement.innerHTML='${escapeAttribute(getInitial(name))}'"
+                >
+            </div>
+        `
+        :
+        `
+            <div class="view-avatar">
+                ${escapeHtml(
+                    getInitial(name)
+                )}
+            </div>
+        `;
+
+
+    const rate =
+        getAttendanceRate(
+            student
+        );
+
+
+    const status =
+        getStudentStatus(
+            student
+        );
+
+
+    document.getElementById(
+        "viewProfileContent"
+    ).innerHTML = `
+
+        ${avatar}
+
+        <h2>
+            ${escapeHtml(name)}
+
+            ${
+                student.verified
+                ?
+                `<span
+                    class="verify"
+                    title="Verified"
+                >✓</span>`
+                :
+                ""
+            }
+
+        </h2>
+
+        <p>
+            ${escapeHtml(
+                getStudentId(
+                    student
+                )
+            )}
+            •
+            ${escapeHtml(
+                getStudentCourse(
+                    student
+                )
+            )}
+        </p>
+
+
+        <div class="view-info-grid">
+
+
+            <div class="view-info">
+
+                <span>
+                    Email
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        student.email ||
+                        "-"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="view-info">
+
+                <span>
+                    Phone
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        student.phone ||
+                        "-"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="view-info">
+
+                <span>
+                    Admission Date
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        formatDate(
+                            student.admissionDate
+                        )
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="view-info">
+
+                <span>
+                    Date of Birth
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        formatDate(
+                            student.dob ||
+                            student.dateOfBirth
+                        )
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="view-info">
+
+                <span>
+                    Guardian
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        student.guardianName ||
+                        "-"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="view-info">
+
+                <span>
+                    Guardian Phone
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        student.guardianPhone ||
+                        "-"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="view-info">
+
+                <span>
+                    Account Status
+                </span>
+
+                <strong
+                    style="
+                        color:${
+                            status === "active"
+                            ?
+                            "var(--success)"
+                            :
+                            "var(--danger)"
+                        };
+                    "
+                >
+                    ●
+                    ${
+                        status === "active"
+                        ?
+                        "Active"
+                        :
+                        "Inactive"
+                    }
+                </strong>
+
+            </div>
+
+
+            <div class="view-info">
+
+                <span>
+                    Attendance
+                </span>
+
+                <strong
+                    style="
+                        color:${
+                            rate < 60
+                            ?
+                            "var(--danger)"
+                            :
+                            rate < 80
+                            ?
+                            "var(--warning)"
+                            :
+                            "var(--success)"
+                        };
+                    "
+                >
+                    ${rate.toFixed(1)}%
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="view-note">
+
+            <span>
+                Address
+            </span>
+
+            <p>
+                ${escapeHtml(
+                    student.address ||
+                    "Address দেওয়া হয়নি।"
+                )}
+            </p>
+
+        </div>
+
+
+        <div class="view-note">
+
+            <span>
+                Notes
+            </span>
+
+            <p>
+                ${escapeHtml(
+                    student.notes ||
+                    "কোনো additional note নেই।"
+                )}
+            </p>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "viewModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE VIEW MODAL
+========================================================= */
+
+function closeViewModal(){
+
+    document.getElementById(
+        "viewModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   DELETE MODAL
+========================================================= */
+
+function openDeleteModal(
+    id
+){
+
+    const student =
+        students.find(
+            item =>
+                getStudentId(
+                    item
+                ) ===
+                String(id)
+        );
+
+
+    if(
+        !student
+    ){
+
+        showToast(
+            "Student পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
+
+
+    deletingStudentId =
+        String(id);
+
+
+    document.getElementById(
+        "deleteMessage"
+    ).innerHTML = `
+
+        আপনি কি
+
+        <strong
+            style="color:var(--text)"
+        >
+            ${escapeHtml(
+                getStudentName(
+                    student
+                )
+            )}
+        </strong>
+
+        (
+
+        ${escapeHtml(
+            getStudentId(
+                student
+            )
+        )}
+
+        )
+
+        profile-টি permanently delete করতে চান?
+
+        <br><br>
+
+        <span
+            style="color:var(--danger);font-size:7px;"
+        >
+            ⚠️ এই action পরে undo করা যাবে না।
+        </span>
+
+    `;
+
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE DELETE MODAL
+========================================================= */
+
+function closeDeleteModal(){
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    deletingStudentId =
+        null;
+
+}
+
+
+/* =========================================================
+   CONFIRM DELETE
+========================================================= */
+
+function confirmDelete(){
+
+    if(
+        !deletingStudentId
+    ){
+
+        return;
+
+    }
+
+
+    const index =
+        students.findIndex(
+            student =>
+                getStudentId(
+                    student
+                ) ===
+                deletingStudentId
+        );
+
+
+    if(
+        index === -1
+    ){
+
+        closeDeleteModal();
+
+        showToast(
+            "Student পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
+
+
+    const removed =
+        students[index];
+
+
+    students.splice(
+        index,
+        1
+    );
+
+
+    saveData();
+
+    buildCourseFilter();
+
+    renderStudents();
+
+    closeDeleteModal();
+
+
+    showToast(
+        `${getStudentName(
+            removed
+        )} deleted ✓`
+    );
+
+}
+
+
+/* =========================================================
+   RESET FILTERS
+========================================================= */
+
+function resetFilters(){
+
+    document.getElementById(
+        "searchInput"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "courseFilter"
+    ).value =
+        "all";
+
+
+    document.getElementById(
+        "statusFilter"
+    ).value =
+        "all";
+
+
+    renderStudents();
+
+
+    showToast(
+        "Filters reset ✓"
+    );
+
+}
+
+
+/* =========================================================
+   EXPORT CSV
+========================================================= */
+
+function exportStudents(){
+
+    const data =
+        getFilteredStudents();
+
+
+    if(
+        data.length === 0
+    ){
+
+        showToast(
+            "Export করার মতো student নেই!"
+        );
+
+        return;
+
+    }
+
+
+    const rows = [];
+
+
+    rows.push([
+
+        "No",
+        "Student ID",
+        "Name",
+        "Course",
+        "Email",
+        "Phone",
+        "Status",
+        "Admission Date",
+        "Attendance"
+
+    ]);
+
+
+    data.forEach(
+        (
+            student,
+            index
+        ) => {
+
+            rows.push([
+
+                index + 1,
+
+                getStudentId(
+                    student
+                ),
+
+                getStudentName(
+                    student
+                ),
+
+                getStudentCourse(
+                    student
+                ),
+
+                student.email ||
+                "",
+
+                student.phone ||
+                "",
+
+                getStudentStatus(
+                    student
+                ),
+
+                student.admissionDate ||
+                "",
+
+                getAttendanceRate(
+                    student
+                ).toFixed(1) + "%"
+
+            ]);
+
+        }
+    );
+
+
+    const csv =
+        rows
+        .map(
+            row =>
+                row
+                .map(
+                    value =>
+                        `"${String(
+                            value
+                        ).replace(
+                            /"/g,
+                            '""'
+                        )}"`
+                )
+                .join(",")
+        )
+        .join("\n");
+
+
+    const blob =
+        new Blob(
+            [
+                "\uFEFF" +
+                csv
+            ],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "snk-student-profiles.csv";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    showToast(
+        "Student CSV exported ✓"
+    );
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printProfiles(){
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        "snkStudentProfileTheme",
+        dark
+        ?
+        "dark"
+        :
+        "light"
+    );
+
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        dark
+        ?
+        "☀️"
+        :
+        "🌙";
+
+}
+
+
+function loadTheme(){
+
+    if(
+        localStorage.getItem(
+            "snkStudentProfileTheme"
+        ) ===
+        "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+
+        document.getElementById(
+            "themeBtn"
+        ).textContent =
+            "☀️";
+
+    }
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+function goBack(){
+
+    if(
+        document.referrer
+    ){
+
+        history.back();
+
+    }
+    else{
+
+        window.location.href =
+            "admin.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function getToday(){
+
+    const date =
+        new Date();
+
+
+    const year =
+        date.getFullYear();
+
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+function formatDate(
+    value
+){
+
+    if(
+        !value
+    ){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(
+            value
+        );
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+function getInitial(
+    name
+){
+
+    const clean =
+        String(
+            name ||
+            "S"
+        ).trim();
+
+
+    if(
+        !clean
+    ){
+
+        return "S";
+
+    }
+
+
+    /*
+       Bengali + English friendly
+    */
+
+    return clean
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value == null
+        ?
+        ""
+        :
+        String(value);
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   ESCAPE ATTRIBUTE
+========================================================= */
+
+function escapeAttribute(
+    value
+){
+
+    return String(
+        value == null
+        ?
+        ""
+        :
+        value
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#39;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    );
+
+}
+
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+document.getElementById(
+    "studentModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            this
+        ){
+
+            closeStudentModal();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "viewModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            this
+        ){
+
+            closeViewModal();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "deleteModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            this
+        ){
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closeStudentModal();
+
+            closeViewModal();
+
+            closeDeleteModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   STORAGE LISTENER
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            STUDENTS_KEY ||
+            event.key ===
+            ATTENDANCE_KEY
+        ){
+
+            loadData();
+
+            buildCourseFilter();
+
+            renderStudents();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadTheme();
+
+        loadData();
+
+        createDemoStudents();
+
+        buildCourseFilter();
+
+        renderStudents();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
