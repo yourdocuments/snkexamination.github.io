@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SNK IT Institute | Attendance History</title>
+<title>SNK IT Institute | Student Attendance</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +60,10 @@ body.dark{
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:"Noto Sans Bengali",Arial,sans-serif;
     background:var(--bg);
@@ -75,6 +79,10 @@ select{
 
 button{
     cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
 }
 
 
@@ -155,7 +163,7 @@ button{
 ========================================================= */
 
 .main{
-    max-width:1250px;
+    max-width:1300px;
     margin:auto;
     padding:28px 20px 50px;
 }
@@ -231,7 +239,130 @@ button{
 
 
 /* =========================================================
-   REPORT FILTER
+   TABS
+========================================================= */
+
+.tabs-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:7px;
+    box-shadow:var(--shadow);
+    margin-bottom:16px;
+}
+
+.tabs{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+}
+
+.tab-btn{
+    min-height:38px;
+    padding:0 15px;
+
+    border:1px solid transparent;
+    border-radius:9px;
+
+    background:transparent;
+    color:var(--muted);
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.tab-btn:hover{
+    background:var(--primary-soft);
+    color:var(--primary);
+}
+
+.tab-btn.active{
+    background:var(--primary);
+    color:#fff;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:35px;
+    height:35px;
+
+    border-radius:9px;
+    background:var(--primary-soft);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.stat-number{
+    font-size:21px;
+    font-weight:900;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:2px;
+}
+
+.stat.blue .stat-number{
+    color:var(--primary);
+}
+
+.stat.green .stat-number{
+    color:var(--success);
+}
+
+.stat.red .stat-number{
+    color:var(--danger);
+}
+
+.stat.orange .stat-number{
+    color:var(--warning);
+}
+
+.stat.purple .stat-number{
+    color:var(--purple);
+}
+
+
+/* =========================================================
+   TAB CONTENT
+========================================================= */
+
+.tab-content{
+    display:none;
+}
+
+.tab-content.active{
+    display:block;
+}
+
+
+/* =========================================================
+   FILTER CARD
 ========================================================= */
 
 .filter-card{
@@ -251,7 +382,7 @@ button{
 
 .filters{
     display:grid;
-    grid-template-columns:1.3fr 1fr 1fr 1fr auto;
+    grid-template-columns:1.5fr 1fr 1fr auto;
     gap:9px;
     align-items:end;
 }
@@ -290,87 +421,19 @@ button{
 
 
 /* =========================================================
-   STATS
+   ATTENDANCE CARD
 ========================================================= */
 
-.stats{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:10px;
-    margin-bottom:17px;
-}
-
-.stat{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:14px;
-    box-shadow:var(--shadow);
-}
-
-.stat-icon{
-    width:35px;
-    height:35px;
-
-    border-radius:9px;
-    background:var(--primary-soft);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:16px;
-    margin-bottom:8px;
-}
-
-.stat-number{
-    font-size:20px;
-    font-weight:900;
-}
-
-.stat-label{
-    color:var(--muted);
-    font-size:7px;
-    margin-top:2px;
-}
-
-.stat.blue .stat-number{
-    color:var(--primary);
-}
-
-.stat.green .stat-number{
-    color:var(--success);
-}
-
-.stat.red .stat-number{
-    color:var(--danger);
-}
-
-.stat.orange .stat-number{
-    color:var(--warning);
-}
-
-.stat.purple .stat-number{
-    color:var(--purple);
-}
-
-
-/* =========================================================
-   REPORT CARD
-========================================================= */
-
-.report-card{
+.attendance-card{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:15px;
 
     box-shadow:var(--shadow);
     overflow:hidden;
-
-    margin-bottom:18px;
 }
 
-.report-toolbar{
+.attendance-toolbar{
     padding:13px 15px;
 
     border-bottom:1px solid var(--border);
@@ -381,13 +444,13 @@ button{
     gap:10px;
 }
 
-.report-toolbar-left{
+.attendance-toolbar-left{
     display:flex;
     align-items:center;
     gap:8px;
 }
 
-.report-toolbar h2{
+.attendance-toolbar h2{
     font-size:12px;
 }
 
@@ -403,7 +466,7 @@ button{
     font-weight:900;
 }
 
-.report-actions{
+.bulk-actions{
     display:flex;
     gap:6px;
 }
@@ -421,7 +484,7 @@ button{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1050px;
+    min-width:850px;
 }
 
 thead{
@@ -499,92 +562,49 @@ tbody tr:hover{
 
 
 /* =========================================================
-   MINI NUMBERS
+   STATUS BUTTONS
 ========================================================= */
 
-.number-badge{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
+.status-buttons{
+    display:flex;
+    gap:5px;
+}
 
-    min-width:32px;
-    height:26px;
+.status-btn{
+    min-width:65px;
+    height:31px;
 
-    padding:0 7px;
-
+    border:1px solid var(--border);
     border-radius:7px;
 
-    font-size:8px;
+    background:var(--card);
+    color:var(--muted);
+
+    font-size:7px;
     font-weight:900;
 }
 
-.number-badge.present{
-    background:var(--success-soft);
-    color:var(--success);
+.status-btn:hover{
+    transform:translateY(-1px);
 }
 
-.number-badge.absent{
-    background:var(--danger-soft);
-    color:var(--danger);
-}
-
-.number-badge.late{
-    background:var(--warning-soft);
-    color:var(--warning);
-}
-
-.number-badge.total{
-    background:var(--primary-soft);
-    color:var(--primary);
-}
-
-
-/* =========================================================
-   PERCENTAGE
-========================================================= */
-
-.percentage-wrap{
-    min-width:105px;
-}
-
-.percentage-text{
-    font-size:8px;
-    font-weight:900;
-    margin-bottom:4px;
-}
-
-.progress{
-    width:100%;
-    height:6px;
-
-    background:var(--bg);
-
-    border-radius:99px;
-
-    overflow:hidden;
-}
-
-.progress-bar{
-    height:100%;
-    border-radius:99px;
-
+.status-btn.active.present{
     background:var(--success);
-
-    transition:.3s;
+    border-color:var(--success);
+    color:#fff;
 }
 
-.progress-bar.medium{
-    background:var(--warning);
-}
-
-.progress-bar.low{
+.status-btn.active.absent{
     background:var(--danger);
+    border-color:var(--danger);
+    color:#fff;
 }
 
-
-/* =========================================================
-   STATUS
-========================================================= */
+.status-btn.active.late{
+    background:var(--warning);
+    border-color:var(--warning);
+    color:#fff;
+}
 
 .status-label{
     display:inline-flex;
@@ -599,22 +619,22 @@ tbody tr:hover{
     font-weight:900;
 }
 
-.status-label.good{
+.status-label.present{
     background:var(--success-soft);
     color:var(--success);
 }
 
-.status-label.average{
-    background:var(--warning-soft);
-    color:var(--warning);
-}
-
-.status-label.low{
+.status-label.absent{
     background:var(--danger-soft);
     color:var(--danger);
 }
 
-.status-label.none{
+.status-label.late{
+    background:var(--warning-soft);
+    color:var(--warning);
+}
+
+.status-label.unmarked{
     background:var(--bg);
     color:var(--muted);
 }
@@ -626,7 +646,7 @@ tbody tr:hover{
 
 .summary{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
+    grid-template-columns:repeat(4,1fr);
 
     gap:10px;
 
@@ -658,10 +678,6 @@ tbody tr:hover{
     margin-top:2px;
 }
 
-.summary-box.blue .summary-value{
-    color:var(--primary);
-}
-
 .summary-box.present .summary-value{
     color:var(--success);
 }
@@ -674,28 +690,141 @@ tbody tr:hover{
     color:var(--warning);
 }
 
-.summary-box.rate .summary-value{
-    color:var(--purple);
+.summary-box.unmarked .summary-value{
+    color:var(--muted);
 }
 
 
 /* =========================================================
-   HISTORY CARD
+   HISTORY
 ========================================================= */
 
-.history-card{
+.history-toolbar{
     background:var(--card);
     border:1px solid var(--border);
     border-radius:15px;
-
+    padding:15px;
     box-shadow:var(--shadow);
+    margin-bottom:15px;
 
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.history-title{
+    font-size:12px;
+    font-weight:900;
+}
+
+.history-subtitle{
+    color:var(--muted);
+    font-size:7px;
+    margin-top:3px;
+}
+
+.history-actions{
+    display:flex;
+    gap:7px;
+}
+
+.history-table-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    box-shadow:var(--shadow);
     overflow:hidden;
 }
 
-.history-header{
-    padding:13px 15px;
+.history-status{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
+}
 
+.mini-status{
+    padding:4px 6px;
+    border-radius:5px;
+    font-size:6px;
+    font-weight:900;
+}
+
+.mini-status.present{
+    background:var(--success-soft);
+    color:var(--success);
+}
+
+.mini-status.absent{
+    background:var(--danger-soft);
+    color:var(--danger);
+}
+
+.mini-status.late{
+    background:var(--warning-soft);
+    color:var(--warning);
+}
+
+.history-date{
+    font-weight:900;
+}
+
+.history-date small{
+    display:block;
+    color:var(--muted);
+    font-size:6px;
+    margin-top:2px;
+}
+
+.action-btn{
+    width:31px;
+    height:31px;
+
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+
+    border-radius:7px;
+
+    font-size:10px;
+}
+
+.action-btn:hover{
+    background:var(--danger-soft);
+    color:var(--danger);
+}
+
+
+/* =========================================================
+   MONTHLY REPORT
+========================================================= */
+
+.report-filter{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:15px;
+    box-shadow:var(--shadow);
+    margin-bottom:15px;
+}
+
+.report-filters{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr auto;
+    gap:9px;
+    align-items:end;
+}
+
+.report-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.report-header{
+    padding:15px;
     border-bottom:1px solid var(--border);
 
     display:flex;
@@ -704,89 +833,54 @@ tbody tr:hover{
     gap:10px;
 }
 
-.history-header h2{
+.report-header h2{
     font-size:12px;
 }
 
-.history-subtitle{
+.report-header p{
     color:var(--muted);
     font-size:7px;
-}
-
-.history-list{
-    max-height:500px;
-    overflow:auto;
-}
-
-.history-item{
-    padding:12px 15px;
-
-    border-bottom:1px solid var(--border);
-
-    display:grid;
-
-    grid-template-columns:110px 1fr auto;
-
-    gap:12px;
-
-    align-items:center;
-}
-
-.history-item:last-child{
-    border-bottom:none;
-}
-
-.history-date{
-    font-weight:900;
-    font-size:8px;
-}
-
-.history-date small{
-    display:block;
-    color:var(--muted);
-    font-size:6.5px;
     margin-top:3px;
 }
 
-.history-counts{
-    display:flex;
-    flex-wrap:wrap;
-    gap:5px;
-}
-
-.history-pill{
+.percentage{
+    display:inline-block;
+    min-width:48px;
+    text-align:center;
     padding:5px 7px;
-
     border-radius:6px;
-
-    font-size:6.5px;
+    font-size:7px;
     font-weight:900;
 }
 
-.history-pill.present{
+.percentage.good{
     background:var(--success-soft);
     color:var(--success);
 }
 
-.history-pill.absent{
-    background:var(--danger-soft);
-    color:var(--danger);
-}
-
-.history-pill.late{
+.percentage.average{
     background:var(--warning-soft);
     color:var(--warning);
 }
 
-.history-pill.total{
-    background:var(--primary-soft);
-    color:var(--primary);
+.percentage.low{
+    background:var(--danger-soft);
+    color:var(--danger);
 }
 
-.history-rate{
-    font-size:10px;
-    font-weight:900;
-    color:var(--purple);
+.progress{
+    width:100%;
+    height:6px;
+    background:var(--bg);
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:5px;
+}
+
+.progress-bar{
+    height:100%;
+    border-radius:20px;
+    background:var(--primary);
 }
 
 
@@ -838,10 +932,7 @@ tbody tr:hover{
 
 .modal{
     width:100%;
-    max-width:650px;
-
-    max-height:90vh;
-    overflow:auto;
+    max-width:550px;
 
     background:var(--card);
     color:var(--text);
@@ -891,106 +982,10 @@ tbody tr:hover{
     padding:18px;
 }
 
-.modal-student{
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    padding-bottom:14px;
-    margin-bottom:14px;
-
-    border-bottom:1px solid var(--border);
-}
-
-.modal-avatar{
-    width:45px;
-    height:45px;
-
-    border-radius:11px;
-
-    background:var(--primary-soft);
-    color:var(--primary);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:13px;
-    font-weight:900;
-}
-
-.modal-student-name{
-    font-size:11px;
-    font-weight:900;
-}
-
-.modal-student-id{
+.modal-text{
+    font-size:8px;
+    line-height:1.8;
     color:var(--muted);
-    font-size:7px;
-    margin-top:3px;
-}
-
-.detail-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
-    margin-bottom:15px;
-}
-
-.detail-box{
-    border:1px solid var(--border);
-    border-radius:9px;
-    padding:10px;
-}
-
-.detail-box span{
-    display:block;
-    color:var(--muted);
-    font-size:6.5px;
-}
-
-.detail-box strong{
-    display:block;
-    font-size:16px;
-    margin-top:2px;
-}
-
-.detail-box.present strong{
-    color:var(--success);
-}
-
-.detail-box.absent strong{
-    color:var(--danger);
-}
-
-.detail-box.late strong{
-    color:var(--warning);
-}
-
-.modal-history{
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.modal-history-row{
-    padding:9px 11px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    border-bottom:1px solid var(--border);
-
-    font-size:7px;
-}
-
-.modal-history-row:last-child{
-    border-bottom:none;
-}
-
-.modal-history-date{
-    font-weight:900;
 }
 
 .modal-actions{
@@ -1053,26 +1048,23 @@ tbody tr:hover{
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:1150px){
+@media(max-width:1100px){
 
     .stats{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .filters{
-        grid-template-columns:1fr 1fr 1fr;
+    .filters,
+    .report-filters{
+        grid-template-columns:1fr 1fr;
     }
 
 }
 
-@media(max-width:800px){
+@media(max-width:750px){
 
     .stats{
         grid-template-columns:repeat(2,1fr);
-    }
-
-    .filters{
-        grid-template-columns:1fr 1fr;
     }
 
     .page-header{
@@ -1088,17 +1080,16 @@ tbody tr:hover{
         flex:1;
     }
 
-    .report-toolbar,
-    .history-header{
+    .attendance-toolbar{
         flex-direction:column;
         align-items:flex-start;
     }
 
-    .report-actions{
+    .bulk-actions{
         width:100%;
     }
 
-    .report-actions .btn{
+    .bulk-actions .btn{
         flex:1;
     }
 
@@ -1106,17 +1097,17 @@ tbody tr:hover{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .history-item{
-        grid-template-columns:1fr;
-        gap:6px;
+    .history-toolbar{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .history-rate{
-        text-align:left;
+    .history-actions{
+        width:100%;
     }
 
-    .detail-grid{
-        grid-template-columns:repeat(2,1fr);
+    .history-actions .btn{
+        flex:1;
     }
 
 }
@@ -1131,7 +1122,8 @@ tbody tr:hover{
         padding:18px 13px 35px;
     }
 
-    .filters{
+    .filters,
+    .report-filters{
         grid-template-columns:1fr;
     }
 
@@ -1139,12 +1131,21 @@ tbody tr:hover{
         grid-template-columns:1fr 1fr;
     }
 
-    .summary{
+    .status-buttons{
+        flex-wrap:wrap;
+    }
+
+    .status-btn{
+        min-width:58px;
+    }
+
+    .tabs{
+        display:grid;
         grid-template-columns:1fr 1fr;
     }
 
-    .detail-grid{
-        grid-template-columns:1fr 1fr;
+    .tab-btn{
+        width:100%;
     }
 
 }
@@ -1167,12 +1168,16 @@ tbody tr:hover{
     }
 
     .header,
+    .tabs-card,
     .page-header .actions,
     .filter-card,
-    .report-actions,
-    .history-card,
+    .report-filter,
+    .history-toolbar,
+    .bulk-actions,
+    .status-buttons,
     .footer,
-    .toast{
+    .toast,
+    .action-btn{
         display:none !important;
     }
 
@@ -1181,12 +1186,23 @@ tbody tr:hover{
         padding:0;
     }
 
+    .tab-content{
+        display:none !important;
+    }
+
+    .tab-content.active{
+        display:block !important;
+    }
+
+    .attendance-card,
+    .history-table-card,
     .report-card{
         border:none;
         box-shadow:none;
     }
 
-    .report-toolbar{
+    .attendance-toolbar,
+    .report-header{
         border:none;
     }
 
@@ -1203,8 +1219,32 @@ tbody tr:hover{
         color:#000 !important;
     }
 
-    .progress{
-        border:1px solid #ddd;
+}
+
+
+/* =========================================================
+   PRINT REPORT TITLE
+========================================================= */
+
+.print-title{
+    display:none;
+}
+
+@media print{
+
+    .print-title{
+        display:block;
+        text-align:center;
+        margin-bottom:15px;
+    }
+
+    .print-title h1{
+        font-size:18px;
+    }
+
+    .print-title p{
+        font-size:9px;
+        margin-top:4px;
     }
 
 }
@@ -1235,7 +1275,7 @@ tbody tr:hover{
             SNK IT Institute
 
             <small>
-                Attendance History & Monthly Report
+                Student Attendance Management
             </small>
 
         </div>
@@ -1280,11 +1320,11 @@ tbody tr:hover{
         <div class="page-title">
 
             <h1>
-                📊 Attendance History
+                📅 Student Attendance
             </h1>
 
             <p>
-                Student attendance history, monthly report এবং percentage দেখুন।
+                Daily attendance, history এবং monthly report পরিচালনা করুন।
             </p>
 
         </div>
@@ -1294,16 +1334,16 @@ tbody tr:hover{
 
             <button
                 class="btn"
-                onclick="refreshData()"
+                onclick="printCurrentTab()"
             >
-                ↻ Refresh
+                🖨️ Print
             </button>
 
             <button
                 class="btn primary"
-                onclick="printReport()"
+                onclick="saveAttendance()"
             >
-                🖨️ Print Report
+                💾 Save Attendance
             </button>
 
         </div>
@@ -1313,109 +1353,36 @@ tbody tr:hover{
 
 
     <!-- =====================================================
-         FILTER
+         TABS
     ====================================================== -->
 
-    <section class="filter-card">
+    <section class="tabs-card">
 
-        <div class="filter-title">
-            🔎 Attendance Report Filter
-        </div>
-
-
-        <div class="filters">
-
-
-            <div class="field">
-
-                <label>
-                    Search Student
-                </label>
-
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Name, Student ID, phone..."
-                    oninput="renderReport()"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Course
-                </label>
-
-                <select
-                    id="courseFilter"
-                    onchange="renderReport()"
-                >
-
-                    <option value="all">
-                        All Courses
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Month
-                </label>
-
-                <input
-                    type="month"
-                    id="monthFilter"
-                    onchange="renderReport()"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label>
-                    Minimum Attendance
-                </label>
-
-                <select
-                    id="percentageFilter"
-                    onchange="renderReport()"
-                >
-
-                    <option value="all">
-                        All Students
-                    </option>
-
-                    <option value="75">
-                        Below 75%
-                    </option>
-
-                    <option value="50">
-                        Below 50%
-                    </option>
-
-                    <option value="90">
-                        90% or Above
-                    </option>
-
-                </select>
-
-            </div>
-
+        <div class="tabs">
 
             <button
-                class="btn"
-                onclick="resetFilters()"
+                class="tab-btn active"
+                id="dailyTabBtn"
+                onclick="switchTab('daily')"
             >
-                Reset
+                📅 Daily Attendance
             </button>
 
+            <button
+                class="tab-btn"
+                id="historyTabBtn"
+                onclick="switchTab('history')"
+            >
+                🕘 Attendance History
+            </button>
+
+            <button
+                class="tab-btn"
+                id="monthlyTabBtn"
+                onclick="switchTab('monthly')"
+            >
+                📊 Monthly Report
+            </button>
 
         </div>
 
@@ -1424,175 +1391,414 @@ tbody tr:hover{
 
 
     <!-- =====================================================
-         STATS
+         DAILY TAB
     ====================================================== -->
 
-    <section class="stats">
+    <section
+        class="tab-content active"
+        id="dailyTab"
+    >
 
 
-        <div class="stat blue">
+        <!-- STATS -->
 
-            <div class="stat-icon">
-                👨‍🎓
-            </div>
+        <section class="stats">
 
-            <div
-                class="stat-number"
-                id="totalStudents"
-            >
-                0
-            </div>
+            <div class="stat blue">
 
-            <div class="stat-label">
-                Total Students
-            </div>
+                <div class="stat-icon">
+                    👨‍🎓
+                </div>
 
-        </div>
-
-
-        <div class="stat green">
-
-            <div class="stat-icon">
-                ✅
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalPresent"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Total Present
-            </div>
-
-        </div>
-
-
-        <div class="stat red">
-
-            <div class="stat-icon">
-                ❌
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalAbsent"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Total Absent
-            </div>
-
-        </div>
-
-
-        <div class="stat orange">
-
-            <div class="stat-icon">
-                🕐
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalLate"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Total Late
-            </div>
-
-        </div>
-
-
-        <div class="stat purple">
-
-            <div class="stat-icon">
-                📈
-            </div>
-
-            <div
-                class="stat-number"
-                id="averageAttendance"
-            >
-                0%
-            </div>
-
-            <div class="stat-label">
-                Average Attendance
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                📅
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalDays"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Attendance Days
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         STUDENT REPORT
-    ====================================================== -->
-
-    <section class="report-card">
-
-
-        <div class="report-toolbar">
-
-            <div class="report-toolbar-left">
-
-                <h2>
-                    👨‍🎓 Student Monthly Attendance Report
-                </h2>
-
-                <span
-                    class="date-badge"
-                    id="monthBadge"
+                <div
+                    class="stat-number"
+                    id="totalStudents"
                 >
-                    Current Month
-                </span>
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Total Students
+                </div>
 
             </div>
 
 
-            <div class="report-actions">
+            <div class="stat green">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="presentCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Present
+                </div>
+
+            </div>
+
+
+            <div class="stat red">
+
+                <div class="stat-icon">
+                    ❌
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="absentCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Absent
+                </div>
+
+            </div>
+
+
+            <div class="stat orange">
+
+                <div class="stat-icon">
+                    🕐
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="lateCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Late
+                </div>
+
+            </div>
+
+
+            <div class="stat purple">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="unmarkedCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Unmarked
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FILTER -->
+
+        <section class="filter-card">
+
+            <div class="filter-title">
+                🔎 Search & Attendance Date
+            </div>
+
+
+            <div class="filters">
+
+                <div class="field">
+
+                    <label>
+                        Search Student
+                    </label>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Name, Student ID, phone..."
+                        oninput="renderStudents()"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Course
+                    </label>
+
+                    <select
+                        id="courseFilter"
+                        onchange="renderStudents()"
+                    >
+
+                        <option value="all">
+                            All Courses
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Attendance Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="attendanceDate"
+                        onchange="loadAttendanceForDate()"
+                    >
+
+                </div>
+
 
                 <button
                     class="btn"
-                    onclick="exportCSV()"
+                    onclick="resetFilters()"
                 >
-                    📥 Export CSV
+                    Reset
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ATTENDANCE CARD -->
+
+        <section class="attendance-card">
+
+
+            <div class="attendance-toolbar">
+
+                <div class="attendance-toolbar-left">
+
+                    <h2>
+                        👨‍🎓 Student Attendance List
+                    </h2>
+
+                    <span
+                        class="date-badge"
+                        id="dateBadge"
+                    >
+                        Today
+                    </span>
+
+                </div>
+
+
+                <div class="bulk-actions">
+
+                    <button
+                        class="btn success"
+                        onclick="markAll('present')"
+                    >
+                        ✓ All Present
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="markAll('absent')"
+                    >
+                        ✕ All Absent
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="markAll('late')"
+                    >
+                        🕐 All Late
+                    </button>
+
+                    <button
+                        class="btn"
+                        onclick="clearAllMarks()"
+                    >
+                        ↺ Clear
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Contact
+                            </th>
+
+                            <th>
+                                Attendance
+                            </th>
+
+                            <th>
+                                Current Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="studentTableBody"
+                    ></tbody>
+
+                </table>
+
+            </div>
+
+
+
+            <div class="summary">
+
+                <div class="summary-box present">
+
+                    <div class="summary-label">
+                        Present
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="summaryPresent"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box absent">
+
+                    <div class="summary-label">
+                        Absent
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="summaryAbsent"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box late">
+
+                    <div class="summary-label">
+                        Late
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="summaryLate"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box unmarked">
+
+                    <div class="summary-label">
+                        Unmarked
+                    </div>
+
+                    <div
+                        class="summary-value"
+                        id="summaryUnmarked"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         HISTORY TAB
+    ====================================================== -->
+
+    <section
+        class="tab-content"
+        id="historyTab"
+    >
+
+        <div class="history-toolbar">
+
+            <div>
+
+                <div class="history-title">
+                    🕘 Attendance History
+                </div>
+
+                <div class="history-subtitle">
+                    Save করা সকল date-এর attendance record এখানে দেখতে পারবেন।
+                </div>
+
+            </div>
+
+
+            <div class="history-actions">
+
+                <button
+                    class="btn"
+                    onclick="refreshHistory()"
+                >
+                    🔄 Refresh
                 </button>
 
                 <button
                     class="btn primary"
-                    onclick="showAllHistory()"
+                    onclick="printHistory()"
                 >
-                    📅 Full History
+                    🖨️ Print History
                 </button>
 
             </div>
@@ -1601,153 +1807,64 @@ tbody tr:hover{
 
 
 
-        <div class="table-wrap">
+        <div class="history-table-card">
 
-            <table>
+            <div class="table-wrap">
 
-                <thead>
+                <table>
 
-                    <tr>
+                    <thead>
 
-                        <th>
-                            #
-                        </th>
+                        <tr>
 
-                        <th>
-                            Student
-                        </th>
+                            <th>
+                                #
+                            </th>
 
-                        <th>
-                            Course
-                        </th>
+                            <th>
+                                Date
+                            </th>
 
-                        <th>
-                            Present
-                        </th>
+                            <th>
+                                Total
+                            </th>
 
-                        <th>
-                            Absent
-                        </th>
+                            <th>
+                                Present
+                            </th>
 
-                        <th>
-                            Late
-                        </th>
+                            <th>
+                                Absent
+                            </th>
 
-                        <th>
-                            Marked Days
-                        </th>
+                            <th>
+                                Late
+                            </th>
 
-                        <th>
-                            Attendance %
-                        </th>
+                            <th>
+                                Unmarked
+                            </th>
 
-                        <th>
-                            Performance
-                        </th>
+                            <th>
+                                Attendance %
+                            </th>
 
-                        <th>
-                            Action
-                        </th>
+                            <th>
+                                Action
+                            </th>
 
-                    </tr>
+                        </tr>
 
-                </thead>
+                    </thead>
 
 
-                <tbody
-                    id="reportTableBody"
-                ></tbody>
+                    <tbody
+                        id="historyTableBody"
+                    ></tbody>
 
-            </table>
-
-        </div>
-
-
-
-        <!-- SUMMARY -->
-
-        <div class="summary">
-
-
-            <div class="summary-box blue">
-
-                <div class="summary-label">
-                    Students
-                </div>
-
-                <div
-                    class="summary-value"
-                    id="summaryStudents"
-                >
-                    0
-                </div>
+                </table>
 
             </div>
-
-
-            <div class="summary-box present">
-
-                <div class="summary-label">
-                    Present
-                </div>
-
-                <div
-                    class="summary-value"
-                    id="summaryPresent"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="summary-box absent">
-
-                <div class="summary-label">
-                    Absent
-                </div>
-
-                <div
-                    class="summary-value"
-                    id="summaryAbsent"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="summary-box late">
-
-                <div class="summary-label">
-                    Late
-                </div>
-
-                <div
-                    class="summary-value"
-                    id="summaryLate"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="summary-box rate">
-
-                <div class="summary-label">
-                    Attendance Rate
-                </div>
-
-                <div
-                    class="summary-value"
-                    id="summaryRate"
-                >
-                    0%
-                </div>
-
-            </div>
-
 
         </div>
 
@@ -1756,34 +1873,161 @@ tbody tr:hover{
 
 
     <!-- =====================================================
-         DAILY HISTORY
+         MONTHLY TAB
     ====================================================== -->
 
-    <section class="history-card">
+    <section
+        class="tab-content"
+        id="monthlyTab"
+    >
+
+        <div class="report-filter">
+
+            <div class="filter-title">
+                📊 Monthly Attendance Report
+            </div>
 
 
-        <div class="history-header">
+            <div class="report-filters">
 
-            <div>
+                <div class="field">
 
-                <h2>
-                    📅 Daily Attendance History
-                </h2>
+                    <label>
+                        Month
+                    </label>
 
-                <div class="history-subtitle">
-                    Selected month-এর প্রতিটি attendance day-এর summary
+                    <input
+                        type="month"
+                        id="reportMonth"
+                        onchange="renderMonthlyReport()"
+                    >
+
                 </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Course
+                    </label>
+
+                    <select
+                        id="reportCourseFilter"
+                        onchange="renderMonthlyReport()"
+                    >
+
+                        <option value="all">
+                            All Courses
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Search Student
+                    </label>
+
+                    <input
+                        type="search"
+                        id="reportSearch"
+                        placeholder="Student name / ID..."
+                        oninput="renderMonthlyReport()"
+                    >
+
+                </div>
+
+
+                <button
+                    class="btn primary"
+                    onclick="printMonthlyReport()"
+                >
+                    🖨️ Print Report
+                </button>
 
             </div>
 
         </div>
 
 
-        <div
-            class="history-list"
-            id="historyList"
-        ></div>
 
+        <div class="report-card">
+
+            <div class="report-header">
+
+                <div>
+
+                    <h2>
+                        📈 Student-wise Attendance
+                    </h2>
+
+                    <p id="monthlyReportSubtitle">
+                        Monthly attendance summary
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Working Days
+                            </th>
+
+                            <th>
+                                Present
+                            </th>
+
+                            <th>
+                                Absent
+                            </th>
+
+                            <th>
+                                Late
+                            </th>
+
+                            <th>
+                                Attendance %
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="monthlyTableBody"
+                    ></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
     </section>
 
@@ -1791,7 +2035,7 @@ tbody tr:hover{
 
     <footer class="footer">
 
-        © 2026 SNK IT Institute • Attendance History & Monthly Report
+        © 2026 SNK IT Institute • Student Attendance Management
 
     </footer>
 
@@ -1800,26 +2044,25 @@ tbody tr:hover{
 
 
 <!-- =======================================================
-     STUDENT DETAIL MODAL
+     CONFIRM SAVE MODAL
 ======================================================= -->
 
 <div
     class="modal-overlay"
-    id="studentModal"
+    id="confirmModal"
 >
 
     <div class="modal">
 
-
         <div class="modal-header">
 
             <h2>
-                📊 Student Attendance Details
+                💾 Save Attendance
             </h2>
 
             <button
                 class="close-btn"
-                onclick="closeStudentModal()"
+                onclick="closeConfirm()"
             >
                 ×
             </button>
@@ -1830,7 +2073,8 @@ tbody tr:hover{
         <div class="modal-body">
 
             <div
-                id="studentModalContent"
+                class="modal-text"
+                id="confirmText"
             ></div>
 
 
@@ -1838,9 +2082,77 @@ tbody tr:hover{
 
                 <button
                     class="btn"
-                    onclick="closeStudentModal()"
+                    onclick="closeConfirm()"
                 >
-                    Close
+                    Cancel
+                </button>
+
+                <button
+                    class="btn primary"
+                    onclick="confirmSave()"
+                >
+                    Confirm & Save
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =======================================================
+     DELETE MODAL
+======================================================= -->
+
+<div
+    class="modal-overlay"
+    id="deleteModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2>
+                🗑️ Delete Attendance
+            </h2>
+
+            <button
+                class="close-btn"
+                onclick="closeDeleteModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div
+                class="modal-text"
+                id="deleteText"
+            ></div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    class="btn"
+                    onclick="closeDeleteModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="btn danger"
+                    onclick="confirmDeleteDate()"
+                >
+                    Delete Record
                 </button>
 
             </div>
@@ -1876,6 +2188,9 @@ const STUDENTS_KEY =
 const ATTENDANCE_KEY =
     "snkStudentAttendance";
 
+const THEME_KEY =
+    "snkAttendanceTheme";
+
 
 /* =========================================================
    STATE
@@ -1885,7 +2200,13 @@ let students = [];
 
 let attendance = {};
 
-let reportRows = [];
+let pendingSave = false;
+
+let pendingDeleteDate = null;
+
+let currentTab = "daily";
+
+let toastTimer = null;
 
 
 /* =========================================================
@@ -1898,18 +2219,82 @@ document.addEventListener(
 
         loadTheme();
 
+        setToday();
+
         setCurrentMonth();
 
         loadStudents();
 
         loadAttendance();
 
-        buildCourseFilter();
+        buildCourseFilters();
 
-        renderReport();
+        renderStudents();
+
+        renderHistory();
+
+        renderMonthlyReport();
 
     }
 );
+
+
+/* =========================================================
+   TODAY
+========================================================= */
+
+function getTodayString(){
+
+    const today =
+        new Date();
+
+    const year =
+        today.getFullYear();
+
+    const month =
+        String(
+            today.getMonth() + 1
+        ).padStart(2,"0");
+
+    const day =
+        String(
+            today.getDate()
+        ).padStart(2,"0");
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+function setToday(){
+
+    document.getElementById(
+        "attendanceDate"
+    ).value =
+        getTodayString();
+
+}
+
+
+function setCurrentMonth(){
+
+    const today =
+        new Date();
+
+    const year =
+        today.getFullYear();
+
+    const month =
+        String(
+            today.getMonth() + 1
+        ).padStart(2,"0");
+
+    document.getElementById(
+        "reportMonth"
+    ).value =
+        `${year}-${month}`;
+
+}
 
 
 /* =========================================================
@@ -1997,134 +2382,7 @@ function loadAttendance(){
 
 
 /* =========================================================
-   DATE / MONTH
-========================================================= */
-
-function setCurrentMonth(){
-
-    const now =
-        new Date();
-
-    const year =
-        now.getFullYear();
-
-    const month =
-        String(
-            now.getMonth()+1
-        ).padStart(2,"0");
-
-
-    document.getElementById(
-        "monthFilter"
-    ).value =
-        `${year}-${month}`;
-
-}
-
-
-function getSelectedMonth(){
-
-    return document.getElementById(
-        "monthFilter"
-    ).value;
-
-}
-
-
-function getMonthDates(monthValue){
-
-    if(!monthValue){
-
-        return [];
-
-    }
-
-
-    const parts =
-        monthValue.split("-");
-
-    const year =
-        Number(parts[0]);
-
-    const month =
-        Number(parts[1]);
-
-
-    const days =
-        new Date(
-            year,
-            month,
-            0
-        ).getDate();
-
-
-    const dates = [];
-
-
-    for(
-        let day=1;
-        day<=days;
-        day++
-    ){
-
-        dates.push(
-            `${year}-${String(month).padStart(2,"0")}-${String(day).padStart(2,"0")}`
-        );
-
-    }
-
-
-    return dates;
-
-}
-
-
-function updateMonthBadge(){
-
-    const month =
-        getSelectedMonth();
-
-    const badge =
-        document.getElementById(
-            "monthBadge"
-        );
-
-
-    if(!month){
-
-        badge.textContent =
-            "No Month";
-
-        return;
-
-    }
-
-
-    const parts =
-        month.split("-");
-
-    const date =
-        new Date(
-            Number(parts[0]),
-            Number(parts[1])-1,
-            1
-        );
-
-
-    badge.textContent =
-        date.toLocaleDateString(
-            "en-GB",
-            {
-                month:"long",
-                year:"numeric"
-            }
-        );
-
-}
-
-
-/* =========================================================
-   STUDENT HELPERS
+   GET STUDENT DATA
 ========================================================= */
 
 function getStudentId(student){
@@ -2184,18 +2442,14 @@ function getInitials(name){
         .filter(Boolean);
 
 
-    if(
-        words.length === 0
-    ){
+    if(!words.length){
 
         return "ST";
 
     }
 
 
-    if(
-        words.length === 1
-    ){
+    if(words.length === 1){
 
         return words[0]
             .substring(0,2)
@@ -2213,64 +2467,92 @@ function getInitials(name){
 
 
 /* =========================================================
-   COURSE FILTER
+   COURSE FILTERS
 ========================================================= */
 
-function buildCourseFilter(){
+function getCourses(){
 
-    const select =
+    return [
+        ...new Set(
+            students
+            .map(
+                student =>
+                    getCourse(student)
+            )
+            .filter(
+                course =>
+                    course &&
+                    course !== "-"
+            )
+        )
+    ]
+    .sort(
+        (a,b) =>
+            String(a)
+            .localeCompare(
+                String(b)
+            )
+    );
+
+}
+
+
+function buildCourseFilters(){
+
+    const courses =
+        getCourses();
+
+
+    const daily =
         document.getElementById(
             "courseFilter"
         );
 
-
-    const courses =
-        [
-            ...new Set(
-                students
-                .map(
-                    student =>
-                        getCourse(student)
-                )
-                .filter(
-                    course =>
-                        course &&
-                        course !== "-"
-                )
-            )
-        ]
-        .sort(
-            (a,b) =>
-                String(a)
-                .localeCompare(
-                    String(b)
-                )
+    const report =
+        document.getElementById(
+            "reportCourseFilter"
         );
 
 
-    select.innerHTML = `
-        <option value="all">
-            All Courses
-        </option>
-    `;
+    daily.innerHTML =
+        `<option value="all">All Courses</option>`;
+
+    report.innerHTML =
+        `<option value="all">All Courses</option>`;
 
 
     courses.forEach(
         course => {
 
-            const option =
+            const option1 =
                 document.createElement(
                     "option"
                 );
 
-            option.value =
+            option1.value =
                 course;
 
-            option.textContent =
+            option1.textContent =
                 course;
 
-            select.appendChild(
-                option
+            daily.appendChild(
+                option1
+            );
+
+
+            const option2 =
+                document.createElement(
+                    "option"
+                );
+
+            option2.value =
+                course;
+
+            option2.textContent =
+                course;
+
+            report.appendChild(
+                option2
             );
 
         }
@@ -2280,7 +2562,51 @@ function buildCourseFilter(){
 
 
 /* =========================================================
-   SEARCH FILTER
+   SELECTED DATE
+========================================================= */
+
+function getSelectedDate(){
+
+    return document.getElementById(
+        "attendanceDate"
+    ).value;
+
+}
+
+
+/* =========================================================
+   DATE BADGE
+========================================================= */
+
+function updateDateBadge(){
+
+    const date =
+        getSelectedDate();
+
+    const badge =
+        document.getElementById(
+            "dateBadge"
+        );
+
+
+    if(!date){
+
+        badge.textContent =
+            "No Date";
+
+        return;
+
+    }
+
+
+    badge.textContent =
+        formatDate(date);
+
+}
+
+
+/* =========================================================
+   FILTER STUDENTS
 ========================================================= */
 
 function getFilteredStudents(){
@@ -2297,7 +2623,8 @@ function getFilteredStudents(){
     const course =
         document.getElementById(
             "courseFilter"
-        ).value;
+        )
+        .value;
 
 
     return students.filter(
@@ -2351,269 +2678,17 @@ function getFilteredStudents(){
 
 
 /* =========================================================
-   STUDENT REPORT CALCULATION
+   RENDER DAILY STUDENTS
 ========================================================= */
 
-function calculateStudentReport(
-    student
-){
+function renderStudents(){
 
-    const id =
-        getStudentId(
-            student
-        );
-
-
-    const month =
-        getSelectedMonth();
-
-
-    const dates =
-        getMonthDates(
-            month
-        );
-
-
-    let present = 0;
-    let absent = 0;
-    let late = 0;
-
-
-    dates.forEach(
-        date => {
-
-            const dayData =
-                attendance[date];
-
-
-            if(
-                !dayData
-            ){
-
-                return;
-
-            }
-
-
-            const status =
-                dayData[id];
-
-
-            if(
-                status === "present"
-            ){
-
-                present++;
-
-            }
-            else if(
-                status === "absent"
-            ){
-
-                absent++;
-
-            }
-            else if(
-                status === "late"
-            ){
-
-                late++;
-
-            }
-
-        }
-    );
-
-
-    const markedDays =
-        present +
-        absent +
-        late;
-
-
-    /*
-       Attendance percentage:
-
-       Present + Late
-       ---------------- x 100
-       Marked Days
-
-       Late is counted as attended.
-    */
-
-    const percentage =
-        markedDays > 0
-        ?
-        (
-            (
-                present +
-                late
-            )
-            /
-            markedDays
-        )
-        *
-        100
-        :
-        0;
-
-
-    return {
-
-        student,
-        id,
-        present,
-        absent,
-        late,
-        markedDays,
-        percentage
-
-    };
-
-}
-
-
-/* =========================================================
-   PERFORMANCE
-========================================================= */
-
-function getPerformance(
-    percentage
-){
-
-    if(
-        percentage >= 90
-    ){
-
-        return {
-            className:"good",
-            text:"Excellent"
-        };
-
-    }
-
-
-    if(
-        percentage >= 75
-    ){
-
-        return {
-            className:"good",
-            text:"Good"
-        };
-
-    }
-
-
-    if(
-        percentage >= 50
-    ){
-
-        return {
-            className:"average",
-            text:"Average"
-        };
-
-    }
-
-
-    if(
-        percentage > 0
-    ){
-
-        return {
-            className:"low",
-            text:"Low"
-        };
-
-    }
-
-
-    return {
-        className:"none",
-        text:"No Data"
-    };
-
-}
-
-
-/* =========================================================
-   PERCENTAGE FILTER
-========================================================= */
-
-function matchesPercentageFilter(
-    row
-){
-
-    const filter =
-        document.getElementById(
-            "percentageFilter"
-        ).value;
-
-
-    if(
-        filter === "all"
-    ){
-
-        return true;
-
-    }
-
-
-    const value =
-        Number(filter);
-
-
-    if(
-        value === 75
-    ){
-
-        return (
-            row.percentage < 75
-        );
-
-    }
-
-
-    if(
-        value === 50
-    ){
-
-        return (
-            row.percentage < 50
-        );
-
-    }
-
-
-    if(
-        value === 90
-    ){
-
-        return (
-            row.percentage >= 90
-        );
-
-    }
-
-
-    return true;
-
-}
-
-
-/* =========================================================
-   RENDER REPORT
-========================================================= */
-
-function renderReport(){
-
-    updateMonthBadge();
+    updateDateBadge();
 
 
     const tbody =
         document.getElementById(
-            "reportTableBody"
+            "studentTableBody"
         );
 
 
@@ -2621,56 +2696,30 @@ function renderReport(){
         "";
 
 
-    const filteredStudents =
+    const filtered =
         getFilteredStudents();
 
 
-    reportRows =
-        filteredStudents
-        .map(
-            student =>
-                calculateStudentReport(
-                    student
-                )
-        )
-        .filter(
-            row =>
-                matchesPercentageFilter(
-                    row
-                )
-        );
-
-
-    if(
-        reportRows.length === 0
-    ){
+    if(!filtered.length){
 
         tbody.innerHTML = `
 
             <tr>
 
-                <td
-                    colspan="10"
-                    style="padding:0;"
-                >
+                <td colspan="6">
 
                     <div class="empty">
 
                         <div class="empty-icon">
-                            📊
+                            👨‍🎓
                         </div>
 
                         <strong>
-                            কোনো attendance report পাওয়া যায়নি
+                            কোনো Student পাওয়া যায়নি
                         </strong>
 
-                        <div
-                            style="
-                                margin-top:5px;
-                                font-size:7px;
-                            "
-                        >
-                            Attendance page থেকে attendance mark করুন।
+                        <div style="margin-top:5px;font-size:7px;">
+                            Student Management থেকে student যোগ করুন।
                         </div>
 
                     </div>
@@ -2683,50 +2732,1322 @@ function renderReport(){
 
         updateStats();
 
-        renderDailyHistory();
+        return;
+
+    }
+
+
+    filtered.forEach(
+        (student,index) => {
+
+            const id =
+                getStudentId(student);
+
+            const name =
+                getStudentName(student);
+
+            const course =
+                getCourse(student);
+
+            const phone =
+                getPhone(student);
+
+            const status =
+                getAttendanceStatus(id);
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+
+                    <div class="student-cell">
+
+                        <div class="avatar">
+                            ${escapeHtml(
+                                getInitials(name)
+                            )}
+                        </div>
+
+                        <div>
+
+                            <div class="student-name">
+                                ${escapeHtml(name)}
+                            </div>
+
+                            <div class="student-id">
+                                ID: ${escapeHtml(id || "-")}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+                <td>
+
+                    <div class="course-text">
+                        ${escapeHtml(course)}
+                    </div>
+
+                </td>
+
+                <td>
+
+                    <div class="course-text">
+                        ${escapeHtml(phone)}
+                    </div>
+
+                </td>
+
+                <td>
+
+                    <div class="status-buttons">
+
+                        <button
+                            class="status-btn present ${
+                                status === "present"
+                                ? "active"
+                                : ""
+                            }"
+                            onclick="setStatus('${escapeAttribute(id)}','present')"
+                        >
+                            ✓ Present
+                        </button>
+
+                        <button
+                            class="status-btn absent ${
+                                status === "absent"
+                                ? "active"
+                                : ""
+                            }"
+                            onclick="setStatus('${escapeAttribute(id)}','absent')"
+                        >
+                            ✕ Absent
+                        </button>
+
+                        <button
+                            class="status-btn late ${
+                                status === "late"
+                                ? "active"
+                                : ""
+                            }"
+                            onclick="setStatus('${escapeAttribute(id)}','late')"
+                        >
+                            🕐 Late
+                        </button>
+
+                    </div>
+
+                </td>
+
+                <td>
+                    ${getStatusBadge(status)}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(
+                row
+            );
+
+        }
+    );
+
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   GET ATTENDANCE STATUS
+========================================================= */
+
+function getAttendanceStatus(studentId){
+
+    const date =
+        getSelectedDate();
+
+
+    if(
+        !date ||
+        !studentId
+    ){
+
+        return "unmarked";
+
+    }
+
+
+    if(
+        !attendance[date]
+    ){
+
+        return "unmarked";
+
+    }
+
+
+    return (
+        attendance[date][studentId] ||
+        "unmarked"
+    );
+
+}
+
+
+/* =========================================================
+   SET STATUS
+========================================================= */
+
+function setStatus(
+    studentId,
+    status
+){
+
+    const date =
+        getSelectedDate();
+
+
+    if(!date){
+
+        showToast(
+            "প্রথমে Attendance Date নির্বাচন করুন!"
+        );
 
         return;
 
     }
 
 
-    reportRows.forEach(
-        (row,index) => {
+    if(!studentId){
 
-            const student =
-                row.student;
+        showToast(
+            "Student ID পাওয়া যায়নি!"
+        );
+
+        return;
+
+    }
 
 
-            const performance =
-                getPerformance(
-                    row.percentage
+    if(!attendance[date]){
+
+        attendance[date] = {};
+
+    }
+
+
+    if(
+        attendance[date][studentId] === status
+    ){
+
+        delete attendance[date][studentId];
+
+    }
+    else{
+
+        attendance[date][studentId] =
+            status;
+
+    }
+
+
+    renderStudents();
+
+}
+
+
+/* =========================================================
+   MARK ALL
+========================================================= */
+
+function markAll(status){
+
+    const date =
+        getSelectedDate();
+
+
+    if(!date){
+
+        showToast(
+            "প্রথমে Date নির্বাচন করুন!"
+        );
+
+        return;
+
+    }
+
+
+    if(!attendance[date]){
+
+        attendance[date] = {};
+
+    }
+
+
+    const filtered =
+        getFilteredStudents();
+
+
+    filtered.forEach(
+        student => {
+
+            const id =
+                getStudentId(student);
+
+
+            if(id){
+
+                attendance[date][id] =
+                    status;
+
+            }
+
+        }
+    );
+
+
+    renderStudents();
+
+
+    const label =
+        status === "present"
+        ? "Present"
+        : status === "absent"
+        ? "Absent"
+        : "Late";
+
+
+    showToast(
+        `Selected students → ${label} ✓`
+    );
+
+}
+
+
+/* =========================================================
+   CLEAR MARKS
+========================================================= */
+
+function clearAllMarks(){
+
+    const date =
+        getSelectedDate();
+
+
+    if(!date){
+
+        showToast(
+            "Date নির্বাচন করুন!"
+        );
+
+        return;
+
+    }
+
+
+    if(!attendance[date]){
+
+        showToast(
+            "এই তারিখে কোনো mark নেই।"
+        );
+
+        return;
+
+    }
+
+
+    const filtered =
+        getFilteredStudents();
+
+
+    filtered.forEach(
+        student => {
+
+            const id =
+                getStudentId(student);
+
+
+            if(id){
+
+                delete attendance[date][id];
+
+            }
+
+        }
+    );
+
+
+    if(
+        Object.keys(
+            attendance[date]
+        ).length === 0
+    ){
+
+        delete attendance[date];
+
+    }
+
+
+    renderStudents();
+
+
+    showToast(
+        "Attendance marks cleared ✓"
+    );
+
+}
+
+
+/* =========================================================
+   STATUS BADGE
+========================================================= */
+
+function getStatusBadge(status){
+
+    if(status === "present"){
+
+        return `
+            <span class="status-label present">
+                ✓ Present
+            </span>
+        `;
+
+    }
+
+
+    if(status === "absent"){
+
+        return `
+            <span class="status-label absent">
+                ✕ Absent
+            </span>
+        `;
+
+    }
+
+
+    if(status === "late"){
+
+        return `
+            <span class="status-label late">
+                🕐 Late
+            </span>
+        `;
+
+    }
+
+
+    return `
+        <span class="status-label unmarked">
+            — Unmarked
+        </span>
+    `;
+
+}
+
+
+/* =========================================================
+   DAILY STATS
+========================================================= */
+
+function calculateDateStats(date){
+
+    const record =
+        attendance[date] || {};
+
+
+    let present = 0;
+    let absent = 0;
+    let late = 0;
+
+
+    students.forEach(
+        student => {
+
+            const id =
+                getStudentId(student);
+
+            const status =
+                record[id] || "unmarked";
+
+
+            if(status === "present"){
+
+                present++;
+
+            }
+            else if(status === "absent"){
+
+                absent++;
+
+            }
+            else if(status === "late"){
+
+                late++;
+
+            }
+
+        }
+    );
+
+
+    const total =
+        students.length;
+
+    const unmarked =
+        Math.max(
+            total -
+            present -
+            absent -
+            late,
+            0
+        );
+
+
+    return {
+        total,
+        present,
+        absent,
+        late,
+        unmarked
+    };
+
+}
+
+
+function updateStats(){
+
+    const filtered =
+        getFilteredStudents();
+
+
+    let present = 0;
+    let absent = 0;
+    let late = 0;
+    let unmarked = 0;
+
+
+    filtered.forEach(
+        student => {
+
+            const status =
+                getAttendanceStatus(
+                    getStudentId(student)
                 );
 
 
-            const progressClass =
-                row.percentage >= 75
-                ?
-                ""
-                :
-                row.percentage >= 50
-                ?
-                "medium"
-                :
-                "low";
+            if(status === "present"){
+
+                present++;
+
+            }
+            else if(status === "absent"){
+
+                absent++;
+
+            }
+            else if(status === "late"){
+
+                late++;
+
+            }
+            else{
+
+                unmarked++;
+
+            }
+
+        }
+    );
 
 
-            const tr =
+    document.getElementById(
+        "totalStudents"
+    ).textContent =
+        filtered.length;
+
+    document.getElementById(
+        "presentCount"
+    ).textContent =
+        present;
+
+    document.getElementById(
+        "absentCount"
+    ).textContent =
+        absent;
+
+    document.getElementById(
+        "lateCount"
+    ).textContent =
+        late;
+
+    document.getElementById(
+        "unmarkedCount"
+    ).textContent =
+        unmarked;
+
+
+    document.getElementById(
+        "summaryPresent"
+    ).textContent =
+        present;
+
+    document.getElementById(
+        "summaryAbsent"
+    ).textContent =
+        absent;
+
+    document.getElementById(
+        "summaryLate"
+    ).textContent =
+        late;
+
+    document.getElementById(
+        "summaryUnmarked"
+    ).textContent =
+        unmarked;
+
+}
+
+
+/* =========================================================
+   DATE CHANGE
+========================================================= */
+
+function loadAttendanceForDate(){
+
+    renderStudents();
+
+    showToast(
+        "Attendance date changed"
+    );
+
+}
+
+
+/* =========================================================
+   SAVE ATTENDANCE
+========================================================= */
+
+function saveAttendance(){
+
+    const date =
+        getSelectedDate();
+
+
+    if(!date){
+
+        showToast(
+            "Attendance Date নির্বাচন করুন!"
+        );
+
+        return;
+
+    }
+
+
+    const filtered =
+        getFilteredStudents();
+
+
+    let marked = 0;
+
+
+    filtered.forEach(
+        student => {
+
+            const status =
+                getAttendanceStatus(
+                    getStudentId(student)
+                );
+
+
+            if(status !== "unmarked"){
+
+                marked++;
+
+            }
+
+        }
+    );
+
+
+    if(!marked){
+
+        showToast(
+            "কমপক্ষে একজন student-এর attendance mark করুন!"
+        );
+
+        return;
+
+    }
+
+
+    pendingSave = true;
+
+
+    document.getElementById(
+        "confirmText"
+    ).innerHTML = `
+
+        <strong>
+            ${formatDate(date)}
+        </strong>
+
+        তারিখের attendance save করতে চান?
+
+        <br><br>
+
+        Selected students:
+        <strong>
+            ${filtered.length}
+        </strong>
+
+        <br>
+
+        Marked attendance:
+        <strong>
+            ${marked}
+        </strong>
+
+        <br><br>
+
+        Save করলে attendance browser-এর
+        localStorage-এ সংরক্ষিত হবে।
+
+    `;
+
+
+    document.getElementById(
+        "confirmModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   CONFIRM SAVE
+========================================================= */
+
+function confirmSave(){
+
+    if(!pendingSave){
+
+        closeConfirm();
+
+        return;
+
+    }
+
+
+    try{
+
+        localStorage.setItem(
+            ATTENDANCE_KEY,
+            JSON.stringify(
+                attendance
+            )
+        );
+
+
+        pendingSave =
+            false;
+
+
+        closeConfirm();
+
+        renderHistory();
+
+        renderMonthlyReport();
+
+
+        showToast(
+            "Attendance saved successfully ✓"
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Attendance save করা যায়নি!"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE CONFIRM
+========================================================= */
+
+function closeConfirm(){
+
+    document.getElementById(
+        "confirmModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+function getAttendanceDates(){
+
+    return Object.keys(
+        attendance
+    )
+    .filter(
+        date =>
+            attendance[date] &&
+            typeof attendance[date] === "object"
+    )
+    .sort(
+        (a,b) =>
+            b.localeCompare(a)
+    );
+
+}
+
+
+function renderHistory(){
+
+    const tbody =
+        document.getElementById(
+            "historyTableBody"
+        );
+
+
+    tbody.innerHTML =
+        "";
+
+
+    const dates =
+        getAttendanceDates();
+
+
+    if(!dates.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="9">
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            🕘
+                        </div>
+
+                        <strong>
+                            কোনো Attendance History নেই
+                        </strong>
+
+                        <div style="margin-top:5px;font-size:7px;">
+                            Daily Attendance থেকে attendance save করুন।
+                        </div>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    dates.forEach(
+        (date,index) => {
+
+            const stats =
+                calculateDateStats(date);
+
+
+            const percentage =
+                calculatePercentage(
+                    stats.present +
+                    stats.late,
+                    stats.present +
+                    stats.absent +
+                    stats.late
+                );
+
+
+            const row =
                 document.createElement(
                     "tr"
                 );
 
 
-            tr.innerHTML = `
+            row.innerHTML = `
 
                 <td>
                     ${index + 1}
                 </td>
 
+                <td>
+
+                    <div class="history-date">
+
+                        ${formatDate(date)}
+
+                        <small>
+                            ${getDayName(date)}
+                        </small>
+
+                    </div>
+
+                </td>
+
+                <td>
+                    ${stats.total}
+                </td>
+
+                <td>
+
+                    <span class="mini-status present">
+                        ${stats.present}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="mini-status absent">
+                        ${stats.absent}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="mini-status late">
+                        ${stats.late}
+                    </span>
+
+                </td>
+
+                <td>
+                    ${stats.unmarked}
+                </td>
+
+                <td>
+
+                    <span class="percentage ${
+                        getPercentageClass(
+                            percentage
+                        )
+                    }">
+                        ${percentage}%
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="action-btn"
+                        title="View this date"
+                        onclick="viewHistoryDate('${escapeAttribute(date)}')"
+                    >
+                        👁️
+                    </button>
+
+                    <button
+                        class="action-btn"
+                        title="Delete"
+                        onclick="deleteHistoryDate('${escapeAttribute(date)}')"
+                    >
+                        🗑️
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+function refreshHistory(){
+
+    loadStudents();
+
+    loadAttendance();
+
+    renderHistory();
+
+    renderMonthlyReport();
+
+    showToast(
+        "History refreshed ✓"
+    );
+
+}
+
+
+/* =========================================================
+   VIEW HISTORY DATE
+========================================================= */
+
+function viewHistoryDate(date){
+
+    document.getElementById(
+        "attendanceDate"
+    ).value =
+        date;
+
+
+    switchTab(
+        "daily"
+    );
+
+
+    renderStudents();
+
+
+    showToast(
+        `${formatDate(date)} attendance loaded`
+    );
+
+}
+
+
+/* =========================================================
+   DELETE HISTORY
+========================================================= */
+
+function deleteHistoryDate(date){
+
+    pendingDeleteDate =
+        date;
+
+
+    document.getElementById(
+        "deleteText"
+    ).innerHTML = `
+
+        <strong>
+            ${formatDate(date)}
+        </strong>
+
+        তারিখের সম্পূর্ণ attendance record delete করতে চান?
+
+        <br><br>
+
+        ⚠️ এই action পরে undo করা যাবে না।
+
+    `;
+
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+function confirmDeleteDate(){
+
+    if(!pendingDeleteDate){
+
+        closeDeleteModal();
+
+        return;
+
+    }
+
+
+    delete attendance[
+        pendingDeleteDate
+    ];
+
+
+    try{
+
+        localStorage.setItem(
+            ATTENDANCE_KEY,
+            JSON.stringify(
+                attendance
+            )
+        );
+
+
+        const deletedDate =
+            pendingDeleteDate;
+
+
+        pendingDeleteDate =
+            null;
+
+
+        closeDeleteModal();
+
+        renderHistory();
+
+        renderMonthlyReport();
+
+        renderStudents();
+
+
+        showToast(
+            `${formatDate(deletedDate)} record deleted ✓`
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Record delete করা যায়নি!"
+        );
+
+    }
+
+}
+
+
+function closeDeleteModal(){
+
+    document.getElementById(
+        "deleteModal"
+    ).classList.remove(
+        "show"
+    );
+
+    pendingDeleteDate =
+        null;
+
+}
+
+
+/* =========================================================
+   MONTHLY REPORT
+========================================================= */
+
+function renderMonthlyReport(){
+
+    const tbody =
+        document.getElementById(
+            "monthlyTableBody"
+        );
+
+
+    tbody.innerHTML =
+        "";
+
+
+    const month =
+        document.getElementById(
+            "reportMonth"
+        ).value;
+
+
+    const course =
+        document.getElementById(
+            "reportCourseFilter"
+        ).value;
+
+
+    const search =
+        document.getElementById(
+            "reportSearch"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if(!month){
+
+        return;
+
+    }
+
+
+    const dates =
+        getDatesForMonth(month);
+
+
+    let filteredStudents =
+        students.filter(
+            student => {
+
+                const studentCourse =
+                    getCourse(student);
+
+                const name =
+                    getStudentName(student)
+                    .toLowerCase();
+
+                const id =
+                    getStudentId(student)
+                    .toLowerCase();
+
+
+                const courseMatch =
+                    course === "all" ||
+                    studentCourse === course;
+
+
+                const searchMatch =
+                    !search ||
+                    name.includes(search) ||
+                    id.includes(search);
+
+
+                return (
+                    courseMatch &&
+                    searchMatch
+                );
+
+            }
+        );
+
+
+    if(!filteredStudents.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="8">
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            📊
+                        </div>
+
+                        <strong>
+                            কোনো Student পাওয়া যায়নি
+                        </strong>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        updateMonthlySubtitle(
+            month,
+            dates.length
+        );
+
+        return;
+
+    }
+
+
+    filteredStudents.forEach(
+        (student,index) => {
+
+            const id =
+                getStudentId(student);
+
+            const studentDates =
+                dates.filter(
+                    date =>
+                        attendance[date] &&
+                        attendance[date][id]
+                );
+
+
+            let present = 0;
+            let absent = 0;
+            let late = 0;
+
+
+            studentDates.forEach(
+                date => {
+
+                    const status =
+                        attendance[date][id];
+
+
+                    if(status === "present"){
+
+                        present++;
+
+                    }
+                    else if(status === "absent"){
+
+                        absent++;
+
+                    }
+                    else if(status === "late"){
+
+                        late++;
+
+                    }
+
+                }
+            );
+
+
+            const marked =
+                present +
+                absent +
+                late;
+
+
+            const percentage =
+                calculatePercentage(
+                    present + late,
+                    marked
+                );
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
 
                 <td>
 
@@ -2749,10 +4070,7 @@ function renderReport(){
                             </div>
 
                             <div class="student-id">
-                                ID:
-                                ${escapeHtml(
-                                    row.id || "-"
-                                )}
+                                ID: ${escapeHtml(id || "-")}
                             </div>
 
                         </div>
@@ -2761,106 +4079,58 @@ function renderReport(){
 
                 </td>
 
-
                 <td>
-
-                    <div class="course-text">
-                        ${escapeHtml(
-                            getCourse(student)
-                        )}
-                    </div>
-
+                    ${escapeHtml(
+                        getCourse(student)
+                    )}
                 </td>
 
+                <td>
+                    ${marked}
+                </td>
 
                 <td>
 
-                    <span class="number-badge present">
-                        ${row.present}
+                    <span class="mini-status present">
+                        ${present}
                     </span>
 
                 </td>
 
-
                 <td>
 
-                    <span class="number-badge absent">
-                        ${row.absent}
+                    <span class="mini-status absent">
+                        ${absent}
                     </span>
 
                 </td>
 
-
                 <td>
 
-                    <span class="number-badge late">
-                        ${row.late}
+                    <span class="mini-status late">
+                        ${late}
                     </span>
 
                 </td>
 
-
                 <td>
 
-                    <span class="number-badge total">
-                        ${row.markedDays}
+                    <span class="percentage ${
+                        getPercentageClass(
+                            percentage
+                        )
+                    }">
+                        ${percentage}%
                     </span>
 
-                </td>
+                    <div class="progress">
 
-
-                <td>
-
-                    <div class="percentage-wrap">
-
-                        <div class="percentage-text">
-                            ${row.percentage.toFixed(1)}%
-                        </div>
-
-                        <div class="progress">
-
-                            <div
-                                class="progress-bar ${progressClass}"
-                                style="
-                                    width:${Math.min(
-                                        row.percentage,
-                                        100
-                                    )}%;
-                                "
-                            ></div>
-
-                        </div>
+                        <div
+                            class="progress-bar"
+                            style="width:${percentage}%"
+                        ></div>
 
                     </div>
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="status-label ${performance.className}"
-                    >
-                        ${escapeHtml(
-                            performance.text
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <button
-                        class="btn"
-                        style="
-                            min-height:30px;
-                            padding:0 9px;
-                        "
-                        onclick="showStudentDetails('${escapeAttribute(row.id)}')"
-                    >
-                        View
-                    </button>
 
                 </td>
 
@@ -2868,682 +4138,191 @@ function renderReport(){
 
 
             tbody.appendChild(
-                tr
+                row
             );
 
         }
     );
 
 
-    updateStats();
-
-    renderDailyHistory();
+    updateMonthlySubtitle(
+        month,
+        dates.length
+    );
 
 }
 
 
-/* =========================================================
-   UPDATE STATS
-========================================================= */
+function getDatesForMonth(month){
 
-function updateStats(){
-
-    let totalPresent = 0;
-    let totalAbsent = 0;
-    let totalLate = 0;
-
-    let totalMarked = 0;
-
-
-    reportRows.forEach(
-        row => {
-
-            totalPresent +=
-                row.present;
-
-            totalAbsent +=
-                row.absent;
-
-            totalLate +=
-                row.late;
-
-            totalMarked +=
-                row.markedDays;
-
-        }
-    );
-
-
-    const average =
-        totalMarked > 0
-        ?
-        (
-            (
-                totalPresent +
-                totalLate
+    return Object.keys(
+        attendance
+    )
+    .filter(
+        date =>
+            date.startsWith(
+                month
             )
-            /
-            totalMarked
-        )
-        *
-        100
-        :
-        0;
-
-
-    const days =
-        getMonthDates(
-            getSelectedMonth()
-        )
-        .filter(
-            date =>
-                attendance[date] &&
-                Object.keys(
-                    attendance[date]
-                ).length > 0
-        )
-        .length;
-
-
-    document.getElementById(
-        "totalStudents"
-    ).textContent =
-        reportRows.length;
-
-
-    document.getElementById(
-        "totalPresent"
-    ).textContent =
-        totalPresent;
-
-
-    document.getElementById(
-        "totalAbsent"
-    ).textContent =
-        totalAbsent;
-
-
-    document.getElementById(
-        "totalLate"
-    ).textContent =
-        totalLate;
-
-
-    document.getElementById(
-        "averageAttendance"
-    ).textContent =
-        average.toFixed(1) + "%";
-
-
-    document.getElementById(
-        "totalDays"
-    ).textContent =
-        days;
-
-
-    document.getElementById(
-        "summaryStudents"
-    ).textContent =
-        reportRows.length;
-
-
-    document.getElementById(
-        "summaryPresent"
-    ).textContent =
-        totalPresent;
-
-
-    document.getElementById(
-        "summaryAbsent"
-    ).textContent =
-        totalAbsent;
-
-
-    document.getElementById(
-        "summaryLate"
-    ).textContent =
-        totalLate;
-
-
-    document.getElementById(
-        "summaryRate"
-    ).textContent =
-        average.toFixed(1) + "%";
-
-}
-
-
-/* =========================================================
-   DAILY HISTORY
-========================================================= */
-
-function renderDailyHistory(){
-
-    const container =
-        document.getElementById(
-            "historyList"
-        );
-
-
-    container.innerHTML =
-        "";
-
-
-    const month =
-        getSelectedMonth();
-
-
-    const dates =
-        getMonthDates(
-            month
-        );
-
-
-    const activeDates =
-        dates
-        .filter(
-            date =>
-                attendance[date] &&
-                Object.keys(
-                    attendance[date]
-                ).length > 0
-        )
-        .sort()
-        .reverse();
-
-
-    if(
-        activeDates.length === 0
-    ){
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                <div class="empty-icon">
-                    📅
-                </div>
-
-                <strong>
-                    এই মাসে কোনো attendance history নেই
-                </strong>
-
-                <div
-                    style="
-                        margin-top:5px;
-                        font-size:7px;
-                    "
-                >
-                    Attendance page থেকে attendance save করুন।
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    activeDates.forEach(
-        date => {
-
-            const data =
-                attendance[date] || {};
-
-
-            let present = 0;
-            let absent = 0;
-            let late = 0;
-
-
-            Object.values(
-                data
-            ).forEach(
-                status => {
-
-                    if(
-                        status === "present"
-                    ){
-
-                        present++;
-
-                    }
-                    else if(
-                        status === "absent"
-                    ){
-
-                        absent++;
-
-                    }
-                    else if(
-                        status === "late"
-                    ){
-
-                        late++;
-
-                    }
-
-                }
-            );
-
-
-            const total =
-                present +
-                absent +
-                late;
-
-
-            const rate =
-                total > 0
-                ?
-                (
-                    (
-                        present +
-                        late
-                    )
-                    /
-                    total
-                )
-                *
-                100
-                :
-                0;
-
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "history-item";
-
-
-            item.innerHTML = `
-
-                <div class="history-date">
-
-                    ${formatDate(date)}
-
-                    <small>
-                        ${getDayName(date)}
-                    </small>
-
-                </div>
-
-
-                <div class="history-counts">
-
-                    <span class="history-pill present">
-                        ✓ Present ${present}
-                    </span>
-
-                    <span class="history-pill absent">
-                        ✕ Absent ${absent}
-                    </span>
-
-                    <span class="history-pill late">
-                        🕐 Late ${late}
-                    </span>
-
-                    <span class="history-pill total">
-                        Total ${total}
-                    </span>
-
-                </div>
-
-
-                <div class="history-rate">
-                    ${rate.toFixed(1)}%
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                item
-            );
-
-        }
+    )
+    .sort(
+        (a,b) =>
+            a.localeCompare(b)
     );
 
 }
 
 
-/* =========================================================
-   STUDENT DETAILS
-========================================================= */
-
-function showStudentDetails(
-    studentId
+function updateMonthlySubtitle(
+    month,
+    days
 ){
 
-    const student =
-        students.find(
-            item =>
-                getStudentId(item) ===
-                String(studentId)
-        );
-
-
-    if(!student){
-
-        showToast(
-            "Student পাওয়া যায়নি!"
-        );
-
-        return;
-
-    }
-
-
-    const row =
-        calculateStudentReport(
-            student
-        );
-
-
-    const content =
-        document.getElementById(
-            "studentModalContent"
-        );
-
-
-    const dates =
-        getMonthDates(
-            getSelectedMonth()
-        )
-        .filter(
-            date =>
-                attendance[date] &&
-                attendance[date][studentId]
-        )
-        .sort()
-        .reverse();
-
-
-    let historyHtml =
-        "";
-
-
-    if(
-        dates.length === 0
-    ){
-
-        historyHtml = `
-
-            <div class="empty">
-
-                কোনো attendance record নেই।
-
-            </div>
-
-        `;
-
-    }
-    else{
-
-        dates.forEach(
-            date => {
-
-                const status =
-                    attendance[date][studentId];
-
-
-                let badge = "";
-
-
-                if(
-                    status === "present"
-                ){
-
-                    badge = `
-                        <span class="status-label good">
-                            ✓ Present
-                        </span>
-                    `;
-
-                }
-                else if(
-                    status === "absent"
-                ){
-
-                    badge = `
-                        <span class="status-label low">
-                            ✕ Absent
-                        </span>
-                    `;
-
-                }
-                else if(
-                    status === "late"
-                ){
-
-                    badge = `
-                        <span class="status-label average">
-                            🕐 Late
-                        </span>
-                    `;
-
-                }
-
-
-                historyHtml += `
-
-                    <div class="modal-history-row">
-
-                        <div class="modal-history-date">
-                            ${formatDate(date)}
-                        </div>
-
-                        <div>
-                            ${badge}
-                        </div>
-
-                    </div>
-
-                `;
-
-            }
-        );
-
-    }
-
-
-    content.innerHTML = `
-
-        <div class="modal-student">
-
-            <div class="modal-avatar">
-
-                ${escapeHtml(
-                    getInitials(
-                        getStudentName(student)
-                    )
-                )}
-
-            </div>
-
-
-            <div>
-
-                <div class="modal-student-name">
-                    ${escapeHtml(
-                        getStudentName(student)
-                    )}
-                </div>
-
-                <div class="modal-student-id">
-                    ID:
-                    ${escapeHtml(
-                        row.id || "-"
-                    )}
-
-                    •
-
-                    ${escapeHtml(
-                        getCourse(student)
-                    )}
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="detail-grid">
-
-
-            <div class="detail-box present">
-
-                <span>
-                    Present
-                </span>
-
-                <strong>
-                    ${row.present}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box absent">
-
-                <span>
-                    Absent
-                </span>
-
-                <strong>
-                    ${row.absent}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box late">
-
-                <span>
-                    Late
-                </span>
-
-                <strong>
-                    ${row.late}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <span>
-                    Attendance
-                </span>
-
-                <strong>
-                    ${row.percentage.toFixed(1)}%
-                </strong>
-
-            </div>
-
-
-        </div>
-
-
-        <div
-            style="
-                font-size:9px;
-                font-weight:900;
-                margin-bottom:8px;
-            "
-        >
-            📅 Attendance Records
-        </div>
-
-
-        <div class="modal-history">
-
-            ${historyHtml}
-
-        </div>
-
-    `;
-
-
     document.getElementById(
-        "studentModal"
-    ).classList.add(
-        "show"
-    );
+        "monthlyReportSubtitle"
+    ).textContent =
+        `${formatMonth(month)} • ${days} recorded day(s)`;
 
 }
 
 
 /* =========================================================
-   CLOSE MODAL
+   PERCENTAGE
 ========================================================= */
 
-function closeStudentModal(){
+function calculatePercentage(
+    attended,
+    marked
+){
 
-    document.getElementById(
-        "studentModal"
-    ).classList.remove(
-        "show"
+    if(!marked){
+
+        return 0;
+
+    }
+
+
+    return Math.round(
+        (
+            attended /
+            marked
+        ) * 100
     );
 
 }
 
 
-/* =========================================================
-   FULL HISTORY
-========================================================= */
+function getPercentageClass(
+    percentage
+){
 
-function showAllHistory(){
+    if(percentage >= 80){
 
-    const searchInput =
-        document.getElementById(
-            "searchInput"
-        );
-
-
-    const search =
-        searchInput.value.trim();
-
-
-    if(search){
-
-        renderReport();
-
-        showToast(
-            "Filtered history already shown"
-        );
-
-        return;
+        return "good";
 
     }
 
 
-    document.getElementById(
-        "percentageFilter"
-    ).value =
-        "all";
+    if(percentage >= 60){
+
+        return "average";
+
+    }
 
 
-    renderReport();
+    return "low";
+
+}
 
 
-    const history =
-        document.getElementById(
-            "historyList"
+/* =========================================================
+   TABS
+========================================================= */
+
+function switchTab(tab){
+
+    currentTab =
+        tab;
+
+
+    document
+        .querySelectorAll(
+            ".tab-content"
+        )
+        .forEach(
+            element =>
+                element.classList.remove(
+                    "active"
+                )
         );
 
 
-    history.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-    });
+    document
+        .querySelectorAll(
+            ".tab-btn"
+        )
+        .forEach(
+            button =>
+                button.classList.remove(
+                    "active"
+                )
+        );
+
+
+    if(tab === "daily"){
+
+        document.getElementById(
+            "dailyTab"
+        ).classList.add(
+            "active"
+        );
+
+        document.getElementById(
+            "dailyTabBtn"
+        ).classList.add(
+            "active"
+        );
+
+        renderStudents();
+
+    }
+
+
+    if(tab === "history"){
+
+        document.getElementById(
+            "historyTab"
+        ).classList.add(
+            "active"
+        );
+
+        document.getElementById(
+            "historyTabBtn"
+        ).classList.add(
+            "active"
+        );
+
+        renderHistory();
+
+    }
+
+
+    if(tab === "monthly"){
+
+        document.getElementById(
+            "monthlyTab"
+        ).classList.add(
+            "active"
+        );
+
+        document.getElementById(
+            "monthlyTabBtn"
+        ).classList.add(
+            "active"
+        );
+
+        renderMonthlyReport();
+
+    }
 
 }
 
@@ -3566,15 +4345,9 @@ function resetFilters(){
         "all";
 
 
-    document.getElementById(
-        "percentageFilter"
-    ).value =
-        "all";
+    setToday();
 
-
-    setCurrentMonth();
-
-    renderReport();
+    renderStudents();
 
 
     showToast(
@@ -3585,161 +4358,48 @@ function resetFilters(){
 
 
 /* =========================================================
-   REFRESH
-========================================================= */
-
-function refreshData(){
-
-    loadStudents();
-
-    loadAttendance();
-
-    buildCourseFilter();
-
-    renderReport();
-
-
-    showToast(
-        "Attendance data refreshed ✓"
-    );
-
-}
-
-
-/* =========================================================
-   CSV EXPORT
-========================================================= */
-
-function exportCSV(){
-
-    if(
-        reportRows.length === 0
-    ){
-
-        showToast(
-            "Export করার মতো data নেই!"
-        );
-
-        return;
-
-    }
-
-
-    const rows = [];
-
-
-    rows.push([
-        "Student Name",
-        "Student ID",
-        "Course",
-        "Present",
-        "Absent",
-        "Late",
-        "Marked Days",
-        "Attendance %"
-    ]);
-
-
-    reportRows.forEach(
-        row => {
-
-            rows.push([
-                getStudentName(row.student),
-                row.id,
-                getCourse(row.student),
-                row.present,
-                row.absent,
-                row.late,
-                row.markedDays,
-                row.percentage.toFixed(1) + "%"
-            ]);
-
-        }
-    );
-
-
-    const csv =
-        rows
-        .map(
-            row =>
-                row
-                .map(
-                    value =>
-                        `"${String(value).replace(
-                            /"/g,
-                            '""'
-                        )}"`
-                )
-                .join(",")
-        )
-        .join("\n");
-
-
-    const blob =
-        new Blob(
-            [
-                "\uFEFF" +
-                csv
-            ],
-            {
-                type:
-                    "text/csv;charset=utf-8;"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(
-            blob
-        );
-
-
-    const link =
-        document.createElement(
-            "a"
-        );
-
-
-    link.href =
-        url;
-
-
-    link.download =
-        "SNK-Attendance-" +
-        getSelectedMonth() +
-        ".csv";
-
-
-    document.body.appendChild(
-        link
-    );
-
-
-    link.click();
-
-
-    link.remove();
-
-
-    URL.revokeObjectURL(
-        url
-    );
-
-
-    showToast(
-        "CSV exported successfully ✓"
-    );
-
-}
-
-
-/* =========================================================
    PRINT
 ========================================================= */
 
-function printReport(){
+function printCurrentTab(){
 
     window.print();
+
+}
+
+
+function printHistory(){
+
+    switchTab(
+        "history"
+    );
+
+    setTimeout(
+        function(){
+
+            window.print();
+
+        },
+        100
+    );
+
+}
+
+
+function printMonthlyReport(){
+
+    switchTab(
+        "monthly"
+    );
+
+    setTimeout(
+        function(){
+
+            window.print();
+
+        },
+        100
+    );
 
 }
 
@@ -3762,7 +4422,7 @@ function toggleTheme(){
 
 
     localStorage.setItem(
-        "snkAttendanceHistoryTheme",
+        THEME_KEY,
         dark
         ?
         "dark"
@@ -3780,13 +4440,11 @@ function loadTheme(){
 
     const theme =
         localStorage.getItem(
-            "snkAttendanceHistoryTheme"
+            THEME_KEY
         );
 
 
-    if(
-        theme === "dark"
-    ){
+    if(theme === "dark"){
 
         document.body.classList.add(
             "dark"
@@ -3826,9 +4484,7 @@ function updateThemeButton(){
 
 function goBack(){
 
-    if(
-        document.referrer
-    ){
+    if(document.referrer){
 
         history.back();
 
@@ -3847,9 +4503,7 @@ function goBack(){
    DATE FORMAT
 ========================================================= */
 
-function formatDate(
-    value
-){
+function formatDate(value){
 
     if(!value){
 
@@ -3860,14 +4514,7 @@ function formatDate(
 
     const date =
         new Date(
-            value +
-            (
-                String(value).includes("T")
-                ?
-                ""
-                :
-                "T00:00:00"
-            )
+            value + "T00:00:00"
         );
 
 
@@ -3894,13 +4541,44 @@ function formatDate(
 }
 
 
-/* =========================================================
-   DAY NAME
-========================================================= */
+function formatMonth(value){
 
-function getDayName(
-    value
-){
+    if(!value){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(
+            value + "-01T00:00:00"
+        );
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return value;
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+function getDayName(value){
 
     const date =
         new Date(
@@ -3922,9 +4600,7 @@ function getDayName(
    ESCAPE HTML
 ========================================================= */
 
-function escapeHtml(
-    value
-){
+function escapeHtml(value){
 
     const div =
         document.createElement(
@@ -3949,9 +4625,7 @@ function escapeHtml(
    ESCAPE ATTRIBUTE
 ========================================================= */
 
-function escapeAttribute(
-    value
-){
+function escapeAttribute(value){
 
     return String(
         value == null
@@ -3988,12 +4662,7 @@ function escapeAttribute(
    TOAST
 ========================================================= */
 
-let toastTimer = null;
-
-
-function showToast(
-    message
-){
+function showToast(message){
 
     const toast =
         document.getElementById(
@@ -4031,20 +4700,34 @@ function showToast(
 
 
 /* =========================================================
-   MODAL CLICK
+   MODAL EVENTS
 ========================================================= */
 
 document.getElementById(
-    "studentModal"
+    "confirmModal"
 ).addEventListener(
     "click",
     function(event){
 
-        if(
-            event.target === this
-        ){
+        if(event.target === this){
 
-            closeStudentModal();
+            closeConfirm();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "deleteModal"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+
+            closeDeleteModal();
 
         }
 
@@ -4060,11 +4743,11 @@ document.addEventListener(
     "keydown",
     function(event){
 
-        if(
-            event.key === "Escape"
-        ){
+        if(event.key === "Escape"){
 
-            closeStudentModal();
+            closeConfirm();
+
+            closeDeleteModal();
 
         }
 
@@ -4086,9 +4769,13 @@ window.addEventListener(
 
             loadStudents();
 
-            buildCourseFilter();
+            buildCourseFilters();
 
-            renderReport();
+            renderStudents();
+
+            renderMonthlyReport();
+
+            renderHistory();
 
         }
 
@@ -4099,7 +4786,11 @@ window.addEventListener(
 
             loadAttendance();
 
-            renderReport();
+            renderStudents();
+
+            renderHistory();
+
+            renderMonthlyReport();
 
         }
 
