@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SNK IT Institute | Admin Dashboard 1.9</title>
+<title>SNK IT Institute | Admin Dashboard 1.11</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 /* =========================================================
    SNK IT INSTITUTE
    ADMIN DASHBOARD
-   VERSION 1.9
+   VERSION 1.11
 
    IMPORTANT:
    This is UI/Demo version.
@@ -1487,6 +1487,29 @@ td{
 }
 
 
+
+/* =========================================================
+   VERSION 1.11 — EXISTING MODULE NAVIGATION
+   ========================================================= */
+
+const moduleLinks = {
+    "Students": "students.html",
+    "Courses": "courses.html",
+    "Assignments": "assignments.html",
+    "Quiz": "quiz.html",
+    "Results": "results.html",
+    "Attendance": "attendance-overview.html",
+    "Resources": "resources.html"
+};
+
+function openModule(name){
+    if(moduleLinks[name]){
+        window.location.href = moduleLinks[name];
+    }else{
+        showDemo(name);
+    }
+}
+
 /* =========================================================
    DEMO MODAL
    ========================================================= */
@@ -1906,7 +1929,7 @@ Dashboard
 
 <button
 class="menu-item"
-onclick="showDemo('Students')">
+onclick="openModule('Students')">
 
 <span class="menu-icon">
 👨‍🎓
@@ -1926,7 +1949,7 @@ Students
 
 <button
 class="menu-item"
-onclick="showDemo('Courses')">
+onclick="openModule('Courses')">
 
 <span class="menu-icon">
 🎓
@@ -1947,7 +1970,7 @@ Academic
 
 <button
 class="menu-item"
-onclick="showDemo('Assignments')">
+onclick="openModule('Assignments')">
 
 <span class="menu-icon">
 📝
@@ -1967,7 +1990,7 @@ Assignments
 
 <button
 class="menu-item"
-onclick="showDemo('Quiz')">
+onclick="openModule('Quiz')">
 
 <span class="menu-icon">
 🎯
@@ -1983,7 +2006,7 @@ Quiz
 
 <button
 class="menu-item"
-onclick="showDemo('Results')">
+onclick="openModule('Results')">
 
 <span class="menu-icon">
 🏆
@@ -1999,7 +2022,7 @@ Results
 
 <button
 class="menu-item"
-onclick="showDemo('Attendance')">
+onclick="openModule('Attendance')">
 
 <span class="menu-icon">
 📅
@@ -2020,7 +2043,7 @@ Content
 
 <button
 class="menu-item"
-onclick="showDemo('Resources')">
+onclick="openModule('Resources')">
 
 <span class="menu-icon">
 📚
@@ -2239,7 +2262,7 @@ Marks, Results ও Resources পরিচালনা করা যাবে।
 
 
 <div class="welcome-badge">
-VERSION 1.9 • DEMO UI
+VERSION 1.11 • DEMO UI
 </div>
 
 
@@ -2786,7 +2809,7 @@ Recently registered / active students
 
 <button
 class="view-all"
-onclick="showDemo('Students')">
+onclick="openModule('Students')">
 Manage Students
 </button>
 
@@ -3291,7 +3314,7 @@ Batch 01-এর নতুন class schedule update করা হয়েছে।
 
 <footer class="footer">
 
-SNK IT Institute • Admin Dashboard 1.9 • Offline Course Management
+SNK IT Institute • Admin Dashboard 1.11 • Offline Course Management
 
 <br>
 
@@ -3345,11 +3368,11 @@ onclick="closeModal()">
 <div class="demo-box">
 
 <strong>
-🔧 Current Version: 1.9
+🔧 Current Version: 1.11
 </strong>
 
 <span>
-এটি এখন UI/Demo mode-এ আছে। Real data ও database পরে যুক্ত হবে।
+এটি এখন UI/Demo mode-এ আছে। Existing project modules-এর direct navigation যুক্ত হয়েছে। Real database পরে যুক্ত হবে।
 </span>
 
 </div>
@@ -3567,4 +3590,3 @@ document.addEventListener(
 
 </body>
 </html>
-```
