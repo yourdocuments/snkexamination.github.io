@@ -1,66 +1,49 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SNK IT Institute | Attendance Audit Log</title>
+<title>Attendance Audit Log — SNK Examination</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 :root{
-    --bg:#f4f7fb;
+    --bg:#f5f7fb;
     --card:#ffffff;
     --text:#172033;
-    --muted:#667085;
+    --muted:#6b7280;
     --border:#e5e7eb;
-
     --primary:#2563eb;
     --primary-dark:#1d4ed8;
-    --primary-soft:#eff6ff;
-
     --success:#16a34a;
-    --success-soft:#f0fdf4;
-
-    --danger:#dc2626;
-    --danger-soft:#fef2f2;
-
     --warning:#d97706;
-    --warning-soft:#fffbeb;
-
+    --danger:#dc2626;
     --purple:#7c3aed;
-    --purple-soft:#f5f3ff;
-
-    --shadow:0 10px 30px rgba(15,23,42,.08);
-}
-
-body.dark{
-    --bg:#080d18;
-    --card:#111827;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:#1f2937;
-
-    --primary-soft:#172554;
-    --success-soft:#052e16;
-    --danger-soft:#450a0a;
-    --warning-soft:#451a03;
-    --purple-soft:#2e1065;
-
-    --shadow:0 10px 30px rgba(0,0,0,.3);
+    --shadow:0 12px 30px rgba(15,23,42,.08);
+    --sidebar:#111827;
+    --sidebar-text:#d1d5db;
+    --sidebar-hover:#1f2937;
 }
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    font-family:"Inter",sans-serif;
     background:var(--bg);
     color:var(--text);
     min-height:100vh;
@@ -76,252 +59,353 @@ button{
     cursor:pointer;
 }
 
-.header{
-    position:sticky;
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
     top:0;
+    width:255px;
+    height:100vh;
+    background:var(--sidebar);
+    color:white;
+    padding:20px 14px;
     z-index:1000;
+    overflow-y:auto;
+}
 
-    min-height:70px;
-    padding:12px 25px;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:8px 10px 22px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    margin-bottom:15px;
+}
 
+.brand img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+    background:white;
+    border-radius:10px;
+    padding:4px;
+}
+
+.brand-title{
+    font-size:16px;
+    font-weight:800;
+}
+
+.brand-sub{
+    font-size:11px;
+    color:#9ca3af;
+    margin-top:3px;
+}
+
+.nav-title{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#6b7280;
+    padding:10px 12px 7px;
+}
+
+.nav-link{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 12px;
+    border-radius:9px;
+    color:var(--sidebar-text);
+    font-size:13px;
+    margin-bottom:3px;
+    transition:.2s;
+}
+
+.nav-link i{
+    width:18px;
+    text-align:center;
+}
+
+.nav-link:hover{
+    background:var(--sidebar-hover);
+    color:#fff;
+}
+
+.nav-link.active{
+    background:#2563eb;
+    color:white;
+    font-weight:700;
+}
+
+.sidebar-footer{
+    margin-top:20px;
+    padding:12px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#9ca3af;
+    font-size:10px;
+    line-height:1.6;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:255px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:70px;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    background:var(--card);
-    border-bottom:1px solid var(--border);
-
-    box-shadow:0 4px 20px rgba(15,23,42,.05);
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:500;
 }
 
-.logo-area{
+.topbar-left{
     display:flex;
     align-items:center;
     gap:10px;
 }
 
-.logo{
-    width:44px;
-    height:44px;
-    object-fit:contain;
+.topbar-title{
+    font-size:15px;
+    font-weight:800;
 }
 
-.logo-text{
-    font-size:14px;
-    font-weight:900;
-}
-
-.logo-text small{
-    display:block;
-    color:var(--muted);
-    font-size:8px;
-    margin-top:2px;
-}
-
-.header-actions{
+.topbar-right{
     display:flex;
-    gap:7px;
+    align-items:center;
+    gap:8px;
+}
+
+.icon-btn{
+    width:40px;
+    height:40px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.icon-btn:hover{
+    border-color:var(--primary);
+    color:var(--primary);
+}
+
+.page{
+    padding:28px;
+    max-width:1600px;
+    margin:auto;
+}
+
+.page-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:24px;
+}
+
+.eyebrow{
+    color:var(--primary);
+    font-size:12px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    margin-bottom:7px;
+}
+
+h1{
+    font-size:28px;
+    line-height:1.2;
+    margin-bottom:7px;
+}
+
+.page-description{
+    color:var(--muted);
+    font-size:13px;
+    max-width:760px;
+}
+
+.head-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
 .btn{
-    min-height:38px;
-    padding:0 13px;
-
     border:1px solid var(--border);
-    border-radius:9px;
-
     background:var(--card);
     color:var(--text);
-
-    font-size:8px;
-    font-weight:900;
-
-    transition:.2s;
+    padding:10px 14px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
 }
 
 .btn:hover{
     border-color:var(--primary);
-    transform:translateY(-1px);
+    color:var(--primary);
 }
 
-.btn.primary{
+.btn-primary{
     background:var(--primary);
     border-color:var(--primary);
-    color:#fff;
+    color:white;
 }
 
-.btn.primary:hover{
+.btn-primary:hover{
     background:var(--primary-dark);
+    border-color:var(--primary-dark);
+    color:white;
 }
 
-.btn.success{
-    background:var(--success);
-    border-color:var(--success);
-    color:#fff;
+.btn-danger{
+    color:var(--danger);
 }
 
-.btn.danger{
-    background:var(--danger);
-    border-color:var(--danger);
-    color:#fff;
+.btn-success{
+    color:var(--success);
 }
 
-.btn.warning{
-    background:var(--warning);
-    border-color:var(--warning);
-    color:#fff;
-}
-
-.btn.small{
-    min-height:32px;
-    padding:0 10px;
-    font-size:7px;
-}
-
-.main{
-    max-width:1250px;
-    margin:auto;
-    padding:28px 20px 50px;
-}
-
-.page-header{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:18px;
-}
-
-.page-title h1{
-    font-size:24px;
-    margin-bottom:4px;
-}
-
-.page-title p{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.actions{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-}
-
-.info{
-    padding:12px 14px;
-
-    background:var(--primary-soft);
-    border:1px solid rgba(37,99,235,.15);
-
-    border-radius:11px;
-
-    font-size:8px;
-    line-height:1.8;
-
-    margin-bottom:15px;
-}
-
-.info strong{
-    display:block;
-    font-size:9px;
-    margin-bottom:3px;
-}
+/* STATS */
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:15px;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+    margin-bottom:20px;
 }
 
 .stat{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:13px;
-    padding:14px;
+    border-radius:14px;
+    padding:18px;
     box-shadow:var(--shadow);
 }
 
-.stat-icon{
-    font-size:18px;
-    margin-bottom:6px;
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
 }
 
-.stat-value{
-    font-size:20px;
-    font-weight:900;
+.stat-icon{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eff6ff;
+    color:var(--primary);
+}
+
+.stat:nth-child(2) .stat-icon{
+    background:#ecfdf5;
+    color:var(--success);
+}
+
+.stat:nth-child(3) .stat-icon{
+    background:#fff7ed;
+    color:var(--warning);
+}
+
+.stat:nth-child(4) .stat-icon{
+    background:#fef2f2;
+    color:var(--danger);
+}
+
+.stat:nth-child(5) .stat-icon{
+    background:#f5f3ff;
+    color:var(--purple);
 }
 
 .stat-label{
+    font-size:11px;
     color:var(--muted);
-    font-size:7px;
-    margin-top:2px;
+    margin-bottom:5px;
 }
+
+.stat-value{
+    font-size:25px;
+    font-weight:800;
+}
+
+.stat-note{
+    font-size:10px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+/* FILTER CARD */
 
 .card{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:15px;
+    border-radius:14px;
     box-shadow:var(--shadow);
-    overflow:hidden;
+}
+
+.filters{
+    padding:18px;
+    margin-bottom:20px;
+}
+
+.card-title{
+    font-size:14px;
+    font-weight:800;
     margin-bottom:15px;
-}
-
-.card-header{
-    padding:14px 15px;
-    border-bottom:1px solid var(--border);
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.card-header h2{
-    font-size:12px;
-}
-
-.card-header p{
-    color:var(--muted);
-    font-size:7px;
-    margin-top:3px;
-}
-
-.card-body{
-    padding:15px;
 }
 
 .filter-grid{
     display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:10px;
+    grid-template-columns:1.3fr 1fr 1fr 1fr 1.4fr auto;
+    gap:12px;
+    align-items:end;
 }
 
 .field label{
     display:block;
+    font-size:10px;
+    font-weight:700;
     color:var(--muted);
-    font-size:7px;
-    font-weight:900;
-    margin-bottom:5px;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:.3px;
 }
 
 .field input,
 .field select{
     width:100%;
-    height:39px;
-
-    padding:0 10px;
-
+    height:40px;
     border:1px solid var(--border);
     border-radius:8px;
-
     background:var(--card);
     color:var(--text);
-
+    padding:0 11px;
+    font-size:12px;
     outline:none;
-
-    font-size:8px;
 }
 
 .field input:focus,
@@ -333,209 +417,227 @@ button{
 .filter-actions{
     display:flex;
     gap:7px;
-    margin-top:12px;
-    flex-wrap:wrap;
+}
+
+/* TABLE */
+
+.table-card{
+    overflow:hidden;
+}
+
+.table-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px;
+    border-bottom:1px solid var(--border);
+    gap:15px;
+}
+
+.table-title{
+    font-size:14px;
+    font-weight:800;
+}
+
+.table-subtitle{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
 }
 
 .table-wrap{
+    width:100%;
     overflow-x:auto;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:950px;
+    min-width:1050px;
 }
 
-thead th{
-    background:var(--bg);
+th{
+    background:rgba(148,163,184,.08);
     color:var(--muted);
-
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
     text-align:left;
-
-    font-size:7px;
-    font-weight:900;
-
-    padding:11px 10px;
-
+    padding:12px 15px;
     border-bottom:1px solid var(--border);
-
     white-space:nowrap;
 }
 
-tbody td{
-    padding:11px 10px;
-
+td{
+    padding:14px 15px;
     border-bottom:1px solid var(--border);
-
-    font-size:7.5px;
-
+    font-size:12px;
     vertical-align:middle;
+}
+
+tr:last-child td{
+    border-bottom:none;
 }
 
 tbody tr:hover{
     background:rgba(37,99,235,.025);
 }
 
-tbody tr:last-child td{
-    border-bottom:0;
+.student-cell{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:#eff6ff;
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:11px;
+}
+
+.student-name{
+    font-weight:700;
+}
+
+.student-id{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
+}
+
+.course-text{
+    font-weight:600;
+}
+
+.meta{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
 }
 
 .badge{
     display:inline-flex;
     align-items:center;
-    gap:4px;
-
-    padding:4px 7px;
-
-    border-radius:20px;
-
-    font-size:6.5px;
-    font-weight:900;
-
+    gap:5px;
+    padding:5px 8px;
+    border-radius:999px;
+    font-size:10px;
+    font-weight:800;
     white-space:nowrap;
 }
 
-.badge.add{
-    background:var(--success-soft);
+.badge-added{
+    background:#ecfdf5;
+    color:#15803d;
+}
+
+.badge-updated{
+    background:#eff6ff;
+    color:#1d4ed8;
+}
+
+.badge-deleted{
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+.badge-backup{
+    background:#f5f3ff;
+    color:#6d28d9;
+}
+
+.badge-restore{
+    background:#fff7ed;
+    color:#c2410c;
+}
+
+.badge-system{
+    background:#f3f4f6;
+    color:#4b5563;
+}
+
+.status-present{
     color:var(--success);
 }
 
-.badge.update{
-    background:var(--primary-soft);
-    color:var(--primary);
-}
-
-.badge.delete{
-    background:var(--danger-soft);
+.status-absent{
     color:var(--danger);
 }
 
-.badge.export{
-    background:var(--purple-soft);
-    color:var(--purple);
-}
-
-.badge.import{
-    background:var(--warning-soft);
+.status-late{
     color:var(--warning);
 }
 
-.badge.other{
-    background:var(--bg);
-    color:var(--muted);
-}
-
-.student-name{
-    font-weight:900;
-}
-
-.student-id{
-    color:var(--muted);
-    font-size:6.5px;
-    margin-top:2px;
-}
-
-.details{
-    max-width:280px;
-    color:var(--muted);
-    line-height:1.6;
-}
-
-.action-btn{
-    width:29px;
-    height:29px;
-
-    border:1px solid var(--border);
-    border-radius:7px;
-
-    background:var(--card);
-    color:var(--text);
-}
-
-.action-btn:hover{
-    border-color:var(--primary);
-}
-
-.empty{
-    padding:45px 20px;
-    text-align:center;
-}
-
-.empty-icon{
-    font-size:35px;
-    margin-bottom:8px;
-}
-
-.empty h3{
-    font-size:12px;
-    margin-bottom:4px;
-}
-
-.empty p{
-    color:var(--muted);
-    font-size:8px;
-}
-
-.pagination{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-
-    padding-top:13px;
-    margin-top:13px;
-
-    border-top:1px solid var(--border);
-}
-
-.page-info{
-    color:var(--muted);
-    font-size:7px;
-}
-
-.page-buttons{
+.action-buttons{
     display:flex;
     gap:5px;
 }
 
-.page-btn{
-    min-width:32px;
+.small-btn{
+    width:31px;
     height:31px;
-
     border:1px solid var(--border);
-    border-radius:7px;
-
     background:var(--card);
-    color:var(--text);
-
-    font-size:7px;
-    font-weight:900;
+    border-radius:7px;
+    color:var(--muted);
 }
 
-.page-btn.active{
-    background:var(--primary);
-    color:#fff;
+.small-btn:hover{
     border-color:var(--primary);
+    color:var(--primary);
 }
 
-.page-btn:disabled{
-    opacity:.45;
-    cursor:not-allowed;
+/* EMPTY */
+
+.empty{
+    padding:55px 20px;
+    text-align:center;
+    color:var(--muted);
 }
+
+.empty i{
+    font-size:36px;
+    margin-bottom:12px;
+    opacity:.45;
+}
+
+.empty-title{
+    color:var(--text);
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.empty-text{
+    font-size:12px;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:20px;
+    padding:15px 0;
+    color:var(--muted);
+    font-size:10px;
+    text-align:center;
+}
+
+/* MODAL */
 
 .modal{
     position:fixed;
     inset:0;
-
-    background:rgba(15,23,42,.65);
-
+    background:rgba(15,23,42,.58);
     display:none;
     align-items:center;
     justify-content:center;
-
-    z-index:4000;
-
+    z-index:2000;
     padding:20px;
 }
 
@@ -544,166 +646,353 @@ tbody tr:last-child td{
 }
 
 .modal-box{
-    width:100%;
-    max-width:520px;
-
+    width:min(720px,100%);
     max-height:90vh;
     overflow:auto;
-
     background:var(--card);
-
-    border-radius:15px;
-
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
+    border-radius:16px;
+    box-shadow:0 30px 70px rgba(0,0,0,.25);
 }
 
-.modal-header{
-    padding:15px;
-
+.modal-head{
+    padding:18px 20px;
     border-bottom:1px solid var(--border);
-
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
+    gap:10px;
 }
 
-.modal-header h3{
-    font-size:12px;
+.modal-title{
+    font-size:16px;
+    font-weight:800;
 }
 
-.close-btn{
-    width:30px;
-    height:30px;
-
+.modal-close{
+    width:34px;
+    height:34px;
     border:1px solid var(--border);
-    border-radius:7px;
-
     background:var(--card);
-    color:var(--text);
+    color:var(--muted);
+    border-radius:8px;
 }
 
 .modal-body{
-    padding:17px;
+    padding:20px;
 }
 
-.detail-row{
+.detail-grid{
     display:grid;
-    grid-template-columns:130px 1fr;
-    gap:10px;
-
-    padding:9px 0;
-
-    border-bottom:1px solid var(--border);
-
-    font-size:8px;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-.detail-row:last-child{
-    border-bottom:0;
+.detail-item{
+    padding:13px;
+    border:1px solid var(--border);
+    border-radius:10px;
 }
 
 .detail-label{
     color:var(--muted);
-    font-weight:900;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    font-weight:800;
+    margin-bottom:5px;
 }
 
 .detail-value{
+    font-size:12px;
+    font-weight:700;
     word-break:break-word;
 }
 
-.modal-footer{
-    padding:12px 15px;
-
-    border-top:1px solid var(--border);
-
-    display:flex;
-    justify-content:flex-end;
-    gap:7px;
+.detail-full{
+    grid-column:1/-1;
 }
+
+.json-box{
+    margin-top:15px;
+    padding:14px;
+    border-radius:10px;
+    background:#0f172a;
+    color:#dbeafe;
+    font-family:monospace;
+    font-size:10px;
+    white-space:pre-wrap;
+    word-break:break-word;
+    max-height:220px;
+    overflow:auto;
+}
+
+/* TOAST */
 
 .toast{
     position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:5000;
-
+    right:22px;
+    bottom:22px;
     background:#111827;
-    color:#fff;
-
-    padding:11px 15px;
-
-    border-radius:9px;
-
-    font-size:8px;
-
-    opacity:0;
-    transform:translateY(20px);
-
-    pointer-events:none;
-
-    transition:.25s;
+    color:white;
+    padding:12px 16px;
+    border-radius:10px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    font-size:12px;
+    font-weight:600;
+    display:none;
+    z-index:3000;
 }
 
 .toast.show{
-    opacity:1;
-    transform:translateY(0);
+    display:flex;
+    animation:toastIn .25s ease;
 }
 
-@media(max-width:950px){
+@keyframes toastIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* DARK MODE */
+
+body.dark{
+    --bg:#0b1120;
+    --card:#111827;
+    --text:#f3f4f6;
+    --muted:#9ca3af;
+    --border:#263244;
+    --sidebar:#070b14;
+    --sidebar-hover:#182235;
+    --shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+body.dark .stat-icon{
+    background:#172554;
+}
+
+body.dark .stat:nth-child(2) .stat-icon{
+    background:#052e1a;
+}
+
+body.dark .stat:nth-child(3) .stat-icon{
+    background:#431f05;
+}
+
+body.dark .stat:nth-child(4) .stat-icon{
+    background:#450a0a;
+}
+
+body.dark .stat:nth-child(5) .stat-icon{
+    background:#2e1065;
+}
+
+body.dark .avatar{
+    background:#172554;
+}
+
+body.dark .badge-added{
+    background:#052e1a;
+    color:#86efac;
+}
+
+body.dark .badge-updated{
+    background:#172554;
+    color:#93c5fd;
+}
+
+body.dark .badge-deleted{
+    background:#450a0a;
+    color:#fca5a5;
+}
+
+body.dark .badge-backup{
+    background:#2e1065;
+    color:#c4b5fd;
+}
+
+body.dark .badge-restore{
+    background:#431f05;
+    color:#fdba74;
+}
+
+body.dark .badge-system{
+    background:#1f2937;
+    color:#d1d5db;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1250px){
+    .stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .filter-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:900px){
+    .sidebar{
+        width:72px;
+        padding:15px 8px;
+    }
+
+    .brand{
+        justify-content:center;
+        padding-left:4px;
+        padding-right:4px;
+    }
+
+    .brand img{
+        width:40px;
+        height:40px;
+    }
+
+    .brand-title,
+    .brand-sub,
+    .nav-title,
+    .nav-link span,
+    .sidebar-footer{
+        display:none;
+    }
+
+    .nav-link{
+        justify-content:center;
+        padding:12px 8px;
+    }
+
+    .nav-link i{
+        width:auto;
+    }
+
+    .main{
+        margin-left:72px;
+    }
+
+    .page{
+        padding:20px;
+    }
+
+    .page-head{
+        flex-direction:column;
+    }
 
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
-
-    .filter-grid{
-        grid-template-columns:1fr 1fr;
-    }
 }
 
-@media(max-width:700px){
-
-    .header{
-        padding:10px 13px;
+@media(max-width:620px){
+    .topbar{
+        padding:0 15px;
     }
 
-    .main{
-        padding:18px 13px 35px;
+    .topbar-title{
+        font-size:13px;
     }
 
-    .page-header{
-        flex-direction:column;
-        align-items:flex-start;
+    .page{
+        padding:15px;
     }
 
-    .actions{
-        width:100%;
-    }
-
-    .actions .btn{
-        flex:1;
+    h1{
+        font-size:23px;
     }
 
     .stats{
-        grid-template-columns:1fr 1fr;
-        gap:8px;
+        grid-template-columns:1fr;
     }
 
     .filter-grid{
         grid-template-columns:1fr;
     }
 
-    .filter-actions .btn{
+    .head-actions{
+        width:100%;
+    }
+
+    .head-actions .btn{
         flex:1;
+        justify-content:center;
     }
 
-    .pagination{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .detail-row{
+    .detail-grid{
         grid-template-columns:1fr;
-        gap:3px;
+    }
+
+    .detail-full{
+        grid-column:auto;
+    }
+}
+
+/* PRINT */
+
+@media print{
+    body{
+        background:white !important;
+        color:#111 !important;
+    }
+
+    .sidebar,
+    .topbar,
+    .head-actions,
+    .filters,
+    .action-buttons,
+    .footer,
+    .modal,
+    .toast{
+        display:none !important;
+    }
+
+    .main{
+        margin-left:0 !important;
+    }
+
+    .page{
+        padding:0 !important;
+        max-width:none !important;
+    }
+
+    .page-head{
+        margin-bottom:15px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(5,1fr);
+        box-shadow:none;
+    }
+
+    .stat,
+    .card{
+        box-shadow:none !important;
+    }
+
+    .table-card{
+        border:1px solid #ddd;
+    }
+
+    th,
+    td{
+        color:#111 !important;
+        background:white !important;
+    }
+
+    .stat-value{
+        color:#111 !important;
+    }
+
+    .page-description,
+    .stat-label,
+    .stat-note,
+    .table-subtitle{
+        color:#555 !important;
     }
 }
 </style>
@@ -711,262 +1000,386 @@ tbody tr:last-child td{
 
 <body>
 
-<header class="header">
+<!-- SIDEBAR -->
 
-    <div class="logo-area">
+<aside class="sidebar">
 
+    <div class="brand">
         <img
-            class="logo"
-            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-            alt="SNK IT Institute"
-        >
+        src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+        alt="SNK Logo">
 
-        <div class="logo-text">
-
-            SNK IT Institute
-
-            <small>
-                Attendance Audit Log
-            </small>
-
+        <div>
+            <div class="brand-title">SNK Examination</div>
+            <div class="brand-sub">Attendance System</div>
         </div>
-
     </div>
 
-    <div class="header-actions">
+    <div class="nav-title">Main</div>
 
-        <button
-            class="btn"
-            id="themeBtn"
-            onclick="toggleTheme()"
-        >
-            🌙
-        </button>
+    <a class="nav-link" href="admin.html">
+        <i class="fa-solid fa-gauge"></i>
+        <span>Admin Dashboard</span>
+    </a>
 
-        <button
-            class="btn"
-            onclick="goBack()"
-        >
-            ← Back
-        </button>
+    <a class="nav-link" href="students.html">
+        <i class="fa-solid fa-user-graduate"></i>
+        <span>Students</span>
+    </a>
 
+    <a class="nav-link" href="courses.html">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Courses</span>
+    </a>
+
+    <div class="nav-title">Attendance</div>
+
+    <a class="nav-link" href="attendance.html">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span>Take Attendance</span>
+    </a>
+
+    <a class="nav-link" href="attendance-overview.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Overview</span>
+    </a>
+
+    <a class="nav-link" href="attendance-reports.html">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Reports</span>
+    </a>
+
+    <a class="nav-link" href="attendance-calendar.html">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Calendar</span>
+    </a>
+
+    <a class="nav-link" href="attendance-alerts.html">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Alerts</span>
+    </a>
+
+    <a class="nav-link" href="attendance-notifications.html">
+        <i class="fa-solid fa-bell"></i>
+        <span>Notifications</span>
+    </a>
+
+    <a class="nav-link" href="attendance-backup.html">
+        <i class="fa-solid fa-database"></i>
+        <span>Backup & Restore</span>
+    </a>
+
+    <a class="nav-link active" href="attendance-audit-log.html">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Audit Log</span>
+    </a>
+
+    <a class="nav-link" href="attendance-data-manager.html">
+        <i class="fa-solid fa-server"></i>
+        <span>Data Manager</span>
+    </a>
+
+    <div class="sidebar-footer">
+        SNK Examination<br>
+        Attendance Module<br>
+        Version 1.25
     </div>
 
-</header>
+</aside>
 
+
+<!-- MAIN -->
 
 <main class="main">
 
-    <section class="page-header">
+    <header class="topbar">
 
-        <div class="page-title">
-
-            <h1>
-                📋 Attendance Audit Log
-            </h1>
-
-            <p>
-                Attendance system-এর গুরুত্বপূর্ণ activity এবং change history দেখুন।
-            </p>
-
+        <div class="topbar-left">
+            <div class="topbar-title">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                Attendance Audit Log
+            </div>
         </div>
 
-        <div class="actions">
+        <div class="topbar-right">
 
             <button
-                class="btn primary"
-                onclick="exportLogs()"
-            >
-                📤 Export CSV
+            class="icon-btn"
+            onclick="refreshAudit()"
+            title="Refresh">
+                <i class="fa-solid fa-rotate"></i>
             </button>
 
             <button
-                class="btn danger"
-                onclick="clearLogs()"
-            >
-                🗑 Clear Logs
+            class="icon-btn"
+            onclick="printAudit()"
+            title="Print">
+                <i class="fa-solid fa-print"></i>
+            </button>
+
+            <button
+            class="icon-btn"
+            onclick="toggleTheme()"
+            title="Toggle Theme">
+                <i id="themeIcon" class="fa-solid fa-moon"></i>
             </button>
 
         </div>
 
-    </section>
+    </header>
 
 
-    <div class="info">
+    <section class="page">
 
-        <strong>
-            🔐 Audit History
-        </strong>
-
-        এই page attendance system-এর activity history LocalStorage-এ
-        <b>snkAttendanceAuditLogs</b> key-এর মাধ্যমে সংরক্ষণ করে।
-        এখানে নতুন record, update, delete, import এবং export-এর মতো action দেখা যাবে।
-
-    </div>
-
-
-    <section class="stats">
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                📋
-            </div>
-
-            <div
-                class="stat-value"
-                id="totalLogs"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Total Activities
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                ➕
-            </div>
-
-            <div
-                class="stat-value"
-                id="addLogs"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Added
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                ✏️
-            </div>
-
-            <div
-                class="stat-value"
-                id="updateLogs"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Updated
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon">
-                🗑️
-            </div>
-
-            <div
-                class="stat-value"
-                id="deleteLogs"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Deleted
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FILTER -->
-
-    <section class="card">
-
-        <div class="card-header">
+        <div class="page-head">
 
             <div>
+                <div class="eyebrow">
+                    Attendance Management
+                </div>
 
-                <h2>
-                    🔎 Search & Filter
-                </h2>
+                <h1>Audit Log</h1>
 
-                <p>
-                    Audit activity দ্রুত খুঁজে বের করুন।
+                <p class="page-description">
+                    Track attendance activities, changes, backups and restores
+                    with date, time, student and course information.
                 </p>
+            </div>
+
+            <div class="head-actions">
+
+                <button
+                class="btn btn-primary"
+                onclick="window.location.href='attendance.html'">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    Take Attendance
+                </button>
+
+                <button
+                class="btn"
+                onclick="exportCSV()">
+                    <i class="fa-solid fa-file-csv"></i>
+                    Export CSV
+                </button>
+
+                <button
+                class="btn"
+                onclick="printAudit()">
+                    <i class="fa-solid fa-print"></i>
+                    Print
+                </button>
 
             </div>
 
         </div>
 
 
-        <div class="card-body">
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-list"></i>
+                    </div>
+                </div>
+
+                <div class="stat-label">
+                    Total Activities
+                </div>
+
+                <div
+                class="stat-value"
+                id="totalActivities">
+                    0
+                </div>
+
+                <div class="stat-note">
+                    All recorded actions
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                </div>
+
+                <div class="stat-label">
+                    Added
+                </div>
+
+                <div
+                class="stat-value"
+                id="addedCount">
+                    0
+                </div>
+
+                <div class="stat-note">
+                    New attendance records
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-pen"></i>
+                    </div>
+                </div>
+
+                <div class="stat-label">
+                    Updated
+                </div>
+
+                <div
+                class="stat-value"
+                id="updatedCount">
+                    0
+                </div>
+
+                <div class="stat-note">
+                    Changed records
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-trash"></i>
+                    </div>
+                </div>
+
+                <div class="stat-label">
+                    Deleted
+                </div>
+
+                <div
+                class="stat-value"
+                id="deletedCount">
+                    0
+                </div>
+
+                <div class="stat-note">
+                    Removed records
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                </div>
+
+                <div class="stat-label">
+                    Backup / Restore
+                </div>
+
+                <div
+                class="stat-value"
+                id="backupCount">
+                    0
+                </div>
+
+                <div class="stat-note">
+                    Data operations
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="card filters">
+
+            <div class="card-title">
+                <i class="fa-solid fa-filter"></i>
+                Filter Audit Activities
+            </div>
 
             <div class="filter-grid">
 
                 <div class="field">
 
-                    <label>
-                        Search
+                    <label for="dateFrom">
+                        From Date
                     </label>
 
                     <input
-                        type="search"
-                        id="searchInput"
-                        placeholder="Student ID, name, action, details..."
-                        oninput="applyFilters()"
-                    >
+                    type="date"
+                    id="dateFrom"
+                    onchange="applyFilters()">
 
                 </div>
 
 
                 <div class="field">
 
-                    <label>
+                    <label for="dateTo">
+                        To Date
+                    </label>
+
+                    <input
+                    type="date"
+                    id="dateTo"
+                    onchange="applyFilters()">
+
+                </div>
+
+
+                <div class="field">
+
+                    <label for="actionFilter">
                         Action
                     </label>
 
                     <select
-                        id="actionFilter"
-                        onchange="applyFilters()"
-                    >
+                    id="actionFilter"
+                    onchange="applyFilters()">
 
                         <option value="all">
                             All Actions
                         </option>
 
-                        <option value="add">
+                        <option value="added">
                             Added
                         </option>
 
-                        <option value="update">
+                        <option value="updated">
                             Updated
                         </option>
 
-                        <option value="delete">
+                        <option value="deleted">
                             Deleted
                         </option>
 
-                        <option value="import">
-                            Imported
+                        <option value="backup">
+                            Backup
                         </option>
 
-                        <option value="export">
-                            Exported
+                        <option value="restore">
+                            Restore
                         </option>
 
-                        <option value="other">
-                            Other
+                        <option value="system">
+                            System
                         </option>
 
                     </select>
@@ -976,170 +1389,188 @@ tbody tr:last-child td{
 
                 <div class="field">
 
-                    <label>
-                        From Date
+                    <label for="courseFilter">
+                        Course
                     </label>
 
-                    <input
-                        type="date"
-                        id="fromDate"
-                        onchange="applyFilters()"
-                    >
+                    <select
+                    id="courseFilter"
+                    onchange="applyFilters()">
+
+                        <option value="all">
+                            All Courses
+                        </option>
+
+                    </select>
 
                 </div>
 
 
                 <div class="field">
 
-                    <label>
-                        To Date
+                    <label for="searchInput">
+                        Search
                     </label>
 
                     <input
-                        type="date"
-                        id="toDate"
-                        onchange="applyFilters()"
-                    >
+                    type="text"
+                    id="searchInput"
+                    placeholder="Student, ID, course, action..."
+                    oninput="applyFilters()">
+
+                </div>
+
+
+                <div class="filter-actions">
+
+                    <button
+                    class="btn"
+                    onclick="resetFilters()">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        Reset
+                    </button>
 
                 </div>
 
             </div>
 
+        </div>
 
-            <div class="filter-actions">
+
+        <!-- TABLE -->
+
+        <div class="card table-card">
+
+            <div class="table-head">
+
+                <div>
+
+                    <div class="table-title">
+                        Activity History
+                    </div>
+
+                    <div
+                    class="table-subtitle"
+                    id="resultInfo">
+                        Showing 0 activities
+                    </div>
+
+                </div>
 
                 <button
-                    class="btn primary"
-                    onclick="applyFilters()"
-                >
-                    🔎 Apply Filter
-                </button>
-
-                <button
-                    class="btn"
-                    onclick="resetFilters()"
-                >
-                    ↺ Reset
-                </button>
-
-                <button
-                    class="btn"
-                    onclick="loadLogs()"
-                >
-                    ↻ Refresh
+                class="btn"
+                onclick="refreshAudit()">
+                    <i class="fa-solid fa-rotate"></i>
+                    Refresh
                 </button>
 
             </div>
 
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Date & Time
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Attendance
+                            </th>
+
+                            <th>
+                                Session / Class
+                            </th>
+
+                            <th>
+                                Source
+                            </th>
+
+                            <th>
+                                Details
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="auditTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+            <div
+            class="empty"
+            id="emptyState"
+            style="display:none;">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <div class="empty-title">
+                    No audit activities found
+                </div>
+
+                <div class="empty-text">
+                    Try changing your filters or add attendance records.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer">
+            SNK Examination — Attendance Audit Log v1.25
         </div>
 
     </section>
-
-
-    <!-- LOG TABLE -->
-
-    <section class="card">
-
-        <div class="card-header">
-
-            <div>
-
-                <h2>
-                    📝 Activity History
-                </h2>
-
-                <p id="resultText">
-                    Audit records
-                </p>
-
-            </div>
-
-            <button
-                class="btn small"
-                onclick="createDemoLog()"
-            >
-                + Test Log
-            </button>
-
-        </div>
-
-
-        <div class="card-body">
-
-            <div
-                class="table-wrap"
-                id="tableContainer"
-            >
-            </div>
-
-            <div
-                class="pagination"
-                id="pagination"
-            >
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <footer
-        style="
-            text-align:center;
-            color:var(--muted);
-            font-size:8px;
-            padding:20px;
-        "
-    >
-
-        © 2026 SNK IT Institute • Attendance Audit Log
-
-    </footer>
 
 </main>
 
 
-<!-- DETAILS MODAL -->
+<!-- DETAIL MODAL -->
 
 <div
-    class="modal"
-    id="detailsModal"
->
+class="modal"
+id="detailModal">
 
     <div class="modal-box">
 
-        <div class="modal-header">
+        <div class="modal-head">
 
-            <h3>
-                🔎 Audit Details
-            </h3>
+            <div class="modal-title">
+                Audit Activity Details
+            </div>
 
             <button
-                class="close-btn"
-                onclick="closeDetails()"
-            >
-                ✕
+            class="modal-close"
+            onclick="closeModal()">
+                <i class="fa-solid fa-xmark"></i>
             </button>
 
         </div>
-
 
         <div
-            class="modal-body"
-            id="detailsBody"
-        >
-        </div>
-
-
-        <div class="modal-footer">
-
-            <button
-                class="btn"
-                onclick="closeDetails()"
-            >
-                Close
-            </button>
-
+        class="modal-body"
+        id="detailBody">
         </div>
 
     </div>
@@ -1147,867 +1578,1011 @@ tbody tr:last-child td{
 </div>
 
 
+<!-- TOAST -->
+
 <div
-    class="toast"
-    id="toast"
-></div>
+class="toast"
+id="toast">
+</div>
 
 
 <script>
 
 /* =========================================================
-   1.42 ATTENDANCE AUDIT LOG
+   SNK EXAMINATION
+   ATTENDANCE AUDIT LOG
+   VERSION 1.25
 ========================================================= */
 
-const AUDIT_KEY =
-    "snkAttendanceAuditLogs";
 
-const THEME_KEY =
-    "snkAttendanceAuditTheme";
+/* STORAGE */
+
+const AUDIT_KEY = "snkAttendanceAuditLogV125";
+
+const ATTENDANCE_KEYS = [
+    "attendanceRecords",
+    "attendanceData",
+    "attendance",
+    "attendanceRecordsData",
+    "studentAttendance",
+    "snkAttendanceData"
+];
+
+const COURSE_KEYS = [
+    "snkCoursesV113",
+    "courses",
+    "courseList",
+    "snkCourses"
+];
 
 
-let allLogs = [];
+/* GLOBAL DATA */
 
+let auditLogs = [];
 let filteredLogs = [];
 
-let currentPage = 1;
 
-const PAGE_SIZE = 10;
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function safeJSON(value, fallback){
+
+    try{
+        return JSON.parse(value);
+    }catch(error){
+        return fallback;
+    }
+
+}
+
+
+function escapeHTML(value){
+
+    if(value === null || value === undefined){
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function uid(prefix="AUD"){
+
+    return prefix + "_" +
+        Date.now() + "_" +
+        Math.random()
+        .toString(36)
+        .substring(2,8);
+
+}
+
+
+function formatDateTime(value){
+
+    if(!value){
+        return "—";
+    }
+
+    const d = new Date(value);
+
+    if(isNaN(d.getTime())){
+        return String(value);
+    }
+
+    return d.toLocaleString("en-BD",{
+        year:"numeric",
+        month:"short",
+        day:"2-digit",
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit"
+    });
+
+}
+
+
+function dateOnly(value){
+
+    if(!value){
+        return "";
+    }
+
+    const d = new Date(value);
+
+    if(isNaN(d.getTime())){
+        return "";
+    }
+
+    return [
+        d.getFullYear(),
+        String(d.getMonth()+1).padStart(2,"0"),
+        String(d.getDate()).padStart(2,"0")
+    ].join("-");
+
+}
+
+
+function initials(name){
+
+    if(!name){
+        return "?";
+    }
+
+    return String(name)
+        .trim()
+        .split(/\s+/)
+        .slice(0,2)
+        .map(x => x.charAt(0))
+        .join("")
+        .toUpperCase();
+
+}
 
 
 /* =========================================================
-   INIT
+   NORMALIZE ATTENDANCE
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+function normalizeStatus(value){
 
-        loadTheme();
+    const s = String(value || "")
+        .trim()
+        .toLowerCase();
 
-        loadLogs();
+    if(
+        s === "present" ||
+        s === "p" ||
+        s === "1" ||
+        s === "yes"
+    ){
+        return "present";
+    }
+
+    if(
+        s === "late" ||
+        s === "l"
+    ){
+        return "late";
+    }
+
+    if(
+        s === "absent" ||
+        s === "a" ||
+        s === "0" ||
+        s === "no"
+    ){
+        return "absent";
+    }
+
+    return s || "unknown";
+}
+
+
+function normalizeRecord(record,index=0){
+
+    if(!record || typeof record !== "object"){
+        return null;
+    }
+
+    const studentName =
+        record.studentName ||
+        record.name ||
+        record.student ||
+        record.fullName ||
+        "Unknown Student";
+
+    const studentId =
+        record.studentId ||
+        record.studentID ||
+        record.id ||
+        record.roll ||
+        record.registration ||
+        "N/A";
+
+    const course =
+        record.course ||
+        record.courseName ||
+        record.program ||
+        record.subject ||
+        "General";
+
+    const date =
+        record.date ||
+        record.attendanceDate ||
+        record.day ||
+        "";
+
+    const status =
+        normalizeStatus(
+            record.status ||
+            record.attendance ||
+            record.value
+        );
+
+    return {
+        ...record,
+
+        _index:index,
+
+        id:
+            record.id ||
+            record.recordId ||
+            uid("ATT"),
+
+        studentId:String(studentId),
+
+        studentName:String(studentName),
+
+        course:String(course),
+
+        className:
+            String(
+                record.className ||
+                record.class ||
+                record.batch ||
+                record.section ||
+                "—"
+            ),
+
+        date:String(date),
+
+        session:
+            String(
+                record.session ||
+                record.shift ||
+                record.period ||
+                "Regular"
+            ),
+
+        status:status,
+
+        time:
+            record.time ||
+            record.updatedAt ||
+            record.createdAt ||
+            ""
+
+    };
+
+}
+
+
+/* =========================================================
+   LOAD ATTENDANCE
+========================================================= */
+
+function loadAttendanceRecords(){
+
+    const found = [];
+
+    for(const key of ATTENDANCE_KEYS){
+
+        const raw = localStorage.getItem(key);
+
+        if(!raw){
+            continue;
+        }
+
+        const parsed = safeJSON(raw,null);
+
+        if(Array.isArray(parsed)){
+
+            parsed.forEach((item,index)=>{
+
+                const normalized =
+                    normalizeRecord(
+                        item,
+                        index
+                    );
+
+                if(normalized){
+                    found.push(normalized);
+                }
+
+            });
+
+            if(found.length){
+                break;
+            }
+
+        }
+
+        if(parsed && typeof parsed === "object"){
+
+            const possible =
+                parsed.records ||
+                parsed.data ||
+                parsed.attendance ||
+                parsed.items;
+
+            if(Array.isArray(possible)){
+
+                possible.forEach((item,index)=>{
+
+                    const normalized =
+                        normalizeRecord(
+                            item,
+                            index
+                        );
+
+                    if(normalized){
+                        found.push(normalized);
+                    }
+
+                });
+
+                if(found.length){
+                    break;
+                }
+
+            }
+
+        }
 
     }
-);
+
+    return dedupeAttendance(found);
+
+}
+
+
+function dedupeAttendance(records){
+
+    const map = new Map();
+
+    records.forEach(record=>{
+
+        const key = [
+            record.studentId,
+            record.studentName,
+            record.course,
+            record.className,
+            record.date,
+            record.session
+        ].join("|").toLowerCase();
+
+        map.set(key,record);
+
+    });
+
+    return Array.from(map.values());
+
+}
 
 
 /* =========================================================
-   LOAD LOGS
+   LOAD COURSES
 ========================================================= */
 
-function loadLogs(){
+function loadCourses(){
+
+    const courses = [];
+
+    for(const key of COURSE_KEYS){
+
+        const raw =
+            localStorage.getItem(key);
+
+        if(!raw){
+            continue;
+        }
+
+        const parsed =
+            safeJSON(raw,null);
+
+        if(Array.isArray(parsed)){
+
+            parsed.forEach(course=>{
+
+                if(typeof course === "string"){
+                    courses.push(course);
+                }else if(course){
+
+                    courses.push(
+                        course.name ||
+                        course.courseName ||
+                        course.title ||
+                        course.code ||
+                        ""
+                    );
+
+                }
+
+            });
+
+        }else if(parsed && typeof parsed === "object"){
+
+            const list =
+                parsed.courses ||
+                parsed.data ||
+                parsed.items;
+
+            if(Array.isArray(list)){
+
+                list.forEach(course=>{
+
+                    if(typeof course === "string"){
+                        courses.push(course);
+                    }else if(course){
+
+                        courses.push(
+                            course.name ||
+                            course.courseName ||
+                            course.title ||
+                            course.code ||
+                            ""
+                        );
+
+                    }
+
+                });
+
+            }
+
+        }
+
+        if(courses.length){
+            break;
+        }
+
+    }
+
+    return [...new Set(
+        courses
+        .filter(Boolean)
+        .map(String)
+    )].sort();
+
+}
+
+
+/* =========================================================
+   AUDIT LOG STORAGE
+========================================================= */
+
+function loadAuditLogs(){
+
+    const raw =
+        localStorage.getItem(AUDIT_KEY);
+
+    const stored =
+        safeJSON(raw,[]);
+
+    if(Array.isArray(stored) && stored.length){
+
+        auditLogs = stored;
+
+    }else{
+
+        auditLogs =
+            buildInitialAuditLogs();
+
+        saveAuditLogs();
+
+    }
+
+}
+
+
+function saveAuditLogs(){
 
     try{
 
-        const stored =
-            JSON.parse(
-                localStorage.getItem(
-                    AUDIT_KEY
-                ) || "[]"
-            );
-
-
-        if(
-            Array.isArray(
-                stored
+        localStorage.setItem(
+            AUDIT_KEY,
+            JSON.stringify(
+                auditLogs.slice(0,2000)
             )
-        ){
-
-            allLogs =
-                stored;
-
-        }
-        else{
-
-            allLogs = [];
-
-        }
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        allLogs = [];
-
-    }
-
-
-    normalizeLogs();
-
-    updateStats();
-
-    applyFilters();
-
-}
-
-
-/* =========================================================
-   NORMALIZE LOGS
-========================================================= */
-
-function normalizeLogs(){
-
-    allLogs =
-        allLogs.map(
-            function(log,index){
-
-                return {
-
-                    id:
-                        log.id ||
-                        (
-                            "AUDIT-" +
-                            Date.now() +
-                            "-" +
-                            index
-                        ),
-
-                    timestamp:
-                        log.timestamp ||
-                        log.date ||
-                        new Date().toISOString(),
-
-                    action:
-                        String(
-                            log.action ||
-                            "other"
-                        ).toLowerCase(),
-
-                    actor:
-                        log.actor ||
-                        log.admin ||
-                        "Admin",
-
-                    studentId:
-                        log.studentId ||
-                        log.studentID ||
-                        "",
-
-                    studentName:
-                        log.studentName ||
-                        log.name ||
-                        "",
-
-                    details:
-                        log.details ||
-                        log.description ||
-                        log.message ||
-                        "",
-
-                    oldValue:
-                        log.oldValue ??
-                        "",
-
-                    newValue:
-                        log.newValue ??
-                        ""
-
-                };
-
-            }
         );
 
-}
+    }catch(error){
 
+        console.error(
+            "Could not save audit logs",
+            error
+        );
 
-/* =========================================================
-   SAVE LOGS
-========================================================= */
-
-function saveLogs(){
-
-    localStorage.setItem(
-        AUDIT_KEY,
-        JSON.stringify(
-            allLogs
-        )
-    );
+    }
 
 }
 
 
 /* =========================================================
-   CREATE AUDIT LOG
+   BUILD INITIAL LOGS
 ========================================================= */
 
-function addAuditLog(
-    action,
-    details,
-    studentId = "",
-    studentName = "",
-    actor = "Admin",
-    oldValue = "",
-    newValue = ""
-){
+function buildInitialAuditLogs(){
+
+    const records =
+        loadAttendanceRecords();
+
+    if(!records.length){
+        return [];
+    }
+
+    const logs = [];
+
+    records
+        .sort((a,b)=>{
+
+            const ad =
+                new Date(
+                    a.updatedAt ||
+                    a.createdAt ||
+                    a.date ||
+                    0
+                ).getTime();
+
+            const bd =
+                new Date(
+                    b.updatedAt ||
+                    b.createdAt ||
+                    b.date ||
+                    0
+                ).getTime();
+
+            return bd-ad;
+
+        })
+        .forEach(record=>{
+
+            logs.push({
+
+                id:uid("AUD"),
+
+                timestamp:
+                    record.updatedAt ||
+                    record.createdAt ||
+                    record.time ||
+                    (
+                        record.date
+                        ? record.date + "T12:00:00"
+                        : new Date().toISOString()
+                    ),
+
+                action:"added",
+
+                source:"Attendance",
+
+                studentId:
+                    record.studentId,
+
+                studentName:
+                    record.studentName,
+
+                course:
+                    record.course,
+
+                className:
+                    record.className,
+
+                date:
+                    record.date,
+
+                session:
+                    record.session,
+
+                status:
+                    record.status,
+
+                recordId:
+                    record.id,
+
+                message:
+                    "Attendance record loaded into audit history.",
+
+                details:{
+                    status:record.status,
+                    recordId:record.id,
+                    source:"Initial synchronization"
+                }
+
+            });
+
+        });
+
+    return logs.slice(0,2000);
+
+}
+
+
+/* =========================================================
+   ADD AUDIT LOG
+========================================================= */
+
+function addAuditLog(action,data={}){
 
     const log = {
 
-        id:
-            "AUD-" +
-            Date.now() +
-            "-" +
-            Math.random()
-                .toString(36)
-                .slice(2,7),
+        id:uid("AUD"),
 
         timestamp:
             new Date().toISOString(),
 
         action:
-            String(
-                action ||
-                "other"
-            ).toLowerCase(),
+            action || "system",
 
-        actor:
-            actor ||
-            "Admin",
+        source:
+            data.source ||
+            "System",
 
         studentId:
-            studentId ||
+            data.studentId ||
             "",
 
         studentName:
-            studentName ||
+            data.studentName ||
+            "",
+
+        course:
+            data.course ||
+            "",
+
+        className:
+            data.className ||
+            "",
+
+        date:
+            data.date ||
+            "",
+
+        session:
+            data.session ||
+            "",
+
+        status:
+            normalizeStatus(
+                data.status || ""
+            ),
+
+        recordId:
+            data.recordId ||
+            data.id ||
+            "",
+
+        message:
+            data.message ||
             "",
 
         details:
-            details ||
-            "",
-
-        oldValue:
-            oldValue,
-
-        newValue:
-            newValue
+            data.details ||
+            {}
 
     };
 
+    auditLogs.unshift(log);
 
-    allLogs.unshift(
-        log
-    );
+    auditLogs =
+        auditLogs.slice(0,2000);
 
+    saveAuditLogs();
 
-    saveLogs();
-
-    updateStats();
-
-    applyFilters();
+    render();
 
 }
 
 
 /* =========================================================
-   FILTERS
+   PUBLIC HELPER
+   Other pages can use this function if they share
+   the same browser localStorage.
+========================================================= */
+
+window.snkAttendanceAudit = {
+
+    add:function(action,data){
+
+        addAuditLog(
+            action,
+            data || {}
+        );
+
+    },
+
+    getAll:function(){
+
+        return [...auditLogs];
+
+    },
+
+    clear:function(){
+
+        auditLogs = [];
+
+        saveAuditLogs();
+
+        render();
+
+    }
+
+};
+
+
+/* =========================================================
+   ACTION CLASS
+========================================================= */
+
+function actionBadge(action){
+
+    const value =
+        String(action || "system")
+        .toLowerCase();
+
+    let cls = "badge-system";
+    let icon = "fa-circle-info";
+    let label = "System";
+
+    if(value === "added"){
+
+        cls = "badge-added";
+        icon = "fa-plus";
+        label = "Added";
+
+    }else if(value === "updated"){
+
+        cls = "badge-updated";
+        icon = "fa-pen";
+        label = "Updated";
+
+    }else if(value === "deleted"){
+
+        cls = "badge-deleted";
+        icon = "fa-trash";
+        label = "Deleted";
+
+    }else if(value === "backup"){
+
+        cls = "badge-backup";
+        icon = "fa-database";
+        label = "Backup";
+
+    }else if(value === "restore"){
+
+        cls = "badge-restore";
+        icon = "fa-rotate-left";
+        label = "Restore";
+
+    }
+
+    return `
+        <span class="badge ${cls}">
+            <i class="fa-solid ${icon}"></i>
+            ${escapeHTML(label)}
+        </span>
+    `;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function statusHTML(status){
+
+    const value =
+        normalizeStatus(status);
+
+    if(value === "present"){
+
+        return `
+            <span class="status-present">
+                <i class="fa-solid fa-circle-check"></i>
+                Present
+            </span>
+        `;
+
+    }
+
+    if(value === "absent"){
+
+        return `
+            <span class="status-absent">
+                <i class="fa-solid fa-circle-xmark"></i>
+                Absent
+            </span>
+        `;
+
+    }
+
+    if(value === "late"){
+
+        return `
+            <span class="status-late">
+                <i class="fa-solid fa-clock"></i>
+                Late
+            </span>
+        `;
+
+    }
+
+    return escapeHTML(value || "—");
+
+}
+
+
+/* =========================================================
+   FILTER
 ========================================================= */
 
 function applyFilters(){
 
+    const from =
+        document.getElementById("dateFrom").value;
+
+    const to =
+        document.getElementById("dateTo").value;
+
+    const action =
+        document.getElementById("actionFilter").value;
+
+    const course =
+        document.getElementById("courseFilter").value;
+
     const search =
-        (
-            document.getElementById(
-                "searchInput"
-            ).value ||
-            ""
-        )
+        document.getElementById("searchInput")
+        .value
         .trim()
         .toLowerCase();
 
 
-    const action =
-        document.getElementById(
-            "actionFilter"
-        ).value;
-
-
-    const fromDate =
-        document.getElementById(
-            "fromDate"
-        ).value;
-
-
-    const toDate =
-        document.getElementById(
-            "toDate"
-        ).value;
-
-
     filteredLogs =
-        allLogs.filter(
-            function(log){
+        auditLogs.filter(log=>{
 
-                const searchable = [
+            const logDate =
+                dateOnly(
+                    log.timestamp
+                ) ||
+                String(log.date || "");
 
-                    log.id,
 
-                    log.action,
+            if(from && logDate < from){
+                return false;
+            }
 
-                    log.actor,
+            if(to && logDate > to){
+                return false;
+            }
 
-                    log.studentId,
+
+            if(
+                action !== "all" &&
+                String(log.action).toLowerCase()
+                !== action
+            ){
+                return false;
+            }
+
+
+            if(
+                course !== "all" &&
+                String(log.course)
+                .toLowerCase()
+                !== course.toLowerCase()
+            ){
+                return false;
+            }
+
+
+            if(search){
+
+                const haystack = [
 
                     log.studentName,
-
-                    log.details,
-
-                    stringifyValue(
-                        log.oldValue
-                    ),
-
-                    stringifyValue(
-                        log.newValue
-                    )
+                    log.studentId,
+                    log.course,
+                    log.className,
+                    log.session,
+                    log.action,
+                    log.source,
+                    log.message,
+                    log.status
 
                 ]
                 .join(" ")
                 .toLowerCase();
 
-
-                if(
-                    search &&
-                    !searchable.includes(
-                        search
-                    )
-                ){
-
+                if(!haystack.includes(search)){
                     return false;
-
                 }
-
-
-                if(
-                    action !== "all" &&
-                    getActionType(
-                        log.action
-                    ) !== action
-                ){
-
-                    return false;
-
-                }
-
-
-                const logDate =
-                    getDateOnly(
-                        log.timestamp
-                    );
-
-
-                if(
-                    fromDate &&
-                    logDate < fromDate
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    toDate &&
-                    logDate > toDate
-                ){
-
-                    return false;
-
-                }
-
-
-                return true;
 
             }
-        );
 
 
-    currentPage = 1;
+            return true;
+
+        });
+
 
     renderTable();
-
-    renderPagination();
 
 }
 
 
 /* =========================================================
-   RESET FILTERS
+   RESET
 ========================================================= */
 
 function resetFilters(){
 
-    document.getElementById(
-        "searchInput"
-    ).value = "";
+    document.getElementById("dateFrom").value = "";
 
+    document.getElementById("dateTo").value = "";
 
-    document.getElementById(
-        "actionFilter"
-    ).value = "all";
+    document.getElementById("actionFilter").value = "all";
 
+    document.getElementById("courseFilter").value = "all";
 
-    document.getElementById(
-        "fromDate"
-    ).value = "";
-
-
-    document.getElementById(
-        "toDate"
-    ).value = "";
-
+    document.getElementById("searchInput").value = "";
 
     applyFilters();
 
-}
-
-
-/* =========================================================
-   RENDER TABLE
-========================================================= */
-
-function renderTable(){
-
-    const container =
-        document.getElementById(
-            "tableContainer"
-        );
-
-
-    const resultText =
-        document.getElementById(
-            "resultText"
-        );
-
-
-    resultText.textContent =
-        filteredLogs.length +
-        " টি record পাওয়া গেছে";
-
-
-    if(
-        filteredLogs.length === 0
-    ){
-
-        container.innerHTML = `
-
-            <div class="empty">
-
-                <div class="empty-icon">
-                    📭
-                </div>
-
-                <h3>
-                    কোনো audit record নেই
-                </h3>
-
-                <p>
-                    আপনার selected filter অনুযায়ী কোনো activity পাওয়া যায়নি।
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    const start =
-        (
-            currentPage - 1
-        ) *
-        PAGE_SIZE;
-
-
-    const pageLogs =
-        filteredLogs.slice(
-            start,
-            start + PAGE_SIZE
-        );
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Date & Time
-                    </th>
-
-                    <th>
-                        Action
-                    </th>
-
-                    <th>
-                        Student
-                    </th>
-
-                    <th>
-                        Actor
-                    </th>
-
-                    <th>
-                        Details
-                    </th>
-
-                    <th>
-                        View
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-    `;
-
-
-    pageLogs.forEach(
-        function(log){
-
-            html += `
-
-                <tr>
-
-                    <td>
-                        <strong>
-                            ${escapeHTML(
-                                formatDate(
-                                    log.timestamp
-                                )
-                            )}
-                        </strong>
-
-                        <div class="student-id">
-                            ${escapeHTML(
-                                formatTime(
-                                    log.timestamp
-                                )
-                            )}
-                        </div>
-                    </td>
-
-
-                    <td>
-                        ${getActionBadge(
-                            log.action
-                        )}
-                    </td>
-
-
-                    <td>
-
-                        <div class="student-name">
-                            ${escapeHTML(
-                                log.studentName ||
-                                "—"
-                            )}
-                        </div>
-
-                        ${
-                            log.studentId
-                            ?
-                            `
-                            <div class="student-id">
-                                ID: ${escapeHTML(
-                                    log.studentId
-                                )}
-                            </div>
-                            `
-                            :
-                            ""
-                        }
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHTML(
-                            log.actor ||
-                            "Admin"
-                        )}
-                    </td>
-
-
-                    <td>
-
-                        <div class="details">
-
-                            ${escapeHTML(
-                                log.details ||
-                                "No details"
-                            )}
-
-                        </div>
-
-                    </td>
-
-
-                    <td>
-
-                        <button
-                            class="action-btn"
-                            title="View Details"
-                            onclick="viewDetails('${escapeAttribute(log.id)}')"
-                        >
-                            👁
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        }
+    showToast(
+        "Filters reset."
     );
 
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
 }
 
 
 /* =========================================================
-   PAGINATION
+   COURSE FILTER
 ========================================================= */
 
-function renderPagination(){
+function populateCourses(){
 
-    const pagination =
-        document.getElementById(
-            "pagination"
-        );
+    const select =
+        document.getElementById("courseFilter");
 
+    const current =
+        select.value;
 
-    const total =
-        filteredLogs.length;
+    const courses =
+        new Set();
 
+    loadCourses()
+        .forEach(course=>{
+            courses.add(course);
+        });
 
-    const totalPages =
-        Math.max(
-            1,
-            Math.ceil(
-                total /
-                PAGE_SIZE
-            )
-        );
+    auditLogs.forEach(log=>{
 
+        if(log.course){
+            courses.add(log.course);
+        }
 
-    if(
-        total === 0
-    ){
-
-        pagination.innerHTML = "";
-
-        return;
-
-    }
-
-
-    if(
-        currentPage >
-        totalPages
-    ){
-
-        currentPage =
-            totalPages;
-
-    }
-
-
-    const start =
-        (
-            currentPage - 1
-        ) *
-        PAGE_SIZE +
-        1;
-
-
-    const end =
-        Math.min(
-            currentPage *
-            PAGE_SIZE,
-            total
-        );
-
-
-    let buttons = `
-
-        <button
-            class="page-btn"
-            onclick="changePage(${currentPage - 1})"
-            ${currentPage === 1 ? "disabled" : ""}
-        >
-            ‹
-        </button>
-
-    `;
-
-
-    const maxButtons = 5;
-
-    let firstPage =
-        Math.max(
-            1,
-            currentPage -
-            Math.floor(
-                maxButtons / 2
-            )
-        );
-
-
-    let lastPage =
-        Math.min(
-            totalPages,
-            firstPage +
-            maxButtons -
-            1
-        );
-
-
-    if(
-        lastPage -
-        firstPage +
-        1 <
-        maxButtons
-    ){
-
-        firstPage =
-            Math.max(
-                1,
-                lastPage -
-                maxButtons +
-                1
-            );
-
-    }
-
-
-    for(
-        let i = firstPage;
-        i <= lastPage;
-        i++
-    ){
-
-        buttons += `
-
-            <button
-                class="page-btn ${
-                    i === currentPage
-                    ? "active"
-                    : ""
-                }"
-                onclick="changePage(${i})"
-            >
-                ${i}
-            </button>
-
-        `;
-
-    }
-
-
-    buttons += `
-
-        <button
-            class="page-btn"
-            onclick="changePage(${currentPage + 1})"
-            ${
-                currentPage === totalPages
-                ? "disabled"
-                : ""
-            }
-        >
-            ›
-        </button>
-
-    `;
-
-
-    pagination.innerHTML = `
-
-        <div class="page-info">
-
-            Showing
-            <strong>
-                ${start}
-            </strong>
-            –
-            <strong>
-                ${end}
-            </strong>
-            of
-            <strong>
-                ${total}
-            </strong>
-
-        </div>
-
-
-        <div class="page-buttons">
-
-            ${buttons}
-
-        </div>
-
-    `;
-
-}
-
-
-function changePage(
-    page
-){
-
-    const totalPages =
-        Math.max(
-            1,
-            Math.ceil(
-                filteredLogs.length /
-                PAGE_SIZE
-            )
-        );
-
-
-    if(
-        page < 1 ||
-        page > totalPages
-    ){
-
-        return;
-
-    }
-
-
-    currentPage =
-        page;
-
-
-    renderTable();
-
-    renderPagination();
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
     });
+
+    select.innerHTML =
+        `<option value="all">All Courses</option>`;
+
+    [...courses]
+        .sort()
+        .forEach(course=>{
+
+            const option =
+                document.createElement("option");
+
+            option.value = course;
+
+            option.textContent = course;
+
+            select.appendChild(option);
+
+        });
+
+    if(
+        [...select.options]
+        .some(o=>o.value===current)
+    ){
+        select.value=current;
+    }
 
 }
 
@@ -2016,194 +2591,266 @@ function changePage(
    STATS
 ========================================================= */
 
-function updateStats(){
+function renderStats(){
+
+    const total =
+        filteredLogs.length;
+
+    const added =
+        filteredLogs.filter(
+            x=>x.action==="added"
+        ).length;
+
+    const updated =
+        filteredLogs.filter(
+            x=>x.action==="updated"
+        ).length;
+
+    const deleted =
+        filteredLogs.filter(
+            x=>x.action==="deleted"
+        ).length;
+
+    const backup =
+        filteredLogs.filter(
+            x =>
+                x.action==="backup" ||
+                x.action==="restore"
+        ).length;
+
 
     document.getElementById(
-        "totalLogs"
-    ).textContent =
-        allLogs.length;
+        "totalActivities"
+    ).textContent = total;
 
 
     document.getElementById(
-        "addLogs"
-    ).textContent =
-        countAction(
-            "add"
-        );
+        "addedCount"
+    ).textContent = added;
 
 
     document.getElementById(
-        "updateLogs"
-    ).textContent =
-        countAction(
-            "update"
-        );
+        "updatedCount"
+    ).textContent = updated;
 
 
     document.getElementById(
-        "deleteLogs"
-    ).textContent =
-        countAction(
-            "delete"
-        );
-
-}
+        "deletedCount"
+    ).textContent = deleted;
 
 
-function countAction(
-    action
-){
-
-    return allLogs.filter(
-        log =>
-            getActionType(
-                log.action
-            ) === action
-    ).length;
-
-}
-
-
-/* =========================================================
-   ACTION TYPE
-========================================================= */
-
-function getActionType(
-    action
-){
-
-    const value =
-        String(
-            action ||
-            ""
-        )
-        .toLowerCase();
-
-
-    if(
-        value.includes(
-            "add"
-        ) ||
-        value.includes(
-            "create"
-        ) ||
-        value.includes(
-            "insert"
-        ) ||
-        value.includes(
-            "present"
-        )
-    ){
-
-        return "add";
-
-    }
-
-
-    if(
-        value.includes(
-            "update"
-        ) ||
-        value.includes(
-            "edit"
-        ) ||
-        value.includes(
-            "change"
-        )
-    ){
-
-        return "update";
-
-    }
-
-
-    if(
-        value.includes(
-            "delete"
-        ) ||
-        value.includes(
-            "remove"
-        )
-    ){
-
-        return "delete";
-
-    }
-
-
-    if(
-        value.includes(
-            "import"
-        )
-    ){
-
-        return "import";
-
-    }
-
-
-    if(
-        value.includes(
-            "export"
-        )
-    ){
-
-        return "export";
-
-    }
-
-
-    return "other";
+    document.getElementById(
+        "backupCount"
+    ).textContent = backup;
 
 }
 
 
 /* =========================================================
-   ACTION BADGE
+   RENDER
 ========================================================= */
 
-function getActionBadge(
-    action
-){
+function render(){
 
-    const type =
-        getActionType(
-            action
+    populateCourses();
+
+    applyFilters();
+
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+function renderTable(){
+
+    const body =
+        document.getElementById(
+            "auditTableBody"
+        );
+
+    const empty =
+        document.getElementById(
+            "emptyState"
+        );
+
+    const info =
+        document.getElementById(
+            "resultInfo"
         );
 
 
-    const labels = {
-
-        add:
-            "➕ Added",
-
-        update:
-            "✏️ Updated",
-
-        delete:
-            "🗑 Deleted",
-
-        import:
-            "📥 Imported",
-
-        export:
-            "📤 Exported",
-
-        other:
-            "• Other"
-
-    };
+    body.innerHTML = "";
 
 
-    return `
+    if(!filteredLogs.length){
 
-        <span class="badge ${type}">
+        empty.style.display="block";
 
-            ${labels[type]}
+        info.textContent =
+            "Showing 0 activities";
 
-        </span>
+        renderStats();
 
-    `;
+        return;
+
+    }
+
+
+    empty.style.display="none";
+
+
+    info.textContent =
+        `Showing ${filteredLogs.length} of ${auditLogs.length} activities`;
+
+
+    filteredLogs.forEach(log=>{
+
+        const tr =
+            document.createElement("tr");
+
+
+        tr.innerHTML = `
+
+            <td>
+
+                <strong>
+                    ${escapeHTML(
+                        formatDateTime(
+                            log.timestamp
+                        )
+                    )}
+                </strong>
+
+                <div class="meta">
+                    ${escapeHTML(
+                        dateOnly(
+                            log.timestamp
+                        )
+                    )}
+                </div>
+
+            </td>
+
+
+            <td>
+                ${actionBadge(log.action)}
+            </td>
+
+
+            <td>
+
+                <div class="student-cell">
+
+                    <div class="avatar">
+                        ${escapeHTML(
+                            initials(
+                                log.studentName
+                            )
+                        )}
+                    </div>
+
+                    <div>
+
+                        <div class="student-name">
+                            ${escapeHTML(
+                                log.studentName ||
+                                "System"
+                            )}
+                        </div>
+
+                        <div class="student-id">
+                            ${escapeHTML(
+                                log.studentId ||
+                                "—"
+                            )}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <td>
+
+                <div class="course-text">
+                    ${escapeHTML(
+                        log.course ||
+                        "—"
+                    )}
+                </div>
+
+                <div class="meta">
+                    ${escapeHTML(
+                        log.className ||
+                        "—"
+                    )}
+                </div>
+
+            </td>
+
+
+            <td>
+                ${statusHTML(log.status)}
+            </td>
+
+
+            <td>
+
+                <strong>
+                    ${escapeHTML(
+                        log.session ||
+                        "—"
+                    )}
+                </strong>
+
+                <div class="meta">
+                    ${escapeHTML(
+                        log.date ||
+                        "—"
+                    )}
+                </div>
+
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    log.source ||
+                    "System"
+                )}
+            </td>
+
+
+            <td>
+
+                <div class="action-buttons">
+
+                    <button
+                    class="small-btn"
+                    title="View Details"
+                    onclick='viewDetails(${JSON.stringify(log.id)})'>
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
+
+
+        body.appendChild(tr);
+
+    });
+
+
+    renderStats();
 
 }
 
@@ -2212,247 +2859,297 @@ function getActionBadge(
    VIEW DETAILS
 ========================================================= */
 
-function viewDetails(
-    id
-){
+function viewDetails(id){
 
     const log =
-        allLogs.find(
-            item =>
-                String(
-                    item.id
-                ) ===
-                String(id)
+        auditLogs.find(
+            x=>String(x.id)===String(id)
         );
 
-
-    if(
-        !log
-    ){
-
-        showToast(
-            "Audit record পাওয়া যায়নি।"
-        );
-
+    if(!log){
         return;
-
     }
 
 
-    document.getElementById(
-        "detailsBody"
-    ).innerHTML = `
+    const details =
+        log.details &&
+        typeof log.details==="object"
+        ? log.details
+        : {};
 
-        <div class="detail-row">
 
-            <div class="detail-label">
-                Audit ID
+    const detailBody =
+        document.getElementById(
+            "detailBody"
+        );
+
+
+    detailBody.innerHTML = `
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Action
+                </div>
+
+                <div class="detail-value">
+                    ${actionBadge(
+                        log.action
+                    )}
+                </div>
+
             </div>
 
-            <div class="detail-value">
-                ${escapeHTML(
-                    log.id
-                )}
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Date & Time
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        formatDateTime(
+                            log.timestamp
+                        )
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Student
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        log.studentName ||
+                        "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Student ID
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        log.studentId ||
+                        "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Course
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        log.course ||
+                        "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Class / Batch
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        log.className ||
+                        "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Attendance Date
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        log.date ||
+                        "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Session
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        log.session ||
+                        "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Attendance Status
+                </div>
+
+                <div class="detail-value">
+                    ${statusHTML(
+                        log.status
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Source
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        log.source ||
+                        "System"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item detail-full">
+
+                <div class="detail-label">
+                    Message
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        log.message ||
+                        "No additional message."
+                    )}
+                </div>
+
             </div>
 
         </div>
 
 
-        <div class="detail-row">
-
-            <div class="detail-label">
-                Date
-            </div>
-
-            <div class="detail-value">
-                ${escapeHTML(
-                    formatDate(
-                        log.timestamp
-                    )
-                )}
-            </div>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <div class="detail-label">
-                Time
-            </div>
-
-            <div class="detail-value">
-                ${escapeHTML(
-                    formatTime(
-                        log.timestamp
-                    )
-                )}
-            </div>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <div class="detail-label">
-                Action
-            </div>
-
-            <div class="detail-value">
-                ${getActionBadge(
-                    log.action
-                )}
-            </div>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <div class="detail-label">
-                Actor
-            </div>
-
-            <div class="detail-value">
-                ${escapeHTML(
-                    log.actor ||
-                    "Admin"
-                )}
-            </div>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <div class="detail-label">
-                Student ID
-            </div>
-
-            <div class="detail-value">
-                ${escapeHTML(
-                    log.studentId ||
-                    "—"
-                )}
-            </div>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <div class="detail-label">
-                Student Name
-            </div>
-
-            <div class="detail-value">
-                ${escapeHTML(
-                    log.studentName ||
-                    "—"
-                )}
-            </div>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <div class="detail-label">
-                Details
-            </div>
-
-            <div class="detail-value">
-                ${escapeHTML(
-                    log.details ||
-                    "—"
-                )}
-            </div>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <div class="detail-label">
-                Previous Value
-            </div>
-
-            <div class="detail-value">
-                <pre style="
-                    white-space:pre-wrap;
-                    font-family:inherit;
-                    font-size:7px;
-                ">${escapeHTML(
-                    stringifyValue(
-                        log.oldValue
-                    ) ||
-                    "—"
-                )}</pre>
-            </div>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <div class="detail-label">
-                New Value
-            </div>
-
-            <div class="detail-value">
-                <pre style="
-                    white-space:pre-wrap;
-                    font-family:inherit;
-                    font-size:7px;
-                ">${escapeHTML(
-                    stringifyValue(
-                        log.newValue
-                    ) ||
-                    "—"
-                )}</pre>
-            </div>
-
+        <div class="json-box">
+${escapeHTML(
+JSON.stringify(
+{
+    id:log.id,
+    timestamp:log.timestamp,
+    action:log.action,
+    source:log.source,
+    recordId:log.recordId,
+    details:details
+},
+null,
+2
+)
+)}
         </div>
 
     `;
 
 
-    document.getElementById(
-        "detailsModal"
-    )
-    .classList
-    .add(
-        "show"
-    );
-
-}
-
-
-function closeDetails(){
-
-    document.getElementById(
-        "detailsModal"
-    )
-    .classList
-    .remove(
-        "show"
-    );
+    document
+        .getElementById("detailModal")
+        .classList.add("show");
 
 }
 
 
 /* =========================================================
-   EXPORT CSV
+   CLOSE MODAL
 ========================================================= */
 
-function exportLogs(){
+function closeModal(){
 
-    if(
-        filteredLogs.length === 0
-    ){
+    document
+        .getElementById("detailModal")
+        .classList.remove("show");
+
+}
+
+
+document
+    .getElementById("detailModal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(event.target === this){
+                closeModal();
+            }
+
+        }
+    );
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key==="Escape"){
+            closeModal();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CSV EXPORT
+========================================================= */
+
+function csvEscape(value){
+
+    return `"${String(
+        value ?? ""
+    ).replace(/"/g,'""')}"`;
+
+}
+
+
+function exportCSV(){
+
+    if(!filteredLogs.length){
 
         showToast(
-            "Export করার মতো কোনো record নেই।"
+            "No audit activities to export."
         );
 
         return;
@@ -2460,480 +3157,133 @@ function exportLogs(){
     }
 
 
-    const headers = [
+    const rows = [
 
-        "Audit ID",
-        "Date",
-        "Time",
-        "Action",
-        "Actor",
-        "Student ID",
-        "Student Name",
-        "Details",
-        "Previous Value",
-        "New Value"
+        [
+            "Date & Time",
+            "Action",
+            "Student Name",
+            "Student ID",
+            "Course",
+            "Class",
+            "Attendance Date",
+            "Session",
+            "Status",
+            "Source",
+            "Record ID",
+            "Message"
+        ]
 
     ];
 
 
-    const rows =
-        filteredLogs.map(
-            function(log){
+    filteredLogs.forEach(log=>{
 
-                return [
+        rows.push([
 
-                    log.id,
+            formatDateTime(
+                log.timestamp
+            ),
 
-                    formatDate(
-                        log.timestamp
-                    ),
+            log.action,
 
-                    formatTime(
-                        log.timestamp
-                    ),
+            log.studentName,
 
-                    log.action,
+            log.studentId,
 
-                    log.actor,
+            log.course,
 
-                    log.studentId,
+            log.className,
 
-                    log.studentName,
+            log.date,
 
-                    log.details,
+            log.session,
 
-                    stringifyValue(
-                        log.oldValue
-                    ),
+            log.status,
 
-                    stringifyValue(
-                        log.newValue
-                    )
+            log.source,
 
-                ];
+            log.recordId,
 
-            }
-        );
+            log.message
+
+        ]);
+
+    });
 
 
     const csv =
-        [
-            headers,
-            ...rows
-        ]
-        .map(
-            row =>
-                row
-                .map(
-                    csvEscape
-                )
-                .join(",")
+        rows
+        .map(row =>
+            row.map(csvEscape).join(",")
         )
         .join("\n");
 
 
     const blob =
         new Blob(
-            [
-                "\uFEFF" +
-                csv
-            ],
+            [csv],
             {
-                type:
-                    "text/csv;charset=utf-8;"
+                type:"text/csv;charset=utf-8;"
             }
         );
 
 
     const url =
-        URL.createObjectURL(
-            blob
-        );
+        URL.createObjectURL(blob);
 
 
-    const link =
-        document.createElement(
-            "a"
-        );
+    const a =
+        document.createElement("a");
 
+    a.href=url;
 
-    link.href =
-        url;
-
-
-    link.download =
-        "attendance-audit-log-" +
-        getToday() +
+    a.download =
+        "SNK-Attendance-Audit-Log-" +
+        new Date()
+        .toISOString()
+        .slice(0,10) +
         ".csv";
 
+    document.body.appendChild(a);
 
-    document.body.appendChild(
-        link
-    );
+    a.click();
 
+    a.remove();
 
-    link.click();
-
-
-    link.remove();
-
-
-    URL.revokeObjectURL(
-        url
-    );
-
-
-    addAuditLog(
-        "export",
-        "Attendance audit log exported as CSV."
-    );
+    URL.revokeObjectURL(url);
 
 
     showToast(
-        "Audit log CSV exported ✓"
+        "CSV exported successfully."
     );
 
 }
 
 
 /* =========================================================
-   CLEAR LOGS
+   PRINT
 ========================================================= */
 
-function clearLogs(){
+function printAudit(){
 
-    if(
-        allLogs.length === 0
-    ){
+    window.print();
 
-        showToast(
-            "Clear করার মতো কোনো log নেই।"
-        );
-
-        return;
-
-    }
+}
 
 
-    const confirmed =
-        confirm(
-            "আপনি কি সব Attendance Audit Log মুছে ফেলতে চান?\n\nএই action undo করা যাবে না।"
-        );
+/* =========================================================
+   REFRESH
+========================================================= */
 
+function refreshAudit(){
 
-    if(
-        !confirmed
-    ){
+    loadAuditLogs();
 
-        return;
-
-    }
-
-
-    localStorage.removeItem(
-        AUDIT_KEY
-    );
-
-
-    allLogs = [];
-
-    filteredLogs = [];
-
-    currentPage = 1;
-
-
-    updateStats();
-
-    renderTable();
-
-    renderPagination();
-
+    render();
 
     showToast(
-        "সব audit logs clear করা হয়েছে।"
-    );
-
-}
-
-
-/* =========================================================
-   DEMO LOG
-========================================================= */
-
-function createDemoLog(){
-
-    addAuditLog(
-
-        "update",
-
-        "Attendance record updated from audit log test action.",
-
-        "STU-DEMO-001",
-
-        "Demo Student",
-
-        "Admin",
-
-        "Absent",
-
-        "Present"
-
-    );
-
-
-    showToast(
-        "Test audit log added ✓"
-    );
-
-}
-
-
-/* =========================================================
-   DATE / TIME
-========================================================= */
-
-function getDateOnly(
-    timestamp
-){
-
-    const date =
-        new Date(
-            timestamp
-        );
-
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-
-        return "";
-
-    }
-
-
-    const y =
-        date.getFullYear();
-
-
-    const m =
-        String(
-            date.getMonth()+1
-        )
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    const d =
-        String(
-            date.getDate()
-        )
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    return (
-        y +
-        "-" +
-        m +
-        "-" +
-        d
-    );
-
-}
-
-
-function formatDate(
-    timestamp
-){
-
-    const date =
-        new Date(
-            timestamp
-        );
-
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-
-        return "Invalid Date";
-
-    }
-
-
-    return date.toLocaleDateString(
-        "en-GB",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric"
-        }
-    );
-
-}
-
-
-function formatTime(
-    timestamp
-){
-
-    const date =
-        new Date(
-            timestamp
-        );
-
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-
-        return "--";
-
-    }
-
-
-    return date.toLocaleTimeString(
-        "en-US",
-        {
-            hour:"2-digit",
-            minute:"2-digit",
-            second:"2-digit"
-        }
-    );
-
-}
-
-
-/* =========================================================
-   CSV HELPERS
-========================================================= */
-
-function csvEscape(
-    value
-){
-
-    const text =
-        stringifyValue(
-            value
-        );
-
-
-    return '"' +
-        text
-        .replace(
-            /"/g,
-            '""'
-        ) +
-        '"';
-
-}
-
-
-function stringifyValue(
-    value
-){
-
-    if(
-        value === null ||
-        value === undefined
-    ){
-
-        return "";
-
-    }
-
-
-    if(
-        typeof value ===
-            "object"
-    ){
-
-        try{
-
-            return JSON.stringify(
-                value
-            );
-
-        }
-        catch(error){
-
-            return String(
-                value
-            );
-
-        }
-
-    }
-
-
-    return String(
-        value
-    );
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(
-    value
-){
-
-    return String(
-        value ??
-        ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-function escapeAttribute(
-    value
-){
-
-    return String(
-        value ??
-        ""
-    )
-    .replace(
-        /\\/g,
-        "\\\\"
-    )
-    .replace(
-        /'/g,
-        "\\'"
+        "Audit log refreshed."
     );
 
 }
@@ -2943,6 +3293,26 @@ function escapeAttribute(
    THEME
 ========================================================= */
 
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem(
+            "snkAttendanceTheme"
+        ) || "light";
+
+
+    if(theme==="dark"){
+
+        document.body.classList.add("dark");
+
+    }
+
+
+    updateThemeIcon();
+
+}
+
+
 function toggleTheme(){
 
     document.body.classList.toggle(
@@ -2950,85 +3320,44 @@ function toggleTheme(){
     );
 
 
-    const isDark =
+    const dark =
         document.body.classList.contains(
             "dark"
         );
 
 
     localStorage.setItem(
-        THEME_KEY,
-        isDark
-        ?
-        "dark"
-        :
-        "light"
+        "snkAttendanceTheme",
+        dark ? "dark" : "light"
     );
 
 
-    updateThemeButton();
+    updateThemeIcon();
 
 }
 
 
-function loadTheme(){
+function updateThemeIcon(){
 
-    const theme =
-        localStorage.getItem(
-            THEME_KEY
+    const icon =
+        document.getElementById(
+            "themeIcon"
         );
 
 
     if(
-        theme === "dark"
-    ){
-
-        document.body.classList.add(
-            "dark"
-        );
-
-    }
-
-
-    updateThemeButton();
-
-}
-
-
-function updateThemeButton(){
-
-    document.getElementById(
-        "themeBtn"
-    )
-    .textContent =
         document.body.classList.contains(
             "dark"
         )
-        ?
-        "☀️"
-        :
-        "🌙";
-
-}
-
-
-/* =========================================================
-   BACK
-========================================================= */
-
-function goBack(){
-
-    if(
-        document.referrer
     ){
 
-        history.back();
+        icon.className =
+            "fa-solid fa-sun";
 
-    }
-    else{
+    }else{
 
-        window.location.href =
-            "admin.html";
+        icon.className =
+            "fa-solid fa-moon";
 
     }
 
@@ -3039,12 +3368,9 @@ function goBack(){
    TOAST
 ========================================================= */
 
-let toastTimer;
+let toastTimer = null;
 
-
-function showToast(
-    message
-){
+function showToast(message){
 
     const toast =
         document.getElementById(
@@ -3068,66 +3394,358 @@ function showToast(
 
     toastTimer =
         setTimeout(
-            function(){
-
+            ()=>{
                 toast.classList.remove(
                     "show"
                 );
-
             },
-            2800
+            2500
         );
 
 }
 
 
 /* =========================================================
-   MODAL OUTSIDE CLICK
+   AUTO ACTIVITY DETECTION
 ========================================================= */
 
-document.getElementById(
-    "detailsModal"
-)
-.addEventListener(
-    "click",
-    function(event){
+/*
+   Version 1.25 automatically watches attendance localStorage.
+
+   When attendance records are changed from another page,
+   the audit page refreshes itself.
+
+   The actual detailed Added / Updated / Deleted audit
+   can also be pushed using:
+
+   window.snkAttendanceAudit.add(
+       "added",
+       {...}
+   );
+
+   This keeps the audit module independent and safe.
+*/
+
+
+let lastAttendanceSnapshot = "";
+
+
+function getAttendanceSnapshot(){
+
+    const records =
+        loadAttendanceRecords();
+
+    return JSON.stringify(
+        records
+        .map(r=>({
+
+            id:r.id,
+            studentId:r.studentId,
+            course:r.course,
+            date:r.date,
+            session:r.session,
+            status:r.status
+
+        }))
+        .sort(
+            (a,b)=>
+                JSON.stringify(a)
+                .localeCompare(
+                    JSON.stringify(b)
+                )
+        )
+    );
+
+}
+
+
+function watchAttendanceChanges(){
+
+    const snapshot =
+        getAttendanceSnapshot();
+
+
+    if(!lastAttendanceSnapshot){
+
+        lastAttendanceSnapshot =
+            snapshot;
+
+        return;
+
+    }
+
+
+    if(
+        snapshot !==
+        lastAttendanceSnapshot
+    ){
+
+        const oldRecords =
+            safeJSON(
+                lastAttendanceSnapshot,
+                []
+            );
+
+
+        const newRecords =
+            safeJSON(
+                snapshot,
+                []
+            );
+
+
+        detectAttendanceChanges(
+            oldRecords,
+            newRecords
+        );
+
+
+        lastAttendanceSnapshot =
+            snapshot;
+
+    }
+
+}
+
+
+function detectAttendanceChanges(
+    oldRecords,
+    newRecords
+){
+
+    const oldMap = new Map();
+
+    oldRecords.forEach(record=>{
+
+        oldMap.set(
+            recordKey(record),
+            record
+        );
+
+    });
+
+
+    const newMap = new Map();
+
+    newRecords.forEach(record=>{
+
+        newMap.set(
+            recordKey(record),
+            record
+        );
+
+    });
+
+
+    newMap.forEach(
+        (record,key)=>{
+
+            if(!oldMap.has(key)){
+
+                const full =
+                    loadAttendanceRecords()
+                    .find(
+                        x =>
+                            recordKey(x)
+                            === key
+                    );
+
+
+                if(full){
+
+                    addAuditLog(
+                        "added",
+                        {
+                            source:"Attendance",
+                            studentId:
+                                full.studentId,
+                            studentName:
+                                full.studentName,
+                            course:
+                                full.course,
+                            className:
+                                full.className,
+                            date:
+                                full.date,
+                            session:
+                                full.session,
+                            status:
+                                full.status,
+                            recordId:
+                                full.id,
+                            message:
+                                "New attendance record detected.",
+                            details:
+                                {
+                                    detectedBy:
+                                        "Automatic watcher"
+                                }
+                        }
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    oldMap.forEach(
+        (record,key)=>{
+
+            if(!newMap.has(key)){
+
+                addAuditLog(
+                    "deleted",
+                    {
+                        source:"Attendance",
+                        studentId:
+                            record.studentId,
+                        studentName:
+                            record.studentName,
+                        course:
+                            record.course,
+                        date:
+                            record.date,
+                        session:
+                            record.session,
+                        status:
+                            record.status,
+                        recordId:
+                            record.id,
+                        message:
+                            "Attendance record removed.",
+                        details:
+                            {
+                                detectedBy:
+                                    "Automatic watcher"
+                            }
+                    }
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+       Detect status updates by matching
+       student/course/date/session.
+    */
+
+    const oldComparable = new Map();
+
+    oldRecords.forEach(record=>{
+
+        oldComparable.set(
+            comparableKey(record),
+            record
+        );
+
+    });
+
+
+    newRecords.forEach(record=>{
+
+        const old =
+            oldComparable.get(
+                comparableKey(record)
+            );
 
         if(
-            event.target ===
-            this
+            old &&
+            old.status !==
+            record.status
         ){
 
-            closeDetails();
+            addAuditLog(
+                "updated",
+                {
+                    source:"Attendance",
+                    studentId:
+                        record.studentId,
+                    studentName:
+                        record.studentName,
+                    course:
+                        record.course,
+                    date:
+                        record.date,
+                    session:
+                        record.session,
+                    status:
+                        record.status,
+                    recordId:
+                        record.id,
+                    message:
+                        `Attendance status changed from ${old.status} to ${record.status}.`,
+                    details:
+                        {
+                            previousStatus:
+                                old.status,
+                            newStatus:
+                                record.status,
+                            detectedBy:
+                                "Automatic watcher"
+                        }
+                }
+            );
 
         }
 
-    }
-);
+    });
+
+}
+
+
+function recordKey(record){
+
+    return [
+
+        record.id ||
+        "",
+
+        record.studentId ||
+        "",
+
+        record.course ||
+        "",
+
+        record.date ||
+        "",
+
+        record.session ||
+        ""
+
+    ].join("|");
+
+}
+
+
+function comparableKey(record){
+
+    return [
+
+        record.studentId ||
+        "",
+
+        record.course ||
+        "",
+
+        record.date ||
+        "",
+
+        record.session ||
+        ""
+
+    ].join("|");
+
+}
 
 
 /* =========================================================
-   ESC KEY
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key ===
-            "Escape"
-        ){
-
-            closeDetails();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   CROSS-TAB STORAGE UPDATE
+   STORAGE EVENT
 ========================================================= */
 
 window.addEventListener(
@@ -3135,11 +3753,28 @@ window.addEventListener(
     function(event){
 
         if(
-            event.key ===
-            AUDIT_KEY
+            ATTENDANCE_KEYS.includes(
+                event.key
+            ) ||
+            COURSE_KEYS.includes(
+                event.key
+            ) ||
+            event.key===AUDIT_KEY
         ){
 
-            loadLogs();
+            loadAuditLogs();
+
+            render();
+
+        }
+
+
+        if(
+            event.key ===
+            "snkAttendanceTheme"
+        ){
+
+            loadTheme();
 
         }
 
@@ -3148,23 +3783,67 @@ window.addEventListener(
 
 
 /* =========================================================
-   EXPOSE FUNCTION FOR OTHER ATTENDANCE PAGES
-=========================================================
-
-Other pages can use:
-
-addAuditLog(
-    "add",
-    "Attendance marked Present",
-    "STU001",
-    "Student Name",
-    "Admin"
-);
-
+   VISIBILITY
 ========================================================= */
 
-window.addAttendanceAuditLog =
-    addAuditLog;
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            loadAuditLogs();
+
+            render();
+
+            lastAttendanceSnapshot =
+                getAttendanceSnapshot();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+function initialize(){
+
+    loadTheme();
+
+    loadAuditLogs();
+
+    populateCourses();
+
+    render();
+
+    lastAttendanceSnapshot =
+        getAttendanceSnapshot();
+
+
+    /*
+       Periodically check attendance changes.
+       This allows the audit page to notice changes
+       made by modules that do not directly call
+       window.snkAttendanceAudit.
+    */
+
+    setInterval(
+        watchAttendanceChanges,
+        3000
+    );
+
+}
+
+
+/* START */
+
+initialize();
 
 </script>
 
