@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -20,7 +18,6 @@
 }
 
 :root{
-
     --bg:#f4f6fa;
     --card:#ffffff;
     --text:#172033;
@@ -29,7 +26,6 @@
 
     --primary:#2563eb;
     --primary-dark:#1d4ed8;
-
     --soft:#eff6ff;
 
     --success:#16a34a;
@@ -42,14 +38,12 @@
     --danger-soft:#fee2e2;
 
     --purple:#7c3aed;
-
     --sidebar:#111827;
 
     --shadow:0 10px 30px rgba(15,23,42,.07);
 }
 
 body.dark{
-
     --bg:#080d18;
     --card:#111827;
     --text:#f8fafc;
@@ -57,22 +51,16 @@ body.dark{
     --border:#1f2937;
 
     --soft:#172554;
-
     --sidebar:#020617;
 
     --shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
 body{
-
     font-family:"Noto Sans Bengali",Arial,sans-serif;
-
     background:var(--bg);
-
     color:var(--text);
-
     min-height:100vh;
-
     transition:.25s;
 }
 
@@ -80,41 +68,30 @@ button,
 input,
 select,
 textarea{
-
     font-family:inherit;
 }
 
 button{
-
     cursor:pointer;
 }
 
 a{
-
     text-decoration:none;
-
     color:inherit;
 }
-
 
 /* =========================
 SIDEBAR
 ========================= */
 
 .sidebar{
-
     width:255px;
-
     min-width:255px;
-
     background:var(--sidebar);
-
     color:#fff;
-
     min-height:100vh;
 
     position:fixed;
-
     left:0;
     top:0;
     bottom:0;
@@ -122,969 +99,777 @@ SIDEBAR
     z-index:1000;
 
     display:flex;
-
     flex-direction:column;
 
     transition:.25s;
 }
 
 .sidebar-logo{
-
     height:76px;
-
     padding:13px 17px;
 
     display:flex;
-
     align-items:center;
-
     gap:10px;
 
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .sidebar-logo img{
-
     width:45px;
     height:45px;
-
     object-fit:contain;
 }
 
+.logo-fallback{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:14px;
+}
+
 .sidebar-logo-text{
-
     font-size:15px;
-
     font-weight:800;
 }
 
 .sidebar-logo-text small{
-
     display:block;
-
     color:#9ca3af;
-
     font-size:9px;
-
     font-weight:500;
 }
 
 .sidebar-menu{
-
     padding:18px 12px;
-
     flex:1;
-
     overflow-y:auto;
 }
 
 .menu-label{
-
     color:#6b7280;
-
     font-size:9px;
-
     font-weight:800;
-
     padding:8px 11px;
-
     letter-spacing:.5px;
 }
 
 .menu-item{
-
     width:100%;
-
     border:none;
-
     background:transparent;
-
     color:#d1d5db;
 
     display:flex;
-
     align-items:center;
-
     gap:11px;
 
     padding:11px 12px;
-
     border-radius:9px;
 
     margin-bottom:4px;
 
     font-size:11px;
-
     font-weight:600;
-
     text-align:left;
 }
 
 .menu-item:hover{
-
     background:rgba(255,255,255,.07);
-
     color:#fff;
 }
 
 .menu-item.active{
-
     background:#2563eb;
-
     color:#fff;
 }
 
 .menu-icon{
-
     width:22px;
-
     text-align:center;
-
     font-size:15px;
 }
 
 .sidebar-footer{
-
     padding:13px;
-
     border-top:1px solid rgba(255,255,255,.08);
 }
 
 .admin-mini{
-
     display:flex;
-
     align-items:center;
-
     gap:9px;
-
     padding:9px;
-
     background:rgba(255,255,255,.05);
-
     border-radius:10px;
 }
 
 .admin-avatar{
-
     width:34px;
     height:34px;
-
     border-radius:9px;
-
     background:#2563eb;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 }
 
 .admin-mini-info{
-
     flex:1;
 }
 
 .admin-mini-info strong{
-
     display:block;
-
     font-size:10px;
 }
 
 .admin-mini-info span{
-
     display:block;
-
     color:#9ca3af;
-
     font-size:8px;
 }
 
 .logout-small{
-
     border:none;
-
     background:transparent;
-
     color:#9ca3af;
-
     font-size:14px;
 }
-
 
 /* =========================
 MAIN
 ========================= */
 
 .main{
-
     margin-left:255px;
-
     width:calc(100% - 255px);
-
     min-width:0;
 }
-
 
 /* =========================
 TOPBAR
 ========================= */
 
 .topbar{
-
     height:76px;
-
     background:var(--card);
-
     border-bottom:1px solid var(--border);
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
     padding:0 25px;
 
     position:sticky;
-
     top:0;
-
     z-index:900;
 }
 
 .topbar-left{
-
     display:flex;
-
     align-items:center;
-
     gap:12px;
 }
 
 .mobile-menu-btn{
-
     display:none;
 
     border:1px solid var(--border);
-
     background:var(--card);
-
     color:var(--text);
 
     width:38px;
     height:38px;
-
     border-radius:9px;
-
     font-size:18px;
 }
 
 .page-heading h1{
-
     font-size:20px;
 }
 
 .page-heading p{
-
     color:var(--muted);
-
     font-size:10px;
 }
 
 .topbar-actions{
-
     display:flex;
-
     align-items:center;
-
     gap:7px;
 }
 
 .topbar-btn{
-
     width:37px;
     height:37px;
 
     border:1px solid var(--border);
-
     background:var(--card);
-
     color:var(--text);
 
     border-radius:9px;
 }
 
 .admin-top-profile{
-
     display:flex;
-
     align-items:center;
-
     gap:9px;
-
     padding-left:9px;
-
     border-left:1px solid var(--border);
 }
 
 .top-avatar{
-
     width:36px;
     height:36px;
-
     border-radius:9px;
-
     background:var(--soft);
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 }
 
 .top-profile-text strong{
-
     display:block;
-
     font-size:10px;
 }
 
 .top-profile-text span{
-
     display:block;
-
     color:var(--muted);
-
     font-size:8px;
 }
-
 
 /* =========================
 CONTENT
 ========================= */
 
 .content{
-
     padding:25px;
 }
 
 .page-intro{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
-
     margin-bottom:20px;
 }
 
 .page-intro h2{
-
     font-size:21px;
-
     margin-bottom:4px;
 }
 
 .page-intro p{
-
     color:var(--muted);
-
     font-size:10px;
 }
 
 .primary-btn{
-
     border:none;
-
     background:var(--primary);
-
     color:#fff;
 
     padding:11px 16px;
-
     border-radius:9px;
 
     font-size:10px;
-
     font-weight:800;
 }
 
+.primary-btn:hover{
+    background:var(--primary-dark);
+}
 
 /* =========================
 STATS
 ========================= */
 
 .stats-grid{
-
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
     gap:15px;
-
     margin-bottom:20px;
 }
 
 .stat-card{
-
     background:var(--card);
-
     border:1px solid var(--border);
-
     border-radius:15px;
-
     padding:17px;
-
     box-shadow:var(--shadow);
 }
 
 .stat-icon{
-
     width:39px;
     height:39px;
-
     border-radius:10px;
-
     background:var(--soft);
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     font-size:17px;
-
     margin-bottom:11px;
 }
 
 .stat-number{
-
     font-size:23px;
-
     font-weight:800;
 }
 
 .stat-title{
-
     font-size:10px;
 }
 
 .stat-description{
-
     color:var(--muted);
-
     font-size:8px;
 }
-
 
 /* =========================
 TOOLBAR
 ========================= */
 
 .toolbar{
-
     background:var(--card);
-
     border:1px solid var(--border);
-
     border-radius:15px;
-
     padding:14px;
-
     box-shadow:var(--shadow);
-
     margin-bottom:15px;
 }
 
 .toolbar-row{
-
     display:flex;
-
     align-items:center;
-
     gap:9px;
-
     flex-wrap:wrap;
 }
 
 .search-box{
-
     flex:1;
-
     min-width:220px;
-
     position:relative;
 }
 
 .search-box span{
-
     position:absolute;
-
     left:11px;
-
     top:50%;
-
     transform:translateY(-50%);
-
     color:var(--muted);
 }
 
 .search-box input{
-
     width:100%;
 
     border:1px solid var(--border);
-
     background:var(--bg);
-
     color:var(--text);
 
     padding:10px 12px 10px 33px;
-
     border-radius:8px;
 
     outline:none;
-
     font-size:10px;
 }
 
 .filter-select{
-
     border:1px solid var(--border);
-
     background:var(--bg);
-
     color:var(--text);
 
     padding:10px 12px;
-
     border-radius:8px;
 
     outline:none;
-
     font-size:9px;
 
     min-width:140px;
 }
-
 
 /* =========================
 TABLE
 ========================= */
 
 .table-card{
-
     background:var(--card);
-
     border:1px solid var(--border);
-
     border-radius:15px;
-
     box-shadow:var(--shadow);
-
     overflow:hidden;
 }
 
+.table-header{
+    padding:15px 17px;
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.table-header h3{
+    font-size:12px;
+}
+
+.table-header span{
+    color:var(--muted);
+    font-size:8px;
+}
+
 .table-wrapper{
-
     width:100%;
-
     overflow-x:auto;
 }
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
-    min-width:1100px;
+    min-width:1150px;
 }
 
 thead{
-
     background:var(--bg);
 }
 
 th{
-
     color:var(--muted);
-
     font-size:8px;
-
     font-weight:800;
 
     text-align:left;
-
     padding:13px 14px;
 
     border-bottom:1px solid var(--border);
-
     white-space:nowrap;
 }
 
 td{
-
     padding:12px 14px;
-
     border-bottom:1px solid var(--border);
 
     font-size:9px;
-
     white-space:nowrap;
 }
 
 tbody tr:hover{
-
     background:var(--bg);
 }
-
 
 /* =========================
 STUDENT
 ========================= */
 
 .student-cell{
-
     display:flex;
-
     align-items:center;
-
     gap:8px;
 }
 
 .student-avatar{
-
     width:35px;
     height:35px;
-
     border-radius:9px;
 
     background:var(--soft);
-
     color:var(--primary);
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     font-size:9px;
-
     font-weight:800;
 }
 
 .student-cell strong{
-
     display:block;
-
     font-size:9px;
 }
 
 .student-cell span{
-
     display:block;
-
     color:var(--muted);
-
     font-size:7px;
-
     margin-top:2px;
 }
 
-
 /* =========================
-TYPE
-========================= */
-
-.type-badge{
-
-    display:inline-flex;
-
-    padding:5px 8px;
-
-    border-radius:20px;
-
-    font-size:7px;
-
-    font-weight:800;
-}
-
-.type-badge.quiz{
-
-    background:#f5f3ff;
-
-    color:#7c3aed;
-}
-
-.type-badge.assignment{
-
-    background:#ecfeff;
-
-    color:#0891b2;
-}
-
-body.dark .type-badge.quiz{
-
-    background:#2e1065;
-
-    color:#c4b5fd;
-}
-
-body.dark .type-badge.assignment{
-
-    background:#083344;
-
-    color:#67e8f9;
-}
-
-
-/* =========================
-COURSE
+BADGES
 ========================= */
 
 .course-badge{
-
     display:inline-flex;
-
     padding:5px 8px;
 
     background:var(--soft);
-
     color:var(--primary);
 
     border-radius:20px;
 
     font-size:7px;
-
     font-weight:800;
 }
 
-
-/* =========================
-STATUS
-========================= */
-
-.status{
-
+.type-badge{
     display:inline-flex;
-
     padding:5px 8px;
-
     border-radius:20px;
 
     font-size:7px;
-
     font-weight:800;
 }
 
+.type-badge.quiz{
+    background:#f5f3ff;
+    color:#7c3aed;
+}
+
+.type-badge.assignment{
+    background:#ecfeff;
+    color:#0891b2;
+}
+
+body.dark .type-badge.quiz{
+    background:#2e1065;
+    color:#c4b5fd;
+}
+
+body.dark .type-badge.assignment{
+    background:#083344;
+    color:#67e8f9;
+}
+
+.status{
+    display:inline-flex;
+    padding:5px 8px;
+    border-radius:20px;
+
+    font-size:7px;
+    font-weight:800;
+}
+
+.status.passed{
+    background:var(--success-soft);
+    color:#15803d;
+}
+
+.status.failed{
+    background:var(--danger-soft);
+    color:#b91c1c;
+}
+
 .status.pending{
-
     background:var(--warning-soft);
-
     color:#a16207;
 }
 
 .status.reviewed{
-
     background:var(--success-soft);
-
     color:#15803d;
 }
-
-.status.missing{
-
-    background:var(--danger-soft);
-
-    color:#b91c1c;
-}
-
 
 /* =========================
 MARKS
 ========================= */
 
 .marks{
-
     font-weight:800;
 }
 
-.marks.pending{
-
-    color:var(--warning);
-}
-
-.marks.done{
-
+.marks.good{
     color:var(--success);
 }
 
+.marks.bad{
+    color:var(--danger);
+}
+
+.marks.pending{
+    color:var(--warning);
+}
+
+.grade{
+    display:inline-flex;
+    width:28px;
+    height:28px;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:8px;
+
+    background:var(--soft);
+    color:var(--primary);
+
+    font-weight:800;
+    font-size:9px;
+}
 
 /* =========================
 ACTIONS
 ========================= */
 
 .row-actions{
-
     display:flex;
-
     gap:5px;
 }
 
 .action-btn{
-
     width:30px;
     height:30px;
 
     border:1px solid var(--border);
-
     background:var(--card);
-
     color:var(--text);
 
     border-radius:7px;
 }
 
 .action-btn:hover{
-
     background:var(--soft);
 }
 
-.action-btn.mark:hover{
-
-    color:var(--success);
+.action-btn.delete:hover{
+    color:var(--danger);
 }
 
+.action-btn.edit:hover{
+    color:var(--primary);
+}
+
+.action-btn.view:hover{
+    color:var(--purple);
+}
+
+/* =========================
+EMPTY
+========================= */
+
+.empty-state{
+    text-align:center;
+    padding:50px 20px;
+    color:var(--muted);
+}
+
+.empty-state .empty-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.empty-state h3{
+    color:var(--text);
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.empty-state p{
+    font-size:9px;
+}
 
 /* =========================
 MODAL
 ========================= */
 
 .modal-overlay{
-
     position:fixed;
-
     inset:0;
 
     background:rgba(0,0,0,.55);
 
     display:none;
-
     align-items:center;
-
     justify-content:center;
 
     padding:20px;
-
     z-index:3000;
 }
 
 .modal-overlay.show{
-
     display:flex;
 }
 
 .modal{
-
     width:100%;
-
-    max-width:620px;
-
+    max-width:650px;
     max-height:90vh;
 
     overflow-y:auto;
 
     background:var(--card);
-
     border:1px solid var(--border);
 
     border-radius:18px;
-
     padding:22px;
 
     box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
+.modal.large{
+    max-width:850px;
+}
+
 .modal-header{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     margin-bottom:17px;
 }
 
 .modal-header h3{
-
     font-size:16px;
 }
 
 .modal-header p{
-
     color:var(--muted);
-
     font-size:8px;
-
     margin-top:2px;
 }
 
 .modal-close{
-
     width:30px;
     height:30px;
 
     border:none;
-
     background:var(--bg);
-
     color:var(--text);
 
     border-radius:8px;
-
     font-size:16px;
 }
-
 
 /* =========================
 FORM
 ========================= */
 
 .form-grid{
-
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:12px;
 }
 
 .form-group{
-
     margin-bottom:12px;
 }
 
 .form-group.full{
-
     grid-column:1 / -1;
 }
 
 .form-group label{
-
     display:block;
 
     font-size:9px;
-
     font-weight:800;
 
     margin-bottom:5px;
@@ -1093,225 +878,230 @@ FORM
 .form-group input,
 .form-group select,
 .form-group textarea{
-
     width:100%;
 
     border:1px solid var(--border);
-
     background:var(--bg);
-
     color:var(--text);
 
     padding:10px;
-
     border-radius:8px;
 
     outline:none;
-
     font-size:9px;
 }
 
 .form-group textarea{
-
     min-height:85px;
-
     resize:vertical;
 }
 
 .form-actions{
-
     display:flex;
-
     justify-content:flex-end;
-
     gap:7px;
-
     margin-top:8px;
 }
 
 .secondary-btn{
-
     border:1px solid var(--border);
-
     background:var(--card);
-
     color:var(--text);
 
     padding:10px 14px;
-
     border-radius:8px;
 
     font-size:9px;
-
     font-weight:700;
 }
 
 .save-btn{
-
     border:none;
-
     background:var(--primary);
-
     color:#fff;
 
     padding:10px 16px;
-
     border-radius:8px;
 
     font-size:9px;
-
     font-weight:800;
 }
 
-
 /* =========================
-DETAIL BOX
+DETAIL
 ========================= */
 
 .detail-box{
-
     background:var(--bg);
-
     border:1px solid var(--border);
 
     border-radius:12px;
-
     padding:13px;
 
     margin-bottom:15px;
 }
 
 .detail-row{
-
     display:flex;
-
     justify-content:space-between;
-
     gap:10px;
 
     padding:7px 0;
-
     border-bottom:1px dashed var(--border);
 }
 
 .detail-row:last-child{
-
     border-bottom:none;
 }
 
 .detail-row span{
-
     color:var(--muted);
-
     font-size:8px;
 }
 
 .detail-row strong{
-
     font-size:9px;
-
     text-align:right;
 }
-
 
 /* =========================
 RESULT PREVIEW
 ========================= */
 
 .result-preview{
-
     border:1px solid var(--border);
-
-    border-radius:12px;
-
-    padding:15px;
-
-    text-align:center;
-
-    margin-bottom:15px;
+    border-radius:14px;
+    overflow:hidden;
 }
 
-.result-preview .big-score{
+.result-header{
+    background:var(--primary);
+    color:#fff;
+    padding:18px;
+    text-align:center;
+}
 
-    font-size:32px;
+.result-header h2{
+    font-size:17px;
+}
 
+.result-header p{
+    font-size:8px;
+    opacity:.9;
+    margin-top:4px;
+}
+
+.result-student{
+    padding:16px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.result-info{
+    background:var(--bg);
+    padding:10px;
+    border-radius:9px;
+}
+
+.result-info span{
+    display:block;
+    color:var(--muted);
+    font-size:7px;
+}
+
+.result-info strong{
+    display:block;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.result-score{
+    padding:18px;
+    text-align:center;
+    border-top:1px solid var(--border);
+}
+
+.result-score .big-score{
+    font-size:35px;
     font-weight:800;
-
     color:var(--primary);
 }
 
-.result-preview p{
-
+.result-score p{
     color:var(--muted);
-
     font-size:8px;
 }
 
-
-/* =========================
-EMPTY
-========================= */
-
-.empty-state{
-
-    display:none;
-
+.result-footer{
+    padding:12px;
+    background:var(--bg);
     text-align:center;
-
-    padding:45px 20px;
-
     color:var(--muted);
-
-    font-size:10px;
+    font-size:7px;
 }
 
-
 /* =========================
-FOOTER
+TOAST
 ========================= */
 
-.footer{
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
 
-    padding:20px 25px;
+    background:#111827;
+    color:#fff;
 
-    border-top:1px solid var(--border);
-
-    color:var(--muted);
+    padding:12px 16px;
+    border-radius:10px;
 
     font-size:9px;
+    font-weight:700;
 
-    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
 
-    margin-top:25px;
+    transform:translateY(100px);
+    opacity:0;
+    pointer-events:none;
+
+    transition:.3s;
+
+    z-index:5000;
 }
 
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.toast.success{
+    border-left:4px solid #22c55e;
+}
+
+.toast.error{
+    border-left:4px solid #ef4444;
+}
 
 /* =========================
-MOBILE
+OVERLAY MOBILE
 ========================= */
 
 .sidebar-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.45);
-
-    z-index:950;
-
     display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:950;
 }
 
-.sidebar-overlay.show{
-
-    display:block;
-}
+/* =========================
+RESPONSIVE
+========================= */
 
 @media(max-width:1100px){
 
     .stats-grid{
-
         grid-template-columns:repeat(2,1fr);
     }
 }
@@ -1319,113 +1109,105 @@ MOBILE
 @media(max-width:800px){
 
     .sidebar{
-
         transform:translateX(-100%);
     }
 
     .sidebar.open{
-
         transform:translateX(0);
     }
 
+    .sidebar-overlay.show{
+        display:block;
+    }
+
     .main{
-
         margin-left:0;
-
         width:100%;
     }
 
     .mobile-menu-btn{
-
-        display:flex;
-
-        align-items:center;
-
-        justify-content:center;
+        display:block;
     }
 
     .top-profile-text{
-
         display:none;
-    }
-
-    .admin-top-profile{
-
-        border-left:none;
-    }
-}
-
-@media(max-width:600px){
-
-    .topbar{
-
-        height:65px;
-
-        padding:0 13px;
     }
 
     .content{
-
-        padding:15px;
-    }
-
-    .page-heading h1{
-
-        font-size:16px;
-    }
-
-    .page-heading p{
-
-        display:none;
+        padding:17px;
     }
 
     .page-intro{
-
-        flex-direction:column;
-
         align-items:flex-start;
-    }
-
-    .stats-grid{
-
-        grid-template-columns:1fr;
-    }
-
-    .toolbar-row{
-
         flex-direction:column;
-
-        align-items:stretch;
-    }
-
-    .search-box{
-
-        min-width:0;
-    }
-
-    .filter-select{
-
-        width:100%;
     }
 
     .form-grid{
-
         grid-template-columns:1fr;
     }
 
     .form-group.full{
-
         grid-column:auto;
+    }
+
+    .result-student{
+        grid-template-columns:1fr;
     }
 }
 
-</style>
+@media(max-width:550px){
 
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .topbar-actions .topbar-btn:nth-child(2){
+        display:none;
+    }
+
+    .page-heading h1{
+        font-size:16px;
+    }
+
+    .page-heading p{
+        display:none;
+    }
+
+    .content{
+        padding:12px;
+    }
+
+    .modal{
+        padding:16px;
+    }
+}
+
+@media print{
+
+    body *{
+        visibility:hidden;
+    }
+
+    #printArea,
+    #printArea *{
+        visibility:visible;
+    }
+
+    #printArea{
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+    }
+}
+</style>
 </head>
 
-
 <body>
-
 
 <!-- =========================
 SIDEBAR
@@ -1433,206 +1215,89 @@ SIDEBAR
 
 <aside class="sidebar" id="sidebar">
 
-
     <div class="sidebar-logo">
 
-        <img
-            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-            alt="SNK IT Institute Logo"
-        >
+        <div class="logo-fallback">
+            SNK
+        </div>
 
         <div class="sidebar-logo-text">
-
             SNK IT Institute
-
-            <small>
-                Admin Control Panel
-            </small>
-
+            <small>Admin Management System</small>
         </div>
 
     </div>
-
 
     <div class="sidebar-menu">
 
+        <div class="menu-label">MAIN</div>
 
-        <div class="menu-label">
-            MAIN
-        </div>
-
-
-        <a
-            class="menu-item"
-            href="admin.html"
-        >
-
-            <span class="menu-icon">
-                📊
-            </span>
-
+        <a class="menu-item" href="admin.html">
+            <span class="menu-icon">📊</span>
             Dashboard
-
         </a>
 
-
-        <a
-            class="menu-item"
-            href="students.html"
-        >
-
-            <span class="menu-icon">
-                👨‍🎓
-            </span>
-
+        <a class="menu-item" href="students.html">
+            <span class="menu-icon">👨‍🎓</span>
             Students
-
         </a>
 
-
-        <a
-            class="menu-item"
-            href="courses.html"
-        >
-
-            <span class="menu-icon">
-                🎓
-            </span>
-
+        <a class="menu-item" href="courses.html">
+            <span class="menu-icon">📚</span>
             Courses
-
         </a>
 
-
-        <div class="menu-label">
-            ACADEMIC
-        </div>
-
-
-        <a
-            class="menu-item"
-            href="assignments.html"
-        >
-
-            <span class="menu-icon">
-                📝
-            </span>
-
+        <a class="menu-item" href="assignments.html">
+            <span class="menu-icon">📝</span>
             Assignments
-
         </a>
 
-
-        <a
-            class="menu-item"
-            href="quiz.html"
-        >
-
-            <span class="menu-icon">
-                🎯
-            </span>
-
+        <a class="menu-item" href="quiz.html">
+            <span class="menu-icon">❓</span>
             Quiz
-
         </a>
 
-
-        <a
-            class="menu-item active"
-            href="results.html"
-        >
-
-            <span class="menu-icon">
-                🏆
-            </span>
-
+        <a class="menu-item active" href="results.html">
+            <span class="menu-icon">🏆</span>
             Results
-
         </a>
 
+        <div class="menu-label">ATTENDANCE</div>
 
-        <div class="menu-label">
-            CONTENT
-        </div>
+        <a class="menu-item" href="attendance-overview.html">
+            <span class="menu-icon">📅</span>
+            Attendance
+        </a>
 
+        <div class="menu-label">RESOURCES</div>
 
-        <a
-            class="menu-item"
-            href="resources.html"
-        >
-
-            <span class="menu-icon">
-                📚
-            </span>
-
+        <a class="menu-item" href="resources.html">
+            <span class="menu-icon">📁</span>
             Resources
-
         </a>
 
-
-        <button
-            class="menu-item"
-            onclick="showDemo('Notices')"
-        >
-
-            <span class="menu-icon">
-                📢
-            </span>
-
-            Notices
-
-        </button>
-
-
-        <div class="menu-label">
-            SYSTEM
-        </div>
-
-
-        <button
-            class="menu-item"
-            onclick="showDemo('Settings')"
-        >
-
-            <span class="menu-icon">
-                ⚙️
-            </span>
-
-            Settings
-
-        </button>
+        <a class="menu-item" href="index.html">
+            <span class="menu-icon">🌐</span>
+            View Website
+        </a>
 
     </div>
 
-
     <div class="sidebar-footer">
-
 
         <div class="admin-mini">
 
             <div class="admin-avatar">
-                👨‍💼
+                👤
             </div>
-
 
             <div class="admin-mini-info">
-
-                <strong>
-                    Super Admin
-                </strong>
-
-                <span>
-                    Administrator
-                </span>
-
+                <strong>Administrator</strong>
+                <span>Super Admin</span>
             </div>
 
-
-            <button
-                class="logout-small"
-                onclick="logoutDemo()"
-            >
-                🚪
+            <button class="logout-small" onclick="logoutAdmin()" title="Logout">
+                ⎋
             </button>
 
         </div>
@@ -1641,13 +1306,7 @@ SIDEBAR
 
 </aside>
 
-
-<div
-    class="sidebar-overlay"
-    id="sidebarOverlay"
-    onclick="closeSidebar()"
-></div>
-
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <!-- =========================
 MAIN
@@ -1655,1390 +1314,430 @@ MAIN
 
 <main class="main">
 
+    <!-- TOPBAR -->
 
-<header class="topbar">
+    <header class="topbar">
 
+        <div class="topbar-left">
 
-    <div class="topbar-left">
+            <button class="mobile-menu-btn" onclick="openSidebar()">
+                ☰
+            </button>
 
-
-        <button
-            class="mobile-menu-btn"
-            onclick="toggleSidebar()"
-        >
-            ☰
-        </button>
-
-
-        <div class="page-heading">
-
-            <h1>
-                Results Management
-            </h1>
-
-            <p>
-                SNK IT Institute • Marks & Results
-            </p>
+            <div class="page-heading">
+                <h1>Results Management</h1>
+                <p>Student results and academic performance</p>
+            </div>
 
         </div>
 
-    </div>
+        <div class="topbar-actions">
 
+            <button class="topbar-btn" onclick="toggleTheme()" title="Theme">
+                🌙
+            </button>
 
-    <div class="topbar-actions">
+            <button class="topbar-btn" onclick="refreshResults()" title="Refresh">
+                ↻
+            </button>
 
+            <div class="admin-top-profile">
 
-        <button
-            class="topbar-btn"
-            onclick="toggleTheme()"
-            id="themeBtn"
-        >
-            🌙
-        </button>
+                <div class="top-avatar">
+                    👤
+                </div>
 
-
-        <button
-            class="topbar-btn"
-            onclick="showDemo('Notifications')"
-        >
-            🔔
-        </button>
-
-
-        <div class="admin-top-profile">
-
-            <div class="top-avatar">
-                👨‍💼
-            </div>
-
-
-            <div class="top-profile-text">
-
-                <strong>
-                    Super Admin
-                </strong>
-
-                <span>
-                    Administrator
-                </span>
+                <div class="top-profile-text">
+                    <strong>Admin</strong>
+                    <span>Super Admin</span>
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+    </header>
 
-</header>
+    <!-- CONTENT -->
 
+    <section class="content">
 
-<section class="content">
+        <div class="page-intro">
 
+            <div>
+                <h2>📊 Results</h2>
+                <p>Manage student examination, quiz and assignment results.</p>
+            </div>
 
-    <div class="page-intro">
-
-
-        <div>
-
-            <h2>
-                Student Results
-            </h2>
-
-            <p>
-                Assignment ও Quiz-এর marks review এবং publish করুন।
-            </p>
+            <button class="primary-btn" onclick="openAddResult()">
+                ＋ Add Result
+            </button>
 
         </div>
 
+        <!-- STATS -->
 
-        <button
-            class="primary-btn"
-            onclick="showDemo('Result Report')"
-        >
-            📊 Result Report
-        </button>
+        <div class="stats-grid">
 
-    </div>
+            <div class="stat-card">
 
+                <div class="stat-icon">
+                    📊
+                </div>
 
-    <!-- =========================
-    STATS
-    ========================= -->
+                <div class="stat-number" id="totalResults">
+                    0
+                </div>
 
-    <div class="stats-grid">
+                <div class="stat-title">
+                    Total Results
+                </div>
 
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                📋
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalSubmissions"
-            >
-                6
-            </div>
-
-            <div class="stat-title">
-                Total Submissions
-            </div>
-
-            <div class="stat-description">
-                মোট submission
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                ⏳
-            </div>
-
-            <div
-                class="stat-number"
-                id="pendingCount"
-            >
-                3
-            </div>
-
-            <div class="stat-title">
-                Pending Review
-            </div>
-
-            <div class="stat-description">
-                marks দেওয়া হয়নি
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                ✅
-            </div>
-
-            <div
-                class="stat-number"
-                id="reviewedCount"
-            >
-                3
-            </div>
-
-            <div class="stat-title">
-                Reviewed
-            </div>
-
-            <div class="stat-description">
-                marks complete
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🏆
-            </div>
-
-            <div
-                class="stat-number"
-            >
-                78%
-            </div>
-
-            <div class="stat-title">
-                Average Score
-            </div>
-
-            <div class="stat-description">
-                current demo average
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-    TOOLBAR
-    ========================= -->
-
-    <div class="toolbar">
-
-
-        <div class="toolbar-row">
-
-
-            <div class="search-box">
-
-                <span>
-                    🔍
-                </span>
-
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Student, ID বা assignment খুঁজুন..."
-                    oninput="filterResults()"
-                >
+                <div class="stat-description">
+                    All recorded results
+                </div>
 
             </div>
 
+            <div class="stat-card">
 
-            <select
-                class="filter-select"
-                id="typeFilter"
-                onchange="filterResults()"
-            >
+                <div class="stat-icon">
+                    ✅
+                </div>
 
-                <option value="all">
-                    সব Type
-                </option>
+                <div class="stat-number" id="passedResults">
+                    0
+                </div>
 
-                <option value="Quiz">
-                    Quiz
-                </option>
+                <div class="stat-title">
+                    Passed
+                </div>
 
-                <option value="Assignment">
-                    Assignment
-                </option>
+                <div class="stat-description">
+                    Successful students
+                </div>
 
-            </select>
+            </div>
 
+            <div class="stat-card">
 
-            <select
-                class="filter-select"
-                id="statusFilter"
-                onchange="filterResults()"
-            >
+                <div class="stat-icon">
+                    ❌
+                </div>
 
-                <option value="all">
-                    সব Status
-                </option>
+                <div class="stat-number" id="failedResults">
+                    0
+                </div>
 
-                <option value="Pending">
+                <div class="stat-title">
+                    Failed
+                </div>
+
+                <div class="stat-description">
+                    Failed results
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div class="stat-number" id="pendingResults">
+                    0
+                </div>
+
+                <div class="stat-title">
                     Pending
-                </option>
+                </div>
 
-                <option value="Reviewed">
-                    Reviewed
-                </option>
+                <div class="stat-description">
+                    Pending evaluation
+                </div>
 
-            </select>
-
-
-            <select
-                class="filter-select"
-                id="courseFilter"
-                onchange="filterResults()"
-            >
-
-                <option value="all">
-                    সব Course
-                </option>
-
-                <option value="Computer Basic">
-                    Computer Basic
-                </option>
-
-                <option value="MS Word">
-                    MS Word
-                </option>
-
-                <option value="MS Excel">
-                    MS Excel
-                </option>
-
-                <option value="Graphic Design">
-                    Graphic Design
-                </option>
-
-            </select>
+            </div>
 
         </div>
 
-    </div>
+        <!-- TOOLBAR -->
 
+        <div class="toolbar">
 
-    <!-- =========================
-    TABLE
-    ========================= -->
+            <div class="toolbar-row">
 
-    <div class="table-card">
+                <div class="search-box">
 
+                    <span>🔎</span>
 
-        <div class="table-wrapper">
-
-
-            <table>
-
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            STUDENT
-                        </th>
-
-                        <th>
-                            ACTIVITY
-                        </th>
-
-                        <th>
-                            TYPE
-                        </th>
-
-                        <th>
-                            COURSE
-                        </th>
-
-                        <th>
-                            SUBMITTED
-                        </th>
-
-                        <th>
-                            MARKS
-                        </th>
-
-                        <th>
-                            STATUS
-                        </th>
-
-                        <th>
-                            ACTION
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="resultTable">
-
-
-                    <!-- ROW 1 -->
-
-                    <tr
-                        data-name="Rahim Ahmed"
-                        data-id="SNK-1001"
-                        data-type="Quiz"
-                        data-course="Computer Basic"
-                        data-status="Reviewed"
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search student, ID, course..."
+                        oninput="renderResults()"
                     >
 
-
-                        <td>
-
-                            <div class="student-cell">
-
-                                <div class="student-avatar">
-                                    RA
-                                </div>
-
-                                <div>
-
-                                    <strong>
-                                        Rahim Ahmed
-                                    </strong>
-
-                                    <span>
-                                        SNK-1001
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-                            Computer Basic Quiz 01
-                        </td>
-
-
-                        <td>
-
-                            <span class="type-badge quiz">
-                                Quiz
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                Computer Basic
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            08 Sep 2026
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks done">
-                                18 / 20
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="status reviewed">
-                                Reviewed
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewResult(this)"
-                                    title="View"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn mark"
-                                    onclick="openMarks(this)"
-                                    title="Marks"
-                                >
-                                    ✏️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- ROW 2 -->
-
-                    <tr
-                        data-name="Nusrat Jahan"
-                        data-id="SNK-1002"
-                        data-type="Quiz"
-                        data-course="MS Word"
-                        data-status="Pending"
-                    >
-
-
-                        <td>
-
-                            <div class="student-cell">
-
-                                <div class="student-avatar">
-                                    NJ
-                                </div>
-
-                                <div>
-
-                                    <strong>
-                                        Nusrat Jahan
-                                    </strong>
-
-                                    <span>
-                                        SNK-1002
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-                            MS Word Quiz 01
-                        </td>
-
-
-                        <td>
-
-                            <span class="type-badge quiz">
-                                Quiz
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                MS Word
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            09 Sep 2026
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="status pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewResult(this)"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn mark"
-                                    onclick="openMarks(this)"
-                                >
-                                    ✏️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- ROW 3 -->
-
-                    <tr
-                        data-name="Sadia Akter"
-                        data-id="SNK-1003"
-                        data-type="Assignment"
-                        data-course="MS Excel"
-                        data-status="Reviewed"
-                    >
-
-
-                        <td>
-
-                            <div class="student-cell">
-
-                                <div class="student-avatar">
-                                    SA
-                                </div>
-
-                                <div>
-
-                                    <strong>
-                                        Sadia Akter
-                                    </strong>
-
-                                    <span>
-                                        SNK-1003
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-                            Excel Practical Assignment
-                        </td>
-
-
-                        <td>
-
-                            <span class="type-badge assignment">
-                                Assignment
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                MS Excel
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            10 Sep 2026
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks done">
-                                17 / 20
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="status reviewed">
-                                Reviewed
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewResult(this)"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn mark"
-                                    onclick="openMarks(this)"
-                                >
-                                    ✏️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- ROW 4 -->
-
-                    <tr
-                        data-name="Tanvir Hasan"
-                        data-id="SNK-1004"
-                        data-type="Assignment"
-                        data-course="Graphic Design"
-                        data-status="Pending"
-                    >
-
-
-                        <td>
-
-                            <div class="student-cell">
-
-                                <div class="student-avatar">
-                                    TH
-                                </div>
-
-                                <div>
-
-                                    <strong>
-                                        Tanvir Hasan
-                                    </strong>
-
-                                    <span>
-                                        SNK-1004
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-                            Logo Design Assignment
-                        </td>
-
-
-                        <td>
-
-                            <span class="type-badge assignment">
-                                Assignment
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                Graphic Design
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            10 Sep 2026
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="status pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewResult(this)"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn mark"
-                                    onclick="openMarks(this)"
-                                >
-                                    ✏️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- ROW 5 -->
-
-                    <tr
-                        data-name="Jannatul Ferdous"
-                        data-id="SNK-1005"
-                        data-type="Quiz"
-                        data-course="MS Excel"
-                        data-status="Reviewed"
-                    >
-
-
-                        <td>
-
-                            <div class="student-cell">
-
-                                <div class="student-avatar">
-                                    JF
-                                </div>
-
-                                <div>
-
-                                    <strong>
-                                        Jannatul Ferdous
-                                    </strong>
-
-                                    <span>
-                                        SNK-1005
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-                            Excel Formula Quiz
-                        </td>
-
-
-                        <td>
-
-                            <span class="type-badge quiz">
-                                Quiz
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                MS Excel
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            11 Sep 2026
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks done">
-                                22 / 25
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="status reviewed">
-                                Reviewed
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewResult(this)"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn mark"
-                                    onclick="openMarks(this)"
-                                >
-                                    ✏️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- ROW 6 -->
-
-                    <tr
-                        data-name="Sabbir Hossain"
-                        data-id="SNK-1006"
-                        data-type="Assignment"
-                        data-course="Computer Basic"
-                        data-status="Pending"
-                    >
-
-
-                        <td>
-
-                            <div class="student-cell">
-
-                                <div class="student-avatar">
-                                    SH
-                                </div>
-
-                                <div>
-
-                                    <strong>
-                                        Sabbir Hossain
-                                    </strong>
-
-                                    <span>
-                                        SNK-1006
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-                            Computer Practical Assignment
-                        </td>
-
-
-                        <td>
-
-                            <span class="type-badge assignment">
-                                Assignment
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                Computer Basic
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            11 Sep 2026
-                        </td>
-
-
-                        <td>
-
-                            <span class="marks pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="status pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewResult(this)"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn mark"
-                                    onclick="openMarks(this)"
-                                >
-                                    ✏️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>
+                </div>
+
+                <select
+                    class="filter-select"
+                    id="courseFilter"
+                    onchange="renderResults()"
+                >
+                    <option value="">All Courses</option>
+                </select>
+
+                <select
+                    class="filter-select"
+                    id="typeFilter"
+                    onchange="renderResults()"
+                >
+                    <option value="">All Types</option>
+                    <option value="Exam">Exam</option>
+                    <option value="Quiz">Quiz</option>
+                    <option value="Assignment">Assignment</option>
+                </select>
+
+                <select
+                    class="filter-select"
+                    id="statusFilter"
+                    onchange="renderResults()"
+                >
+                    <option value="">All Status</option>
+                    <option value="Passed">Passed</option>
+                    <option value="Failed">Failed</option>
+                    <option value="Pending">Pending</option>
+                </select>
+
+            </div>
 
         </div>
 
+        <!-- TABLE -->
 
-        <div
-            class="empty-state"
-            id="emptyState"
-        >
-            😕 কোনো result পাওয়া যায়নি।
+        <div class="table-card">
+
+            <div class="table-header">
+
+                <h3>📋 Result Records</h3>
+
+                <span id="resultCount">
+                    0 results
+                </span>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Type</th>
+                            <th>Marks</th>
+                            <th>Percentage</th>
+                            <th>Grade</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="resultsTableBody"></tbody>
+
+                </table>
+
+            </div>
+
         </div>
 
-    </div>
-
-
-    <footer class="footer">
-
-        © 2026 SNK IT Institute • Results Management
-
-    </footer>
-
-
-</section>
+    </section>
 
 </main>
 
-
 <!-- =========================
-VIEW RESULT MODAL
+ADD / EDIT MODAL
 ========================= -->
 
-<div
-    class="modal-overlay"
-    id="viewModal"
->
-
+<div class="modal-overlay" id="resultModal">
 
     <div class="modal">
 
-
         <div class="modal-header">
 
-
             <div>
-
-                <h3>
-                    Result Details
+                <h3 id="resultModalTitle">
+                    Add Result
                 </h3>
 
                 <p>
-                    Student submission details
+                    Enter student result information.
                 </p>
-
             </div>
 
-
-            <button
-                class="modal-close"
-                onclick="closeModal('viewModal')"
-            >
+            <button class="modal-close" onclick="closeModal('resultModal')">
                 ×
             </button>
 
         </div>
 
+        <form id="resultForm" onsubmit="saveResult(event)">
 
-        <div class="detail-box">
-
-
-            <div class="detail-row">
-
-                <span>
-                    Student
-                </span>
-
-                <strong id="viewStudent">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>
-                    Student ID
-                </span>
-
-                <strong id="viewStudentId">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>
-                    Activity
-                </span>
-
-                <strong id="viewActivity">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>
-                    Type
-                </span>
-
-                <strong id="viewType">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>
-                    Course
-                </span>
-
-                <strong id="viewCourse">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>
-                    Submitted
-                </span>
-
-                <strong id="viewSubmitted">
-                    —
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="result-preview">
-
-
-            <div
-                class="big-score"
-                id="viewScore"
-            >
-                —
-            </div>
-
-
-            <p>
-                Current Result
-            </p>
-
-        </div>
-
-
-        <div class="form-group">
-
-
-            <label>
-                Admin Feedback
-            </label>
-
-
-            <textarea
-                id="viewFeedback"
-                readonly
-            ></textarea>
-
-        </div>
-
-
-        <div class="form-actions">
-
-            <button
-                class="secondary-btn"
-                onclick="closeModal('viewModal')"
-            >
-                Close
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-MARKS MODAL
-========================= -->
-
-<div
-    class="modal-overlay"
-    id="marksModal"
->
-
-
-    <div class="modal">
-
-
-        <div class="modal-header">
-
-
-            <div>
-
-                <h3>
-                    Give Marks
-                </h3>
-
-                <p>
-                    Student-এর result update করুন।
-                </p>
-
-            </div>
-
-
-            <button
-                class="modal-close"
-                onclick="closeModal('marksModal')"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="detail-box">
-
-
-            <div class="detail-row">
-
-                <span>
-                    Student
-                </span>
-
-                <strong id="markStudent">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>
-                    Activity
-                </span>
-
-                <strong id="markActivity">
-                    —
-                </strong>
-
-            </div>
-
-
-            <div class="detail-row">
-
-                <span>
-                    Course
-                </span>
-
-                <strong id="markCourse">
-                    —
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <form
-            onsubmit="saveMarks(event)"
-        >
-
-
-            <input
-                type="hidden"
-                id="markRowIndex"
-            >
-
+            <input type="hidden" id="editResultId">
 
             <div class="form-grid">
 
+                <div class="form-group">
+
+                    <label>Student Name *</label>
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        required
+                        placeholder="Student name"
+                    >
+
+                </div>
 
                 <div class="form-group">
 
-                    <label>
-                        Obtained Marks
-                    </label>
+                    <label>Student ID *</label>
+
+                    <input
+                        type="text"
+                        id="studentId"
+                        required
+                        placeholder="SNK-001"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Course *</label>
+
+                    <input
+                        type="text"
+                        id="courseName"
+                        required
+                        placeholder="Computer Office Application"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Result Type *</label>
+
+                    <select id="resultType" required>
+
+                        <option value="">
+                            Select Type
+                        </option>
+
+                        <option value="Exam">
+                            Exam
+                        </option>
+
+                        <option value="Quiz">
+                            Quiz
+                        </option>
+
+                        <option value="Assignment">
+                            Assignment
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Obtained Marks *</label>
 
                     <input
                         type="number"
                         id="obtainedMarks"
                         min="0"
+                        step="0.01"
                         required
-                        placeholder="18"
+                        placeholder="80"
                     >
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Total Marks
-                    </label>
+                    <label>Total Marks *</label>
 
                     <input
                         type="number"
                         id="totalMarks"
                         min="1"
+                        step="0.01"
                         required
-                        placeholder="20"
+                        placeholder="100"
                     >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Pass Marks</label>
+
+                    <input
+                        type="number"
+                        id="passMarks"
+                        min="0"
+                        step="0.01"
+                        value="40"
+                        placeholder="40"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Result Date *</label>
+
+                    <input
+                        type="date"
+                        id="resultDate"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group full">
+
+                    <label>Remarks</label>
+
+                    <textarea
+                        id="resultRemarks"
+                        placeholder="Optional remarks..."
+                    ></textarea>
 
                 </div>
 
             </div>
 
-
-            <div class="form-group">
-
-
-                <label>
-                    Admin Feedback
-                </label>
-
-
-                <textarea
-                    id="adminFeedback"
-                    placeholder="Student-এর জন্য feedback লিখুন..."
-                ></textarea>
-
-            </div>
-
-
             <div class="form-actions">
-
 
                 <button
                     type="button"
                     class="secondary-btn"
-                    onclick="closeModal('marksModal')"
+                    onclick="closeModal('resultModal')"
                 >
                     Cancel
                 </button>
-
 
                 <button
                     type="submit"
@@ -3049,16 +1748,1408 @@ MARKS MODAL
 
             </div>
 
-
         </form>
 
     </div>
 
 </div>
 
+<!-- =========================
+VIEW MODAL
+========================= -->
+
+<div class="modal-overlay" id="viewModal">
+
+    <div class="modal large">
+
+        <div class="modal-header">
+
+            <div>
+                <h3>Result Details</h3>
+                <p>Complete student result information.</p>
+            </div>
+
+            <button class="modal-close" onclick="closeModal('viewModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div id="viewResultContent"></div>
+
+        <div class="form-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeModal('viewModal')"
+            >
+                Close
+            </button>
+
+            <button
+                class="save-btn"
+                onclick="printCurrentResult()"
+            >
+                🖨 Print Result
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PRINT AREA -->
+
+<div id="printArea"></div>
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
 
 <script>
+/* =========================================================
+   SNK RESULTS MANAGEMENT
+   VERSION 1.16
+========================================================= */
 
+const STORAGE_KEY = "snkResultsV116";
+
+let results = [];
+
+let currentViewId = null;
+
+/* =========================
+DEFAULT DATA
+========================= */
+
+const defaultResults = [
+    {
+        id:"RES-1001",
+        studentName:"Sakib Ahmed",
+        studentId:"SNK-001",
+        courseName:"Computer Office Application",
+        type:"Exam",
+        obtained:85,
+        total:100,
+        passMarks:40,
+        date:"2026-08-10",
+        remarks:"Excellent performance"
+    },
+    {
+        id:"RES-1002",
+        studentName:"Nusrat Jahan",
+        studentId:"SNK-002",
+        courseName:"Graphic Design",
+        type:"Quiz",
+        obtained:72,
+        total:100,
+        passMarks:40,
+        date:"2026-08-12",
+        remarks:"Good performance"
+    },
+    {
+        id:"RES-1003",
+        studentName:"Rahim Hasan",
+        studentId:"SNK-003",
+        courseName:"Web Design",
+        type:"Assignment",
+        obtained:35,
+        total:100,
+        passMarks:40,
+        date:"2026-08-15",
+        remarks:"Needs improvement"
+    },
+    {
+        id:"RES-1004",
+        studentName:"Mim Akter",
+        studentId:"SNK-004",
+        courseName:"Digital Marketing",
+        type:"Exam",
+        obtained:91,
+        total:100,
+        passMarks:40,
+        date:"2026-08-18",
+        remarks:"Outstanding"
+    },
+    {
+        id:"RES-1005",
+        studentName:"Arif Hossain",
+        studentId:"SNK-005",
+        courseName:"Computer Office Application",
+        type:"Quiz",
+        obtained:58,
+        total:100,
+        passMarks:40,
+        date:"2026-08-20",
+        remarks:"Passed"
+    }
+];
+
+/* =========================
+INIT
+========================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    loadTheme();
+
+    loadResults();
+
+    populateCourseFilter();
+
+    setTodayDate();
+
+    renderResults();
+
+});
+
+/* =========================
+LOAD RESULTS
+========================= */
+
+function loadResults(){
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if(saved){
+
+        try{
+
+            results = JSON.parse(saved);
+
+        }catch(error){
+
+            results = [...defaultResults];
+
+            saveToStorage();
+
+        }
+
+    }else{
+
+        results = [...defaultResults];
+
+        saveToStorage();
+
+    }
+
+}
+
+/* =========================
+SAVE STORAGE
+========================= */
+
+function saveToStorage(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(results)
+    );
+
+}
+
+/* =========================
+GRADE
+========================= */
+
+function getPercentage(obtained,total){
+
+    if(!total || total <= 0){
+        return 0;
+    }
+
+    return (Number(obtained) / Number(total)) * 100;
+
+}
+
+function getGrade(percentage){
+
+    if(percentage >= 80) return "A+";
+    if(percentage >= 70) return "A";
+    if(percentage >= 60) return "A-";
+    if(percentage >= 50) return "B";
+    if(percentage >= 40) return "C";
+
+    return "F";
+
+}
+
+function getStatus(result){
+
+    if(result.pending){
+        return "Pending";
+    }
+
+    const percentage = getPercentage(
+        result.obtained,
+        result.total
+    );
+
+    const passMarks = Number(
+        result.passMarks || 40
+    );
+
+    if(Number(result.obtained) >= passMarks){
+        return "Passed";
+    }
+
+    return "Failed";
+
+}
+
+/* =========================
+INITIALS
+========================= */
+
+function getInitials(name){
+
+    if(!name){
+        return "ST";
+    }
+
+    const parts = name.trim().split(/\s+/);
+
+    if(parts.length === 1){
+        return parts[0].substring(0,2).toUpperCase();
+    }
+
+    return (
+        parts[0][0] +
+        parts[parts.length - 1][0]
+    ).toUpperCase();
+
+}
+
+/* =========================
+ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+/* =========================
+FORMAT DATE
+========================= */
+
+function formatDate(date){
+
+    if(!date){
+        return "-";
+    }
+
+    const d = new Date(date + "T00:00:00");
+
+    if(Number.isNaN(d.getTime())){
+        return date;
+    }
+
+    return d.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+/* =========================
+COURSE FILTER
+========================= */
+
+function populateCourseFilter(){
+
+    const select = document.getElementById("courseFilter");
+
+    const current = select.value;
+
+    const courses = [
+        ...new Set(
+            results
+                .map(item => item.courseName)
+                .filter(Boolean)
+        )
+    ].sort();
+
+    select.innerHTML = `
+        <option value="">All Courses</option>
+    `;
+
+    courses.forEach(course => {
+
+        const option = document.createElement("option");
+
+        option.value = course;
+        option.textContent = course;
+
+        select.appendChild(option);
+
+    });
+
+    select.value = current;
+
+}
+
+/* =========================
+RENDER RESULTS
+========================= */
+
+function renderResults(){
+
+    const body = document.getElementById(
+        "resultsTableBody"
+    );
+
+    const search = document.getElementById(
+        "searchInput"
+    ).value.trim().toLowerCase();
+
+    const course = document.getElementById(
+        "courseFilter"
+    ).value;
+
+    const type = document.getElementById(
+        "typeFilter"
+    ).value;
+
+    const status = document.getElementById(
+        "statusFilter"
+    ).value;
+
+    const filtered = results.filter(result => {
+
+        const resultStatus = getStatus(result);
+
+        const searchable = [
+
+            result.studentName,
+            result.studentId,
+            result.courseName,
+            result.type,
+            result.id
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+        const matchSearch =
+            !search ||
+            searchable.includes(search);
+
+        const matchCourse =
+            !course ||
+            result.courseName === course;
+
+        const matchType =
+            !type ||
+            result.type === type;
+
+        const matchStatus =
+            !status ||
+            resultStatus === status;
+
+        return (
+            matchSearch &&
+            matchCourse &&
+            matchType &&
+            matchStatus
+        );
+
+    });
+
+    updateStats();
+
+    document.getElementById(
+        "resultCount"
+    ).textContent =
+        `${filtered.length} results`;
+
+    if(!filtered.length){
+
+        body.innerHTML = `
+            <tr>
+                <td colspan="9">
+                    <div class="empty-state">
+                        <div class="empty-icon">📭</div>
+                        <h3>No Result Found</h3>
+                        <p>কোনো result পাওয়া যায়নি।</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    body.innerHTML = filtered.map(result => {
+
+        const percentage =
+            getPercentage(
+                result.obtained,
+                result.total
+            );
+
+        const grade =
+            getGrade(percentage);
+
+        const resultStatus =
+            getStatus(result);
+
+        let statusClass = "pending";
+
+        if(resultStatus === "Passed"){
+            statusClass = "passed";
+        }
+
+        if(resultStatus === "Failed"){
+            statusClass = "failed";
+        }
+
+        const marksClass =
+            resultStatus === "Passed"
+                ? "good"
+                : resultStatus === "Failed"
+                    ? "bad"
+                    : "pending";
+
+        const typeClass =
+            result.type.toLowerCase();
+
+        return `
+
+            <tr>
+
+                <td>
+
+                    <div class="student-cell">
+
+                        <div class="student-avatar">
+                            ${escapeHTML(
+                                getInitials(
+                                    result.studentName
+                                )
+                            )}
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ${escapeHTML(
+                                    result.studentName
+                                )}
+                            </strong>
+
+                            <span>
+                                ${escapeHTML(
+                                    result.studentId
+                                )}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+                <td>
+
+                    <span class="course-badge">
+                        ${escapeHTML(
+                            result.courseName
+                        )}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="type-badge ${typeClass}">
+                        ${escapeHTML(result.type)}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="marks ${marksClass}">
+                        ${Number(result.obtained)}
+                        /
+                        ${Number(result.total)}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <strong>
+                        ${percentage.toFixed(1)}%
+                    </strong>
+
+                </td>
+
+                <td>
+
+                    <span class="grade">
+                        ${grade}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="status ${statusClass}">
+                        ${resultStatus}
+                    </span>
+
+                </td>
+
+                <td>
+                    ${formatDate(result.date)}
+                </td>
+
+                <td>
+
+                    <div class="row-actions">
+
+                        <button
+                            class="action-btn view"
+                            onclick="viewResult('${result.id}')"
+                            title="View"
+                        >
+                            👁
+                        </button>
+
+                        <button
+                            class="action-btn edit"
+                            onclick="editResult('${result.id}')"
+                            title="Edit"
+                        >
+                            ✏️
+                        </button>
+
+                        <button
+                            class="action-btn"
+                            onclick="printResult('${result.id}')"
+                            title="Print"
+                        >
+                            🖨
+                        </button>
+
+                        <button
+                            class="action-btn delete"
+                            onclick="deleteResult('${result.id}')"
+                            title="Delete"
+                        >
+                            🗑
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }).join("");
+
+}
+
+/* =========================
+STATS
+========================= */
+
+function updateStats(){
+
+    const total = results.length;
+
+    const passed = results.filter(
+        result => getStatus(result) === "Passed"
+    ).length;
+
+    const failed = results.filter(
+        result => getStatus(result) === "Failed"
+    ).length;
+
+    const pending = results.filter(
+        result => getStatus(result) === "Pending"
+    ).length;
+
+    document.getElementById(
+        "totalResults"
+    ).textContent = total;
+
+    document.getElementById(
+        "passedResults"
+    ).textContent = passed;
+
+    document.getElementById(
+        "failedResults"
+    ).textContent = failed;
+
+    document.getElementById(
+        "pendingResults"
+    ).textContent = pending;
+
+}
+
+/* =========================
+ADD RESULT
+========================= */
+
+function openAddResult(){
+
+    document.getElementById(
+        "resultModalTitle"
+    ).textContent = "Add Result";
+
+    document.getElementById(
+        "resultForm"
+    ).reset();
+
+    document.getElementById(
+        "editResultId"
+    ).value = "";
+
+    document.getElementById(
+        "passMarks"
+    ).value = "40";
+
+    setTodayDate();
+
+    document.getElementById(
+        "resultModal"
+    ).classList.add("show");
+
+}
+
+/* =========================
+TODAY DATE
+========================= */
+
+function setTodayDate(){
+
+    const input =
+        document.getElementById("resultDate");
+
+    if(!input.value){
+
+        const today =
+            new Date()
+            .toISOString()
+            .split("T")[0];
+
+        input.value = today;
+
+    }
+
+}
+
+/* =========================
+SAVE RESULT
+========================= */
+
+function saveResult(event){
+
+    event.preventDefault();
+
+    const editId =
+        document.getElementById(
+            "editResultId"
+        ).value;
+
+    const studentName =
+        document.getElementById(
+            "studentName"
+        ).value.trim();
+
+    const studentId =
+        document.getElementById(
+            "studentId"
+        ).value.trim();
+
+    const courseName =
+        document.getElementById(
+            "courseName"
+        ).value.trim();
+
+    const type =
+        document.getElementById(
+            "resultType"
+        ).value;
+
+    const obtained =
+        Number(
+            document.getElementById(
+                "obtainedMarks"
+            ).value
+        );
+
+    const total =
+        Number(
+            document.getElementById(
+                "totalMarks"
+            ).value
+        );
+
+    const passMarks =
+        Number(
+            document.getElementById(
+                "passMarks"
+            ).value || 40
+        );
+
+    const date =
+        document.getElementById(
+            "resultDate"
+        ).value;
+
+    const remarks =
+        document.getElementById(
+            "resultRemarks"
+        ).value.trim();
+
+    if(obtained > total){
+
+        showToast(
+            "Obtained marks total marks-এর চেয়ে বেশি হতে পারবে না.",
+            "error"
+        );
+
+        return;
+    }
+
+    if(passMarks > total){
+
+        showToast(
+            "Pass marks total marks-এর চেয়ে বেশি হতে পারবে না.",
+            "error"
+        );
+
+        return;
+    }
+
+    const data = {
+
+        studentName,
+        studentId,
+        courseName,
+        type,
+        obtained,
+        total,
+        passMarks,
+        date,
+        remarks
+
+    };
+
+    if(editId){
+
+        const index =
+            results.findIndex(
+                result => result.id === editId
+            );
+
+        if(index !== -1){
+
+            results[index] = {
+                ...results[index],
+                ...data
+            };
+
+        }
+
+        showToast(
+            "Result successfully updated.",
+            "success"
+        );
+
+    }else{
+
+        const newResult = {
+
+            id:
+                "RES-" +
+                Date.now(),
+
+            ...data
+
+        };
+
+        results.unshift(newResult);
+
+        showToast(
+            "New result successfully added.",
+            "success"
+        );
+
+    }
+
+    saveToStorage();
+
+    populateCourseFilter();
+
+    renderResults();
+
+    closeModal("resultModal");
+
+}
+
+/* =========================
+EDIT RESULT
+========================= */
+
+function editResult(id){
+
+    const result =
+        results.find(
+            item => item.id === id
+        );
+
+    if(!result){
+        return;
+    }
+
+    document.getElementById(
+        "resultModalTitle"
+    ).textContent = "Edit Result";
+
+    document.getElementById(
+        "editResultId"
+    ).value = result.id;
+
+    document.getElementById(
+        "studentName"
+    ).value = result.studentName;
+
+    document.getElementById(
+        "studentId"
+    ).value = result.studentId;
+
+    document.getElementById(
+        "courseName"
+    ).value = result.courseName;
+
+    document.getElementById(
+        "resultType"
+    ).value = result.type;
+
+    document.getElementById(
+        "obtainedMarks"
+    ).value = result.obtained;
+
+    document.getElementById(
+        "totalMarks"
+    ).value = result.total;
+
+    document.getElementById(
+        "passMarks"
+    ).value = result.passMarks || 40;
+
+    document.getElementById(
+        "resultDate"
+    ).value = result.date;
+
+    document.getElementById(
+        "resultRemarks"
+    ).value = result.remarks || "";
+
+    document.getElementById(
+        "resultModal"
+    ).classList.add("show");
+
+}
+
+/* =========================
+VIEW RESULT
+========================= */
+
+function viewResult(id){
+
+    const result =
+        results.find(
+            item => item.id === id
+        );
+
+    if(!result){
+        return;
+    }
+
+    currentViewId = id;
+
+    const percentage =
+        getPercentage(
+            result.obtained,
+            result.total
+        );
+
+    const grade =
+        getGrade(percentage);
+
+    const status =
+        getStatus(result);
+
+    const statusClass =
+        status === "Passed"
+            ? "passed"
+            : status === "Failed"
+                ? "failed"
+                : "pending";
+
+    document.getElementById(
+        "viewResultContent"
+    ).innerHTML = `
+
+        <div class="result-preview" id="preview-${id}">
+
+            <div class="result-header">
+
+                <h2>
+                    SNK IT Institute
+                </h2>
+
+                <p>
+                    Student Academic Result
+                </p>
+
+            </div>
+
+            <div class="result-student">
+
+                <div class="result-info">
+
+                    <span>
+                        Student Name
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            result.studentName
+                        )}
+                    </strong>
+
+                </div>
+
+                <div class="result-info">
+
+                    <span>
+                        Student ID
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            result.studentId
+                        )}
+                    </strong>
+
+                </div>
+
+                <div class="result-info">
+
+                    <span>
+                        Course
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            result.courseName
+                        )}
+                    </strong>
+
+                </div>
+
+                <div class="result-info">
+
+                    <span>
+                        Result Type
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(result.type)}
+                    </strong>
+
+                </div>
+
+                <div class="result-info">
+
+                    <span>
+                        Result Date
+                    </span>
+
+                    <strong>
+                        ${formatDate(result.date)}
+                    </strong>
+
+                </div>
+
+                <div class="result-info">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong>
+                        <span class="status ${statusClass}">
+                            ${status}
+                        </span>
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="result-score">
+
+                <div class="big-score">
+                    ${Number(result.obtained)}
+                    /
+                    ${Number(result.total)}
+                </div>
+
+                <p>
+                    ${percentage.toFixed(1)}%
+                    &nbsp; • &nbsp;
+                    Grade ${grade}
+                </p>
+
+            </div>
+
+            <div class="detail-box" style="margin:15px;">
+
+                <div class="detail-row">
+
+                    <span>
+                        Pass Marks
+                    </span>
+
+                    <strong>
+                        ${Number(result.passMarks || 40)}
+                    </strong>
+
+                </div>
+
+                <div class="detail-row">
+
+                    <span>
+                        Remarks
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            result.remarks || "No remarks"
+                        )}
+                    </strong>
+
+                </div>
+
+                <div class="detail-row">
+
+                    <span>
+                        Result ID
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(result.id)}
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="result-footer">
+
+                Generated by SNK IT Institute
+                • Results Management System
+
+            </div>
+
+        </div>
+
+    `;
+
+    document.getElementById(
+        "viewModal"
+    ).classList.add("show");
+
+}
+
+/* =========================
+DELETE
+========================= */
+
+function deleteResult(id){
+
+    const result =
+        results.find(
+            item => item.id === id
+        );
+
+    if(!result){
+        return;
+    }
+
+    const confirmed =
+        confirm(
+            `Are you sure you want to delete the result of ${result.studentName}?`
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+    results =
+        results.filter(
+            item => item.id !== id
+        );
+
+    saveToStorage();
+
+    populateCourseFilter();
+
+    renderResults();
+
+    showToast(
+        "Result deleted successfully.",
+        "success"
+    );
+
+}
+
+/* =========================
+PRINT
+========================= */
+
+function printResult(id){
+
+    const result =
+        results.find(
+            item => item.id === id
+        );
+
+    if(!result){
+        return;
+    }
+
+    const percentage =
+        getPercentage(
+            result.obtained,
+            result.total
+        );
+
+    const grade =
+        getGrade(percentage);
+
+    const status =
+        getStatus(result);
+
+    const printArea =
+        document.getElementById(
+            "printArea"
+        );
+
+    printArea.innerHTML = `
+
+        <div style="
+            max-width:700px;
+            margin:30px auto;
+            font-family:Arial,sans-serif;
+            color:#111827;
+            border:1px solid #ddd;
+            padding:35px;
+        ">
+
+            <div style="
+                text-align:center;
+                border-bottom:2px solid #2563eb;
+                padding-bottom:20px;
+                margin-bottom:25px;
+            ">
+
+                <h1 style="margin:0;">
+                    SNK IT Institute
+                </h1>
+
+                <p style="margin:7px 0 0;">
+                    Student Academic Result
+                </p>
+
+            </div>
+
+            <table style="
+                width:100%;
+                border-collapse:collapse;
+                margin-bottom:25px;
+            ">
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Student Name
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        <strong>
+                            ${escapeHTML(result.studentName)}
+                        </strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Student ID
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        ${escapeHTML(result.studentId)}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Course
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        ${escapeHTML(result.courseName)}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Result Type
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        ${escapeHTML(result.type)}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Marks
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        ${result.obtained} / ${result.total}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Percentage
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        ${percentage.toFixed(1)}%
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Grade
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        <strong>${grade}</strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Status
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        <strong>${status}</strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        Date
+                    </td>
+
+                    <td style="padding:10px;border:1px solid #ddd;">
+                        ${formatDate(result.date)}
+                    </td>
+                </tr>
+
+            </table>
+
+            <div style="
+                margin-top:40px;
+                display:flex;
+                justify-content:space-between;
+            ">
+
+                <div>
+                    ___________________<br>
+                    Student Signature
+                </div>
+
+                <div style="text-align:right;">
+                    ___________________<br>
+                    Authorized Signature
+                </div>
+
+            </div>
+
+            <p style="
+                text-align:center;
+                margin-top:40px;
+                font-size:12px;
+                color:#777;
+            ">
+                Generated by SNK IT Institute Results Management System
+            </p>
+
+        </div>
+
+    `;
+
+    window.print();
+
+}
+
+/* =========================
+PRINT CURRENT
+========================= */
+
+function printCurrentResult(){
+
+    if(currentViewId){
+        printResult(currentViewId);
+    }
+
+}
+
+/* =========================
+REFRESH
+========================= */
+
+function refreshResults(){
+
+    loadResults();
+
+    populateCourseFilter();
+
+    renderResults();
+
+    showToast(
+        "Results refreshed.",
+        "success"
+    );
+
+}
 
 /* =========================
 THEME
@@ -3076,12 +3167,7 @@ function toggleTheme(){
         dark ? "dark" : "light"
     );
 
-    document.getElementById(
-        "themeBtn"
-    ).textContent =
-        dark ? "☀️" : "🌙";
 }
-
 
 function loadTheme(){
 
@@ -3094,32 +3180,86 @@ function loadTheme(){
 
         document.body.classList.add("dark");
 
-        document.getElementById(
-            "themeBtn"
-        ).textContent =
-            "☀️";
     }
+
 }
 
+/* =========================
+MODAL CLOSE
+========================= */
 
-loadTheme();
+function closeModal(id){
 
+    const modal =
+        document.getElementById(id);
+
+    if(modal){
+        modal.classList.remove("show");
+    }
+
+}
+
+/* =========================
+OUTSIDE MODAL CLICK
+========================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target.classList.contains(
+                "modal-overlay"
+            )
+        ){
+
+            event.target.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+/* =========================
+ESC CLOSE
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            document.querySelectorAll(
+                ".modal-overlay.show"
+            ).forEach(modal => {
+
+                modal.classList.remove("show");
+
+            });
+
+        }
+
+    }
+);
 
 /* =========================
 SIDEBAR
 ========================= */
 
-function toggleSidebar(){
+function openSidebar(){
 
     document
         .getElementById("sidebar")
-        .classList.toggle("open");
+        .classList.add("open");
 
     document
         .getElementById("sidebarOverlay")
-        .classList.toggle("show");
-}
+        .classList.add("show");
 
+}
 
 function closeSidebar(){
 
@@ -3130,654 +3270,70 @@ function closeSidebar(){
     document
         .getElementById("sidebarOverlay")
         .classList.remove("show");
-}
-
-
-/* =========================
-FILTER
-========================= */
-
-function filterResults(){
-
-    const search =
-        document
-            .getElementById("searchInput")
-            .value
-            .toLowerCase()
-            .trim();
-
-    const type =
-        document
-            .getElementById("typeFilter")
-            .value;
-
-    const status =
-        document
-            .getElementById("statusFilter")
-            .value;
-
-    const course =
-        document
-            .getElementById("courseFilter")
-            .value;
-
-
-    const rows =
-        document.querySelectorAll(
-            "#resultTable tr"
-        );
-
-
-    let visible = 0;
-
-
-    rows.forEach(row => {
-
-
-        const rowText =
-            row.innerText.toLowerCase();
-
-
-        const rowType =
-            row.dataset.type;
-
-
-        const rowStatus =
-            row.dataset.status;
-
-
-        const rowCourse =
-            row.dataset.course;
-
-
-        const searchMatch =
-            !search ||
-            rowText.includes(search) ||
-            row.dataset.name
-                .toLowerCase()
-                .includes(search) ||
-            row.dataset.id
-                .toLowerCase()
-                .includes(search);
-
-
-        const typeMatch =
-            type === "all" ||
-            rowType === type;
-
-
-        const statusMatch =
-            status === "all" ||
-            rowStatus === status;
-
-
-        const courseMatch =
-            course === "all" ||
-            rowCourse === course;
-
-
-        if(
-            searchMatch &&
-            typeMatch &&
-            statusMatch &&
-            courseMatch
-        ){
-
-            row.style.display = "";
-
-            visible++;
-
-        }else{
-
-            row.style.display = "none";
-        }
-
-    });
-
-
-    document.getElementById(
-        "emptyState"
-    ).style.display =
-        visible === 0
-        ? "block"
-        : "none";
-}
-
-
-/* =========================
-VIEW RESULT
-========================= */
-
-function viewResult(button){
-
-    const row =
-        button.closest("tr");
-
-
-    const cells =
-        row.querySelectorAll("td");
-
-
-    const student =
-        row.dataset.name;
-
-
-    const studentId =
-        row.dataset.id;
-
-
-    const activity =
-        cells[1].textContent.trim();
-
-
-    const type =
-        row.dataset.type;
-
-
-    const course =
-        row.dataset.course;
-
-
-    const submitted =
-        cells[4].textContent.trim();
-
-
-    const marks =
-        cells[5].textContent.trim();
-
-
-    document.getElementById(
-        "viewStudent"
-    ).textContent =
-        student;
-
-
-    document.getElementById(
-        "viewStudentId"
-    ).textContent =
-        studentId;
-
-
-    document.getElementById(
-        "viewActivity"
-    ).textContent =
-        activity;
-
-
-    document.getElementById(
-        "viewType"
-    ).textContent =
-        type;
-
-
-    document.getElementById(
-        "viewCourse"
-    ).textContent =
-        course;
-
-
-    document.getElementById(
-        "viewSubmitted"
-    ).textContent =
-        submitted;
-
-
-    document.getElementById(
-        "viewScore"
-    ).textContent =
-        marks;
-
-
-    const feedback =
-        localStorage.getItem(
-            "resultFeedback_" + studentId
-        ) || "এখনো কোনো feedback নেই।";
-
-
-    document.getElementById(
-        "viewFeedback"
-    ).value =
-        feedback;
-
-
-    document
-        .getElementById("viewModal")
-        .classList.add("show");
-}
-
-
-/* =========================
-OPEN MARKS
-========================= */
-
-function openMarks(button){
-
-    const row =
-        button.closest("tr");
-
-
-    const cells =
-        row.querySelectorAll("td");
-
-
-    const student =
-        row.dataset.name;
-
-
-    const activity =
-        cells[1].textContent.trim();
-
-
-    const course =
-        row.dataset.course;
-
-
-    document.getElementById(
-        "markStudent"
-    ).textContent =
-        student;
-
-
-    document.getElementById(
-        "markActivity"
-    ).textContent =
-        activity;
-
-
-    document.getElementById(
-        "markCourse"
-    ).textContent =
-        course;
-
-
-    document.getElementById(
-        "markRowIndex"
-    ).value =
-        Array.from(
-            row.parentNode.children
-        ).indexOf(row);
-
-
-    const currentMarks =
-        cells[5].textContent.trim();
-
-
-    if(
-        currentMarks !== "Pending" &&
-        currentMarks.includes("/")
-    ){
-
-        const parts =
-            currentMarks
-                .split("/")
-                .map(x => x.trim());
-
-
-        document.getElementById(
-            "obtainedMarks"
-        ).value =
-            parts[0];
-
-
-        document.getElementById(
-            "totalMarks"
-        ).value =
-            parts[1];
-
-    }else{
-
-        document.getElementById(
-            "obtainedMarks"
-        ).value =
-            "";
-
-
-        document.getElementById(
-            "totalMarks"
-        ).value =
-            "20";
-    }
-
-
-    document.getElementById(
-        "adminFeedback"
-    ).value =
-        localStorage.getItem(
-            "resultFeedback_" +
-            row.dataset.id
-        ) || "";
-
-
-    document
-        .getElementById("marksModal")
-        .classList.add("show");
-}
-
-
-/* =========================
-SAVE MARKS
-========================= */
-
-function saveMarks(event){
-
-    event.preventDefault();
-
-
-    const obtained =
-        Number(
-            document.getElementById(
-                "obtainedMarks"
-            ).value
-        );
-
-
-    const total =
-        Number(
-            document.getElementById(
-                "totalMarks"
-            ).value
-        );
-
-
-    const feedback =
-        document.getElementById(
-            "adminFeedback"
-        ).value.trim();
-
-
-    const rowIndex =
-        Number(
-            document.getElementById(
-                "markRowIndex"
-            ).value
-        );
-
-
-    if(
-        total <= 0 ||
-        obtained < 0 ||
-        obtained > total
-    ){
-
-        alert(
-            "⚠️ Marks সঠিকভাবে দিন।"
-        );
-
-        return;
-    }
-
-
-    const rows =
-        document.querySelectorAll(
-            "#resultTable tr"
-        );
-
-
-    const row =
-        rows[rowIndex];
-
-
-    if(!row){
-
-        alert(
-            "Result row পাওয়া যায়নি।"
-        );
-
-        return;
-    }
-
-
-    const cells =
-        row.querySelectorAll("td");
-
-
-    /* MARKS */
-
-    cells[5].innerHTML = `
-
-        <span class="marks done">
-
-            ${obtained} / ${total}
-
-        </span>
-
-    `;
-
-
-    /* STATUS */
-
-    cells[6].innerHTML = `
-
-        <span class="status reviewed">
-
-            Reviewed
-
-        </span>
-
-    `;
-
-
-    row.dataset.status =
-        "Reviewed";
-
-
-    /* FEEDBACK */
-
-    localStorage.setItem(
-
-        "resultFeedback_" +
-        row.dataset.id,
-
-        feedback
-
-    );
-
-
-    /* RESULT OBJECT */
-
-    const resultData = {
-
-        student:
-            row.dataset.name,
-
-        studentId:
-            row.dataset.id,
-
-        activity:
-            cells[1].textContent.trim(),
-
-        type:
-            row.dataset.type,
-
-        course:
-            row.dataset.course,
-
-        obtainedMarks:
-            obtained,
-
-        totalMarks:
-            total,
-
-        feedback:
-            feedback,
-
-        status:
-            "Reviewed",
-
-        updatedAt:
-            new Date().toISOString()
-
-    };
-
-
-    localStorage.setItem(
-
-        "snkResult_" +
-        row.dataset.id,
-
-        JSON.stringify(resultData)
-
-    );
-
-
-    closeModal("marksModal");
-
-
-    updateStats();
-
-
-    alert(
-        "✅ Result successfully saved!"
-    );
 
 }
 
-
 /* =========================
-STATS
+TOAST
 ========================= */
 
-function updateStats(){
+let toastTimer = null;
 
-    const rows =
-        document.querySelectorAll(
-            "#resultTable tr"
+function showToast(message,type="success"){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className =
+        "toast show " + type;
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2800
         );
 
-
-    let pending = 0;
-
-    let reviewed = 0;
-
-
-    rows.forEach(row => {
-
-        if(
-            row.dataset.status ===
-            "Pending"
-        ){
-
-            pending++;
-
-        }else{
-
-            reviewed++;
-        }
-
-    });
-
-
-    document.getElementById(
-        "totalSubmissions"
-    ).textContent =
-        rows.length;
-
-
-    document.getElementById(
-        "pendingCount"
-    ).textContent =
-        pending;
-
-
-    document.getElementById(
-        "reviewedCount"
-    ).textContent =
-        reviewed;
 }
 
-
 /* =========================
-MODAL CLOSE
+ADMIN LOGOUT
 ========================= */
 
-function closeModal(id){
+function logoutAdmin(){
 
-    document
-        .getElementById(id)
-        .classList.remove("show");
-}
-
-
-/* =========================
-DEMO
-========================= */
-
-function showDemo(name){
-
-    alert(
-
-        "📌 " +
-        name +
-        " feature পরবর্তী step-এ functional করা হবে।"
-
-    );
-}
-
-
-/* =========================
-LOGOUT
-========================= */
-
-function logoutDemo(){
-
-    const ok =
+    const confirmed =
         confirm(
-            "আপনি কি Logout করতে চান?"
+            "আপনি কি Admin Panel থেকে logout করতে চান?"
         );
 
-
-    if(ok){
-
-        sessionStorage.removeItem(
-            "snkAdminLoggedIn"
-        );
-
-
-        alert(
-            "আপনি Admin Panel থেকে Logout করেছেন।"
-        );
+    if(!confirmed){
+        return;
     }
+
+    /*
+       Existing admin-login workflow
+       থাকলে এখানে redirect করা যাবে।
+    */
+
+    window.location.href =
+        "admin.html";
+
 }
 
-
-/* =========================
-OUTSIDE MODAL CLICK
-========================= */
-
-[
-    "viewModal",
-    "marksModal"
-].forEach(id => {
-
-
-    document
-        .getElementById(id)
-        .addEventListener(
-            "click",
-            function(event){
-
-                if(
-                    event.target === this
-                ){
-
-                    closeModal(id);
-
-                }
-
-            }
-        );
-
-});
-
-
-/* =========================
-INITIAL
-========================= */
-
-updateStats();
-
+/* =========================================================
+END VERSION 1.16
+========================================================= */
 </script>
 
 </body>
 </html>
-```
