@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,9 +9,18 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+rel="stylesheet"
+>
 
 <style>
+
+/* =========================================================
+   VERSION 1.15
+   QUIZ MANAGEMENT PRO
+========================================================= */
 
 *{
     margin:0;
@@ -19,38 +29,58 @@
 }
 
 :root{
+
     --bg:#f4f6fa;
     --card:#ffffff;
     --text:#172033;
     --muted:#667085;
     --border:#e5e7eb;
+
     --primary:#2563eb;
     --primary-dark:#1d4ed8;
+
     --soft:#eff6ff;
+
     --success:#16a34a;
     --warning:#d97706;
     --danger:#dc2626;
+
     --purple:#7c3aed;
+
     --sidebar:#111827;
-    --shadow:0 10px 30px rgba(15,23,42,.07);
+
+    --shadow:
+        0 10px 30px rgba(15,23,42,.07);
 }
 
 body.dark{
+
     --bg:#080d18;
     --card:#111827;
     --text:#f8fafc;
     --muted:#94a3b8;
     --border:#1f2937;
+
     --soft:#172554;
+
     --sidebar:#020617;
-    --shadow:0 10px 30px rgba(0,0,0,.25);
+
+    --shadow:
+        0 10px 30px rgba(0,0,0,.25);
 }
 
 body{
-    font-family:"Noto Sans Bengali",Arial,sans-serif;
+
+    font-family:
+        "Noto Sans Bengali",
+        Arial,
+        sans-serif;
+
     background:var(--bg);
     color:var(--text);
+
     min-height:100vh;
+
     transition:.25s;
 }
 
@@ -58,883 +88,1509 @@ button,
 input,
 select,
 textarea{
+
     font-family:inherit;
 }
 
 button{
+
     cursor:pointer;
 }
 
 a{
+
     text-decoration:none;
     color:inherit;
 }
 
 
-/* =========================
+/* =========================================================
    SIDEBAR
-========================= */
+========================================================= */
 
 .sidebar{
+
     width:255px;
     min-width:255px;
+
     background:var(--sidebar);
     color:#fff;
+
     min-height:100vh;
+
     position:fixed;
+
     left:0;
     top:0;
     bottom:0;
+
     z-index:1000;
+
     display:flex;
     flex-direction:column;
+
     transition:.25s;
 }
 
 .sidebar-logo{
+
     height:76px;
+
     padding:13px 17px;
+
     display:flex;
     align-items:center;
+
     gap:10px;
-    border-bottom:1px solid rgba(255,255,255,.08);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
 }
 
 .sidebar-logo img{
+
     width:45px;
     height:45px;
+
     object-fit:contain;
 }
 
 .sidebar-logo-text{
+
     font-size:15px;
     font-weight:800;
 }
 
 .sidebar-logo-text small{
+
     display:block;
+
     color:#9ca3af;
+
     font-size:9px;
     font-weight:500;
 }
 
 .sidebar-menu{
+
     padding:18px 12px;
+
     flex:1;
+
     overflow-y:auto;
 }
 
 .menu-label{
+
     color:#6b7280;
+
     font-size:9px;
+
     font-weight:800;
+
     padding:8px 11px;
+
     letter-spacing:.5px;
 }
 
 .menu-item{
+
     width:100%;
+
     border:none;
+
     background:transparent;
+
     color:#d1d5db;
+
     display:flex;
+
     align-items:center;
+
     gap:11px;
+
     padding:11px 12px;
+
     border-radius:9px;
+
     margin-bottom:4px;
+
     font-size:11px;
+
     font-weight:600;
+
     text-align:left;
 }
 
 .menu-item:hover{
-    background:rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.07);
+
     color:#fff;
 }
 
 .menu-item.active{
+
     background:#2563eb;
+
     color:#fff;
 }
 
 .menu-icon{
+
     width:22px;
+
     text-align:center;
+
     font-size:15px;
 }
 
+.menu-badge{
+
+    margin-left:auto;
+
+    background:#374151;
+
+    color:#d1d5db;
+
+    padding:2px 6px;
+
+    border-radius:20px;
+
+    font-size:7px;
+}
+
+.menu-item.active .menu-badge{
+
+    background:rgba(255,255,255,.2);
+
+    color:#fff;
+}
+
 .sidebar-footer{
+
     padding:13px;
-    border-top:1px solid rgba(255,255,255,.08);
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
 }
 
 .admin-mini{
+
     display:flex;
+
     align-items:center;
+
     gap:9px;
+
     padding:9px;
-    background:rgba(255,255,255,.05);
+
+    background:
+        rgba(255,255,255,.05);
+
     border-radius:10px;
 }
 
 .admin-avatar{
+
     width:34px;
     height:34px;
+
     border-radius:9px;
+
     background:#2563eb;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
 }
 
 .admin-mini-info{
+
     flex:1;
 }
 
 .admin-mini-info strong{
+
     display:block;
+
     font-size:10px;
 }
 
 .admin-mini-info span{
+
     display:block;
+
     color:#9ca3af;
+
     font-size:8px;
 }
 
 .logout-small{
+
     border:none;
+
     background:transparent;
+
     color:#9ca3af;
+
     font-size:14px;
 }
 
 
-/* =========================
+/* =========================================================
    MAIN
-========================= */
+========================================================= */
 
 .main{
+
     margin-left:255px;
-    width:calc(100% - 255px);
+
+    width:
+        calc(100% - 255px);
+
     min-width:0;
 }
 
 
-/* =========================
+/* =========================================================
    TOPBAR
-========================= */
+========================================================= */
 
 .topbar{
+
     height:76px;
+
     background:var(--card);
-    border-bottom:1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:0 25px;
+
     position:sticky;
+
     top:0;
+
     z-index:900;
 }
 
 .topbar-left{
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
 }
 
 .mobile-menu-btn{
+
     display:none;
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     width:38px;
     height:38px;
+
     border-radius:9px;
+
     font-size:18px;
 }
 
 .page-heading h1{
+
     font-size:20px;
 }
 
 .page-heading p{
+
     color:var(--muted);
+
     font-size:10px;
 }
 
 .topbar-actions{
+
     display:flex;
+
     align-items:center;
+
     gap:7px;
 }
 
 .topbar-btn{
+
     width:37px;
     height:37px;
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     border-radius:9px;
 }
 
 .admin-top-profile{
+
     display:flex;
+
     align-items:center;
+
     gap:9px;
+
     padding-left:9px;
-    border-left:1px solid var(--border);
+
+    border-left:
+        1px solid var(--border);
 }
 
 .top-avatar{
+
     width:36px;
     height:36px;
+
     border-radius:9px;
+
     background:var(--soft);
+
     display:flex;
+
     align-items:center;
     justify-content:center;
 }
 
 .top-profile-text strong{
+
     display:block;
+
     font-size:10px;
 }
 
 .top-profile-text span{
+
     display:block;
+
     color:var(--muted);
+
     font-size:8px;
 }
 
 
-/* =========================
+/* =========================================================
    CONTENT
-========================= */
+========================================================= */
 
 .content{
+
     padding:25px;
 }
 
 .page-intro{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:15px;
+
     margin-bottom:20px;
 }
 
 .page-intro h2{
+
     font-size:21px;
+
     margin-bottom:4px;
 }
 
 .page-intro p{
+
     color:var(--muted);
+
     font-size:10px;
 }
 
 .primary-btn{
+
     border:none;
+
     background:var(--primary);
+
     color:#fff;
+
     padding:11px 16px;
+
     border-radius:9px;
+
     font-size:10px;
+
     font-weight:800;
 }
 
+.primary-btn:hover{
 
-/* =========================
+    background:var(--primary-dark);
+}
+
+
+/* =========================================================
    STATS
-========================= */
+========================================================= */
 
 .stats-grid{
+
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(4,1fr);
+
     gap:15px;
+
     margin-bottom:20px;
 }
 
 .stat-card{
+
     background:var(--card);
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     border-radius:15px;
+
     padding:17px;
+
     box-shadow:var(--shadow);
 }
 
 .stat-icon{
+
     width:39px;
     height:39px;
+
     border-radius:10px;
+
     background:var(--soft);
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     font-size:17px;
+
     margin-bottom:11px;
 }
 
 .stat-number{
+
     font-size:23px;
+
     font-weight:800;
 }
 
 .stat-title{
+
     font-size:10px;
 }
 
 .stat-description{
+
     color:var(--muted);
+
     font-size:8px;
 }
 
 
-/* =========================
+/* =========================================================
    TOOLBAR
-========================= */
+========================================================= */
 
 .toolbar{
+
     background:var(--card);
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     border-radius:15px;
+
     padding:14px;
+
     box-shadow:var(--shadow);
+
     margin-bottom:15px;
 }
 
 .toolbar-row{
+
     display:flex;
+
     align-items:center;
+
     gap:9px;
+
     flex-wrap:wrap;
 }
 
 .search-box{
+
     flex:1;
+
     min-width:220px;
+
     position:relative;
 }
 
 .search-box span{
+
     position:absolute;
+
     left:11px;
+
     top:50%;
-    transform:translateY(-50%);
+
+    transform:
+        translateY(-50%);
+
     color:var(--muted);
 }
 
 .search-box input{
+
     width:100%;
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background:var(--bg);
+
     color:var(--text);
-    padding:10px 12px 10px 33px;
+
+    padding:
+        10px
+        12px
+        10px
+        33px;
+
     border-radius:8px;
+
     outline:none;
+
     font-size:10px;
 }
 
 .filter-select{
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background:var(--bg);
+
     color:var(--text);
+
     padding:10px 12px;
+
     border-radius:8px;
+
     outline:none;
+
     font-size:9px;
+
     min-width:145px;
 }
 
 
-/* =========================
+/* =========================================================
    TABLE
-========================= */
+========================================================= */
 
 .table-card{
+
     background:var(--card);
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     border-radius:15px;
+
     box-shadow:var(--shadow);
+
     overflow:hidden;
 }
 
 .table-wrapper{
+
     width:100%;
+
     overflow-x:auto;
 }
 
 table{
+
     width:100%;
+
     border-collapse:collapse;
-    min-width:1120px;
+
+    min-width:1150px;
 }
 
 thead{
+
     background:var(--bg);
 }
 
 th{
+
     color:var(--muted);
+
     font-size:8px;
+
     font-weight:800;
+
     text-align:left;
+
     padding:13px 14px;
-    border-bottom:1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
     white-space:nowrap;
 }
 
 td{
+
     padding:12px 14px;
-    border-bottom:1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
     font-size:9px;
+
     white-space:nowrap;
 }
 
 tbody tr:hover{
+
     background:var(--bg);
 }
 
 .quiz-cell strong{
+
     display:block;
+
     font-size:10px;
 }
 
 .quiz-cell span{
+
     display:block;
+
     color:var(--muted);
+
     font-size:7px;
+
     margin-top:2px;
+
+    max-width:250px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 }
 
 .course-badge{
+
     display:inline-flex;
+
     padding:5px 8px;
+
     background:var(--soft);
+
     color:var(--primary);
+
     border-radius:20px;
+
     font-size:7px;
+
     font-weight:800;
 }
 
 .time-badge{
+
     display:inline-flex;
+
     align-items:center;
+
     gap:4px;
+
     padding:5px 8px;
+
     background:#f5f3ff;
+
     color:var(--purple);
+
     border-radius:20px;
+
     font-size:7px;
+
     font-weight:800;
 }
 
 body.dark .time-badge{
+
     background:#2e1065;
+
     color:#c4b5fd;
 }
 
 .deadline{
+
     font-weight:700;
 }
 
 .deadline.upcoming{
+
     color:var(--warning);
 }
 
 .deadline.active{
+
     color:var(--success);
 }
 
 .deadline.overdue{
+
     color:var(--danger);
 }
 
 .status{
+
     display:inline-flex;
+
     padding:5px 8px;
+
     border-radius:20px;
+
     font-size:7px;
+
     font-weight:800;
 }
 
 .status.active{
+
     background:#dcfce7;
+
     color:#15803d;
 }
 
 .status.closed{
+
     background:#fee2e2;
+
     color:#b91c1c;
 }
 
 .status.draft{
+
     background:#f3f4f6;
+
     color:#4b5563;
 }
 
 body.dark .status.draft{
+
     background:#1f2937;
+
     color:#d1d5db;
 }
 
 .attempt-count{
+
     font-weight:800;
 }
 
 .row-actions{
+
     display:flex;
+
     gap:5px;
 }
 
 .action-btn{
+
     width:30px;
     height:30px;
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     border-radius:7px;
 }
 
 .action-btn:hover{
+
     background:var(--soft);
 }
 
 .action-btn.delete:hover{
+
     color:var(--danger);
 }
 
 
-/* =========================
+/* =========================================================
    MODAL
-========================= */
+========================================================= */
 
 .modal-overlay{
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.55);
+
+    background:
+        rgba(0,0,0,.55);
+
     display:none;
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
+
     z-index:3000;
 }
 
 .modal-overlay.show{
+
     display:flex;
 }
 
 .modal{
+
     width:100%;
-    max-width:650px;
+
+    max-width:680px;
+
     max-height:90vh;
+
     overflow-y:auto;
+
     background:var(--card);
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     border-radius:18px;
+
     padding:22px;
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.25);
 }
 
 .modal-header{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     margin-bottom:17px;
 }
 
 .modal-header h3{
+
     font-size:16px;
 }
 
 .modal-header p{
+
     color:var(--muted);
+
     font-size:8px;
+
     margin-top:2px;
 }
 
 .modal-close{
+
     width:30px;
     height:30px;
+
     border:none;
+
     background:var(--bg);
+
     color:var(--text);
+
     border-radius:8px;
+
     font-size:16px;
 }
 
 .form-grid{
+
     display:grid;
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:
+        1fr 1fr;
+
     gap:12px;
 }
 
 .form-group{
+
     margin-bottom:12px;
 }
 
 .form-group.full{
-    grid-column:1 / -1;
+
+    grid-column:
+        1 / -1;
 }
 
 .form-group label{
+
     display:block;
+
     font-size:9px;
+
     font-weight:800;
+
     margin-bottom:5px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea{
+
     width:100%;
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background:var(--bg);
+
     color:var(--text);
+
     padding:10px;
+
     border-radius:8px;
+
     outline:none;
+
     font-size:9px;
 }
 
 .form-group textarea{
-    min-height:80px;
+
+    min-height:85px;
+
     resize:vertical;
 }
 
 .form-actions{
+
     display:flex;
+
     justify-content:flex-end;
+
     gap:7px;
+
     margin-top:8px;
 }
 
 .secondary-btn{
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     padding:10px 14px;
+
     border-radius:8px;
+
     font-size:9px;
+
     font-weight:700;
 }
 
 .save-btn{
+
     border:none;
+
     background:var(--primary);
+
     color:#fff;
+
     padding:10px 16px;
+
     border-radius:8px;
+
     font-size:9px;
+
     font-weight:800;
 }
 
 
-/* =========================
-   QUESTIONS MODAL
-========================= */
-
-.question-info{
-    background:var(--soft);
-    border-radius:10px;
-    padding:12px;
-    margin-bottom:15px;
-}
-
-.question-info strong{
-    font-size:10px;
-}
-
-.question-info p{
-    color:var(--muted);
-    font-size:8px;
-    margin-top:3px;
-}
+/* =========================================================
+   QUESTIONS
+========================================================= */
 
 .question-list{
+
     display:flex;
+
     flex-direction:column;
-    gap:9px;
+
+    gap:10px;
+
+    margin-top:10px;
 }
 
 .question-item{
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:12px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:11px;
+
+    padding:13px;
+
     background:var(--bg);
 }
 
+.question-top{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:7px;
+}
+
 .question-number{
+
     color:var(--primary);
+
     font-size:8px;
+
     font-weight:800;
-    margin-bottom:4px;
+}
+
+.question-actions{
+
+    display:flex;
+
+    gap:5px;
+}
+
+.question-actions button{
+
+    width:27px;
+    height:27px;
+
+    border:
+        1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:7px;
 }
 
 .question-text{
-    font-size:9px;
+
+    font-size:10px;
+
     font-weight:700;
+
+    line-height:1.6;
+
     margin-bottom:8px;
 }
 
 .option{
+
     font-size:8px;
+
     color:var(--muted);
-    margin:3px 0;
+
+    margin:4px 0;
+
+    padding:5px 7px;
+
+    border-radius:6px;
 }
 
-.correct{
+.option.correct{
+
     color:var(--success);
-    font-weight:700;
+
+    background:#dcfce7;
+
+    font-weight:800;
+}
+
+body.dark .option.correct{
+
+    background:#052e16;
+}
+
+.question-empty{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    padding:30px 10px;
+
+    font-size:10px;
 }
 
 
-/* =========================
-   ATTEMPTS MODAL
-========================= */
+/* =========================================================
+   DETAIL
+========================================================= */
+
+.detail-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+}
+
+.detail-box{
+
+    background:var(--bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:9px;
+
+    padding:12px;
+}
+
+.detail-box label{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    margin-bottom:4px;
+}
+
+.detail-box strong{
+
+    font-size:10px;
+}
+
+
+/* =========================================================
+   ATTEMPTS
+========================================================= */
 
 .attempt-list{
+
     display:flex;
+
     flex-direction:column;
+
     gap:8px;
 }
 
 .attempt-item{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     gap:10px;
+
     padding:11px;
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     border-radius:10px;
+
     background:var(--bg);
 }
 
 .student-info{
+
     display:flex;
+
     align-items:center;
+
     gap:8px;
+
+    flex:1;
 }
 
 .student-avatar{
+
     width:34px;
     height:34px;
+
     border-radius:9px;
+
     background:var(--soft);
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     font-size:9px;
+
     font-weight:800;
 }
 
 .student-info strong{
+
     display:block;
+
     font-size:9px;
 }
 
 .student-info span{
+
     display:block;
+
     color:var(--muted);
+
     font-size:7px;
 }
 
 .score{
+
     font-size:10px;
+
     font-weight:800;
+
     color:var(--success);
 }
 
 .view-btn{
-    border:1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background:var(--card);
+
     color:var(--text);
+
     padding:7px 10px;
+
     border-radius:7px;
+
     font-size:8px;
+
     font-weight:700;
 }
 
 
-/* =========================
+/* =========================================================
    EMPTY
-========================= */
+========================================================= */
 
 .empty-state{
+
     display:none;
+
     text-align:center;
+
     padding:45px 20px;
+
     color:var(--muted);
+
     font-size:10px;
 }
 
 
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 .footer{
+
     padding:20px 25px;
-    border-top:1px solid var(--border);
+
+    border-top:
+        1px solid var(--border);
+
     color:var(--muted);
+
     font-size:9px;
+
     text-align:center;
+
     margin-top:25px;
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    background:#111827;
+
+    color:#fff;
+
+    padding:12px 16px;
+
+    border-radius:10px;
+
+    font-size:10px;
+
+    z-index:5000;
+
+    transform:
+        translateY(100px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s;
+}
+
+.toast.show{
+
+    transform:
+        translateY(0);
+
+    opacity:1;
+}
+
+
+/* =========================================================
+   SIDEBAR OVERLAY
+========================================================= */
 
 .sidebar-overlay{
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.45);
+
+    background:
+        rgba(0,0,0,.45);
+
     z-index:950;
+
     display:none;
 }
 
 .sidebar-overlay.show{
+
     display:block;
 }
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media(max-width:1100px){
 
     .stats-grid{
-        grid-template-columns:repeat(2,1fr);
+
+        grid-template-columns:
+            repeat(2,1fr);
     }
 }
 
 @media(max-width:800px){
 
     .sidebar{
-        transform:translateX(-100%);
+
+        transform:
+            translateX(-100%);
     }
 
     .sidebar.open{
-        transform:translateX(0);
+
+        transform:
+            translateX(0);
     }
 
     .main{
+
         margin-left:0;
+
         width:100%;
     }
 
     .mobile-menu-btn{
+
         display:flex;
+
         align-items:center;
+
         justify-content:center;
     }
 
     .top-profile-text{
+
         display:none;
     }
 
     .admin-top-profile{
+
         border-left:none;
     }
 }
@@ -942,50 +1598,87 @@ body.dark .status.draft{
 @media(max-width:600px){
 
     .topbar{
+
         height:65px;
+
         padding:0 13px;
     }
 
     .content{
+
         padding:15px;
     }
 
     .page-heading h1{
+
         font-size:16px;
     }
 
     .page-heading p{
+
         display:none;
     }
 
     .page-intro{
+
         flex-direction:column;
+
         align-items:flex-start;
     }
 
     .stats-grid{
+
         grid-template-columns:1fr;
     }
 
     .toolbar-row{
+
         flex-direction:column;
+
         align-items:stretch;
     }
 
     .search-box{
+
         min-width:0;
     }
 
     .filter-select{
+
         width:100%;
     }
 
     .form-grid{
+
         grid-template-columns:1fr;
     }
 
     .form-group.full{
+
         grid-column:auto;
+    }
+
+    .detail-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .attempt-item{
+
+        align-items:flex-start;
+
+        flex-wrap:wrap;
+    }
+
+    .toast{
+
+        left:15px;
+
+        right:15px;
+
+        bottom:15px;
+
+        text-align:center;
     }
 }
 
@@ -996,9 +1689,9 @@ body.dark .status.draft{
 <body>
 
 
-<!-- =========================
+<!-- =========================================================
      SIDEBAR
-========================= -->
+========================================================= -->
 
 <aside class="sidebar" id="sidebar">
 
@@ -1111,6 +1804,13 @@ body.dark .status.draft{
                 Quiz
             </span>
 
+            <span
+                class="menu-badge"
+                id="sidebarQuizCount"
+            >
+                0
+            </span>
+
         </a>
 
 
@@ -1125,6 +1825,22 @@ body.dark .status.draft{
 
             <span>
                 Results
+            </span>
+
+        </a>
+
+
+        <a
+            class="menu-item"
+            href="attendance-overview.html"
+        >
+
+            <span class="menu-icon">
+                📅
+            </span>
+
+            <span>
+                Attendance
             </span>
 
         </a>
@@ -1153,7 +1869,7 @@ body.dark .status.draft{
 
         <button
             class="menu-item"
-            onclick="showDemo('Notices')"
+            onclick="showToast('📢 Notices module পরবর্তী step-এ আসবে।')"
         >
 
             <span class="menu-icon">
@@ -1174,7 +1890,7 @@ body.dark .status.draft{
 
         <button
             class="menu-item"
-            onclick="showDemo('Settings')"
+            onclick="showToast('⚙️ Settings module পরবর্তী step-এ আসবে।')"
         >
 
             <span class="menu-icon">
@@ -1213,6 +1929,7 @@ body.dark .status.draft{
             <button
                 class="logout-small"
                 onclick="logoutDemo()"
+                title="Logout"
             >
                 🚪
             </button>
@@ -1231,9 +1948,9 @@ body.dark .status.draft{
 ></div>
 
 
-<!-- =========================
+<!-- =========================================================
      MAIN
-========================= -->
+========================================================= -->
 
 <main class="main">
 
@@ -1271,6 +1988,7 @@ body.dark .status.draft{
             class="topbar-btn"
             onclick="toggleTheme()"
             id="themeBtn"
+            title="Theme"
         >
             🌙
         </button>
@@ -1278,7 +1996,8 @@ body.dark .status.draft{
 
         <button
             class="topbar-btn"
-            onclick="showDemo('Notifications')"
+            onclick="showToast('🔔 Notification system পরবর্তী step-এ আসবে।')"
+            title="Notifications"
         >
             🔔
         </button>
@@ -1297,7 +2016,7 @@ body.dark .status.draft{
                 </strong>
 
                 <span>
-                    Administrator
+                    Online
                 </span>
 
             </div>
@@ -1317,11 +2036,11 @@ body.dark .status.draft{
         <div>
 
             <h2>
-                Quiz
+                Quiz Management
             </h2>
 
             <p>
-                Quiz তৈরি করুন, সময় নির্ধারণ করুন এবং student attempts দেখুন।
+                Quiz তৈরি, প্রশ্ন পরিচালনা এবং student attempts দেখুন।
             </p>
 
         </div>
@@ -1329,7 +2048,7 @@ body.dark .status.draft{
 
         <button
             class="primary-btn"
-            onclick="openAddQuiz()"
+            onclick="openQuizModal()"
         >
             ＋ New Quiz
         </button>
@@ -1337,9 +2056,9 @@ body.dark .status.draft{
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          STATS
-    ========================= -->
+    ====================================================== -->
 
     <div class="stats-grid">
 
@@ -1354,7 +2073,7 @@ body.dark .status.draft{
                 class="stat-number"
                 id="totalQuiz"
             >
-                5
+                0
             </div>
 
             <div class="stat-title">
@@ -1378,7 +2097,7 @@ body.dark .status.draft{
                 class="stat-number"
                 id="activeQuiz"
             >
-                3
+                0
             </div>
 
             <div class="stat-title">
@@ -1386,7 +2105,31 @@ body.dark .status.draft{
             </div>
 
             <div class="stat-description">
-                student দিতে পারবে
+                এখন চালু আছে
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ❓
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalQuestions"
+            >
+                0
+            </div>
+
+            <div class="stat-title">
+                Questions
+            </div>
+
+            <div class="stat-description">
+                মোট MCQ প্রশ্ন
             </div>
 
         </div>
@@ -1402,11 +2145,11 @@ body.dark .status.draft{
                 class="stat-number"
                 id="totalAttempts"
             >
-                29
+                0
             </div>
 
             <div class="stat-title">
-                Total Attempts
+                Attempts
             </div>
 
             <div class="stat-description">
@@ -1415,35 +2158,12 @@ body.dark .status.draft{
 
         </div>
 
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                ⏱️
-            </div>
-
-            <div
-                class="stat-number"
-            >
-                30m
-            </div>
-
-            <div class="stat-title">
-                Default Time
-            </div>
-
-            <div class="stat-description">
-                quiz countdown
-            </div>
-
-        </div>
-
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          TOOLBAR
-    ========================= -->
+    ====================================================== -->
 
     <div class="toolbar">
 
@@ -1457,10 +2177,10 @@ body.dark .status.draft{
                 </span>
 
                 <input
-                    type="text"
                     id="searchInput"
+                    type="text"
                     placeholder="Quiz বা course খুঁজুন..."
-                    oninput="filterQuiz()"
+                    oninput="renderQuizzes()"
                 >
 
             </div>
@@ -1469,27 +2189,11 @@ body.dark .status.draft{
             <select
                 class="filter-select"
                 id="courseFilter"
-                onchange="filterQuiz()"
+                onchange="renderQuizzes()"
             >
 
                 <option value="all">
                     সব Course
-                </option>
-
-                <option value="Computer Basic">
-                    Computer Basic
-                </option>
-
-                <option value="MS Word">
-                    MS Word
-                </option>
-
-                <option value="MS Excel">
-                    MS Excel
-                </option>
-
-                <option value="Graphic Design">
-                    Graphic Design
                 </option>
 
             </select>
@@ -1498,7 +2202,7 @@ body.dark .status.draft{
             <select
                 class="filter-select"
                 id="statusFilter"
-                onchange="filterQuiz()"
+                onchange="renderQuizzes()"
             >
 
                 <option value="all">
@@ -1509,12 +2213,12 @@ body.dark .status.draft{
                     Active
                 </option>
 
-                <option value="Closed">
-                    Closed
-                </option>
-
                 <option value="Draft">
                     Draft
+                </option>
+
+                <option value="Closed">
+                    Closed
                 </option>
 
             </select>
@@ -1524,9 +2228,9 @@ body.dark .status.draft{
     </div>
 
 
-    <!-- =========================
-         QUIZ TABLE
-    ========================= -->
+    <!-- =====================================================
+         TABLE
+    ====================================================== -->
 
     <div class="table-card">
 
@@ -1559,6 +2263,10 @@ body.dark .status.draft{
                         </th>
 
                         <th>
+                            QUESTIONS
+                        </th>
+
+                        <th>
                             ATTEMPTS
                         </th>
 
@@ -1575,620 +2283,9 @@ body.dark .status.draft{
                 </thead>
 
 
-                <tbody id="quizTable">
-
-
-                    <!-- QUIZ 1 -->
-
-                    <tr
-                        data-name="Computer Basic Quiz 01"
-                        data-course="Computer Basic"
-                        data-status="Active"
-                    >
-
-                        <td>
-
-                            <div class="quiz-cell">
-
-                                <strong>
-                                    Computer Basic Quiz 01
-                                </strong>
-
-                                <span>
-                                    Computer fundamentals MCQ
-                                </span>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                Computer Basic
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="time-badge">
-                                ⏱️ 20 min
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="deadline upcoming">
-                                15 Sep 2026
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            20
-                        </td>
-
-
-                        <td>
-
-                            <span class="attempt-count">
-                                10
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="status active">
-                                Active
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewQuiz(
-                                        'Computer Basic Quiz 01',
-                                        'Computer Basic',
-                                        '20',
-                                        '15 Sep 2026',
-                                        '20',
-                                        'Active'
-                                    )"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showQuestions('Computer Basic Quiz 01')"
-                                >
-                                    ❓
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showAttempts('Computer Basic Quiz 01')"
-                                >
-                                    👨‍🎓
-                                </button>
-
-
-                                <button
-                                    class="action-btn delete"
-                                    onclick="deleteQuiz(this)"
-                                >
-                                    🗑️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- QUIZ 2 -->
-
-                    <tr
-                        data-name="MS Word Quiz 01"
-                        data-course="MS Word"
-                        data-status="Active"
-                    >
-
-                        <td>
-
-                            <div class="quiz-cell">
-
-                                <strong>
-                                    MS Word Quiz 01
-                                </strong>
-
-                                <span>
-                                    Word tools and formatting
-                                </span>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                MS Word
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="time-badge">
-                                ⏱️ 30 min
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="deadline active">
-                                18 Sep 2026
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            25
-                        </td>
-
-
-                        <td>
-                            <span class="attempt-count">
-                                8
-                            </span>
-                        </td>
-
-
-                        <td>
-
-                            <span class="status active">
-                                Active
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewQuiz(
-                                        'MS Word Quiz 01',
-                                        'MS Word',
-                                        '30',
-                                        '18 Sep 2026',
-                                        '25',
-                                        'Active'
-                                    )"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showQuestions('MS Word Quiz 01')"
-                                >
-                                    ❓
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showAttempts('MS Word Quiz 01')"
-                                >
-                                    👨‍🎓
-                                </button>
-
-
-                                <button
-                                    class="action-btn delete"
-                                    onclick="deleteQuiz(this)"
-                                >
-                                    🗑️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- QUIZ 3 -->
-
-                    <tr
-                        data-name="Excel Formula Quiz"
-                        data-course="MS Excel"
-                        data-status="Active"
-                    >
-
-                        <td>
-
-                            <div class="quiz-cell">
-
-                                <strong>
-                                    Excel Formula Quiz
-                                </strong>
-
-                                <span>
-                                    Formula and spreadsheet MCQ
-                                </span>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                MS Excel
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="time-badge">
-                                ⏱️ 25 min
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="deadline active">
-                                20 Sep 2026
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            25
-                        </td>
-
-
-                        <td>
-                            <span class="attempt-count">
-                                6
-                            </span>
-                        </td>
-
-
-                        <td>
-
-                            <span class="status active">
-                                Active
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewQuiz(
-                                        'Excel Formula Quiz',
-                                        'MS Excel',
-                                        '25',
-                                        '20 Sep 2026',
-                                        '25',
-                                        'Active'
-                                    )"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showQuestions('Excel Formula Quiz')"
-                                >
-                                    ❓
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showAttempts('Excel Formula Quiz')"
-                                >
-                                    👨‍🎓
-                                </button>
-
-
-                                <button
-                                    class="action-btn delete"
-                                    onclick="deleteQuiz(this)"
-                                >
-                                    🗑️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- QUIZ 4 -->
-
-                    <tr
-                        data-name="Graphic Design Quiz"
-                        data-course="Graphic Design"
-                        data-status="Closed"
-                    >
-
-                        <td>
-
-                            <div class="quiz-cell">
-
-                                <strong>
-                                    Graphic Design Quiz
-                                </strong>
-
-                                <span>
-                                    Design fundamentals
-                                </span>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                Graphic Design
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="time-badge">
-                                ⏱️ 15 min
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="deadline overdue">
-                                01 Sep 2026
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            15
-                        </td>
-
-
-                        <td>
-                            <span class="attempt-count">
-                                5
-                            </span>
-                        </td>
-
-
-                        <td>
-
-                            <span class="status closed">
-                                Closed
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewQuiz(
-                                        'Graphic Design Quiz',
-                                        'Graphic Design',
-                                        '15',
-                                        '01 Sep 2026',
-                                        '15',
-                                        'Closed'
-                                    )"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showQuestions('Graphic Design Quiz')"
-                                >
-                                    ❓
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showAttempts('Graphic Design Quiz')"
-                                >
-                                    👨‍🎓
-                                </button>
-
-
-                                <button
-                                    class="action-btn delete"
-                                    onclick="deleteQuiz(this)"
-                                >
-                                    🗑️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-
-                    <!-- QUIZ 5 -->
-
-                    <tr
-                        data-name="Final Computer Quiz"
-                        data-course="Computer Basic"
-                        data-status="Draft"
-                    >
-
-                        <td>
-
-                            <div class="quiz-cell">
-
-                                <strong>
-                                    Final Computer Quiz
-                                </strong>
-
-                                <span>
-                                    Final assessment quiz
-                                </span>
-
-                            </div>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="course-badge">
-                                Computer Basic
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="time-badge">
-                                ⏱️ 30 min
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="deadline">
-                                30 Sep 2026
-                            </span>
-
-                        </td>
-
-
-                        <td>
-                            50
-                        </td>
-
-
-                        <td>
-                            <span class="attempt-count">
-                                0
-                            </span>
-                        </td>
-
-
-                        <td>
-
-                            <span class="status draft">
-                                Draft
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <div class="row-actions">
-
-                                <button
-                                    class="action-btn"
-                                    onclick="viewQuiz(
-                                        'Final Computer Quiz',
-                                        'Computer Basic',
-                                        '30',
-                                        '30 Sep 2026',
-                                        '50',
-                                        'Draft'
-                                    )"
-                                >
-                                    👁
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showQuestions('Final Computer Quiz')"
-                                >
-                                    ❓
-                                </button>
-
-
-                                <button
-                                    class="action-btn"
-                                    onclick="showAttempts('Final Computer Quiz')"
-                                >
-                                    👨‍🎓
-                                </button>
-
-
-                                <button
-                                    class="action-btn delete"
-                                    onclick="deleteQuiz(this)"
-                                >
-                                    🗑️
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
+                <tbody
+                    id="quizTable"
+                >
                 </tbody>
 
             </table>
@@ -2200,7 +2297,7 @@ body.dark .status.draft{
             class="empty-state"
             id="emptyState"
         >
-            😕 কোনো Quiz পাওয়া যায়নি।
+            😕 কোনো quiz পাওয়া যায়নি।
         </div>
 
     </div>
@@ -2208,7 +2305,9 @@ body.dark .status.draft{
 
     <footer class="footer">
 
-        © 2026 SNK IT Institute • Quiz Management
+        © 2026 SNK IT Institute
+        • Quiz Management
+        • Version 1.15
 
     </footer>
 
@@ -2217,13 +2316,13 @@ body.dark .status.draft{
 </main>
 
 
-<!-- =========================
-     VIEW QUIZ MODAL
-========================= -->
+<!-- =========================================================
+     QUIZ ADD / EDIT MODAL
+========================================================= -->
 
 <div
     class="modal-overlay"
-    id="viewModal"
+    id="quizModal"
 >
 
     <div class="modal">
@@ -2233,159 +2332,11 @@ body.dark .status.draft{
 
             <div>
 
-                <h3>
-                    Quiz Details
-                </h3>
-
-                <p>
-                    Quiz information
-                </p>
-
-            </div>
-
-
-            <button
-                class="modal-close"
-                onclick="closeModal('viewModal')"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Quiz Name
-            </label>
-
-            <input
-                id="viewName"
-                type="text"
-                readonly
-            >
-
-        </div>
-
-
-        <div class="form-grid">
-
-
-            <div class="form-group">
-
-                <label>
-                    Course
-                </label>
-
-                <input
-                    id="viewCourse"
-                    type="text"
-                    readonly
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Time
-                </label>
-
-                <input
-                    id="viewTime"
-                    type="text"
-                    readonly
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Deadline
-                </label>
-
-                <input
-                    id="viewDeadline"
-                    type="text"
-                    readonly
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Total Marks
-                </label>
-
-                <input
-                    id="viewMarks"
-                    type="text"
-                    readonly
-                >
-
-            </div>
-
-
-            <div class="form-group full">
-
-                <label>
-                    Status
-                </label>
-
-                <input
-                    id="viewStatus"
-                    type="text"
-                    readonly
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="form-actions">
-
-            <button
-                class="secondary-btn"
-                onclick="closeModal('viewModal')"
-            >
-                Close
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     ADD QUIZ MODAL
-========================= -->
-
-<div
-    class="modal-overlay"
-    id="addModal"
->
-
-    <div class="modal">
-
-
-        <div class="modal-header">
-
-            <div>
-
-                <h3>
+                <h3 id="quizModalTitle">
                     Create New Quiz
                 </h3>
 
-                <p>
+                <p id="quizModalSubtitle">
                     নতুন quiz তৈরি করুন।
                 </p>
 
@@ -2394,7 +2345,7 @@ body.dark .status.draft{
 
             <button
                 class="modal-close"
-                onclick="closeModal('addModal')"
+                onclick="closeModal('quizModal')"
             >
                 ×
             </button>
@@ -2405,6 +2356,11 @@ body.dark .status.draft{
         <form
             onsubmit="saveQuiz(event)"
         >
+
+            <input
+                type="hidden"
+                id="editQuizId"
+            >
 
 
             <div class="form-group">
@@ -2587,7 +2543,7 @@ body.dark .status.draft{
                 <button
                     type="button"
                     class="secondary-btn"
-                    onclick="closeModal('addModal')"
+                    onclick="closeModal('quizModal')"
                 >
                     Cancel
                 </button>
@@ -2596,6 +2552,7 @@ body.dark .status.draft{
                 <button
                     type="submit"
                     class="save-btn"
+                    id="quizSaveBtn"
                 >
                     💾 Save Quiz
                 </button>
@@ -2609,9 +2566,190 @@ body.dark .status.draft{
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
+     VIEW QUIZ MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="viewModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3>
+                    Quiz Details
+                </h3>
+
+                <p>
+                    Quiz information
+                </p>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                onclick="closeModal('viewModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="detail-grid">
+
+
+            <div class="detail-box">
+
+                <label>
+                    Quiz Name
+                </label>
+
+                <strong id="viewName">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <label>
+                    Course
+                </label>
+
+                <strong id="viewCourse">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <label>
+                    Time
+                </label>
+
+                <strong id="viewTime">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <label>
+                    Total Marks
+                </label>
+
+                <strong id="viewMarks">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <label>
+                    Deadline
+                </label>
+
+                <strong id="viewDeadline">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <label>
+                    Status
+                </label>
+
+                <strong id="viewStatus">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <label>
+                    Questions
+                </label>
+
+                <strong id="viewQuestionCount">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <label>
+                    Attempts
+                </label>
+
+                <strong id="viewAttemptCount">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="detail-box" style="margin-top:10px;">
+
+            <label>
+                Instructions
+            </label>
+
+            <strong
+                id="viewDescription"
+                style="
+                    font-weight:500;
+                    line-height:1.7;
+                "
+            >
+                -
+            </strong>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeModal('viewModal')"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
      QUESTIONS MODAL
-========================= -->
+========================================================= -->
 
 <div
     class="modal-overlay"
@@ -2630,7 +2768,7 @@ body.dark .status.draft{
                 </h3>
 
                 <p>
-                    প্রশ্ন ও correct answer
+                    MCQ questions management
                 </p>
 
             </div>
@@ -2646,108 +2784,38 @@ body.dark .status.draft{
         </div>
 
 
-        <div class="question-info">
+        <div class="form-actions"
+             style="
+                justify-content:space-between;
+                margin-top:0;
+                margin-bottom:12px;
+             ">
 
-            <strong>
-                Sample MCQ Questions
-            </strong>
+            <span
+                id="questionSummary"
+                style="
+                    color:var(--muted);
+                    font-size:8px;
+                "
+            >
+                0 questions
+            </span>
 
-            <p>
-                পরবর্তী step-এ Admin এখান থেকে নতুন প্রশ্ন যোগ করতে পারবে।
-            </p>
+
+            <button
+                class="primary-btn"
+                onclick="openQuestionModal()"
+            >
+                ＋ Add Question
+            </button>
 
         </div>
 
 
-        <div class="question-list">
-
-
-            <div class="question-item">
-
-                <div class="question-number">
-                    QUESTION 01
-                </div>
-
-                <div class="question-text">
-                    Computer-এর brain বলা হয় কোনটিকে?
-                </div>
-
-                <div class="option">
-                    A. Monitor
-                </div>
-
-                <div class="option correct">
-                    B. CPU ✓
-                </div>
-
-                <div class="option">
-                    C. Keyboard
-                </div>
-
-                <div class="option">
-                    D. Mouse
-                </div>
-
-            </div>
-
-
-            <div class="question-item">
-
-                <div class="question-number">
-                    QUESTION 02
-                </div>
-
-                <div class="question-text">
-                    কোনটি একটি input device?
-                </div>
-
-                <div class="option correct">
-                    A. Keyboard ✓
-                </div>
-
-                <div class="option">
-                    B. Monitor
-                </div>
-
-                <div class="option">
-                    C. Speaker
-                </div>
-
-                <div class="option">
-                    D. Projector
-                </div>
-
-            </div>
-
-
-            <div class="question-item">
-
-                <div class="question-number">
-                    QUESTION 03
-                </div>
-
-                <div class="question-text">
-                    RAM-এর পূর্ণরূপ কী?
-                </div>
-
-                <div class="option correct">
-                    A. Random Access Memory ✓
-                </div>
-
-                <div class="option">
-                    B. Read Access Memory
-                </div>
-
-                <div class="option">
-                    C. Run Access Machine
-                </div>
-
-                <div class="option">
-                    D. Random Application Memory
-                </div>
-
-            </div>
-
+        <div
+            class="question-list"
+            id="questionList"
+        >
         </div>
 
 
@@ -2767,9 +2835,203 @@ body.dark .status.draft{
 </div>
 
 
-<!-- =========================
+<!-- =========================================================
+     QUESTION ADD / EDIT MODAL
+========================================================= -->
+
+<div
+    class="modal-overlay"
+    id="questionModal"
+>
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3 id="questionModalTitle">
+                    Add Question
+                </h3>
+
+                <p>
+                    MCQ question তৈরি করুন।
+                </p>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                onclick="closeModal('questionModal')"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            onsubmit="saveQuestion(event)"
+        >
+
+            <input
+                type="hidden"
+                id="editQuestionId"
+            >
+
+
+            <div class="form-group">
+
+                <label>
+                    Question
+                </label>
+
+                <textarea
+                    id="questionText"
+                    placeholder="প্রশ্ন লিখুন..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Option A
+                    </label>
+
+                    <input
+                        id="optionA"
+                        type="text"
+                        placeholder="Option A"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Option B
+                    </label>
+
+                    <input
+                        id="optionB"
+                        type="text"
+                        placeholder="Option B"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Option C
+                    </label>
+
+                    <input
+                        id="optionC"
+                        type="text"
+                        placeholder="Option C"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Option D
+                    </label>
+
+                    <input
+                        id="optionD"
+                        type="text"
+                        placeholder="Option D"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Correct Answer
+                    </label>
+
+                    <select
+                        id="correctAnswer"
+                        required
+                    >
+
+                        <option value="">
+                            Select Correct Answer
+                        </option>
+
+                        <option value="A">
+                            A
+                        </option>
+
+                        <option value="B">
+                            B
+                        </option>
+
+                        <option value="C">
+                            C
+                        </option>
+
+                        <option value="D">
+                            D
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeModal('questionModal')"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    💾 Save Question
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
      ATTEMPTS MODAL
-========================= -->
+========================================================= -->
 
 <div
     class="modal-overlay"
@@ -2804,160 +3066,10 @@ body.dark .status.draft{
         </div>
 
 
-        <div class="attempt-list">
-
-
-            <div class="attempt-item">
-
-                <div class="student-info">
-
-                    <div class="student-avatar">
-                        RA
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Rahim Ahmed
-                        </strong>
-
-                        <span>
-                            SNK-1001 • 08 Sep 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="score">
-                    18/20
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="showDemo('Attempt Details')"
-                >
-                    View
-                </button>
-
-            </div>
-
-
-            <div class="attempt-item">
-
-                <div class="student-info">
-
-                    <div class="student-avatar">
-                        NJ
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Nusrat Jahan
-                        </strong>
-
-                        <span>
-                            SNK-1002 • 09 Sep 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="score">
-                    17/20
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="showDemo('Attempt Details')"
-                >
-                    View
-                </button>
-
-            </div>
-
-
-            <div class="attempt-item">
-
-                <div class="student-info">
-
-                    <div class="student-avatar">
-                        SA
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Sadia Akter
-                        </strong>
-
-                        <span>
-                            SNK-1003 • 10 Sep 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="score">
-                    20/20
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="showDemo('Attempt Details')"
-                >
-                    View
-                </button>
-
-            </div>
-
-
-            <div class="attempt-item">
-
-                <div class="student-info">
-
-                    <div class="student-avatar">
-                        TH
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Tanvir Hasan
-                        </strong>
-
-                        <span>
-                            SNK-1004 • 10 Sep 2026
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="score">
-                    16/20
-                </div>
-
-
-                <button
-                    class="view-btn"
-                    onclick="showDemo('Attempt Details')"
-                >
-                    View
-                </button>
-
-            </div>
-
+        <div
+            class="attempt-list"
+            id="attemptList"
+        >
         </div>
 
 
@@ -2977,235 +3089,1154 @@ body.dark .status.draft{
 </div>
 
 
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
 <script>
 
+/* =========================================================
+   STORAGE
+========================================================= */
 
-/* =========================
-   THEME
-========================= */
+const QUIZ_STORAGE =
+    "snkQuizListV115";
 
-function toggleTheme(){
+const THEME_STORAGE =
+    "snkQuizTheme";
 
-    document.body.classList.toggle("dark");
 
-    const dark =
-        document.body.classList.contains("dark");
+/* =========================================================
+   DEMO DATA
+========================================================= */
+
+const defaultQuizzes = [
+
+    {
+        id:1,
+
+        name:"Computer Basic Quiz 01",
+
+        course:"Computer Basic",
+
+        time:20,
+
+        marks:20,
+
+        deadline:"2026-09-15",
+
+        status:"Active",
+
+        description:
+            "Computer fundamentals এবং basic hardware/software সম্পর্কে MCQ quiz।",
+
+        questions:[
+
+            {
+                id:101,
+
+                text:
+                    "Computer-এর brain বলা হয় কোনটিকে?",
+
+                options:{
+                    A:"Monitor",
+                    B:"CPU",
+                    C:"Keyboard",
+                    D:"Mouse"
+                },
+
+                correct:"B"
+            },
+
+            {
+                id:102,
+
+                text:
+                    "কোনটি একটি input device?",
+
+                options:{
+                    A:"Keyboard",
+                    B:"Monitor",
+                    C:"Speaker",
+                    D:"Projector"
+                },
+
+                correct:"A"
+            },
+
+            {
+                id:103,
+
+                text:
+                    "RAM-এর পূর্ণরূপ কী?",
+
+                options:{
+                    A:"Random Access Memory",
+                    B:"Read Access Memory",
+                    C:"Run Access Machine",
+                    D:"Random Application Memory"
+                },
+
+                correct:"A"
+            }
+
+        ],
+
+        attempts:[
+
+            {
+                id:1,
+                name:"Rahim Ahmed",
+                studentId:"SNK-1001",
+                date:"08 Sep 2026",
+                score:"18/20"
+            },
+
+            {
+                id:2,
+                name:"Nusrat Jahan",
+                studentId:"SNK-1002",
+                date:"09 Sep 2026",
+                score:"17/20"
+            },
+
+            {
+                id:3,
+                name:"Sadia Akter",
+                studentId:"SNK-1003",
+                date:"10 Sep 2026",
+                score:"20/20"
+            },
+
+            {
+                id:4,
+                name:"Tanvir Hasan",
+                studentId:"SNK-1004",
+                date:"10 Sep 2026",
+                score:"16/20"
+            }
+
+        ],
+
+        createdAt:"2026-09-01"
+
+    },
+
+
+    {
+        id:2,
+
+        name:"MS Excel Formula Quiz",
+
+        course:"MS Excel",
+
+        time:15,
+
+        marks:15,
+
+        deadline:"2026-09-20",
+
+        status:"Active",
+
+        description:
+            "Excel formula এবং spreadsheet fundamentals quiz।",
+
+        questions:[
+
+            {
+                id:201,
+
+                text:
+                    "SUM function-এর কাজ কী?",
+
+                options:{
+                    A:"Text format",
+                    B:"যোগ করা",
+                    C:"Delete করা",
+                    D:"Print করা"
+                },
+
+                correct:"B"
+            }
+
+        ],
+
+        attempts:[
+
+            {
+                id:5,
+                name:"Mim Akter",
+                studentId:"SNK-1005",
+                date:"11 Sep 2026",
+                score:"13/15"
+            }
+
+        ],
+
+        createdAt:"2026-09-02"
+
+    },
+
+
+    {
+        id:3,
+
+        name:"MS Word Quiz 01",
+
+        course:"MS Word",
+
+        time:10,
+
+        marks:10,
+
+        deadline:"2026-09-25",
+
+        status:"Draft",
+
+        description:
+            "MS Word formatting এবং document creation quiz।",
+
+        questions:[],
+
+        attempts:[],
+
+        createdAt:"2026-09-03"
+
+    }
+
+];
+
+
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
+
+function getQuizzes(){
+
+    const saved =
+        localStorage.getItem(
+            QUIZ_STORAGE
+        );
+
+    if(!saved){
+
+        localStorage.setItem(
+            QUIZ_STORAGE,
+            JSON.stringify(defaultQuizzes)
+        );
+
+        return JSON.parse(
+            JSON.stringify(defaultQuizzes)
+        );
+    }
+
+    try{
+
+        const parsed =
+            JSON.parse(saved);
+
+        if(!Array.isArray(parsed)){
+
+            throw new Error(
+                "Invalid quiz data"
+            );
+        }
+
+        return parsed;
+
+    }catch(error){
+
+        localStorage.setItem(
+            QUIZ_STORAGE,
+            JSON.stringify(defaultQuizzes)
+        );
+
+        return JSON.parse(
+            JSON.stringify(defaultQuizzes)
+        );
+    }
+
+}
+
+
+function saveQuizzes(quizzes){
 
     localStorage.setItem(
-        "snkQuizTheme",
-        dark ? "dark" : "light"
+        QUIZ_STORAGE,
+        JSON.stringify(quizzes)
     );
 
-    document.getElementById("themeBtn").textContent =
-        dark ? "☀️" : "🌙";
 }
 
 
-function loadTheme(){
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
-    const theme =
-        localStorage.getItem("snkQuizTheme");
+function escapeHTML(value){
 
-    if(theme === "dark"){
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
 
-        document.body.classList.add("dark");
 
-        document.getElementById("themeBtn").textContent =
-            "☀️";
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(dateString){
+
+    if(!dateString){
+
+        return "-";
     }
-}
 
-loadTheme();
+    const date =
+        new Date(
+            dateString +
+            "T00:00:00"
+        );
 
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
 
-/* =========================
-   SIDEBAR
-========================= */
-
-function toggleSidebar(){
-
-    document
-        .getElementById("sidebar")
-        .classList.toggle("open");
-
-    document
-        .getElementById("sidebarOverlay")
-        .classList.toggle("show");
-}
-
-
-function closeSidebar(){
-
-    document
-        .getElementById("sidebar")
-        .classList.remove("open");
-
-    document
-        .getElementById("sidebarOverlay")
-        .classList.remove("show");
 }
 
 
-/* =========================
-   FILTER
-========================= */
+/* =========================================================
+   DEADLINE
+========================================================= */
 
-function filterQuiz(){
+function deadlineClass(item){
+
+    if(item.status !== "Active"){
+
+        return "";
+    }
+
+    const today =
+        new Date();
+
+    today.setHours(
+        0,0,0,0
+    );
+
+    const deadline =
+        new Date(
+            item.deadline +
+            "T00:00:00"
+        );
+
+    const days =
+        Math.ceil(
+            (
+                deadline -
+                today
+            ) /
+            (1000*60*60*24)
+        );
+
+    if(days < 0){
+
+        return "overdue";
+    }
+
+    if(days <= 7){
+
+        return "upcoming";
+    }
+
+    return "active";
+
+}
+
+
+function deadlineText(item){
+
+    if(item.status === "Closed"){
+
+        return "Closed";
+    }
+
+    if(item.status === "Draft"){
+
+        return "Draft";
+    }
+
+    const today =
+        new Date();
+
+    today.setHours(
+        0,0,0,0
+    );
+
+    const deadline =
+        new Date(
+            item.deadline +
+            "T00:00:00"
+        );
+
+    const days =
+        Math.ceil(
+            (
+                deadline -
+                today
+            ) /
+            (1000*60*60*24)
+        );
+
+    if(days < 0){
+
+        return (
+            Math.abs(days) +
+            " days overdue"
+        );
+    }
+
+    if(days === 0){
+
+        return "Today";
+    }
+
+    if(days === 1){
+
+        return "Tomorrow";
+    }
+
+    return (
+        days +
+        " days left"
+    );
+
+}
+
+
+/* =========================================================
+   COURSE FILTER
+========================================================= */
+
+function renderCourseFilter(){
+
+    const select =
+        document.getElementById(
+            "courseFilter"
+        );
+
+    const current =
+        select.value;
+
+    const quizzes =
+        getQuizzes();
+
+    const courses =
+        [
+            ...new Set(
+                quizzes.map(
+                    quiz =>
+                        quiz.course
+                )
+            )
+        ].sort();
+
+    select.innerHTML =
+        `
+        <option value="all">
+            সব Course
+        </option>
+        `;
+
+    courses.forEach(course => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            course;
+
+        option.textContent =
+            course;
+
+        select.appendChild(
+            option
+        );
+
+    });
+
+    if(
+        courses.includes(current)
+    ){
+
+        select.value =
+            current;
+    }
+
+}
+
+
+/* =========================================================
+   RENDER QUIZZES
+========================================================= */
+
+function renderQuizzes(){
+
+    const tbody =
+        document.getElementById(
+            "quizTable"
+        );
+
+    const empty =
+        document.getElementById(
+            "emptyState"
+        );
 
     const search =
         document
-            .getElementById("searchInput")
+            .getElementById(
+                "searchInput"
+            )
             .value
             .toLowerCase()
             .trim();
 
     const course =
         document
-            .getElementById("courseFilter")
+            .getElementById(
+                "courseFilter"
+            )
             .value;
 
     const status =
         document
-            .getElementById("statusFilter")
+            .getElementById(
+                "statusFilter"
+            )
             .value;
 
-    const rows =
-        document.querySelectorAll(
-            "#quizTable tr"
+    const quizzes =
+        getQuizzes();
+
+    const filtered =
+        quizzes.filter(
+            quiz => {
+
+                const searchMatch =
+                    !search ||
+                    quiz.name
+                        .toLowerCase()
+                        .includes(search) ||
+                    quiz.course
+                        .toLowerCase()
+                        .includes(search) ||
+                    (
+                        quiz.description ||
+                        ""
+                    )
+                    .toLowerCase()
+                    .includes(search);
+
+                const courseMatch =
+                    course === "all" ||
+                    quiz.course === course;
+
+                const statusMatch =
+                    status === "all" ||
+                    quiz.status === status;
+
+                return (
+                    searchMatch &&
+                    courseMatch &&
+                    statusMatch
+                );
+
+            }
         );
 
-    let visible = 0;
+
+    tbody.innerHTML = "";
 
 
-    rows.forEach(row => {
+    filtered.forEach(
+        quiz => {
 
-        const name =
-            row.dataset.name.toLowerCase();
-
-        const rowCourse =
-            row.dataset.course;
-
-        const rowStatus =
-            row.dataset.status;
+            const row =
+                document.createElement(
+                    "tr"
+                );
 
 
-        const searchMatch =
-            name.includes(search) ||
-            row.innerText
-                .toLowerCase()
-                .includes(search);
+            const questions =
+                Array.isArray(
+                    quiz.questions
+                )
+                    ? quiz.questions.length
+                    : 0;
 
 
-        const courseMatch =
-            course === "all" ||
-            rowCourse === course;
+            const attempts =
+                Array.isArray(
+                    quiz.attempts
+                )
+                    ? quiz.attempts.length
+                    : Number(
+                        quiz.attempts || 0
+                    );
 
 
-        const statusMatch =
-            status === "all" ||
-            rowStatus === status;
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="quiz-cell">
+
+                        <strong>
+                            ${escapeHTML(
+                                quiz.name
+                            )}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(
+                                quiz.description ||
+                                "No instructions"
+                            )}
+                        </span>
+
+                    </div>
+
+                </td>
 
 
-        if(
-            searchMatch &&
-            courseMatch &&
-            statusMatch
-        ){
+                <td>
 
-            row.style.display = "";
-            visible++;
+                    <span class="course-badge">
 
-        }else{
+                        ${escapeHTML(
+                            quiz.course
+                        )}
 
-            row.style.display = "none";
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="time-badge">
+
+                        ⏱
+                        ${escapeHTML(
+                            quiz.time
+                        )}
+                        min
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="
+                            deadline
+                            ${deadlineClass(quiz)}
+                        "
+                    >
+
+                        ${formatDate(
+                            quiz.deadline
+                        )}
+
+                        <small
+                            style="
+                                display:block;
+                                font-size:6px;
+                                opacity:.75;
+                            "
+                        >
+                            ${escapeHTML(
+                                deadlineText(quiz)
+                            )}
+                        </small>
+
+                    </span>
+
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        quiz.marks
+                    )}
+                </td>
+
+
+                <td>
+
+                    <strong>
+                        ${questions}
+                    </strong>
+
+                </td>
+
+
+                <td>
+
+                    <span class="attempt-count">
+                        ${attempts}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="
+                            status
+                            ${String(
+                                quiz.status
+                            ).toLowerCase()}
+                        "
+                    >
+                        ${escapeHTML(
+                            quiz.status
+                        )}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <div class="row-actions">
+
+
+                        <button
+                            class="action-btn"
+                            title="View"
+                            onclick="
+                                viewQuiz(
+                                    ${quiz.id}
+                                )
+                            "
+                        >
+                            👁
+                        </button>
+
+
+                        <button
+                            class="action-btn"
+                            title="Edit"
+                            onclick="
+                                editQuiz(
+                                    ${quiz.id}
+                                )
+                            "
+                        >
+                            ✏️
+                        </button>
+
+
+                        <button
+                            class="action-btn"
+                            title="Questions"
+                            onclick="
+                                showQuestions(
+                                    ${quiz.id}
+                                )
+                            "
+                        >
+                            ❓
+                        </button>
+
+
+                        <button
+                            class="action-btn"
+                            title="Attempts"
+                            onclick="
+                                showAttempts(
+                                    ${quiz.id}
+                                )
+                            "
+                        >
+                            👨‍🎓
+                        </button>
+
+
+                        <button
+                            class="
+                                action-btn
+                                delete
+                            "
+                            title="Delete"
+                            onclick="
+                                deleteQuiz(
+                                    ${quiz.id}
+                                )
+                            "
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+            tbody.appendChild(
+                row
+            );
+
         }
+    );
 
-    });
+
+    empty.style.display =
+        filtered.length === 0
+            ? "block"
+            : "none";
 
 
-    document.getElementById("emptyState").style.display =
-        visible === 0 ? "block" : "none";
+    updateStats();
+
 }
 
 
-/* =========================
-   VIEW QUIZ
-========================= */
+/* =========================================================
+   STATS
+========================================================= */
 
-function viewQuiz(
-    name,
-    course,
-    time,
-    deadline,
-    marks,
-    status
-){
+function updateStats(){
 
-    document.getElementById("viewName").value =
-        name;
+    const quizzes =
+        getQuizzes();
 
-    document.getElementById("viewCourse").value =
-        course;
 
-    document.getElementById("viewTime").value =
-        time + " Minutes";
+    const total =
+        quizzes.length;
 
-    document.getElementById("viewDeadline").value =
-        deadline;
 
-    document.getElementById("viewMarks").value =
-        marks;
+    const active =
+        quizzes.filter(
+            quiz =>
+                quiz.status ===
+                "Active"
+        ).length;
 
-    document.getElementById("viewStatus").value =
-        status;
+
+    const questions =
+        quizzes.reduce(
+            (
+                total,
+                quiz
+            ) =>
+                total +
+                (
+                    Array.isArray(
+                        quiz.questions
+                    )
+                        ?
+                        quiz.questions.length
+                        :
+                        0
+                ),
+            0
+        );
+
+
+    const attempts =
+        quizzes.reduce(
+            (
+                total,
+                quiz
+            ) =>
+                total +
+                (
+                    Array.isArray(
+                        quiz.attempts
+                    )
+                        ?
+                        quiz.attempts.length
+                        :
+                        Number(
+                            quiz.attempts ||
+                            0
+                        )
+                ),
+            0
+        );
+
+
+    document.getElementById(
+        "totalQuiz"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "activeQuiz"
+    ).textContent =
+        active;
+
+
+    document.getElementById(
+        "totalQuestions"
+    ).textContent =
+        questions;
+
+
+    document.getElementById(
+        "totalAttempts"
+    ).textContent =
+        attempts;
+
+
+    document.getElementById(
+        "sidebarQuizCount"
+    ).textContent =
+        total;
+
+}
+
+
+/* =========================================================
+   OPEN ADD QUIZ
+========================================================= */
+
+function openQuizModal(){
+
+    document.getElementById(
+        "quizModalTitle"
+    ).textContent =
+        "Create New Quiz";
+
+
+    document.getElementById(
+        "quizModalSubtitle"
+    ).textContent =
+        "নতুন quiz তৈরি করুন।";
+
+
+    document.getElementById(
+        "quizSaveBtn"
+    ).textContent =
+        "💾 Save Quiz";
+
+
+    document.getElementById(
+        "editQuizId"
+    ).value =
+        "";
 
 
     document
-        .getElementById("viewModal")
-        .classList.add("show");
+        .querySelector(
+            "#quizModal form"
+        )
+        .reset();
+
+
+    document.getElementById(
+        "newStatus"
+    ).value =
+        "Active";
+
+
+    document.getElementById(
+        "quizModal"
+    ).classList.add(
+        "show"
+    );
+
 }
 
 
-/* =========================
-   ADD QUIZ
-========================= */
+/* =========================================================
+   EDIT QUIZ
+========================================================= */
 
-function openAddQuiz(){
+function editQuiz(id){
 
-    document
-        .getElementById("addModal")
-        .classList.add("show");
+    const quizzes =
+        getQuizzes();
+
+
+    const quiz =
+        quizzes.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    if(!quiz){
+
+        showToast(
+            "Quiz পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    document.getElementById(
+        "quizModalTitle"
+    ).textContent =
+        "Edit Quiz";
+
+
+    document.getElementById(
+        "quizModalSubtitle"
+    ).textContent =
+        "Quiz information update করুন।";
+
+
+    document.getElementById(
+        "quizSaveBtn"
+    ).textContent =
+        "💾 Update Quiz";
+
+
+    document.getElementById(
+        "editQuizId"
+    ).value =
+        quiz.id;
+
+
+    document.getElementById(
+        "newName"
+    ).value =
+        quiz.name;
+
+
+    document.getElementById(
+        "newCourse"
+    ).value =
+        quiz.course;
+
+
+    document.getElementById(
+        "newTime"
+    ).value =
+        quiz.time;
+
+
+    document.getElementById(
+        "newMarks"
+    ).value =
+        quiz.marks;
+
+
+    document.getElementById(
+        "newDeadline"
+    ).value =
+        quiz.deadline;
+
+
+    document.getElementById(
+        "newStatus"
+    ).value =
+        quiz.status;
+
+
+    document.getElementById(
+        "newDescription"
+    ).value =
+        quiz.description ||
+        "";
+
+
+    document.getElementById(
+        "quizModal"
+    ).classList.add(
+        "show"
+    );
+
 }
 
+
+/* =========================================================
+   SAVE QUIZ
+========================================================= */
 
 function saveQuiz(event){
 
     event.preventDefault();
 
 
+    const editId =
+        document.getElementById(
+            "editQuizId"
+        ).value;
+
+
     const name =
-        document.getElementById("newName").value.trim();
+        document.getElementById(
+            "newName"
+        ).value
+        .trim();
+
 
     const course =
-        document.getElementById("newCourse").value;
+        document.getElementById(
+            "newCourse"
+        ).value;
+
 
     const time =
-        document.getElementById("newTime").value;
+        Number(
+            document.getElementById(
+                "newTime"
+            ).value
+        );
+
 
     const marks =
-        document.getElementById("newMarks").value;
+        Number(
+            document.getElementById(
+                "newMarks"
+            ).value
+        );
+
 
     const deadline =
-        document.getElementById("newDeadline").value;
+        document.getElementById(
+            "newDeadline"
+        ).value;
+
 
     const status =
-        document.getElementById("newStatus").value;
+        document.getElementById(
+            "newStatus"
+        ).value;
+
 
     const description =
-        document
-            .getElementById("newDescription")
-            .value
-            .trim();
+        document.getElementById(
+            "newDescription"
+        ).value
+        .trim();
 
 
     if(
@@ -3216,8 +4247,8 @@ function saveQuiz(event){
         !deadline
     ){
 
-        alert(
-            "সব প্রয়োজনীয় তথ্য পূরণ করুন।"
+        showToast(
+            "⚠️ সব প্রয়োজনীয় তথ্য পূরণ করুন।"
         );
 
         return;
@@ -3225,16 +4256,72 @@ function saveQuiz(event){
 
 
     const quizzes =
-        JSON.parse(
-            localStorage.getItem(
-                "snkQuizList"
-            ) || "[]"
+        getQuizzes();
+
+
+    if(editId){
+
+        const index =
+            quizzes.findIndex(
+                quiz =>
+                    Number(quiz.id) ===
+                    Number(editId)
+            );
+
+
+        if(index !== -1){
+
+            quizzes[index] = {
+
+                ...quizzes[index],
+
+                name,
+
+                course,
+
+                time,
+
+                marks,
+
+                deadline,
+
+                status,
+
+                description
+
+            };
+
+        }
+
+
+        saveQuizzes(
+            quizzes
         );
 
 
-    quizzes.push({
+        closeModal(
+            "quizModal"
+        );
 
-        id:Date.now(),
+
+        renderCourseFilter();
+
+        renderQuizzes();
+
+
+        showToast(
+            "✅ Quiz successfully updated."
+        );
+
+
+        return;
+    }
+
+
+    const newQuiz = {
+
+        id:
+            Date.now(),
 
         name,
 
@@ -3252,256 +4339,1393 @@ function saveQuiz(event){
 
         questions:[],
 
-        attempts:0,
+        attempts:[],
 
         createdAt:
-            new Date().toISOString()
+            new Date()
+                .toISOString()
 
-    });
+    };
 
 
-    localStorage.setItem(
-        "snkQuizList",
-        JSON.stringify(quizzes)
+    quizzes.push(
+        newQuiz
     );
 
 
-    alert(
-        "✅ Quiz save হয়েছে।"
+    saveQuizzes(
+        quizzes
     );
 
 
-    document
-        .getElementById("addModal")
-        .querySelector("form")
-        .reset();
+    closeModal(
+        "quizModal"
+    );
 
 
-    closeModal("addModal");
+    renderCourseFilter();
+
+    renderQuizzes();
+
+
+    showToast(
+        "✅ New quiz successfully added."
+    );
 
 }
 
 
-/* =========================
-   QUESTIONS
-========================= */
+/* =========================================================
+   VIEW QUIZ
+========================================================= */
 
-function showQuestions(name){
+function viewQuiz(id){
 
-    document.getElementById(
-        "questionsTitle"
-    ).textContent =
-        name + " — Questions";
+    const quizzes =
+        getQuizzes();
 
 
-    document
-        .getElementById("questionsModal")
-        .classList.add("show");
-}
-
-
-/* =========================
-   ATTEMPTS
-========================= */
-
-function showAttempts(name){
-
-    document.getElementById(
-        "attemptsTitle"
-    ).textContent =
-        name + " — Student Attempts";
-
-
-    document
-        .getElementById("attemptsModal")
-        .classList.add("show");
-}
-
-
-/* =========================
-   DELETE
-========================= */
-
-function deleteQuiz(button){
-
-    const ok =
-        confirm(
-            "আপনি কি এই Quiz delete করতে চান?"
+    const quiz =
+        quizzes.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
         );
 
 
-    if(!ok){
+    if(!quiz){
+
+        showToast(
+            "Quiz পাওয়া যায়নি।"
+        );
+
         return;
     }
 
 
-    button
-        .closest("tr")
-        .remove();
+    document.getElementById(
+        "viewName"
+    ).textContent =
+        quiz.name;
 
 
-    updateStats();
+    document.getElementById(
+        "viewCourse"
+    ).textContent =
+        quiz.course;
 
 
-    alert(
-        "🗑️ Quiz deleted."
-    );
-}
+    document.getElementById(
+        "viewTime"
+    ).textContent =
+        quiz.time +
+        " Minutes";
 
 
-/* =========================
-   STATS
-========================= */
+    document.getElementById(
+        "viewMarks"
+    ).textContent =
+        quiz.marks;
 
-function updateStats(){
 
-    const rows =
-        document.querySelectorAll(
-            "#quizTable tr"
+    document.getElementById(
+        "viewDeadline"
+    ).textContent =
+        formatDate(
+            quiz.deadline
         );
 
 
-    let active = 0;
-    let attempts = 0;
+    document.getElementById(
+        "viewStatus"
+    ).textContent =
+        quiz.status;
 
 
-    rows.forEach(row => {
+    document.getElementById(
+        "viewQuestionCount"
+    ).textContent =
+        Array.isArray(
+            quiz.questions
+        )
+            ?
+            quiz.questions.length
+            :
+            0;
 
-        if(
-            row.dataset.status ===
-            "Active"
-        ){
 
-            active++;
-        }
-
-
-        const count =
-            row.querySelector(
-                ".attempt-count"
+    document.getElementById(
+        "viewAttemptCount"
+    ).textContent =
+        Array.isArray(
+            quiz.attempts
+        )
+            ?
+            quiz.attempts.length
+            :
+            Number(
+                quiz.attempts ||
+                0
             );
 
 
-        if(count){
+    document.getElementById(
+        "viewDescription"
+    ).textContent =
+        quiz.description ||
+        "No instructions added.";
 
-            attempts +=
-                Number(
-                    count.textContent
-                ) || 0;
+
+    document.getElementById(
+        "viewModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   DELETE QUIZ
+========================================================= */
+
+function deleteQuiz(id){
+
+    const quizzes =
+        getQuizzes();
+
+
+    const quiz =
+        quizzes.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    if(!quiz){
+
+        showToast(
+            "Quiz পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            `আপনি কি "${quiz.name}" delete করতে চান?`
+        );
+
+
+    if(!confirmed){
+
+        return;
+    }
+
+
+    const updated =
+        quizzes.filter(
+            item =>
+                Number(item.id) !==
+                Number(id)
+        );
+
+
+    saveQuizzes(
+        updated
+    );
+
+
+    renderCourseFilter();
+
+    renderQuizzes();
+
+
+    showToast(
+        "🗑️ Quiz deleted successfully."
+    );
+
+}
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+let currentQuizId =
+    null;
+
+
+function showQuestions(id){
+
+    currentQuizId =
+        id;
+
+
+    const quizzes =
+        getQuizzes();
+
+
+    const quiz =
+        quizzes.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    if(!quiz){
+
+        showToast(
+            "Quiz পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    document.getElementById(
+        "questionsTitle"
+    ).textContent =
+        quiz.name +
+        " — Questions";
+
+
+    renderQuestions(
+        quiz
+    );
+
+
+    document.getElementById(
+        "questionsModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+function renderQuestions(quiz){
+
+    const list =
+        document.getElementById(
+            "questionList"
+        );
+
+
+    const questions =
+        Array.isArray(
+            quiz.questions
+        )
+            ?
+            quiz.questions
+            :
+            [];
+
+
+    document.getElementById(
+        "questionSummary"
+    ).textContent =
+        questions.length +
+        " questions";
+
+
+    list.innerHTML = "";
+
+
+    if(!questions.length){
+
+        list.innerHTML = `
+
+            <div class="question-empty">
+
+                📝 এখনো কোনো question যোগ করা হয়নি।
+
+                <br><br>
+
+                উপরের
+                <strong>
+                    ＋ Add Question
+                </strong>
+                button ব্যবহার করুন।
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    questions.forEach(
+        (question,index) => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "question-item";
+
+
+            item.innerHTML = `
+
+                <div class="question-top">
+
+                    <div class="question-number">
+
+                        QUESTION
+                        ${String(
+                            index + 1
+                        ).padStart(2,"0")}
+
+                    </div>
+
+
+                    <div class="question-actions">
+
+                        <button
+                            title="Edit"
+                            onclick="
+                                editQuestion(
+                                    ${question.id}
+                                )
+                            "
+                        >
+                            ✏️
+                        </button>
+
+
+                        <button
+                            title="Delete"
+                            onclick="
+                                deleteQuestion(
+                                    ${question.id}
+                                )
+                            "
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="question-text">
+
+                    ${escapeHTML(
+                        question.text
+                    )}
+
+                </div>
+
+
+                <div
+                    class="
+                        option
+                        ${question.correct === "A"
+                            ? "correct"
+                            : ""}
+                    "
+                >
+
+                    A.
+                    ${escapeHTML(
+                        question.options.A
+                    )}
+
+                    ${
+                        question.correct === "A"
+                            ? " ✓"
+                            : ""
+                    }
+
+                </div>
+
+
+                <div
+                    class="
+                        option
+                        ${question.correct === "B"
+                            ? "correct"
+                            : ""}
+                    "
+                >
+
+                    B.
+                    ${escapeHTML(
+                        question.options.B
+                    )}
+
+                    ${
+                        question.correct === "B"
+                            ? " ✓"
+                            : ""
+                    }
+
+                </div>
+
+
+                <div
+                    class="
+                        option
+                        ${question.correct === "C"
+                            ? "correct"
+                            : ""}
+                    "
+                >
+
+                    C.
+                    ${escapeHTML(
+                        question.options.C
+                    )}
+
+                    ${
+                        question.correct === "C"
+                            ? " ✓"
+                            : ""
+                    }
+
+                </div>
+
+
+                <div
+                    class="
+                        option
+                        ${question.correct === "D"
+                            ? "correct"
+                            : ""}
+                    "
+                >
+
+                    D.
+                    ${escapeHTML(
+                        question.options.D
+                    )}
+
+                    ${
+                        question.correct === "D"
+                            ? " ✓"
+                            : ""
+                    }
+
+                </div>
+
+            `;
+
+
+            list.appendChild(
+                item
+            );
+
         }
+    );
+
+}
+
+
+/* =========================================================
+   OPEN QUESTION MODAL
+========================================================= */
+
+function openQuestionModal(){
+
+    if(!currentQuizId){
+
+        showToast(
+            "আগে একটি quiz select করুন।"
+        );
+
+        return;
+    }
+
+
+    document.getElementById(
+        "questionModalTitle"
+    ).textContent =
+        "Add Question";
+
+
+    document.getElementById(
+        "editQuestionId"
+    ).value =
+        "";
+
+
+    document
+        .querySelector(
+            "#questionModal form"
+        )
+        .reset();
+
+
+    document.getElementById(
+        "questionModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   EDIT QUESTION
+========================================================= */
+
+function editQuestion(questionId){
+
+    const quizzes =
+        getQuizzes();
+
+
+    const quiz =
+        quizzes.find(
+            item =>
+                Number(item.id) ===
+                Number(currentQuizId)
+        );
+
+
+    if(!quiz){
+
+        return;
+    }
+
+
+    const question =
+        quiz.questions.find(
+            item =>
+                Number(item.id) ===
+                Number(questionId)
+        );
+
+
+    if(!question){
+
+        showToast(
+            "Question পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    document.getElementById(
+        "questionModalTitle"
+    ).textContent =
+        "Edit Question";
+
+
+    document.getElementById(
+        "editQuestionId"
+    ).value =
+        question.id;
+
+
+    document.getElementById(
+        "questionText"
+    ).value =
+        question.text;
+
+
+    document.getElementById(
+        "optionA"
+    ).value =
+        question.options.A;
+
+
+    document.getElementById(
+        "optionB"
+    ).value =
+        question.options.B;
+
+
+    document.getElementById(
+        "optionC"
+    ).value =
+        question.options.C;
+
+
+    document.getElementById(
+        "optionD"
+    ).value =
+        question.options.D;
+
+
+    document.getElementById(
+        "correctAnswer"
+    ).value =
+        question.correct;
+
+
+    document.getElementById(
+        "questionModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   SAVE QUESTION
+========================================================= */
+
+function saveQuestion(event){
+
+    event.preventDefault();
+
+
+    if(!currentQuizId){
+
+        showToast(
+            "Quiz select করা হয়নি।"
+        );
+
+        return;
+    }
+
+
+    const text =
+        document.getElementById(
+            "questionText"
+        ).value.trim();
+
+
+    const optionA =
+        document.getElementById(
+            "optionA"
+        ).value.trim();
+
+
+    const optionB =
+        document.getElementById(
+            "optionB"
+        ).value.trim();
+
+
+    const optionC =
+        document.getElementById(
+            "optionC"
+        ).value.trim();
+
+
+    const optionD =
+        document.getElementById(
+            "optionD"
+        ).value.trim();
+
+
+    const correct =
+        document.getElementById(
+            "correctAnswer"
+        ).value;
+
+
+    if(
+        !text ||
+        !optionA ||
+        !optionB ||
+        !optionC ||
+        !optionD ||
+        !correct
+    ){
+
+        showToast(
+            "⚠️ সব তথ্য পূরণ করুন।"
+        );
+
+        return;
+    }
+
+
+    const quizzes =
+        getQuizzes();
+
+
+    const quiz =
+        quizzes.find(
+            item =>
+                Number(item.id) ===
+                Number(currentQuizId)
+        );
+
+
+    if(!quiz){
+
+        showToast(
+            "Quiz পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    if(
+        !Array.isArray(
+            quiz.questions
+        )
+    ){
+
+        quiz.questions = [];
+    }
+
+
+    const editId =
+        document.getElementById(
+            "editQuestionId"
+        ).value;
+
+
+    if(editId){
+
+        const question =
+            quiz.questions.find(
+                item =>
+                    Number(item.id) ===
+                    Number(editId)
+            );
+
+
+        if(question){
+
+            question.text =
+                text;
+
+            question.options = {
+
+                A:optionA,
+
+                B:optionB,
+
+                C:optionC,
+
+                D:optionD
+
+            };
+
+            question.correct =
+                correct;
+
+        }
+
+
+        saveQuizzes(
+            quizzes
+        );
+
+
+        closeModal(
+            "questionModal"
+        );
+
+
+        renderQuestions(
+            quiz
+        );
+
+        renderQuizzes();
+
+
+        showToast(
+            "✅ Question updated."
+        );
+
+
+        return;
+    }
+
+
+    quiz.questions.push({
+
+        id:
+            Date.now(),
+
+        text,
+
+        options:{
+
+            A:optionA,
+
+            B:optionB,
+
+            C:optionC,
+
+            D:optionD
+
+        },
+
+        correct
 
     });
 
 
-    document.getElementById(
-        "totalQuiz"
-    ).textContent =
-        rows.length;
+    saveQuizzes(
+        quizzes
+    );
 
 
-    document.getElementById(
-        "activeQuiz"
-    ).textContent =
-        active;
+    closeModal(
+        "questionModal"
+    );
 
 
-    document.getElementById(
-        "totalAttempts"
-    ).textContent =
-        attempts;
+    renderQuestions(
+        quiz
+    );
+
+    renderQuizzes();
+
+
+    showToast(
+        "✅ Question added."
+    );
+
 }
 
 
-/* =========================
+/* =========================================================
+   DELETE QUESTION
+========================================================= */
+
+function deleteQuestion(questionId){
+
+    const confirmed =
+        confirm(
+            "আপনি কি এই question delete করতে চান?"
+        );
+
+
+    if(!confirmed){
+
+        return;
+    }
+
+
+    const quizzes =
+        getQuizzes();
+
+
+    const quiz =
+        quizzes.find(
+            item =>
+                Number(item.id) ===
+                Number(currentQuizId)
+        );
+
+
+    if(!quiz){
+
+        return;
+    }
+
+
+    quiz.questions =
+        quiz.questions.filter(
+            question =>
+                Number(question.id) !==
+                Number(questionId)
+        );
+
+
+    saveQuizzes(
+        quizzes
+    );
+
+
+    renderQuestions(
+        quiz
+    );
+
+    renderQuizzes();
+
+
+    showToast(
+        "🗑️ Question deleted."
+    );
+
+}
+
+
+/* =========================================================
+   ATTEMPTS
+========================================================= */
+
+function showAttempts(id){
+
+    const quizzes =
+        getQuizzes();
+
+
+    const quiz =
+        quizzes.find(
+            item =>
+                Number(item.id) ===
+                Number(id)
+        );
+
+
+    if(!quiz){
+
+        showToast(
+            "Quiz পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    document.getElementById(
+        "attemptsTitle"
+    ).textContent =
+        quiz.name +
+        " — Student Attempts";
+
+
+    const list =
+        document.getElementById(
+            "attemptList"
+        );
+
+
+    const attempts =
+        Array.isArray(
+            quiz.attempts
+        )
+            ?
+            quiz.attempts
+            :
+            [];
+
+
+    list.innerHTML = "";
+
+
+    if(!attempts.length){
+
+        list.innerHTML = `
+
+            <div
+                style="
+                    text-align:center;
+                    color:var(--muted);
+                    padding:30px 10px;
+                    font-size:10px;
+                "
+            >
+
+                📭 এখনো কোনো student attempt নেই।
+
+            </div>
+
+        `;
+
+    }else{
+
+        attempts.forEach(
+            attempt => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "attempt-item";
+
+
+                const initials =
+                    String(
+                        attempt.name ||
+                        "Student"
+                    )
+                    .split(" ")
+                    .map(
+                        part =>
+                            part[0]
+                    )
+                    .join("")
+                    .slice(0,2)
+                    .toUpperCase();
+
+
+                item.innerHTML = `
+
+                    <div class="student-info">
+
+                        <div class="student-avatar">
+
+                            ${escapeHTML(
+                                initials
+                            )}
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                ${escapeHTML(
+                                    attempt.name ||
+                                    "Student"
+                                )}
+
+                            </strong>
+
+
+                            <span>
+
+                                ${escapeHTML(
+                                    attempt.studentId ||
+                                    "N/A"
+                                )}
+
+                                •
+
+                                ${escapeHTML(
+                                    attempt.date ||
+                                    "Date unavailable"
+                                )}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="score">
+
+                        ${escapeHTML(
+                            attempt.score ||
+                            "-"
+                        )}
+
+                    </div>
+
+
+                    <button
+                        class="view-btn"
+                        onclick="
+                            showToast(
+                                '📌 Attempt details পরবর্তী version-এ আরও বিস্তারিত হবে।'
+                            )
+                        "
+                    >
+                        View
+                    </button>
+
+                `;
+
+
+                list.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+
+    document.getElementById(
+        "attemptsModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle(
+        "dark"
+    );
+
+
+    const dark =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    localStorage.setItem(
+        THEME_STORAGE,
+        dark
+            ? "dark"
+            : "light"
+    );
+
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        dark
+            ? "☀️"
+            : "🌙";
+
+}
+
+
+function loadTheme(){
+
+    const theme =
+        localStorage.getItem(
+            THEME_STORAGE
+        );
+
+
+    if(theme === "dark"){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+
+        document.getElementById(
+            "themeBtn"
+        ).textContent =
+            "☀️";
+
+    }
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function toggleSidebar(){
+
+    document
+        .getElementById(
+            "sidebar"
+        )
+        .classList.toggle(
+            "open"
+        );
+
+
+    document
+        .getElementById(
+            "sidebarOverlay"
+        )
+        .classList.toggle(
+            "show"
+        );
+
+}
+
+
+function closeSidebar(){
+
+    document
+        .getElementById(
+            "sidebar"
+        )
+        .classList.remove(
+            "open"
+        );
+
+
+    document
+        .getElementById(
+            "sidebarOverlay"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+/* =========================================================
    MODAL
-========================= */
+========================================================= */
 
 function closeModal(id){
 
     document
         .getElementById(id)
-        .classList.remove("show");
+        .classList.remove(
+            "show"
+        );
+
 }
 
 
-/* =========================
-   DEMO
-========================= */
+/* =========================================================
+   TOAST
+========================================================= */
 
-function showDemo(name){
+let toastTimer;
 
-    alert(
-        "📌 " +
-        name +
-        " feature পরবর্তী step-এ functional করা হবে।"
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
     );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2600
+        );
+
 }
 
 
-/* =========================
+/* =========================================================
    LOGOUT
-========================= */
+========================================================= */
 
 function logoutDemo(){
 
-    const ok =
+    const confirmed =
         confirm(
             "আপনি কি Logout করতে চান?"
         );
 
 
-    if(ok){
+    if(!confirmed){
 
-        sessionStorage.removeItem(
-            "snkAdminLoggedIn"
-        );
-
-
-        alert(
-            "আপনি Admin Panel থেকে Logout করেছেন।"
-        );
+        return;
     }
+
+
+    sessionStorage.removeItem(
+        "snkAdminLoggedIn"
+    );
+
+
+    showToast(
+        "আপনি Admin Panel থেকে Logout করেছেন।"
+    );
+
 }
 
 
-/* =========================
+/* =========================================================
    OUTSIDE MODAL CLICK
-========================= */
+========================================================= */
 
 [
+    "quizModal",
     "viewModal",
-    "addModal",
     "questionsModal",
+    "questionModal",
     "attemptsModal"
-].forEach(id => {
 
-    document
-        .getElementById(id)
-        .addEventListener(
-            "click",
-            function(event){
+].forEach(
+    function(id){
 
-                if(
-                    event.target === this
-                ){
+        document
+            .getElementById(id)
+            .addEventListener(
+                "click",
+                function(event){
 
-                    closeModal(id);
+                    if(
+                        event.target ===
+                        this
+                    ){
+
+                        closeModal(
+                            id
+                        );
+
+                    }
+
                 }
+            );
 
-            }
-        );
-
-});
+    }
+);
 
 
-/* =========================
-   INITIAL
-========================= */
+/* =========================================================
+   ESCAPE
+========================================================= */
 
-updateStats();
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            [
+                "quizModal",
+                "viewModal",
+                "questionsModal",
+                "questionModal",
+                "attemptsModal"
+
+            ].forEach(
+                function(id){
+
+                    closeModal(
+                        id
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+loadTheme();
+
+renderCourseFilter();
+
+renderQuizzes();
 
 </script>
 
 </body>
 </html>
-```
