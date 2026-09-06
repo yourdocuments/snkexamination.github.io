@@ -1,2941 +1,2488 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SNK IT Institute | Student ID Cards</title>
+  <title>My Student ID Card — SNK IT Institute</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta
+    name="description"
+    content="SNK IT Institute Student Portal - Student ID Card"
+  >
 
-<style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-/* =========================================================
-   ROOT
-========================================================= */
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
 
-:root{
-    --bg:#f4f7fb;
-    --card:#ffffff;
-    --text:#172033;
-    --muted:#667085;
-    --border:#e5e7eb;
-
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
-    --primary-soft:#eff6ff;
-
-    --success:#16a34a;
-    --danger:#dc2626;
-    --warning:#d97706;
-
-    --shadow:0 10px 30px rgba(15,23,42,.08);
-}
+  <style>
 
-body.dark{
-    --bg:#080d18;
-    --card:#111827;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:#1f2937;
+    /* =====================================================
+       GLOBAL
+    ====================================================== */
 
-    --primary-soft:#172554;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    --shadow:0 10px 30px rgba(0,0,0,.28);
-}
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+      --success: #16a34a;
+      --warning: #f59e0b;
+      --danger: #dc2626;
 
-html{
-    scroll-behavior:smooth;
-}
+      --dark: #0f172a;
 
-body{
-    font-family:"Noto Sans Bengali",Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-}
+      --bg: #f1f5f9;
+      --card: #ffffff;
 
-button,
-input,
-select{
-    font-family:inherit;
-}
+      --text: #0f172a;
+      --muted: #64748b;
 
-button{
-    cursor:pointer;
-}
+      --border: #e2e8f0;
 
+      --id-blue: #1d4ed8;
+      --id-cyan: #0891b2;
 
-/* =========================================================
-   HEADER
-========================================================= */
+      --shadow:
+        0 12px 35px rgba(15, 23, 42, 0.09);
 
-.header{
-    position:sticky;
-    top:0;
-    z-index:1000;
+      --radius: 18px;
+    }
 
-    min-height:70px;
+    body.dark {
+      --bg: #020617;
+      --card: #0f172a;
 
-    padding:12px 25px;
+      --text: #f8fafc;
+      --muted: #94a3b8;
 
-    background:var(--card);
+      --border: #1e293b;
 
-    border-bottom:1px solid var(--border);
+      --shadow:
+        0 12px 35px rgba(0, 0, 0, 0.3);
+    }
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    html {
+      scroll-behavior: smooth;
+    }
 
-    gap:15px;
+    body {
+      font-family:
+        "Noto Sans Bengali",
+        Arial,
+        sans-serif;
 
-    box-shadow:0 4px 20px rgba(15,23,42,.04);
-}
+      background: var(--bg);
+      color: var(--text);
 
-.logo-area{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+      min-height: 100vh;
 
-.logo{
-    width:44px;
-    height:44px;
-    object-fit:contain;
-}
+      transition:
+        background 0.3s ease,
+        color 0.3s ease;
+    }
 
-.logo-text{
-    font-size:14px;
-    font-weight:900;
-    line-height:1.2;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.logo-text small{
-    display:block;
-    color:var(--muted);
-    font-size:8px;
-    margin-top:3px;
-}
+    button {
+      font-family: inherit;
+    }
 
-.header-actions{
-    display:flex;
-    gap:7px;
-}
 
-.header-btn{
-    min-height:38px;
+    /* =====================================================
+       TOP BAR
+    ====================================================== */
 
-    padding:0 12px;
+    .topbar {
+      background: var(--dark);
+      color: #fff;
 
-    border:1px solid var(--border);
+      padding: 9px 15px;
 
-    background:var(--card);
+      text-align: center;
 
-    color:var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
 
-    border-radius:9px;
 
-    font-size:8px;
-    font-weight:900;
-}
+    /* =====================================================
+       HEADER
+    ====================================================== */
 
-.header-btn:hover{
-    background:var(--primary-soft);
-}
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
 
+      height: 72px;
 
-/* =========================================================
-   MAIN
-========================================================= */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-.main{
-    max-width:1250px;
-    margin:auto;
+      gap: 15px;
 
-    padding:28px 20px 50px;
-}
+      padding: 0 24px;
 
-.page-header{
-    display:flex;
+      background: var(--card);
 
-    align-items:flex-end;
-    justify-content:space-between;
+      border-bottom:
+        1px solid var(--border);
 
-    gap:15px;
+      box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.03);
+    }
 
-    margin-bottom:18px;
-}
+    .brand {
+      display: flex;
+      align-items: center;
 
-.page-title h1{
-    font-size:23px;
-    margin-bottom:4px;
-}
+      gap: 12px;
 
-.page-title p{
-    color:var(--muted);
-    font-size:9px;
-}
+      min-width: 0;
+    }
 
-.actions{
-    display:flex;
-    gap:7px;
-}
+    .brand img {
+      width: 45px;
+      height: 45px;
 
-.btn{
-    min-height:38px;
+      object-fit: contain;
 
-    padding:0 13px;
+      border-radius: 12px;
+    }
 
-    border:1px solid var(--border);
+    .brand-text {
+      min-width: 0;
+    }
 
-    border-radius:9px;
+    .brand-title {
+      font-size: 18px;
+      font-weight: 900;
 
-    background:var(--card);
-    color:var(--text);
+      line-height: 1.1;
+    }
 
-    font-size:8px;
-    font-weight:900;
-}
+    .brand-subtitle {
+      color: var(--muted);
 
-.btn:hover{
-    background:var(--primary-soft);
-}
+      font-size: 11px;
 
-.btn.primary{
-    background:var(--primary);
-    border-color:var(--primary);
-    color:#fff;
-}
+      margin-top: 3px;
+    }
 
-.btn.primary:hover{
-    background:var(--primary-dark);
-}
+    .header-actions {
+      display: flex;
+      align-items: center;
 
-.btn.success{
-    background:var(--success);
-    border-color:var(--success);
-    color:#fff;
-}
+      gap: 8px;
+    }
 
-.btn.danger{
-    background:var(--danger);
-    border-color:var(--danger);
-    color:#fff;
-}
+    .icon-btn {
+      width: 42px;
+      height: 42px;
 
+      border:
+        1px solid var(--border);
 
-/* =========================================================
-   STATS
-========================================================= */
+      border-radius: 12px;
 
-.stats{
-    display:grid;
+      background: var(--card);
+      color: var(--text);
 
-    grid-template-columns:
-        repeat(4,1fr);
+      cursor: pointer;
 
-    gap:10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-    margin-bottom:15px;
-}
+      font-size: 18px;
 
-.stat{
-    background:var(--card);
+      transition: 0.2s ease;
+    }
 
-    border:1px solid var(--border);
+    .icon-btn:hover {
+      transform: translateY(-1px);
 
-    border-radius:14px;
+      background: var(--bg);
+    }
 
-    padding:14px;
+    .logout-btn {
+      border: none;
 
-    box-shadow:var(--shadow);
-}
+      background: var(--danger);
+      color: #fff;
 
-.stat-icon{
-    width:35px;
-    height:35px;
+      padding:
+        10px 15px;
 
-    border-radius:9px;
+      border-radius: 11px;
 
-    background:var(--primary-soft);
+      font-size: 13px;
+      font-weight: 800;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+      cursor: pointer;
 
-    font-size:16px;
+      transition: 0.2s ease;
+    }
 
-    margin-bottom:8px;
-}
+    .logout-btn:hover {
+      opacity: 0.9;
 
-.stat-number{
-    font-size:22px;
-    font-weight:900;
-}
+      transform:
+        translateY(-1px);
+    }
 
-.stat-label{
-    color:var(--muted);
-    font-size:7px;
-    margin-top:2px;
-}
 
-.stat.blue .stat-number{
-    color:var(--primary);
-}
+    /* =====================================================
+       MAIN
+    ====================================================== */
 
-.stat.green .stat-number{
-    color:var(--success);
-}
-
-.stat.orange .stat-number{
-    color:var(--warning);
-}
-
-.stat.red .stat-number{
-    color:var(--danger);
-}
-
-
-/* =========================================================
-   FILTER
-========================================================= */
-
-.filter-card{
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    border-radius:15px;
-
-    padding:15px;
-
-    box-shadow:var(--shadow);
-
-    margin-bottom:17px;
-}
-
-.filter-title{
-    font-size:11px;
-    font-weight:900;
-
-    margin-bottom:12px;
-}
-
-.filters{
-    display:grid;
-
-    grid-template-columns:
-        1.6fr 1fr auto;
-
-    gap:9px;
-
-    align-items:end;
-}
-
-.field label{
-    display:block;
-
-    color:var(--muted);
-
-    font-size:7px;
-
-    font-weight:900;
-
-    margin-bottom:5px;
-}
-
-.field input,
-.field select{
-    width:100%;
-
-    height:38px;
-
-    border:1px solid var(--border);
-
-    border-radius:8px;
-
-    background:var(--card);
-
-    color:var(--text);
-
-    padding:0 10px;
-
-    outline:none;
-
-    font-size:8px;
-}
-
-.field input:focus,
-.field select:focus{
-    border-color:var(--primary);
-}
-
-
-/* =========================================================
-   ID CARD GRID
-========================================================= */
-
-.card-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:16px;
-}
-
-
-/* =========================================================
-   DIGITAL ID CARD
-========================================================= */
-
-.id-card{
-    width:100%;
-
-    max-width:390px;
-
-    margin:auto;
-
-    background:#fff;
-
-    color:#111827;
-
-    border-radius:17px;
-
-    overflow:hidden;
-
-    border:1px solid #dbe3ef;
-
-    box-shadow:
-        0 15px 35px rgba(15,23,42,.12);
-
-    position:relative;
-
-    transition:.2s;
-}
-
-.id-card:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 20px 42px rgba(15,23,42,.16);
-}
-
-
-/* =========================================================
-   CARD TOP
-========================================================= */
-
-.id-header{
-    min-height:84px;
-
-    padding:13px 15px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #1d4ed8,
-            #2563eb
+    .container {
+      width:
+        min(
+          1180px,
+          calc(100% - 30px)
         );
 
-    color:#fff;
+      margin: 0 auto;
 
-    display:flex;
+      padding:
+        28px 0
+        55px;
+    }
 
-    align-items:center;
 
-    gap:10px;
+    /* =====================================================
+       WELCOME
+    ====================================================== */
 
-    position:relative;
+    .welcome {
+      background:
+        linear-gradient(
+          135deg,
+          #1d4ed8,
+          #2563eb,
+          #0891b2
+        );
 
-    overflow:hidden;
-}
+      color: #fff;
 
-.id-header::after{
-    content:"";
+      border-radius: 24px;
 
-    position:absolute;
+      padding: 28px;
 
-    width:120px;
-    height:120px;
+      box-shadow: var(--shadow);
 
-    border-radius:50%;
+      display: flex;
 
-    border:20px solid rgba(255,255,255,.08);
+      align-items: center;
+      justify-content: space-between;
 
-    right:-40px;
-    top:-45px;
-}
+      gap: 20px;
 
-.id-logo{
-    width:43px;
-    height:43px;
+      margin-bottom: 22px;
+    }
 
-    object-fit:contain;
+    .welcome h1 {
+      font-size: 28px;
 
-    background:#fff;
+      font-weight: 900;
 
-    border-radius:9px;
+      margin-bottom: 7px;
+    }
 
-    padding:3px;
+    .welcome p {
+      font-size: 14px;
 
-    position:relative;
+      line-height: 1.7;
 
-    z-index:1;
-}
+      opacity: 0.94;
+    }
 
-.institute-info{
-    position:relative;
-    z-index:1;
-}
+    .student-badge {
+      min-width: 180px;
 
-.institute-info h3{
-    font-size:11px;
-    font-weight:900;
-}
+      padding:
+        14px 18px;
 
-.institute-info p{
-    font-size:6px;
-    opacity:.9;
-    margin-top:3px;
-}
+      border-radius: 14px;
 
-.id-label{
-    position:absolute;
+      background:
+        rgba(
+          255,
+          255,
+          255,
+          0.14
+        );
 
-    right:12px;
-    bottom:9px;
+      border:
+        1px solid
+        rgba(
+          255,
+          255,
+          255,
+          0.25
+        );
 
-    font-size:6px;
+      text-align: right;
+    }
 
-    font-weight:900;
+    .student-badge small {
+      display: block;
 
-    letter-spacing:.7px;
+      opacity: 0.8;
 
-    opacity:.95;
+      margin-bottom: 3px;
+    }
 
-    z-index:2;
-}
+    .student-badge strong {
+      font-size: 18px;
+    }
 
 
-/* =========================================================
-   CARD BODY
-========================================================= */
+    /* =====================================================
+       NOTICE
+    ====================================================== */
 
-.id-body{
-    padding:17px 16px 15px;
+    .notice {
+      padding:
+        16px 18px;
 
-    display:grid;
+      border-radius: 15px;
 
-    grid-template-columns:
-        85px 1fr;
+      background: #eff6ff;
 
-    gap:15px;
+      border:
+        1px solid #bfdbfe;
 
-    min-height:160px;
-}
+      color: #1e3a8a;
 
-.student-photo{
-    width:82px;
-    height:100px;
+      font-size: 13px;
 
-    border-radius:9px;
+      line-height: 1.8;
 
-    background:#eff6ff;
+      margin-bottom: 22px;
+    }
 
-    border:2px solid #dbeafe;
+    body.dark .notice {
+      background: #172554;
 
-    display:flex;
+      border-color: #1e40af;
 
-    align-items:center;
-    justify-content:center;
+      color: #bfdbfe;
+    }
 
-    overflow:hidden;
 
-    color:#2563eb;
+    /* =====================================================
+       SECTION
+    ====================================================== */
 
-    font-size:27px;
+    .section {
+      background: var(--card);
 
-    font-weight:900;
-}
+      border:
+        1px solid var(--border);
 
-.student-photo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+      border-radius: var(--radius);
 
-.student-info{
-    min-width:0;
-}
+      padding: 24px;
 
-.student-info h2{
-    font-size:13px;
+      box-shadow: var(--shadow);
 
-    font-weight:900;
+      margin-bottom: 22px;
+    }
 
-    line-height:1.3;
+    .section-header {
+      display: flex;
 
-    margin-bottom:3px;
+      align-items: center;
+      justify-content: space-between;
 
-    word-break:break-word;
-}
+      gap: 15px;
 
-.student-course{
-    display:inline-block;
+      margin-bottom: 20px;
+    }
 
-    background:#eff6ff;
+    .section-title {
+      font-size: 21px;
 
-    color:#1d4ed8;
+      font-weight: 900;
+    }
 
-    padding:3px 7px;
+    .section-subtitle {
+      color: var(--muted);
 
-    border-radius:20px;
+      font-size: 13px;
 
-    font-size:6px;
+      margin-top: 4px;
+    }
 
-    font-weight:900;
 
-    margin-bottom:9px;
-}
+    /* =====================================================
+       ID CARD AREA
+    ====================================================== */
 
-.info-item{
-    display:flex;
+    .id-card-wrap {
+      display: flex;
 
-    gap:6px;
+      justify-content: center;
 
-    margin-bottom:6px;
+      padding:
+        10px 0 15px;
+    }
 
-    font-size:6.5px;
 
-    line-height:1.35;
-}
+    /* =====================================================
+       STUDENT ID CARD
+    ====================================================== */
 
-.info-item .label{
-    color:#6b7280;
+    .id-card {
+      position: relative;
 
-    width:54px;
+      width: 430px;
 
-    flex:none;
-}
+      min-height: 680px;
 
-.info-item .value{
-    font-weight:800;
+      overflow: hidden;
 
-    overflow-wrap:anywhere;
-}
+      border-radius: 25px;
 
+      background: #ffffff;
 
-/* =========================================================
-   CARD FOOTER
-========================================================= */
+      color: #111827;
 
-.id-footer{
-    border-top:1px dashed #d1d5db;
+      box-shadow:
+        0 25px 60px
+        rgba(
+          15,
+          23,
+          42,
+          0.2
+        );
 
-    padding:10px 15px;
+      border:
+        1px solid
+        rgba(
+          37,
+          99,
+          235,
+          0.18
+        );
+    }
 
-    display:flex;
 
-    align-items:center;
+    /* =====================================================
+       CARD BACKGROUND DECORATION
+    ====================================================== */
 
-    justify-content:space-between;
+    .card-bg-circle-1 {
+      position: absolute;
 
-    gap:8px;
+      width: 250px;
+      height: 250px;
 
-    background:#fafafa;
-}
+      border-radius: 50%;
 
-.valid-text{
-    font-size:6px;
-    color:#6b7280;
-}
+      background:
+        rgba(
+          37,
+          99,
+          235,
+          0.08
+        );
 
-.valid-text strong{
-    display:block;
+      top: -100px;
+      right: -80px;
+    }
 
-    color:#111827;
+    .card-bg-circle-2 {
+      position: absolute;
 
-    font-size:7px;
+      width: 190px;
+      height: 190px;
 
-    margin-top:2px;
-}
+      border-radius: 50%;
 
-.status-badge{
-    display:inline-flex;
+      background:
+        rgba(
+          8,
+          145,
+          178,
+          0.07
+        );
 
-    align-items:center;
+      bottom: -70px;
+      left: -70px;
+    }
 
-    gap:4px;
 
-    font-size:6px;
+    /* =====================================================
+       CARD HEADER
+    ====================================================== */
 
-    font-weight:900;
+    .id-header {
+      position: relative;
+      z-index: 2;
 
-    padding:5px 8px;
+      background:
+        linear-gradient(
+          135deg,
+          #1d4ed8,
+          #2563eb,
+          #0891b2
+        );
 
-    border-radius:20px;
-}
+      color: #fff;
 
-.status-active{
-    background:#dcfce7;
-    color:#15803d;
-}
+      padding:
+        25px 24px 32px;
 
-.status-inactive{
-    background:#fee2e2;
-    color:#b91c1c;
-}
+      text-align: center;
+    }
 
+    .id-header-top {
+      display: flex;
 
-/* =========================================================
-   CARD ACTIONS
-========================================================= */
+      align-items: center;
 
-.card-actions{
-    display:grid;
+      justify-content: center;
 
-    grid-template-columns:
-        1fr 1fr 1fr;
+      gap: 12px;
 
-    gap:6px;
+      margin-bottom: 13px;
+    }
 
-    padding:10px 12px;
+    .id-logo {
+      width: 55px;
+      height: 55px;
 
-    background:var(--card);
+      object-fit: contain;
 
-    border-top:1px solid var(--border);
-}
+      background: #fff;
 
-.card-action{
-    min-height:33px;
+      border-radius: 13px;
 
-    border:1px solid var(--border);
+      padding: 5px;
+    }
 
-    border-radius:7px;
+    .id-institute {
+      text-align: left;
+    }
 
-    background:var(--card);
+    .id-institute-name {
+      font-size: 19px;
 
-    color:var(--text);
+      font-weight: 900;
 
-    font-size:7px;
+      line-height: 1.2;
+    }
 
-    font-weight:900;
-}
+    .id-institute-subtitle {
+      font-size: 10px;
 
-.card-action:hover{
-    background:var(--primary-soft);
-}
+      opacity: 0.85;
 
-.card-action.primary{
-    background:var(--primary);
-    border-color:var(--primary);
-    color:#fff;
-}
+      margin-top: 3px;
+    }
 
+    .id-card-title {
+      font-size: 20px;
 
-/* =========================================================
-   EMPTY
-========================================================= */
+      font-weight: 900;
 
-.empty{
-    grid-column:1/-1;
+      letter-spacing: 1px;
 
-    background:var(--card);
+      text-transform: uppercase;
+    }
 
-    border:1px solid var(--border);
+    .id-card-small-title {
+      font-size: 11px;
 
-    border-radius:15px;
+      opacity: 0.86;
 
-    padding:55px 20px;
+      margin-top: 3px;
+    }
 
-    text-align:center;
 
-    color:var(--muted);
+    /* =====================================================
+       PROFILE PHOTO
+    ====================================================== */
 
-    font-size:9px;
-}
+    .photo-area {
+      position: relative;
+      z-index: 4;
 
-.empty-icon{
-    font-size:40px;
-    margin-bottom:9px;
-}
+      display: flex;
 
+      justify-content: center;
 
-/* =========================================================
-   MODAL
-========================================================= */
+      margin-top: -50px;
 
-.modal-overlay{
-    position:fixed;
+      margin-bottom: 15px;
+    }
 
-    inset:0;
+    .student-photo {
+      width: 110px;
+      height: 110px;
 
-    z-index:3000;
+      border-radius: 50%;
 
-    background:rgba(15,23,42,.65);
+      background:
+        linear-gradient(
+          135deg,
+          #dbeafe,
+          #e0f2fe
+        );
 
-    backdrop-filter:blur(5px);
+      border:
+        6px solid #fff;
 
-    display:none;
+      box-shadow:
+        0 10px 25px
+        rgba(
+          15,
+          23,
+          42,
+          0.16
+        );
 
-    align-items:center;
-    justify-content:center;
+      display: flex;
 
-    padding:15px;
-}
+      align-items: center;
+      justify-content: center;
 
-.modal-overlay.show{
-    display:flex;
-}
+      color: #1d4ed8;
 
-.modal{
-    width:100%;
+      font-size: 42px;
 
-    max-width:720px;
+      font-weight: 900;
 
-    max-height:94vh;
+      overflow: hidden;
+    }
 
-    overflow:auto;
+    .student-photo img {
+      width: 100%;
+      height: 100%;
 
-    background:var(--card);
+      object-fit: cover;
 
-    color:var(--text);
+      display: none;
+    }
 
-    border:1px solid var(--border);
 
-    border-radius:18px;
+    /* =====================================================
+       CARD CONTENT
+    ====================================================== */
 
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.3);
-}
+    .id-content {
+      position: relative;
+      z-index: 2;
 
-.modal-header{
-    position:sticky;
-    top:0;
+      padding:
+        0 25px 25px;
 
-    z-index:5;
+      text-align: center;
+    }
 
-    background:var(--card);
+    .student-name {
+      font-size: 24px;
 
-    padding:15px 18px;
+      font-weight: 900;
 
-    border-bottom:1px solid var(--border);
+      color: #111827;
 
-    display:flex;
+      margin-bottom: 3px;
+    }
 
-    align-items:center;
-    justify-content:space-between;
-}
+    .student-role {
+      color: #64748b;
 
-.modal-header h2{
-    font-size:13px;
-}
+      font-size: 12px;
 
-.close-btn{
-    width:32px;
-    height:32px;
+      margin-bottom: 16px;
+    }
 
-    border:1px solid var(--border);
 
-    background:var(--card);
+    /* =====================================================
+       ACTIVE BADGE
+    ====================================================== */
 
-    color:var(--text);
+    .active-badge {
+      display: inline-flex;
 
-    border-radius:8px;
+      align-items: center;
 
-    font-size:16px;
-}
+      gap: 7px;
 
-.close-btn:hover{
-    color:var(--danger);
+      padding:
+        7px 13px;
 
-    background:#fee2e2;
-}
+      border-radius: 999px;
 
-.modal-body{
-    padding:20px;
-}
+      background: #dcfce7;
 
+      color: #166534;
 
-/* =========================================================
-   PREVIEW
-========================================================= */
+      font-size: 11px;
 
-.preview-area{
-    background:var(--bg);
+      font-weight: 900;
 
-    border:1px solid var(--border);
+      margin-bottom: 20px;
+    }
 
-    border-radius:13px;
+    .active-dot {
+      width: 7px;
+      height: 7px;
 
-    padding:20px;
+      border-radius: 50%;
 
-    display:flex;
+      background: #16a34a;
+    }
 
-    justify-content:center;
 
-    overflow:auto;
-}
+    /* =====================================================
+       INFORMATION
+    ====================================================== */
 
-.preview-card{
-    width:390px;
+    .id-info {
+      border-top:
+        1px solid #e5e7eb;
 
-    min-width:390px;
-}
+      border-bottom:
+        1px solid #e5e7eb;
 
+      padding:
+        15px 0;
 
-/* =========================================================
-   PRINT AREA
-========================================================= */
+      display: grid;
 
-.print-wrapper{
-    display:none;
-}
+      grid-template-columns:
+        1fr 1fr;
 
+      gap: 13px 15px;
 
-/* =========================================================
-   TOAST
-========================================================= */
+      text-align: left;
+    }
 
-.toast{
-    position:fixed;
+    .id-info-item {
+      min-width: 0;
+    }
 
-    right:20px;
-    bottom:20px;
+    .id-info-item span {
+      display: block;
 
-    z-index:5000;
+      color: #64748b;
 
-    background:#111827;
+      font-size: 9px;
 
-    color:#fff;
+      text-transform: uppercase;
 
-    padding:11px 15px;
+      letter-spacing: 0.4px;
 
-    border-radius:9px;
+      margin-bottom: 3px;
+    }
 
-    font-size:9px;
+    .id-info-item strong {
+      display: block;
 
-    opacity:0;
+      color: #111827;
 
-    transform:translateY(20px);
+      font-size: 12px;
 
-    pointer-events:none;
+      line-height: 1.45;
 
-    transition:.25s;
-}
+      word-break: break-word;
+    }
 
-.toast.show{
-    opacity:1;
 
-    transform:translateY(0);
-}
+    /* =====================================================
+       CARD FOOTER
+    ====================================================== */
 
+    .id-footer {
+      position: relative;
+      z-index: 2;
 
-/* =========================================================
-   FOOTER
-========================================================= */
+      margin-top: 20px;
 
-.footer{
-    text-align:center;
+      display: flex;
 
-    color:var(--muted);
+      align-items: center;
+      justify-content: space-between;
 
-    font-size:8px;
+      gap: 12px;
+    }
 
-    padding:25px 10px 5px;
-}
+    .signature-box {
+      text-align: center;
 
+      min-width: 130px;
+    }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+    .signature-line {
+      height: 1px;
 
-@media(max-width:1050px){
+      background: #64748b;
 
-    .card-grid{
+      margin-bottom: 5px;
+    }
+
+    .signature-box strong {
+      display: block;
+
+      font-size: 10px;
+
+      color: #111827;
+    }
+
+    .signature-box span {
+      display: block;
+
+      font-size: 8px;
+
+      color: #64748b;
+
+      margin-top: 2px;
+    }
+
+    .mini-seal {
+      width: 66px;
+      height: 66px;
+
+      flex-shrink: 0;
+
+      border:
+        2px solid
+        #2563eb;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-direction: column;
+
+      color: #1d4ed8;
+
+      font-size: 9px;
+
+      font-weight: 900;
+
+      transform:
+        rotate(-8deg);
+
+      background:
+        rgba(
+          37,
+          99,
+          235,
+          0.04
+        );
+    }
+
+    .mini-seal small {
+      font-size: 6px;
+
+      letter-spacing: 0.7px;
+
+      margin-top: 2px;
+    }
+
+
+    /* =====================================================
+       CARD BOTTOM STRIP
+    ====================================================== */
+
+    .id-bottom-strip {
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      height: 8px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #1d4ed8,
+          #2563eb,
+          #0891b2
+        );
+    }
+
+
+    /* =====================================================
+       CARD NUMBER
+    ====================================================== */
+
+    .card-number {
+      margin-top: 15px;
+
+      font-size: 9px;
+
+      color: #64748b;
+
+      letter-spacing: 0.4px;
+    }
+
+    .card-number strong {
+      color: #334155;
+    }
+
+
+    /* =====================================================
+       ACTIONS
+    ====================================================== */
+
+    .actions {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 20px;
+
+      justify-content: center;
+    }
+
+    .btn {
+      border: none;
+
+      border-radius: 11px;
+
+      padding:
+        11px 17px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform:
+        translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+
+      color: var(--text);
+
+      border:
+        1px solid var(--border);
+    }
+
+
+    /* =====================================================
+       COURSE INFORMATION
+    ====================================================== */
+
+    .course-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 13px;
+    }
+
+    .course-item {
+      padding: 15px;
+
+      border:
+        1px solid var(--border);
+
+      background: var(--bg);
+
+      border-radius: 13px;
+    }
+
+    .course-item span {
+      display: block;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      margin-bottom: 5px;
+    }
+
+    .course-item strong {
+      font-size: 14px;
+    }
+
+
+    /* =====================================================
+       INFORMATION NOTE
+    ====================================================== */
+
+    .info-note {
+      margin-top: 20px;
+
+      padding:
+        15px 16px;
+
+      border-radius: 13px;
+
+      background: var(--bg);
+
+      border:
+        1px solid var(--border);
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.8;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    footer {
+      border-top:
+        1px solid var(--border);
+
+      background: var(--card);
+
+      color: var(--muted);
+
+      text-align: center;
+
+      padding:
+        24px 15px;
+
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: var(--text);
+    }
+
+
+    /* =====================================================
+       TOAST
+    ====================================================== */
+
+    .toast {
+      position: fixed;
+
+      right: 20px;
+      bottom: 20px;
+
+      z-index: 9999;
+
+      background: #0f172a;
+
+      color: #fff;
+
+      padding:
+        13px 17px;
+
+      border-radius: 12px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      transform:
+        translateY(15px);
+
+      transition: 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+
+      visibility: visible;
+
+      transform:
+        translateY(0);
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+
+    @media (max-width: 650px) {
+
+      .header {
+        padding:
+          0 14px;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .brand-title {
+        font-size: 15px;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logout-btn {
+        padding:
+          9px 11px;
+
+        font-size: 12px;
+      }
+
+      .container {
+        width:
+          calc(100% - 20px);
+
+        padding-top: 18px;
+      }
+
+      .welcome {
+        flex-direction: column;
+
+        align-items:
+          flex-start;
+
+        padding: 21px;
+
+        border-radius: 19px;
+      }
+
+      .welcome h1 {
+        font-size: 23px;
+      }
+
+      .student-badge {
+        width: 100%;
+
+        text-align: left;
+      }
+
+      .section {
+        padding: 17px;
+      }
+
+      .section-title {
+        font-size: 18px;
+      }
+
+      .id-card {
+        width: 100%;
+
+        max-width: 430px;
+
+        min-height: 650px;
+      }
+
+      .id-header {
+        padding:
+          22px 17px 30px;
+      }
+
+      .id-content {
+        padding:
+          0 18px 22px;
+      }
+
+      .id-institute-name {
+        font-size: 16px;
+      }
+
+      .id-card-title {
+        font-size: 18px;
+      }
+
+      .student-name {
+        font-size: 21px;
+      }
+
+      .id-info {
+        gap: 11px;
+      }
+
+      .id-info-item strong {
+        font-size: 11px;
+      }
+
+      .course-grid {
         grid-template-columns:
-            repeat(2,1fr);
+          1fr;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
     }
 
-}
 
-@media(max-width:800px){
+    /* =====================================================
+       PRINT
+    ====================================================== */
 
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
+    @media print {
+
+      @page {
+        size: auto;
+        margin: 8mm;
+      }
+
+      html,
+      body {
+        background: #fff !important;
+
+        color: #000 !important;
+      }
+
+      .topbar,
+      .header,
+      .welcome,
+      .notice,
+      .section:not(.id-card-section),
+      footer,
+      .actions,
+      .info-note,
+      .section-header {
+        display: none !important;
+      }
+
+      .container {
+        width: 100%;
+
+        padding: 0;
+
+        margin: 0;
+      }
+
+      .id-card-section {
+        display: block !important;
+
+        padding: 0;
+
+        margin: 0;
+
+        border: none;
+
+        box-shadow: none;
+
+        background: #fff;
+      }
+
+      .id-card-wrap {
+        padding: 0;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
+      }
+
+      .id-card {
+        width: 430px;
+
+        min-height: 680px;
+
+        box-shadow: none;
+
+        border:
+          1px solid
+          #2563eb;
+
+        page-break-inside: avoid;
+      }
+
     }
 
-    .filters{
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .filters .btn{
-        width:100%;
-    }
-
-}
-
-@media(max-width:650px){
-
-    .header{
-        padding:10px 13px;
-    }
-
-    .main{
-        padding:18px 13px 35px;
-    }
-
-    .page-header{
-        flex-direction:column;
-
-        align-items:flex-start;
-    }
-
-    .actions{
-        width:100%;
-    }
-
-    .actions .btn{
-        flex:1;
-    }
-
-    .filters{
-        grid-template-columns:1fr;
-    }
-
-    .card-grid{
-        grid-template-columns:1fr;
-    }
-
-    .id-card{
-        max-width:390px;
-    }
-
-}
-
-@media(max-width:420px){
-
-    .stats{
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .stat{
-        padding:11px;
-    }
-
-    .stat-number{
-        font-size:18px;
-    }
-
-    .preview-area{
-        padding:10px;
-
-        justify-content:flex-start;
-    }
-
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-@media print{
-
-    @page{
-        size:A4;
-        margin:12mm;
-    }
-
-    body{
-        background:#fff !important;
-    }
-
-    .header,
-    .page-header,
-    .stats,
-    .filter-card,
-    .card-actions,
-    .footer,
-    .modal-overlay,
-    .toast{
-        display:none !important;
-    }
-
-    .main{
-        max-width:none;
-        padding:0;
-    }
-
-    .card-grid{
-        display:block;
-    }
-
-    .profile-card{
-        display:block;
-
-        page-break-inside:avoid;
-
-        margin:0 auto 20px;
-    }
-
-    .id-card{
-        box-shadow:none;
-
-        border:1px solid #bbb;
-    }
-
-}
-
-
-/* =========================================================
-   SINGLE CARD PRINT
-========================================================= */
-
-body.single-print .header,
-body.single-print .main > *,
-body.single-print .footer,
-body.single-print .modal-overlay,
-body.single-print .toast{
-    display:none !important;
-}
-
-body.single-print .print-wrapper{
-    display:flex !important;
-
-    min-height:100vh;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#fff;
-}
-
-body.single-print{
-    background:#fff;
-}
-
-body.single-print .id-card{
-    box-shadow:none;
-}
-
-</style>
+  </style>
 </head>
-
 
 <body>
 
 
-<!-- =======================================================
-     HEADER
-======================================================= -->
+  <!-- =====================================================
+       TOP BAR
+  ====================================================== -->
 
-<header class="header">
+  <div class="topbar">
+    🪪 SNK IT Institute — Student Portal
+  </div>
 
-    <div class="logo-area">
 
-        <img
-            class="logo"
-            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-            alt="SNK IT Institute"
-        >
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
-        <div class="logo-text">
+  <header class="header">
 
-            SNK IT Institute
+    <a
+      href="student-dashboard.html"
+      class="brand"
+    >
 
-            <small>
-                Student ID Card Management
-            </small>
+      <img
+        src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+        alt="SNK IT Institute Logo"
+      >
 
+      <div class="brand-text">
+
+        <div class="brand-title">
+          SNK IT Institute
         </div>
 
-    </div>
+        <div class="brand-subtitle">
+          Offline Course Student Portal
+        </div>
+
+      </div>
+
+    </a>
 
 
     <div class="header-actions">
 
-        <button
-            class="header-btn"
-            onclick="toggleTheme()"
-            id="themeBtn"
-        >
-            🌙
-        </button>
+      <button
+        type="button"
+        class="icon-btn"
+        id="themeBtn"
+        title="Theme"
+        aria-label="Theme"
+      >
+        🌙
+      </button>
 
-        <button
-            class="header-btn"
-            onclick="goBack()"
-        >
-            ← Back
-        </button>
+
+      <button
+        type="button"
+        class="logout-btn"
+        id="logoutBtn"
+      >
+        Logout
+      </button>
 
     </div>
 
-</header>
+  </header>
 
 
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
 
-<!-- =======================================================
-     MAIN
-======================================================= -->
-
-<main class="main">
-
-
-    <!-- PAGE HEADER -->
-
-    <section class="page-header">
-
-        <div class="page-title">
-
-            <h1>
-                🪪 Student ID Cards
-            </h1>
-
-            <p>
-                Student-এর digital ID card preview, print এবং management করুন।
-            </p>
-
-        </div>
+  <main class="container">
 
 
-        <div class="actions">
+    <!-- ===================================================
+         WELCOME
+    ==================================================== -->
 
-            <button
-                class="btn"
-                onclick="printAllCards()"
-            >
-                🖨️ Print All
-            </button>
+    <section class="welcome">
 
-            <button
-                class="btn primary"
-                onclick="refreshStudents()"
-            >
-                🔄 Refresh
-            </button>
+      <div>
 
-        </div>
+        <h1>
+          🪪 My Student ID Card
+        </h1>
 
-    </section>
+        <p>
+          আপনার Student ID Card এখানে দেখতে ও print করতে পারবেন।
+        </p>
 
+        <p style="margin-top:5px;">
+          Computer Office Application • Batch 01 • Offline
+        </p>
 
-
-    <!-- =====================================================
-         STATS
-    ====================================================== -->
-
-    <section class="stats">
+      </div>
 
 
-        <div class="stat blue">
+      <div class="student-badge">
 
-            <div class="stat-icon">
-                👨‍🎓
-            </div>
+        <small>
+          Student ID
+        </small>
 
-            <div
-                class="stat-number"
-                id="totalStudents"
-            >
-                0
-            </div>
+        <strong id="topStudentId">
+          SNK-1001
+        </strong>
 
-            <div class="stat-label">
-                Total Students
-            </div>
-
-        </div>
-
-
-        <div class="stat green">
-
-            <div class="stat-icon">
-                🪪
-            </div>
-
-            <div
-                class="stat-number"
-                id="activeCards"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Active ID Cards
-            </div>
-
-        </div>
-
-
-        <div class="stat orange">
-
-            <div class="stat-icon">
-                🎓
-            </div>
-
-            <div
-                class="stat-number"
-                id="courseCount"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Courses
-            </div>
-
-        </div>
-
-
-        <div class="stat red">
-
-            <div class="stat-icon">
-                ⛔
-            </div>
-
-            <div
-                class="stat-number"
-                id="inactiveCards"
-            >
-                0
-            </div>
-
-            <div class="stat-label">
-                Inactive Students
-            </div>
-
-        </div>
+      </div>
 
     </section>
 
 
+    <!-- ===================================================
+         NOTICE
+    ==================================================== -->
 
-    <!-- =====================================================
-         FILTER
-    ====================================================== -->
+    <div class="notice">
 
-    <section class="filter-card">
+      🪪 <strong>Student ID Card:</strong>
+      এই ID Card আপনার Student Portal-এর digital/demo card।
 
-        <div class="filter-title">
-            🔎 Search & Filter ID Cards
-        </div>
+      <br>
 
+      📅 <strong>Course Start:</strong>
+      08 September 2026
 
-        <div class="filters">
+      <br>
 
+      ℹ️ ভবিষ্যতে Firebase-এর মাধ্যমে student photo,
+      registration information এবং official ID data
+      automatically load করা যাবে।
 
-            <div class="field">
-
-                <label>
-                    Search
-                </label>
-
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Name, Student ID, phone, email..."
-                    oninput="renderCards()"
-                >
-
-            </div>
+    </div>
 
 
-            <div class="field">
-
-                <label>
-                    Course
-                </label>
-
-                <select
-                    id="courseFilter"
-                    onchange="renderCards()"
-                >
-
-                    <option value="all">
-                        All Courses
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <button
-                class="btn"
-                onclick="resetFilters()"
-            >
-                Reset
-            </button>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         CARD GRID
-    ====================================================== -->
+    <!-- ===================================================
+         ID CARD SECTION
+    ==================================================== -->
 
     <section
-        class="card-grid"
-        id="cardGrid"
-    ></section>
+      class="section id-card-section"
+    >
 
+      <div class="section-header">
 
+        <div>
 
-    <footer class="footer">
+          <div class="section-title">
+            🪪 Student Identity Card
+          </div>
 
-        © 2026 SNK IT Institute • Student ID Card Management
-
-    </footer>
-
-</main>
-
-
-
-<!-- =======================================================
-     PREVIEW MODAL
-======================================================= -->
-
-<div
-    class="modal-overlay"
-    id="previewModal"
->
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h2>
-                🪪 ID Card Preview
-            </h2>
-
-            <button
-                class="close-btn"
-                onclick="closePreview()"
-            >
-                ×
-            </button>
+          <div class="section-subtitle">
+            Digital Student ID Card Preview
+          </div>
 
         </div>
 
+      </div>
 
-        <div class="modal-body">
 
-            <div class="preview-area">
+      <!-- =================================================
+           ID CARD
+      ================================================== -->
 
-                <div
-                    class="preview-card"
-                    id="previewContent"
-                ></div>
-
-            </div>
-
-        </div>
-
-
-        <div class="modal-header"
-             style="
-                position:static;
-                border-top:1px solid var(--border);
-                border-bottom:0;
-                justify-content:flex-end;
-             "
-        >
-
-            <button
-                class="btn"
-                onclick="closePreview()"
-            >
-                Close
-            </button>
-
-            <button
-                class="btn primary"
-                onclick="printPreviewCard()"
-            >
-                🖨️ Print ID Card
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =======================================================
-     SINGLE PRINT WRAPPER
-======================================================= -->
-
-<div
-    class="print-wrapper"
-    id="singlePrintWrapper"
-></div>
-
-
-
-<div
-    class="toast"
-    id="toast"
-></div>
-
-
-
-<script>
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-const STUDENTS_KEY =
-    "snkStudents";
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let students = [];
-
-let previewStudentId = null;
-
-
-/* =========================================================
-   LOAD STUDENTS
-========================================================= */
-
-function loadStudents(){
-
-    try{
-
-        const data =
-            localStorage.getItem(
-                STUDENTS_KEY
-            );
-
-
-        students =
-            data
-            ?
-            JSON.parse(data)
-            :
-            [];
-
-    }
-    catch(error){
-
-        console.error(
-            "Student data loading error:",
-            error
-        );
-
-        students = [];
-
-    }
-
-
-    if(
-        !Array.isArray(students)
-    ){
-
-        students = [];
-
-    }
-
-}
-
-
-/* =========================================================
-   STUDENT HELPERS
-========================================================= */
-
-function getStudentId(student){
-
-    return String(
-        student.id ||
-        student.studentId ||
-        ""
-    );
-
-}
-
-
-function getStudentName(student){
-
-    return (
-        student.name ||
-        student.studentName ||
-        "Student"
-    );
-
-}
-
-
-function getCourse(student){
-
-    return (
-        student.course ||
-        student.courseName ||
-        "-"
-    );
-
-}
-
-
-function getStatus(student){
-
-    return String(
-        student.status ||
-        "active"
-    ).toLowerCase();
-
-}
-
-
-function getEmail(student){
-
-    return (
-        student.email ||
-        "-"
-    );
-
-}
-
-
-function getPhone(student){
-
-    return (
-        student.phone ||
-        "-"
-    );
-
-}
-
-
-function getAdmissionDate(student){
-
-    return (
-        student.admissionDate ||
-        ""
-    );
-
-}
-
-
-function getPhoto(student){
-
-    return (
-        student.photo ||
-        student.photoUrl ||
-        ""
-    );
-
-}
-
-
-/* =========================================================
-   INITIAL
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        loadTheme();
-
-        loadStudents();
-
-        buildCourseFilter();
-
-        renderCards();
-
-    }
-);
-
-
-/* =========================================================
-   BUILD COURSE FILTER
-========================================================= */
-
-function buildCourseFilter(){
-
-    const select =
-        document.getElementById(
-            "courseFilter"
-        );
-
-
-    const oldValue =
-        select.value;
-
-
-    const courses =
-        [
-            ...new Set(
-                students
-                .map(
-                    student =>
-                        getCourse(
-                            student
-                        )
-                )
-                .filter(
-                    course =>
-                        course &&
-                        course !== "-"
-                )
-            )
-        ]
-        .sort(
-            (a,b) =>
-                a.localeCompare(
-                    b
-                )
-        );
-
-
-    select.innerHTML = `
-
-        <option value="all">
-            All Courses
-        </option>
-
-    `;
-
-
-    courses.forEach(
-        course => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                course;
-
-
-            option.textContent =
-                course;
-
-
-            select.appendChild(
-                option
-            );
-
-        }
-    );
-
-
-    if(
-        courses.includes(
-            oldValue
-        )
-    ){
-
-        select.value =
-            oldValue;
-
-    }
-
-}
-
-
-/* =========================================================
-   FILTER STUDENTS
-========================================================= */
-
-function getFilteredStudents(){
-
-    const search =
-        document.getElementById(
-            "searchInput"
-        )
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    const course =
-        document.getElementById(
-            "courseFilter"
-        )
-        .value;
-
-
-    return students.filter(
-        student => {
-
-            const id =
-                getStudentId(
-                    student
-                )
-                .toLowerCase();
-
-
-            const name =
-                getStudentName(
-                    student
-                )
-                .toLowerCase();
-
-
-            const email =
-                getEmail(
-                    student
-                )
-                .toLowerCase();
-
-
-            const phone =
-                getPhone(
-                    student
-                )
-                .toLowerCase();
-
-
-            const studentCourse =
-                getCourse(
-                    student
-                );
-
-
-            const searchMatch =
-                !search ||
-                id.includes(search) ||
-                name.includes(search) ||
-                email.includes(search) ||
-                phone.includes(search);
-
-
-            const courseMatch =
-                course === "all" ||
-                studentCourse === course;
-
-
-            return (
-                searchMatch &&
-                courseMatch
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   RENDER
-========================================================= */
-
-function renderCards(){
-
-    const grid =
-        document.getElementById(
-            "cardGrid"
-        );
-
-
-    grid.innerHTML =
-        "";
-
-
-    const data =
-        getFilteredStudents();
-
-
-    if(
-        data.length === 0
-    ){
-
-        grid.innerHTML = `
-
-            <div class="empty">
-
-                <div class="empty-icon">
-                    🪪
-                </div>
-
-                <strong>
-                    কোনো Student ID Card পাওয়া যায়নি
-                </strong>
-
-                <div
-                    style="
-                        margin-top:5px;
-                        font-size:7px;
-                    "
-                >
-                    প্রথমে Student Profile Management থেকে
-                    student যোগ করুন।
-                </div>
-
-            </div>
-
-        `;
-
-        updateStats();
-
-        return;
-
-    }
-
-
-    data.forEach(
-        student => {
-
-            grid.appendChild(
-                createStudentCard(
-                    student
-                )
-            );
-
-        }
-    );
-
-
-    updateStats();
-
-}
-
-
-/* =========================================================
-   CREATE ID CARD
-========================================================= */
-
-function createStudentCard(
-    student
-){
-
-    const wrapper =
-        document.createElement(
-            "div"
-        );
-
-
-    wrapper.className =
-        "profile-card";
-
-
-    wrapper.innerHTML = `
-
-        ${buildCardHTML(
-            student
-        )}
-
-
-        <div class="card-actions">
-
-            <button
-                class="card-action"
-                onclick="previewCard('${escapeAttribute(
-                    getStudentId(student)
-                )}')"
-            >
-                👁️ Preview
-            </button>
-
-            <button
-                class="card-action primary"
-                onclick="printSingleCard('${escapeAttribute(
-                    getStudentId(student)
-                )}')"
-            >
-                🖨️ Print
-            </button>
-
-            <button
-                class="card-action"
-                onclick="copyStudentId('${escapeAttribute(
-                    getStudentId(student)
-                )}')"
-            >
-                📋 Copy ID
-            </button>
-
-        </div>
-
-    `;
-
-
-    return wrapper;
-
-}
-
-
-/* =========================================================
-   BUILD CARD HTML
-========================================================= */
-
-function buildCardHTML(
-    student
-){
-
-    const name =
-        getStudentName(
-            student
-        );
-
-
-    const id =
-        getStudentId(
-            student
-        );
-
-
-    const course =
-        getCourse(
-            student
-        );
-
-
-    const email =
-        getEmail(
-            student
-        );
-
-
-    const phone =
-        getPhone(
-            student
-        );
-
-
-    const admission =
-        formatDate(
-            getAdmissionDate(
-                student
-            )
-        );
-
-
-    const photo =
-        getPhoto(
-            student
-        );
-
-
-    const status =
-        getStatus(
-            student
-        );
-
-
-    const initial =
-        getInitial(
-            name
-        );
-
-
-    const photoHTML =
-        photo
-        ?
-        `
-            <div class="student-photo">
-
-                <img
-                    src="${escapeAttribute(photo)}"
-                    alt="${escapeAttribute(name)}"
-                    onerror="this.parentElement.innerHTML='${escapeAttribute(initial)}'"
-                >
-
-            </div>
-        `
-        :
-        `
-            <div class="student-photo">
-                ${escapeHtml(initial)}
-            </div>
-        `;
-
-
-    const statusHTML =
-        status === "active"
-        ?
-        `
-            <span class="status-badge status-active">
-                ● Active
-            </span>
-        `
-        :
-        `
-            <span class="status-badge status-inactive">
-                ● Inactive
-            </span>
-        `;
-
-
-    return `
+      <div class="id-card-wrap">
 
         <div class="id-card">
 
-            <div class="id-header">
 
-                <img
-                    class="id-logo"
-                    src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-                    alt="SNK IT"
+          <!-- DECORATION -->
+
+          <div
+            class="card-bg-circle-1"
+          ></div>
+
+          <div
+            class="card-bg-circle-2"
+          ></div>
+
+
+          <!-- CARD HEADER -->
+
+          <div class="id-header">
+
+            <div class="id-header-top">
+
+              <img
+                class="id-logo"
+                src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+                alt="SNK IT Institute Logo"
+              >
+
+              <div class="id-institute">
+
+                <div class="id-institute-name">
+                  SNK IT Institute
+                </div>
+
+                <div class="id-institute-subtitle">
+                  Student Training & IT Education
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="id-card-title">
+              Student ID Card
+            </div>
+
+            <div class="id-card-small-title">
+              OFFLINE COURSE STUDENT
+            </div>
+
+          </div>
+
+
+          <!-- PHOTO -->
+
+          <div class="photo-area">
+
+            <div
+              class="student-photo"
+              id="studentPhoto"
+              title="Student Photo"
+            >
+
+              <span id="photoPlaceholder">
+                👤
+              </span>
+
+              <img
+                id="photoImage"
+                src=""
+                alt="Student Photo"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- CONTENT -->
+
+          <div class="id-content">
+
+
+            <div
+              class="student-name"
+              id="cardStudentName"
+            >
+              Demo Student
+            </div>
+
+
+            <div class="student-role">
+              Student • SNK IT Institute
+            </div>
+
+
+            <div class="active-badge">
+
+              <span class="active-dot"></span>
+
+              Active Student
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="id-info">
+
+
+              <div class="id-info-item">
+
+                <span>
+                  Student ID
+                </span>
+
+                <strong
+                  id="cardStudentId"
                 >
+                  SNK-1001
+                </strong>
+
+              </div>
 
 
-                <div class="institute-info">
+              <div class="id-info-item">
 
-                    <h3>
-                        SNK IT Institute
-                    </h3>
+                <span>
+                  Batch
+                </span>
 
-                    <p>
-                        Technology • Education • Skills
-                    </p>
+                <strong>
+                  Batch 01
+                </strong>
 
-                </div>
+              </div>
 
 
-                <div class="id-label">
-                    STUDENT ID CARD
-                </div>
+              <div class="id-info-item">
+
+                <span>
+                  Course
+                </span>
+
+                <strong>
+                  Computer Office Application
+                </strong>
+
+              </div>
+
+
+              <div class="id-info-item">
+
+                <span>
+                  Mode
+                </span>
+
+                <strong>
+                  Offline
+                </strong>
+
+              </div>
+
+
+              <div class="id-info-item">
+
+                <span>
+                  Course Duration
+                </span>
+
+                <strong>
+                  6 Months
+                </strong>
+
+              </div>
+
+
+              <div class="id-info-item">
+
+                <span>
+                  Class Start
+                </span>
+
+                <strong>
+                  08 September 2026
+                </strong>
+
+              </div>
+
+
+              <div class="id-info-item">
+
+                <span>
+                  Class Days
+                </span>
+
+                <strong>
+                  Saturday – Monday
+                </strong>
+
+              </div>
+
+
+              <div class="id-info-item">
+
+                <span>
+                  Class Time
+                </span>
+
+                <strong>
+                  4:00 PM – 6:00 PM
+                </strong>
+
+              </div>
+
 
             </div>
 
 
-            <div class="id-body">
+            <!-- CARD NUMBER -->
 
-                ${photoHTML}
+            <div class="card-number">
 
-
-                <div class="student-info">
-
-                    <h2>
-                        ${escapeHtml(name)}
-                    </h2>
-
-
-                    <span class="student-course">
-                        ${escapeHtml(course)}
-                    </span>
-
-
-                    <div class="info-item">
-
-                        <span class="label">
-                            Student ID
-                        </span>
-
-                        <span class="value">
-                            ${escapeHtml(id || "-")}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <span class="label">
-                            Phone
-                        </span>
-
-                        <span class="value">
-                            ${escapeHtml(phone)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <span class="label">
-                            Email
-                        </span>
-
-                        <span class="value">
-                            ${escapeHtml(email)}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <span class="label">
-                            Admission
-                        </span>
-
-                        <span class="value">
-                            ${escapeHtml(admission)}
-                        </span>
-
-                    </div>
-
-                </div>
+              Card No:
+              <strong id="cardNumber">
+                SNK-ID-SNK-1001
+              </strong>
 
             </div>
 
+
+            <!-- FOOTER -->
 
             <div class="id-footer">
 
-                <div class="valid-text">
 
-                    Issued by
+              <div class="signature-box">
 
-                    <strong>
-                        SNK IT Institute
-                    </strong>
+                <div class="signature-line"></div>
 
+                <strong>
+                  SNK IT Instructor
+                </strong>
+
+                <span>
+                  Course Instructor
+                </span>
+
+              </div>
+
+
+              <div class="mini-seal">
+
+                <div>
+                  SNK IT
                 </div>
 
+                <small>
+                  INSTITUTE
+                </small>
 
-                ${statusHTML}
+                <div>
+                  ★
+                </div>
+
+              </div>
+
+
+              <div class="signature-box">
+
+                <div class="signature-line"></div>
+
+                <strong>
+                  Authorized
+                </strong>
+
+                <span>
+                  Institute Authority
+                </span>
+
+              </div>
+
 
             </div>
 
+          </div>
+
+
+          <!-- BOTTOM STRIP -->
+
+          <div class="id-bottom-strip"></div>
+
+
         </div>
 
-    `;
-
-}
+      </div>
 
 
-/* =========================================================
-   PREVIEW
-========================================================= */
+      <!-- =================================================
+           ACTIONS
+      ================================================== -->
 
-function previewCard(
-    id
-){
+      <div class="actions">
 
-    const student =
-        findStudent(
-            id
-        );
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="printCardBtn"
+        >
+          🖨️ Print ID Card
+        </button>
 
 
-    if(
-        !student
-    ){
+        <a
+          href="student-dashboard.html"
+          class="btn btn-secondary"
+        >
+          🏠 Dashboard
+        </a>
 
-        showToast(
-            "Student পাওয়া যায়নি!"
-        );
 
-        return;
+        <a
+          href="courses.html"
+          class="btn btn-secondary"
+        >
+          📚 My Course
+        </a>
+
+
+        <a
+          href="student-profiles.html"
+          class="btn btn-secondary"
+        >
+          👤 My Profile
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         COURSE INFORMATION
+    ==================================================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="section-title">
+            📚 Enrollment Information
+          </div>
+
+          <div class="section-subtitle">
+            আপনার বর্তমান Course ও Batch তথ্য
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="course-grid">
+
+
+        <div class="course-item">
+
+          <span>
+            Student
+          </span>
+
+          <strong id="infoStudentName">
+            Demo Student
+          </strong>
+
+        </div>
+
+
+        <div class="course-item">
+
+          <span>
+            Student ID
+          </span>
+
+          <strong id="infoStudentId">
+            SNK-1001
+          </strong>
+
+        </div>
+
+
+        <div class="course-item">
+
+          <span>
+            Course
+          </span>
+
+          <strong>
+            Computer Office Application
+          </strong>
+
+        </div>
+
+
+        <div class="course-item">
+
+          <span>
+            Batch
+          </span>
+
+          <strong>
+            Batch 01
+          </strong>
+
+        </div>
+
+
+        <div class="course-item">
+
+          <span>
+            Course Mode
+          </span>
+
+          <strong>
+            Offline
+          </strong>
+
+        </div>
+
+
+        <div class="course-item">
+
+          <span>
+            Duration
+          </span>
+
+          <strong>
+            6 Months
+          </strong>
+
+        </div>
+
+
+        <div class="course-item">
+
+          <span>
+            Class Start
+          </span>
+
+          <strong>
+            08 September 2026
+          </strong>
+
+        </div>
+
+
+        <div class="course-item">
+
+          <span>
+            Status
+          </span>
+
+          <strong>
+            Active
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="info-note">
+
+        ℹ️ <strong>Note:</strong>
+        এই ID Card বর্তমানে Student Portal-এর
+        demo/local data ব্যবহার করছে।
+        Student Photo, Guardian Information,
+        official registration number এবং অন্যান্য
+        verified information ভবিষ্যতে Firebase/Admin
+        system-এর মাধ্যমে যুক্ত করা যাবে।
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <p>
+      © 2026
+      <strong>
+        SNK IT Institute
+      </strong>
+      — Student Portal
+    </p>
+
+    <p style="margin-top:6px;">
+      Student ID Card Module v1.10
+    </p>
+
+  </footer>
+
+
+  <!-- =====================================================
+       TOAST
+  ====================================================== -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+
+    /* =====================================================
+       STEP 1.10
+       STUDENT ID CARD
+    ====================================================== */
+
+
+    /* =====================================================
+       SESSION PROTECTION
+    ====================================================== */
+
+    if (
+      sessionStorage.getItem(
+        "snkStudentLoggedIn"
+      ) !== "true"
+    ) {
+
+      window.location.replace(
+        "login.html"
+      );
 
     }
 
 
-    previewStudentId =
-        String(id);
+    /* =====================================================
+       STUDENT DATA
+    ====================================================== */
 
+    function getStudentId() {
 
-    document.getElementById(
-        "previewContent"
-    ).innerHTML =
-        buildCardHTML(
-            student
-        );
-
-
-    document.getElementById(
-        "previewModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   CLOSE PREVIEW
-========================================================= */
-
-function closePreview(){
-
-    document.getElementById(
-        "previewModal"
-    ).classList.remove(
-        "show"
-    );
-
-
-    previewStudentId =
-        null;
-
-}
-
-
-/* =========================================================
-   PRINT PREVIEW
-========================================================= */
-
-function printPreviewCard(){
-
-    if(
-        !previewStudentId
-    ){
-
-        showToast(
-            "কোনো card selected নেই!"
-        );
-
-        return;
+      return (
+        sessionStorage.getItem(
+          "snkStudentId"
+        ) || "SNK-1001"
+      );
 
     }
 
 
-    printSingleCard(
-        previewStudentId
-    );
+    function getStudentName() {
 
-}
-
-
-/* =========================================================
-   PRINT SINGLE CARD
-========================================================= */
-
-function printSingleCard(
-    id
-){
-
-    const student =
-        findStudent(
-            id
-        );
-
-
-    if(
-        !student
-    ){
-
-        showToast(
-            "Student পাওয়া যায়নি!"
-        );
-
-        return;
+      return (
+        sessionStorage.getItem(
+          "snkStudentName"
+        ) || "Demo Student"
+      );
 
     }
 
 
-    const wrapper =
-        document.getElementById(
-            "singlePrintWrapper"
-        );
+    /* =====================================================
+       UPDATE STUDENT INFORMATION
+    ====================================================== */
+
+    function refreshStudentData() {
+
+      const currentStudentId =
+        getStudentId();
 
 
-    wrapper.innerHTML =
-        buildCardHTML(
-            student
-        );
+      const currentStudentName =
+        getStudentName();
 
 
-    document.body.classList.add(
-        "single-print"
-    );
+      /*
+        Header
+      */
+
+      document.getElementById(
+        "topStudentId"
+      ).textContent =
+        currentStudentId;
 
 
-    setTimeout(
-        function(){
+      /*
+        ID Card
+      */
 
-            window.print();
-
-        },
-        150
-    );
-
-}
+      document.getElementById(
+        "cardStudentId"
+      ).textContent =
+        currentStudentId;
 
 
-/* =========================================================
-   AFTER PRINT
-========================================================= */
-
-window.addEventListener(
-    "afterprint",
-    function(){
-
-        document.body.classList.remove(
-            "single-print"
-        );
+      document.getElementById(
+        "cardStudentName"
+      ).textContent =
+        currentStudentName;
 
 
-        document.getElementById(
-            "singlePrintWrapper"
-        ).innerHTML =
-            "";
+      /*
+        Enrollment information
+      */
 
-    }
-);
-
-
-/* =========================================================
-   PRINT ALL
-========================================================= */
-
-function printAllCards(){
-
-    const data =
-        getFilteredStudents();
+      document.getElementById(
+        "infoStudentId"
+      ).textContent =
+        currentStudentId;
 
 
-    if(
-        data.length === 0
-    ){
+      document.getElementById(
+        "infoStudentName"
+      ).textContent =
+        currentStudentName;
 
-        showToast(
-            "Print করার মতো student নেই!"
-        );
 
-        return;
+      /*
+        Generate card number
+      */
+
+      document.getElementById(
+        "cardNumber"
+      ).textContent =
+        "SNK-ID-" +
+        currentStudentId;
 
     }
 
 
-    /*
-       For print-all we temporarily
-       use the existing grid.
-    */
+    refreshStudentData();
 
-    window.print();
 
-}
+    /* =====================================================
+       THEME
+    ====================================================== */
 
+    const themeBtn =
+      document.getElementById(
+        "themeBtn"
+      );
 
-/* =========================================================
-   FIND STUDENT
-========================================================= */
 
-function findStudent(
-    id
-){
+    function applyTheme() {
 
-    return students.find(
-        student =>
-            getStudentId(
-                student
-            ) ===
-            String(id)
-    );
-
-}
-
-
-/* =========================================================
-   COPY STUDENT ID
-========================================================= */
-
-async function copyStudentId(
-    id
-){
-
-    try{
-
-        await navigator.clipboard.writeText(
-            String(id)
-        );
-
-
-        showToast(
-            "Student ID copied ✓"
-        );
-
-    }
-    catch(error){
-
-        /*
-           Fallback for older browsers.
-        */
-
-        const textarea =
-            document.createElement(
-                "textarea"
-            );
-
-
-        textarea.value =
-            String(id);
-
-
-        document.body.appendChild(
-            textarea
-        );
-
-
-        textarea.select();
-
-
-        try{
-
-            document.execCommand(
-                "copy"
-            );
-
-            showToast(
-                "Student ID copied ✓"
-            );
-
-        }
-        catch(e){
-
-            showToast(
-                "Copy করা যায়নি!"
-            );
-
-        }
-
-
-        textarea.remove();
-
-    }
-
-}
-
-
-/* =========================================================
-   UPDATE STATS
-========================================================= */
-
-function updateStats(){
-
-    const total =
-        students.length;
-
-
-    const active =
-        students.filter(
-            student =>
-                getStatus(
-                    student
-                ) ===
-                "active"
-        ).length;
-
-
-    const inactive =
-        total -
-        active;
-
-
-    const courses =
-        new Set(
-            students
-            .map(
-                student =>
-                    getCourse(
-                        student
-                    )
-            )
-            .filter(
-                course =>
-                    course &&
-                    course !== "-"
-            )
-        ).size;
-
-
-    document.getElementById(
-        "totalStudents"
-    ).textContent =
-        total;
-
-
-    document.getElementById(
-        "activeCards"
-    ).textContent =
-        active;
-
-
-    document.getElementById(
-        "courseCount"
-    ).textContent =
-        courses;
-
-
-    document.getElementById(
-        "inactiveCards"
-    ).textContent =
-        inactive;
-
-}
-
-
-/* =========================================================
-   RESET FILTERS
-========================================================= */
-
-function resetFilters(){
-
-    document.getElementById(
-        "searchInput"
-    ).value =
-        "";
-
-
-    document.getElementById(
-        "courseFilter"
-    ).value =
-        "all";
-
-
-    renderCards();
-
-
-    showToast(
-        "Filters reset ✓"
-    );
-
-}
-
-
-/* =========================================================
-   REFRESH
-========================================================= */
-
-function refreshStudents(){
-
-    loadStudents();
-
-    buildCourseFilter();
-
-    renderCards();
-
-
-    showToast(
-        "Student data refreshed ✓"
-    );
-
-}
-
-
-/* =========================================================
-   THEME
-========================================================= */
-
-function toggleTheme(){
-
-    document.body.classList.toggle(
-        "dark"
-    );
-
-
-    const isDark =
-        document.body.classList.contains(
-            "dark"
-        );
-
-
-    localStorage.setItem(
-        "snkStudentIDTheme",
-        isDark
-        ?
-        "dark"
-        :
-        "light"
-    );
-
-
-    updateThemeButton();
-
-}
-
-
-function loadTheme(){
-
-    const theme =
+      const savedTheme =
         localStorage.getItem(
-            "snkStudentIDTheme"
-        );
+          "snkTheme"
+        ) || "light";
 
 
-    if(
-        theme === "dark"
-    ){
+      if (
+        savedTheme === "dark"
+      ) {
 
         document.body.classList.add(
+          "dark"
+        );
+
+        themeBtn.textContent =
+          "☀️";
+
+      } else {
+
+        document.body.classList.remove(
+          "dark"
+        );
+
+        themeBtn.textContent =
+          "🌙";
+
+      }
+
+    }
+
+
+    applyTheme();
+
+
+    themeBtn.addEventListener(
+      "click",
+      function() {
+
+        const isDark =
+          document.body.classList.toggle(
             "dark"
-        );
-
-    }
+          );
 
 
-    updateThemeButton();
-
-}
-
-
-function updateThemeButton(){
-
-    const dark =
-        document.body.classList.contains(
-            "dark"
+        localStorage.setItem(
+          "snkTheme",
+          isDark
+            ? "dark"
+            : "light"
         );
 
 
-    document.getElementById(
-        "themeBtn"
-    ).textContent =
-        dark
-        ?
-        "☀️"
-        :
-        "🌙";
+        themeBtn.textContent =
+          isDark
+            ? "☀️"
+            : "🌙";
 
-}
-
-
-/* =========================================================
-   BACK
-========================================================= */
-
-function goBack(){
-
-    if(
-        document.referrer
-    ){
-
-        history.back();
-
-    }
-    else{
-
-        window.location.href =
-            "admin.html";
-
-    }
-
-}
-
-
-/* =========================================================
-   DATE
-========================================================= */
-
-function formatDate(
-    value
-){
-
-    if(
-        !value
-    ){
-
-        return "-";
-
-    }
-
-
-    const date =
-        new Date(
-            value
-        );
-
-
-    if(
-        isNaN(
-            date.getTime()
-        )
-    ){
-
-        return String(
-            value
-        );
-
-    }
-
-
-    return date.toLocaleDateString(
-        "en-GB",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric"
-        }
+      }
     );
 
-}
+
+    /* =====================================================
+       LOGOUT
+    ====================================================== */
+
+    document
+      .getElementById(
+        "logoutBtn"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          sessionStorage.removeItem(
+            "snkStudentLoggedIn"
+          );
+
+          sessionStorage.removeItem(
+            "snkStudentId"
+          );
+
+          sessionStorage.removeItem(
+            "snkStudentName"
+          );
+
+          sessionStorage.removeItem(
+            "snkStudentCourse"
+          );
 
 
-/* =========================================================
-   INITIAL
-========================================================= */
+          window.location.replace(
+            "login.html"
+          );
 
-function getInitial(
-    name
-){
-
-    const clean =
-        String(
-            name ||
-            "S"
-        ).trim();
+        }
+      );
 
 
-    if(
-        !clean
-    ){
+    /* =====================================================
+       PRINT ID CARD
+    ====================================================== */
 
-        return "S";
+    document
+      .getElementById(
+        "printCardBtn"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          window.print();
+
+        }
+      );
+
+
+    /* =====================================================
+       FUTURE STUDENT PHOTO SUPPORT
+    ====================================================== */
+
+    function loadStudentPhoto() {
+
+      /*
+        Future Firebase/localStorage structure:
+
+        snkStudentProfile = {
+          photo: "image-url"
+        }
+
+        Currently the portal does not require
+        a student photo.
+      */
+
+      let profile = null;
+
+
+      try {
+
+        const raw =
+          localStorage.getItem(
+            "snkStudentProfile"
+          );
+
+
+        if (raw) {
+
+          profile =
+            JSON.parse(raw);
+
+        }
+
+      } catch (error) {
+
+        profile = null;
+
+      }
+
+
+      if (
+        profile &&
+        profile.photo
+      ) {
+
+        const photoImage =
+          document.getElementById(
+            "photoImage"
+          );
+
+
+        const photoPlaceholder =
+          document.getElementById(
+            "photoPlaceholder"
+          );
+
+
+        photoImage.src =
+          profile.photo;
+
+
+        photoImage.style.display =
+          "block";
+
+
+        photoPlaceholder.style.display =
+          "none";
+
+
+        photoImage.onerror =
+          function() {
+
+            photoImage.style.display =
+              "none";
+
+
+            photoPlaceholder.style.display =
+              "block";
+
+          };
+
+      }
 
     }
 
 
-    return clean
-        .charAt(0)
-        .toUpperCase();
-
-}
+    loadStudentPhoto();
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+    /* =====================================================
+       STORAGE EVENT
+    ====================================================== */
 
-function escapeHtml(
-    value
-){
+    window.addEventListener(
+      "storage",
+      function(event) {
 
-    const div =
-        document.createElement(
-            "div"
+        if (
+          event.key ===
+          "snkTheme"
+        ) {
+
+          applyTheme();
+
+        }
+
+
+        if (
+          event.key ===
+          "snkStudentProfile"
+        ) {
+
+          loadStudentPhoto();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       PAGE VISIBILITY
+    ====================================================== */
+
+    document.addEventListener(
+      "visibilitychange",
+      function() {
+
+        if (
+          document.visibilityState ===
+          "visible"
+        ) {
+
+          refreshStudentData();
+
+          applyTheme();
+
+          loadStudentPhoto();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       TOAST
+    ====================================================== */
+
+    function showToast(
+      message
+    ) {
+
+      const toast =
+        document.getElementById(
+          "toast"
         );
 
 
-    div.textContent =
-        value == null
-        ?
-        ""
-        :
-        String(value);
+      toast.textContent =
+        message;
 
 
-    return div.innerHTML;
-
-}
-
-
-/* =========================================================
-   ESCAPE ATTRIBUTE
-========================================================= */
-
-function escapeAttribute(
-    value
-){
-
-    return String(
-        value == null
-        ?
-        ""
-        :
-        value
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#39;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    );
-
-}
+      toast.classList.add(
+        "show"
+      );
 
 
-/* =========================================================
-   MODAL OUTSIDE CLICK
-========================================================= */
+      setTimeout(
+        function() {
 
-document.getElementById(
-    "previewModal"
-).addEventListener(
-    "click",
-    function(event){
+          toast.classList.remove(
+            "show"
+          );
 
-        if(
-            event.target ===
-            this
-        ){
-
-            closePreview();
-
-        }
+        },
+        2500
+      );
 
     }
-);
 
 
-/* =========================================================
-   ESC KEY
-========================================================= */
+    /* =====================================================
+       INITIAL LOAD
+    ====================================================== */
 
-document.addEventListener(
-    "keydown",
-    function(event){
+    refreshStudentData();
 
-        if(
-            event.key ===
-            "Escape"
-        ){
-
-            closePreview();
-
-        }
-
-    }
-);
+    loadStudentPhoto();
 
 
-/* =========================================================
-   STORAGE CHANGE
-========================================================= */
-
-window.addEventListener(
-    "storage",
-    function(event){
-
-        if(
-            event.key ===
-            STUDENTS_KEY
-        ){
-
-            loadStudents();
-
-            buildCourseFilter();
-
-            renderCards();
-
-        }
-
-    }
-);
-
-</script>
+  </script>
 
 </body>
 </html>
