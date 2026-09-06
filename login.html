@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Login | SNK IT Institute</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+rel="stylesheet"
+>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --border:#e5e7eb;
+    --soft:#eff6ff;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --shadow:0 20px 50px rgba(15,23,42,.10);
+}
+
+body.dark{
+    --bg:#0b1120;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --primary:#3b82f6;
+    --primary-dark:#2563eb;
+    --border:#1f2937;
+    --soft:#172554;
+    --shadow:0 20px 50px rgba(0,0,0,.30);
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.3s;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+}
+
+.navbar{
+    width:min(1150px,94%);
+    margin:auto;
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:var(--text);
+}
+
+.logo img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-size:17px;
+    font-weight:800;
+}
+
+.logo-text small{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    font-weight:500;
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.nav-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:8px 11px;
+    border-radius:8px;
+    font-family:inherit;
+    font-size:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.nav-btn:hover{
+    border-color:var(--primary);
+    background:var(--soft);
+}
+
+
+/* =========================
+   PAGE
+   ========================= */
+
+.page{
+    width:min(1150px,94%);
+    margin:40px auto;
+}
+
+.login-layout{
+    min-height:calc(100vh - 150px);
+    display:grid;
+    grid-template-columns:1fr 430px;
+    gap:30px;
+    align-items:center;
+}
+
+
+/* =========================
+   LEFT SIDE
+   ========================= */
+
+.intro{
+    padding:30px 10px;
+}
+
+.intro-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:var(--soft);
+    color:var(--primary);
+    border:1px solid #bfdbfe;
+    padding:8px 13px;
+    border-radius:25px;
+    font-size:10px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.intro h1{
+    font-size:42px;
+    line-height:1.25;
+    margin-bottom:14px;
+}
+
+.intro h1 span{
+    color:var(--primary);
+}
+
+.intro p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.9;
+    max-width:600px;
+}
+
+.feature-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:25px;
+}
+
+.feature{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:15px;
+}
+
+.feature-icon{
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--soft);
+    border-radius:10px;
+    font-size:18px;
+    margin-bottom:9px;
+}
+
+.feature h3{
+    font-size:12px;
+    margin-bottom:3px;
+}
+
+.feature p{
+    font-size:9px;
+    line-height:1.6;
+}
+
+
+/* =========================
+   LOGIN CARD
+   ========================= */
+
+.login-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:30px;
+    box-shadow:var(--shadow);
+}
+
+.login-heading{
+    text-align:center;
+    margin-bottom:24px;
+}
+
+.login-icon{
+    width:68px;
+    height:68px;
+    margin:0 auto 13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:18px;
+    background:var(--soft);
+    font-size:31px;
+}
+
+.login-heading h2{
+    font-size:24px;
+    margin-bottom:5px;
+}
+
+.login-heading p{
+    color:var(--muted);
+    font-size:10px;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-label{
+    display:block;
+    font-size:10px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-icon{
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:15px;
+    z-index:2;
+}
+
+.form-input{
+    width:100%;
+    height:45px;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    border-radius:10px;
+    padding:0 42px 0 38px;
+    outline:none;
+    font-family:inherit;
+    font-size:11px;
+    transition:.2s;
+}
+
+.form-input:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(37,99,235,.10);
+}
+
+.password-toggle{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:transparent;
+    color:var(--muted);
+    font-size:15px;
+    cursor:pointer;
+}
+
+.form-options{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:5px 0 18px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:var(--muted);
+    font-size:9px;
+}
+
+.remember input{
+    accent-color:var(--primary);
+}
+
+.forgot{
+    color:var(--primary);
+    font-size:9px;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.login-submit{
+    width:100%;
+    height:46px;
+    border:none;
+    border-radius:10px;
+    background:var(--primary);
+    color:#fff;
+    font-family:inherit;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.login-submit:hover{
+    background:var(--primary-dark);
+    transform:translateY(-1px);
+}
+
+.login-submit:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+    transform:none;
+}
+
+
+/* =========================
+   MESSAGE
+   ========================= */
+
+.message{
+    display:none;
+    padding:11px 12px;
+    border-radius:9px;
+    margin-bottom:15px;
+    font-size:9px;
+    line-height:1.6;
+}
+
+.message.error{
+    display:block;
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    color:#b91c1c;
+}
+
+.message.success{
+    display:block;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+    color:#166534;
+}
+
+
+/* =========================
+   DEMO LOGIN
+   ========================= */
+
+.demo-box{
+    margin-top:18px;
+    padding:13px;
+    border:1px dashed var(--border);
+    border-radius:11px;
+    background:var(--soft);
+}
+
+.demo-title{
+    font-size:10px;
+    font-weight:800;
+    color:var(--primary);
+    margin-bottom:7px;
+}
+
+.demo-row{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    font-size:9px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+.demo-row strong{
+    color:var(--text);
+}
+
+
+/* =========================
+   SECURITY NOTE
+   ========================= */
+
+.security-note{
+    margin-top:18px;
+    padding-top:15px;
+    border-top:1px solid var(--border);
+    text-align:center;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.7;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer{
+    border-top:1px solid var(--border);
+    background:var(--card);
+    text-align:center;
+    padding:20px;
+}
+
+footer p{
+    color:var(--muted);
+    font-size:9px;
+    margin:3px;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media(max-width:850px){
+
+    .login-layout{
+        grid-template-columns:1fr;
+        min-height:auto;
+    }
+
+    .intro{
+        text-align:center;
+        padding:15px 0 0;
+    }
+
+    .intro p{
+        margin:auto;
+    }
+
+    .feature-list{
+        text-align:left;
+    }
+
+    .login-card{
+        max-width:500px;
+        width:100%;
+        margin:auto;
+    }
+}
+
+
+@media(max-width:550px){
+
+    .navbar{
+        min-height:62px;
+    }
+
+    .logo img{
+        width:38px;
+        height:38px;
+    }
+
+    .logo-text{
+        font-size:13px;
+    }
+
+    .logo-text small{
+        font-size:7px;
+    }
+
+    .nav-btn{
+        padding:7px 8px;
+        font-size:8px;
+    }
+
+    .page{
+        margin:20px auto;
+    }
+
+    .intro h1{
+        font-size:30px;
+    }
+
+    .intro p{
+        font-size:11px;
+    }
+
+    .feature-list{
+        grid-template-columns:1fr;
+    }
+
+    .login-card{
+        padding:22px 18px;
+        border-radius:19px;
+    }
+
+    .login-heading h2{
+        font-size:21px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+     ========================= -->
+
+<header>
+
+<nav class="navbar">
+
+<a
+href="index.html"
+class="logo"
+>
+
+<img
+src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+alt="SNK IT Institute Logo"
+>
+
+<div class="logo-text">
+
+SNK IT Institute
+
+<small>
+Offline Course Student Portal
+</small>
+
+</div>
+
+</a>
+
+
+<div class="nav-actions">
+
+<button
+class="nav-btn"
+onclick="toggleTheme()"
+id="themeBtn"
+>
+🌙
+</button>
+
+<a
+href="index.html"
+class="nav-btn"
+>
+← Home
+</a>
+
+</div>
+
+</nav>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN
+     ========================= -->
+
+<main class="page">
+
+<div class="login-layout">
+
+
+<!-- =========================
+     INTRO
+     ========================= -->
+
+<section class="intro">
+
+<span class="intro-badge">
+🔐 Secure Student Portal
+</span>
+
+
+<h1>
+Welcome to
+<span>SNK IT Institute</span>
+Student Portal
+</h1>
+
+
+<p>
+
+Student ID এবং Password ব্যবহার করে
+আপনার Student Portal-এ Login করুন।
+Login করার পর Course, Assignment, Quiz,
+Attendance এবং Result-এর তথ্য দেখা যাবে।
+
+</p>
+
+
+<div class="feature-list">
+
+
+<div class="feature">
+
+<div class="feature-icon">
+📚
+</div>
+
+<h3>
+My Course
+</h3>
+
+<p>
+আপনার Course ও Batch-এর তথ্য দেখুন।
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+📝
+</div>
+
+<h3>
+Assignment
+</h3>
+
+<p>
+Assignment এবং Submission manage করুন।
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+🎯
+</div>
+
+<h3>
+Quiz
+</h3>
+
+<p>
+Online Timed Quiz দিন।
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+📊
+</div>
+
+<h3>
+Result
+</h3>
+
+<p>
+আপনার Result ও Performance দেখুন।
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     LOGIN CARD
+     ========================= -->
+
+<section class="login-card">
+
+
+<div class="login-heading">
+
+<div class="login-icon">
+👨‍🎓
+</div>
+
+<h2>
+Student Login
+</h2>
+
+<p>
+আপনার Student Account-এ প্রবেশ করুন
+</p>
+
+</div>
+
+
+
+<div
+id="message"
+class="message"
+>
+</div>
+
+
+
+<form
+id="loginForm"
+onsubmit="handleLogin(event)"
+>
+
+
+<!-- STUDENT ID -->
+
+<div class="form-group">
+
+<label
+class="form-label"
+for="studentId"
+>
+Student ID
+</label>
+
+
+<div class="input-wrap">
+
+<span class="input-icon">
+🆔
+</span>
+
+
+<input
+type="text"
+id="studentId"
+class="form-input"
+placeholder="যেমন: SNK-1001"
+autocomplete="username"
+required
+>
+
+</div>
+
+</div>
+
+
+
+<!-- PASSWORD -->
+
+<div class="form-group">
+
+<label
+class="form-label"
+for="password"
+>
+Password
+</label>
+
+
+<div class="input-wrap">
+
+<span class="input-icon">
+🔑
+</span>
+
+
+<input
+type="password"
+id="password"
+class="form-input"
+placeholder="আপনার Password লিখুন"
+autocomplete="current-password"
+required
+>
+
+
+<button
+type="button"
+class="password-toggle"
+onclick="togglePassword()"
+id="passwordToggle"
+aria-label="Show password"
+>
+👁️
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- OPTIONS -->
+
+<div class="form-options">
+
+<label class="remember">
+
+<input
+type="checkbox"
+id="rememberMe"
+>
+
+<span>
+Remember me
+</span>
+
+</label>
+
+
+<a
+href="#"
+class="forgot"
+onclick="forgotPassword(event)"
+>
+Forgot Password?
+</a>
+
+</div>
+
+
+
+<!-- LOGIN -->
+
+<button
+type="submit"
+class="login-submit"
+id="loginBtn"
+>
+🔐 Login to Student Portal
+</button>
+
+
+</form>
+
+
+
+<!-- DEMO -->
+
+<div class="demo-box">
+
+<div class="demo-title">
+🧪 Demo Login
+</div>
+
+
+<div class="demo-row">
+
+<span>
+Student ID
+</span>
+
+<strong>
+SNK-1001
+</strong>
+
+</div>
+
+
+<div class="demo-row">
+
+<span>
+Password
+</span>
+
+<strong>
+123456
+</strong>
+
+</div>
+
+</div>
+
+
+
+<div class="security-note">
+
+🔒 আপনার Login Session এই Browser-এর
+Session Storage-এ রাখা হবে।
+
+<br>
+
+বর্তমানে এটি Demo Login System।
+পরবর্তী ধাপে Admin/Student Database-এর
+সাথে Connect করা হবে।
+
+</div>
+
+
+</section>
+
+</div>
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+     ========================= -->
+
+<footer>
+
+<p>
+SNK IT Institute • Student Portal
+</p>
+
+<p>
+Class Start: 08 September 2026 • Batch 01
+</p>
+
+<p>
+© 2026 SNK IT Institute. All Rights Reserved.
+</p>
+
+</footer>
+
+
+
+<script>
+
+
+/* =========================================================
+   THEME
+   ========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("dark");
+
+    const isDark =
+        document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "snkTheme",
+        isDark ? "dark" : "light"
+    );
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        isDark ? "☀️" : "🌙";
+}
+
+
+(function(){
+
+    const savedTheme =
+        localStorage.getItem("snkTheme");
+
+    if(savedTheme === "dark"){
+
+        document.body.classList.add("dark");
+
+        document.getElementById(
+            "themeBtn"
+        ).textContent =
+            "☀️";
+    }
+
+})();
+
+
+
+/* =========================================================
+   PASSWORD SHOW / HIDE
+   ========================================================= */
+
+function togglePassword(){
+
+    const password =
+        document.getElementById("password");
+
+    const button =
+        document.getElementById("passwordToggle");
+
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        button.textContent = "🙈";
+
+        button.setAttribute(
+            "aria-label",
+            "Hide password"
+        );
+
+    }
+    else{
+
+        password.type = "password";
+
+        button.textContent = "👁️";
+
+        button.setAttribute(
+            "aria-label",
+            "Show password"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    const message =
+        document.getElementById("message");
+
+    message.className =
+        "message " + type;
+
+    message.textContent =
+        text;
+
+}
+
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+function handleLogin(event){
+
+    event.preventDefault();
+
+
+    const studentId =
+        document.getElementById(
+            "studentId"
+        ).value
+        .trim()
+        .toUpperCase();
+
+
+    const password =
+        document.getElementById(
+            "password"
+        ).value;
+
+
+    const rememberMe =
+        document.getElementById(
+            "rememberMe"
+        ).checked;
+
+
+    const loginBtn =
+        document.getElementById(
+            "loginBtn"
+        );
+
+
+    /* -------------------------
+       VALIDATION
+       ------------------------- */
+
+    if(studentId === ""){
+
+        showMessage(
+            "⚠️ Student ID লিখুন।",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(password === ""){
+
+        showMessage(
+            "⚠️ Password লিখুন।",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /* -------------------------
+       DEMO CREDENTIAL
+       ------------------------- */
+
+    const validStudentId =
+        "SNK-1001";
+
+    const validPassword =
+        "123456";
+
+
+    loginBtn.disabled = true;
+
+    loginBtn.textContent =
+        "⏳ Login হচ্ছে...";
+
+
+    setTimeout(function(){
+
+
+        if(
+            studentId === validStudentId &&
+            password === validPassword
+        ){
+
+            /*
+             * Student session
+             */
+
+            sessionStorage.setItem(
+                "snkStudentLoggedIn",
+                "true"
+            );
+
+
+            sessionStorage.setItem(
+                "snkStudentId",
+                studentId
+            );
+
+
+            sessionStorage.setItem(
+                "snkStudentName",
+                "Demo Student"
+            );
+
+
+            sessionStorage.setItem(
+                "snkStudentCourse",
+                "Computer Office Application"
+            );
+
+
+            if(rememberMe){
+
+                localStorage.setItem(
+                    "snkRememberStudent",
+                    "true"
+                );
+
+                localStorage.setItem(
+                    "snkRememberStudentId",
+                    studentId
+                );
+
+            }
+            else{
+
+                localStorage.removeItem(
+                    "snkRememberStudent"
+                );
+
+                localStorage.removeItem(
+                    "snkRememberStudentId"
+                );
+
+            }
+
+
+            showMessage(
+                "✅ Login Successful! Student Dashboard-এ নেওয়া হচ্ছে...",
+                "success"
+            );
+
+
+            loginBtn.textContent =
+                "✅ Login Successful";
+
+
+            setTimeout(function(){
+
+                /*
+                 * Step 1.1-এর পরের Dashboard
+                 * এখন student-dashboard.html থাকলে
+                 * সেখানে যাবে।
+                 */
+
+                window.location.href =
+                    "student-dashboard.html";
+
+            },800);
+
+
+        }
+        else{
+
+            showMessage(
+                "❌ Student ID অথবা Password ভুল। Demo Login: SNK-1001 / 123456",
+                "error"
+            );
+
+
+            loginBtn.disabled = false;
+
+            loginBtn.textContent =
+                "🔐 Login to Student Portal";
+
+        }
+
+    },500);
+
+}
+
+
+
+/* =========================================================
+   REMEMBERED STUDENT
+   ========================================================= */
+
+(function(){
+
+    const remembered =
+        localStorage.getItem(
+            "snkRememberStudent"
+        );
+
+    const rememberedId =
+        localStorage.getItem(
+            "snkRememberStudentId"
+        );
+
+
+    if(
+        remembered === "true" &&
+        rememberedId
+    ){
+
+        document.getElementById(
+            "studentId"
+        ).value =
+            rememberedId;
+
+
+        document.getElementById(
+            "rememberMe"
+        ).checked =
+            true;
+
+    }
+
+})();
+
+
+
+/* =========================================================
+   FORGOT PASSWORD
+   ========================================================= */
+
+function forgotPassword(event){
+
+    event.preventDefault();
+
+
+    showMessage(
+        "ℹ️ Forgot Password Recovery পরবর্তী ধাপে তৈরি করা হবে।",
+        "error"
+    );
+
+}
+
+
+
+/* =========================================================
+   ALREADY LOGGED IN CHECK
+   ========================================================= */
+
+(function(){
+
+    const loggedIn =
+        sessionStorage.getItem(
+            "snkStudentLoggedIn"
+        );
+
+
+    if(loggedIn === "true"){
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        message.className =
+            "message success";
+
+        message.textContent =
+            "ℹ️ আপনি ইতিমধ্যে Login করা আছেন। Dashboard-এ যেতে Login button ব্যবহার করুন।";
+
+    }
+
+})();
+
+
+</script>
+
+</body>
+
+</html>
+```
