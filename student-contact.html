@@ -4,28 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Student Contact | SNK IT Institute</title>
-
-  <meta
-    name="description"
-    content="SNK IT Institute Student Contact and Communication Center"
-  >
+  <title>Contact | SNK IT Institute</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
     :root{
       --bg:#f5f7fb;
       --card:#ffffff;
@@ -33,27 +18,18 @@
       --muted:#667085;
       --primary:#2563eb;
       --primary-dark:#1d4ed8;
-      --success:#16a34a;
-      --warning:#d97706;
-      --danger:#dc2626;
       --border:#e5e7eb;
-      --soft:#eef4ff;
-      --soft-green:#ecfdf5;
-      --soft-orange:#fff7ed;
+      --success:#16a34a;
+      --warning:#f59e0b;
+      --danger:#dc2626;
       --shadow:0 12px 35px rgba(15,23,42,.08);
-      --radius:20px;
+      --radius:18px;
     }
 
-    body.dark{
-      --bg:#0b1220;
-      --card:#111827;
-      --text:#f3f4f6;
-      --muted:#9ca3af;
-      --border:#253047;
-      --soft:#172554;
-      --soft-green:#052e1b;
-      --soft-orange:#29170c;
-      --shadow:0 12px 35px rgba(0,0,0,.28);
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
     html{
@@ -65,7 +41,15 @@
       background:var(--bg);
       color:var(--text);
       line-height:1.6;
-      transition:.25s ease;
+    }
+
+    body.dark{
+      --bg:#0b1120;
+      --card:#111827;
+      --text:#f3f4f6;
+      --muted:#9ca3af;
+      --border:#243044;
+      --shadow:0 12px 35px rgba(0,0,0,.25);
     }
 
     a{
@@ -77,53 +61,56 @@
     input,
     textarea,
     select{
-      font-family:inherit;
+      font:inherit;
     }
 
     button{
       cursor:pointer;
     }
 
-    .container{
-      width:min(1180px,92%);
-      margin:auto;
+    .topbar{
+      background:linear-gradient(135deg,#1d4ed8,#2563eb);
+      color:#fff;
+      text-align:center;
+      padding:8px 15px;
+      font-size:13px;
+      font-weight:600;
     }
 
-    /* =========================
-       HEADER
-    ========================== */
-
-    header{
+    .header{
       position:sticky;
       top:0;
       z-index:1000;
       background:rgba(255,255,255,.92);
+      backdrop-filter:blur(14px);
       border-bottom:1px solid var(--border);
-      backdrop-filter:blur(15px);
     }
 
-    body.dark header{
-      background:rgba(17,24,39,.92);
+    body.dark .header{
+      background:rgba(17,24,39,.94);
     }
 
     .nav{
+      max-width:1200px;
+      margin:auto;
       min-height:72px;
+      padding:10px 20px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:18px;
+      gap:20px;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:11px;
+      gap:12px;
       min-width:0;
     }
 
     .brand img{
-      width:44px;
-      height:44px;
+      width:48px;
+      height:48px;
       object-fit:contain;
       border-radius:12px;
       background:#fff;
@@ -138,13 +125,13 @@
     .brand-title{
       font-size:18px;
       font-weight:800;
-      white-space:nowrap;
+      line-height:1.2;
     }
 
     .brand-subtitle{
-      font-size:11px;
       color:var(--muted);
-      white-space:nowrap;
+      font-size:12px;
+      margin-top:2px;
     }
 
     .nav-actions{
@@ -152,6 +139,7 @@
       align-items:center;
       gap:8px;
       flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
     .nav-btn{
@@ -159,8 +147,9 @@
       background:var(--card);
       color:var(--text);
       padding:9px 13px;
-      border-radius:11px;
+      border-radius:10px;
       font-weight:700;
+      font-size:13px;
       transition:.2s;
     }
 
@@ -170,44 +159,45 @@
       transform:translateY(-1px);
     }
 
-    .nav-btn.primary{
-      background:var(--primary);
-      color:#fff;
-      border-color:var(--primary);
+    .logout{
+      background:#fee2e2;
+      color:#b91c1c;
+      border-color:#fecaca;
     }
 
-    .nav-btn.primary:hover{
-      background:var(--primary-dark);
-      color:#fff;
+    body.dark .logout{
+      background:#3a1717;
+      color:#fca5a5;
+      border-color:#5b2424;
     }
 
-    /* =========================
-       HERO
-    ========================== */
+    .container{
+      width:min(1200px,calc(100% - 30px));
+      margin:auto;
+    }
 
     .hero{
-      padding:45px 0 25px;
-    }
-
-    .hero-box{
+      margin:28px 0;
+      padding:42px 32px;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at top right,rgba(255,255,255,.20),transparent 30%),
+        linear-gradient(135deg,#1d4ed8,#2563eb 55%,#0ea5e9);
+      color:#fff;
+      box-shadow:var(--shadow);
       position:relative;
       overflow:hidden;
-      border-radius:27px;
-      padding:40px;
-      background:
-        radial-gradient(
-          circle at 88% 10%,
-          rgba(37,99,235,.20),
-          transparent 29%
-        ),
-        radial-gradient(
-          circle at 8% 90%,
-          rgba(22,163,74,.10),
-          transparent 26%
-        ),
-        var(--card);
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:230px;
+      height:230px;
+      border-radius:50%;
+      background:rgba(255,255,255,.08);
+      right:-70px;
+      bottom:-100px;
     }
 
     .hero-content{
@@ -216,105 +206,49 @@
       max-width:760px;
     }
 
-    .eyebrow{
+    .hero-badge{
       display:inline-flex;
       align-items:center;
       gap:7px;
       padding:7px 12px;
       border-radius:999px;
-      background:var(--soft);
-      color:var(--primary);
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.25);
       font-size:12px;
-      font-weight:800;
+      font-weight:700;
       margin-bottom:14px;
     }
 
     .hero h1{
-      font-size:clamp(30px,5vw,46px);
+      font-size:clamp(28px,5vw,44px);
       line-height:1.15;
       margin-bottom:12px;
+      font-weight:800;
     }
 
     .hero p{
-      color:var(--muted);
+      max-width:680px;
+      opacity:.94;
       font-size:15px;
-      max-width:720px;
     }
 
-    .hero-buttons{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:22px;
-    }
-
-    /* =========================
-       BUTTON
-    ========================== */
-
-    .btn{
-      border:0;
-      padding:12px 17px;
-      border-radius:12px;
-      font-weight:800;
-      font-size:12px;
-      transition:.2s;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-    }
-
-    .btn-primary{
-      background:var(--primary);
-      color:#fff;
-    }
-
-    .btn-primary:hover{
-      background:var(--primary-dark);
-    }
-
-    .btn-success{
-      background:var(--success);
-      color:#fff;
-    }
-
-    .btn-secondary{
-      background:var(--card);
-      color:var(--text);
-      border:1px solid var(--border);
-    }
-
-    /* =========================
-       SECTION
-    ========================== */
-
-    section{
-      padding:20px 0 40px;
+    .section{
+      margin:30px 0;
     }
 
     .section-head{
-      margin-bottom:20px;
+      margin-bottom:18px;
     }
 
     .section-head h2{
       font-size:25px;
-      line-height:1.3;
+      margin-bottom:5px;
     }
 
     .section-head p{
       color:var(--muted);
-      font-size:13px;
-      margin-top:4px;
+      font-size:14px;
     }
-
-    /* =========================
-       CONTACT GRID
-    ========================== */
 
     .contact-grid{
       display:grid;
@@ -325,268 +259,81 @@
     .contact-card{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:20px;
+      border-radius:var(--radius);
       padding:22px;
       box-shadow:var(--shadow);
       transition:.2s;
     }
 
     .contact-card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(37,99,235,.35);
+      transform:translateY(-3px);
     }
 
     .contact-icon{
-      width:54px;
-      height:54px;
+      width:48px;
+      height:48px;
       display:grid;
       place-items:center;
-      background:var(--soft);
+      border-radius:14px;
+      background:#eff6ff;
       color:var(--primary);
-      border-radius:16px;
-      font-size:26px;
-      margin-bottom:15px;
+      font-size:22px;
+      margin-bottom:14px;
+    }
+
+    body.dark .contact-icon{
+      background:#172554;
     }
 
     .contact-card h3{
       font-size:17px;
-      margin-bottom:6px;
+      margin-bottom:5px;
     }
 
     .contact-card p{
       color:var(--muted);
-      font-size:12px;
-      min-height:42px;
+      font-size:13px;
+      margin-bottom:12px;
     }
 
     .contact-link{
       display:inline-block;
-      margin-top:13px;
       color:var(--primary);
       font-weight:800;
-      font-size:12px;
+      font-size:13px;
+      word-break:break-word;
     }
 
-    /* =========================
-       MAIN CONTACT
-    ========================== */
-
-    .main-contact{
+    .main-grid{
       display:grid;
-      grid-template-columns:1.05fr .95fr;
+      grid-template-columns:1.1fr .9fr;
       gap:20px;
+      align-items:start;
     }
 
     .panel{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:20px;
-      box-shadow:var(--shadow);
+      border-radius:var(--radius);
       padding:25px;
+      box-shadow:var(--shadow);
     }
 
-    .panel h3{
-      font-size:20px;
+    .panel h2{
+      font-size:22px;
       margin-bottom:5px;
     }
 
     .panel-sub{
       color:var(--muted);
-      font-size:12px;
-      margin-bottom:18px;
-    }
-
-    /* =========================
-       INSTITUTE INFO
-    ========================== */
-
-    .institute-box{
-      display:flex;
-      align-items:flex-start;
-      gap:15px;
-      padding:17px;
-      background:var(--bg);
-      border:1px solid var(--border);
-      border-radius:16px;
-      margin-bottom:12px;
-    }
-
-    .institute-icon{
-      width:45px;
-      height:45px;
-      flex:0 0 45px;
-      display:grid;
-      place-items:center;
-      background:var(--soft);
-      border-radius:13px;
-      font-size:22px;
-    }
-
-    .institute-box strong{
-      display:block;
-      font-size:14px;
-      margin-bottom:2px;
-    }
-
-    .institute-box span{
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    /* =========================
-       HOURS
-    ========================== */
-
-    .hours{
-      display:grid;
-      gap:8px;
-    }
-
-    .hours-row{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:12px 14px;
-      background:var(--bg);
-      border:1px solid var(--border);
-      border-radius:12px;
-      font-size:12px;
-    }
-
-    .hours-row span:first-child{
-      font-weight:700;
-    }
-
-    .hours-row span:last-child{
-      color:var(--muted);
-      text-align:right;
-    }
-
-    /* =========================
-       STUDENT INFO
-    ========================== */
-
-    .student-card{
-      display:flex;
-      align-items:center;
-      gap:13px;
-      padding:16px;
-      background:var(--soft);
-      border-radius:15px;
-      margin-bottom:17px;
-    }
-
-    .avatar{
-      width:52px;
-      height:52px;
-      flex:0 0 52px;
-      display:grid;
-      place-items:center;
-      border-radius:15px;
-      background:var(--card);
-      color:var(--primary);
-      font-size:23px;
-      font-weight:800;
-    }
-
-    .student-name{
-      font-size:16px;
-      font-weight:800;
-    }
-
-    .student-id{
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .student-status{
-      display:inline-flex;
-      margin-top:4px;
-      padding:3px 8px;
-      border-radius:999px;
-      background:var(--soft-green);
-      color:var(--success);
-      font-size:9px;
-      font-weight:800;
-    }
-
-    /* =========================
-       COURSE
-    ========================== */
-
-    .course-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:9px;
-    }
-
-    .course-box{
-      padding:13px;
-      background:var(--bg);
-      border:1px solid var(--border);
-      border-radius:12px;
-    }
-
-    .course-label{
-      color:var(--muted);
-      font-size:10px;
-      margin-bottom:2px;
-    }
-
-    .course-value{
       font-size:13px;
-      font-weight:800;
+      margin-bottom:20px;
     }
-
-    /* =========================
-       COMMUNICATION
-    ========================== */
-
-    .communication-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-    }
-
-    .communication-card{
-      border:1px solid var(--border);
-      background:var(--card);
-      border-radius:17px;
-      padding:20px;
-      text-align:center;
-      box-shadow:var(--shadow);
-    }
-
-    .communication-icon{
-      width:55px;
-      height:55px;
-      display:grid;
-      place-items:center;
-      margin:0 auto 12px;
-      background:var(--soft);
-      border-radius:16px;
-      font-size:26px;
-    }
-
-    .communication-card h3{
-      font-size:16px;
-      margin-bottom:5px;
-    }
-
-    .communication-card p{
-      color:var(--muted);
-      font-size:11px;
-      margin-bottom:13px;
-    }
-
-    /* =========================
-       FORM
-    ========================== */
 
     .form-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:14px;
+      gap:15px;
     }
 
     .field{
@@ -599,154 +346,279 @@
       grid-column:1/-1;
     }
 
-    .field label{
-      font-size:12px;
+    label{
+      font-size:13px;
       font-weight:800;
     }
 
-    .field input,
-    .field select,
-    .field textarea{
+    input,
+    select,
+    textarea{
       width:100%;
       border:1px solid var(--border);
       background:var(--bg);
       color:var(--text);
       border-radius:11px;
-      padding:11px 12px;
+      padding:11px 13px;
       outline:none;
-      font-size:12px;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus{
-      border-color:var(--primary);
-      box-shadow:0 0 0 3px rgba(37,99,235,.10);
-    }
-
-    .field textarea{
-      min-height:125px;
-      resize:vertical;
-    }
-
-    .form-actions{
-      display:flex;
-      gap:9px;
-      flex-wrap:wrap;
-      margin-top:16px;
-    }
-
-    /* =========================
-       QUICK LINKS
-    ========================== */
-
-    .quick-links{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
-    }
-
-    .quick-link{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:14px;
-      border:1px solid var(--border);
-      background:var(--card);
-      border-radius:14px;
       transition:.2s;
     }
 
-    .quick-link:hover{
-      transform:translateY(-2px);
+    input:focus,
+    select:focus,
+    textarea:focus{
       border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(37,99,235,.12);
     }
 
-    .quick-link-icon{
+    input[readonly]{
+      opacity:.8;
+    }
+
+    textarea{
+      min-height:135px;
+      resize:vertical;
+    }
+
+    .submit-btn{
+      margin-top:17px;
+      border:0;
+      background:var(--primary);
+      color:#fff;
+      padding:12px 18px;
+      border-radius:11px;
+      font-weight:800;
+      transition:.2s;
+    }
+
+    .submit-btn:hover{
+      background:var(--primary-dark);
+      transform:translateY(-1px);
+    }
+
+    .info-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .info-item{
+      display:flex;
+      gap:13px;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:var(--bg);
+    }
+
+    .info-item-icon{
       width:40px;
       height:40px;
       flex:0 0 40px;
+      border-radius:11px;
+      background:#eff6ff;
+      color:var(--primary);
       display:grid;
       place-items:center;
-      background:var(--soft);
-      border-radius:11px;
+      font-size:18px;
     }
 
-    .quick-link strong{
+    body.dark .info-item-icon{
+      background:#172554;
+    }
+
+    .info-item strong{
       display:block;
+      font-size:14px;
+      margin-bottom:2px;
+    }
+
+    .info-item span{
+      display:block;
+      color:var(--muted);
       font-size:12px;
     }
 
-    .quick-link span{
+    .support-box{
+      margin-top:18px;
+      padding:18px;
+      border-radius:15px;
+      background:linear-gradient(135deg,#ecfdf5,#f0fdf4);
+      border:1px solid #bbf7d0;
+    }
+
+    body.dark .support-box{
+      background:#0d281a;
+      border-color:#174d2a;
+    }
+
+    .support-box h3{
+      font-size:16px;
+      margin-bottom:5px;
+    }
+
+    .support-box p{
       color:var(--muted);
-      font-size:10px;
+      font-size:12px;
+      margin-bottom:12px;
     }
 
-    /* =========================
-       NOTICE
-    ========================== */
-
-    .notice{
-      padding:14px 16px;
-      border-radius:14px;
-      background:var(--soft-orange);
-      color:var(--warning);
-      border:1px solid rgba(217,119,6,.2);
-      font-size:11px;
+    .whatsapp-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#16a34a;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:10px;
+      font-size:13px;
+      font-weight:800;
     }
 
-    /* =========================
-       FOOTER
-    ========================== */
+    .faq-grid{
+      display:grid;
+      gap:10px;
+    }
 
-    footer{
-      margin-top:25px;
-      border-top:1px solid var(--border);
+    .faq{
+      border:1px solid var(--border);
+      border-radius:13px;
+      overflow:hidden;
       background:var(--card);
     }
 
-    .footer-inner{
-      min-height:100px;
+    .faq-question{
+      width:100%;
+      border:0;
+      background:transparent;
+      color:var(--text);
+      padding:15px 17px;
+      text-align:left;
+      font-weight:800;
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:15px;
-      flex-wrap:wrap;
-      padding:24px 0;
+      align-items:center;
+      gap:10px;
     }
 
-    .footer-text{
+    .faq-answer{
+      display:none;
+      padding:0 17px 16px;
       color:var(--muted);
-      font-size:11px;
+      font-size:13px;
     }
 
-    .footer-links{
+    .faq.open .faq-answer{
+      display:block;
+    }
+
+    .faq-arrow{
+      transition:.2s;
+    }
+
+    .faq.open .faq-arrow{
+      transform:rotate(180deg);
+    }
+
+    .course-card{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:20px;
+      align-items:center;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .course-title{
+      font-size:19px;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+
+    .course-meta{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .course-badges{
       display:flex;
-      gap:12px;
+      gap:7px;
       flex-wrap:wrap;
+      margin-top:12px;
     }
 
-    .footer-links a{
-      color:var(--primary);
+    .badge{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
       font-size:11px;
-      font-weight:700;
+      font-weight:800;
+      background:#eff6ff;
+      color:#1d4ed8;
     }
 
-    /* =========================
-       TOAST
-    ========================== */
+    body.dark .badge{
+      background:#172554;
+      color:#93c5fd;
+    }
+
+    .back-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:10px;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    footer{
+      margin-top:40px;
+      padding:28px 15px;
+      border-top:1px solid var(--border);
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .footer-title{
+      color:var(--text);
+      font-weight:800;
+      margin-bottom:3px;
+    }
+
+    .notice{
+      margin-top:18px;
+      padding:13px 15px;
+      border-radius:12px;
+      background:#fffbeb;
+      border:1px solid #fde68a;
+      color:#92400e;
+      font-size:12px;
+    }
+
+    body.dark .notice{
+      background:#2a2108;
+      border-color:#5a4710;
+      color:#fcd34d;
+    }
 
     .toast{
       position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:3000;
+      right:18px;
+      bottom:18px;
+      z-index:2000;
       background:#111827;
       color:#fff;
       padding:12px 16px;
-      border-radius:12px;
-      font-size:12px;
-      box-shadow:0 15px 35px rgba(0,0,0,.25);
+      border-radius:11px;
+      font-size:13px;
+      box-shadow:0 12px 30px rgba(0,0,0,.22);
       transform:translateY(100px);
       opacity:0;
       pointer-events:none;
@@ -758,101 +630,19 @@
       opacity:1;
     }
 
-    /* =========================
-       MODAL
-    ========================== */
-
-    .modal{
-      position:fixed;
-      inset:0;
-      z-index:2000;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      background:rgba(2,6,23,.68);
-    }
-
-    .modal.show{
-      display:flex;
-    }
-
-    .modal-box{
-      width:min(500px,100%);
-      background:var(--card);
-      color:var(--text);
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:24px;
-      box-shadow:0 25px 70px rgba(0,0,0,.3);
-    }
-
-    .modal-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      margin-bottom:12px;
-    }
-
-    .modal-head h3{
-      font-size:18px;
-    }
-
-    .close-btn{
-      width:35px;
-      height:35px;
-      border:1px solid var(--border);
-      background:var(--bg);
-      color:var(--text);
-      border-radius:10px;
-      font-size:20px;
-    }
-
-    .modal-box p{
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media(max-width:1050px){
-
+    @media(max-width:1000px){
       .contact-grid{
         grid-template-columns:repeat(2,1fr);
       }
 
-      .quick-links{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-    }
-
-    @media(max-width:850px){
-
-      .main-contact{
+      .main-grid{
         grid-template-columns:1fr;
       }
-
-      .communication-grid{
-        grid-template-columns:1fr;
-      }
-
     }
 
-    @media(max-width:650px){
-
+    @media(max-width:700px){
       .nav{
-        min-height:65px;
-        padding:9px 0;
-        align-items:flex-start;
-      }
-
-      .brand img{
-        width:38px;
-        height:38px;
+        padding:9px 12px;
       }
 
       .brand-title{
@@ -863,33 +653,30 @@
         display:none;
       }
 
+      .brand img{
+        width:42px;
+        height:42px;
+      }
+
       .nav-actions{
-        justify-content:flex-end;
+        gap:5px;
       }
 
       .nav-btn{
-        padding:7px 9px;
-        font-size:10px;
+        padding:8px 9px;
+        font-size:11px;
       }
 
       .hero{
-        padding-top:25px;
-      }
-
-      .hero-box{
-        padding:25px 18px;
-        border-radius:20px;
+        padding:30px 21px;
+        margin-top:18px;
       }
 
       .hero h1{
-        font-size:29px;
+        font-size:30px;
       }
 
       .contact-grid{
-        grid-template-columns:1fr;
-      }
-
-      .quick-links{
         grid-template-columns:1fr;
       }
 
@@ -901,1093 +688,335 @@
         grid-column:auto;
       }
 
-      .course-grid{
+      .panel{
+        padding:19px;
+      }
+
+      .course-card{
         grid-template-columns:1fr;
       }
-
-      .panel{
-        padding:18px;
-      }
-
     }
 
-    /* =========================
-       PRINT
-    ========================== */
-
     @media print{
-
-      header,
-      .hero-buttons,
-      .form-actions,
-      footer,
-      .toast{
-        display:none !important;
+      .topbar,
+      .header,
+      .hero,
+      .submit-btn,
+      .whatsapp-btn,
+      .back-btn,
+      .notice{
+        display:none!important;
       }
 
       body{
-        background:#fff;
-        color:#000;
+        background:#fff!important;
+        color:#000!important;
       }
 
       .panel,
       .contact-card,
-      .communication-card,
-      .hero-box{
-        box-shadow:none;
-        border:1px solid #ddd;
+      .course-card{
+        box-shadow:none!important;
+        break-inside:avoid;
       }
-
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
+  <div class="topbar">
+    🎓 SNK IT Institute Student Portal • Student Support & Contact
+  </div>
 
-  <header>
+  <header class="header">
+    <nav class="nav">
 
-    <div class="container nav">
-
-      <a
-        href="student-dashboard.html"
-        class="brand"
-      >
-
+      <a href="student-dashboard.html" class="brand">
         <img
           src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
           alt="SNK IT Institute Logo"
         >
 
         <div class="brand-text">
-
-          <div class="brand-title">
-            SNK IT Institute
-          </div>
-
-          <div class="brand-subtitle">
-            Student Portal
-          </div>
-
+          <div class="brand-title">SNK IT Institute</div>
+          <div class="brand-subtitle">Student Portal</div>
         </div>
-
       </a>
 
-
       <div class="nav-actions">
-
-        <a
-          href="student-dashboard.html"
-          class="nav-btn"
-        >
-          Dashboard
-        </a>
-
-        <a
-          href="student-notifications.html"
-          class="nav-btn"
-          title="Notifications"
-        >
-          🔔
-        </a>
-
-        <button
-          type="button"
-          class="nav-btn"
-          id="themeButton"
-          onclick="toggleTheme()"
-          title="Theme"
-        >
-          🌙
-        </button>
-
-        <button
-          type="button"
-          class="nav-btn primary"
-          onclick="logoutStudent()"
-        >
-          Logout
-        </button>
-
+        <a href="student-dashboard.html" class="nav-btn">🏠 Dashboard</a>
+        <a href="student-support.html" class="nav-btn">🆘 Support</a>
+        <button class="nav-btn" id="themeBtn" type="button">🌙</button>
+        <button class="nav-btn logout" id="logoutBtn" type="button">Logout</button>
       </div>
 
-    </div>
-
+    </nav>
   </header>
 
-
-  <main>
-
-    <!-- HERO -->
+  <main class="container">
 
     <section class="hero">
+      <div class="hero-content">
 
-      <div class="container">
+        <div class="hero-badge">
+          📞 Student Contact Center
+        </div>
 
-        <div class="hero-box">
+        <h1>আমাদের সাথে যোগাযোগ করুন</h1>
 
-          <div class="hero-content">
+        <p>
+          আপনার course, assignment, quiz, result, attendance অথবা
+          Student Portal সংক্রান্ত কোনো সাহায্যের প্রয়োজন হলে
+          নিচের যেকোনো মাধ্যমে SNK IT Institute-এর সাথে যোগাযোগ করুন।
+        </p>
 
-            <div class="eyebrow">
-              📞 Student Contact Center
-            </div>
+      </div>
+    </section>
 
-            <h1>
-              SNK IT Institute-এর সাথে যোগাযোগ করুন
-            </h1>
+    <section class="section">
 
-            <p>
-              Course, class, assignment, quiz, result,
-              attendance অথবা Student Portal সংক্রান্ত
-              যেকোনো বিষয়ে প্রয়োজনীয় যোগাযোগের তথ্য এখানে পাবেন।
-            </p>
+      <div class="section-head">
+        <h2>যোগাযোগের মাধ্যম</h2>
+        <p>আপনার প্রয়োজন অনুযায়ী যেকোনো একটি option ব্যবহার করুন।</p>
+      </div>
 
-            <div class="hero-buttons">
+      <div class="contact-grid">
 
-              <a
-                href="https://wa.me/8801700000000"
-                target="_blank"
-                rel="noopener"
-                class="btn btn-success"
-              >
-                💬 WhatsApp Support
-              </a>
+        <div class="contact-card">
+          <div class="contact-icon">📱</div>
+          <h3>Phone</h3>
+          <p>সরাসরি ফোনে যোগাযোগ করুন।</p>
+          <a class="contact-link" href="tel:+8801700000000">
+            +880 1700-000000
+          </a>
+        </div>
 
-              <button
-                type="button"
-                class="btn btn-primary"
-                onclick="scrollToSection('messageSection')"
-              >
-                ✉️ Message পাঠান
-              </button>
+        <div class="contact-card">
+          <div class="contact-icon">💬</div>
+          <h3>WhatsApp</h3>
+          <p>দ্রুত support-এর জন্য WhatsApp ব্যবহার করুন।</p>
+          <a
+            class="contact-link"
+            href="https://wa.me/8801700000000"
+            target="_blank"
+            rel="noopener"
+          >
+            WhatsApp Support
+          </a>
+        </div>
 
-              <button
-                type="button"
-                class="btn btn-secondary"
-                onclick="window.print()"
-              >
-                🖨️ Print
-              </button>
+        <div class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <h3>Email</h3>
+          <p>বিস্তারিত বিষয় email-এর মাধ্যমে পাঠাতে পারেন।</p>
+          <a
+            class="contact-link"
+            href="mailto:snkitinstitute@gmail.com"
+          >
+            snkitinstitute@gmail.com
+          </a>
+        </div>
 
-            </div>
-
-          </div>
-
+        <div class="contact-card">
+          <div class="contact-icon">🕓</div>
+          <h3>Support Time</h3>
+          <p>Student support-এর জন্য নির্ধারিত সময়।</p>
+          <span class="contact-link">
+            10:00 AM – 8:00 PM
+          </span>
         </div>
 
       </div>
 
     </section>
 
+    <section class="section">
 
-    <!-- CONTACT OPTIONS -->
+      <div class="main-grid">
 
-    <section>
-
-      <div class="container">
-
-        <div class="section-head">
-
-          <h2>
-            📲 যোগাযোগের মাধ্যম
-          </h2>
-
-          <p>
-            আপনার সুবিধামতো যোগাযোগের মাধ্যম বেছে নিন।
-          </p>
-
-        </div>
-
-
-        <div class="contact-grid">
-
-          <div class="contact-card">
-
-            <div class="contact-icon">
-              📞
-            </div>
-
-            <h3>
-              Phone
-            </h3>
-
-            <p>
-              Institute-এর official support number-এ
-              যোগাযোগ করতে পারেন।
-            </p>
-
-            <a
-              href="tel:+8801700000000"
-              class="contact-link"
-            >
-              Call Support →
-            </a>
-
-          </div>
-
-
-          <div class="contact-card">
-
-            <div class="contact-icon">
-              💬
-            </div>
-
-            <h3>
-              WhatsApp
-            </h3>
-
-            <p>
-              দ্রুত যোগাযোগের জন্য WhatsApp Support ব্যবহার করুন।
-            </p>
-
-            <a
-              href="https://wa.me/8801700000000"
-              target="_blank"
-              rel="noopener"
-              class="contact-link"
-            >
-              Open WhatsApp →
-            </a>
-
-          </div>
-
-
-          <div class="contact-card">
-
-            <div class="contact-icon">
-              ✉️
-            </div>
-
-            <h3>
-              Email
-            </h3>
-
-            <p>
-              বিস্তারিত বিষয় লিখে email-এর মাধ্যমে যোগাযোগ করতে পারেন।
-            </p>
-
-            <a
-              href="mailto:iamsnkbd@protonmail.com"
-              class="contact-link"
-            >
-              Send Email →
-            </a>
-
-          </div>
-
-
-          <div class="contact-card">
-
-            <div class="contact-icon">
-              🆘
-            </div>
-
-            <h3>
-              Student Support
-            </h3>
-
-            <p>
-              Portal-এর সমস্যা হলে dedicated Support Center ব্যবহার করুন।
-            </p>
-
-            <a
-              href="student-support.html"
-              class="contact-link"
-            >
-              Open Support →
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- INSTITUTE + STUDENT -->
-
-    <section>
-
-      <div class="container">
-
-        <div class="main-contact">
-
-          <!-- INSTITUTE -->
-
-          <div class="panel">
-
-            <h3>
-              🏫 Institute Information
-            </h3>
-
-            <p class="panel-sub">
-              Student communication-এর জন্য প্রয়োজনীয় information।
-            </p>
-
-
-            <div class="institute-box">
-
-              <div class="institute-icon">
-                🏫
-              </div>
-
-              <div>
-
-                <strong>
-                  SNK IT Institute
-                </strong>
-
-                <span>
-                  Information Technology & Computer Training
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="institute-box">
-
-              <div class="institute-icon">
-                📚
-              </div>
-
-              <div>
-
-                <strong>
-                  Student Course
-                </strong>
-
-                <span>
-                  Computer Office Application — Batch 01
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="institute-box">
-
-              <div class="institute-icon">
-                💻
-              </div>
-
-              <div>
-
-                <strong>
-                  Class Mode
-                </strong>
-
-                <span>
-                  Offline Class
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="institute-box">
-
-              <div class="institute-icon">
-                📅
-              </div>
-
-              <div>
-
-                <strong>
-                  Class Start
-                </strong>
-
-                <span>
-                  08 September 2026
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="institute-box">
-
-              <div class="institute-icon">
-                ⏰
-              </div>
-
-              <div>
-
-                <strong>
-                  Class Schedule
-                </strong>
-
-                <span>
-                  Saturday–Monday • 4:00 PM–6:00 PM
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="institute-box">
-
-              <div class="institute-icon">
-                👨‍🏫
-              </div>
-
-              <div>
-
-                <strong>
-                  Instructor
-                </strong>
-
-                <span>
-                  SNK IT Instructor
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- STUDENT -->
-
-          <div class="panel">
-
-            <h3>
-              👤 Student Information
-            </h3>
-
-            <p class="panel-sub">
-              আপনার logged-in account information।
-            </p>
-
-
-            <div class="student-card">
-
-              <div class="avatar">
-                👤
-              </div>
-
-              <div>
-
-                <div
-                  class="student-name"
-                  id="studentName"
-                >
-                  Demo Student
-                </div>
-
-                <div
-                  class="student-id"
-                  id="studentId"
-                >
-                  SNK-1001
-                </div>
-
-                <span class="student-status">
-                  Active Student
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <h3
-              style="
-                font-size:16px;
-                margin-top:8px;
-                margin-bottom:12px;
-              "
-            >
-              🕐 Support Hours
-            </h3>
-
-
-            <div class="hours">
-
-              <div class="hours-row">
-
-                <span>
-                  Saturday
-                </span>
-
-                <span>
-                  10:00 AM – 8:00 PM
-                </span>
-
-              </div>
-
-
-              <div class="hours-row">
-
-                <span>
-                  Sunday
-                </span>
-
-                <span>
-                  10:00 AM – 8:00 PM
-                </span>
-
-              </div>
-
-
-              <div class="hours-row">
-
-                <span>
-                  Monday
-                </span>
-
-                <span>
-                  10:00 AM – 8:00 PM
-                </span>
-
-              </div>
-
-
-              <div class="hours-row">
-
-                <span>
-                  Other Days
-                </span>
-
-                <span>
-                  Contact before visiting
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- QUICK COMMUNICATION -->
-
-    <section>
-
-      <div class="container">
-
-        <div class="section-head">
-
-          <h2>
-            💬 Quick Communication
-          </h2>
-
-          <p>
-            আপনার প্রয়োজন অনুযায়ী দ্রুত যোগাযোগ করুন।
-          </p>
-
-        </div>
-
-
-        <div class="communication-grid">
-
-          <div class="communication-card">
-
-            <div class="communication-icon">
-              💬
-            </div>
-
-            <h3>
-              WhatsApp
-            </h3>
-
-            <p>
-              দ্রুত message পাঠানোর জন্য।
-            </p>
-
-            <a
-              href="https://wa.me/8801700000000"
-              target="_blank"
-              rel="noopener"
-              class="btn btn-success"
-            >
-              WhatsApp করুন
-            </a>
-
-          </div>
-
-
-          <div class="communication-card">
-
-            <div class="communication-icon">
-              ✉️
-            </div>
-
-            <h3>
-              Email
-            </h3>
-
-            <p>
-              বিস্তারিত বিষয় email করুন।
-            </p>
-
-            <a
-              href="mailto:iamsnkbd@protonmail.com"
-              class="btn btn-primary"
-            >
-              Email করুন
-            </a>
-
-          </div>
-
-
-          <div class="communication-card">
-
-            <div class="communication-icon">
-              🆘
-            </div>
-
-            <h3>
-              Support Center
-            </h3>
-
-            <p>
-              Portal issue report করার জন্য।
-            </p>
-
-            <a
-              href="student-support.html"
-              class="btn btn-secondary"
-            >
-              Support খুলুন
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- MESSAGE FORM -->
-
-    <section id="messageSection">
-
-      <div class="container">
+        <!-- CONTACT FORM -->
 
         <div class="panel">
 
-          <h3>
-            ✉️ Institute-কে Message পাঠান
-          </h3>
+          <h2>📩 Contact Request</h2>
 
           <p class="panel-sub">
-            আপনার message browser-এর localStorage-এ save হবে।
+            নিচের form পূরণ করে আপনার সমস্যাটি আমাদের জানাতে পারেন।
           </p>
-
 
           <form id="contactForm">
 
             <div class="form-grid">
 
               <div class="field">
-
-                <label for="formStudentName">
-                  Student Name
-                </label>
-
+                <label for="studentName">Student Name</label>
                 <input
+                  id="studentName"
                   type="text"
-                  id="formStudentName"
                   readonly
                 >
-
               </div>
 
-
               <div class="field">
-
-                <label for="formStudentId">
-                  Student ID
-                </label>
-
+                <label for="studentId">Student ID</label>
                 <input
+                  id="studentId"
                   type="text"
-                  id="formStudentId"
                   readonly
                 >
-
               </div>
 
-
               <div class="field">
+                <label for="contactType">Contact Type</label>
 
-                <label for="contactReason">
-                  যোগাযোগের বিষয়
-                </label>
-
-                <select
-                  id="contactReason"
-                  required
-                >
-
-                  <option value="">
-                    Select a topic
-                  </option>
-
-                  <option value="Class">
-                    Class / Schedule
-                  </option>
-
-                  <option value="Course">
-                    Course
-                  </option>
-
-                  <option value="Assignment">
-                    Assignment
-                  </option>
-
-                  <option value="Quiz">
-                    Quiz
-                  </option>
-
-                  <option value="Result">
-                    Result
-                  </option>
-
-                  <option value="Attendance">
-                    Attendance
-                  </option>
-
-                  <option value="Profile">
-                    Student Profile
-                  </option>
-
-                  <option value="Certificate">
-                    Certificate
-                  </option>
-
-                  <option value="Technical">
-                    Technical Problem
-                  </option>
-
-                  <option value="Other">
-                    Other
-                  </option>
-
+                <select id="contactType" required>
+                  <option value="">Select Type</option>
+                  <option value="Course Help">Course Help</option>
+                  <option value="Assignment Help">Assignment Help</option>
+                  <option value="Quiz Help">Quiz Help</option>
+                  <option value="Result Help">Result Help</option>
+                  <option value="Attendance Help">Attendance Help</option>
+                  <option value="Portal Problem">Portal Problem</option>
+                  <option value="Other">Other</option>
                 </select>
 
               </div>
 
-
               <div class="field">
+                <label for="priority">Priority</label>
 
-                <label for="contactPriority">
-                  Priority
-                </label>
-
-                <select
-                  id="contactPriority"
-                  required
-                >
-
-                  <option value="Normal">
-                    Normal
-                  </option>
-
-                  <option value="Important">
-                    Important
-                  </option>
-
-                  <option value="Urgent">
-                    Urgent
-                  </option>
-
+                <select id="priority" required>
+                  <option value="Normal">Normal</option>
+                  <option value="Important">Important</option>
+                  <option value="Urgent">Urgent</option>
                 </select>
 
               </div>
 
-
               <div class="field full">
-
-                <label for="contactSubject">
-                  Subject
-                </label>
+                <label for="subject">Subject</label>
 
                 <input
+                  id="subject"
                   type="text"
-                  id="contactSubject"
-                  maxlength="120"
-                  placeholder="যেমন: Class schedule সম্পর্কে জানতে চাই"
+                  placeholder="যেমন: Assignment জমা দিতে পারছি না"
                   required
                 >
-
               </div>
 
-
               <div class="field full">
-
-                <label for="contactMessage">
-                  Message
-                </label>
+                <label for="message">Message</label>
 
                 <textarea
-                  id="contactMessage"
-                  maxlength="1000"
-                  placeholder="আপনার message বিস্তারিত লিখুন..."
+                  id="message"
+                  placeholder="আপনার সমস্যাটি বিস্তারিত লিখুন..."
                   required
                 ></textarea>
-
               </div>
 
             </div>
 
-
-            <div class="form-actions">
-
-              <button
-                type="submit"
-                class="btn btn-primary"
-              >
-                📤 Send Message
-              </button>
-
-              <button
-                type="reset"
-                class="btn btn-secondary"
-              >
-                Reset
-              </button>
-
-            </div>
+            <button class="submit-btn" type="submit">
+              📤 Request পাঠান
+            </button>
 
           </form>
 
+          <div class="notice">
+            ℹ️ এটি বর্তমানে Demo/Local Portal system।
+            আপনার request এই browser-এর localStorage-এ সংরক্ষণ হবে।
+          </div>
+
         </div>
 
-      </div>
 
-    </section>
+        <!-- CONTACT INFORMATION -->
 
+        <div class="panel">
 
-    <!-- QUICK LINKS -->
+          <h2>🏢 Institute Information</h2>
 
-    <section>
-
-      <div class="container">
-
-        <div class="section-head">
-
-          <h2>
-            🔗 Student Quick Links
-          </h2>
-
-          <p>
-            প্রয়োজনীয় Student Portal section-এ দ্রুত যান।
+          <p class="panel-sub">
+            আপনার course সম্পর্কিত গুরুত্বপূর্ণ তথ্য।
           </p>
 
-        </div>
+          <div class="info-list">
 
+            <div class="info-item">
+              <div class="info-item-icon">🎓</div>
 
-        <div class="quick-links">
-
-          <a
-            href="student-dashboard.html"
-            class="quick-link"
-          >
-
-            <div class="quick-link-icon">
-              🏠
+              <div>
+                <strong>Institute</strong>
+                <span>SNK IT Institute</span>
+              </div>
             </div>
 
-            <div>
+            <div class="info-item">
+              <div class="info-item-icon">💻</div>
 
-              <strong>
-                Dashboard
-              </strong>
-
-              <span>
-                Student Home
-              </span>
-
+              <div>
+                <strong>Course</strong>
+                <span>Computer Office Application</span>
+              </div>
             </div>
 
-          </a>
+            <div class="info-item">
+              <div class="info-item-icon">👥</div>
 
-
-          <a
-            href="student-profiles.html"
-            class="quick-link"
-          >
-
-            <div class="quick-link-icon">
-              👤
+              <div>
+                <strong>Batch</strong>
+                <span>Batch 01</span>
+              </div>
             </div>
 
-            <div>
+            <div class="info-item">
+              <div class="info-item-icon">🏫</div>
 
-              <strong>
-                My Profile
-              </strong>
-
-              <span>
-                Profile information
-              </span>
-
+              <div>
+                <strong>Class Mode</strong>
+                <span>Offline</span>
+              </div>
             </div>
 
-          </a>
+            <div class="info-item">
+              <div class="info-item-icon">📅</div>
 
-
-          <a
-            href="student-resources.html"
-            class="quick-link"
-          >
-
-            <div class="quick-link-icon">
-              📚
+              <div>
+                <strong>Class Start</strong>
+                <span>08 September 2026</span>
+              </div>
             </div>
 
-            <div>
+            <div class="info-item">
+              <div class="info-item-icon">⏰</div>
 
-              <strong>
-                Resources
-              </strong>
-
-              <span>
-                Notes & materials
-              </span>
-
+              <div>
+                <strong>Class Time</strong>
+                <span>Saturday–Monday • 4:00 PM–6:00 PM</span>
+              </div>
             </div>
 
-          </a>
+          </div>
 
+          <div class="support-box">
 
-          <a
-            href="student-support.html"
-            class="quick-link"
-          >
+            <h3>💚 দ্রুত সাহায্য দরকার?</h3>
 
-            <div class="quick-link-icon">
-              🆘
-            </div>
+            <p>
+              জরুরি কোনো বিষয়ে দ্রুত যোগাযোগের জন্য WhatsApp Support ব্যবহার করুন।
+            </p>
 
-            <div>
+            <a
+              class="whatsapp-btn"
+              href="https://wa.me/8801700000000"
+              target="_blank"
+              rel="noopener"
+            >
+              💬 WhatsApp Support
+            </a>
 
-              <strong>
-                Support
-              </strong>
-
-              <span>
-                Help Center
-              </span>
-
-            </div>
-
-          </a>
-
-
-          <a
-            href="student-notifications.html"
-            class="quick-link"
-          >
-
-            <div class="quick-link-icon">
-              🔔
-            </div>
-
-            <div>
-
-              <strong>
-                Notifications
-              </strong>
-
-              <span>
-                Important notices
-              </span>
-
-            </div>
-
-          </a>
-
-
-          <a
-            href="student-settings.html"
-            class="quick-link"
-          >
-
-            <div class="quick-link-icon">
-              ⚙️
-            </div>
-
-            <div>
-
-              <strong>
-                Settings
-              </strong>
-
-              <span>
-                Portal settings
-              </span>
-
-            </div>
-
-          </a>
-
-
-          <a
-            href="student-attendance.html"
-            class="quick-link"
-          >
-
-            <div class="quick-link-icon">
-              📊
-            </div>
-
-            <div>
-
-              <strong>
-                Attendance
-              </strong>
-
-              <span>
-                Attendance history
-              </span>
-
-            </div>
-
-          </a>
-
-
-          <a
-            href="results.html"
-            class="quick-link"
-          >
-
-            <div class="quick-link-icon">
-              🏆
-            </div>
-
-            <div>
-
-              <strong>
-                Results
-              </strong>
-
-              <span>
-                Quiz & result
-              </span>
-
-            </div>
-
-          </a>
+          </div>
 
         </div>
 
@@ -1996,347 +1025,306 @@
     </section>
 
 
-    <!-- NOTICE -->
+    <!-- FAQ -->
 
-    <section>
+    <section class="section">
 
-      <div class="container">
+      <div class="section-head">
+        <h2>❓ Frequently Asked Questions</h2>
+        <p>সাধারণ কিছু প্রশ্নের উত্তর এখানে পাওয়া যাবে।</p>
+      </div>
 
-        <div class="notice">
+      <div class="faq-grid">
 
-          <strong>ℹ️ Demo / Local Version:</strong>
+        <div class="faq">
+          <button class="faq-question" type="button">
+            <span>Class কখন শুরু হবে?</span>
+            <span class="faq-arrow">⌄</span>
+          </button>
 
-          এই Contact page-এর Message form বর্তমানে
-          browser-এর localStorage-এ message সংরক্ষণ করে।
-          এটি এখনো real server বা Admin communication system-এর সাথে
-          connected নয়। পরবর্তী Firebase/backend integration-এর সময়
-          real message delivery এবং Admin reply system যুক্ত করা যাবে।
+          <div class="faq-answer">
+            Batch 01-এর class start date হলো
+            <strong>08 September 2026</strong>।
+          </div>
+        </div>
 
+        <div class="faq">
+          <button class="faq-question" type="button">
+            <span>Class কোথায় হবে?</span>
+            <span class="faq-arrow">⌄</span>
+          </button>
+
+          <div class="faq-answer">
+            বর্তমান course information অনুযায়ী
+            Computer Office Application courseটি Offline mode-এ অনুষ্ঠিত হবে।
+          </div>
+        </div>
+
+        <div class="faq">
+          <button class="faq-question" type="button">
+            <span>Assignment জমা দিতে সমস্যা হলে কী করব?</span>
+            <span class="faq-arrow">⌄</span>
+          </button>
+
+          <div class="faq-answer">
+            Student Support অথবা এই Contact page-এর request form ব্যবহার করে
+            Assignment Help নির্বাচন করে আপনার সমস্যাটি পাঠাতে পারেন।
+          </div>
+        </div>
+
+        <div class="faq">
+          <button class="faq-question" type="button">
+            <span>Result কোথায় দেখা যাবে?</span>
+            <span class="faq-arrow">⌄</span>
+          </button>
+
+          <div class="faq-answer">
+            Student Dashboard থেকে
+            <strong>My Result</strong> section-এ গিয়ে result দেখা যাবে।
+          </div>
+        </div>
+
+        <div class="faq">
+          <button class="faq-question" type="button">
+            <span>Attendance কোথায় দেখা যাবে?</span>
+            <span class="faq-arrow">⌄</span>
+          </button>
+
+          <div class="faq-answer">
+            Dashboard অথবা Student Attendance page থেকে
+            আপনার attendance history ও percentage দেখা যাবে।
+          </div>
         </div>
 
       </div>
 
+    </section>
+
+
+    <!-- COURSE -->
+
+    <section class="section">
+
+      <div class="section-head">
+        <h2>📚 Current Course</h2>
+        <p>আপনার বর্তমান enrollment information।</p>
+      </div>
+
+      <div class="course-card">
+
+        <div>
+
+          <div class="course-title">
+            Computer Office Application
+          </div>
+
+          <div class="course-meta">
+            SNK IT Institute • Batch 01
+          </div>
+
+          <div class="course-badges">
+            <span class="badge">Offline</span>
+            <span class="badge">6 Months</span>
+            <span class="badge">Sat–Mon</span>
+            <span class="badge">4–6 PM</span>
+            <span class="badge">Active</span>
+          </div>
+
+        </div>
+
+        <a
+          href="courses.html"
+          class="back-btn"
+        >
+          📚 My Course
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <section class="section" style="text-align:center;">
+      <a
+        href="student-dashboard.html"
+        class="back-btn"
+      >
+        ← Dashboard-এ ফিরে যান
+      </a>
     </section>
 
   </main>
 
 
-  <!-- MODAL -->
-
-  <div
-    class="modal"
-    id="successModal"
-  >
-
-    <div class="modal-box">
-
-      <div class="modal-head">
-
-        <h3>
-          ✅ Message Saved
-        </h3>
-
-        <button
-          type="button"
-          class="close-btn"
-          onclick="closeModal()"
-        >
-          ×
-        </button>
-
-      </div>
-
-      <p>
-        আপনার message এই browser-এ সফলভাবে সংরক্ষণ করা হয়েছে।
-        Real Admin communication system পরবর্তী backend integration-এর
-        মাধ্যমে যুক্ত করা যাবে।
-      </p>
-
-      <div class="form-actions">
-
-        <button
-          type="button"
-          class="btn btn-primary"
-          onclick="closeModal()"
-        >
-          ঠিক আছে
-        </button>
-
-        <a
-          href="student-support.html"
-          class="btn btn-secondary"
-        >
-          Support Center
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- TOAST -->
-
-  <div
-    class="toast"
-    id="toast"
-  ></div>
-
-
-  <!-- FOOTER -->
-
   <footer>
 
-    <div class="container footer-inner">
+    <div class="footer-title">
+      SNK IT Institute — Student Portal
+    </div>
 
-      <div class="footer-text">
+    <div>
+      Computer Office Application • Batch 01 • Offline
+    </div>
 
-        © 2026 SNK IT Institute.
-        Student Contact Center.
-
-      </div>
-
-      <div class="footer-links">
-
-        <a href="student-dashboard.html">
-          Dashboard
-        </a>
-
-        <a href="student-profiles.html">
-          Profile
-        </a>
-
-        <a href="student-support.html">
-          Support
-        </a>
-
-        <a href="student-settings.html">
-          Settings
-        </a>
-
-      </div>
-
+    <div style="margin-top:5px;">
+      © 2026 SNK IT Institute. Student Portal Demo.
     </div>
 
   </footer>
 
 
+  <div class="toast" id="toast"></div>
+
+
   <script>
 
-    /* =========================================
+    /* ================================
        SESSION PROTECTION
-    ========================================== */
+    ================================= */
 
-    (function(){
-
-      const loggedIn =
-        sessionStorage.getItem(
-          "snkStudentLoggedIn"
-        );
-
-      if(
-        loggedIn !== "true"
-      ){
-
-        window.location.replace(
-          "login.html"
-        );
-
-      }
-
-    })();
+    if(
+      sessionStorage.getItem("snkStudentLoggedIn") !== "true"
+    ){
+      window.location.replace("login.html");
+    }
 
 
-    /* =========================================
-       STUDENT DATA
-    ========================================== */
+    /* ================================
+       STUDENT INFORMATION
+    ================================= */
 
     const studentId =
-      sessionStorage.getItem(
-        "snkStudentId"
-      ) ||
-      "SNK-1001";
-
+      sessionStorage.getItem("snkStudentId") || "SNK-1001";
 
     const studentName =
-      sessionStorage.getItem(
-        "snkStudentName"
-      ) ||
-      "Demo Student";
+      sessionStorage.getItem("snkStudentName") || "Demo Student";
 
+    document.getElementById("studentId").value =
+      studentId;
 
-    document.getElementById(
-      "studentName"
-    ).textContent =
+    document.getElementById("studentName").value =
       studentName;
 
 
-    document.getElementById(
-      "studentId"
-    ).textContent =
-      studentId;
-
-
-    document.getElementById(
-      "formStudentName"
-    ).value =
-      studentName;
-
-
-    document.getElementById(
-      "formStudentId"
-    ).value =
-      studentId;
-
-
-    /* =========================================
+    /* ================================
        THEME
-    ========================================== */
+    ================================= */
+
+    const themeBtn =
+      document.getElementById("themeBtn");
 
     function applyTheme(){
 
-      let theme =
-        localStorage.getItem(
-          "snkTheme"
-        ) ||
-        "light";
-
-
-      let isDark =
-        theme === "dark";
-
-
-      if(
-        theme === "system"
-      ){
-
-        isDark =
-          window.matchMedia &&
-          window.matchMedia(
-            "(prefers-color-scheme: dark)"
-          ).matches;
-
-      }
-
+      const theme =
+        localStorage.getItem("snkTheme") || "light";
 
       document.body.classList.toggle(
         "dark",
-        isDark
+        theme === "dark"
       );
 
-
-      const button =
-        document.getElementById(
-          "themeButton"
-        );
-
-
-      if(button){
-
-        button.textContent =
-          isDark
-            ? "☀️"
-            : "🌙";
-
-      }
-
+      themeBtn.textContent =
+        theme === "dark" ? "☀️" : "🌙";
     }
-
-
-    function toggleTheme(){
-
-      const current =
-        localStorage.getItem(
-          "snkTheme"
-        ) ||
-        "light";
-
-
-      const next =
-        current === "dark"
-          ? "light"
-          : "dark";
-
-
-      localStorage.setItem(
-        "snkTheme",
-        next
-      );
-
-
-      applyTheme();
-
-
-      showToast(
-        next === "dark"
-          ? "Dark Mode চালু হয়েছে।"
-          : "Light Mode চালু হয়েছে।"
-      );
-
-    }
-
 
     applyTheme();
 
+    themeBtn.addEventListener("click",function(){
 
-    /* =========================================
+      const current =
+        localStorage.getItem("snkTheme") || "light";
+
+      const next =
+        current === "dark" ? "light" : "dark";
+
+      localStorage.setItem("snkTheme",next);
+
+      applyTheme();
+
+      showToast(
+        next === "dark"
+          ? "Dark mode চালু হয়েছে"
+          : "Light mode চালু হয়েছে"
+      );
+
+    });
+
+
+    /* ================================
        LOGOUT
-    ========================================== */
+    ================================= */
 
-    function logoutStudent(){
+    document
+      .getElementById("logoutBtn")
+      .addEventListener("click",function(){
 
-      sessionStorage.removeItem(
-        "snkStudentLoggedIn"
-      );
+        const ok =
+          confirm("আপনি কি Logout করতে চান?");
 
-      sessionStorage.removeItem(
-        "snkStudentId"
-      );
+        if(!ok) return;
 
-      sessionStorage.removeItem(
-        "snkStudentName"
-      );
+        sessionStorage.removeItem(
+          "snkStudentLoggedIn"
+        );
 
-      sessionStorage.removeItem(
-        "snkStudentCourse"
-      );
+        sessionStorage.removeItem(
+          "snkStudentId"
+        );
+
+        sessionStorage.removeItem(
+          "snkStudentName"
+        );
+
+        sessionStorage.removeItem(
+          "snkStudentCourse"
+        );
+
+        window.location.href =
+          "login.html";
+      });
 
 
-      window.location.href =
-        "login.html";
+    /* ================================
+       TOAST
+    ================================= */
 
+    const toast =
+      document.getElementById("toast");
+
+    let toastTimer;
+
+    function showToast(message){
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(function(){
+
+          toast.classList.remove("show");
+
+        },3000);
     }
 
 
-    /* =========================================
-       CONTACT STORAGE
-    ========================================== */
+    /* ================================
+       CONTACT REQUEST
+    ================================= */
 
     const CONTACT_KEY =
-      "snkStudentContactMessages";
+      "snkStudentContactRequests";
 
-
-    function getMessages(){
+    function getRequests(){
 
       try{
 
-        const saved =
-          localStorage.getItem(
-            CONTACT_KEY
-          );
-
-
-        if(!saved){
-
-          return [];
-
-        }
-
-
         const data =
-          JSON.parse(saved);
-
+          JSON.parse(
+            localStorage.getItem(CONTACT_KEY) || "[]"
+          );
 
         return Array.isArray(data)
           ? data
@@ -2344,335 +1332,153 @@
 
       }catch(error){
 
-        console.error(
-          "Contact storage error:",
-          error
-        );
-
         return [];
-
       }
-
     }
 
 
-    function saveMessages(messages){
+    function saveRequests(data){
 
       localStorage.setItem(
         CONTACT_KEY,
-        JSON.stringify(messages)
+        JSON.stringify(data)
       );
-
     }
 
 
-    /* =========================================
-       CONTACT FORM
-    ========================================== */
+    document
+      .getElementById("contactForm")
+      .addEventListener("submit",function(event){
+
+        event.preventDefault();
+
+        const type =
+          document.getElementById("contactType").value;
+
+        const priority =
+          document.getElementById("priority").value;
+
+        const subject =
+          document.getElementById("subject").value.trim();
+
+        const message =
+          document.getElementById("message").value.trim();
+
+
+        if(!type || !priority || !subject || !message){
+
+          showToast(
+            "দয়া করে সব প্রয়োজনীয় তথ্য পূরণ করুন।"
+          );
+
+          return;
+        }
+
+
+        const request = {
+
+          id:
+            "CONTACT-" + Date.now(),
+
+          studentId:
+            studentId,
+
+          studentName:
+            studentName,
+
+          course:
+            "Computer Office Application",
+
+          batch:
+            "Batch 01",
+
+          type:
+            type,
+
+          priority:
+            priority,
+
+          subject:
+            subject,
+
+          message:
+            message,
+
+          status:
+            "Pending",
+
+          createdAt:
+            new Date().toISOString()
+
+        };
+
+
+        const requests =
+          getRequests();
+
+        requests.unshift(request);
+
+        saveRequests(requests);
+
+
+        this.reset();
+
+        document.getElementById(
+          "studentId"
+        ).value = studentId;
+
+        document.getElementById(
+          "studentName"
+        ).value = studentName;
+
+
+        showToast(
+          "আপনার Contact Request সফলভাবে পাঠানো হয়েছে।"
+        );
+
+      });
+
+
+    /* ================================
+       FAQ ACCORDION
+    ================================= */
 
     document
-      .getElementById(
-        "contactForm"
-      )
-      .addEventListener(
-        "submit",
-        function(event){
+      .querySelectorAll(".faq-question")
+      .forEach(function(button){
 
-          event.preventDefault();
+        button.addEventListener("click",function(){
 
+          const faq =
+            this.closest(".faq");
 
-          const reason =
-            document.getElementById(
-              "contactReason"
-            ).value;
-
-
-          const priority =
-            document.getElementById(
-              "contactPriority"
-            ).value;
-
-
-          const subject =
-            document.getElementById(
-              "contactSubject"
-            ).value.trim();
-
-
-          const message =
-            document.getElementById(
-              "contactMessage"
-            ).value.trim();
-
-
-          if(!reason){
-
-            showToast(
-              "যোগাযোগের বিষয় নির্বাচন করুন।"
-            );
-
-            return;
-
-          }
-
-
-          if(!subject){
-
-            showToast(
-              "Subject লিখুন।"
-            );
-
-            document
-              .getElementById(
-                "contactSubject"
-              )
-              .focus();
-
-            return;
-
-          }
-
-
-          if(!message){
-
-            showToast(
-              "Message লিখুন।"
-            );
-
-            document
-              .getElementById(
-                "contactMessage"
-              )
-              .focus();
-
-            return;
-
-          }
-
-
-          const newMessage = {
-
-            id:
-              "MSG-" +
-              Date.now(),
-
-            studentId:
-              studentId,
-
-            studentName:
-              studentName,
-
-            course:
-              "Computer Office Application",
-
-            batch:
-              "Batch 01",
-
-            reason:
-              reason,
-
-            priority:
-              priority,
-
-            subject:
-              subject,
-
-            message:
-              message,
-
-            status:
-              "Saved",
-
-            createdAt:
-              new Date().toISOString()
-
-          };
-
-
-          const messages =
-            getMessages();
-
-
-          messages.unshift(
-            newMessage
-          );
-
-
-          saveMessages(
-            messages
-          );
+          const isOpen =
+            faq.classList.contains("open");
 
 
           document
-            .getElementById(
-              "contactForm"
-            )
-            .reset();
+            .querySelectorAll(".faq.open")
+            .forEach(function(item){
+
+              item.classList.remove("open");
+
+            });
 
 
-          document.getElementById(
-            "formStudentName"
-          ).value =
-            studentName;
+          if(!isOpen){
 
-
-          document.getElementById(
-            "formStudentId"
-          ).value =
-            studentId;
-
-
-          openModal();
-
-        }
-      );
-
-
-    /* =========================================
-       MODAL
-    ========================================== */
-
-    function openModal(){
-
-      document
-        .getElementById(
-          "successModal"
-        )
-        .classList.add(
-          "show"
-        );
-
-    }
-
-
-    function closeModal(){
-
-      document
-        .getElementById(
-          "successModal"
-        )
-        .classList.remove(
-          "show"
-        );
-
-    }
-
-
-    document
-      .getElementById(
-        "successModal"
-      )
-      .addEventListener(
-        "click",
-        function(event){
-
-          if(
-            event.target ===
-            this
-          ){
-
-            closeModal();
+            faq.classList.add("open");
 
           }
 
-        }
-      );
+        });
 
-
-    /* =========================================
-       SCROLL
-    ========================================== */
-
-    function scrollToSection(id){
-
-      const section =
-        document.getElementById(
-          id
-        );
-
-
-      if(!section){
-
-        return;
-
-      }
-
-
-      section.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
       });
 
-    }
 
-
-    /* =========================================
-       TOAST
-    ========================================== */
-
-    let toastTimer;
-
-
-    function showToast(message){
-
-      const toast =
-        document.getElementById(
-          "toast"
-        );
-
-
-      toast.textContent =
-        message;
-
-
-      toast.classList.add(
-        "show"
-      );
-
-
-      clearTimeout(
-        toastTimer
-      );
-
-
-      toastTimer =
-        setTimeout(
-          function(){
-
-            toast.classList.remove(
-              "show"
-            );
-
-          },
-          2800
-        );
-
-    }
-
-
-    /* =========================================
-       ESC KEY
-    ========================================== */
-
-    document.addEventListener(
-      "keydown",
-      function(event){
-
-        if(
-          event.key === "Escape"
-        ){
-
-          closeModal();
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       STORAGE CHANGE
-    ========================================== */
+    /* ================================
+       STORAGE REFRESH
+    ================================= */
 
     window.addEventListener(
       "storage",
@@ -2684,16 +1490,12 @@
     );
 
 
-    /* =========================================
-       VISIBILITY CHANGE
-    ========================================== */
-
     document.addEventListener(
       "visibilitychange",
       function(){
 
         if(
-          !document.hidden
+          document.visibilityState === "visible"
         ){
 
           applyTheme();
@@ -2704,48 +1506,39 @@
     );
 
 
-    /* =========================================
-       SYSTEM THEME CHANGE
-    ========================================== */
+    /* ================================
+       SYSTEM THEME
+    ================================= */
 
-    if(
-      window.matchMedia
-    ){
-
-      const media =
-        window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        );
+    const mediaQuery =
+      window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
 
 
-      if(
-        media.addEventListener
-      ){
+    mediaQuery.addEventListener(
+      "change",
+      function(){
 
-        media.addEventListener(
-          "change",
-          function(){
+        const saved =
+          localStorage.getItem("snkTheme");
 
-            const theme =
-              localStorage.getItem(
-                "snkTheme"
-              );
+        if(!saved){
 
+          document.body.classList.toggle(
+            "dark",
+            mediaQuery.matches
+          );
 
-            if(
-              theme === "system"
-            ){
+          themeBtn.textContent =
+            mediaQuery.matches
+              ? "☀️"
+              : "🌙";
 
-              applyTheme();
-
-            }
-
-          }
-        );
+        }
 
       }
-
-    }
+    );
 
   </script>
 
