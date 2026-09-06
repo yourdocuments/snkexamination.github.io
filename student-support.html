@@ -1,1 +1,2716 @@
-#
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Student Support | SNK IT Institute</title>
+
+  <meta
+    name="description"
+    content="SNK IT Institute Student Support and Help Center"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#172033;
+      --muted:#667085;
+      --primary:#2563eb;
+      --primary-dark:#1d4ed8;
+      --success:#16a34a;
+      --warning:#d97706;
+      --danger:#dc2626;
+      --border:#e5e7eb;
+      --soft:#eef4ff;
+      --shadow:0 12px 35px rgba(15,23,42,.08);
+      --radius:20px;
+    }
+
+    body.dark{
+      --bg:#0b1220;
+      --card:#111827;
+      --text:#f3f4f6;
+      --muted:#9ca3af;
+      --border:#253047;
+      --soft:#172554;
+      --shadow:0 12px 35px rgba(0,0,0,.28);
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:"Noto Sans Bengali",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      transition:.25s ease;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    button,
+    input,
+    textarea,
+    select{
+      font-family:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    .container{
+      width:min(1180px,92%);
+      margin:auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.92);
+      border-bottom:1px solid var(--border);
+      backdrop-filter:blur(15px);
+    }
+
+    body.dark header{
+      background:rgba(17,24,39,.92);
+    }
+
+    .nav{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      min-width:0;
+    }
+
+    .brand img{
+      width:44px;
+      height:44px;
+      object-fit:contain;
+      border-radius:12px;
+      background:#fff;
+      padding:4px;
+      border:1px solid var(--border);
+    }
+
+    .brand-text{
+      min-width:0;
+    }
+
+    .brand-title{
+      font-size:18px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .brand-subtitle{
+      font-size:11px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .nav-btn{
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      padding:9px 13px;
+      border-radius:11px;
+      font-weight:700;
+      transition:.2s;
+    }
+
+    .nav-btn:hover{
+      border-color:var(--primary);
+      color:var(--primary);
+      transform:translateY(-1px);
+    }
+
+    .nav-btn.primary{
+      background:var(--primary);
+      color:#fff;
+      border-color:var(--primary);
+    }
+
+    .nav-btn.primary:hover{
+      background:var(--primary-dark);
+      color:#fff;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero{
+      padding:55px 0 35px;
+    }
+
+    .hero-box{
+      position:relative;
+      overflow:hidden;
+      border-radius:28px;
+      padding:42px;
+      background:
+        radial-gradient(circle at 85% 15%,rgba(59,130,246,.20),transparent 30%),
+        radial-gradient(circle at 10% 90%,rgba(37,99,235,.14),transparent 28%),
+        var(--card);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-box::after{
+      content:"";
+      position:absolute;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      border:30px solid rgba(37,99,235,.06);
+      right:-70px;
+      bottom:-80px;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:760px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--soft);
+      color:var(--primary);
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:15px;
+    }
+
+    .hero h1{
+      font-size:clamp(30px,5vw,48px);
+      line-height:1.15;
+      margin-bottom:14px;
+    }
+
+    .hero p{
+      color:var(--muted);
+      max-width:700px;
+      font-size:16px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .btn{
+      border:0;
+      padding:12px 17px;
+      border-radius:12px;
+      font-weight:800;
+      transition:.2s;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-primary{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .btn-secondary{
+      background:var(--card);
+      color:var(--text);
+      border:1px solid var(--border);
+    }
+
+    .btn-success{
+      background:var(--success);
+      color:#fff;
+    }
+
+    /* =========================
+       SECTION
+    ========================== */
+
+    section{
+      padding:20px 0 45px;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .section-head h2{
+      font-size:26px;
+      line-height:1.25;
+    }
+
+    .section-head p{
+      color:var(--muted);
+      margin-top:5px;
+      font-size:14px;
+    }
+
+    /* =========================
+       SUPPORT CARDS
+    ========================== */
+
+    .support-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .support-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      transition:.2s;
+    }
+
+    .support-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(37,99,235,.35);
+    }
+
+    .support-icon{
+      width:52px;
+      height:52px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      background:var(--soft);
+      font-size:25px;
+      margin-bottom:15px;
+    }
+
+    .support-card h3{
+      font-size:17px;
+      margin-bottom:7px;
+    }
+
+    .support-card p{
+      color:var(--muted);
+      font-size:13px;
+      min-height:48px;
+    }
+
+    .support-card button,
+    .support-card a.card-link{
+      display:inline-block;
+      margin-top:14px;
+      color:var(--primary);
+      font-weight:800;
+      font-size:13px;
+      border:0;
+      background:transparent;
+    }
+
+    /* =========================
+       QUICK HELP
+    ========================== */
+
+    .quick-help{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:20px;
+    }
+
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+
+    .panel h3{
+      margin-bottom:6px;
+      font-size:20px;
+    }
+
+    .panel-sub{
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .help-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .help-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px;
+      background:var(--bg);
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+
+    .help-number{
+      flex:0 0 32px;
+      width:32px;
+      height:32px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      background:var(--primary);
+      color:#fff;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .help-item strong{
+      display:block;
+      margin-bottom:3px;
+    }
+
+    .help-item span{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* =========================
+       COURSE INFO
+    ========================== */
+
+    .course-info{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+
+    .info-box{
+      padding:14px;
+      background:var(--bg);
+      border:1px solid var(--border);
+      border-radius:13px;
+    }
+
+    .info-label{
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:2px;
+    }
+
+    .info-value{
+      font-weight:800;
+      font-size:14px;
+    }
+
+    /* =========================
+       FAQ
+    ========================== */
+
+    .faq-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .faq-item{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:15px;
+      overflow:hidden;
+    }
+
+    .faq-question{
+      width:100%;
+      border:0;
+      background:transparent;
+      color:var(--text);
+      padding:17px 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      text-align:left;
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .faq-question span:last-child{
+      color:var(--primary);
+      font-size:20px;
+      transition:.2s;
+    }
+
+    .faq-item.open .faq-question span:last-child{
+      transform:rotate(45deg);
+    }
+
+    .faq-answer{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .25s ease;
+    }
+
+    .faq-answer-inner{
+      padding:0 18px 17px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* =========================
+       SUPPORT FORM
+    ========================== */
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .field.full{
+      grid-column:1/-1;
+    }
+
+    .field label{
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid var(--border);
+      background:var(--bg);
+      color:var(--text);
+      border-radius:12px;
+      padding:12px 13px;
+      outline:none;
+      transition:.2s;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(37,99,235,.10);
+    }
+
+    .field textarea{
+      min-height:130px;
+      resize:vertical;
+    }
+
+    .form-actions{
+      margin-top:17px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .form-note{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    /* =========================
+       REQUEST HISTORY
+    ========================== */
+
+    .request-list{
+      display:grid;
+      gap:10px;
+      margin-top:15px;
+    }
+
+    .request-item{
+      border:1px solid var(--border);
+      background:var(--bg);
+      border-radius:14px;
+      padding:15px;
+    }
+
+    .request-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .request-title{
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 9px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .status.pending{
+      background:#fff7ed;
+      color:#c2410c;
+    }
+
+    .status.saved{
+      background:#ecfdf5;
+      color:#15803d;
+    }
+
+    .request-meta{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .empty{
+      padding:25px;
+      text-align:center;
+      color:var(--muted);
+      border:1px dashed var(--border);
+      border-radius:14px;
+    }
+
+    /* =========================
+       NOTICE
+    ========================== */
+
+    .demo-notice{
+      margin-top:20px;
+      padding:14px 16px;
+      border-radius:14px;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      color:#9a3412;
+      font-size:12px;
+    }
+
+    body.dark .demo-notice{
+      background:#29170c;
+      border-color:#5b341d;
+      color:#fdba74;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer{
+      margin-top:25px;
+      border-top:1px solid var(--border);
+      background:var(--card);
+    }
+
+    .footer-inner{
+      min-height:100px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      flex-wrap:wrap;
+      padding:25px 0;
+    }
+
+    .footer-text{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-links a{
+      color:var(--primary);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    /* =========================
+       MODAL
+    ========================== */
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,.65);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:2000;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      width:min(520px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:var(--card);
+      color:var(--text);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:25px;
+      box-shadow:0 25px 70px rgba(0,0,0,.25);
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    .close-btn{
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:var(--bg);
+      color:var(--text);
+      font-size:20px;
+    }
+
+    .modal-box p{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* =========================
+       TOAST
+    ========================== */
+
+    .toast{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      z-index:3000;
+      background:#111827;
+      color:#fff;
+      padding:12px 16px;
+      border-radius:12px;
+      box-shadow:0 15px 35px rgba(0,0,0,.25);
+      font-size:12px;
+      transform:translateY(100px);
+      opacity:0;
+      pointer-events:none;
+      transition:.25s;
+    }
+
+    .toast.show{
+      transform:translateY(0);
+      opacity:1;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media(max-width:1000px){
+      .support-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .quick-help{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:650px){
+      .nav{
+        padding:10px 0;
+        align-items:flex-start;
+      }
+
+      .nav-actions{
+        justify-content:flex-end;
+      }
+
+      .nav-btn{
+        padding:7px 9px;
+        font-size:11px;
+      }
+
+      .brand img{
+        width:38px;
+        height:38px;
+      }
+
+      .brand-title{
+        font-size:15px;
+      }
+
+      .brand-subtitle{
+        display:none;
+      }
+
+      .hero{
+        padding-top:25px;
+      }
+
+      .hero-box{
+        padding:26px 20px;
+        border-radius:21px;
+      }
+
+      .hero h1{
+        font-size:30px;
+      }
+
+      .support-grid{
+        grid-template-columns:1fr;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .field.full{
+        grid-column:auto;
+      }
+
+      .course-info{
+        grid-template-columns:1fr;
+      }
+
+      .section-head{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .panel{
+        padding:18px;
+      }
+
+      .footer-inner{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+    }
+
+    /* =========================
+       PRINT
+    ========================== */
+
+    @media print{
+      header,
+      .hero-buttons,
+      .demo-notice,
+      .form-actions,
+      footer,
+      .toast{
+        display:none !important;
+      }
+
+      body{
+        background:#fff;
+        color:#000;
+      }
+
+      .panel,
+      .support-card,
+      .hero-box{
+        box-shadow:none;
+        border:1px solid #ddd;
+      }
+
+      section{
+        page-break-inside:avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header>
+    <div class="container nav">
+
+      <a href="student-dashboard.html" class="brand">
+
+        <img
+          src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+          alt="SNK IT Institute Logo"
+        >
+
+        <div class="brand-text">
+          <div class="brand-title">SNK IT Institute</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+
+      </a>
+
+      <div class="nav-actions">
+
+        <a
+          href="student-dashboard.html"
+          class="nav-btn"
+        >
+          Dashboard
+        </a>
+
+        <a
+          href="student-notifications.html"
+          class="nav-btn"
+        >
+          🔔 Notifications
+        </a>
+
+        <button
+          class="nav-btn"
+          id="themeBtn"
+          type="button"
+          onclick="toggleTheme()"
+        >
+          🌙
+        </button>
+
+        <button
+          class="nav-btn primary"
+          type="button"
+          onclick="logoutStudent()"
+        >
+          Logout
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="hero-box">
+
+          <div class="hero-content">
+
+            <div class="eyebrow">
+              🆘 Student Help Center
+            </div>
+
+            <h1>
+              আপনার যেকোনো সমস্যায়
+              আমরা পাশে আছি।
+            </h1>
+
+            <p>
+              Course, Assignment, Quiz, Result, Attendance,
+              Profile অথবা Student Portal ব্যবহার করতে কোনো
+              সমস্যা হলে এখান থেকে সাহায্য নিন।
+            </p>
+
+            <div class="hero-buttons">
+
+              <button
+                class="btn btn-primary"
+                type="button"
+                onclick="scrollToSupportForm()"
+              >
+                📝 Support Request
+              </button>
+
+              <a
+                href="https://wa.me/8801700000000"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-success"
+              >
+                💬 WhatsApp Support
+              </a>
+
+              <button
+                class="btn btn-secondary"
+                type="button"
+                onclick="window.print()"
+              >
+                🖨️ Print
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SUPPORT OPTIONS -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <div>
+            <h2>কী ধরনের সাহায্য দরকার?</h2>
+
+            <p>
+              নিচের category থেকে আপনার প্রয়োজন অনুযায়ী সাহায্য নিন।
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="support-grid">
+
+          <div class="support-card">
+
+            <div class="support-icon">
+              📚
+            </div>
+
+            <h3>
+              Course Help
+            </h3>
+
+            <p>
+              Course, Batch, Class Schedule,
+              Module অথবা Course Information সম্পর্কে সাহায্য।
+            </p>
+
+            <button
+              type="button"
+              onclick="selectSupportType('Course Help')"
+            >
+              সাহায্য নিন →
+            </button>
+
+          </div>
+
+
+          <div class="support-card">
+
+            <div class="support-icon">
+              📝
+            </div>
+
+            <h3>
+              Assignment Help
+            </h3>
+
+            <p>
+              Assignment দেখা, deadline,
+              submission অথবা status সম্পর্কে সাহায্য।
+            </p>
+
+            <button
+              type="button"
+              onclick="selectSupportType('Assignment Help')"
+            >
+              সাহায্য নিন →
+            </button>
+
+          </div>
+
+
+          <div class="support-card">
+
+            <div class="support-icon">
+              🧠
+            </div>
+
+            <h3>
+              Quiz Help
+            </h3>
+
+            <p>
+              Quiz শুরু করা, timer, question,
+              submit অথবা result সম্পর্কে সাহায্য।
+            </p>
+
+            <button
+              type="button"
+              onclick="selectSupportType('Quiz Help')"
+            >
+              সাহায্য নিন →
+            </button>
+
+          </div>
+
+
+          <div class="support-card">
+
+            <div class="support-icon">
+              📊
+            </div>
+
+            <h3>
+              Result & Attendance
+            </h3>
+
+            <p>
+              Result, Attendance percentage,
+              Present/Absent/Late status সম্পর্কে সাহায্য।
+            </p>
+
+            <button
+              type="button"
+              onclick="selectSupportType('Result & Attendance')"
+            >
+              সাহায্য নিন →
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- QUICK HELP + COURSE INFO -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="quick-help">
+
+          <div class="panel">
+
+            <h3>
+              ⚡ দ্রুত সাহায্য
+            </h3>
+
+            <p class="panel-sub">
+              সাধারণ সমস্যাগুলোর জন্য আগে এগুলো চেষ্টা করুন।
+            </p>
+
+            <div class="help-list">
+
+              <div class="help-item">
+
+                <div class="help-number">
+                  1
+                </div>
+
+                <div>
+                  <strong>
+                    Login করতে পারছেন না?
+                  </strong>
+
+                  <span>
+                    Student ID এবং password সঠিকভাবে লিখেছেন কি না
+                    পরীক্ষা করুন।
+                  </span>
+                </div>
+
+              </div>
+
+
+              <div class="help-item">
+
+                <div class="help-number">
+                  2
+                </div>
+
+                <div>
+                  <strong>
+                    Assignment submit হচ্ছে না?
+                  </strong>
+
+                  <span>
+                    Assignment-এর deadline এবং submission information
+                    পরীক্ষা করুন।
+                  </span>
+                </div>
+
+              </div>
+
+
+              <div class="help-item">
+
+                <div class="help-number">
+                  3
+                </div>
+
+                <div>
+                  <strong>
+                    Quiz result দেখা যাচ্ছে না?
+                  </strong>
+
+                  <span>
+                    Quiz submit করার পরে My Results page refresh করুন।
+                  </span>
+                </div>
+
+              </div>
+
+
+              <div class="help-item">
+
+                <div class="help-number">
+                  4
+                </div>
+
+                <div>
+                  <strong>
+                    Attendance ভুল দেখাচ্ছে?
+                  </strong>
+
+                  <span>
+                    Date এবং course filter পরীক্ষা করে Support Request পাঠান।
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <h3>
+              🎓 আপনার Course
+            </h3>
+
+            <p class="panel-sub">
+              বর্তমান Student Portal course information
+            </p>
+
+            <div class="course-info">
+
+              <div class="info-box">
+                <div class="info-label">Course</div>
+                <div class="info-value">
+                  Computer Office Application
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-label">Batch</div>
+                <div class="info-value">
+                  Batch 01
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-label">Mode</div>
+                <div class="info-value">
+                  Offline
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-label">Duration</div>
+                <div class="info-value">
+                  6 Months
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-label">Class</div>
+                <div class="info-value">
+                  Saturday–Monday
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-label">Time</div>
+                <div class="info-value">
+                  4:00 PM–6:00 PM
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-label">Class Start</div>
+                <div class="info-value">
+                  08 September 2026
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-label">Instructor</div>
+                <div class="info-value">
+                  SNK IT Instructor
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FAQ -->
+
+    <section id="faq">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <div>
+            <h2>
+              ❓ Frequently Asked Questions
+            </h2>
+
+            <p>
+              সবচেয়ে সাধারণ প্রশ্নগুলোর উত্তর এখানে পাওয়া যাবে।
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              onclick="toggleFAQ(this)"
+            >
+              <span>
+                Student Portal-এ Login কীভাবে করব?
+              </span>
+
+              <span>
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+
+                Student ID এবং password ব্যবহার করে
+                <strong>login.html</strong> page থেকে Login করুন।
+                Login সফল হলে Student Dashboard খুলবে।
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              onclick="toggleFAQ(this)"
+            >
+              <span>
+                Assignment কোথা থেকে দেখব?
+              </span>
+
+              <span>
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+
+                Dashboard অথবা Student Portal-এর
+                <strong>Assignments</strong> section থেকে
+                আপনার Assignment দেখতে পারবেন।
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              onclick="toggleFAQ(this)"
+            >
+              <span>
+                Quiz submit করার পরে result কোথায় পাব?
+              </span>
+
+              <span>
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+
+                Quiz submit করার পরে
+                <strong>My Results</strong> page-এ আপনার quiz result
+                দেখা যাবে।
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              onclick="toggleFAQ(this)"
+            >
+              <span>
+                Attendance percentage কীভাবে হিসাব হয়?
+              </span>
+
+              <span>
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+
+                Present এবং Late attendance attended হিসেবে গণনা হয়।
+                মোট attended session-এর ভিত্তিতে attendance percentage
+                হিসাব করা হয়।
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              onclick="toggleFAQ(this)"
+            >
+              <span>
+                আমার Attendance ভুল হলে কী করব?
+              </span>
+
+              <span>
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+
+                Attendance page-এ date এবং course দেখে বিষয়টি নিশ্চিত করুন।
+                ভুল থাকলে নিচের Support Request Form ব্যবহার করে
+                বিস্তারিত জানান।
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              onclick="toggleFAQ(this)"
+            >
+              <span>
+                Student Profile information পরিবর্তন করা যাবে?
+              </span>
+
+              <span>
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+
+                Student Profile page থেকে বর্তমানে editable information
+                যেমন mobile, email, guardian information ইত্যাদি
+                update করা যাবে।
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              onclick="toggleFAQ(this)"
+            >
+              <span>
+                Certificate কখন পাব?
+              </span>
+
+              <span>
+                +
+              </span>
+            </button>
+
+            <div class="faq-answer">
+
+              <div class="faq-answer-inner">
+
+                Course completion-এর পরে certificate status অনুযায়ী
+                certificate section থেকে information পাওয়া যাবে।
+                বর্তমানে portal-এ course completion pending থাকলে
+                certificate earned হিসেবে দেখানো হবে না।
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SUPPORT REQUEST -->
+
+    <section id="supportFormSection">
+
+      <div class="container">
+
+        <div class="panel">
+
+          <div class="section-head">
+
+            <div>
+              <h2>
+                📝 Support Request পাঠান
+              </h2>
+
+              <p>
+                আপনার সমস্যাটি লিখে locally save করুন।
+              </p>
+            </div>
+
+          </div>
+
+
+          <form id="supportForm">
+
+            <div class="form-grid">
+
+              <div class="field">
+
+                <label for="studentName">
+                  Student Name
+                </label>
+
+                <input
+                  type="text"
+                  id="studentName"
+                  readonly
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="studentId">
+                  Student ID
+                </label>
+
+                <input
+                  type="text"
+                  id="studentId"
+                  readonly
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="supportType">
+                  সমস্যার ধরন
+                </label>
+
+                <select id="supportType" required>
+
+                  <option value="">
+                    Select Support Type
+                  </option>
+
+                  <option value="Login Problem">
+                    Login Problem
+                  </option>
+
+                  <option value="Course Help">
+                    Course Help
+                  </option>
+
+                  <option value="Assignment Help">
+                    Assignment Help
+                  </option>
+
+                  <option value="Quiz Help">
+                    Quiz Help
+                  </option>
+
+                  <option value="Result & Attendance">
+                    Result & Attendance
+                  </option>
+
+                  <option value="Profile Help">
+                    Profile Help
+                  </option>
+
+                  <option value="Certificate Help">
+                    Certificate Help
+                  </option>
+
+                  <option value="Technical Problem">
+                    Technical Problem
+                  </option>
+
+                  <option value="Other">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="priority">
+                  Priority
+                </label>
+
+                <select id="priority" required>
+
+                  <option value="Normal">
+                    Normal
+                  </option>
+
+                  <option value="Important">
+                    Important
+                  </option>
+
+                  <option value="Urgent">
+                    Urgent
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="field full">
+
+                <label for="subject">
+                  Subject
+                </label>
+
+                <input
+                  type="text"
+                  id="subject"
+                  placeholder="যেমন: Attendance ভুল দেখাচ্ছে"
+                  maxlength="120"
+                  required
+                >
+
+              </div>
+
+
+              <div class="field full">
+
+                <label for="message">
+                  আপনার সমস্যার বিস্তারিত
+                </label>
+
+                <textarea
+                  id="message"
+                  placeholder="আপনার সমস্যাটি বিস্তারিত লিখুন..."
+                  maxlength="1000"
+                  required
+                ></textarea>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+              >
+                📤 Submit Request
+              </button>
+
+              <button
+                type="reset"
+                class="btn btn-secondary"
+              >
+                Reset
+              </button>
+
+            </div>
+
+
+            <div class="form-note">
+              এই version-এ Support Request browser-এর localStorage-এ
+              সংরক্ষিত হবে। Firebase/backend connection পরবর্তী ধাপে
+              যুক্ত করা যাবে।
+            </div>
+
+          </form>
+
+
+          <!-- REQUEST HISTORY -->
+
+          <div style="margin-top:30px;">
+
+            <h3>
+              📋 আপনার Support Requests
+            </h3>
+
+            <p class="panel-sub">
+              এই browser-এ সংরক্ষিত request history
+            </p>
+
+            <div
+              id="requestList"
+              class="request-list"
+            ></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- IMPORTANT NOTICE -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="demo-notice">
+
+          <strong>ℹ️ Demo / Local Version:</strong>
+
+          Support Request বর্তমানে এই browser-এর
+          <strong>localStorage</strong>-এ save হচ্ছে।
+          এটি এখনো real admin/server support system-এর সাথে connected নয়।
+          ভবিষ্যতে Firebase/backend integration করলে Admin থেকে
+          Support Request দেখা ও reply করা যাবে।
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       MODAL
+  ========================== -->
+
+  <div
+    class="modal"
+    id="supportModal"
+  >
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <h3 id="modalTitle">
+          Support
+        </h3>
+
+        <button
+          class="close-btn"
+          type="button"
+          onclick="closeModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <p id="modalMessage">
+        আপনার সমস্যার জন্য Support Request পাঠাতে পারেন।
+      </p>
+
+      <div class="form-actions">
+
+        <button
+          class="btn btn-primary"
+          type="button"
+          onclick="closeModal();scrollToSupportForm();"
+        >
+          📝 Request পাঠান
+        </button>
+
+        <a
+          href="https://wa.me/8801700000000"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-success"
+        >
+          💬 WhatsApp
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div class="footer-text">
+
+        © 2026 SNK IT Institute.
+        Student Portal.
+
+      </div>
+
+      <div class="footer-links">
+
+        <a href="student-dashboard.html">
+          Dashboard
+        </a>
+
+        <a href="student-profiles.html">
+          Profile
+        </a>
+
+        <a href="student-resources.html">
+          Resources
+        </a>
+
+        <a href="student-notifications.html">
+          Notifications
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* =========================================
+       SESSION PROTECTION
+    ========================================== */
+
+    (function(){
+
+      const loggedIn =
+        sessionStorage.getItem("snkStudentLoggedIn");
+
+      if(loggedIn !== "true"){
+
+        window.location.replace("login.html");
+
+        return;
+
+      }
+
+    })();
+
+
+    /* =========================================
+       STUDENT DATA
+    ========================================== */
+
+    const studentId =
+      sessionStorage.getItem("snkStudentId") ||
+      "SNK-1001";
+
+    const studentName =
+      sessionStorage.getItem("snkStudentName") ||
+      "Demo Student";
+
+
+    document.getElementById("studentId").value =
+      studentId;
+
+    document.getElementById("studentName").value =
+      studentName;
+
+
+    /* =========================================
+       THEME
+    ========================================== */
+
+    function applyTheme(){
+
+      const theme =
+        localStorage.getItem("snkTheme") ||
+        "light";
+
+      document.body.classList.toggle(
+        "dark",
+        theme === "dark"
+      );
+
+      const themeBtn =
+        document.getElementById("themeBtn");
+
+      if(themeBtn){
+
+        themeBtn.textContent =
+          theme === "dark"
+            ? "☀️"
+            : "🌙";
+
+      }
+
+    }
+
+
+    function toggleTheme(){
+
+      const current =
+        localStorage.getItem("snkTheme") ||
+        "light";
+
+      const next =
+        current === "dark"
+          ? "light"
+          : "dark";
+
+      localStorage.setItem(
+        "snkTheme",
+        next
+      );
+
+      applyTheme();
+
+    }
+
+
+    applyTheme();
+
+
+    /* =========================================
+       LOGOUT
+    ========================================== */
+
+    function logoutStudent(){
+
+      sessionStorage.removeItem(
+        "snkStudentLoggedIn"
+      );
+
+      sessionStorage.removeItem(
+        "snkStudentId"
+      );
+
+      sessionStorage.removeItem(
+        "snkStudentName"
+      );
+
+      sessionStorage.removeItem(
+        "snkStudentCourse"
+      );
+
+      window.location.href =
+        "login.html";
+
+    }
+
+
+    /* =========================================
+       SUPPORT TYPE
+    ========================================== */
+
+    function selectSupportType(type){
+
+      const select =
+        document.getElementById("supportType");
+
+      select.value = type;
+
+      scrollToSupportForm();
+
+      document.getElementById("subject").focus();
+
+    }
+
+
+    /* =========================================
+       SCROLL SUPPORT FORM
+    ========================================== */
+
+    function scrollToSupportForm(){
+
+      const section =
+        document.getElementById(
+          "supportFormSection"
+        );
+
+      if(section){
+
+        section.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+      }
+
+    }
+
+
+    /* =========================================
+       FAQ
+    ========================================== */
+
+    function toggleFAQ(button){
+
+      const item =
+        button.closest(".faq-item");
+
+      const answer =
+        item.querySelector(".faq-answer");
+
+      const isOpen =
+        item.classList.contains("open");
+
+
+      document
+        .querySelectorAll(".faq-item")
+        .forEach(function(other){
+
+          if(other !== item){
+
+            other.classList.remove("open");
+
+            const otherAnswer =
+              other.querySelector(".faq-answer");
+
+            otherAnswer.style.maxHeight =
+              null;
+
+          }
+
+        });
+
+
+      if(isOpen){
+
+        item.classList.remove("open");
+
+        answer.style.maxHeight =
+          null;
+
+      }else{
+
+        item.classList.add("open");
+
+        answer.style.maxHeight =
+          answer.scrollHeight + "px";
+
+      }
+
+    }
+
+
+    /* =========================================
+       STORAGE KEY
+    ========================================== */
+
+    const SUPPORT_KEY =
+      "snkStudentSupportRequests";
+
+
+    /* =========================================
+       GET REQUESTS
+    ========================================== */
+
+    function getRequests(){
+
+      try{
+
+        const data =
+          localStorage.getItem(
+            SUPPORT_KEY
+          );
+
+        if(!data){
+
+          return [];
+
+        }
+
+        const parsed =
+          JSON.parse(data);
+
+        return Array.isArray(parsed)
+          ? parsed
+          : [];
+
+      }catch(error){
+
+        console.error(error);
+
+        return [];
+
+      }
+
+    }
+
+
+    /* =========================================
+       SAVE REQUESTS
+    ========================================== */
+
+    function saveRequests(requests){
+
+      localStorage.setItem(
+        SUPPORT_KEY,
+        JSON.stringify(requests)
+      );
+
+    }
+
+
+    /* =========================================
+       SUPPORT FORM
+    ========================================== */
+
+    document
+      .getElementById("supportForm")
+      .addEventListener(
+        "submit",
+        function(event){
+
+          event.preventDefault();
+
+
+          const type =
+            document.getElementById(
+              "supportType"
+            ).value;
+
+          const priority =
+            document.getElementById(
+              "priority"
+            ).value;
+
+          const subject =
+            document.getElementById(
+              "subject"
+            ).value.trim();
+
+          const message =
+            document.getElementById(
+              "message"
+            ).value.trim();
+
+
+          if(!type){
+
+            showToast(
+              "দয়া করে সমস্যার ধরন নির্বাচন করুন।"
+            );
+
+            return;
+
+          }
+
+
+          if(!subject){
+
+            showToast(
+              "Subject লিখুন।"
+            );
+
+            document
+              .getElementById("subject")
+              .focus();
+
+            return;
+
+          }
+
+
+          if(!message){
+
+            showToast(
+              "সমস্যার বিস্তারিত লিখুন।"
+            );
+
+            document
+              .getElementById("message")
+              .focus();
+
+            return;
+
+          }
+
+
+          const request = {
+
+            id:
+              "SUP-" +
+              Date.now(),
+
+            studentId:
+              studentId,
+
+            studentName:
+              studentName,
+
+            course:
+              "Computer Office Application",
+
+            batch:
+              "Batch 01",
+
+            type:
+              type,
+
+            priority:
+              priority,
+
+            subject:
+              subject,
+
+            message:
+              message,
+
+            status:
+              "Pending",
+
+            createdAt:
+              new Date().toISOString()
+
+          };
+
+
+          const requests =
+            getRequests();
+
+
+          requests.unshift(
+            request
+          );
+
+
+          saveRequests(
+            requests
+          );
+
+
+          document
+            .getElementById(
+              "supportForm"
+            )
+            .reset();
+
+
+          document.getElementById(
+            "studentId"
+          ).value = studentId;
+
+
+          document.getElementById(
+            "studentName"
+          ).value = studentName;
+
+
+          renderRequests();
+
+
+          showToast(
+            "আপনার Support Request সংরক্ষণ করা হয়েছে।"
+          );
+
+
+          document
+            .getElementById(
+              "requestList"
+            )
+            .scrollIntoView({
+              behavior:"smooth",
+              block:"center"
+            });
+
+        }
+      );
+
+
+    /* =========================================
+       RENDER REQUESTS
+    ========================================== */
+
+    function renderRequests(){
+
+      const container =
+        document.getElementById(
+          "requestList"
+        );
+
+
+      const allRequests =
+        getRequests();
+
+
+      const requests =
+        allRequests.filter(function(item){
+
+          return String(
+            item.studentId || ""
+          ).toLowerCase() ===
+          String(
+            studentId
+          ).toLowerCase();
+
+        });
+
+
+      if(!requests.length){
+
+        container.innerHTML = `
+          <div class="empty">
+            এখনো কোনো Support Request পাঠানো হয়নি।
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        requests
+          .slice(0,10)
+          .map(function(item){
+
+            const date =
+              formatDateTime(
+                item.createdAt
+              );
+
+
+            const safeSubject =
+              escapeHTML(
+                item.subject
+              );
+
+
+            const safeType =
+              escapeHTML(
+                item.type
+              );
+
+
+            const safePriority =
+              escapeHTML(
+                item.priority
+              );
+
+
+            return `
+
+              <div class="request-item">
+
+                <div class="request-top">
+
+                  <div class="request-title">
+                    ${safeSubject}
+                  </div>
+
+                  <span class="status pending">
+                    ${escapeHTML(item.status || "Pending")}
+                  </span>
+
+                </div>
+
+                <div class="request-meta">
+
+                  ${safeType}
+                  • Priority: ${safePriority}
+                  • ${date}
+
+                </div>
+
+              </div>
+
+            `;
+
+          })
+          .join("");
+
+    }
+
+
+    /* =========================================
+       DATE FORMAT
+    ========================================== */
+
+    function formatDateTime(value){
+
+      if(!value){
+
+        return "Unknown date";
+
+      }
+
+      try{
+
+        const date =
+          new Date(value);
+
+        return date.toLocaleString(
+          "en-GB",
+          {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+          }
+        );
+
+      }catch(error){
+
+        return value;
+
+      }
+
+    }
+
+
+    /* =========================================
+       HTML ESCAPE
+    ========================================== */
+
+    function escapeHTML(value){
+
+      return String(
+        value ?? ""
+      )
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+
+    }
+
+
+    /* =========================================
+       MODAL
+    ========================================== */
+
+    function openSupportModal(
+      title,
+      message
+    ){
+
+      document.getElementById(
+        "modalTitle"
+      ).textContent =
+        title;
+
+      document.getElementById(
+        "modalMessage"
+      ).textContent =
+        message;
+
+      document
+        .getElementById(
+          "supportModal"
+        )
+        .classList.add(
+          "show"
+        );
+
+    }
+
+
+    function closeModal(){
+
+      document
+        .getElementById(
+          "supportModal"
+        )
+        .classList.remove(
+          "show"
+        );
+
+    }
+
+
+    document
+      .getElementById(
+        "supportModal"
+      )
+      .addEventListener(
+        "click",
+        function(event){
+
+          if(
+            event.target ===
+            this
+          ){
+
+            closeModal();
+
+          }
+
+        }
+      );
+
+
+    /* =========================================
+       TOAST
+    ========================================== */
+
+    let toastTimer;
+
+
+    function showToast(message){
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toastTimer =
+        setTimeout(
+          function(){
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          3000
+        );
+
+    }
+
+
+    /* =========================================
+       STORAGE CHANGE
+    ========================================== */
+
+    window.addEventListener(
+      "storage",
+      function(){
+
+        applyTheme();
+
+        renderRequests();
+
+      }
+    );
+
+
+    /* =========================================
+       VISIBILITY CHANGE
+    ========================================== */
+
+    document.addEventListener(
+      "visibilitychange",
+      function(){
+
+        if(
+          !document.hidden
+        ){
+
+          applyTheme();
+
+          renderRequests();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       ESCAPE MODAL
+    ========================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event){
+
+        if(
+          event.key === "Escape"
+        ){
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       INITIAL LOAD
+    ========================================== */
+
+    renderRequests();
+
+  </script>
+
+</body>
+</html>
+```
