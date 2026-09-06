@@ -1,5731 +1,3322 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz | SNK IT Institute</title>
 
-<title>SNK IT Institute | Quiz Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-<link
-href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
-rel="stylesheet"
->
+  <style>
 
-<style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#172033;
+      --muted:#687386;
+      --border:#e5e9f2;
 
-/* =========================================================
-   VERSION 1.15
-   QUIZ MANAGEMENT PRO
-========================================================= */
+      --primary:#2563eb;
+      --primary-dark:#1d4ed8;
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+      --success:#16a34a;
+      --warning:#d97706;
+      --danger:#dc2626;
 
-:root{
+      --purple:#7c3aed;
 
-    --bg:#f4f6fa;
-    --card:#ffffff;
-    --text:#172033;
-    --muted:#667085;
-    --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(15,23,42,.08);
 
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
+      --radius:18px;
+    }
 
-    --soft:#eff6ff;
 
-    --success:#16a34a;
-    --warning:#d97706;
-    --danger:#dc2626;
+    body.dark{
+      --bg:#0b1220;
+      --card:#111827;
+      --text:#f1f5f9;
+      --muted:#94a3b8;
+      --border:#243047;
 
-    --purple:#7c3aed;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+    }
 
-    --sidebar:#111827;
 
-    --shadow:
-        0 10px 30px rgba(15,23,42,.07);
-}
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
 
-body.dark{
 
-    --bg:#080d18;
-    --card:#111827;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:#1f2937;
+    html{
+      scroll-behavior:smooth;
+    }
 
-    --soft:#172554;
 
-    --sidebar:#020617;
+    body{
+      font-family:"Noto Sans Bengali",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
 
-    --shadow:
-        0 10px 30px rgba(0,0,0,.25);
-}
+      transition:.25s ease;
+    }
 
-body{
 
-    font-family:
-        "Noto Sans Bengali",
-        Arial,
-        sans-serif;
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-    background:var(--bg);
-    color:var(--text);
 
-    min-height:100vh;
+    button,
+    input{
+      font-family:inherit;
+    }
 
-    transition:.25s;
-}
 
-button,
-input,
-select,
-textarea{
+    button{
+      cursor:pointer;
+    }
 
-    font-family:inherit;
-}
 
-button{
+    .container{
+      width:min(1180px,92%);
+      margin:auto;
+    }
 
-    cursor:pointer;
-}
 
-a{
+    /* =========================
+       HEADER
+    ========================== */
 
-    text-decoration:none;
-    color:inherit;
-}
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
 
+      background:rgba(255,255,255,.92);
 
-/* =========================================================
-   SIDEBAR
-========================================================= */
+      border-bottom:1px solid var(--border);
 
-.sidebar{
+      backdrop-filter:blur(12px);
+    }
 
-    width:255px;
-    min-width:255px;
 
-    background:var(--sidebar);
-    color:#fff;
+    body.dark header{
+      background:rgba(17,24,39,.92);
+    }
 
-    min-height:100vh;
 
-    position:fixed;
+    .nav{
+      min-height:72px;
 
-    left:0;
-    top:0;
-    bottom:0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
 
-    z-index:1000;
+      gap:20px;
+    }
 
-    display:flex;
-    flex-direction:column;
 
-    transition:.25s;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
 
-.sidebar-logo{
+      font-weight:800;
+    }
 
-    height:76px;
 
-    padding:13px 17px;
+    .brand img{
+      width:45px;
+      height:45px;
 
-    display:flex;
-    align-items:center;
+      object-fit:contain;
 
-    gap:10px;
+      border-radius:12px;
 
-    border-bottom:
-        1px solid rgba(255,255,255,.08);
-}
+      background:#fff;
 
-.sidebar-logo img{
+      padding:4px;
 
-    width:45px;
-    height:45px;
+      border:1px solid var(--border);
+    }
 
-    object-fit:contain;
-}
 
-.sidebar-logo-text{
+    .brand-text{
+      display:flex;
+      flex-direction:column;
 
-    font-size:15px;
-    font-weight:800;
-}
+      line-height:1.2;
+    }
 
-.sidebar-logo-text small{
 
-    display:block;
+    .brand-title{
+      font-size:17px;
+      font-weight:800;
+    }
 
-    color:#9ca3af;
 
-    font-size:9px;
-    font-weight:500;
-}
+    .brand-subtitle{
+      color:var(--muted);
+      font-size:11px;
 
-.sidebar-menu{
+      margin-top:3px;
+    }
 
-    padding:18px 12px;
 
-    flex:1;
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
 
-    overflow-y:auto;
-}
 
-.menu-label{
+    .nav-btn{
+      border:1px solid var(--border);
 
-    color:#6b7280;
+      background:var(--card);
 
-    font-size:9px;
+      color:var(--text);
 
-    font-weight:800;
+      min-height:40px;
 
-    padding:8px 11px;
+      padding:0 13px;
 
-    letter-spacing:.5px;
-}
+      border-radius:11px;
 
-.menu-item{
+      font-weight:700;
+      font-size:13px;
 
-    width:100%;
+      transition:.2s ease;
+    }
 
-    border:none;
 
-    background:transparent;
+    .nav-btn:hover{
+      transform:translateY(-1px);
 
-    color:#d1d5db;
+      border-color:var(--primary);
 
-    display:flex;
+      color:var(--primary);
+    }
 
-    align-items:center;
 
-    gap:11px;
+    .logout-btn{
+      color:var(--danger);
+    }
 
-    padding:11px 12px;
 
-    border-radius:9px;
+    /* =========================
+       HERO
+    ========================== */
 
-    margin-bottom:4px;
+    .hero{
+      padding:42px 0 28px;
+    }
 
-    font-size:11px;
 
-    font-weight:600;
+    .hero-card{
+      position:relative;
 
-    text-align:left;
-}
+      overflow:hidden;
 
-.menu-item:hover{
+      border-radius:24px;
 
-    background:
-        rgba(255,255,255,.07);
+      padding:32px;
 
-    color:#fff;
-}
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #4f46e5,
+          #2563eb
+        );
 
-.menu-item.active{
+      color:#fff;
 
-    background:#2563eb;
+      box-shadow:
+        0 20px 50px rgba(79,70,229,.25);
+    }
 
-    color:#fff;
-}
 
-.menu-icon{
+    .hero-card::after{
+      content:"";
 
-    width:22px;
+      position:absolute;
 
-    text-align:center;
+      width:270px;
+      height:270px;
 
-    font-size:15px;
-}
+      border-radius:50%;
 
-.menu-badge{
+      background:rgba(255,255,255,.08);
 
-    margin-left:auto;
+      right:-80px;
+      top:-110px;
+    }
 
-    background:#374151;
 
-    color:#d1d5db;
+    .hero-content{
+      position:relative;
+      z-index:2;
+    }
 
-    padding:2px 6px;
 
-    border-radius:20px;
+    .hero-badge{
+      display:inline-flex;
 
-    font-size:7px;
-}
+      align-items:center;
 
-.menu-item.active .menu-badge{
+      gap:7px;
 
-    background:rgba(255,255,255,.2);
+      padding:7px 12px;
 
-    color:#fff;
-}
+      border-radius:999px;
 
-.sidebar-footer{
+      background:rgba(255,255,255,.14);
 
-    padding:13px;
+      border:
+        1px solid
+        rgba(255,255,255,.2);
 
-    border-top:
-        1px solid rgba(255,255,255,.08);
-}
+      font-size:12px;
 
-.admin-mini{
+      font-weight:700;
 
-    display:flex;
+      margin-bottom:14px;
+    }
 
-    align-items:center;
 
-    gap:9px;
+    .hero h1{
+      font-size:clamp(27px,4vw,40px);
 
-    padding:9px;
+      line-height:1.2;
 
-    background:
-        rgba(255,255,255,.05);
+      margin-bottom:10px;
+    }
 
-    border-radius:10px;
-}
 
-.admin-avatar{
+    .hero p{
+      max-width:720px;
 
-    width:34px;
-    height:34px;
+      opacity:.92;
 
-    border-radius:9px;
+      font-size:15px;
+    }
 
-    background:#2563eb;
 
-    display:flex;
+    .hero-info{
+      display:flex;
 
-    align-items:center;
-    justify-content:center;
-}
+      flex-wrap:wrap;
 
-.admin-mini-info{
+      gap:10px;
 
-    flex:1;
-}
+      margin-top:20px;
+    }
 
-.admin-mini-info strong{
 
-    display:block;
+    .hero-info span{
+      background:rgba(255,255,255,.12);
 
-    font-size:10px;
-}
+      border:
+        1px solid
+        rgba(255,255,255,.18);
 
-.admin-mini-info span{
+      padding:8px 12px;
 
-    display:block;
+      border-radius:10px;
 
-    color:#9ca3af;
+      font-size:12px;
 
-    font-size:8px;
-}
+      font-weight:600;
+    }
 
-.logout-small{
 
-    border:none;
+    /* =========================
+       STUDENT BAR
+    ========================== */
 
-    background:transparent;
+    .student-bar{
+      margin-bottom:28px;
+    }
 
-    color:#9ca3af;
 
-    font-size:14px;
-}
+    .student-card{
+      background:var(--card);
 
+      border:1px solid var(--border);
 
-/* =========================================================
-   MAIN
-========================================================= */
+      border-radius:var(--radius);
 
-.main{
+      box-shadow:var(--shadow);
 
-    margin-left:255px;
+      padding:18px 20px;
 
-    width:
-        calc(100% - 255px);
+      display:flex;
 
-    min-width:0;
-}
+      align-items:center;
 
+      justify-content:space-between;
 
-/* =========================================================
-   TOPBAR
-========================================================= */
+      gap:20px;
+    }
 
-.topbar{
 
-    height:76px;
+    .student-info{
+      display:flex;
 
-    background:var(--card);
+      align-items:center;
 
-    border-bottom:
-        1px solid var(--border);
+      gap:14px;
+    }
 
-    display:flex;
 
-    align-items:center;
+    .student-avatar{
+      width:52px;
+      height:52px;
 
-    justify-content:space-between;
+      border-radius:15px;
 
-    padding:0 25px;
+      display:grid;
+      place-items:center;
 
-    position:sticky;
+      background:rgba(124,58,237,.1);
 
-    top:0;
+      color:var(--purple);
 
-    z-index:900;
-}
+      font-size:21px;
 
-.topbar-left{
+      font-weight:800;
+    }
 
-    display:flex;
 
-    align-items:center;
+    .student-info h3{
+      font-size:16px;
 
-    gap:12px;
-}
+      margin-bottom:2px;
+    }
 
-.mobile-menu-btn{
 
-    display:none;
+    .student-info p{
+      color:var(--muted);
 
-    border:
-        1px solid var(--border);
+      font-size:12px;
+    }
 
-    background:var(--card);
 
-    color:var(--text);
+    .student-status{
+      padding:7px 12px;
 
-    width:38px;
-    height:38px;
+      border-radius:999px;
 
-    border-radius:9px;
+      background:rgba(22,163,74,.1);
 
-    font-size:18px;
-}
+      color:var(--success);
 
-.page-heading h1{
+      font-size:12px;
 
-    font-size:20px;
-}
+      font-weight:800;
+    }
 
-.page-heading p{
 
-    color:var(--muted);
+    /* =========================
+       QUIZ WRAPPER
+    ========================== */
 
-    font-size:10px;
-}
+    .quiz-section{
+      padding:0 0 55px;
+    }
 
-.topbar-actions{
 
-    display:flex;
+    .quiz-layout{
+      display:grid;
 
-    align-items:center;
+      grid-template-columns:
+        minmax(0,1fr)
+        300px;
 
-    gap:7px;
-}
+      gap:20px;
 
-.topbar-btn{
+      align-items:start;
+    }
 
-    width:37px;
-    height:37px;
 
-    border:
-        1px solid var(--border);
+    /* =========================
+       QUIZ CARD
+    ========================== */
 
-    background:var(--card);
+    .quiz-card{
+      background:var(--card);
 
-    color:var(--text);
+      border:1px solid var(--border);
 
-    border-radius:9px;
-}
+      border-radius:20px;
 
-.admin-top-profile{
+      box-shadow:var(--shadow);
 
-    display:flex;
+      overflow:hidden;
+    }
 
-    align-items:center;
 
-    gap:9px;
+    .quiz-header{
+      padding:20px;
 
-    padding-left:9px;
+      border-bottom:
+        1px solid
+        var(--border);
 
-    border-left:
-        1px solid var(--border);
-}
+      display:flex;
 
-.top-avatar{
+      align-items:center;
 
-    width:36px;
-    height:36px;
+      justify-content:space-between;
 
-    border-radius:9px;
+      gap:15px;
+    }
 
-    background:var(--soft);
 
-    display:flex;
+    .quiz-header h2{
+      font-size:19px;
+    }
 
-    align-items:center;
-    justify-content:center;
-}
 
-.top-profile-text strong{
+    .quiz-header p{
+      color:var(--muted);
 
-    display:block;
+      font-size:11px;
 
-    font-size:10px;
-}
+      margin-top:3px;
+    }
 
-.top-profile-text span{
 
-    display:block;
+    .timer{
+      min-width:115px;
 
-    color:var(--muted);
+      text-align:center;
 
-    font-size:8px;
-}
+      padding:10px 13px;
 
+      border-radius:12px;
 
-/* =========================================================
-   CONTENT
-========================================================= */
+      background:
+        rgba(37,99,235,.08);
 
-.content{
+      border:
+        1px solid
+        rgba(37,99,235,.18);
 
-    padding:25px;
-}
+      color:var(--primary);
 
-.page-intro{
+      font-size:17px;
 
-    display:flex;
+      font-weight:800;
+    }
 
-    align-items:center;
 
-    justify-content:space-between;
+    .timer.warning{
+      color:var(--warning);
 
-    gap:15px;
+      background:
+        rgba(217,119,6,.08);
 
-    margin-bottom:20px;
-}
+      border-color:
+        rgba(217,119,6,.2);
+    }
 
-.page-intro h2{
 
-    font-size:21px;
+    .timer.danger{
+      color:var(--danger);
 
-    margin-bottom:4px;
-}
+      background:
+        rgba(220,38,38,.08);
 
-.page-intro p{
+      border-color:
+        rgba(220,38,38,.2);
+    }
 
-    color:var(--muted);
 
-    font-size:10px;
-}
+    .progress-wrap{
+      padding:15px 20px 0;
+    }
 
-.primary-btn{
 
-    border:none;
+    .progress-info{
+      display:flex;
 
-    background:var(--primary);
+      align-items:center;
 
-    color:#fff;
+      justify-content:space-between;
 
-    padding:11px 16px;
+      margin-bottom:7px;
 
-    border-radius:9px;
+      color:var(--muted);
 
-    font-size:10px;
+      font-size:11px;
+    }
 
-    font-weight:800;
-}
 
-.primary-btn:hover{
+    .progress-bar{
+      width:100%;
 
-    background:var(--primary-dark);
-}
+      height:8px;
 
+      background:var(--bg);
 
-/* =========================================================
-   STATS
-========================================================= */
+      border-radius:999px;
 
-.stats-grid{
+      overflow:hidden;
+    }
 
-    display:grid;
 
-    grid-template-columns:
-        repeat(4,1fr);
+    .progress-fill{
+      height:100%;
 
-    gap:15px;
+      width:0%;
 
-    margin-bottom:20px;
-}
+      background:var(--primary);
 
-.stat-card{
+      border-radius:999px;
 
-    background:var(--card);
+      transition:.3s ease;
+    }
 
-    border:
-        1px solid var(--border);
 
-    border-radius:15px;
+    .question-area{
+      padding:25px 20px 22px;
+    }
 
-    padding:17px;
 
-    box-shadow:var(--shadow);
-}
+    .question-number{
+      display:inline-flex;
 
-.stat-icon{
+      padding:6px 10px;
 
-    width:39px;
-    height:39px;
+      border-radius:999px;
 
-    border-radius:10px;
+      background:
+        rgba(124,58,237,.1);
 
-    background:var(--soft);
+      color:var(--purple);
 
-    display:flex;
+      font-size:11px;
 
-    align-items:center;
-    justify-content:center;
+      font-weight:800;
 
-    font-size:17px;
+      margin-bottom:13px;
+    }
 
-    margin-bottom:11px;
-}
 
-.stat-number{
+    .question{
+      font-size:18px;
 
-    font-size:23px;
+      font-weight:800;
 
-    font-weight:800;
-}
+      line-height:1.55;
 
-.stat-title{
+      margin-bottom:20px;
+    }
 
-    font-size:10px;
-}
 
-.stat-description{
+    .options{
+      display:grid;
 
-    color:var(--muted);
+      gap:11px;
+    }
 
-    font-size:8px;
-}
 
+    .option{
+      position:relative;
 
-/* =========================================================
-   TOOLBAR
-========================================================= */
+      width:100%;
 
-.toolbar{
+      text-align:left;
 
-    background:var(--card);
+      padding:14px 15px;
 
-    border:
-        1px solid var(--border);
+      border:1px solid var(--border);
 
-    border-radius:15px;
+      background:var(--card);
 
-    padding:14px;
+      color:var(--text);
 
-    box-shadow:var(--shadow);
+      border-radius:13px;
 
-    margin-bottom:15px;
-}
+      display:flex;
 
-.toolbar-row{
+      align-items:flex-start;
 
-    display:flex;
+      gap:12px;
 
-    align-items:center;
+      transition:.2s ease;
+    }
 
-    gap:9px;
 
-    flex-wrap:wrap;
-}
+    .option:hover{
+      border-color:var(--primary);
 
-.search-box{
+      background:
+        rgba(37,99,235,.04);
+    }
 
-    flex:1;
 
-    min-width:220px;
+    .option.selected{
+      border-color:var(--primary);
 
-    position:relative;
-}
+      background:
+        rgba(37,99,235,.08);
 
-.search-box span{
+      box-shadow:
+        0 0 0 2px
+        rgba(37,99,235,.08);
+    }
 
-    position:absolute;
 
-    left:11px;
+    .option-letter{
+      width:30px;
+      height:30px;
 
-    top:50%;
+      flex-shrink:0;
 
-    transform:
-        translateY(-50%);
+      border-radius:9px;
 
-    color:var(--muted);
-}
+      display:grid;
+      place-items:center;
 
-.search-box input{
+      background:var(--bg);
 
-    width:100%;
+      border:1px solid var(--border);
 
-    border:
-        1px solid var(--border);
+      color:var(--muted);
 
-    background:var(--bg);
+      font-size:12px;
 
-    color:var(--text);
+      font-weight:800;
+    }
 
-    padding:
-        10px
-        12px
-        10px
-        33px;
 
-    border-radius:8px;
+    .option.selected
+    .option-letter{
+      background:var(--primary);
 
-    outline:none;
+      border-color:var(--primary);
 
-    font-size:10px;
-}
+      color:#fff;
+    }
 
-.filter-select{
 
-    border:
-        1px solid var(--border);
+    .option-text{
+      font-size:13px;
 
-    background:var(--bg);
+      line-height:1.55;
 
-    color:var(--text);
+      padding-top:4px;
+    }
 
-    padding:10px 12px;
 
-    border-radius:8px;
+    .quiz-footer{
+      padding:16px 20px 20px;
 
-    outline:none;
+      border-top:
+        1px solid
+        var(--border);
 
-    font-size:9px;
+      display:flex;
 
-    min-width:145px;
-}
+      align-items:center;
 
+      justify-content:space-between;
 
-/* =========================================================
-   TABLE
-========================================================= */
+      gap:10px;
+    }
 
-.table-card{
 
-    background:var(--card);
+    .quiz-buttons{
+      display:flex;
 
-    border:
-        1px solid var(--border);
+      gap:9px;
+    }
 
-    border-radius:15px;
 
-    box-shadow:var(--shadow);
+    .btn{
+      min-height:42px;
 
-    overflow:hidden;
-}
+      padding:0 16px;
 
-.table-wrapper{
+      border-radius:11px;
 
-    width:100%;
+      border:1px solid var(--border);
 
-    overflow-x:auto;
-}
+      background:var(--card);
 
-table{
+      color:var(--text);
 
-    width:100%;
+      font-size:12px;
 
-    border-collapse:collapse;
+      font-weight:800;
 
-    min-width:1150px;
-}
+      transition:.2s ease;
+    }
 
-thead{
 
-    background:var(--bg);
-}
+    .btn:hover{
+      transform:translateY(-1px);
+    }
 
-th{
 
-    color:var(--muted);
+    .btn-primary{
+      background:var(--primary);
 
-    font-size:8px;
+      border-color:var(--primary);
 
-    font-weight:800;
+      color:#fff;
+    }
 
-    text-align:left;
 
-    padding:13px 14px;
+    .btn-primary:hover{
+      background:var(--primary-dark);
+    }
 
-    border-bottom:
-        1px solid var(--border);
 
-    white-space:nowrap;
-}
+    .btn-success{
+      background:var(--success);
 
-td{
+      border-color:var(--success);
 
-    padding:12px 14px;
+      color:#fff;
+    }
 
-    border-bottom:
-        1px solid var(--border);
 
-    font-size:9px;
+    .btn-danger{
+      background:var(--danger);
 
-    white-space:nowrap;
-}
+      border-color:var(--danger);
 
-tbody tr:hover{
+      color:#fff;
+    }
 
-    background:var(--bg);
-}
 
-.quiz-cell strong{
+    .btn-disabled{
+      opacity:.5;
 
-    display:block;
+      cursor:not-allowed;
+    }
 
-    font-size:10px;
-}
 
-.quiz-cell span{
+    /* =========================
+       SIDEBAR
+    ========================== */
 
-    display:block;
+    .side-card{
+      background:var(--card);
 
-    color:var(--muted);
+      border:1px solid var(--border);
 
-    font-size:7px;
+      border-radius:18px;
 
-    margin-top:2px;
+      box-shadow:var(--shadow);
 
-    max-width:250px;
+      padding:18px;
+    }
 
-    overflow:hidden;
 
-    text-overflow:ellipsis;
-}
+    .side-card + .side-card{
+      margin-top:15px;
+    }
 
-.course-badge{
 
-    display:inline-flex;
+    .side-card h3{
+      font-size:15px;
 
-    padding:5px 8px;
+      margin-bottom:12px;
+    }
 
-    background:var(--soft);
 
-    color:var(--primary);
+    .rule-list{
+      display:grid;
 
-    border-radius:20px;
+      gap:9px;
+    }
 
-    font-size:7px;
 
-    font-weight:800;
-}
+    .rule-item{
+      display:flex;
 
-.time-badge{
+      gap:9px;
 
-    display:inline-flex;
+      align-items:flex-start;
 
-    align-items:center;
+      color:var(--muted);
 
-    gap:4px;
+      font-size:11px;
+    }
 
-    padding:5px 8px;
 
-    background:#f5f3ff;
+    .rule-icon{
+      width:25px;
+      height:25px;
 
-    color:var(--purple);
+      flex-shrink:0;
 
-    border-radius:20px;
+      border-radius:8px;
 
-    font-size:7px;
+      display:grid;
+      place-items:center;
 
-    font-weight:800;
-}
+      background:
+        rgba(37,99,235,.1);
 
-body.dark .time-badge{
+      color:var(--primary);
 
-    background:#2e1065;
+      font-size:12px;
+    }
 
-    color:#c4b5fd;
-}
 
-.deadline{
+    .question-map{
+      display:grid;
 
-    font-weight:700;
-}
+      grid-template-columns:
+        repeat(5,1fr);
 
-.deadline.upcoming{
+      gap:7px;
+    }
 
-    color:var(--warning);
-}
 
-.deadline.active{
+    .map-item{
+      width:100%;
 
-    color:var(--success);
-}
+      aspect-ratio:1;
 
-.deadline.overdue{
+      border-radius:9px;
 
-    color:var(--danger);
-}
+      border:1px solid var(--border);
 
-.status{
+      background:var(--bg);
 
-    display:inline-flex;
+      color:var(--muted);
 
-    padding:5px 8px;
+      font-size:11px;
 
-    border-radius:20px;
+      font-weight:800;
+    }
 
-    font-size:7px;
 
-    font-weight:800;
-}
+    .map-item.current{
+      border-color:var(--primary);
 
-.status.active{
+      background:
+        rgba(37,99,235,.1);
 
-    background:#dcfce7;
+      color:var(--primary);
+    }
 
-    color:#15803d;
-}
 
-.status.closed{
+    .map-item.answered{
+      background:var(--success);
 
-    background:#fee2e2;
+      border-color:var(--success);
 
-    color:#b91c1c;
-}
+      color:#fff;
+    }
 
-.status.draft{
 
-    background:#f3f4f6;
+    /* =========================
+       RESULT
+    ========================== */
 
-    color:#4b5563;
-}
+    .result-screen{
+      display:none;
 
-body.dark .status.draft{
+      padding:28px 20px 30px;
 
-    background:#1f2937;
+      text-align:center;
+    }
 
-    color:#d1d5db;
-}
 
-.attempt-count{
+    .result-screen.show{
+      display:block;
+    }
 
-    font-weight:800;
-}
 
-.row-actions{
+    .result-icon{
+      width:75px;
+      height:75px;
 
-    display:flex;
+      border-radius:50%;
 
-    gap:5px;
-}
+      display:grid;
+      place-items:center;
 
-.action-btn{
+      margin:0 auto 15px;
 
-    width:30px;
-    height:30px;
+      background:
+        rgba(22,163,74,.1);
 
-    border:
-        1px solid var(--border);
+      color:var(--success);
 
-    background:var(--card);
+      font-size:34px;
+    }
 
-    color:var(--text);
 
-    border-radius:7px;
-}
+    .result-screen h2{
+      font-size:25px;
 
-.action-btn:hover{
+      margin-bottom:6px;
+    }
 
-    background:var(--soft);
-}
 
-.action-btn.delete:hover{
+    .result-screen p{
+      color:var(--muted);
 
-    color:var(--danger);
-}
+      font-size:13px;
+    }
 
 
-/* =========================================================
-   MODAL
-========================================================= */
+    .score-circle{
+      width:145px;
+      height:145px;
 
-.modal-overlay{
+      margin:22px auto;
 
-    position:fixed;
+      border-radius:50%;
 
-    inset:0;
+      display:grid;
+      place-items:center;
 
-    background:
-        rgba(0,0,0,.55);
+      background:
+        conic-gradient(
+          var(--primary) 0deg,
+          var(--primary) 0deg,
+          var(--bg) 0deg
+        );
 
-    display:none;
+      position:relative;
+    }
 
-    align-items:center;
 
-    justify-content:center;
+    .score-circle::after{
+      content:"";
 
-    padding:20px;
+      position:absolute;
 
-    z-index:3000;
-}
+      width:112px;
+      height:112px;
 
-.modal-overlay.show{
+      border-radius:50%;
 
-    display:flex;
-}
+      background:var(--card);
+    }
 
-.modal{
 
-    width:100%;
+    .score-content{
+      position:relative;
 
-    max-width:680px;
+      z-index:2;
 
-    max-height:90vh;
+      display:flex;
 
-    overflow-y:auto;
+      flex-direction:column;
 
-    background:var(--card);
+      align-items:center;
+    }
 
-    border:
-        1px solid var(--border);
 
-    border-radius:18px;
+    .score-content strong{
+      font-size:30px;
 
-    padding:22px;
+      line-height:1;
+    }
 
-    box-shadow:
-        0 25px 70px
+
+    .score-content span{
+      color:var(--muted);
+
+      font-size:11px;
+
+      margin-top:5px;
+    }
+
+
+    .result-stats{
+      display:grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:10px;
+
+      max-width:500px;
+
+      margin:0 auto 22px;
+    }
+
+
+    .result-stat{
+      background:var(--bg);
+
+      border:1px solid var(--border);
+
+      border-radius:12px;
+
+      padding:12px;
+    }
+
+
+    .result-stat strong{
+      display:block;
+
+      font-size:19px;
+    }
+
+
+    .result-stat span{
+      color:var(--muted);
+
+      font-size:10px;
+    }
+
+
+    .result-message{
+      padding:13px;
+
+      border-radius:12px;
+
+      background:
+        rgba(37,99,235,.07);
+
+      color:var(--primary);
+
+      font-size:12px;
+
+      margin-bottom:20px;
+    }
+
+
+    /* =========================
+       INTRO SCREEN
+    ========================== */
+
+    .quiz-intro{
+      padding:30px 20px;
+
+      text-align:center;
+    }
+
+
+    .intro-icon{
+      width:70px;
+      height:70px;
+
+      border-radius:20px;
+
+      display:grid;
+      place-items:center;
+
+      margin:0 auto 16px;
+
+      background:
+        rgba(124,58,237,.1);
+
+      color:var(--purple);
+
+      font-size:31px;
+    }
+
+
+    .quiz-intro h2{
+      font-size:24px;
+
+      margin-bottom:7px;
+    }
+
+
+    .quiz-intro p{
+      color:var(--muted);
+
+      font-size:13px;
+
+      max-width:620px;
+
+      margin:0 auto 20px;
+    }
+
+
+    .intro-info{
+      display:grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap:10px;
+
+      max-width:600px;
+
+      margin:0 auto 22px;
+    }
+
+
+    .intro-info-box{
+      padding:13px;
+
+      background:var(--bg);
+
+      border:1px solid var(--border);
+
+      border-radius:12px;
+    }
+
+
+    .intro-info-box strong{
+      display:block;
+
+      font-size:18px;
+    }
+
+
+    .intro-info-box span{
+      color:var(--muted);
+
+      font-size:10px;
+    }
+
+
+    /* =========================
+       TOAST
+    ========================== */
+
+    .toast{
+      position:fixed;
+
+      right:20px;
+      bottom:20px;
+
+      z-index:5000;
+
+      background:#111827;
+
+      color:#fff;
+
+      padding:13px 16px;
+
+      border-radius:12px;
+
+      font-size:12px;
+
+      box-shadow:
+        0 15px 40px
         rgba(0,0,0,.25);
-}
 
-.modal-header{
+      transform:translateY(100px);
 
-    display:flex;
+      opacity:0;
 
-    align-items:center;
+      pointer-events:none;
 
-    justify-content:space-between;
+      transition:.3s ease;
 
-    margin-bottom:17px;
-}
-
-.modal-header h3{
-
-    font-size:16px;
-}
-
-.modal-header p{
-
-    color:var(--muted);
-
-    font-size:8px;
-
-    margin-top:2px;
-}
-
-.modal-close{
-
-    width:30px;
-    height:30px;
-
-    border:none;
-
-    background:var(--bg);
-
-    color:var(--text);
-
-    border-radius:8px;
-
-    font-size:16px;
-}
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:12px;
-}
-
-.form-group{
-
-    margin-bottom:12px;
-}
-
-.form-group.full{
-
-    grid-column:
-        1 / -1;
-}
-
-.form-group label{
-
-    display:block;
-
-    font-size:9px;
-
-    font-weight:800;
-
-    margin-bottom:5px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
-
-    width:100%;
-
-    border:
-        1px solid var(--border);
-
-    background:var(--bg);
-
-    color:var(--text);
-
-    padding:10px;
-
-    border-radius:8px;
-
-    outline:none;
-
-    font-size:9px;
-}
-
-.form-group textarea{
-
-    min-height:85px;
-
-    resize:vertical;
-}
-
-.form-actions{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:7px;
-
-    margin-top:8px;
-}
-
-.secondary-btn{
-
-    border:
-        1px solid var(--border);
-
-    background:var(--card);
-
-    color:var(--text);
-
-    padding:10px 14px;
-
-    border-radius:8px;
-
-    font-size:9px;
-
-    font-weight:700;
-}
-
-.save-btn{
-
-    border:none;
-
-    background:var(--primary);
-
-    color:#fff;
-
-    padding:10px 16px;
-
-    border-radius:8px;
-
-    font-size:9px;
-
-    font-weight:800;
-}
-
-
-/* =========================================================
-   QUESTIONS
-========================================================= */
-
-.question-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
-
-    margin-top:10px;
-}
-
-.question-item{
-
-    border:
-        1px solid var(--border);
-
-    border-radius:11px;
-
-    padding:13px;
-
-    background:var(--bg);
-}
-
-.question-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    margin-bottom:7px;
-}
-
-.question-number{
-
-    color:var(--primary);
-
-    font-size:8px;
-
-    font-weight:800;
-}
-
-.question-actions{
-
-    display:flex;
-
-    gap:5px;
-}
-
-.question-actions button{
-
-    width:27px;
-    height:27px;
-
-    border:
-        1px solid var(--border);
-
-    background:var(--card);
-
-    color:var(--text);
-
-    border-radius:7px;
-}
-
-.question-text{
-
-    font-size:10px;
-
-    font-weight:700;
-
-    line-height:1.6;
-
-    margin-bottom:8px;
-}
-
-.option{
-
-    font-size:8px;
-
-    color:var(--muted);
-
-    margin:4px 0;
-
-    padding:5px 7px;
-
-    border-radius:6px;
-}
-
-.option.correct{
-
-    color:var(--success);
-
-    background:#dcfce7;
-
-    font-weight:800;
-}
-
-body.dark .option.correct{
-
-    background:#052e16;
-}
-
-.question-empty{
-
-    text-align:center;
-
-    color:var(--muted);
-
-    padding:30px 10px;
-
-    font-size:10px;
-}
-
-
-/* =========================================================
-   DETAIL
-========================================================= */
-
-.detail-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:10px;
-}
-
-.detail-box{
-
-    background:var(--bg);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:9px;
-
-    padding:12px;
-}
-
-.detail-box label{
-
-    display:block;
-
-    color:var(--muted);
-
-    font-size:7px;
-
-    margin-bottom:4px;
-}
-
-.detail-box strong{
-
-    font-size:10px;
-}
-
-
-/* =========================================================
-   ATTEMPTS
-========================================================= */
-
-.attempt-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-}
-
-.attempt-item{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    padding:11px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:10px;
-
-    background:var(--bg);
-}
-
-.student-info{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    flex:1;
-}
-
-.student-avatar{
-
-    width:34px;
-    height:34px;
-
-    border-radius:9px;
-
-    background:var(--soft);
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:9px;
-
-    font-weight:800;
-}
-
-.student-info strong{
-
-    display:block;
-
-    font-size:9px;
-}
-
-.student-info span{
-
-    display:block;
-
-    color:var(--muted);
-
-    font-size:7px;
-}
-
-.score{
-
-    font-size:10px;
-
-    font-weight:800;
-
-    color:var(--success);
-}
-
-.view-btn{
-
-    border:
-        1px solid var(--border);
-
-    background:var(--card);
-
-    color:var(--text);
-
-    padding:7px 10px;
-
-    border-radius:7px;
-
-    font-size:8px;
-
-    font-weight:700;
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty-state{
-
-    display:none;
-
-    text-align:center;
-
-    padding:45px 20px;
-
-    color:var(--muted);
-
-    font-size:10px;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer{
-
-    padding:20px 25px;
-
-    border-top:
-        1px solid var(--border);
-
-    color:var(--muted);
-
-    font-size:9px;
-
-    text-align:center;
-
-    margin-top:25px;
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-
-    position:fixed;
-
-    right:20px;
-
-    bottom:20px;
-
-    background:#111827;
-
-    color:#fff;
-
-    padding:12px 16px;
-
-    border-radius:10px;
-
-    font-size:10px;
-
-    z-index:5000;
-
-    transform:
-        translateY(100px);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.3s;
-}
-
-.toast.show{
-
-    transform:
-        translateY(0);
-
-    opacity:1;
-}
-
-
-/* =========================================================
-   SIDEBAR OVERLAY
-========================================================= */
-
-.sidebar-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-        rgba(0,0,0,.45);
-
-    z-index:950;
-
-    display:none;
-}
-
-.sidebar-overlay.show{
-
-    display:block;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:1100px){
-
-    .stats-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-}
-
-@media(max-width:800px){
-
-    .sidebar{
-
-        transform:
-            translateX(-100%);
+      max-width:330px;
     }
 
-    .sidebar.open{
 
-        transform:
-            translateX(0);
+    .toast.show{
+      transform:translateY(0);
+
+      opacity:1;
     }
 
-    .main{
 
-        margin-left:0;
+    /* =========================
+       FOOTER
+    ========================== */
 
-        width:100%;
+    footer{
+      border-top:1px solid var(--border);
+
+      padding:25px 0;
+
+      color:var(--muted);
+
+      font-size:11px;
+
+      text-align:center;
     }
 
-    .mobile-menu-btn{
 
-        display:flex;
+    /* =========================
+       RESPONSIVE
+    ========================== */
 
-        align-items:center;
+    @media(max-width:950px){
 
-        justify-content:center;
+      .quiz-layout{
+        grid-template-columns:1fr;
+      }
+
+
+      .side-card{
+        margin-top:0;
+      }
+
     }
 
-    .top-profile-text{
 
+    @media(max-width:650px){
+
+      .nav{
+        min-height:64px;
+      }
+
+
+      .brand-subtitle{
         display:none;
-    }
+      }
 
-    .admin-top-profile{
 
-        border-left:none;
-    }
-}
-
-@media(max-width:600px){
-
-    .topbar{
-
-        height:65px;
-
-        padding:0 13px;
-    }
-
-    .content{
-
-        padding:15px;
-    }
-
-    .page-heading h1{
-
-        font-size:16px;
-    }
-
-    .page-heading p{
-
+      .nav-btn span{
         display:none;
-    }
+      }
 
-    .page-intro{
 
+      .hero{
+        padding-top:25px;
+      }
+
+
+      .hero-card{
+        padding:24px 20px;
+
+        border-radius:20px;
+      }
+
+
+      .student-card{
         flex-direction:column;
 
         align-items:flex-start;
-    }
+      }
 
-    .stats-grid{
 
-        grid-template-columns:1fr;
-    }
+      .student-status{
+        align-self:flex-start;
+      }
 
-    .toolbar-row{
 
+      .quiz-header{
+        align-items:flex-start;
+
+        flex-direction:column;
+      }
+
+
+      .timer{
+        width:100%;
+      }
+
+
+      .question{
+        font-size:16px;
+      }
+
+
+      .quiz-footer{
         flex-direction:column;
 
         align-items:stretch;
-    }
+      }
 
-    .search-box{
 
-        min-width:0;
-    }
-
-    .filter-select{
-
+      .quiz-buttons{
         width:100%;
-    }
+      }
 
-    .form-grid{
 
+      .quiz-buttons .btn{
+        flex:1;
+      }
+
+
+      .intro-info{
         grid-template-columns:1fr;
+      }
+
+
+      .result-stats{
+        grid-template-columns:1fr 1fr 1fr;
+      }
+
     }
 
-    .form-group.full{
 
-        grid-column:auto;
-    }
+    @media(max-width:420px){
 
-    .detail-grid{
+      .brand-title{
+        font-size:14px;
+      }
 
+
+      .brand img{
+        width:40px;
+        height:40px;
+      }
+
+
+      .hero h1{
+        font-size:25px;
+      }
+
+
+      .option{
+        padding:12px;
+      }
+
+
+      .option-text{
+        font-size:12px;
+      }
+
+
+      .result-stats{
         grid-template-columns:1fr;
+      }
+
     }
 
-    .attempt-item{
-
-        align-items:flex-start;
-
-        flex-wrap:wrap;
-    }
-
-    .toast{
-
-        left:15px;
-
-        right:15px;
-
-        bottom:15px;
-
-        text-align:center;
-    }
-}
-
-</style>
+  </style>
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
-     SIDEBAR
-========================================================= -->
+  <!-- =========================
+       HEADER
+  ========================== -->
 
-<aside class="sidebar" id="sidebar">
+  <header>
 
-    <div class="sidebar-logo">
+    <div class="container nav">
+
+      <a
+        href="student-dashboard.html"
+        class="brand"
+      >
 
         <img
-            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-            alt="SNK IT Institute Logo"
+          src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+          alt="SNK IT Institute Logo"
         >
 
-        <div class="sidebar-logo-text">
+        <div class="brand-text">
 
+          <div class="brand-title">
             SNK IT Institute
+          </div>
 
-            <small>
-                Admin Control Panel
-            </small>
+          <div class="brand-subtitle">
+            Student Portal
+          </div>
 
         </div>
 
-    </div>
+      </a>
 
 
-    <div class="sidebar-menu">
-
-        <div class="menu-label">
-            MAIN
-        </div>
-
+      <div class="nav-actions">
 
         <a
-            class="menu-item"
-            href="admin.html"
+          href="student-dashboard.html"
+          class="nav-btn"
         >
-
-            <span class="menu-icon">
-                📊
-            </span>
-
-            <span>
-                Dashboard
-            </span>
-
-        </a>
-
-
-        <a
-            class="menu-item"
-            href="students.html"
-        >
-
-            <span class="menu-icon">
-                👨‍🎓
-            </span>
-
-            <span>
-                Students
-            </span>
-
-        </a>
-
-
-        <a
-            class="menu-item"
-            href="courses.html"
-        >
-
-            <span class="menu-icon">
-                🎓
-            </span>
-
-            <span>
-                Courses
-            </span>
-
-        </a>
-
-
-        <div class="menu-label">
-            ACADEMIC
-        </div>
-
-
-        <a
-            class="menu-item"
-            href="assignments.html"
-        >
-
-            <span class="menu-icon">
-                📝
-            </span>
-
-            <span>
-                Assignments
-            </span>
-
-        </a>
-
-
-        <a
-            class="menu-item active"
-            href="quiz.html"
-        >
-
-            <span class="menu-icon">
-                🎯
-            </span>
-
-            <span>
-                Quiz
-            </span>
-
-            <span
-                class="menu-badge"
-                id="sidebarQuizCount"
-            >
-                0
-            </span>
-
-        </a>
-
-
-        <a
-            class="menu-item"
-            href="results.html"
-        >
-
-            <span class="menu-icon">
-                🏆
-            </span>
-
-            <span>
-                Results
-            </span>
-
-        </a>
-
-
-        <a
-            class="menu-item"
-            href="attendance-overview.html"
-        >
-
-            <span class="menu-icon">
-                📅
-            </span>
-
-            <span>
-                Attendance
-            </span>
-
-        </a>
-
-
-        <div class="menu-label">
-            CONTENT
-        </div>
-
-
-        <a
-            class="menu-item"
-            href="resources.html"
-        >
-
-            <span class="menu-icon">
-                📚
-            </span>
-
-            <span>
-                Resources
-            </span>
-
+          🏠 <span>Dashboard</span>
         </a>
 
 
         <button
-            class="menu-item"
-            onclick="showToast('📢 Notices module পরবর্তী step-এ আসবে।')"
+          class="nav-btn"
+          id="themeBtn"
+          onclick="toggleTheme()"
         >
-
-            <span class="menu-icon">
-                📢
-            </span>
-
-            <span>
-                Notices
-            </span>
-
+          🌙
         </button>
-
-
-        <div class="menu-label">
-            SYSTEM
-        </div>
 
 
         <button
-            class="menu-item"
-            onclick="showToast('⚙️ Settings module পরবর্তী step-এ আসবে।')"
+          class="nav-btn logout-btn"
+          onclick="logout()"
         >
-
-            <span class="menu-icon">
-                ⚙️
-            </span>
-
-            <span>
-                Settings
-            </span>
-
+          🚪 <span>Logout</span>
         </button>
+
+      </div>
 
     </div>
 
+  </header>
 
-    <div class="sidebar-footer">
 
-        <div class="admin-mini">
+  <!-- =========================
+       MAIN
+  ========================== -->
 
-            <div class="admin-avatar">
-                👨‍💼
+  <main>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="hero-card">
+
+          <div class="hero-content">
+
+            <div class="hero-badge">
+              🧠 Student Portal • Quiz
             </div>
 
-            <div class="admin-mini-info">
-
-                <strong>
-                    Super Admin
-                </strong>
-
-                <span>
-                    Administrator
-                </span>
-
-            </div>
-
-            <button
-                class="logout-small"
-                onclick="logoutDemo()"
-                title="Logout"
-            >
-                🚪
-            </button>
-
-        </div>
-
-    </div>
-
-</aside>
-
-
-<div
-    class="sidebar-overlay"
-    id="sidebarOverlay"
-    onclick="closeSidebar()"
-></div>
-
-
-<!-- =========================================================
-     MAIN
-========================================================= -->
-
-<main class="main">
-
-
-<header class="topbar">
-
-    <div class="topbar-left">
-
-        <button
-            class="mobile-menu-btn"
-            onclick="toggleSidebar()"
-        >
-            ☰
-        </button>
-
-
-        <div class="page-heading">
 
             <h1>
-                Quiz Management
+              Online Quiz
             </h1>
 
-            <p>
-                SNK IT Institute • Quiz Control
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="topbar-actions">
-
-        <button
-            class="topbar-btn"
-            onclick="toggleTheme()"
-            id="themeBtn"
-            title="Theme"
-        >
-            🌙
-        </button>
-
-
-        <button
-            class="topbar-btn"
-            onclick="showToast('🔔 Notification system পরবর্তী step-এ আসবে।')"
-            title="Notifications"
-        >
-            🔔
-        </button>
-
-
-        <div class="admin-top-profile">
-
-            <div class="top-avatar">
-                👨‍💼
-            </div>
-
-            <div class="top-profile-text">
-
-                <strong>
-                    Super Admin
-                </strong>
-
-                <span>
-                    Online
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-<section class="content">
-
-
-    <div class="page-intro">
-
-        <div>
-
-            <h2>
-                Quiz Management
-            </h2>
 
             <p>
-                Quiz তৈরি, প্রশ্ন পরিচালনা এবং student attempts দেখুন।
+              আপনার Computer Office Application কোর্সের
+              Quiz এখানে সম্পন্ন করুন এবং সাথে সাথে Demo Score দেখুন।
             </p>
 
+
+            <div class="hero-info">
+
+              <span>
+                💻 Computer Office Application
+              </span>
+
+              <span>
+                🎓 Batch 01
+              </span>
+
+              <span>
+                📅 Class Starts: 08 September 2026
+              </span>
+
+              <span>
+                ⏱ Quiz Time: 5 Minutes
+              </span>
+
+            </div>
+
+          </div>
+
         </div>
 
+      </div>
 
-        <button
-            class="primary-btn"
-            onclick="openQuizModal()"
-        >
-            ＋ New Quiz
-        </button>
-
-    </div>
+    </section>
 
 
-    <!-- =====================================================
-         STATS
-    ====================================================== -->
+    <!-- STUDENT BAR -->
 
-    <div class="stats-grid">
+    <section class="student-bar">
 
+      <div class="container">
 
-        <div class="stat-card">
+        <div class="student-card">
 
-            <div class="stat-icon">
-                🎯
-            </div>
+          <div class="student-info">
 
             <div
-                class="stat-number"
-                id="totalQuiz"
+              class="student-avatar"
+              id="studentAvatar"
             >
-                0
+              S
             </div>
 
-            <div class="stat-title">
-                Total Quiz
-            </div>
-
-            <div class="stat-description">
-                মোট quiz
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🟢
-            </div>
-
-            <div
-                class="stat-number"
-                id="activeQuiz"
-            >
-                0
-            </div>
-
-            <div class="stat-title">
-                Active Quiz
-            </div>
-
-            <div class="stat-description">
-                এখন চালু আছে
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                ❓
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalQuestions"
-            >
-                0
-            </div>
-
-            <div class="stat-title">
-                Questions
-            </div>
-
-            <div class="stat-description">
-                মোট MCQ প্রশ্ন
-            </div>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                👨‍🎓
-            </div>
-
-            <div
-                class="stat-number"
-                id="totalAttempts"
-            >
-                0
-            </div>
-
-            <div class="stat-title">
-                Attempts
-            </div>
-
-            <div class="stat-description">
-                student quiz attempts
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         TOOLBAR
-    ====================================================== -->
-
-    <div class="toolbar">
-
-        <div class="toolbar-row">
-
-
-            <div class="search-box">
-
-                <span>
-                    🔍
-                </span>
-
-                <input
-                    id="searchInput"
-                    type="text"
-                    placeholder="Quiz বা course খুঁজুন..."
-                    oninput="renderQuizzes()"
-                >
-
-            </div>
-
-
-            <select
-                class="filter-select"
-                id="courseFilter"
-                onchange="renderQuizzes()"
-            >
-
-                <option value="all">
-                    সব Course
-                </option>
-
-            </select>
-
-
-            <select
-                class="filter-select"
-                id="statusFilter"
-                onchange="renderQuizzes()"
-            >
-
-                <option value="all">
-                    সব Status
-                </option>
-
-                <option value="Active">
-                    Active
-                </option>
-
-                <option value="Draft">
-                    Draft
-                </option>
-
-                <option value="Closed">
-                    Closed
-                </option>
-
-            </select>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         TABLE
-    ====================================================== -->
-
-    <div class="table-card">
-
-        <div class="table-wrapper">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            QUIZ
-                        </th>
-
-                        <th>
-                            COURSE
-                        </th>
-
-                        <th>
-                            TIME
-                        </th>
-
-                        <th>
-                            DEADLINE
-                        </th>
-
-                        <th>
-                            MARKS
-                        </th>
-
-                        <th>
-                            QUESTIONS
-                        </th>
-
-                        <th>
-                            ATTEMPTS
-                        </th>
-
-                        <th>
-                            STATUS
-                        </th>
-
-                        <th>
-                            ACTION
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody
-                    id="quizTable"
-                >
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <div
-            class="empty-state"
-            id="emptyState"
-        >
-            😕 কোনো quiz পাওয়া যায়নি।
-        </div>
-
-    </div>
-
-
-    <footer class="footer">
-
-        © 2026 SNK IT Institute
-        • Quiz Management
-        • Version 1.15
-
-    </footer>
-
-</section>
-
-</main>
-
-
-<!-- =========================================================
-     QUIZ ADD / EDIT MODAL
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="quizModal"
->
-
-    <div class="modal">
-
-
-        <div class="modal-header">
 
             <div>
 
-                <h3 id="quizModalTitle">
-                    Create New Quiz
-                </h3>
+              <h3 id="studentName">
+                Demo Student
+              </h3>
 
-                <p id="quizModalSubtitle">
-                    নতুন quiz তৈরি করুন।
-                </p>
+
+              <p>
+                Student ID:
+                <strong id="studentId">
+                  SNK-1001
+                </strong>
+              </p>
 
             </div>
 
+          </div>
 
-            <button
-                class="modal-close"
-                onclick="closeModal('quizModal')"
-            >
-                ×
-            </button>
+
+          <div class="student-status">
+            ● Active Student
+          </div>
 
         </div>
 
+      </div>
 
-        <form
-            onsubmit="saveQuiz(event)"
-        >
+    </section>
 
-            <input
-                type="hidden"
-                id="editQuizId"
+
+    <!-- QUIZ -->
+
+    <section class="quiz-section">
+
+      <div class="container">
+
+        <div class="quiz-layout">
+
+
+          <!-- MAIN QUIZ -->
+
+          <div class="quiz-card">
+
+
+            <!-- INTRO -->
+
+            <div
+              class="quiz-intro"
+              id="quizIntro"
             >
 
+              <div class="intro-icon">
+                🧠
+              </div>
 
-            <div class="form-group">
 
-                <label>
-                    Quiz Name
-                </label>
+              <h2>
+                Computer Basics Quiz
+              </h2>
 
-                <input
-                    id="newName"
-                    type="text"
-                    placeholder="যেমন: MS Excel Quiz 02"
-                    required
-                >
 
-            </div>
+              <p>
+                Quiz শুরু করার আগে নিশ্চিত হয়ে নিন যে আপনি
+                শান্ত পরিবেশে আছেন। Quiz শুরু করলে ৫ মিনিটের
+                timer চালু হবে।
+              </p>
 
 
-            <div class="form-grid">
+              <div class="intro-info">
 
+                <div class="intro-info-box">
 
-                <div class="form-group">
+                  <strong>
+                    3
+                  </strong>
 
-                    <label>
-                        Course
-                    </label>
-
-                    <select
-                        id="newCourse"
-                        required
-                    >
-
-                        <option value="">
-                            Select Course
-                        </option>
-
-                        <option value="Computer Basic">
-                            Computer Basic
-                        </option>
-
-                        <option value="MS Word">
-                            MS Word
-                        </option>
-
-                        <option value="MS Excel">
-                            MS Excel
-                        </option>
-
-                        <option value="Graphic Design">
-                            Graphic Design
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Quiz Time
-                    </label>
-
-                    <select
-                        id="newTime"
-                        required
-                    >
-
-                        <option value="">
-                            Select Time
-                        </option>
-
-                        <option value="10">
-                            10 Minutes
-                        </option>
-
-                        <option value="15">
-                            15 Minutes
-                        </option>
-
-                        <option value="20">
-                            20 Minutes
-                        </option>
-
-                        <option value="30">
-                            30 Minutes
-                        </option>
-
-                        <option value="45">
-                            45 Minutes
-                        </option>
-
-                        <option value="60">
-                            60 Minutes
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Total Marks
-                    </label>
-
-                    <input
-                        id="newMarks"
-                        type="number"
-                        min="1"
-                        placeholder="20"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Deadline
-                    </label>
-
-                    <input
-                        id="newDeadline"
-                        type="date"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group full">
-
-                    <label>
-                        Status
-                    </label>
-
-                    <select
-                        id="newStatus"
-                        required
-                    >
-
-                        <option value="Active">
-                            Active
-                        </option>
-
-                        <option value="Draft">
-                            Draft
-                        </option>
-
-                        <option value="Closed">
-                            Closed
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Instructions
-                </label>
-
-                <textarea
-                    id="newDescription"
-                    placeholder="Student-এর জন্য quiz instruction লিখুন..."
-                ></textarea>
-
-            </div>
-
-
-            <div class="form-actions">
-
-                <button
-                    type="button"
-                    class="secondary-btn"
-                    onclick="closeModal('quizModal')"
-                >
-                    Cancel
-                </button>
-
-
-                <button
-                    type="submit"
-                    class="save-btn"
-                    id="quizSaveBtn"
-                >
-                    💾 Save Quiz
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     VIEW QUIZ MODAL
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="viewModal"
->
-
-    <div class="modal">
-
-
-        <div class="modal-header">
-
-            <div>
-
-                <h3>
-                    Quiz Details
-                </h3>
-
-                <p>
-                    Quiz information
-                </p>
-
-            </div>
-
-
-            <button
-                class="modal-close"
-                onclick="closeModal('viewModal')"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="detail-grid">
-
-
-            <div class="detail-box">
-
-                <label>
-                    Quiz Name
-                </label>
-
-                <strong id="viewName">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <label>
-                    Course
-                </label>
-
-                <strong id="viewCourse">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <label>
-                    Time
-                </label>
-
-                <strong id="viewTime">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <label>
-                    Total Marks
-                </label>
-
-                <strong id="viewMarks">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <label>
-                    Deadline
-                </label>
-
-                <strong id="viewDeadline">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <label>
-                    Status
-                </label>
-
-                <strong id="viewStatus">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <label>
+                  <span>
                     Questions
-                </label>
-
-                <strong id="viewQuestionCount">
-                    0
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <label>
-                    Attempts
-                </label>
-
-                <strong id="viewAttemptCount">
-                    0
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="detail-box" style="margin-top:10px;">
-
-            <label>
-                Instructions
-            </label>
-
-            <strong
-                id="viewDescription"
-                style="
-                    font-weight:500;
-                    line-height:1.7;
-                "
-            >
-                -
-            </strong>
-
-        </div>
-
-
-        <div class="form-actions">
-
-            <button
-                class="secondary-btn"
-                onclick="closeModal('viewModal')"
-            >
-                Close
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     QUESTIONS MODAL
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="questionsModal"
->
-
-    <div class="modal">
-
-
-        <div class="modal-header">
-
-            <div>
-
-                <h3 id="questionsTitle">
-                    Quiz Questions
-                </h3>
-
-                <p>
-                    MCQ questions management
-                </p>
-
-            </div>
-
-
-            <button
-                class="modal-close"
-                onclick="closeModal('questionsModal')"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="form-actions"
-             style="
-                justify-content:space-between;
-                margin-top:0;
-                margin-bottom:12px;
-             ">
-
-            <span
-                id="questionSummary"
-                style="
-                    color:var(--muted);
-                    font-size:8px;
-                "
-            >
-                0 questions
-            </span>
-
-
-            <button
-                class="primary-btn"
-                onclick="openQuestionModal()"
-            >
-                ＋ Add Question
-            </button>
-
-        </div>
-
-
-        <div
-            class="question-list"
-            id="questionList"
-        >
-        </div>
-
-
-        <div class="form-actions">
-
-            <button
-                class="secondary-btn"
-                onclick="closeModal('questionsModal')"
-            >
-                Close
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     QUESTION ADD / EDIT MODAL
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="questionModal"
->
-
-    <div class="modal">
-
-
-        <div class="modal-header">
-
-            <div>
-
-                <h3 id="questionModalTitle">
-                    Add Question
-                </h3>
-
-                <p>
-                    MCQ question তৈরি করুন।
-                </p>
-
-            </div>
-
-
-            <button
-                class="modal-close"
-                onclick="closeModal('questionModal')"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <form
-            onsubmit="saveQuestion(event)"
-        >
-
-            <input
-                type="hidden"
-                id="editQuestionId"
-            >
-
-
-            <div class="form-group">
-
-                <label>
-                    Question
-                </label>
-
-                <textarea
-                    id="questionText"
-                    placeholder="প্রশ্ন লিখুন..."
-                    required
-                ></textarea>
-
-            </div>
-
-
-            <div class="form-grid">
-
-
-                <div class="form-group">
-
-                    <label>
-                        Option A
-                    </label>
-
-                    <input
-                        id="optionA"
-                        type="text"
-                        placeholder="Option A"
-                        required
-                    >
+                  </span>
 
                 </div>
 
 
-                <div class="form-group">
+                <div class="intro-info-box">
 
-                    <label>
-                        Option B
-                    </label>
+                  <strong>
+                    5 Min
+                  </strong>
 
-                    <input
-                        id="optionB"
-                        type="text"
-                        placeholder="Option B"
-                        required
-                    >
+                  <span>
+                    Time Limit
+                  </span>
 
                 </div>
 
 
-                <div class="form-group">
+                <div class="intro-info-box">
 
-                    <label>
-                        Option C
-                    </label>
+                  <strong>
+                    3
+                  </strong>
 
-                    <input
-                        id="optionC"
-                        type="text"
-                        placeholder="Option C"
-                        required
-                    >
+                  <span>
+                    Total Marks
+                  </span>
 
                 </div>
 
-
-                <div class="form-group">
-
-                    <label>
-                        Option D
-                    </label>
-
-                    <input
-                        id="optionD"
-                        type="text"
-                        placeholder="Option D"
-                        required
-                    >
-
-                </div>
+              </div>
 
 
-                <div class="form-group full">
-
-                    <label>
-                        Correct Answer
-                    </label>
-
-                    <select
-                        id="correctAnswer"
-                        required
-                    >
-
-                        <option value="">
-                            Select Correct Answer
-                        </option>
-
-                        <option value="A">
-                            A
-                        </option>
-
-                        <option value="B">
-                            B
-                        </option>
-
-                        <option value="C">
-                            C
-                        </option>
-
-                        <option value="D">
-                            D
-                        </option>
-
-                    </select>
-
-                </div>
+              <button
+                class="btn btn-primary"
+                onclick="startQuiz()"
+              >
+                🚀 Start Quiz
+              </button>
 
             </div>
 
 
-            <div class="form-actions">
+            <!-- QUIZ AREA -->
+
+            <div
+              id="quizArea"
+              style="display:none;"
+            >
+
+
+              <div class="quiz-header">
+
+                <div>
+
+                  <h2>
+                    Computer Basics Quiz
+                  </h2>
+
+                  <p>
+                    প্রতিটি প্রশ্নের একটি সঠিক উত্তর আছে।
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="timer"
+                  id="timer"
+                >
+                  05:00
+                </div>
+
+              </div>
+
+
+              <div class="progress-wrap">
+
+                <div class="progress-info">
+
+                  <span id="progressText">
+                    Question 1 of 3
+                  </span>
+
+                  <span id="answeredText">
+                    Answered: 0/3
+                  </span>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                  <div
+                    class="progress-fill"
+                    id="progressFill"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="question-area"
+                id="questionArea"
+              >
+              </div>
+
+
+              <div class="quiz-footer">
 
                 <button
-                    type="button"
-                    class="secondary-btn"
-                    onclick="closeModal('questionModal')"
+                  class="btn"
+                  id="previousBtn"
+                  onclick="previousQuestion()"
                 >
-                    Cancel
+                  ← Previous
                 </button>
 
 
-                <button
-                    type="submit"
-                    class="save-btn"
-                >
-                    💾 Save Question
-                </button>
+                <div class="quiz-buttons">
 
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
+                  <button
+                    class="btn btn-primary"
+                    id="nextBtn"
+                    onclick="nextQuestion()"
+                  >
+                    Next →
+                  </button>
 
 
-<!-- =========================================================
-     ATTEMPTS MODAL
-========================================================= -->
+                  <button
+                    class="btn btn-success"
+                    id="submitBtn"
+                    onclick="submitQuiz(false)"
+                    style="display:none;"
+                  >
+                    ✓ Submit Quiz
+                  </button>
 
-<div
-    class="modal-overlay"
-    id="attemptsModal"
->
+                </div>
 
-    <div class="modal">
-
-
-        <div class="modal-header">
-
-            <div>
-
-                <h3 id="attemptsTitle">
-                    Student Attempts
-                </h3>
-
-                <p>
-                    Student quiz submission
-                </p>
+              </div>
 
             </div>
 
 
-            <button
-                class="modal-close"
-                onclick="closeModal('attemptsModal')"
+            <!-- RESULT -->
+
+            <div
+              class="result-screen"
+              id="resultScreen"
             >
-                ×
-            </button>
+
+              <div class="result-icon">
+                ✓
+              </div>
+
+
+              <h2>
+                Quiz Completed!
+              </h2>
+
+
+              <p>
+                আপনার Quiz result নিচে দেওয়া হলো।
+              </p>
+
+
+              <div
+                class="score-circle"
+                id="scoreCircle"
+              >
+
+                <div class="score-content">
+
+                  <strong id="scorePercent">
+                    0%
+                  </strong>
+
+                  <span>
+                    Score
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="result-stats">
+
+                <div class="result-stat">
+
+                  <strong id="correctCount">
+                    0
+                  </strong>
+
+                  <span>
+                    Correct
+                  </span>
+
+                </div>
+
+
+                <div class="result-stat">
+
+                  <strong id="wrongCount">
+                    0
+                  </strong>
+
+                  <span>
+                    Wrong
+                  </span>
+
+                </div>
+
+
+                <div class="result-stat">
+
+                  <strong id="totalScore">
+                    0/3
+                  </strong>
+
+                  <span>
+                    Marks
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="result-message"
+                id="resultMessage"
+              >
+                Quiz result প্রস্তুত।
+              </div>
+
+
+              <button
+                class="btn btn-primary"
+                onclick="retakeQuiz()"
+              >
+                🔄 Retake Quiz
+              </button>
+
+
+              <a
+                href="results.html"
+                class="btn"
+                style="display:inline-flex;align-items:center;justify-content:center;margin-left:7px;"
+              >
+                📊 My Results
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <!-- SIDEBAR -->
+
+          <aside>
+
+
+            <div class="side-card">
+
+              <h3>
+                📌 Quiz Rules
+              </h3>
+
+
+              <div class="rule-list">
+
+                <div class="rule-item">
+
+                  <div class="rule-icon">
+                    ⏱
+                  </div>
+
+                  <div>
+                    Quiz-এর সময় ৫ মিনিট।
+                  </div>
+
+                </div>
+
+
+                <div class="rule-item">
+
+                  <div class="rule-icon">
+                    📝
+                  </div>
+
+                  <div>
+                    প্রতিটি প্রশ্নের একটি উত্তর নির্বাচন করুন।
+                  </div>
+
+                </div>
+
+
+                <div class="rule-item">
+
+                  <div class="rule-icon">
+                    🔒
+                  </div>
+
+                  <div>
+                    সময় শেষ হলে Quiz automatically submit হবে।
+                  </div>
+
+                </div>
+
+
+                <div class="rule-item">
+
+                  <div class="rule-icon">
+                    💾
+                  </div>
+
+                  <div>
+                    Result এই browser-এ Demo হিসেবে save হবে।
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="side-card">
+
+              <h3>
+                🔢 Questions
+              </h3>
+
+
+              <div
+                class="question-map"
+                id="questionMap"
+              >
+              </div>
+
+            </div>
+
+
+            <div class="side-card">
+
+              <h3>
+                📅 Course Info
+              </h3>
+
+
+              <div class="rule-list">
+
+                <div class="rule-item">
+
+                  <div class="rule-icon">
+                    💻
+                  </div>
+
+                  <div>
+                    Computer Office Application
+                  </div>
+
+                </div>
+
+
+                <div class="rule-item">
+
+                  <div class="rule-icon">
+                    🎓
+                  </div>
+
+                  <div>
+                    Batch 01
+                  </div>
+
+                </div>
+
+
+                <div class="rule-item">
+
+                  <div class="rule-icon">
+                    📅
+                  </div>
+
+                  <div>
+                    Class Start: 08 September 2026
+                  </div>
+
+                </div>
+
+
+                <div class="rule-item">
+
+                  <div class="rule-icon">
+                    ⏰
+                  </div>
+
+                  <div>
+                    Saturday–Monday • 4–6 PM
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </aside>
+
 
         </div>
 
+      </div>
 
-        <div
-            class="attempt-list"
-            id="attemptList"
-        >
-        </div>
+    </section>
 
-
-        <div class="form-actions">
-
-            <button
-                class="secondary-btn"
-                onclick="closeModal('attemptsModal')"
-            >
-                Close
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
+  </main>
 
 
-<!-- =========================================================
-     TOAST
-========================================================= -->
+  <!-- TOAST -->
 
-<div
+  <div
     class="toast"
     id="toast"
->
-</div>
+  >
+  </div>
 
 
-<script>
+  <!-- FOOTER -->
 
-/* =========================================================
-   STORAGE
-========================================================= */
+  <footer>
 
-const QUIZ_STORAGE =
-    "snkQuizListV115";
+    <div class="container">
 
-const THEME_STORAGE =
-    "snkQuizTheme";
+      © 2026 SNK IT Institute • Student Portal • Quiz
 
+    </div>
 
-/* =========================================================
-   DEMO DATA
-========================================================= */
+  </footer>
 
-const defaultQuizzes = [
 
-    {
-        id:1,
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
 
-        name:"Computer Basic Quiz 01",
+  <script>
 
-        course:"Computer Basic",
 
-        time:20,
-
-        marks:20,
-
-        deadline:"2026-09-15",
-
-        status:"Active",
-
-        description:
-            "Computer fundamentals এবং basic hardware/software সম্পর্কে MCQ quiz।",
-
-        questions:[
-
-            {
-                id:101,
-
-                text:
-                    "Computer-এর brain বলা হয় কোনটিকে?",
-
-                options:{
-                    A:"Monitor",
-                    B:"CPU",
-                    C:"Keyboard",
-                    D:"Mouse"
-                },
-
-                correct:"B"
-            },
-
-            {
-                id:102,
-
-                text:
-                    "কোনটি একটি input device?",
-
-                options:{
-                    A:"Keyboard",
-                    B:"Monitor",
-                    C:"Speaker",
-                    D:"Projector"
-                },
-
-                correct:"A"
-            },
-
-            {
-                id:103,
-
-                text:
-                    "RAM-এর পূর্ণরূপ কী?",
-
-                options:{
-                    A:"Random Access Memory",
-                    B:"Read Access Memory",
-                    C:"Run Access Machine",
-                    D:"Random Application Memory"
-                },
-
-                correct:"A"
-            }
-
-        ],
-
-        attempts:[
-
-            {
-                id:1,
-                name:"Rahim Ahmed",
-                studentId:"SNK-1001",
-                date:"08 Sep 2026",
-                score:"18/20"
-            },
-
-            {
-                id:2,
-                name:"Nusrat Jahan",
-                studentId:"SNK-1002",
-                date:"09 Sep 2026",
-                score:"17/20"
-            },
-
-            {
-                id:3,
-                name:"Sadia Akter",
-                studentId:"SNK-1003",
-                date:"10 Sep 2026",
-                score:"20/20"
-            },
-
-            {
-                id:4,
-                name:"Tanvir Hasan",
-                studentId:"SNK-1004",
-                date:"10 Sep 2026",
-                score:"16/20"
-            }
-
-        ],
-
-        createdAt:"2026-09-01"
-
-    },
-
-
-    {
-        id:2,
-
-        name:"MS Excel Formula Quiz",
-
-        course:"MS Excel",
-
-        time:15,
-
-        marks:15,
-
-        deadline:"2026-09-20",
-
-        status:"Active",
-
-        description:
-            "Excel formula এবং spreadsheet fundamentals quiz।",
-
-        questions:[
-
-            {
-                id:201,
-
-                text:
-                    "SUM function-এর কাজ কী?",
-
-                options:{
-                    A:"Text format",
-                    B:"যোগ করা",
-                    C:"Delete করা",
-                    D:"Print করা"
-                },
-
-                correct:"B"
-            }
-
-        ],
-
-        attempts:[
-
-            {
-                id:5,
-                name:"Mim Akter",
-                studentId:"SNK-1005",
-                date:"11 Sep 2026",
-                score:"13/15"
-            }
-
-        ],
-
-        createdAt:"2026-09-02"
-
-    },
-
-
-    {
-        id:3,
-
-        name:"MS Word Quiz 01",
-
-        course:"MS Word",
-
-        time:10,
-
-        marks:10,
-
-        deadline:"2026-09-25",
-
-        status:"Draft",
-
-        description:
-            "MS Word formatting এবং document creation quiz।",
-
-        questions:[],
-
-        attempts:[],
-
-        createdAt:"2026-09-03"
-
-    }
-
-];
-
-
-/* =========================================================
-   STORAGE HELPERS
-========================================================= */
-
-function getQuizzes(){
-
-    const saved =
-        localStorage.getItem(
-            QUIZ_STORAGE
-        );
-
-    if(!saved){
-
-        localStorage.setItem(
-            QUIZ_STORAGE,
-            JSON.stringify(defaultQuizzes)
-        );
-
-        return JSON.parse(
-            JSON.stringify(defaultQuizzes)
-        );
-    }
-
-    try{
-
-        const parsed =
-            JSON.parse(saved);
-
-        if(!Array.isArray(parsed)){
-
-            throw new Error(
-                "Invalid quiz data"
-            );
-        }
-
-        return parsed;
-
-    }catch(error){
-
-        localStorage.setItem(
-            QUIZ_STORAGE,
-            JSON.stringify(defaultQuizzes)
-        );
-
-        return JSON.parse(
-            JSON.stringify(defaultQuizzes)
-        );
-    }
-
-}
-
-
-function saveQuizzes(quizzes){
-
-    localStorage.setItem(
-        QUIZ_STORAGE,
-        JSON.stringify(quizzes)
-    );
-
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-}
-
-
-/* =========================================================
-   DATE
-========================================================= */
-
-function formatDate(dateString){
-
-    if(!dateString){
-
-        return "-";
-    }
-
-    const date =
-        new Date(
-            dateString +
-            "T00:00:00"
-        );
-
-    return date.toLocaleDateString(
-        "en-GB",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric"
-        }
-    );
-
-}
-
-
-/* =========================================================
-   DEADLINE
-========================================================= */
-
-function deadlineClass(item){
-
-    if(item.status !== "Active"){
-
-        return "";
-    }
-
-    const today =
-        new Date();
-
-    today.setHours(
-        0,0,0,0
-    );
-
-    const deadline =
-        new Date(
-            item.deadline +
-            "T00:00:00"
-        );
-
-    const days =
-        Math.ceil(
-            (
-                deadline -
-                today
-            ) /
-            (1000*60*60*24)
-        );
-
-    if(days < 0){
-
-        return "overdue";
-    }
-
-    if(days <= 7){
-
-        return "upcoming";
-    }
-
-    return "active";
-
-}
-
-
-function deadlineText(item){
-
-    if(item.status === "Closed"){
-
-        return "Closed";
-    }
-
-    if(item.status === "Draft"){
-
-        return "Draft";
-    }
-
-    const today =
-        new Date();
-
-    today.setHours(
-        0,0,0,0
-    );
-
-    const deadline =
-        new Date(
-            item.deadline +
-            "T00:00:00"
-        );
-
-    const days =
-        Math.ceil(
-            (
-                deadline -
-                today
-            ) /
-            (1000*60*60*24)
-        );
-
-    if(days < 0){
-
-        return (
-            Math.abs(days) +
-            " days overdue"
-        );
-    }
-
-    if(days === 0){
-
-        return "Today";
-    }
-
-    if(days === 1){
-
-        return "Tomorrow";
-    }
-
-    return (
-        days +
-        " days left"
-    );
-
-}
-
-
-/* =========================================================
-   COURSE FILTER
-========================================================= */
-
-function renderCourseFilter(){
-
-    const select =
-        document.getElementById(
-            "courseFilter"
-        );
-
-    const current =
-        select.value;
-
-    const quizzes =
-        getQuizzes();
-
-    const courses =
-        [
-            ...new Set(
-                quizzes.map(
-                    quiz =>
-                        quiz.course
-                )
-            )
-        ].sort();
-
-    select.innerHTML =
-        `
-        <option value="all">
-            সব Course
-        </option>
-        `;
-
-    courses.forEach(course => {
-
-        const option =
-            document.createElement(
-                "option"
-            );
-
-        option.value =
-            course;
-
-        option.textContent =
-            course;
-
-        select.appendChild(
-            option
-        );
-
-    });
+    /* ==========================================
+       SESSION PROTECTION
+    ========================================== */
 
     if(
-        courses.includes(current)
+      sessionStorage.getItem(
+        "snkStudentLoggedIn"
+      ) !== "true"
     ){
 
-        select.value =
-            current;
+      window.location.replace(
+        "login.html"
+      );
+
     }
 
-}
+
+    /* ==========================================
+       STUDENT DATA
+    ========================================== */
+
+    const studentId =
+      sessionStorage.getItem(
+        "snkStudentId"
+      ) || "SNK-1001";
 
 
-/* =========================================================
-   RENDER QUIZZES
-========================================================= */
+    const studentName =
+      sessionStorage.getItem(
+        "snkStudentName"
+      ) || "Demo Student";
 
-function renderQuizzes(){
 
-    const tbody =
+    document.getElementById(
+      "studentId"
+    ).textContent =
+      studentId;
+
+
+    document.getElementById(
+      "studentName"
+    ).textContent =
+      studentName;
+
+
+    document.getElementById(
+      "studentAvatar"
+    ).textContent =
+      studentName
+        .trim()
+        .charAt(0)
+        .toUpperCase() || "S";
+
+
+    /* ==========================================
+       QUIZ DATA
+    ========================================== */
+
+    const quizQuestions = [
+
+      {
+        id:"q1",
+
+        question:
+          "কম্পিউটারের কোন অংশটি সাধারণত হিসাব-নিকাশ ও নির্দেশনা প্রক্রিয়াকরণের প্রধান কাজ করে?",
+
+        options:[
+          {
+            id:"A",
+            text:"Monitor"
+          },
+          {
+            id:"B",
+            text:"CPU"
+          },
+          {
+            id:"C",
+            text:"Keyboard"
+          },
+          {
+            id:"D",
+            text:"Speaker"
+          }
+        ],
+
+        answer:"B"
+      },
+
+
+      {
+        id:"q2",
+
+        question:
+          "নিচের কোনটি একটি Operating System-এর উদাহরণ?",
+
+        options:[
+          {
+            id:"A",
+            text:"Microsoft Word"
+          },
+          {
+            id:"B",
+            text:"Windows"
+          },
+          {
+            id:"C",
+            text:"Google Chrome"
+          },
+          {
+            id:"D",
+            text:"Adobe Reader"
+          }
+        ],
+
+        answer:"B"
+      },
+
+
+      {
+        id:"q3",
+
+        question:
+          "Keyboard-এর কোন key সাধারণত নতুন লাইনে যাওয়ার জন্য ব্যবহার করা হয়?",
+
+        options:[
+          {
+            id:"A",
+            text:"Shift"
+          },
+          {
+            id:"B",
+            text:"Ctrl"
+          },
+          {
+            id:"C",
+            text:"Enter"
+          },
+          {
+            id:"D",
+            text:"Alt"
+          }
+        ],
+
+        answer:"C"
+      }
+
+    ];
+
+
+    /* ==========================================
+       QUIZ VARIABLES
+    ========================================== */
+
+    let currentQuestion = 0;
+
+    let userAnswers = {};
+
+    let timeLeft = 5 * 60;
+
+    let quizTimer = null;
+
+    let quizStarted = false;
+
+    let quizFinished = false;
+
+
+    const QUIZ_RESULT_KEY =
+      "snkQuizResults";
+
+
+    /* ==========================================
+       QUESTION MAP
+    ========================================== */
+
+    function renderQuestionMap(){
+
+      const map =
         document.getElementById(
-            "quizTable"
-        );
-
-    const empty =
-        document.getElementById(
-            "emptyState"
-        );
-
-    const search =
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .toLowerCase()
-            .trim();
-
-    const course =
-        document
-            .getElementById(
-                "courseFilter"
-            )
-            .value;
-
-    const status =
-        document
-            .getElementById(
-                "statusFilter"
-            )
-            .value;
-
-    const quizzes =
-        getQuizzes();
-
-    const filtered =
-        quizzes.filter(
-            quiz => {
-
-                const searchMatch =
-                    !search ||
-                    quiz.name
-                        .toLowerCase()
-                        .includes(search) ||
-                    quiz.course
-                        .toLowerCase()
-                        .includes(search) ||
-                    (
-                        quiz.description ||
-                        ""
-                    )
-                    .toLowerCase()
-                    .includes(search);
-
-                const courseMatch =
-                    course === "all" ||
-                    quiz.course === course;
-
-                const statusMatch =
-                    status === "all" ||
-                    quiz.status === status;
-
-                return (
-                    searchMatch &&
-                    courseMatch &&
-                    statusMatch
-                );
-
-            }
+          "questionMap"
         );
 
 
-    tbody.innerHTML = "";
+      map.innerHTML = "";
 
 
-    filtered.forEach(
-        quiz => {
+      quizQuestions.forEach(
+        (question,index) => {
 
-            const row =
-                document.createElement(
-                    "tr"
-                );
+          const button =
+            document.createElement("button");
 
 
-            const questions =
-                Array.isArray(
-                    quiz.questions
-                )
-                    ? quiz.questions.length
-                    : 0;
+          button.className =
+            "map-item";
 
 
-            const attempts =
-                Array.isArray(
-                    quiz.attempts
-                )
-                    ? quiz.attempts.length
-                    : Number(
-                        quiz.attempts || 0
-                    );
+          button.textContent =
+            index + 1;
 
 
-            row.innerHTML = `
+          button.onclick =
+            function(){
 
-                <td>
+              if(!quizStarted || quizFinished){
+                return;
+              }
 
-                    <div class="quiz-cell">
 
-                        <strong>
-                            ${escapeHTML(
-                                quiz.name
-                            )}
-                        </strong>
+              currentQuestion =
+                index;
 
-                        <span>
-                            ${escapeHTML(
-                                quiz.description ||
-                                "No instructions"
-                            )}
-                        </span>
 
-                    </div>
+              renderQuestion();
 
-                </td>
+            };
 
 
-                <td>
-
-                    <span class="course-badge">
-
-                        ${escapeHTML(
-                            quiz.course
-                        )}
-
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span class="time-badge">
-
-                        ⏱
-                        ${escapeHTML(
-                            quiz.time
-                        )}
-                        min
-
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="
-                            deadline
-                            ${deadlineClass(quiz)}
-                        "
-                    >
-
-                        ${formatDate(
-                            quiz.deadline
-                        )}
-
-                        <small
-                            style="
-                                display:block;
-                                font-size:6px;
-                                opacity:.75;
-                            "
-                        >
-                            ${escapeHTML(
-                                deadlineText(quiz)
-                            )}
-                        </small>
-
-                    </span>
-
-                </td>
-
-
-                <td>
-                    ${escapeHTML(
-                        quiz.marks
-                    )}
-                </td>
-
-
-                <td>
-
-                    <strong>
-                        ${questions}
-                    </strong>
-
-                </td>
-
-
-                <td>
-
-                    <span class="attempt-count">
-                        ${attempts}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="
-                            status
-                            ${String(
-                                quiz.status
-                            ).toLowerCase()}
-                        "
-                    >
-                        ${escapeHTML(
-                            quiz.status
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <div class="row-actions">
-
-
-                        <button
-                            class="action-btn"
-                            title="View"
-                            onclick="
-                                viewQuiz(
-                                    ${quiz.id}
-                                )
-                            "
-                        >
-                            👁
-                        </button>
-
-
-                        <button
-                            class="action-btn"
-                            title="Edit"
-                            onclick="
-                                editQuiz(
-                                    ${quiz.id}
-                                )
-                            "
-                        >
-                            ✏️
-                        </button>
-
-
-                        <button
-                            class="action-btn"
-                            title="Questions"
-                            onclick="
-                                showQuestions(
-                                    ${quiz.id}
-                                )
-                            "
-                        >
-                            ❓
-                        </button>
-
-
-                        <button
-                            class="action-btn"
-                            title="Attempts"
-                            onclick="
-                                showAttempts(
-                                    ${quiz.id}
-                                )
-                            "
-                        >
-                            👨‍🎓
-                        </button>
-
-
-                        <button
-                            class="
-                                action-btn
-                                delete
-                            "
-                            title="Delete"
-                            onclick="
-                                deleteQuiz(
-                                    ${quiz.id}
-                                )
-                            "
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
-
-                </td>
-
-            `;
-
-            tbody.appendChild(
-                row
-            );
+          map.appendChild(button);
 
         }
-    );
+      );
+
+    }
 
 
-    empty.style.display =
-        filtered.length === 0
-            ? "block"
-            : "none";
+    /* ==========================================
+       START QUIZ
+    ========================================== */
+
+    function startQuiz(){
+
+      if(quizStarted){
+        return;
+      }
 
 
-    updateStats();
+      quizStarted = true;
 
-}
+      quizFinished = false;
 
+      currentQuestion = 0;
 
-/* =========================================================
-   STATS
-========================================================= */
+      userAnswers = {};
 
-function updateStats(){
-
-    const quizzes =
-        getQuizzes();
+      timeLeft = 5 * 60;
 
 
-    const total =
-        quizzes.length;
+      document.getElementById(
+        "quizIntro"
+      ).style.display =
+        "none";
 
 
-    const active =
-        quizzes.filter(
-            quiz =>
-                quiz.status ===
-                "Active"
+      document.getElementById(
+        "quizArea"
+      ).style.display =
+        "block";
+
+
+      document.getElementById(
+        "resultScreen"
+      ).classList.remove(
+        "show"
+      );
+
+
+      renderQuestionMap();
+
+      renderQuestion();
+
+      updateTimer();
+
+
+      quizTimer =
+        setInterval(
+          function(){
+
+            timeLeft--;
+
+            updateTimer();
+
+
+            if(timeLeft <= 0){
+
+              clearInterval(
+                quizTimer
+              );
+
+              submitQuiz(true);
+
+            }
+
+          },
+          1000
+        );
+
+    }
+
+
+    /* ==========================================
+       RENDER QUESTION
+    ========================================== */
+
+    function renderQuestion(){
+
+      const question =
+        quizQuestions[currentQuestion];
+
+
+      const area =
+        document.getElementById(
+          "questionArea"
+        );
+
+
+      area.innerHTML = `
+
+        <div class="question-number">
+          Question ${currentQuestion + 1}
+          of ${quizQuestions.length}
+        </div>
+
+
+        <div class="question">
+          ${question.question}
+        </div>
+
+
+        <div class="options">
+
+          ${question.options.map(
+            option => `
+
+              <button
+                class="option ${
+                  userAnswers[question.id] === option.id
+                    ? "selected"
+                    : ""
+                }"
+                onclick="selectAnswer('${option.id}')"
+              >
+
+                <div class="option-letter">
+                  ${option.id}
+                </div>
+
+                <div class="option-text">
+                  ${option.text}
+                </div>
+
+              </button>
+
+            `
+          ).join("")}
+
+        </div>
+
+      `;
+
+
+      updateProgress();
+
+      updateNavigation();
+
+      updateQuestionMap();
+
+    }
+
+
+    /* ==========================================
+       SELECT ANSWER
+    ========================================== */
+
+    function selectAnswer(answer){
+
+      if(!quizStarted || quizFinished){
+        return;
+      }
+
+
+      const question =
+        quizQuestions[currentQuestion];
+
+
+      userAnswers[
+        question.id
+      ] = answer;
+
+
+      renderQuestion();
+
+    }
+
+
+    /* ==========================================
+       NEXT QUESTION
+    ========================================== */
+
+    function nextQuestion(){
+
+      if(
+        currentQuestion <
+        quizQuestions.length - 1
+      ){
+
+        currentQuestion++;
+
+        renderQuestion();
+
+      }
+
+    }
+
+
+    /* ==========================================
+       PREVIOUS QUESTION
+    ========================================== */
+
+    function previousQuestion(){
+
+      if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        renderQuestion();
+
+      }
+
+    }
+
+
+    /* ==========================================
+       UPDATE NAVIGATION
+    ========================================== */
+
+    function updateNavigation(){
+
+      const previousBtn =
+        document.getElementById(
+          "previousBtn"
+        );
+
+
+      const nextBtn =
+        document.getElementById(
+          "nextBtn"
+        );
+
+
+      const submitBtn =
+        document.getElementById(
+          "submitBtn"
+        );
+
+
+      if(currentQuestion === 0){
+
+        previousBtn.disabled = true;
+
+        previousBtn.classList.add(
+          "btn-disabled"
+        );
+
+      }else{
+
+        previousBtn.disabled = false;
+
+        previousBtn.classList.remove(
+          "btn-disabled"
+        );
+
+      }
+
+
+      if(
+        currentQuestion ===
+        quizQuestions.length - 1
+      ){
+
+        nextBtn.style.display =
+          "none";
+
+        submitBtn.style.display =
+          "inline-flex";
+
+      }else{
+
+        nextBtn.style.display =
+          "inline-flex";
+
+        submitBtn.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /* ==========================================
+       UPDATE PROGRESS
+    ========================================== */
+
+    function updateProgress(){
+
+      const answered =
+        Object.keys(
+          userAnswers
         ).length;
 
 
-    const questions =
-        quizzes.reduce(
-            (
-                total,
-                quiz
-            ) =>
-                total +
-                (
-                    Array.isArray(
-                        quiz.questions
-                    )
-                        ?
-                        quiz.questions.length
-                        :
-                        0
-                ),
-            0
-        );
+      const total =
+        quizQuestions.length;
 
 
-    const attempts =
-        quizzes.reduce(
-            (
-                total,
-                quiz
-            ) =>
-                total +
-                (
-                    Array.isArray(
-                        quiz.attempts
-                    )
-                        ?
-                        quiz.attempts.length
-                        :
-                        Number(
-                            quiz.attempts ||
-                            0
-                        )
-                ),
-            0
-        );
+      const percentage =
+        ((currentQuestion + 1) / total) * 100;
 
 
-    document.getElementById(
-        "totalQuiz"
-    ).textContent =
+      document.getElementById(
+        "progressText"
+      ).textContent =
+        "Question " +
+        (currentQuestion + 1) +
+        " of " +
         total;
 
 
-    document.getElementById(
-        "activeQuiz"
-    ).textContent =
-        active;
-
-
-    document.getElementById(
-        "totalQuestions"
-    ).textContent =
-        questions;
-
-
-    document.getElementById(
-        "totalAttempts"
-    ).textContent =
-        attempts;
-
-
-    document.getElementById(
-        "sidebarQuizCount"
-    ).textContent =
+      document.getElementById(
+        "answeredText"
+      ).textContent =
+        "Answered: " +
+        answered +
+        "/" +
         total;
 
-}
 
+      document.getElementById(
+        "progressFill"
+      ).style.width =
+        percentage + "%";
 
-/* =========================================================
-   OPEN ADD QUIZ
-========================================================= */
-
-function openQuizModal(){
-
-    document.getElementById(
-        "quizModalTitle"
-    ).textContent =
-        "Create New Quiz";
-
-
-    document.getElementById(
-        "quizModalSubtitle"
-    ).textContent =
-        "নতুন quiz তৈরি করুন।";
-
-
-    document.getElementById(
-        "quizSaveBtn"
-    ).textContent =
-        "💾 Save Quiz";
-
-
-    document.getElementById(
-        "editQuizId"
-    ).value =
-        "";
-
-
-    document
-        .querySelector(
-            "#quizModal form"
-        )
-        .reset();
-
-
-    document.getElementById(
-        "newStatus"
-    ).value =
-        "Active";
-
-
-    document.getElementById(
-        "quizModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   EDIT QUIZ
-========================================================= */
-
-function editQuiz(id){
-
-    const quizzes =
-        getQuizzes();
-
-
-    const quiz =
-        quizzes.find(
-            item =>
-                Number(item.id) ===
-                Number(id)
-        );
-
-
-    if(!quiz){
-
-        showToast(
-            "Quiz পাওয়া যায়নি।"
-        );
-
-        return;
     }
 
 
-    document.getElementById(
-        "quizModalTitle"
-    ).textContent =
-        "Edit Quiz";
+    /* ==========================================
+       QUESTION MAP UPDATE
+    ========================================== */
 
+    function updateQuestionMap(){
 
-    document.getElementById(
-        "quizModalSubtitle"
-    ).textContent =
-        "Quiz information update করুন।";
-
-
-    document.getElementById(
-        "quizSaveBtn"
-    ).textContent =
-        "💾 Update Quiz";
-
-
-    document.getElementById(
-        "editQuizId"
-    ).value =
-        quiz.id;
-
-
-    document.getElementById(
-        "newName"
-    ).value =
-        quiz.name;
-
-
-    document.getElementById(
-        "newCourse"
-    ).value =
-        quiz.course;
-
-
-    document.getElementById(
-        "newTime"
-    ).value =
-        quiz.time;
-
-
-    document.getElementById(
-        "newMarks"
-    ).value =
-        quiz.marks;
-
-
-    document.getElementById(
-        "newDeadline"
-    ).value =
-        quiz.deadline;
-
-
-    document.getElementById(
-        "newStatus"
-    ).value =
-        quiz.status;
-
-
-    document.getElementById(
-        "newDescription"
-    ).value =
-        quiz.description ||
-        "";
-
-
-    document.getElementById(
-        "quizModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   SAVE QUIZ
-========================================================= */
-
-function saveQuiz(event){
-
-    event.preventDefault();
-
-
-    const editId =
-        document.getElementById(
-            "editQuizId"
-        ).value;
-
-
-    const name =
-        document.getElementById(
-            "newName"
-        ).value
-        .trim();
-
-
-    const course =
-        document.getElementById(
-            "newCourse"
-        ).value;
-
-
-    const time =
-        Number(
-            document.getElementById(
-                "newTime"
-            ).value
+      const items =
+        document.querySelectorAll(
+          ".map-item"
         );
 
 
-    const marks =
-        Number(
-            document.getElementById(
-                "newMarks"
-            ).value
-        );
+      items.forEach(
+        (item,index) => {
+
+          item.classList.remove(
+            "current"
+          );
+
+          item.classList.remove(
+            "answered"
+          );
 
 
-    const deadline =
-        document.getElementById(
-            "newDeadline"
-        ).value;
+          if(
+            index === currentQuestion
+          ){
 
-
-    const status =
-        document.getElementById(
-            "newStatus"
-        ).value;
-
-
-    const description =
-        document.getElementById(
-            "newDescription"
-        ).value
-        .trim();
-
-
-    if(
-        !name ||
-        !course ||
-        !time ||
-        !marks ||
-        !deadline
-    ){
-
-        showToast(
-            "⚠️ সব প্রয়োজনীয় তথ্য পূরণ করুন।"
-        );
-
-        return;
-    }
-
-
-    const quizzes =
-        getQuizzes();
-
-
-    if(editId){
-
-        const index =
-            quizzes.findIndex(
-                quiz =>
-                    Number(quiz.id) ===
-                    Number(editId)
+            item.classList.add(
+              "current"
             );
 
+          }
 
-        if(index !== -1){
 
-            quizzes[index] = {
+          const question =
+            quizQuestions[index];
 
-                ...quizzes[index],
 
-                name,
+          if(
+            userAnswers[
+              question.id
+            ]
+          ){
 
-                course,
+            item.classList.add(
+              "answered"
+            );
 
-                time,
-
-                marks,
-
-                deadline,
-
-                status,
-
-                description
-
-            };
+          }
 
         }
+      );
 
-
-        saveQuizzes(
-            quizzes
-        );
-
-
-        closeModal(
-            "quizModal"
-        );
-
-
-        renderCourseFilter();
-
-        renderQuizzes();
-
-
-        showToast(
-            "✅ Quiz successfully updated."
-        );
-
-
-        return;
     }
 
 
-    const newQuiz = {
+    /* ==========================================
+       TIMER
+    ========================================== */
 
-        id:
-            Date.now(),
+    function updateTimer(){
 
-        name,
-
-        course,
-
-        time,
-
-        marks,
-
-        deadline,
-
-        status,
-
-        description,
-
-        questions:[],
-
-        attempts:[],
-
-        createdAt:
-            new Date()
-                .toISOString()
-
-    };
-
-
-    quizzes.push(
-        newQuiz
-    );
-
-
-    saveQuizzes(
-        quizzes
-    );
-
-
-    closeModal(
-        "quizModal"
-    );
-
-
-    renderCourseFilter();
-
-    renderQuizzes();
-
-
-    showToast(
-        "✅ New quiz successfully added."
-    );
-
-}
-
-
-/* =========================================================
-   VIEW QUIZ
-========================================================= */
-
-function viewQuiz(id){
-
-    const quizzes =
-        getQuizzes();
-
-
-    const quiz =
-        quizzes.find(
-            item =>
-                Number(item.id) ===
-                Number(id)
-        );
-
-
-    if(!quiz){
-
-        showToast(
-            "Quiz পাওয়া যায়নি।"
-        );
-
-        return;
-    }
-
-
-    document.getElementById(
-        "viewName"
-    ).textContent =
-        quiz.name;
-
-
-    document.getElementById(
-        "viewCourse"
-    ).textContent =
-        quiz.course;
-
-
-    document.getElementById(
-        "viewTime"
-    ).textContent =
-        quiz.time +
-        " Minutes";
-
-
-    document.getElementById(
-        "viewMarks"
-    ).textContent =
-        quiz.marks;
-
-
-    document.getElementById(
-        "viewDeadline"
-    ).textContent =
-        formatDate(
-            quiz.deadline
-        );
-
-
-    document.getElementById(
-        "viewStatus"
-    ).textContent =
-        quiz.status;
-
-
-    document.getElementById(
-        "viewQuestionCount"
-    ).textContent =
-        Array.isArray(
-            quiz.questions
-        )
-            ?
-            quiz.questions.length
-            :
-            0;
-
-
-    document.getElementById(
-        "viewAttemptCount"
-    ).textContent =
-        Array.isArray(
-            quiz.attempts
-        )
-            ?
-            quiz.attempts.length
-            :
-            Number(
-                quiz.attempts ||
-                0
-            );
-
-
-    document.getElementById(
-        "viewDescription"
-    ).textContent =
-        quiz.description ||
-        "No instructions added.";
-
-
-    document.getElementById(
-        "viewModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   DELETE QUIZ
-========================================================= */
-
-function deleteQuiz(id){
-
-    const quizzes =
-        getQuizzes();
-
-
-    const quiz =
-        quizzes.find(
-            item =>
-                Number(item.id) ===
-                Number(id)
-        );
-
-
-    if(!quiz){
-
-        showToast(
-            "Quiz পাওয়া যায়নি।"
-        );
-
-        return;
-    }
-
-
-    const confirmed =
-        confirm(
-            `আপনি কি "${quiz.name}" delete করতে চান?`
-        );
-
-
-    if(!confirmed){
-
-        return;
-    }
-
-
-    const updated =
-        quizzes.filter(
-            item =>
-                Number(item.id) !==
-                Number(id)
-        );
-
-
-    saveQuizzes(
-        updated
-    );
-
-
-    renderCourseFilter();
-
-    renderQuizzes();
-
-
-    showToast(
-        "🗑️ Quiz deleted successfully."
-    );
-
-}
-
-
-/* =========================================================
-   QUESTIONS
-========================================================= */
-
-let currentQuizId =
-    null;
-
-
-function showQuestions(id){
-
-    currentQuizId =
-        id;
-
-
-    const quizzes =
-        getQuizzes();
-
-
-    const quiz =
-        quizzes.find(
-            item =>
-                Number(item.id) ===
-                Number(id)
-        );
-
-
-    if(!quiz){
-
-        showToast(
-            "Quiz পাওয়া যায়নি।"
-        );
-
-        return;
-    }
-
-
-    document.getElementById(
-        "questionsTitle"
-    ).textContent =
-        quiz.name +
-        " — Questions";
-
-
-    renderQuestions(
-        quiz
-    );
-
-
-    document.getElementById(
-        "questionsModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-function renderQuestions(quiz){
-
-    const list =
+      const timer =
         document.getElementById(
-            "questionList"
+          "timer"
         );
 
 
-    const questions =
-        Array.isArray(
-            quiz.questions
-        )
-            ?
-            quiz.questions
-            :
-            [];
+      const minutes =
+        Math.floor(
+          timeLeft / 60
+        );
 
 
-    document.getElementById(
-        "questionSummary"
-    ).textContent =
-        questions.length +
-        " questions";
+      const seconds =
+        timeLeft % 60;
 
 
-    list.innerHTML = "";
+      timer.textContent =
+        String(minutes).padStart(2,"0") +
+        ":" +
+        String(seconds).padStart(2,"0");
 
 
-    if(!questions.length){
+      timer.classList.remove(
+        "warning"
+      );
 
-        list.innerHTML = `
+      timer.classList.remove(
+        "danger"
+      );
 
-            <div class="question-empty">
 
-                📝 এখনো কোনো question যোগ করা হয়নি।
+      if(timeLeft <= 60){
 
-                <br><br>
+        timer.classList.add(
+          "danger"
+        );
 
-                উপরের
-                <strong>
-                    ＋ Add Question
-                </strong>
-                button ব্যবহার করুন।
+      }else if(timeLeft <= 120){
 
-            </div>
+        timer.classList.add(
+          "warning"
+        );
 
-        `;
+      }
 
+    }
+
+
+    /* ==========================================
+       SUBMIT QUIZ
+    ========================================== */
+
+    function submitQuiz(autoSubmit){
+
+      if(
+        quizFinished
+      ){
         return;
-    }
+      }
 
 
-    questions.forEach(
-        (question,index) => {
+      if(!autoSubmit){
 
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "question-item";
-
-
-            item.innerHTML = `
-
-                <div class="question-top">
-
-                    <div class="question-number">
-
-                        QUESTION
-                        ${String(
-                            index + 1
-                        ).padStart(2,"0")}
-
-                    </div>
-
-
-                    <div class="question-actions">
-
-                        <button
-                            title="Edit"
-                            onclick="
-                                editQuestion(
-                                    ${question.id}
-                                )
-                            "
-                        >
-                            ✏️
-                        </button>
-
-
-                        <button
-                            title="Delete"
-                            onclick="
-                                deleteQuestion(
-                                    ${question.id}
-                                )
-                            "
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="question-text">
-
-                    ${escapeHTML(
-                        question.text
-                    )}
-
-                </div>
-
-
-                <div
-                    class="
-                        option
-                        ${question.correct === "A"
-                            ? "correct"
-                            : ""}
-                    "
-                >
-
-                    A.
-                    ${escapeHTML(
-                        question.options.A
-                    )}
-
-                    ${
-                        question.correct === "A"
-                            ? " ✓"
-                            : ""
-                    }
-
-                </div>
-
-
-                <div
-                    class="
-                        option
-                        ${question.correct === "B"
-                            ? "correct"
-                            : ""}
-                    "
-                >
-
-                    B.
-                    ${escapeHTML(
-                        question.options.B
-                    )}
-
-                    ${
-                        question.correct === "B"
-                            ? " ✓"
-                            : ""
-                    }
-
-                </div>
-
-
-                <div
-                    class="
-                        option
-                        ${question.correct === "C"
-                            ? "correct"
-                            : ""}
-                    "
-                >
-
-                    C.
-                    ${escapeHTML(
-                        question.options.C
-                    )}
-
-                    ${
-                        question.correct === "C"
-                            ? " ✓"
-                            : ""
-                    }
-
-                </div>
-
-
-                <div
-                    class="
-                        option
-                        ${question.correct === "D"
-                            ? "correct"
-                            : ""}
-                    "
-                >
-
-                    D.
-                    ${escapeHTML(
-                        question.options.D
-                    )}
-
-                    ${
-                        question.correct === "D"
-                            ? " ✓"
-                            : ""
-                    }
-
-                </div>
-
-            `;
-
-
-            list.appendChild(
-                item
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   OPEN QUESTION MODAL
-========================================================= */
-
-function openQuestionModal(){
-
-    if(!currentQuizId){
-
-        showToast(
-            "আগে একটি quiz select করুন।"
-        );
-
-        return;
-    }
-
-
-    document.getElementById(
-        "questionModalTitle"
-    ).textContent =
-        "Add Question";
-
-
-    document.getElementById(
-        "editQuestionId"
-    ).value =
-        "";
-
-
-    document
-        .querySelector(
-            "#questionModal form"
-        )
-        .reset();
-
-
-    document.getElementById(
-        "questionModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   EDIT QUESTION
-========================================================= */
-
-function editQuestion(questionId){
-
-    const quizzes =
-        getQuizzes();
-
-
-    const quiz =
-        quizzes.find(
-            item =>
-                Number(item.id) ===
-                Number(currentQuizId)
-        );
-
-
-    if(!quiz){
-
-        return;
-    }
-
-
-    const question =
-        quiz.questions.find(
-            item =>
-                Number(item.id) ===
-                Number(questionId)
-        );
-
-
-    if(!question){
-
-        showToast(
-            "Question পাওয়া যায়নি।"
-        );
-
-        return;
-    }
-
-
-    document.getElementById(
-        "questionModalTitle"
-    ).textContent =
-        "Edit Question";
-
-
-    document.getElementById(
-        "editQuestionId"
-    ).value =
-        question.id;
-
-
-    document.getElementById(
-        "questionText"
-    ).value =
-        question.text;
-
-
-    document.getElementById(
-        "optionA"
-    ).value =
-        question.options.A;
-
-
-    document.getElementById(
-        "optionB"
-    ).value =
-        question.options.B;
-
-
-    document.getElementById(
-        "optionC"
-    ).value =
-        question.options.C;
-
-
-    document.getElementById(
-        "optionD"
-    ).value =
-        question.options.D;
-
-
-    document.getElementById(
-        "correctAnswer"
-    ).value =
-        question.correct;
-
-
-    document.getElementById(
-        "questionModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   SAVE QUESTION
-========================================================= */
-
-function saveQuestion(event){
-
-    event.preventDefault();
-
-
-    if(!currentQuizId){
-
-        showToast(
-            "Quiz select করা হয়নি।"
-        );
-
-        return;
-    }
-
-
-    const text =
-        document.getElementById(
-            "questionText"
-        ).value.trim();
-
-
-    const optionA =
-        document.getElementById(
-            "optionA"
-        ).value.trim();
-
-
-    const optionB =
-        document.getElementById(
-            "optionB"
-        ).value.trim();
-
-
-    const optionC =
-        document.getElementById(
-            "optionC"
-        ).value.trim();
-
-
-    const optionD =
-        document.getElementById(
-            "optionD"
-        ).value.trim();
-
-
-    const correct =
-        document.getElementById(
-            "correctAnswer"
-        ).value;
-
-
-    if(
-        !text ||
-        !optionA ||
-        !optionB ||
-        !optionC ||
-        !optionD ||
-        !correct
-    ){
-
-        showToast(
-            "⚠️ সব তথ্য পূরণ করুন।"
-        );
-
-        return;
-    }
-
-
-    const quizzes =
-        getQuizzes();
-
-
-    const quiz =
-        quizzes.find(
-            item =>
-                Number(item.id) ===
-                Number(currentQuizId)
-        );
-
-
-    if(!quiz){
-
-        showToast(
-            "Quiz পাওয়া যায়নি।"
-        );
-
-        return;
-    }
-
-
-    if(
-        !Array.isArray(
-            quiz.questions
-        )
-    ){
-
-        quiz.questions = [];
-    }
-
-
-    const editId =
-        document.getElementById(
-            "editQuestionId"
-        ).value;
-
-
-    if(editId){
-
-        const question =
-            quiz.questions.find(
-                item =>
-                    Number(item.id) ===
-                    Number(editId)
-            );
-
-
-        if(question){
-
-            question.text =
-                text;
-
-            question.options = {
-
-                A:optionA,
-
-                B:optionB,
-
-                C:optionC,
-
-                D:optionD
-
-            };
-
-            question.correct =
-                correct;
-
-        }
-
-
-        saveQuizzes(
-            quizzes
-        );
-
-
-        closeModal(
-            "questionModal"
-        );
-
-
-        renderQuestions(
-            quiz
-        );
-
-        renderQuizzes();
-
-
-        showToast(
-            "✅ Question updated."
-        );
-
-
-        return;
-    }
-
-
-    quiz.questions.push({
-
-        id:
-            Date.now(),
-
-        text,
-
-        options:{
-
-            A:optionA,
-
-            B:optionB,
-
-            C:optionC,
-
-            D:optionD
-
-        },
-
-        correct
-
-    });
-
-
-    saveQuizzes(
-        quizzes
-    );
-
-
-    closeModal(
-        "questionModal"
-    );
-
-
-    renderQuestions(
-        quiz
-    );
-
-    renderQuizzes();
-
-
-    showToast(
-        "✅ Question added."
-    );
-
-}
-
-
-/* =========================================================
-   DELETE QUESTION
-========================================================= */
-
-function deleteQuestion(questionId){
-
-    const confirmed =
-        confirm(
-            "আপনি কি এই question delete করতে চান?"
-        );
-
-
-    if(!confirmed){
-
-        return;
-    }
-
-
-    const quizzes =
-        getQuizzes();
-
-
-    const quiz =
-        quizzes.find(
-            item =>
-                Number(item.id) ===
-                Number(currentQuizId)
-        );
-
-
-    if(!quiz){
-
-        return;
-    }
-
-
-    quiz.questions =
-        quiz.questions.filter(
+        const unanswered =
+          quizQuestions.filter(
             question =>
-                Number(question.id) !==
-                Number(questionId)
+              !userAnswers[
+                question.id
+              ]
+          ).length;
+
+
+        if(unanswered > 0){
+
+          const confirmSubmit =
+            confirm(
+              "আপনি " +
+              unanswered +
+              "টি প্রশ্নের উত্তর দেননি। তারপরও কি Quiz Submit করতে চান?"
+            );
+
+
+          if(!confirmSubmit){
+            return;
+          }
+
+        }else{
+
+          const confirmSubmit =
+            confirm(
+              "আপনি কি Quiz Submit করতে চান?"
+            );
+
+
+          if(!confirmSubmit){
+            return;
+          }
+
+        }
+
+      }
+
+
+      quizFinished = true;
+
+
+      if(quizTimer){
+
+        clearInterval(
+          quizTimer
         );
 
-
-    saveQuizzes(
-        quizzes
-    );
+      }
 
 
-    renderQuestions(
-        quiz
-    );
+      calculateResult();
 
-    renderQuizzes();
-
-
-    showToast(
-        "🗑️ Question deleted."
-    );
-
-}
-
-
-/* =========================================================
-   ATTEMPTS
-========================================================= */
-
-function showAttempts(id){
-
-    const quizzes =
-        getQuizzes();
-
-
-    const quiz =
-        quizzes.find(
-            item =>
-                Number(item.id) ===
-                Number(id)
-        );
-
-
-    if(!quiz){
-
-        showToast(
-            "Quiz পাওয়া যায়নি।"
-        );
-
-        return;
     }
 
 
-    document.getElementById(
-        "attemptsTitle"
-    ).textContent =
-        quiz.name +
-        " — Student Attempts";
+    /* ==========================================
+       CALCULATE RESULT
+    ========================================== */
+
+    function calculateResult(){
+
+      let correct = 0;
 
 
-    const list =
-        document.getElementById(
-            "attemptList"
+      quizQuestions.forEach(
+        question => {
+
+          if(
+            userAnswers[
+              question.id
+            ] === question.answer
+          ){
+
+            correct++;
+
+          }
+
+        }
+      );
+
+
+      const total =
+        quizQuestions.length;
+
+
+      const wrong =
+        total - correct;
+
+
+      const percentage =
+        Math.round(
+          (correct / total) * 100
         );
 
 
-    const attempts =
-        Array.isArray(
-            quiz.attempts
-        )
-            ?
-            quiz.attempts
-            :
-            [];
+      saveQuizResult(
+        correct,
+        wrong,
+        total,
+        percentage
+      );
 
 
-    list.innerHTML = "";
+      showResult(
+        correct,
+        wrong,
+        total,
+        percentage
+      );
+
+    }
 
 
-    if(!attempts.length){
+    /* ==========================================
+       SHOW RESULT
+    ========================================== */
 
-        list.innerHTML = `
+    function showResult(
+      correct,
+      wrong,
+      total,
+      percentage
+    ){
 
-            <div
-                style="
-                    text-align:center;
-                    color:var(--muted);
-                    padding:30px 10px;
-                    font-size:10px;
-                "
-            >
+      document.getElementById(
+        "quizArea"
+      ).style.display =
+        "none";
 
-                📭 এখনো কোনো student attempt নেই।
 
-            </div>
+      document.getElementById(
+        "resultScreen"
+      ).classList.add(
+        "show"
+      );
 
+
+      document.getElementById(
+        "correctCount"
+      ).textContent =
+        correct;
+
+
+      document.getElementById(
+        "wrongCount"
+      ).textContent =
+        wrong;
+
+
+      document.getElementById(
+        "totalScore"
+      ).textContent =
+        correct +
+        "/" +
+        total;
+
+
+      document.getElementById(
+        "scorePercent"
+      ).textContent =
+        percentage +
+        "%";
+
+
+      const degrees =
+        percentage * 3.6;
+
+
+      document.getElementById(
+        "scoreCircle"
+      ).style.background =
+        `
+          conic-gradient(
+            var(--primary)
+            0deg
+            ${degrees}deg,
+            var(--bg)
+            ${degrees}deg
+          )
         `;
 
-    }else{
 
-        attempts.forEach(
-            attempt => {
+      let message =
+        "";
 
-                const item =
-                    document.createElement(
-                        "div"
-                    );
 
+      if(percentage >= 80){
 
-                item.className =
-                    "attempt-item";
+        message =
+          "Excellent! আপনার Quiz performance খুব ভালো হয়েছে।";
 
+      }
 
-                const initials =
-                    String(
-                        attempt.name ||
-                        "Student"
-                    )
-                    .split(" ")
-                    .map(
-                        part =>
-                            part[0]
-                    )
-                    .join("")
-                    .slice(0,2)
-                    .toUpperCase();
+      else if(percentage >= 60){
 
+        message =
+          "Good! আপনার performance ভালো। আরও practice করলে আরও ভালো হবে।";
 
-                item.innerHTML = `
+      }
 
-                    <div class="student-info">
+      else{
 
-                        <div class="student-avatar">
+        message =
+          "আরও practice করুন এবং আবার Quiz দেওয়ার চেষ্টা করুন।";
 
-                            ${escapeHTML(
-                                initials
-                            )}
+      }
 
-                        </div>
 
-
-                        <div>
-
-                            <strong>
-
-                                ${escapeHTML(
-                                    attempt.name ||
-                                    "Student"
-                                )}
-
-                            </strong>
-
-
-                            <span>
-
-                                ${escapeHTML(
-                                    attempt.studentId ||
-                                    "N/A"
-                                )}
-
-                                •
-
-                                ${escapeHTML(
-                                    attempt.date ||
-                                    "Date unavailable"
-                                )}
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="score">
-
-                        ${escapeHTML(
-                            attempt.score ||
-                            "-"
-                        )}
-
-                    </div>
-
-
-                    <button
-                        class="view-btn"
-                        onclick="
-                            showToast(
-                                '📌 Attempt details পরবর্তী version-এ আরও বিস্তারিত হবে।'
-                            )
-                        "
-                    >
-                        View
-                    </button>
-
-                `;
-
-
-                list.appendChild(
-                    item
-                );
-
-            }
-        );
-
-    }
-
-
-    document.getElementById(
-        "attemptsModal"
-    ).classList.add(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   THEME
-========================================================= */
-
-function toggleTheme(){
-
-    document.body.classList.toggle(
-        "dark"
-    );
-
-
-    const dark =
-        document.body.classList.contains(
-            "dark"
-        );
-
-
-    localStorage.setItem(
-        THEME_STORAGE,
-        dark
-            ? "dark"
-            : "light"
-    );
-
-
-    document.getElementById(
-        "themeBtn"
-    ).textContent =
-        dark
-            ? "☀️"
-            : "🌙";
-
-}
-
-
-function loadTheme(){
-
-    const theme =
-        localStorage.getItem(
-            THEME_STORAGE
-        );
-
-
-    if(theme === "dark"){
-
-        document.body.classList.add(
-            "dark"
-        );
-
-
-        document.getElementById(
-            "themeBtn"
-        ).textContent =
-            "☀️";
-
-    }
-
-}
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-function toggleSidebar(){
-
-    document
-        .getElementById(
-            "sidebar"
-        )
-        .classList.toggle(
-            "open"
-        );
-
-
-    document
-        .getElementById(
-            "sidebarOverlay"
-        )
-        .classList.toggle(
-            "show"
-        );
-
-}
-
-
-function closeSidebar(){
-
-    document
-        .getElementById(
-            "sidebar"
-        )
-        .classList.remove(
-            "open"
-        );
-
-
-    document
-        .getElementById(
-            "sidebarOverlay"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-function closeModal(id){
-
-    document
-        .getElementById(id)
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
-
-
-function showToast(message){
-
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-
-    toast.textContent =
+      document.getElementById(
+        "resultMessage"
+      ).textContent =
         message;
 
 
-    toast.classList.add(
+      showToast(
+        "✓ Quiz result তৈরি হয়েছে।"
+      );
+
+    }
+
+
+    /* ==========================================
+       SAVE RESULT
+    ========================================== */
+
+    function saveQuizResult(
+      correct,
+      wrong,
+      total,
+      percentage
+    ){
+
+      let results = [];
+
+
+      try{
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              QUIZ_RESULT_KEY
+            )
+          );
+
+
+        if(Array.isArray(saved)){
+          results = saved;
+        }
+
+      }catch(error){
+
+        results = [];
+
+      }
+
+
+      const result = {
+
+        id:
+          "QUIZ-" +
+          Date.now(),
+
+        studentId:
+          studentId,
+
+        studentName:
+          studentName,
+
+        course:
+          "Computer Office Application",
+
+        batch:
+          "Batch 01",
+
+        quizName:
+          "Computer Basics Quiz",
+
+        correct:
+          correct,
+
+        wrong:
+          wrong,
+
+        total:
+          total,
+
+        percentage:
+          percentage,
+
+        submittedAt:
+          new Date().toISOString()
+
+      };
+
+
+      results.push(
+        result
+      );
+
+
+      localStorage.setItem(
+        QUIZ_RESULT_KEY,
+        JSON.stringify(results)
+      );
+
+    }
+
+
+    /* ==========================================
+       RETAKE QUIZ
+    ========================================== */
+
+    function retakeQuiz(){
+
+      if(quizTimer){
+
+        clearInterval(
+          quizTimer
+        );
+
+      }
+
+
+      currentQuestion = 0;
+
+      userAnswers = {};
+
+      timeLeft = 5 * 60;
+
+      quizStarted = false;
+
+      quizFinished = false;
+
+
+      document.getElementById(
+        "resultScreen"
+      ).classList.remove(
         "show"
-    );
+      );
 
 
-    clearTimeout(
-        toastTimer
-    );
+      document.getElementById(
+        "quizArea"
+      ).style.display =
+        "none";
 
 
-    toastTimer =
-        setTimeout(
-            function(){
+      document.getElementById(
+        "quizIntro"
+      ).style.display =
+        "block";
 
-                toast.classList.remove(
-                    "show"
-                );
 
-            },
-            2600
+      document.getElementById(
+        "timer"
+      ).textContent =
+        "05:00";
+
+
+      document.getElementById(
+        "timer"
+      ).className =
+        "timer";
+
+
+      renderQuestionMap();
+
+    }
+
+
+    /* ==========================================
+       THEME
+    ========================================== */
+
+    function applyTheme(){
+
+      const theme =
+        localStorage.getItem(
+          "snkTheme"
+        ) || "light";
+
+
+      if(theme === "dark"){
+
+        document.body.classList.add(
+          "dark"
         );
 
-}
+
+        document.getElementById(
+          "themeBtn"
+        ).textContent =
+          "☀️";
+
+      }else{
+
+        document.body.classList.remove(
+          "dark"
+        );
 
 
-/* =========================================================
-   LOGOUT
-========================================================= */
+        document.getElementById(
+          "themeBtn"
+        ).textContent =
+          "🌙";
 
-function logoutDemo(){
+      }
 
-    const confirmed =
+    }
+
+
+    function toggleTheme(){
+
+      const isDark =
+        document.body.classList.contains(
+          "dark"
+        );
+
+
+      localStorage.setItem(
+        "snkTheme",
+        isDark
+          ? "light"
+          : "dark"
+      );
+
+
+      applyTheme();
+
+    }
+
+
+    /* ==========================================
+       LOGOUT
+    ========================================== */
+
+    function logout(){
+
+      const confirmLogout =
         confirm(
-            "আপনি কি Logout করতে চান?"
+          "আপনি কি Student Portal থেকে Logout করতে চান?"
         );
 
 
-    if(!confirmed){
-
+      if(!confirmLogout){
         return;
+      }
+
+
+      if(quizTimer){
+
+        clearInterval(
+          quizTimer
+        );
+
+      }
+
+
+      sessionStorage.removeItem(
+        "snkStudentLoggedIn"
+      );
+
+
+      sessionStorage.removeItem(
+        "snkStudentId"
+      );
+
+
+      sessionStorage.removeItem(
+        "snkStudentName"
+      );
+
+
+      sessionStorage.removeItem(
+        "snkStudentCourse"
+      );
+
+
+      window.location.replace(
+        "login.html"
+      );
+
+    }
+
+
+    /* ==========================================
+       TOAST
+    ========================================== */
+
+    let toastTimer;
+
+
+    function showToast(message){
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toastTimer =
+        setTimeout(
+          function(){
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          3000
+        );
+
     }
 
 
-    sessionStorage.removeItem(
-        "snkAdminLoggedIn"
-    );
+    /* ==========================================
+       INITIALIZE
+    ========================================== */
+
+    applyTheme();
+
+    renderQuestionMap();
 
 
-    showToast(
-        "আপনি Admin Panel থেকে Logout করেছেন।"
-    );
+    /* ==========================================
+       VISIBILITY REFRESH
+    ========================================== */
 
-}
+    document.addEventListener(
+      "visibilitychange",
+      function(){
 
+        if(!document.hidden){
 
-/* =========================================================
-   OUTSIDE MODAL CLICK
-========================================================= */
-
-[
-    "quizModal",
-    "viewModal",
-    "questionsModal",
-    "questionModal",
-    "attemptsModal"
-
-].forEach(
-    function(id){
-
-        document
-            .getElementById(id)
-            .addEventListener(
-                "click",
-                function(event){
-
-                    if(
-                        event.target ===
-                        this
-                    ){
-
-                        closeModal(
-                            id
-                        );
-
-                    }
-
-                }
-            );
-
-    }
-);
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key ===
-            "Escape"
-        ){
-
-            [
-                "quizModal",
-                "viewModal",
-                "questionsModal",
-                "questionModal",
-                "attemptsModal"
-
-            ].forEach(
-                function(id){
-
-                    closeModal(
-                        id
-                    );
-
-                }
-            );
+          applyTheme();
 
         }
 
-    }
-);
+      }
+    );
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
+    /* ==========================================
+       STORAGE REFRESH
+    ========================================== */
 
-loadTheme();
+    window.addEventListener(
+      "storage",
+      function(){
 
-renderCourseFilter();
+        applyTheme();
 
-renderQuizzes();
+      }
+    );
 
-</script>
+  </script>
 
 </body>
 </html>
+```
