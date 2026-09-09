@@ -4,527 +4,402 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Student Login | SNK IT Institute</title>
+  <title>SNK IT Institute | Student Login</title>
 
-  <meta name="theme-color" content="#0b1020">
   <meta name="description" content="SNK IT Institute Student Portal Login">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <style>
-    :root{
-      --bg:#07111f;
-      --bg2:#0b1730;
-      --card:rgba(14,25,48,.86);
-      --card2:rgba(19,34,63,.92);
-      --text:#f5f7ff;
-      --muted:#aebbd2;
-      --primary:#6c63ff;
-      --primary2:#8b7cff;
-      --cyan:#22d3ee;
-      --green:#22c55e;
-      --danger:#ef4444;
-      --border:rgba(255,255,255,.10);
-      --shadow:0 25px 70px rgba(0,0,0,.38);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
+    :root {
+      --bg: #05070c;
+      --card: #0d111a;
+      --card2: #111722;
+      --text: #ffffff;
+      --muted: #9aa4b2;
+      --border: rgba(255,255,255,0.09);
+      --primary: #7c5cff;
+      --primary2: #5b3df5;
+      --success: #19c37d;
+      --danger: #ff5d73;
+      --input: #080b12;
     }
 
-    html{
-      scroll-behavior:smooth;
+    body.light {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --card2: #f0f2f7;
+      --text: #111827;
+      --muted: #667085;
+      --border: rgba(0,0,0,0.08);
+      --input: #f8fafc;
     }
 
-    body{
-      min-height:100vh;
-      font-family:"Poppins","Noto Sans Bengali",sans-serif;
-      color:var(--text);
+    body {
+      font-family: Arial, "Noto Sans Bengali", sans-serif;
       background:
-        radial-gradient(circle at 15% 20%,rgba(108,99,255,.18),transparent 28%),
-        radial-gradient(circle at 85% 75%,rgba(34,211,238,.12),transparent 30%),
-        linear-gradient(135deg,var(--bg),var(--bg2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      overflow-x:hidden;
+        radial-gradient(circle at top left, rgba(124,92,255,0.15), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(25,195,125,0.08), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: 0.25s ease;
     }
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px),
-        radial-gradient(circle,rgba(255,255,255,.35) 1px,transparent 1px);
-      background-size:110px 110px,180px 180px;
-      background-position:20px 30px,80px 100px;
-      opacity:.16;
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
 
-    .login-shell{
-      width:min(1050px,100%);
-      min-height:650px;
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      position:relative;
-      z-index:1;
-      border:1px solid var(--border);
-      border-radius:30px;
-      overflow:hidden;
-      background:rgba(7,14,29,.65);
-      backdrop-filter:blur(20px);
-      box-shadow:var(--shadow);
+    .login-wrapper {
+      width: 100%;
+      max-width: 980px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.35);
     }
 
-    .visual{
-      position:relative;
-      padding:50px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      overflow:hidden;
+    .brand-side {
+      padding: 50px;
       background:
-        radial-gradient(circle at 30% 30%,rgba(108,99,255,.28),transparent 35%),
-        radial-gradient(circle at 75% 70%,rgba(34,211,238,.14),transparent 35%),
-        linear-gradient(145deg,rgba(20,31,62,.9),rgba(7,14,29,.95));
+        linear-gradient(145deg, rgba(124,92,255,0.25), transparent 55%),
+        var(--card2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .visual::before,
-    .visual::after{
-      content:"";
-      position:absolute;
-      border-radius:50%;
-      border:1px solid rgba(139,124,255,.18);
+    .logo-box {
+      width: 76px;
+      height: 76px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(124,92,255,0.15);
+      border: 1px solid rgba(124,92,255,0.35);
+      margin-bottom: 25px;
+      overflow: hidden;
     }
 
-    .visual::before{
-      width:430px;
-      height:430px;
-      top:-150px;
-      right:-150px;
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
     }
 
-    .visual::after{
-      width:620px;
-      height:620px;
-      bottom:-350px;
-      left:-250px;
+    .brand-side h1 {
+      font-size: 36px;
+      line-height: 1.15;
+      margin-bottom: 14px;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:55px;
-      position:relative;
-      z-index:2;
+    .brand-side p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 410px;
     }
 
-    .brand-logo{
-      width:55px;
-      height:55px;
-      border-radius:16px;
-      object-fit:contain;
-      background:#fff;
-      padding:7px;
-      box-shadow:0 10px 35px rgba(108,99,255,.3);
+    .features {
+      margin-top: 32px;
+      display: grid;
+      gap: 13px;
     }
 
-    .brand strong{
-      display:block;
-      font-size:20px;
-      font-weight:800;
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    .brand span{
-      display:block;
-      color:var(--muted);
-      font-size:12px;
-      margin-top:2px;
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(124,92,255,0.14);
+      color: var(--primary);
+      font-weight: bold;
     }
 
-    .visual-content{
-      position:relative;
-      z-index:2;
-      max-width:540px;
+    .form-side {
+      padding: 50px;
+      display: flex;
+      align-items: center;
     }
 
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 13px;
-      border-radius:999px;
-      background:rgba(108,99,255,.12);
-      border:1px solid rgba(139,124,255,.22);
-      color:#c7c2ff;
-      font-size:12px;
-      font-weight:700;
-      margin-bottom:20px;
+    .form-container {
+      width: 100%;
+      max-width: 420px;
+      margin: auto;
     }
 
-    .eyebrow::before{
-      content:"";
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 14px var(--green);
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 25px;
     }
 
-    .visual h1{
-      font-size:clamp(34px,4vw,56px);
-      line-height:1.08;
-      letter-spacing:-1.5px;
-      margin-bottom:20px;
+    .icon-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 17px;
     }
 
-    .gradient-text{
-      background:linear-gradient(90deg,#fff,#a99fff,#6ee7f7);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
+    .icon-btn:hover {
+      background: var(--card2);
     }
 
-    .visual p{
-      color:var(--muted);
-      line-height:1.9;
-      font-size:15px;
-      max-width:470px;
+    .form-title {
+      font-size: 30px;
+      margin-bottom: 8px;
     }
 
-    .feature-list{
-      list-style:none;
-      margin-top:32px;
-      display:grid;
-      gap:13px;
+    .form-subtitle {
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.6;
+      font-size: 14px;
     }
 
-    .feature-list li{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      color:#dfe6f5;
-      font-size:14px;
+    .field {
+      margin-bottom: 18px;
     }
 
-    .feature-icon{
-      width:30px;
-      height:30px;
-      border-radius:10px;
-      display:grid;
-      place-items:center;
-      background:rgba(108,99,255,.15);
-      border:1px solid rgba(139,124,255,.18);
-      color:#bdb6ff;
-      font-size:13px;
-      flex-shrink:0;
+    .field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
     }
 
-    .form-panel{
-      padding:48px;
-      background:rgba(11,19,37,.72);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
+    .input-wrap {
+      position: relative;
     }
 
-    .form-top{
-      margin-bottom:30px;
+    .input-wrap input {
+      width: 100%;
+      height: 52px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      outline: none;
+      background: var(--input);
+      color: var(--text);
+      padding: 0 45px 0 15px;
+      font-size: 15px;
+      transition: 0.2s;
     }
 
-    .form-top h2{
-      font-size:31px;
-      margin-bottom:9px;
+    .input-wrap input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(124,92,255,0.12);
     }
 
-    .form-top p{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.7;
+    .input-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
     }
 
-    .form-group{
-      margin-bottom:19px;
+    .password-toggle {
+      position: absolute;
+      right: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 15px;
     }
 
-    label{
-      display:block;
-      margin-bottom:8px;
-      font-size:13px;
-      font-weight:600;
-      color:#e8edf9;
+    .remember-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 4px 0 20px;
+      font-size: 13px;
     }
 
-    .input-wrap{
-      position:relative;
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
     }
 
-    .input-icon{
-      position:absolute;
-      left:15px;
-      top:50%;
-      transform:translateY(-50%);
-      color:#8593ad;
-      pointer-events:none;
-      font-size:14px;
+    .remember input {
+      accent-color: var(--primary);
     }
 
-    input{
-      width:100%;
-      height:52px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      outline:none;
-      background:rgba(255,255,255,.045);
-      color:var(--text);
-      padding:0 46px 0 43px;
-      font:inherit;
-      transition:.2s ease;
+    .forgot {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
     }
 
-    input::placeholder{
-      color:#66758e;
+    .login-btn {
+      width: 100%;
+      height: 54px;
+      border: 0;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 10px 30px rgba(92,61,245,0.25);
     }
 
-    input:focus{
-      border-color:rgba(139,124,255,.75);
-      box-shadow:0 0 0 4px rgba(108,99,255,.10);
-      background:rgba(255,255,255,.065);
+    .login-btn:hover {
+      transform: translateY(-1px);
     }
 
-    .password-toggle{
-      position:absolute;
-      right:13px;
-      top:50%;
-      transform:translateY(-50%);
-      border:0;
-      background:transparent;
-      color:#8997b0;
-      cursor:pointer;
-      padding:7px;
-      font-size:13px;
+    .login-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
     }
 
-    .password-toggle:hover{
-      color:#fff;
+    .message {
+      display: none;
+      margin-bottom: 18px;
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
-    .form-options{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:15px;
-      margin:2px 0 22px;
-      font-size:12px;
+    .message.show {
+      display: block;
     }
 
-    .remember{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      color:var(--muted);
-      cursor:pointer;
+    .message.error {
+      background: rgba(255,93,115,0.10);
+      border: 1px solid rgba(255,93,115,0.25);
+      color: #ff8798;
     }
 
-    .remember input{
-      width:15px;
-      height:15px;
-      padding:0;
-      accent-color:var(--primary);
-      box-shadow:none;
+    .message.success {
+      background: rgba(25,195,125,0.10);
+      border: 1px solid rgba(25,195,125,0.25);
+      color: #42d99a;
     }
 
-    .forgot{
-      color:#a99fff;
-      text-decoration:none;
-      font-weight:600;
+    .demo-box {
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
     }
 
-    .forgot:hover{
-      color:#fff;
+    .demo-box strong {
+      color: var(--text);
     }
 
-    .login-btn{
-      width:100%;
-      height:54px;
-      border:0;
-      border-radius:15px;
-      cursor:pointer;
-      color:#fff;
-      font:inherit;
-      font-weight:800;
-      background:linear-gradient(135deg,var(--primary),var(--primary2));
-      box-shadow:0 15px 35px rgba(108,99,255,.24);
-      transition:.2s ease;
+    .footer {
+      text-align: center;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
-    .login-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 18px 40px rgba(108,99,255,.34);
+    .loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
     }
 
-    .login-btn:active{
-      transform:translateY(0);
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
     }
 
-    .login-btn.loading{
-      opacity:.7;
-      cursor:wait;
-    }
-
-    .message{
-      min-height:22px;
-      margin-top:14px;
-      font-size:12px;
-      line-height:1.5;
-    }
-
-    .message.error{
-      color:#fca5a5;
-    }
-
-    .message.success{
-      color:#86efac;
-    }
-
-    .demo-box{
-      margin-top:25px;
-      padding:15px;
-      border-radius:15px;
-      border:1px dashed rgba(139,124,255,.28);
-      background:rgba(108,99,255,.06);
-    }
-
-    .demo-box strong{
-      display:block;
-      font-size:12px;
-      margin-bottom:8px;
-      color:#c9c4ff;
-    }
-
-    .demo-box p{
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.7;
-    }
-
-    .demo-box code{
-      color:#fff;
-      background:rgba(255,255,255,.07);
-      padding:2px 6px;
-      border-radius:5px;
-    }
-
-    .back-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      margin-top:20px;
-      color:var(--muted);
-      text-decoration:none;
-      font-size:12px;
-    }
-
-    .back-link:hover{
-      color:#fff;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:25px;
-      transform:translate(-50%,20px);
-      padding:12px 17px;
-      border-radius:12px;
-      background:#111c33;
-      border:1px solid var(--border);
-      color:#fff;
-      font-size:13px;
-      box-shadow:0 15px 35px rgba(0,0,0,.35);
-      opacity:0;
-      pointer-events:none;
-      transition:.25s ease;
-      z-index:100;
-    }
-
-    .toast.show{
-      opacity:1;
-      transform:translate(-50%,0);
-    }
-
-    @media(max-width:850px){
-      .login-shell{
-        grid-template-columns:1fr;
-        max-width:600px;
-      }
-
-      .visual{
-        min-height:390px;
-        padding:35px;
-      }
-
-      .brand{
-        margin-bottom:35px;
-      }
-
-      .visual h1{
-        font-size:38px;
-      }
-
-      .form-panel{
-        padding:35px;
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
     }
 
-    @media(max-width:520px){
-      body{
-        padding:12px;
+    @media (max-width: 800px) {
+      .login-wrapper {
+        grid-template-columns: 1fr;
+        max-width: 520px;
       }
 
-      .login-shell{
-        border-radius:22px;
+      .brand-side {
+        padding: 35px;
       }
 
-      .visual,
-      .form-panel{
-        padding:25px 20px;
+      .brand-side h1 {
+        font-size: 29px;
       }
 
-      .visual{
-        min-height:350px;
+      .features {
+        display: none;
       }
 
-      .visual h1{
-        font-size:32px;
-      }
-
-      .visual p{
-        font-size:13px;
-      }
-
-      .form-top h2{
-        font-size:26px;
-      }
-
-      .form-options{
-        align-items:flex-start;
+      .form-side {
+        padding: 35px;
       }
     }
 
-    @media(prefers-reduced-motion:reduce){
-      *,
-      *::before,
-      *::after{
-        scroll-behavior:auto!important;
-        transition:none!important;
+    @media (max-width: 480px) {
+      .page {
+        padding: 12px;
+      }
+
+      .brand-side,
+      .form-side {
+        padding: 25px 20px;
+      }
+
+      .login-wrapper {
+        border-radius: 22px;
+      }
+
+      .brand-side h1 {
+        font-size: 25px;
+      }
+
+      .form-title {
+        font-size: 25px;
       }
     }
   </style>
@@ -532,554 +407,860 @@
 
 <body>
 
-  <main class="login-shell">
+  <main class="page">
 
-    <section class="visual">
+    <section class="login-wrapper">
 
-      <div class="brand">
-        <img
-          class="brand-logo"
-          src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-          alt="SNK IT Institute Logo"
-          onerror="this.style.display='none'"
-        >
+      <!-- LEFT SIDE -->
+      <div class="brand-side">
 
-        <div>
-          <strong>SNK IT Institute</strong>
-          <span>Student Portal</span>
-        </div>
-      </div>
-
-      <div class="visual-content">
-
-        <div class="eyebrow">
-          Student Portal
+        <div class="logo-box">
+          <img
+            src="https://github.com/yourdocuments/products/blob/main/snkitlogo%20(2).svg?raw=true"
+            alt="SNK IT Institute Logo"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='SNK';"
+          >
         </div>
 
-        <h1>
-          Welcome to your
-          <span class="gradient-text">learning journey.</span>
-        </h1>
+        <h1>SNK IT Institute</h1>
 
         <p>
-          আপনার Student Portal-এ Login করে Course, Class, Assignment,
-          Quiz, Result, Attendance এবং অন্যান্য প্রয়োজনীয় তথ্য এক জায়গা থেকে দেখুন।
+          Offline Course Student Portal-এ login করে
+          আপনার course, assignment, quiz, result ও attendance দেখুন।
         </p>
 
-        <ul class="feature-list">
-          <li>
-            <span class="feature-icon">✓</span>
-            Student Dashboard Access
-          </li>
+        <div class="features">
 
-          <li>
-            <span class="feature-icon">✓</span>
-            Course & Class Information
-          </li>
-
-          <li>
-            <span class="feature-icon">✓</span>
-            Assignment, Quiz & Result
-          </li>
-
-          <li>
-            <span class="feature-icon">✓</span>
-            Attendance & Student Resources
-          </li>
-        </ul>
-
-      </div>
-
-    </section>
-
-
-    <section class="form-panel">
-
-      <div class="form-top">
-        <h2>Student Login</h2>
-        <p>
-          আপনার Student ID এবং Password দিয়ে Portal-এ প্রবেশ করুন।
-        </p>
-      </div>
-
-      <form id="loginForm" autocomplete="on">
-
-        <div class="form-group">
-          <label for="studentId">Student ID</label>
-
-          <div class="input-wrap">
-            <span class="input-icon">ID</span>
-
-            <input
-              type="text"
-              id="studentId"
-              name="studentId"
-              placeholder="Enter Student ID"
-              autocomplete="username"
-              required
-            >
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <span>নিজের Student Dashboard</span>
           </div>
+
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <span>Assignment ও Quiz</span>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <span>Result ও Attendance</span>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">✓</div>
+            <span>Secure Firebase Login</span>
+          </div>
+
         </div>
 
+      </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
 
-          <div class="input-wrap">
-            <span class="input-icon">••</span>
+      <!-- RIGHT SIDE -->
+      <div class="form-side">
 
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter Password"
-              autocomplete="current-password"
-              required
-            >
+        <div class="form-container">
+
+          <div class="top-actions">
 
             <button
+              class="icon-btn"
+              id="languageBtn"
               type="button"
-              class="password-toggle"
-              id="passwordToggle"
-              aria-label="Show password"
+              title="Language"
             >
-              Show
+              EN
             </button>
+
+            <button
+              class="icon-btn"
+              id="themeBtn"
+              type="button"
+              title="Theme"
+            >
+              ☀
+            </button>
+
           </div>
+
+          <h2 class="form-title" id="loginTitle">
+            Student Login
+          </h2>
+
+          <p class="form-subtitle" id="loginSubtitle">
+            আপনার Email ও Password দিয়ে login করুন।
+          </p>
+
+
+          <div
+            id="message"
+            class="message"
+            role="alert"
+          ></div>
+
+
+          <form id="loginForm">
+
+            <div class="field">
+
+              <label for="email" id="emailLabel">
+                Email
+              </label>
+
+              <div class="input-wrap">
+
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="student@example.com"
+                  autocomplete="email"
+                  required
+                >
+
+                <span class="input-icon">
+                  @
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="password" id="passwordLabel">
+                Password
+              </label>
+
+              <div class="input-wrap">
+
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="আপনার password"
+                  autocomplete="current-password"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  id="passwordToggle"
+                  title="Show password"
+                >
+                  👁
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="remember-row">
+
+              <label class="remember">
+
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                >
+
+                <span id="rememberText">
+                  আমাকে মনে রাখুন
+                </span>
+
+              </label>
+
+              <a
+                href="#"
+                class="forgot"
+                id="forgotPassword"
+              >
+                Password ভুলে গেছেন?
+              </a>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="login-btn"
+              id="loginBtn"
+            >
+              Login
+            </button>
+
+          </form>
+
+
+          <div class="demo-box">
+            <strong>নতুন Firebase Login:</strong><br>
+            Admin Firebase Authentication থেকে student
+            account তৈরি করলে সেই Email ও Password দিয়ে login
+            করা যাবে।
+          </div>
+
+
+          <div class="footer">
+            © 2026 SNK IT Institute · Student Portal
+          </div>
+
         </div>
 
-
-        <div class="form-options">
-
-          <label class="remember">
-            <input type="checkbox" id="rememberMe">
-            <span>Remember me</span>
-          </label>
-
-          <a href="#" class="forgot" id="forgotPassword">
-            Forgot Password?
-          </a>
-
-        </div>
-
-
-        <button type="submit" class="login-btn" id="loginButton">
-          Login to Student Portal
-        </button>
-
-        <div id="loginMessage" class="message" aria-live="polite"></div>
-
-      </form>
-
-
-      <div class="demo-box">
-        <strong>Demo Student Account</strong>
-
-        <p>
-          Student ID:
-          <code>SNK-1001</code>
-          <br>
-
-          Password:
-          <code>123456</code>
-        </p>
       </div>
-
-
-      <a href="index.html" class="back-link">
-        ← Back to Home
-      </a>
 
     </section>
 
   </main>
 
 
-  <div class="toast" id="toast"></div>
+  <!-- ======================================================
+       FIREBASE LOGIN
+       ====================================================== -->
+
+  <script type="module">
+
+    import { auth } from "./firebase-config.js";
+
+    import {
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 
-  <script>
-    /* =========================================================
-       SNK IT INSTITUTE
-       Student Portal Login
-       Step 1.19.2
-       ========================================================= */
+    /* ======================================================
+       STORAGE
+       ====================================================== */
 
-    const STORAGE = {
-      theme: "snkTheme",
-      loggedIn: "snkStudentLoggedIn",
-      studentId: "snkStudentId",
-      studentName: "snkStudentName",
-      studentCourse: "snkStudentCourse",
-      studentBatch: "snkStudentBatch",
-      studentProfile: "snkStudentProfile",
-      rememberMe: "snkRememberMe"
-    };
+    const THEME_KEY = "snkTheme";
+    const LANGUAGE_KEY = "snkLanguage";
+
+    const LOGIN_KEY = "snkStudentLoggedIn";
+    const STUDENT_ID_KEY = "snkStudentId";
+    const STUDENT_NAME_KEY = "snkStudentName";
+    const STUDENT_COURSE_KEY = "snkStudentCourse";
+    const STUDENT_BATCH_KEY = "snkStudentBatch";
+
+    const REMEMBER_KEY = "snkRememberMe";
 
 
-    const DEMO_STUDENT = {
+    /* ======================================================
+       DEFAULT STUDENT INFORMATION
+       ====================================================== */
+
+    const DEFAULT_STUDENT = {
       id: "SNK-1001",
-      name: "Student",
+      name: "Demo Student",
       course: "Computer Office Application",
-      batch: "Batch 01",
-      password: "123456"
+      batch: "Batch 01"
     };
 
 
-    const $ = (selector) => document.querySelector(selector);
+    /* ======================================================
+       ELEMENTS
+       ====================================================== */
+
+    const body = document.body;
+
+    const loginForm = document.getElementById("loginForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const rememberMe = document.getElementById("rememberMe");
+
+    const loginBtn = document.getElementById("loginBtn");
+
+    const message = document.getElementById("message");
+
+    const themeBtn = document.getElementById("themeBtn");
+    const languageBtn = document.getElementById("languageBtn");
+
+    const passwordToggle =
+      document.getElementById("passwordToggle");
+
+    const forgotPassword =
+      document.getElementById("forgotPassword");
 
 
-    function showToast(message) {
-      const toast = $("#toast");
+    /* ======================================================
+       LANGUAGE
+       ====================================================== */
 
-      if (!toast) return;
-
-      toast.textContent = message;
-      toast.classList.add("show");
-
-      clearTimeout(window.__snkToastTimer);
-
-      window.__snkToastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2500);
-    }
+    let currentLanguage =
+      localStorage.getItem(LANGUAGE_KEY) || "bn";
 
 
-    function setMessage(message, type = "") {
-      const box = $("#loginMessage");
+    function applyLanguage() {
 
-      if (!box) return;
+      if (currentLanguage === "en") {
 
-      box.textContent = message;
-      box.className = "message";
+        document.documentElement.lang = "en";
 
-      if (type) {
-        box.classList.add(type);
+        document.getElementById("loginTitle").textContent =
+          "Student Login";
+
+        document.getElementById("loginSubtitle").textContent =
+          "Login with your Email and Password.";
+
+        document.getElementById("emailLabel").textContent =
+          "Email";
+
+        document.getElementById("passwordLabel").textContent =
+          "Password";
+
+        document.getElementById("rememberText").textContent =
+          "Remember me";
+
+        forgotPassword.textContent =
+          "Forgot password?";
+
+        loginBtn.textContent =
+          "Login";
+
+        languageBtn.textContent =
+          "BN";
+
+      } else {
+
+        document.documentElement.lang = "bn";
+
+        document.getElementById("loginTitle").textContent =
+          "Student Login";
+
+        document.getElementById("loginSubtitle").textContent =
+          "আপনার Email ও Password দিয়ে login করুন।";
+
+        document.getElementById("emailLabel").textContent =
+          "Email";
+
+        document.getElementById("passwordLabel").textContent =
+          "Password";
+
+        document.getElementById("rememberText").textContent =
+          "আমাকে মনে রাখুন";
+
+        forgotPassword.textContent =
+          "Password ভুলে গেছেন?";
+
+        loginBtn.textContent =
+          "Login";
+
+        languageBtn.textContent =
+          "EN";
       }
+
     }
 
 
-    function getSavedStudentProfile() {
-      try {
-        const raw = localStorage.getItem(STORAGE.studentProfile);
+    languageBtn.addEventListener("click", () => {
 
-        if (!raw) return {};
-
-        const profile = JSON.parse(raw);
-
-        return profile && typeof profile === "object"
-          ? profile
-          : {};
-
-      } catch (error) {
-        return {};
-      }
-    }
-
-
-    function saveStudentSession(student) {
-
-      /*
-       * Session data
-       */
-      sessionStorage.setItem(STORAGE.loggedIn, "true");
-      sessionStorage.setItem(STORAGE.studentId, student.id);
-      sessionStorage.setItem(STORAGE.studentName, student.name);
-      sessionStorage.setItem(STORAGE.studentCourse, student.course);
-      sessionStorage.setItem(STORAGE.studentBatch, student.batch);
-
-
-      /*
-       * Persistent student data
-       *
-       * These are kept in localStorage so other student
-       * pages can read the same information.
-       */
-      localStorage.setItem(STORAGE.studentId, student.id);
-      localStorage.setItem(STORAGE.studentName, student.name);
-      localStorage.setItem(STORAGE.studentCourse, student.course);
-      localStorage.setItem(STORAGE.studentBatch, student.batch);
-
-
-      /*
-       * Create/update basic profile
-       */
-      const oldProfile = getSavedStudentProfile();
-
-      const profile = {
-        ...oldProfile,
-
-        studentId: student.id,
-        name: student.name,
-        course: student.course,
-        batch: student.batch,
-
-        updatedAt: new Date().toISOString()
-      };
+      currentLanguage =
+        currentLanguage === "bn" ? "en" : "bn";
 
       localStorage.setItem(
-        STORAGE.studentProfile,
-        JSON.stringify(profile)
+        LANGUAGE_KEY,
+        currentLanguage
       );
-    }
+
+      applyLanguage();
+
+    });
 
 
-    function loadRememberedStudent() {
+    /* ======================================================
+       THEME
+       ====================================================== */
 
-      const remember =
-        localStorage.getItem(STORAGE.rememberMe) === "true";
+    function applyTheme() {
 
-      if (!remember) return;
+      const savedTheme =
+        localStorage.getItem(THEME_KEY) || "dark";
 
-      const savedId =
-        localStorage.getItem(STORAGE.studentId);
+      if (savedTheme === "light") {
 
-      if (savedId) {
-        $("#studentId").value = savedId;
-        $("#rememberMe").checked = true;
-      }
-    }
+        body.classList.add("light");
+        themeBtn.textContent = "☾";
 
+      } else {
 
-    function setupPasswordToggle() {
-
-      const button = $("#passwordToggle");
-      const input = $("#password");
-
-      if (!button || !input) return;
-
-      button.addEventListener("click", () => {
-
-        const isPassword =
-          input.type === "password";
-
-        input.type =
-          isPassword ? "text" : "password";
-
-        button.textContent =
-          isPassword ? "Hide" : "Show";
-
-        button.setAttribute(
-          "aria-label",
-          isPassword
-            ? "Hide password"
-            : "Show password"
-        );
-
-      });
-    }
-
-
-    function setupForgotPassword() {
-
-      const link = $("#forgotPassword");
-
-      if (!link) return;
-
-      link.addEventListener("click", (event) => {
-
-        event.preventDefault();
-
-        showToast(
-          "Forgot Password recovery will be connected later."
-        );
-
-        setMessage(
-          "Password recovery feature is coming soon.",
-          ""
-        );
-
-      });
-    }
-
-
-    function validateStudent(studentId, password) {
-
-      const normalizedId =
-        studentId.trim().toUpperCase();
-
-      if (
-        normalizedId === DEMO_STUDENT.id &&
-        password === DEMO_STUDENT.password
-      ) {
-
-        return {
-          valid: true,
-          student: {
-            id: DEMO_STUDENT.id,
-            name: DEMO_STUDENT.name,
-            course: DEMO_STUDENT.course,
-            batch: DEMO_STUDENT.batch
-          }
-        };
+        body.classList.remove("light");
+        themeBtn.textContent = "☀";
 
       }
 
-      return {
-        valid: false,
-        student: null
+    }
+
+
+    themeBtn.addEventListener("click", () => {
+
+      const isLight =
+        body.classList.contains("light");
+
+      localStorage.setItem(
+        THEME_KEY,
+        isLight ? "dark" : "light"
+      );
+
+      applyTheme();
+
+    });
+
+
+    /* ======================================================
+       PASSWORD SHOW / HIDE
+       ====================================================== */
+
+    passwordToggle.addEventListener("click", () => {
+
+      if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+        passwordToggle.textContent = "🙈";
+
+      } else {
+
+        passwordInput.type = "password";
+        passwordToggle.textContent = "👁";
+
+      }
+
+    });
+
+
+    /* ======================================================
+       MESSAGE
+       ====================================================== */
+
+    function showMessage(text, type = "error") {
+
+      message.textContent = text;
+
+      message.className =
+        "message show " + type;
+
+    }
+
+
+    function hideMessage() {
+
+      message.textContent = "";
+
+      message.className =
+        "message";
+
+    }
+
+
+    /* ======================================================
+       FIREBASE ERROR MESSAGE
+       ====================================================== */
+
+    function firebaseErrorMessage(errorCode) {
+
+      const messages = {
+
+        "auth/invalid-email":
+          "Email address সঠিক নয়।",
+
+        "auth/user-not-found":
+          "এই Email দিয়ে কোনো account পাওয়া যায়নি।",
+
+        "auth/wrong-password":
+          "Password সঠিক নয়।",
+
+        "auth/invalid-credential":
+          "Email অথবা Password সঠিক নয়।",
+
+        "auth/user-disabled":
+          "এই accountটি disabled করা হয়েছে।",
+
+        "auth/too-many-requests":
+          "অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।",
+
+        "auth/network-request-failed":
+          "Internet connection সমস্যা হয়েছে।",
+
+        "auth/operation-not-allowed":
+          "Firebase Authentication-এ Email/Password এখনো Enable করা হয়নি।"
+
       };
+
+      return messages[errorCode] ||
+        "Login করা যায়নি। আবার চেষ্টা করুন।";
+
     }
 
 
-    function setupLoginForm() {
+    /* ======================================================
+       SAVE STUDENT SESSION
+       ====================================================== */
 
-      const form = $("#loginForm");
-      const button = $("#loginButton");
+    function saveStudentSession(user) {
 
-      if (!form || !button) return;
+      /*
+       * Firebase User UID
+       */
 
-
-      form.addEventListener("submit", (event) => {
-
-        event.preventDefault();
-
-
-        const studentId =
-          $("#studentId").value.trim();
-
-        const password =
-          $("#password").value;
+      const firebaseUid =
+        user.uid || "";
 
 
-        setMessage("");
+      /*
+       * Demo/local student information.
+       *
+       * Later Firestore থেকে actual student profile
+       * এখানে automatically নেওয়া হবে.
+       */
+
+      const studentId =
+        localStorage.getItem(STUDENT_ID_KEY) ||
+        DEFAULT_STUDENT.id;
+
+      const studentName =
+        localStorage.getItem(STUDENT_NAME_KEY) ||
+        user.displayName ||
+        DEFAULT_STUDENT.name;
+
+      const studentCourse =
+        localStorage.getItem(STUDENT_COURSE_KEY) ||
+        DEFAULT_STUDENT.course;
+
+      const studentBatch =
+        localStorage.getItem(STUDENT_BATCH_KEY) ||
+        DEFAULT_STUDENT.batch;
 
 
-        if (!studentId) {
+      /*
+       * Session Storage
+       */
 
-          setMessage(
-            "Please enter your Student ID.",
-            "error"
+      sessionStorage.setItem(
+        LOGIN_KEY,
+        "true"
+      );
+
+      sessionStorage.setItem(
+        STUDENT_ID_KEY,
+        studentId
+      );
+
+      sessionStorage.setItem(
+        STUDENT_NAME_KEY,
+        studentName
+      );
+
+      sessionStorage.setItem(
+        STUDENT_COURSE_KEY,
+        studentCourse
+      );
+
+      sessionStorage.setItem(
+        STUDENT_BATCH_KEY,
+        studentBatch
+      );
+
+      sessionStorage.setItem(
+        "snkFirebaseUid",
+        firebaseUid
+      );
+
+
+      /*
+       * Local Storage
+       */
+
+      localStorage.setItem(
+        STUDENT_ID_KEY,
+        studentId
+      );
+
+      localStorage.setItem(
+        STUDENT_NAME_KEY,
+        studentName
+      );
+
+      localStorage.setItem(
+        STUDENT_COURSE_KEY,
+        studentCourse
+      );
+
+      localStorage.setItem(
+        STUDENT_BATCH_KEY,
+        studentBatch
+      );
+
+    }
+
+
+    /* ======================================================
+       LOGIN
+       ====================================================== */
+
+    loginForm.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      hideMessage();
+
+      const email =
+        emailInput.value.trim();
+
+      const password =
+        passwordInput.value;
+
+
+      if (!email) {
+
+        showMessage(
+          "Email দিন।"
+        );
+
+        emailInput.focus();
+
+        return;
+      }
+
+
+      if (!password) {
+
+        showMessage(
+          "Password দিন।"
+        );
+
+        passwordInput.focus();
+
+        return;
+      }
+
+
+      loginBtn.disabled = true;
+
+      loginBtn.innerHTML = `
+        <span class="loading">
+          <span class="spinner"></span>
+          Login হচ্ছে...
+        </span>
+      `;
+
+
+      try {
+
+        const result =
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
           );
 
-          $("#studentId").focus();
 
-          return;
+        const user =
+          result.user;
+
+
+        /*
+         * Remember Me
+         */
+
+        if (rememberMe.checked) {
+
+          localStorage.setItem(
+            REMEMBER_KEY,
+            "true"
+          );
+
+          localStorage.setItem(
+            "snkLoginEmail",
+            email
+          );
+
+        } else {
+
+          localStorage.removeItem(
+            REMEMBER_KEY
+          );
+
+          localStorage.removeItem(
+            "snkLoginEmail"
+          );
+
         }
 
 
-        if (!password) {
+        /*
+         * Save Student Session
+         */
 
-          setMessage(
-            "Please enter your password.",
-            "error"
-          );
-
-          $("#password").focus();
-
-          return;
-        }
+        saveStudentSession(user);
 
 
-        button.disabled = true;
-        button.classList.add("loading");
-        button.textContent = "Checking Login...";
+        showMessage(
+          currentLanguage === "en"
+            ? "Login successful. Opening dashboard..."
+            : "Login সফল হয়েছে। Dashboard খুলছে...",
+          "success"
+        );
 
 
         setTimeout(() => {
 
-          const result =
-            validateStudent(studentId, password);
+          window.location.href =
+            "student-dashboard.html";
+
+        }, 700);
 
 
-          if (!result.valid) {
+      } catch (error) {
 
-            setMessage(
-              "Student ID অথবা Password সঠিক নয়।",
-              "error"
-            );
+        console.error(
+          "Firebase Login Error:",
+          error
+        );
 
-            showToast("Login failed.");
+        showMessage(
+          firebaseErrorMessage(
+            error.code
+          )
+        );
 
-            button.disabled = false;
-            button.classList.remove("loading");
-            button.textContent =
-              "Login to Student Portal";
+        loginBtn.disabled = false;
 
-            return;
-          }
+        loginBtn.textContent =
+          "Login";
 
+      }
 
-          const student =
-            result.student;
-
-
-          saveStudentSession(student);
+    });
 
 
-          const remember =
-            $("#rememberMe").checked;
+    /* ======================================================
+       PASSWORD RESET
+       ====================================================== */
 
-          localStorage.setItem(
-            STORAGE.rememberMe,
-            remember ? "true" : "false"
+    forgotPassword.addEventListener(
+      "click",
+      async (event) => {
+
+        event.preventDefault();
+
+        hideMessage();
+
+        const email =
+          emailInput.value.trim();
+
+
+        if (!email) {
+
+          showMessage(
+            currentLanguage === "en"
+              ? "First enter your Email."
+              : "আগে আপনার Email লিখুন।"
+          );
+
+          emailInput.focus();
+
+          return;
+        }
+
+
+        try {
+
+          await sendPasswordResetEmail(
+            auth,
+            email
           );
 
 
-          setMessage(
-            "Login successful. Dashboard-এ নেওয়া হচ্ছে...",
+          showMessage(
+            currentLanguage === "en"
+              ? "Password reset email has been sent."
+              : "Password reset email পাঠানো হয়েছে।",
             "success"
           );
 
-          showToast("Login successful");
 
+        } catch (error) {
 
-          setTimeout(() => {
+          console.error(
+            "Password Reset Error:",
+            error
+          );
 
-            window.location.href =
-              "student-dashboard.html";
+          showMessage(
+            firebaseErrorMessage(
+              error.code
+            )
+          );
 
-          }, 700);
-
-
-        }, 450);
-
-      });
-    }
-
-
-    function applyTheme() {
-
-      const theme =
-        localStorage.getItem(STORAGE.theme) || "dark";
-
-      document.documentElement.dataset.theme =
-        theme;
-
-      /*
-       * Login page is intentionally dark/premium.
-       * This keeps compatibility with the portal theme key.
-       */
-    }
-
-
-    function setupKeyboard() {
-
-      document.addEventListener("keydown", (event) => {
-
-        if (event.key === "Escape") {
-          $("#password")?.blur();
         }
 
-      });
+      }
+    );
+
+
+    /* ======================================================
+       REMEMBERED EMAIL
+       ====================================================== */
+
+    const savedEmail =
+      localStorage.getItem(
+        "snkLoginEmail"
+      );
+
+    const savedRemember =
+      localStorage.getItem(
+        REMEMBER_KEY
+      );
+
+
+    if (
+      savedRemember === "true" &&
+      savedEmail
+    ) {
+
+      emailInput.value =
+        savedEmail;
+
+      rememberMe.checked =
+        true;
+
     }
 
 
-    document.addEventListener("DOMContentLoaded", () => {
+    /* ======================================================
+       FIREBASE AUTH STATE
+       ====================================================== */
 
-      applyTheme();
+    onAuthStateChanged(
+      auth,
+      (user) => {
 
-      loadRememberedStudent();
+        if (user) {
 
-      setupPasswordToggle();
+          /*
+           * Firebase already knows this user.
+           *
+           * Do not automatically redirect here,
+           * because user may intentionally be on login page.
+           */
 
-      setupForgotPassword();
+          console.log(
+            "Firebase user:",
+            user.uid
+          );
 
-      setupLoginForm();
+        }
 
-      setupKeyboard();
+      }
+    );
 
-    });
+
+    /* ======================================================
+       INITIALIZE
+       ====================================================== */
+
+    applyTheme();
+    applyLanguage();
+
   </script>
 
 </body>
