@@ -2,1999 +2,502 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SNK IT Institute | Student Portal</title>
-  <meta name="description" content="SNK IT Institute Student Portal - Course, Class, Assignment, Quiz, Result and Attendance">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <link rel="icon" href="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg">
+  <meta
+    name="description"
+    content="SNK IT Institute Student Portal — Offline Course Student Portal"
+  >
 
+  <meta
+    name="theme-color"
+    content="#080b16"
+  >
+
+  <title>SNK IT Institute — Student Portal</title>
+
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#f6f8fc;
-      --card:#ffffff;
-      --card-soft:#f8faff;
-      --text:#111827;
-      --muted:#64748b;
-      --primary:#635bff;
-      --primary2:#8b5cf6;
-      --cyan:#06b6d4;
-      --green:#10b981;
-      --orange:#f59e0b;
-      --red:#ef4444;
-      --border:#e5e7eb;
-      --shadow:0 20px 60px rgba(15,23,42,.10);
-      --shadow-sm:0 10px 30px rgba(15,23,42,.07);
-      --radius:24px;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:"Noto Sans Bengali","Inter",sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.6;
-      overflow-x:hidden;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    button,
-    a{
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    .container{
-      width:min(1180px,calc(100% - 32px));
-      margin:auto;
-    }
-
-    /* =========================
-       TOP BAR
-    ========================== */
-
-    .topbar{
-      background:#0f172a;
-      color:#fff;
-      min-height:38px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:8px 16px;
-      font-size:13px;
-      font-weight:600;
-      text-align:center;
-    }
-
-    .topbar span{
-      color:#c4b5fd;
-    }
-
-    /* =========================
-       NAVBAR
-    ========================== */
-
-    .navbar{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(255,255,255,.88);
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-      border-bottom:1px solid rgba(226,232,240,.8);
-    }
-
-    .nav-inner{
-      min-height:76px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:11px;
-      min-width:max-content;
-    }
-
-    .brand-logo{
-      width:46px;
-      height:46px;
-      border-radius:14px;
-      object-fit:contain;
-      background:#fff;
-      padding:5px;
-      box-shadow:0 8px 22px rgba(99,91,255,.18);
-    }
-
-    .brand-text{
-      display:flex;
-      flex-direction:column;
-      line-height:1.1;
-    }
-
-    .brand-name{
-      font-family:Inter,sans-serif;
-      font-size:18px;
-      font-weight:900;
-      letter-spacing:-.5px;
-    }
-
-    .brand-sub{
-      color:var(--muted);
-      font-family:Inter,sans-serif;
-      font-size:10px;
-      font-weight:700;
-      margin-top:4px;
-    }
-
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap:5px;
-    }
-
-    .nav-links a{
-      padding:10px 12px;
-      border-radius:12px;
-      color:#475569;
-      font-size:13px;
-      font-weight:700;
-      transition:.25s;
-    }
-
-    .nav-links a:hover{
-      color:var(--primary);
-      background:#f1f0ff;
-    }
-
-    .nav-actions{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .icon-btn{
-      width:40px;
-      height:40px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:#fff;
-      cursor:pointer;
-      font-size:16px;
-      display:grid;
-      place-items:center;
-      transition:.25s;
-    }
-
-    .icon-btn:hover{
-      transform:translateY(-2px);
-      border-color:#c4b5fd;
-      box-shadow:0 8px 20px rgba(99,91,255,.12);
-    }
-
-    .login-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      padding:11px 17px;
-      border-radius:13px;
-      background:#111827;
-      color:#fff;
-      font-family:Inter,sans-serif;
-      font-size:13px;
-      font-weight:800;
-      transition:.25s;
-    }
-
-    .login-btn:hover{
-      transform:translateY(-2px);
-      background:#000;
-      box-shadow:0 10px 25px rgba(15,23,42,.18);
-    }
-
-    .mobile-menu{
-      display:none;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .hero{
-      position:relative;
-      min-height:650px;
-      display:flex;
-      align-items:center;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 20% 20%,rgba(99,91,255,.35),transparent 28%),
-        radial-gradient(circle at 85% 30%,rgba(6,182,212,.22),transparent 25%),
-        linear-gradient(135deg,#050816 0%,#0b1026 50%,#090b18 100%);
-      color:#fff;
-      isolation:isolate;
-    }
-
-    /* Galaxy glow */
-
-    .galaxy-glow{
-      position:absolute;
-      width:650px;
-      height:650px;
-      border-radius:50%;
-      top:-250px;
-      right:-160px;
-      background:
-        radial-gradient(circle,
-        rgba(139,92,246,.48) 0%,
-        rgba(99,91,255,.22) 28%,
-        rgba(6,182,212,.10) 48%,
-        transparent 70%);
-      filter:blur(20px);
-      animation:galaxyPulse 8s ease-in-out infinite;
-      z-index:-3;
-    }
-
-    .galaxy-glow.two{
-      width:520px;
-      height:520px;
-      top:260px;
-      left:-250px;
-      animation-delay:2s;
-      opacity:.8;
-    }
-
-    @keyframes galaxyPulse{
-      0%,100%{
-        transform:scale(1) rotate(0deg);
-      }
-      50%{
-        transform:scale(1.12) rotate(8deg);
-      }
-    }
-
-    /* Stars */
-
-    .stars,
-    .stars::before,
-    .stars::after{
-      position:absolute;
-      inset:0;
-      content:"";
-      background-image:
-        radial-gradient(circle,rgba(255,255,255,.9) 1px,transparent 1.5px),
-        radial-gradient(circle,rgba(255,255,255,.65) 1px,transparent 1.5px),
-        radial-gradient(circle,rgba(139,92,246,.8) 1px,transparent 1.5px);
-      background-size:120px 120px,180px 180px,230px 230px;
-      background-position:0 0,40px 80px,90px 30px;
-      opacity:.45;
-      z-index:-4;
-    }
-
-    .stars::before{
-      animation:starsMove 28s linear infinite;
-      opacity:.3;
-    }
-
-    .stars::after{
-      animation:starsMoveReverse 38s linear infinite;
-      opacity:.22;
-    }
-
-    @keyframes starsMove{
-      from{transform:translate3d(0,0,0);}
-      to{transform:translate3d(-120px,100px,0);}
-    }
-
-    @keyframes starsMoveReverse{
-      from{transform:translate3d(0,0,0);}
-      to{transform:translate3d(130px,-90px,0);}
-    }
-
-    /* Orbit */
-
-    .orbit{
-      position:absolute;
-      width:500px;
-      height:500px;
-      border:1px solid rgba(139,92,246,.18);
-      border-radius:50%;
-      right:-100px;
-      top:80px;
-      transform:rotate(-25deg);
-      z-index:-2;
-      animation:orbitRotate 25s linear infinite;
-    }
-
-    .orbit::before{
-      content:"";
-      position:absolute;
-      width:13px;
-      height:13px;
-      border-radius:50%;
-      background:#fff;
-      box-shadow:
-        0 0 12px #fff,
-        0 0 30px #8b5cf6,
-        0 0 60px #8b5cf6;
-      left:70px;
-      top:10px;
-    }
-
-    .orbit.two{
-      width:680px;
-      height:330px;
-      right:-200px;
-      top:150px;
-      transform:rotate(25deg);
-      border-color:rgba(6,182,212,.15);
-      animation-duration:32s;
-    }
-
-    .orbit.two::before{
-      background:#67e8f9;
-      box-shadow:
-        0 0 12px #67e8f9,
-        0 0 35px #06b6d4,
-        0 0 70px #06b6d4;
-      left:50%;
-      top:-5px;
-    }
-
-    @keyframes orbitRotate{
-      from{transform:rotate(0deg);}
-      to{transform:rotate(360deg);}
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:5;
-      padding:88px 0 105px;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      align-items:center;
-      gap:60px;
-    }
-
-    .hero-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 13px;
-      border:1px solid rgba(255,255,255,.15);
-      background:rgba(255,255,255,.07);
-      backdrop-filter:blur(10px);
-      border-radius:999px;
-      color:#ddd6fe;
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:20px;
-    }
-
-    .live-dot{
-      width:8px;
-      height:8px;
-      background:#34d399;
-      border-radius:50%;
-      box-shadow:0 0 15px #34d399;
-      animation:blink 1.5s infinite;
-    }
-
-    @keyframes blink{
-      0%,100%{opacity:1;}
-      50%{opacity:.35;}
-    }
-
-    .hero h1{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:clamp(40px,6vw,76px);
-      line-height:1.02;
-      letter-spacing:-3px;
-      max-width:760px;
-      margin-bottom:22px;
-      font-weight:900;
-    }
-
-    .hero h1 .gradient{
-      background:linear-gradient(90deg,#fff,#c4b5fd,#67e8f9);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero-description{
-      color:#cbd5e1;
-      font-size:16px;
-      max-width:650px;
-      line-height:1.9;
-      margin-bottom:28px;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-    }
-
-    .primary-btn,
-    .secondary-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:9px;
-      min-height:48px;
-      padding:0 20px;
-      border-radius:14px;
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:13px;
-      font-weight:800;
-      cursor:pointer;
-      transition:.25s;
-    }
-
-    .primary-btn{
-      color:#fff;
-      background:linear-gradient(135deg,#635bff,#8b5cf6);
-      box-shadow:0 15px 35px rgba(99,91,255,.32);
-    }
-
-    .primary-btn:hover{
-      transform:translateY(-3px);
-      box-shadow:0 20px 45px rgba(99,91,255,.42);
-    }
-
-    .secondary-btn{
-      color:#fff;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.07);
-      backdrop-filter:blur(10px);
-    }
-
-    .secondary-btn:hover{
-      transform:translateY(-3px);
-      background:rgba(255,255,255,.12);
-    }
-
-    .hero-mini-info{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:30px;
-    }
-
-    .mini-info{
-      padding:10px 13px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.045);
-      border-radius:13px;
-      color:#cbd5e1;
-      font-size:11px;
-      font-weight:700;
-    }
-
-    /* Student visual */
-
-    .hero-visual{
-      position:relative;
-      min-height:430px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .student-card{
-      position:relative;
-      width:min(360px,100%);
-      padding:24px;
-      border:1px solid rgba(255,255,255,.13);
-      background:linear-gradient(
-        145deg,
-        rgba(255,255,255,.13),
-        rgba(255,255,255,.045)
-      );
-      backdrop-filter:blur(22px);
-      border-radius:30px;
-      box-shadow:
-        0 35px 100px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.12);
-      transform:rotate(2deg);
-      animation:floatCard 5s ease-in-out infinite;
-    }
-
-    @keyframes floatCard{
-      0%,100%{transform:translateY(0) rotate(2deg);}
-      50%{transform:translateY(-13px) rotate(-1deg);}
-    }
-
-    .student-card-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:24px;
-    }
-
-    .portal-label{
-      color:#c4b5fd;
-      font-family:Inter,sans-serif;
-      font-size:11px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:1px;
-    }
-
-    .online-badge{
-      font-size:10px;
-      color:#86efac;
-      background:rgba(16,185,129,.12);
-      border:1px solid rgba(16,185,129,.22);
-      border-radius:999px;
-      padding:5px 9px;
-      font-weight:800;
-    }
-
-    .student-avatar{
-      width:76px;
-      height:76px;
-      border-radius:23px;
-      display:grid;
-      place-items:center;
-      font-family:Inter,sans-serif;
-      font-size:28px;
-      font-weight:900;
-      color:#fff;
-      background:linear-gradient(135deg,#635bff,#06b6d4);
-      box-shadow:0 15px 40px rgba(99,91,255,.3);
-      margin-bottom:16px;
-    }
-
-    .student-card h3{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:25px;
-      margin-bottom:5px;
-    }
-
-    .student-card p{
-      color:#94a3b8;
-      font-size:12px;
-      margin-bottom:22px;
-    }
-
-    .progress-label{
-      display:flex;
-      justify-content:space-between;
-      color:#cbd5e1;
-      font-size:11px;
-      font-weight:700;
-      margin-bottom:8px;
-    }
-
-    .progress{
-      height:8px;
-      border-radius:99px;
-      background:rgba(255,255,255,.08);
-      overflow:hidden;
-    }
-
-    .progress span{
-      display:block;
-      width:8%;
-      height:100%;
-      border-radius:99px;
-      background:linear-gradient(90deg,#635bff,#67e8f9);
-    }
-
-    .student-details{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top:22px;
-    }
-
-    .student-detail{
-      padding:12px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:14px;
-    }
-
-    .student-detail small{
-      display:block;
-      color:#64748b;
-      font-size:9px;
-      margin-bottom:3px;
-    }
-
-    .student-detail strong{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      color:#e2e8f0;
-      font-size:12px;
-    }
-
-    .floating-card{
-      position:absolute;
-      padding:12px 14px;
-      border:1px solid rgba(255,255,255,.13);
-      background:rgba(15,23,42,.72);
-      backdrop-filter:blur(16px);
-      border-radius:16px;
-      box-shadow:0 20px 50px rgba(0,0,0,.25);
-      animation:floatSmall 4s ease-in-out infinite;
-    }
-
-    .floating-card.one{
-      left:0;
-      top:40px;
-    }
-
-    .floating-card.two{
-      right:-10px;
-      bottom:40px;
-      animation-delay:1s;
-    }
-
-    .float-icon{
-      width:34px;
-      height:34px;
-      display:grid;
-      place-items:center;
-      border-radius:11px;
-      background:rgba(99,91,255,.18);
-      margin-bottom:7px;
-    }
-
-    .floating-card strong{
-      display:block;
-      font-family:Inter,sans-serif;
-      color:#fff;
-      font-size:12px;
-    }
-
-    .floating-card small{
-      color:#94a3b8;
-      font-size:9px;
-    }
-
-    @keyframes floatSmall{
-      0%,100%{transform:translateY(0);}
-      50%{transform:translateY(-8px);}
-    }
-
-    /* =========================
-       START NOTICE
-    ========================== */
-
-    .notice-wrap{
-      position:relative;
-      margin-top:-34px;
-      z-index:10;
-    }
-
-    .notice{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding:18px 22px;
-      border-radius:20px;
-      background:#fff;
-      box-shadow:var(--shadow);
-      border:1px solid #e9e7ff;
-    }
-
-    .notice-left{
-      display:flex;
-      align-items:center;
-      gap:13px;
-    }
-
-    .notice-icon{
-      width:44px;
-      height:44px;
-      flex:0 0 44px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      background:#f0efff;
-      color:var(--primary);
-      font-size:19px;
-    }
-
-    .notice h3{
-      font-size:14px;
-      margin-bottom:2px;
-    }
-
-    .notice p{
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .notice-date{
-      color:var(--primary);
-      font-family:Inter,sans-serif;
-      font-size:12px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    /* =========================
-       SECTION
-    ========================== */
-
-    .section{
-      padding:85px 0;
-    }
-
-    .section-head{
-      text-align:center;
-      max-width:680px;
-      margin:0 auto 40px;
-    }
-
-    .section-kicker{
-      display:inline-block;
-      color:var(--primary);
-      background:#efeeff;
-      border-radius:999px;
-      padding:6px 11px;
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:10px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.8px;
-      margin-bottom:12px;
-    }
-
-    .section-head h2{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:clamp(27px,4vw,42px);
-      line-height:1.15;
-      letter-spacing:-1.5px;
-      margin-bottom:12px;
-    }
-
-    .section-head p{
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    /* =========================
-       ACCESS CARDS
-    ========================== */
-
-    .access-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-    }
-
-    .access-card{
-      position:relative;
-      overflow:hidden;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:23px;
-      min-height:205px;
-      box-shadow:var(--shadow-sm);
-      transition:.3s;
-    }
-
-    .access-card:hover{
-      transform:translateY(-7px);
-      border-color:#d8d4fe;
-      box-shadow:0 22px 50px rgba(15,23,42,.12);
-    }
-
-    .access-card::after{
-      content:"";
-      position:absolute;
-      width:120px;
-      height:120px;
-      border-radius:50%;
-      right:-55px;
-      bottom:-55px;
-      background:rgba(99,91,255,.07);
-    }
-
-    .access-icon{
-      width:48px;
-      height:48px;
-      display:grid;
-      place-items:center;
-      border-radius:15px;
-      background:#f0efff;
-      color:var(--primary);
-      font-size:20px;
-      margin-bottom:18px;
-    }
-
-    .access-card:nth-child(2) .access-icon{
-      background:#ecfeff;
-      color:#0891b2;
-    }
-
-    .access-card:nth-child(3) .access-icon{
-      background:#ecfdf5;
-      color:#059669;
-    }
-
-    .access-card:nth-child(4) .access-icon{
-      background:#fff7ed;
-      color:#ea580c;
-    }
-
-    .access-card h3{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:17px;
-      margin-bottom:6px;
-    }
-
-    .access-card p{
-      color:var(--muted);
-      font-size:11px;
-      line-height:1.7;
-    }
-
-    .access-arrow{
-      position:absolute;
-      right:20px;
-      top:23px;
-      color:#94a3b8;
-      font-family:Inter,sans-serif;
-      font-size:16px;
-      transition:.25s;
-    }
-
-    .access-card:hover .access-arrow{
-      color:var(--primary);
-      transform:translateX(4px);
-    }
-
-    /* =========================
-       COURSE SECTION
-    ========================== */
-
-    .course-layout{
-      display:grid;
-      grid-template-columns:1.3fr .7fr;
-      gap:20px;
-    }
-
-    .course-main,
-    .course-side{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:25px;
-      box-shadow:var(--shadow-sm);
-    }
-
-    .course-main{
-      padding:28px;
-    }
-
-    .course-title-row{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:15px;
-      margin-bottom:28px;
-    }
-
-    .course-title-row h3{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:25px;
-      margin-bottom:5px;
-    }
-
-    .course-title-row p{
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .active-badge{
-      padding:7px 11px;
-      background:#ecfdf5;
-      color:#047857;
-      border:1px solid #bbf7d0;
-      border-radius:999px;
-      font-size:10px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    .course-stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-      margin-bottom:25px;
-    }
-
-    .course-stat{
-      padding:15px;
-      border-radius:16px;
-      background:#f8fafc;
-      border:1px solid #edf0f4;
-    }
-
-    .course-stat small{
-      display:block;
-      color:#94a3b8;
-      font-size:9px;
-      margin-bottom:4px;
-    }
-
-    .course-stat strong{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:13px;
-    }
-
-    .module-list{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:9px;
-    }
-
-    .module{
-      display:flex;
-      align-items:center;
-      gap:9px;
-      padding:11px 12px;
-      border:1px solid #edf0f4;
-      border-radius:13px;
-      color:#475569;
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .module-check{
-      width:24px;
-      height:24px;
-      display:grid;
-      place-items:center;
-      border-radius:8px;
-      background:#f1f5f9;
-      color:#94a3b8;
-      font-size:10px;
-    }
-
-    .course-side{
-      padding:25px;
-      background:
-        radial-gradient(circle at top right,rgba(99,91,255,.14),transparent 35%),
-        #111827;
-      color:#fff;
-    }
-
-    .course-side-label{
-      color:#a5b4fc;
-      font-size:10px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      margin-bottom:9px;
-    }
-
-    .course-side h3{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:23px;
-      line-height:1.3;
-      margin-bottom:12px;
-    }
-
-    .course-side p{
-      color:#94a3b8;
-      font-size:11px;
-      line-height:1.8;
-    }
-
-    .start-date{
-      margin-top:22px;
-      padding:15px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:15px;
-    }
-
-    .start-date small{
-      display:block;
-      color:#64748b;
-      font-size:9px;
-      margin-bottom:4px;
-    }
-
-    .start-date strong{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:18px;
-    }
-
-    /* =========================
-       FEATURES
-    ========================== */
-
-    .feature-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-
-    .feature{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:21px;
-      padding:23px;
-      box-shadow:var(--shadow-sm);
-      transition:.25s;
-    }
-
-    .feature:hover{
-      transform:translateY(-5px);
-    }
-
-    .feature-icon{
-      width:44px;
-      height:44px;
-      display:grid;
-      place-items:center;
-      border-radius:13px;
-      background:#f1f0ff;
-      color:var(--primary);
-      font-size:18px;
-      margin-bottom:15px;
-    }
-
-    .feature h3{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:15px;
-      margin-bottom:6px;
-    }
-
-    .feature p{
-      color:var(--muted);
-      font-size:11px;
-      line-height:1.8;
-    }
-
-    /* =========================
-       CTA
-    ========================== */
-
-    .cta{
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 85% 20%,rgba(103,232,249,.18),transparent 25%),
-        radial-gradient(circle at 10% 90%,rgba(139,92,246,.25),transparent 30%),
-        #0f172a;
-      border-radius:30px;
-      padding:50px;
-      color:#fff;
-    }
-
-    .cta::before{
-      content:"";
-      position:absolute;
-      width:350px;
-      height:350px;
-      border:1px solid rgba(139,92,246,.18);
-      border-radius:50%;
-      right:-140px;
-      top:-180px;
-    }
-
-    .cta-content{
-      position:relative;
-      z-index:2;
-      max-width:700px;
-    }
-
-    .cta h2{
-      font-family:Inter,"Noto Sans Bengali",sans-serif;
-      font-size:clamp(25px,4vw,38px);
-      line-height:1.25;
-      margin-bottom:12px;
-    }
-
-    .cta p{
-      color:#94a3b8;
-      font-size:13px;
-      line-height:1.8;
-      margin-bottom:22px;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    footer{
-      background:#020617;
-      color:#fff;
-      margin-top:30px;
-    }
-
-    .footer-inner{
-      padding:45px 0 25px;
-      display:grid;
-      grid-template-columns:1.4fr 1fr 1fr;
-      gap:40px;
-    }
-
-    .footer-brand{
-      display:flex;
-      gap:11px;
-      align-items:center;
-      margin-bottom:14px;
-    }
-
-    .footer-brand img{
-      width:42px;
-      height:42px;
-      background:#fff;
-      border-radius:12px;
-      padding:4px;
-    }
-
-    .footer-brand strong{
-      font-family:Inter,sans-serif;
-      font-size:16px;
-    }
-
-    .footer-about{
-      color:#64748b;
-      font-size:11px;
-      line-height:1.9;
-      max-width:420px;
-    }
-
-    .footer-col h4{
-      font-size:12px;
-      margin-bottom:13px;
-      color:#e2e8f0;
-    }
-
-    .footer-col a{
-      display:block;
-      color:#64748b;
-      font-size:11px;
-      padding:4px 0;
-      transition:.2s;
-    }
-
-    .footer-col a:hover{
-      color:#a5b4fc;
-    }
-
-    .copyright{
-      border-top:1px solid rgba(255,255,255,.07);
-      padding:17px 0;
-      color:#475569;
-      text-align:center;
-      font-size:10px;
-    }
-
-    /* =========================
-       DARK MODE
-    ========================== */
-
-    body.dark{
-      --bg:#070b14;
-      --card:#0f172a;
-      --card-soft:#111827;
-      --text:#f8fafc;
-      --muted:#94a3b8;
-      --border:#1e293b;
-      --shadow:0 20px 60px rgba(0,0,0,.35);
-      --shadow-sm:0 10px 30px rgba(0,0,0,.25);
-    }
-
-    body.dark .navbar{
-      background:rgba(7,11,20,.88);
-      border-color:#1e293b;
-    }
-
-    body.dark .brand-sub,
-    body.dark .nav-links a{
-      color:#94a3b8;
-    }
-
-    body.dark .icon-btn{
-      background:#0f172a;
-      color:#fff;
-      border-color:#1e293b;
-    }
-
-    body.dark .notice,
-    body.dark .access-card,
-    body.dark .course-main,
-    body.dark .feature{
-      background:#0f172a;
-      border-color:#1e293b;
-    }
-
-    body.dark .notice-icon{
-      background:#1e1b4b;
-    }
-
-    body.dark .access-card::after{
-      background:rgba(139,92,246,.09);
-    }
-
-    body.dark .course-stat,
-    body.dark .module{
-      background:#111827;
-      border-color:#1e293b;
-    }
-
-    body.dark .course-stat strong,
-    body.dark .module{
-      color:#e2e8f0;
-    }
-
-    body.dark .module-check{
-      background:#1e293b;
-    }
-
-    body.dark .section-kicker{
-      background:#1e1b4b;
-    }
-
-    /* =========================
-       TOAST
-    ========================== */
-
-    .toast{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:2000;
-      max-width:340px;
-      padding:13px 16px;
-      background:#111827;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:14px;
-      box-shadow:0 20px 50px rgba(0,0,0,.25);
-      font-size:11px;
-      font-weight:700;
-      transform:translateY(120px);
-      opacity:0;
-      pointer-events:none;
-      transition:.3s;
-    }
-
-    .toast.show{
-      transform:translateY(0);
-      opacity:1;
-    }
-
-    /* =========================
-       MOBILE
-    ========================== */
-
-    @media(max-width:1000px){
-      .nav-links{
-        display:none;
-      }
-
-      .mobile-menu{
-        display:grid;
-      }
-
-      .hero-content{
-        grid-template-columns:1fr;
-        gap:30px;
-      }
-
-      .hero-visual{
-        min-height:390px;
-      }
-
-      .access-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .course-layout{
-        grid-template-columns:1fr;
-      }
-
-      .feature-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:700px){
-      .container{
-        width:min(100% - 22px,1180px);
-      }
-
-      .topbar{
-        font-size:10px;
-      }
-
-      .brand-sub{
-        display:none;
-      }
-
-      .brand-name{
-        font-size:15px;
-      }
-
-      .brand-logo{
-        width:40px;
-        height:40px;
-      }
-
-      .login-btn{
-        padding:9px 11px;
-        font-size:11px;
-      }
-
-      .icon-btn{
-        width:36px;
-        height:36px;
-      }
-
-      .hero{
-        min-height:auto;
-      }
-
-      .hero-content{
-        padding:65px 0 80px;
-      }
-
-      .hero h1{
-        font-size:42px;
-        letter-spacing:-2px;
-      }
-
-      .hero-description{
-        font-size:13px;
-      }
-
-      .hero-mini-info{
-        gap:7px;
-      }
-
-      .mini-info{
-        font-size:9px;
-      }
-
-      .hero-visual{
-        min-height:390px;
-      }
-
-      .student-card{
-        width:min(330px,92%);
-      }
-
-      .floating-card.one{
-        left:-2px;
-        top:25px;
-      }
-
-      .floating-card.two{
-        right:-2px;
-        bottom:25px;
-      }
-
-      .notice{
-        align-items:flex-start;
-        padding:15px;
-      }
-
-      .notice-date{
-        font-size:10px;
-      }
-
-      .section{
-        padding:60px 0;
-      }
-
-      .access-grid,
-      .feature-grid{
-        grid-template-columns:1fr;
-      }
-
-      .course-stats{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .module-list{
-        grid-template-columns:1fr;
-      }
-
-      .course-main{
-        padding:20px;
-      }
-
-      .course-title-row{
-        flex-direction:column;
-      }
-
-      .cta{
-        padding:30px 22px;
-        border-radius:22px;
-      }
-
-      .footer-inner{
-        grid-template-columns:1fr 1fr;
-        gap:25px;
-      }
-
-      .footer-inner > :first-child{
-        grid-column:1/-1;
-      }
-    }
-
-    @media(max-width:430px){
-      .nav-actions{
-        gap:4px;
-      }
-
-      .login-btn{
-        display:none;
-      }
-
-      .hero h1{
-        font-size:36px;
-      }
-
-      .hero-actions{
-        flex-direction:column;
-      }
-
-      .primary-btn,
-      .secondary-btn{
-        width:100%;
-      }
-
-      .hero-visual{
-        min-height:360px;
-      }
-
-      .student-card{
-        padding:19px;
-      }
-
-      .floating-card{
-        transform:scale(.9);
-      }
-
-      .floating-card.one{
-        left:-15px;
-      }
-
-      .floating-card.two{
-        right:-15px;
-      }
-
-      .footer-inner{
-        grid-template-columns:1fr;
-      }
-
-      .footer-inner > :first-child{
-        grid-column:auto;
-      }
-    }
-
-    /* =========================
-       REDUCED MOTION
-    ========================== */
-
-    @media(prefers-reduced-motion:reduce){
-      *,
-      *::before,
-      *::after{
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        scroll-behavior:auto !important;
-      }
-    }
-  </style>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="dark-theme">
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    🎓 <span>&nbsp;SNK IT Institute Student Portal&nbsp;</span> • Free Course • Batch 01
-  </div>
+  <!-- =====================================================
+       HEADER / NAVIGATION
+       ===================================================== -->
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="container nav-inner">
+  <header class="site-header">
 
-      <a href="index.html" class="brand">
-        <img
-          class="brand-logo"
-          src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-          alt="SNK IT Institute Logo"
-        >
+    <div class="container nav-container">
+
+      <!-- Logo -->
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="SNK IT Institute Home"
+      >
+
+        <div class="brand-logo">
+          <span>SNK</span>
+        </div>
 
         <div class="brand-text">
-          <div class="brand-name">SNK IT Institute</div>
-          <div class="brand-sub">STUDENT PORTAL</div>
+          <strong>SNK IT Institute</strong>
+          <small>Student Portal</small>
         </div>
+
       </a>
 
-      <nav class="nav-links">
-        <a href="#home">হোম</a>
-        <a href="student-dashboard.html">Dashboard</a>
-        <a href="courses.html">Course</a>
-        <a href="assignments.html">Assignment</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="results.html">Result</a>
-        <a href="student-attendance.html">Attendance</a>
-      </nav>
 
-      <div class="nav-actions">
+      <!-- Mobile Menu -->
+      <button
+        type="button"
+        id="mobileMenuBtn"
+        class="mobile-menu-btn"
+        aria-label="Open Menu"
+        aria-expanded="false"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
 
-        <button
-          class="icon-btn"
-          id="languageBtn"
-          type="button"
-          title="Language"
-          aria-label="Language"
+
+      <!-- Navigation -->
+      <nav
+        id="mainNav"
+        class="main-nav"
+        aria-label="Main Navigation"
+      >
+
+        <a
+          href="index.html"
+          class="nav-link active"
+          aria-current="page"
         >
-          EN
-        </button>
+          Home
+        </a>
 
-        <button
-          class="icon-btn"
-          id="themeBtn"
-          type="button"
-          title="Theme"
-          aria-label="Theme"
+        <a
+          href="student-dashboard.html"
+          class="nav-link"
         >
-          🌙
-        </button>
+          My Dashboard
+        </a>
 
-        <a class="login-btn" href="login.html">
-          🔐 Login
+        <a
+          href="courses.html"
+          class="nav-link"
+        >
+          My Course
+        </a>
+
+        <a
+          href="assignments.html"
+          class="nav-link"
+        >
+          Assignment
+        </a>
+
+        <a
+          href="quiz.html"
+          class="nav-link"
+        >
+          Quiz
+        </a>
+
+        <a
+          href="results.html"
+          class="nav-link"
+        >
+          Result
+        </a>
+
+        <a
+          href="student-resources.html"
+          class="nav-link"
+        >
+          Resources
         </a>
 
         <button
-          class="icon-btn mobile-menu"
-          id="menuBtn"
           type="button"
-          aria-label="Menu"
+          id="languageToggle"
+          class="nav-language language-toggle"
+          data-language-toggle
+          title="Switch to English"
         >
-          ☰
+          English
         </button>
 
-      </div>
+        <button
+          type="button"
+          id="themeToggle"
+          class="nav-theme theme-toggle"
+          data-theme-toggle
+          aria-label="Switch to light mode"
+          title="Light Mode"
+        >
+          <i class="fas fa-sun"></i>
+        </button>
+
+        <a
+          href="login.html"
+          class="nav-login"
+        >
+          <i class="fas fa-right-to-bracket"></i>
+          Login
+        </a>
+
+      </nav>
+
     </div>
+
   </header>
 
-  <!-- HERO -->
-  <main id="home">
 
-    <section class="hero">
+  <!-- =====================================================
+       HERO SECTION
+       ===================================================== -->
 
-      <div class="stars"></div>
+  <main>
 
-      <div class="galaxy-glow"></div>
-      <div class="galaxy-glow two"></div>
+    <section
+      class="hero hero-section"
+      id="hero"
+    >
 
-      <div class="orbit"></div>
-      <div class="orbit two"></div>
+      <!-- Galaxy Background -->
+      <div class="galaxy-bg" aria-hidden="true">
 
-      <div class="container hero-content">
+        <span class="star star-1"></span>
+        <span class="star star-2"></span>
+        <span class="star star-3"></span>
+        <span class="star star-4"></span>
+        <span class="star star-5"></span>
+        <span class="star star-6"></span>
+        <span class="star star-7"></span>
+        <span class="star star-8"></span>
+        <span class="star star-9"></span>
+        <span class="star star-10"></span>
+        <span class="star star-11"></span>
+        <span class="star star-12"></span>
+        <span class="star star-13"></span>
+        <span class="star star-14"></span>
+        <span class="star star-15"></span>
+        <span class="star star-16"></span>
+        <span class="star star-17"></span>
+        <span class="star star-18"></span>
+        <span class="star star-19"></span>
+        <span class="star star-20"></span>
 
-        <!-- HERO TEXT -->
-        <div>
+        <div class="hero-glow glow glow-1"></div>
+        <div class="hero-glow glow glow-2"></div>
+        <div class="hero-glow glow glow-3"></div>
+
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+
+      </div>
+
+
+      <div class="container hero-container">
+
+        <!-- Hero Content -->
+        <div class="hero-content">
 
           <div class="hero-badge">
-            <span class="live-dot"></span>
-            Student Learning Portal • Batch 01
+            <span class="badge-dot"></span>
+            Student Portal
           </div>
 
           <h1>
-            Learn.
-            <span class="gradient">Practice.</span>
-            Grow.
+            Learn Today.
+            <br>
+            <span>Build Your Future.</span>
           </h1>
 
           <p class="hero-description">
-            আপনার Computer Office Application কোর্সের
-            Class, Assignment, Quiz, Result, Attendance এবং
-            Learning Resources — সবকিছু এক জায়গায়।
+            SNK IT Institute-এর Offline Course Student Portal-এ
+            আপনার Course, Assignment, Quiz, Result, Attendance
+            এবং Learning Resources এক জায়গা থেকে পরিচালনা করুন।
           </p>
 
-          <div class="hero-actions">
 
-            <a
-              href="student-dashboard.html"
-              class="primary-btn"
-            >
-              🚀 Student Dashboard
-            </a>
+          <!-- Class Start Notice -->
+          <div class="class-start-notice">
 
-            <a
-              href="login.html"
-              class="secondary-btn"
-            >
-              🔐 Student Login
-            </a>
-
-          </div>
-
-          <div class="hero-mini-info">
-
-            <div class="mini-info">
-              🎓 Free Course
+            <div class="notice-icon">
+              <i class="fas fa-calendar-check"></i>
             </div>
 
-            <div class="mini-info">
-              💻 Computer Office Application
-            </div>
+            <div class="notice-content">
 
-            <div class="mini-info">
-              📅 08 September 2026
-            </div>
-
-            <div class="mini-info">
-              🕓 4:00 PM – 6:00 PM
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- HERO STUDENT CARD -->
-        <div class="hero-visual">
-
-          <div class="floating-card one">
-            <div class="float-icon">📚</div>
-            <strong>Learning</strong>
-            <small>Keep learning every day</small>
-          </div>
-
-          <div class="student-card">
-
-            <div class="student-card-top">
-              <span class="portal-label">Student Profile</span>
-              <span class="online-badge">● ACTIVE</span>
-            </div>
-
-            <div class="student-avatar">
-              S
-            </div>
-
-            <h3>SNK Student</h3>
-            <p>Computer Office Application • Batch 01</p>
-
-            <div class="progress-label">
-              <span>Course Progress</span>
-              <span>0%</span>
-            </div>
-
-            <div class="progress">
-              <span></span>
-            </div>
-
-            <div class="student-details">
-
-              <div class="student-detail">
-                <small>Student ID</small>
-                <strong>SNK-1001</strong>
-              </div>
-
-              <div class="student-detail">
-                <small>Mode</small>
-                <strong>Offline</strong>
-              </div>
-
-              <div class="student-detail">
-                <small>Duration</small>
-                <strong>6 Months</strong>
-              </div>
-
-              <div class="student-detail">
-                <small>Class</small>
-                <strong>Sat–Mon</strong>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="floating-card two">
-            <div class="float-icon">🏆</div>
-            <strong>Student Journey</strong>
-            <small>Class → Quiz → Result</small>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- START NOTICE -->
-    <div class="container notice-wrap">
-
-      <div class="notice">
-
-        <div class="notice-left">
-
-          <div class="notice-icon">
-            📅
-          </div>
-
-          <div>
-            <h3>Class Starts Tomorrow</h3>
-            <p>
-              আপনার Batch 01 Computer Office Application course শুরু হচ্ছে।
-            </p>
-          </div>
-
-        </div>
-
-        <div class="notice-date">
-          08 September 2026
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- QUICK ACCESS -->
-    <section class="section">
-
-      <div class="container">
-
-        <div class="section-head">
-
-          <span class="section-kicker">
-            Quick Access
-          </span>
-
-          <h2>
-            আপনার Learning Journey এক জায়গায়
-          </h2>
-
-          <p>
-            প্রয়োজনীয় Student Portal features দ্রুত access করুন।
-          </p>
-
-        </div>
-
-        <div class="access-grid">
-
-          <a href="courses.html" class="access-card">
-
-            <span class="access-arrow">→</span>
-
-            <div class="access-icon">
-              📚
-            </div>
-
-            <h3>My Course</h3>
-
-            <p>
-              আপনার course, modules, routine এবং course progress দেখুন।
-            </p>
-
-          </a>
-
-          <a href="assignments.html" class="access-card">
-
-            <span class="access-arrow">→</span>
-
-            <div class="access-icon">
-              📝
-            </div>
-
-            <h3>Assignment</h3>
-
-            <p>
-              Assignment দেখুন, deadline check করুন এবং submission দিন।
-            </p>
-
-          </a>
-
-          <a href="quiz.html" class="access-card">
-
-            <span class="access-arrow">→</span>
-
-            <div class="access-icon">
-              🧠
-            </div>
-
-            <h3>Quiz</h3>
-
-            <p>
-              Practice quiz দিন এবং আপনার score ও performance দেখুন।
-            </p>
-
-          </a>
-
-          <a href="results.html" class="access-card">
-
-            <span class="access-arrow">→</span>
-
-            <div class="access-icon">
-              🏆
-            </div>
-
-            <h3>Result</h3>
-
-            <p>
-              Quiz result, score, percentage এবং performance history দেখুন।
-            </p>
-
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- COURSE -->
-    <section class="section" style="padding-top:10px;">
-
-      <div class="container">
-
-        <div class="section-head">
-
-          <span class="section-kicker">
-            My Course
-          </span>
-
-          <h2>
-            Computer Office Application
-          </h2>
-
-          <p>
-            Batch 01 • Offline Course • 6 Months
-          </p>
-
-        </div>
-
-        <div class="course-layout">
-
-          <div class="course-main">
-
-            <div class="course-title-row">
-
-              <div>
-                <h3>Computer Office Application</h3>
-                <p>SNK IT Institute • Batch 01</p>
-              </div>
-
-              <span class="active-badge">
-                ● Course Active
+              <span class="notice-label">
+                Class Starts
               </span>
-
-            </div>
-
-            <div class="course-stats">
-
-              <div class="course-stat">
-                <small>Duration</small>
-                <strong>6 Months</strong>
-              </div>
-
-              <div class="course-stat">
-                <small>Class Days</small>
-                <strong>Sat–Mon</strong>
-              </div>
-
-              <div class="course-stat">
-                <small>Class Time</small>
-                <strong>4–6 PM</strong>
-              </div>
-
-              <div class="course-stat">
-                <small>Mode</small>
-                <strong>Offline</strong>
-              </div>
-
-            </div>
-
-            <div class="module-list">
-
-              <div class="module">
-                <span class="module-check">01</span>
-                Computer Basics
-              </div>
-
-              <div class="module">
-                <span class="module-check">02</span>
-                Windows & File Management
-              </div>
-
-              <div class="module">
-                <span class="module-check">03</span>
-                Microsoft Word
-              </div>
-
-              <div class="module">
-                <span class="module-check">04</span>
-                Microsoft Excel
-              </div>
-
-              <div class="module">
-                <span class="module-check">05</span>
-                Microsoft PowerPoint
-              </div>
-
-              <div class="module">
-                <span class="module-check">06</span>
-                Internet & Online Skills
-              </div>
-
-              <div class="module">
-                <span class="module-check">07</span>
-                Typing Practice
-              </div>
-
-              <div class="module">
-                <span class="module-check">08</span>
-                Practical Project
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="course-side">
-
-            <div class="course-side-label">
-              Course Start
-            </div>
-
-            <h3>
-              আপনার নতুন Learning Journey শুরু হচ্ছে।
-            </h3>
-
-            <p>
-              নিয়মিত ক্লাস, practical work, assignment এবং quiz-এর মাধ্যমে
-              ধাপে ধাপে Computer Office Application শেখানো হবে।
-            </p>
-
-            <div class="start-date">
-
-              <small>
-                START DATE
-              </small>
 
               <strong>
                 08 September 2026
               </strong>
 
+              <small>
+                Tuesday • 4:00 PM – 6:00 PM
+              </small>
+
             </div>
 
-            <div style="margin-top:15px;">
+            <div
+              class="countdown-box"
+              title="Class Start Countdown"
+            >
 
-              <a
-                href="student-timetable.html"
-                class="secondary-btn"
-                style="width:100%;"
+              <span class="countdown-label">
+                Starts In
+              </span>
+
+              <strong
+                id="classCountdown"
+                data-class-countdown
               >
-                📅 View Timetable
-              </a>
+                Loading...
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- Hero Buttons -->
+          <div class="hero-actions">
+
+            <a
+              href="student-dashboard.html"
+              class="btn btn-primary"
+            >
+              <i class="fas fa-gauge-high"></i>
+              Student Dashboard
+            </a>
+
+            <a
+              href="login.html"
+              class="btn btn-secondary"
+            >
+              <i class="fas fa-right-to-bracket"></i>
+              Login
+            </a>
+
+          </div>
+
+
+          <!-- Small Trust Info -->
+          <div class="hero-trust">
+
+            <div class="trust-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Free Course</span>
+            </div>
+
+            <div class="trust-item">
+              <i class="fas fa-school"></i>
+              <span>Offline Learning</span>
+            </div>
+
+            <div class="trust-item">
+              <i class="fas fa-user-graduate"></i>
+              <span>Student Focused</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STUDENT CARD
+             ================================================= -->
+
+        <div class="hero-visual">
+
+          <div class="student-card-wrapper">
+
+            <div class="student-card-glow"></div>
+
+            <div class="student-card">
+
+              <!-- Card Top -->
+              <div class="student-card-top">
+
+                <div class="student-mini-brand">
+
+                  <div class="mini-logo">
+                    SNK
+                  </div>
+
+                  <div>
+                    <strong>
+                      SNK IT Institute
+                    </strong>
+
+                    <small>
+                      Student Portal
+                    </small>
+                  </div>
+
+                </div>
+
+                <span class="active-badge">
+                  <span></span>
+                  Active
+                </span>
+
+              </div>
+
+
+              <!-- Student Avatar -->
+              <div class="student-avatar-area">
+
+                <div class="student-avatar">
+                  <i class="fas fa-user-graduate"></i>
+                </div>
+
+                <div class="student-name-area">
+
+                  <span>
+                    Welcome Back
+                  </span>
+
+                  <h2 data-student-name>
+                    Demo Student
+                  </h2>
+
+                  <p data-student-id>
+                    SNK-1001
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <!-- Student Details -->
+              <div class="student-details">
+
+                <div class="detail-item">
+
+                  <span>
+                    Course
+                  </span>
+
+                  <strong data-student-course>
+                    Computer Office Application
+                  </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                  <span>
+                    Batch
+                  </span>
+
+                  <strong data-student-batch>
+                    Batch 01
+                  </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                  <span>
+                    Mode
+                  </span>
+
+                  <strong>
+                    Offline
+                  </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                  <span>
+                    Duration
+                  </span>
+
+                  <strong data-course-duration>
+                    6 Months
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <!-- Progress -->
+              <div class="student-progress">
+
+                <div class="progress-heading">
+
+                  <span>
+                    Course Progress
+                  </span>
+
+                  <strong>
+                    0%
+                  </strong>
+
+                </div>
+
+                <div class="progress-track">
+                  <div
+                    class="progress-fill"
+                    style="width: 0%;"
+                  ></div>
+                </div>
+
+                <small>
+                  Course will begin on
+                  <span data-class-start>
+                    08 September 2026
+                  </span>
+                </small>
+
+              </div>
+
+
+              <!-- Card Footer -->
+              <div class="student-card-footer">
+
+                <span>
+                  <i class="fas fa-clock"></i>
+                  4:00 PM – 6:00 PM
+                </span>
+
+                <span>
+                  <i class="fas fa-calendar-days"></i>
+                  Sat – Mon
+                </span>
+
+              </div>
 
             </div>
 
@@ -2006,109 +509,504 @@
 
     </section>
 
-    <!-- STUDENT FEATURES -->
-    <section class="section" style="padding-top:10px;">
+
+    <!-- =====================================================
+         QUICK ACCESS
+         ===================================================== -->
+
+    <section class="quick-access section">
 
       <div class="container">
 
-        <div class="section-head">
+        <div class="section-heading">
 
-          <span class="section-kicker">
-            Student Features
-          </span>
+          <div>
+            <span class="eyebrow">
+              QUICK ACCESS
+            </span>
 
-          <h2>
-            শুধু Course নয় — পুরো Student Journey
-          </h2>
+            <h2>
+              Everything You Need
+            </h2>
+          </div>
 
           <p>
-            পড়াশোনার প্রয়োজনীয় কাজগুলো একটি organized portal-এর মাধ্যমে manage করুন।
+            আপনার Student Portal-এর গুরুত্বপূর্ণ
+            সব Section দ্রুত Access করুন।
           </p>
 
         </div>
 
-        <div class="feature-grid">
 
-          <div class="feature">
+        <div class="access-grid">
 
-            <div class="feature-icon">
-              📅
+          <!-- Dashboard -->
+          <a
+            href="student-dashboard.html"
+            class="access-card reveal"
+          >
+
+            <div class="access-icon">
+              <i class="fas fa-gauge-high"></i>
             </div>
 
-            <h3>Class & Timetable</h3>
+            <div class="access-content">
+
+              <h3>
+                My Dashboard
+              </h3>
+
+              <p>
+                আপনার Student Dashboard দেখুন।
+              </p>
+
+              <span class="access-link">
+                Open Dashboard
+                <i class="fas fa-arrow-right"></i>
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Course -->
+          <a
+            href="courses.html"
+            class="access-card reveal"
+          >
+
+            <div class="access-icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+
+            <div class="access-content">
+
+              <h3>
+                My Course
+              </h3>
+
+              <p>
+                Course details এবং modules দেখুন।
+              </p>
+
+              <span class="access-link">
+                View Course
+                <i class="fas fa-arrow-right"></i>
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Assignment -->
+          <a
+            href="assignments.html"
+            class="access-card reveal"
+          >
+
+            <div class="access-icon">
+              <i class="fas fa-file-pen"></i>
+            </div>
+
+            <div class="access-content">
+
+              <h3>
+                Assignment
+              </h3>
+
+              <p>
+                Assignment দেখুন এবং submission করুন।
+              </p>
+
+              <span class="access-link">
+                View Assignment
+                <i class="fas fa-arrow-right"></i>
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Quiz -->
+          <a
+            href="quiz.html"
+            class="access-card reveal"
+          >
+
+            <div class="access-icon">
+              <i class="fas fa-circle-question"></i>
+            </div>
+
+            <div class="access-content">
+
+              <h3>
+                Quiz
+              </h3>
+
+              <p>
+                Online Quiz দিয়ে নিজের knowledge যাচাই করুন।
+              </p>
+
+              <span class="access-link">
+                Start Quiz
+                <i class="fas fa-arrow-right"></i>
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Result -->
+          <a
+            href="results.html"
+            class="access-card reveal"
+          >
+
+            <div class="access-icon">
+              <i class="fas fa-chart-column"></i>
+            </div>
+
+            <div class="access-content">
+
+              <h3>
+                Result
+              </h3>
+
+              <p>
+                Quiz এবং Academic Result দেখুন।
+              </p>
+
+              <span class="access-link">
+                View Result
+                <i class="fas fa-arrow-right"></i>
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Attendance -->
+          <a
+            href="student-attendance.html"
+            class="access-card reveal"
+          >
+
+            <div class="access-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+
+            <div class="access-content">
+
+              <h3>
+                Attendance
+              </h3>
+
+              <p>
+                আপনার Class Attendance এবং History দেখুন।
+              </p>
+
+              <span class="access-link">
+                View Attendance
+                <i class="fas fa-arrow-right"></i>
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Resources -->
+          <a
+            href="student-resources.html"
+            class="access-card reveal"
+          >
+
+            <div class="access-icon">
+              <i class="fas fa-folder-open"></i>
+            </div>
+
+            <div class="access-content">
+
+              <h3>
+                Resources
+              </h3>
+
+              <p>
+                Notes, documents এবং learning resources।
+              </p>
+
+              <span class="access-link">
+                Open Resources
+                <i class="fas fa-arrow-right"></i>
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Support -->
+          <a
+            href="student-support.html"
+            class="access-card reveal"
+          >
+
+            <div class="access-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+
+            <div class="access-content">
+
+              <h3>
+                Student Support
+              </h3>
+
+              <p>
+                যেকোনো প্রয়োজন হলে Support নিন।
+              </p>
+
+              <span class="access-link">
+                Get Support
+                <i class="fas fa-arrow-right"></i>
+              </span>
+
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COURSE SECTION
+         ===================================================== -->
+
+    <section class="course-section section">
+
+      <div class="container">
+
+        <div class="course-panel">
+
+          <div class="course-panel-content">
+
+            <span class="eyebrow">
+              YOUR COURSE
+            </span>
+
+            <h2>
+              Computer Office Application
+            </h2>
 
             <p>
-              Weekly class routine এবং upcoming class সহজে দেখুন।
+              Practical computer skills শেখার জন্য
+              structured Offline Course।
+            </p>
+
+
+            <div class="course-meta">
+
+              <div class="course-meta-item">
+
+                <i class="fas fa-clock"></i>
+
+                <div>
+                  <span>Duration</span>
+                  <strong>6 Months</strong>
+                </div>
+
+              </div>
+
+
+              <div class="course-meta-item">
+
+                <i class="fas fa-calendar-days"></i>
+
+                <div>
+                  <span>Routine</span>
+                  <strong>Saturday – Monday</strong>
+                </div>
+
+              </div>
+
+
+              <div class="course-meta-item">
+
+                <i class="fas fa-clock-rotate-left"></i>
+
+                <div>
+                  <span>Class Time</span>
+                  <strong>4:00 PM – 6:00 PM</strong>
+                </div>
+
+              </div>
+
+
+              <div class="course-meta-item">
+
+                <i class="fas fa-location-dot"></i>
+
+                <div>
+                  <span>Mode</span>
+                  <strong>Offline</strong>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <a
+              href="courses.html"
+              class="btn btn-primary"
+            >
+              <i class="fas fa-book-open"></i>
+              Explore My Course
+            </a>
+
+          </div>
+
+
+          <div class="course-panel-visual">
+
+            <div class="course-circle circle-1"></div>
+            <div class="course-circle circle-2"></div>
+
+            <div class="course-icon-large">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+
+            <div class="floating-course-card card-a">
+              <i class="fas fa-file-word"></i>
+              MS Word
+            </div>
+
+            <div class="floating-course-card card-b">
+              <i class="fas fa-file-excel"></i>
+              MS Excel
+            </div>
+
+            <div class="floating-course-card card-c">
+              <i class="fas fa-file-powerpoint"></i>
+              PowerPoint
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STUDENT FEATURES
+         ===================================================== -->
+
+    <section class="features-section section">
+
+      <div class="container">
+
+        <div class="section-heading centered">
+
+          <span class="eyebrow">
+            STUDENT FEATURES
+          </span>
+
+          <h2>
+            Built Around Your Learning
+          </h2>
+
+          <p>
+            Student life সহজ করার জন্য Portal-এ
+            প্রয়োজনীয় গুরুত্বপূর্ণ features রাখা হয়েছে।
+          </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+          <div class="feature-card reveal">
+
+            <div class="feature-number">
+              01
+            </div>
+
+            <i class="fas fa-user-graduate"></i>
+
+            <h3>
+              Student Profile
+            </h3>
+
+            <p>
+              নিজের profile information এক জায়গা থেকে manage করুন।
             </p>
 
           </div>
 
-          <div class="feature">
 
-            <div class="feature-icon">
-              📊
+          <div class="feature-card reveal">
+
+            <div class="feature-number">
+              02
             </div>
 
-            <h3>Attendance</h3>
+            <i class="fas fa-calendar-days"></i>
+
+            <h3>
+              Class & Timetable
+            </h3>
 
             <p>
-              নিজের attendance percentage এবং class history দেখুন।
+              Class routine এবং upcoming class সহজে দেখুন।
             </p>
 
           </div>
 
-          <div class="feature">
 
-            <div class="feature-icon">
-              📝
+          <div class="feature-card reveal">
+
+            <div class="feature-number">
+              03
             </div>
 
-            <h3>Assignments</h3>
+            <i class="fas fa-chart-line"></i>
+
+            <h3>
+              Progress Tracking
+            </h3>
 
             <p>
-              Assignment deadline এবং submission status track করুন।
+              আপনার learning progress এবং attendance track করুন।
             </p>
 
           </div>
 
-          <div class="feature">
 
-            <div class="feature-icon">
-              🧠
+          <div class="feature-card reveal">
+
+            <div class="feature-number">
+              04
             </div>
 
-            <h3>Online Quiz</h3>
+            <i class="fas fa-bell"></i>
+
+            <h3>
+              Notifications
+            </h3>
 
             <p>
-              Practice quiz দিয়ে নিজের knowledge test করুন।
-            </p>
-
-          </div>
-
-          <div class="feature">
-
-            <div class="feature-icon">
-              🏆
-            </div>
-
-            <h3>Results</h3>
-
-            <p>
-              Quiz score এবং performance history দেখতে পারবেন।
-            </p>
-
-          </div>
-
-          <div class="feature">
-
-            <div class="feature-icon">
-              🎓
-            </div>
-
-            <h3>Certificate</h3>
-
-            <p>
-              Course completion-এর পরে certificate section থেকে certificate status দেখুন।
+              Class, assignment এবং important update-এর notification পান।
             </p>
 
           </div>
@@ -2119,41 +1017,60 @@
 
     </section>
 
-    <!-- CTA -->
-    <section class="section" style="padding-top:10px;">
+
+    <!-- =====================================================
+         START LEARNING CTA
+         ===================================================== -->
+
+    <section class="cta-section section">
 
       <div class="container">
 
-        <div class="cta">
+        <div class="cta-panel">
 
           <div class="cta-content">
 
+            <span class="eyebrow">
+              READY TO START?
+            </span>
+
             <h2>
-              Ready to start your learning journey?
+              Your Learning Journey Starts Here.
             </h2>
 
             <p>
-              Student Dashboard-এ login করে আপনার course, class,
-              assignment, quiz, result এবং attendance এক জায়গা থেকে manage করুন।
+              08 September 2026 থেকে আপনার
+              Computer Office Application course শুরু হচ্ছে।
             </p>
 
-            <div class="hero-actions">
+            <div class="cta-actions">
 
               <a
-                href="student-dashboard.html"
-                class="primary-btn"
+                href="student-class.html"
+                class="btn btn-primary"
               >
-                🚀 Open Student Dashboard
+                <i class="fas fa-chalkboard-user"></i>
+                My Class
               </a>
 
               <a
-                href="student-support.html"
-                class="secondary-btn"
+                href="student-timetable.html"
+                class="btn btn-secondary"
               >
-                💬 Student Support
+                <i class="fas fa-calendar-days"></i>
+                Timetable
               </a>
 
             </div>
+
+          </div>
+
+
+          <div class="cta-icon">
+
+            <div class="cta-orbit orbit-small"></div>
+
+            <i class="fas fa-rocket"></i>
 
           </div>
 
@@ -2165,355 +1082,174 @@
 
   </main>
 
-  <!-- FOOTER -->
-  <footer>
 
-    <div class="container footer-inner">
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
 
-      <div>
+  <footer class="site-footer">
 
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Brand -->
         <div class="footer-brand">
 
-          <img
-            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-            alt="SNK IT Institute"
-          >
+          <div class="footer-logo">
+            SNK
+          </div>
 
-          <strong>
+          <h3>
             SNK IT Institute
-          </strong>
+          </h3>
+
+          <p>
+            Student-focused Offline Course Portal.
+          </p>
 
         </div>
 
-        <p class="footer-about">
-          একটি Student-focused learning portal যেখানে
-          Course, Class, Assignment, Quiz, Result এবং Attendance
-          সহজভাবে manage করা যায়।
+
+        <!-- Quick Links -->
+        <div class="footer-column">
+
+          <h4>
+            Quick Links
+          </h4>
+
+          <a href="index.html">
+            Home
+          </a>
+
+          <a href="student-dashboard.html">
+            My Dashboard
+          </a>
+
+          <a href="courses.html">
+            My Course
+          </a>
+
+          <a href="assignments.html">
+            Assignment
+          </a>
+
+          <a href="quiz.html">
+            Quiz
+          </a>
+
+        </div>
+
+
+        <!-- Student -->
+        <div class="footer-column">
+
+          <h4>
+            Student
+          </h4>
+
+          <a href="results.html">
+            Result
+          </a>
+
+          <a href="student-attendance.html">
+            Attendance
+          </a>
+
+          <a href="student-resources.html">
+            Resources
+          </a>
+
+          <a href="student-notifications.html">
+            Notifications
+          </a>
+
+          <a href="student-support.html">
+            Support
+          </a>
+
+        </div>
+
+
+        <!-- Course -->
+        <div class="footer-column">
+
+          <h4>
+            Course Info
+          </h4>
+
+          <span>
+            Computer Office Application
+          </span>
+
+          <span>
+            Batch 01
+          </span>
+
+          <span>
+            Offline
+          </span>
+
+          <span>
+            6 Months
+          </span>
+
+          <span>
+            Saturday – Monday
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+
+        <p>
+          ©
+          <span data-current-year id="currentYear">
+            2026
+          </span>
+          SNK IT Institute. All Rights Reserved.
         </p>
 
-      </div>
+        <div class="footer-bottom-links">
 
-      <div class="footer-col">
+          <a href="student-settings.html">
+            Settings
+          </a>
 
-        <h4>Student Portal</h4>
+          <a href="student-contact.html">
+            Contact
+          </a>
 
-        <a href="student-dashboard.html">
-          Dashboard
-        </a>
-
-        <a href="courses.html">
-          My Course
-        </a>
-
-        <a href="assignments.html">
-          Assignment
-        </a>
-
-        <a href="quiz.html">
-          Quiz
-        </a>
-
-        <a href="results.html">
-          Result
-        </a>
+        </div>
 
       </div>
 
-      <div class="footer-col">
-
-        <h4>More</h4>
-
-        <a href="student-attendance.html">
-          Attendance
-        </a>
-
-        <a href="student-timetable.html">
-          Timetable
-        </a>
-
-        <a href="student-resources.html">
-          Resources
-        </a>
-
-        <a href="student-support.html">
-          Support
-        </a>
-
-        <a href="login.html">
-          Student Login
-        </a>
-
-      </div>
-
-    </div>
-
-    <div class="copyright">
-      © 2026 SNK IT Institute • Student Portal • Free Course
     </div>
 
   </footer>
 
-  <!-- TOAST -->
-  <div id="toast" class="toast"></div>
 
-  <script>
+  <!-- =====================================================
+       TOAST CONTAINER
+       ===================================================== -->
 
-    /* ==========================================
-       SNK STUDENT PORTAL
-       STEP 1.18
-       Premium UI + Galaxy Hero
-    ========================================== */
+  <div
+    id="toastContainer"
+    class="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
 
-    const body = document.body;
-    const themeBtn = document.getElementById("themeBtn");
-    const languageBtn = document.getElementById("languageBtn");
-    const menuBtn = document.getElementById("menuBtn");
-    const toast = document.getElementById("toast");
 
-    /* =========================
-       TOAST
-    ========================== */
+  <!-- =====================================================
+       MAIN JAVASCRIPT
+       ===================================================== -->
 
-    let toastTimer;
-
-    function showToast(message){
-
-      clearTimeout(toastTimer);
-
-      toast.textContent = message;
-      toast.classList.add("show");
-
-      toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2600);
-    }
-
-    /* =========================
-       THEME
-    ========================== */
-
-    function applyTheme(){
-
-      const savedTheme = localStorage.getItem("snkTheme");
-
-      if(savedTheme === "dark"){
-        body.classList.add("dark");
-        themeBtn.textContent = "☀️";
-      }else{
-        body.classList.remove("dark");
-        themeBtn.textContent = "🌙";
-      }
-
-    }
-
-    themeBtn.addEventListener("click", () => {
-
-      const isDark = body.classList.toggle("dark");
-
-      localStorage.setItem(
-        "snkTheme",
-        isDark ? "dark" : "light"
-      );
-
-      themeBtn.textContent = isDark ? "☀️" : "🌙";
-
-      showToast(
-        isDark
-          ? "Dark theme চালু হয়েছে"
-          : "Light theme চালু হয়েছে"
-      );
-
-    });
-
-    applyTheme();
-
-    /* =========================
-       LANGUAGE DEMO
-    ========================== */
-
-    languageBtn.addEventListener("click", () => {
-
-      const current = languageBtn.textContent.trim();
-
-      if(current === "EN"){
-        languageBtn.textContent = "BN";
-        showToast("English mode selected — portal content remains available.");
-      }else{
-        languageBtn.textContent = "EN";
-        showToast("বাংলা mode selected");
-      }
-
-    });
-
-    /* =========================
-       MOBILE MENU
-    ========================== */
-
-    menuBtn.addEventListener("click", () => {
-
-      const nav = document.querySelector(".nav-links");
-
-      const current = getComputedStyle(nav).display;
-
-      if(current === "none"){
-
-        nav.style.display = "flex";
-        nav.style.position = "absolute";
-        nav.style.left = "11px";
-        nav.style.right = "11px";
-        nav.style.top = "72px";
-        nav.style.flexDirection = "column";
-        nav.style.alignItems = "stretch";
-        nav.style.padding = "10px";
-        nav.style.background = body.classList.contains("dark")
-          ? "#0f172a"
-          : "#ffffff";
-        nav.style.border = "1px solid var(--border)";
-        nav.style.borderRadius = "16px";
-        nav.style.boxShadow = "0 20px 40px rgba(0,0,0,.12)";
-
-      }else{
-
-        nav.removeAttribute("style");
-
-      }
-
-    });
-
-    /* =========================
-       STORAGE REFRESH
-    ========================== */
-
-    window.addEventListener("storage", () => {
-
-      applyTheme();
-
-      showToast(
-        "Portal data updated"
-      );
-
-    });
-
-    /* =========================
-       SYSTEM THEME
-    ========================== */
-
-    const mediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-
-    if(!localStorage.getItem("snkTheme")){
-
-      if(mediaQuery.matches){
-        body.classList.add("dark");
-        themeBtn.textContent = "☀️";
-      }
-
-    }
-
-    mediaQuery.addEventListener("change", event => {
-
-      if(!localStorage.getItem("snkTheme")){
-
-        body.classList.toggle(
-          "dark",
-          event.matches
-        );
-
-        themeBtn.textContent =
-          event.matches ? "☀️" : "🌙";
-
-      }
-
-    });
-
-    /* =========================
-       SMOOTH ANCHOR HANDLING
-    ========================== */
-
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-
-      link.addEventListener("click", event => {
-
-        const targetId = link.getAttribute("href");
-
-        if(targetId === "#"){
-          return;
-        }
-
-        const target = document.querySelector(targetId);
-
-        if(target){
-
-          event.preventDefault();
-
-          target.scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-          });
-
-        }
-
-      });
-
-    });
-
-    /* =========================
-       BUTTON FEEDBACK
-    ========================== */
-
-    document.querySelectorAll("a").forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        const href = link.getAttribute("href");
-
-        if(
-          href &&
-          !href.startsWith("#") &&
-          href !== "login.html"
-        ){
-          try{
-            sessionStorage.setItem(
-              "snkLastPortalPage",
-              href
-            );
-          }catch(error){}
-        }
-
-      });
-
-    });
-
-    /* =========================
-       PAGE READY
-    ========================== */
-
-    document.addEventListener("DOMContentLoaded", () => {
-
-      setTimeout(() => {
-
-        const alreadyWelcomed =
-          sessionStorage.getItem("snkHomeWelcomed");
-
-        if(!alreadyWelcomed){
-
-          showToast(
-            "স্বাগতম! SNK IT Student Portal ready 🚀"
-          );
-
-          sessionStorage.setItem(
-            "snkHomeWelcomed",
-            "1"
-          );
-
-        }
-
-      }, 700);
-
-    });
-
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
