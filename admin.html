@@ -1,3592 +1,3770 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SNK IT Institute | Admin Dashboard 1.11</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-/* =========================================================
-   SNK IT INSTITUTE
-   ADMIN DASHBOARD
-   VERSION 1.11
-
-   IMPORTANT:
-   This is UI/Demo version.
-   Real Admin Login will be connected later.
-   ========================================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-
-    --bg:#f4f6fa;
-    --card:#ffffff;
-    --text:#172033;
-    --muted:#667085;
-    --border:#e5e7eb;
-
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
-
-    --soft:#eff6ff;
-
-    --success:#16a34a;
-    --warning:#d97706;
-    --danger:#dc2626;
-    --purple:#7c3aed;
-    --orange:#ea580c;
-
-    --sidebar:#111827;
-
-    --shadow:0 10px 30px rgba(15,23,42,.07);
-}
-
-body.dark{
-
-    --bg:#080d18;
-    --card:#111827;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:#1f2937;
-    --soft:#172554;
-
-    --sidebar:#020617;
-
-    --shadow:0 10px 30px rgba(0,0,0,.25);
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-
-    font-family:"Noto Sans Bengali",Arial,sans-serif;
-
-    background:var(--bg);
-
-    color:var(--text);
-
-    min-height:100vh;
-
-    transition:.25s;
-}
-
-button,
-input,
-select,
-textarea{
-
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-
-/* =========================================================
-   LAYOUT
-   ========================================================= */
-
-.app{
-
-    min-height:100vh;
-
-    display:flex;
-}
-
-
-/* =========================================================
-   SIDEBAR
-   ========================================================= */
-
-.sidebar{
-
-    width:255px;
-
-    min-width:255px;
-
-    background:var(--sidebar);
-
-    color:#fff;
-
-    min-height:100vh;
-
-    position:fixed;
-
-    left:0;
-    top:0;
-    bottom:0;
-
-    z-index:1000;
-
-    display:flex;
-
-    flex-direction:column;
-
-    transition:.25s;
-}
-
-
-.sidebar-logo{
-
-    height:76px;
-
-    padding:13px 17px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-
-.sidebar-logo img{
-
-    width:45px;
-    height:45px;
-
-    object-fit:contain;
-}
-
-
-.sidebar-logo-text{
-
-    font-size:15px;
-
-    font-weight:800;
-}
-
-
-.sidebar-logo-text small{
-
-    display:block;
-
-    color:#9ca3af;
-
-    font-size:9px;
-
-    font-weight:500;
-
-    margin-top:2px;
-}
-
-
-/* Sidebar menu */
-
-.sidebar-menu{
-
-    padding:18px 12px;
-
-    flex:1;
-
-    overflow-y:auto;
-}
-
-
-.menu-label{
-
-    color:#6b7280;
-
-    font-size:9px;
-
-    font-weight:800;
-
-    padding:8px 11px;
-
-    letter-spacing:.5px;
-
-    text-transform:uppercase;
-}
-
-
-.menu-item{
-
-    width:100%;
-
-    border:none;
-
-    background:transparent;
-
-    color:#d1d5db;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:11px;
-
-    padding:11px 12px;
-
-    border-radius:9px;
-
-    margin-bottom:4px;
-
-    font-size:11px;
-
-    font-weight:600;
-
-    text-align:left;
-}
-
-
-.menu-item:hover{
-
-    background:rgba(255,255,255,.07);
-
-    color:#fff;
-}
-
-
-.menu-item.active{
-
-    background:#2563eb;
-
-    color:#fff;
-}
-
-
-.menu-icon{
-
-    width:22px;
-
-    text-align:center;
-
-    font-size:15px;
-}
-
-
-.menu-badge{
-
-    margin-left:auto;
-
-    background:#ef4444;
-
-    color:#fff;
-
-    font-size:8px;
-
-    min-width:18px;
-
-    height:18px;
-
-    border-radius:20px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-}
-
-
-.sidebar-footer{
-
-    padding:13px;
-
-    border-top:1px solid rgba(255,255,255,.08);
-}
-
-
-.admin-mini{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
-    padding:9px;
-
-    background:rgba(255,255,255,.05);
-
-    border-radius:10px;
-}
-
-
-.admin-avatar{
-
-    width:34px;
-    height:34px;
-
-    border-radius:9px;
-
-    background:#2563eb;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:17px;
-}
-
-
-.admin-mini-info{
-
-    flex:1;
-
-    min-width:0;
-}
-
-
-.admin-mini-info strong{
-
-    display:block;
-
-    font-size:10px;
-}
-
-
-.admin-mini-info span{
-
-    display:block;
-
-    color:#9ca3af;
-
-    font-size:8px;
-}
-
-
-.logout-small{
-
-    border:none;
-
-    background:transparent;
-
-    color:#9ca3af;
-
-    font-size:14px;
-
-    padding:5px;
-}
-
-
-.logout-small:hover{
-
-    color:#fff;
-}
-
-
-/* =========================================================
-   MAIN
-   ========================================================= */
-
-.main{
-
-    margin-left:255px;
-
-    width:calc(100% - 255px);
-
-    min-width:0;
-}
-
-
-/* =========================================================
-   TOPBAR
-   ========================================================= */
-
-.topbar{
-
-    height:76px;
-
-    background:var(--card);
-
-    border-bottom:1px solid var(--border);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    padding:0 25px;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:900;
-}
-
-
-.topbar-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-}
-
-
-.mobile-menu-btn{
-
-    display:none;
-
-    border:1px solid var(--border);
-
-    background:var(--card);
-
-    color:var(--text);
-
-    width:38px;
-    height:38px;
-
-    border-radius:9px;
-
-    font-size:18px;
-}
-
-
-.page-heading h1{
-
-    font-size:20px;
-
-    margin-bottom:2px;
-}
-
-
-.page-heading p{
-
-    color:var(--muted);
-
-    font-size:10px;
-}
-
-
-.topbar-actions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-}
-
-
-.topbar-btn{
-
-    width:37px;
-    height:37px;
-
-    border:1px solid var(--border);
-
-    background:var(--card);
-
-    color:var(--text);
-
-    border-radius:9px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:15px;
-}
-
-
-.topbar-btn:hover{
-
-    background:var(--soft);
-}
-
-
-.admin-top-profile{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
-    padding-left:9px;
-
-    border-left:1px solid var(--border);
-}
-
-
-.top-avatar{
-
-    width:36px;
-    height:36px;
-
-    border-radius:9px;
-
-    background:var(--soft);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:17px;
-}
-
-
-.top-profile-text strong{
-
-    display:block;
-
-    font-size:10px;
-}
-
-
-.top-profile-text span{
-
-    display:block;
-
-    color:var(--muted);
-
-    font-size:8px;
-}
-
-
-/* =========================================================
-   CONTENT
-   ========================================================= */
-
-.content{
-
-    padding:25px;
-}
-
-
-/* =========================================================
-   WELCOME
-   ========================================================= */
-
-.welcome{
-
-    background:linear-gradient(135deg,#172554,#2563eb);
-
-    color:#fff;
-
-    border-radius:18px;
-
-    padding:25px;
-
-    margin-bottom:22px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-
-.welcome:after{
-
-    content:"";
-
-    position:absolute;
-
-    width:260px;
-    height:260px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.07);
-
-    right:-80px;
-    top:-120px;
-}
-
-
-.welcome-content{
-
-    position:relative;
-
-    z-index:2;
-}
-
-
-.welcome h2{
-
-    font-size:24px;
-
-    margin-bottom:6px;
-}
-
-
-.welcome p{
-
-    opacity:.9;
-
-    font-size:11px;
-
-    line-height:1.7;
-}
-
-
-.welcome-badge{
-
-    position:relative;
-
-    z-index:2;
-
-    background:rgba(255,255,255,.13);
-
-    border:1px solid rgba(255,255,255,.2);
-
-    padding:9px 13px;
-
-    border-radius:20px;
-
-    font-size:10px;
-
-    font-weight:800;
-
-    white-space:nowrap;
-}
-
-
-/* =========================================================
-   STAT CARDS
-   ========================================================= */
-
-.stats-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:15px;
-
-    margin-bottom:24px;
-}
-
-
-.stat-card{
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    border-radius:15px;
-
-    padding:18px;
-
-    box-shadow:var(--shadow);
-
-    transition:.2s;
-}
-
-
-.stat-card:hover{
-
-    transform:translateY(-2px);
-}
-
-
-.stat-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    margin-bottom:12px;
-}
-
-
-.stat-icon{
-
-    width:40px;
-    height:40px;
-
-    border-radius:10px;
-
-    background:var(--soft);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:18px;
-}
-
-
-.stat-change{
-
-    font-size:8px;
-
-    padding:4px 7px;
-
-    border-radius:15px;
-
-    font-weight:800;
-}
-
-
-.stat-change.up{
-
-    background:#dcfce7;
-
-    color:#166534;
-}
-
-
-.stat-change.warning{
-
-    background:#fef3c7;
-
-    color:#92400e;
-}
-
-
-.stat-number{
-
-    font-size:25px;
-
-    font-weight:800;
-
-    margin-bottom:2px;
-}
-
-
-.stat-card h3{
-
-    font-size:12px;
-
-    margin-bottom:3px;
-}
-
-
-.stat-card p{
-
-    color:var(--muted);
-
-    font-size:9px;
-}
-
-
-/* =========================================================
-   SECTION HEADER
-   ========================================================= */
-
-.section-header{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    margin-bottom:14px;
-}
-
-
-.section-header h2{
-
-    font-size:17px;
-}
-
-
-.section-header p{
-
-    color:var(--muted);
-
-    font-size:9px;
-
-    margin-top:3px;
-}
-
-
-.view-all{
-
-    color:var(--primary);
-
-    font-size:10px;
-
-    font-weight:800;
-
-    background:var(--soft);
-
-    padding:7px 10px;
-
-    border-radius:7px;
-}
-
-
-/* =========================================================
-   DASHBOARD GRID
-   ========================================================= */
-
-.dashboard-grid{
-
-    display:grid;
-
-    grid-template-columns:1.35fr .65fr;
-
-    gap:18px;
-
-    margin-bottom:24px;
-}
-
-
-.panel{
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    border-radius:16px;
-
-    box-shadow:var(--shadow);
-
-    overflow:hidden;
-}
-
-
-.panel-header{
-
-    padding:17px 18px;
-
-    border-bottom:1px solid var(--border);
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:10px;
-}
-
-
-.panel-header h3{
-
-    font-size:14px;
-}
-
-
-.panel-header span{
-
-    color:var(--muted);
-
-    font-size:9px;
-}
-
-
-.panel-body{
-
-    padding:17px 18px;
-}
-
-
-/* =========================================================
-   RECENT ASSIGNMENTS
-   ========================================================= */
-
-.assignment-row{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:11px;
-
-    padding:12px 0;
-
-    border-bottom:1px solid var(--border);
-}
-
-
-.assignment-row:last-child{
-
-    border-bottom:none;
-}
-
-
-.assignment-row-icon{
-
-    width:37px;
-    height:37px;
-
-    border-radius:9px;
-
-    background:var(--soft);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:16px;
-}
-
-
-.assignment-row-info{
-
-    flex:1;
-
-    min-width:0;
-}
-
-
-.assignment-row-info strong{
-
-    display:block;
-
-    font-size:11px;
-
-    margin-bottom:3px;
-}
-
-
-.assignment-row-info span{
-
-    display:block;
-
-    color:var(--muted);
-
-    font-size:8px;
-}
-
-
-.assignment-status{
-
-    font-size:8px;
-
-    font-weight:800;
-
-    padding:5px 8px;
-
-    border-radius:15px;
-
-    white-space:nowrap;
-}
-
-
-.status-open{
-
-    background:#dcfce7;
-
-    color:#166534;
-}
-
-
-.status-pending{
-
-    background:#fef3c7;
-
-    color:#92400e;
-}
-
-
-.status-closed{
-
-    background:#fee2e2;
-
-    color:#991b1b;
-}
-
-
-/* =========================================================
-   COURSE PROGRESS
-   ========================================================= */
-
-.progress-item{
-
-    margin-bottom:18px;
-}
-
-
-.progress-item:last-child{
-
-    margin-bottom:0;
-}
-
-
-.progress-title{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:8px;
-
-    margin-bottom:7px;
-}
-
-
-.progress-title span{
-
-    font-size:10px;
-}
-
-
-.progress-title strong{
-
-    color:var(--primary);
-
-    font-size:10px;
-}
-
-
-.progress-bar{
-
-    height:8px;
-
-    background:var(--border);
-
-    border-radius:20px;
-
-    overflow:hidden;
-}
-
-
-.progress-fill{
-
-    height:100%;
-
-    border-radius:20px;
-
-    background:var(--primary);
-}
-
-
-.progress-fill.green{
-
-    background:var(--success);
-}
-
-
-.progress-fill.purple{
-
-    background:var(--purple);
-}
-
-
-/* =========================================================
-   QUICK ACTIONS
-   ========================================================= */
-
-.quick-actions{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:8px;
-}
-
-
-.quick-action{
-
-    border:1px solid var(--border);
-
-    background:var(--bg);
-
-    border-radius:10px;
-
-    padding:12px 7px;
-
-    text-align:center;
-
-    color:var(--text);
-
-    font-size:9px;
-
-    font-weight:700;
-}
-
-
-.quick-action:hover{
-
-    background:var(--soft);
-
-    border-color:var(--primary);
-}
-
-
-.quick-action-icon{
-
-    display:block;
-
-    font-size:18px;
-
-    margin-bottom:5px;
-}
-
-
-/* =========================================================
-   STUDENTS TABLE
-   ========================================================= */
-
-.table-panel{
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    border-radius:16px;
-
-    box-shadow:var(--shadow);
-
-    overflow:hidden;
-
-    margin-bottom:24px;
-}
-
-
-.table-wrapper{
-
-    width:100%;
-
-    overflow-x:auto;
-}
-
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    min-width:650px;
-}
-
-
-th,
-td{
-
-    padding:12px 15px;
-
-    text-align:left;
-
-    border-bottom:1px solid var(--border);
-
-    font-size:9px;
-}
-
-
-th{
-
-    color:var(--muted);
-
-    font-weight:700;
-
-    background:var(--bg);
-}
-
-
-td{
-
-    font-weight:600;
-}
-
-
-.student-cell{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-}
-
-
-.table-avatar{
-
-    width:31px;
-    height:31px;
-
-    border-radius:8px;
-
-    background:var(--soft);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:14px;
-}
-
-
-.student-name strong{
-
-    display:block;
-
-    font-size:10px;
-}
-
-
-.student-name span{
-
-    display:block;
-
-    color:var(--muted);
-
-    font-size:8px;
-
-    margin-top:2px;
-}
-
-
-.active-dot{
-
-    display:inline-block;
-
-    width:6px;
-    height:6px;
-
-    border-radius:50%;
-
-    background:var(--success);
-
-    margin-right:4px;
-}
-
-
-.table-action{
-
-    border:1px solid var(--border);
-
-    background:var(--card);
-
-    color:var(--primary);
-
-    padding:5px 8px;
-
-    border-radius:6px;
-
-    font-size:8px;
-
-    font-weight:800;
-}
-
-
-.table-action:hover{
-
-    background:var(--soft);
-}
-
-
-/* =========================================================
-   LOWER GRID
-   ========================================================= */
-
-.lower-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:18px;
-
-    margin-bottom:24px;
-}
-
-
-/* =========================================================
-   RESULT
-   ========================================================= */
-
-.result-row{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:11px 0;
-
-    border-bottom:1px solid var(--border);
-}
-
-
-.result-row:last-child{
-
-    border-bottom:none;
-}
-
-
-.result-avatar{
-
-    width:34px;
-    height:34px;
-
-    border-radius:9px;
-
-    background:var(--soft);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-}
-
-
-.result-info{
-
-    flex:1;
-}
-
-
-.result-info strong{
-
-    display:block;
-
-    font-size:10px;
-
-    margin-bottom:2px;
-}
-
-
-.result-info span{
-
-    color:var(--muted);
-
-    font-size:8px;
-}
-
-
-.mark{
-
-    font-size:12px;
-
-    font-weight:800;
-
-    color:var(--primary);
-}
-
-
-.mark.pending{
-
-    color:var(--warning);
-
-    font-size:9px;
-}
-
-
-/* =========================================================
-   NOTICES
-   ========================================================= */
-
-.notice-row{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:10px;
-
-    padding:11px 0;
-
-    border-bottom:1px solid var(--border);
-}
-
-
-.notice-row:last-child{
-
-    border-bottom:none;
-}
-
-
-.notice-icon{
-
-    width:32px;
-    height:32px;
-
-    min-width:32px;
-
-    border-radius:8px;
-
-    background:var(--soft);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-}
-
-
-.notice-info strong{
-
-    display:block;
-
-    font-size:10px;
-
-    margin-bottom:3px;
-}
-
-
-.notice-info span{
-
-    color:var(--muted);
-
-    font-size:8px;
-
-    line-height:1.5;
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.footer{
-
-    padding:20px 25px;
-
-    border-top:1px solid var(--border);
-
-    color:var(--muted);
-
-    font-size:9px;
-
-    text-align:center;
-}
-
-
-
-/* =========================================================
-   VERSION 1.11 — EXISTING MODULE NAVIGATION
-   ========================================================= */
-
-const moduleLinks = {
-    "Students": "students.html",
-    "Courses": "courses.html",
-    "Assignments": "assignments.html",
-    "Quiz": "quiz.html",
-    "Results": "results.html",
-    "Attendance": "attendance-overview.html",
-    "Resources": "resources.html"
-};
-
-function openModule(name){
-    if(moduleLinks[name]){
-        window.location.href = moduleLinks[name];
-    }else{
-        showDemo(name);
-    }
-}
-
-/* =========================================================
-   DEMO MODAL
-   ========================================================= */
-
-.modal-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.55);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    z-index:3000;
-}
-
-
-.modal-overlay.show{
-
-    display:flex;
-}
-
-
-.modal{
-
-    width:100%;
-
-    max-width:430px;
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    padding:23px;
-
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
-}
-
-
-.modal-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin-bottom:17px;
-}
-
-
-.modal-header h3{
-
-    font-size:16px;
-}
-
-
-.modal-close{
-
-    width:30px;
-    height:30px;
-
-    border:none;
-
-    background:var(--bg);
-
-    color:var(--text);
-
-    border-radius:8px;
-
-    font-size:15px;
-}
-
-
-.modal p{
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    line-height:1.7;
-
-    margin-bottom:15px;
-}
-
-
-.demo-box{
-
-    background:var(--soft);
-
-    border:1px solid var(--border);
-
-    border-radius:10px;
-
-    padding:12px;
-
-    margin-bottom:15px;
-}
-
-
-.demo-box strong{
-
-    display:block;
-
-    font-size:11px;
-
-    margin-bottom:3px;
-}
-
-
-.demo-box span{
-
-    color:var(--muted);
-
-    font-size:9px;
-}
-
-
-.modal-btn{
-
-    width:100%;
-
-    border:none;
-
-    background:var(--primary);
-
-    color:#fff;
-
-    padding:10px;
-
-    border-radius:8px;
-
-    font-size:10px;
-
-    font-weight:800;
-}
-
-
-/* =========================================================
-   SIDEBAR OVERLAY
-   ========================================================= */
-
-.sidebar-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.45);
-
-    z-index:950;
-
-    display:none;
-}
-
-
-.sidebar-overlay.show{
-
-    display:block;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media(max-width:1100px){
-
-    .stats-grid{
-
-        grid-template-columns:repeat(2,1fr);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SNK IT Institute — Admin Panel</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --bg: #070b14;
+      --bg2: #0b1120;
+      --panel: rgba(15, 23, 42, .88);
+      --panel2: rgba(17, 24, 39, .96);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(148,163,184,.14);
+
+      --primary: #6366f1;
+      --primary2: #8b5cf6;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --cyan: #06b6d4;
+
+      --sidebar: 250px;
+      --radius: 18px;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
     }
 
-    .dashboard-grid{
-
-        grid-template-columns:1fr;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-}
-
-
-@media(max-width:800px){
-
-    .sidebar{
-
-        transform:translateX(-100%);
+    body {
+      font-family: "Inter", "Noto Sans Bengali", sans-serif;
+      background:
+        radial-gradient(
+          circle at 10% 0%,
+          rgba(99,102,241,.14),
+          transparent 28%
+        ),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      color: var(--text);
+      min-height: 100vh;
     }
 
-    .sidebar.open{
-
-        transform:translateX(0);
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
     }
 
-    .main{
-
-        margin-left:0;
-
-        width:100%;
+    button {
+      cursor: pointer;
     }
 
-    .mobile-menu-btn{
-
-        display:flex;
-
-        align-items:center;
-
-        justify-content:center;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .top-profile-text{
+    /* =========================
+       LAYOUT
+    ========================= */
 
-        display:none;
+    .app {
+      min-height: 100vh;
     }
 
-    .admin-top-profile{
-
-        border-left:none;
-
-        padding-left:0;
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--sidebar);
+      background: rgba(5,9,18,.94);
+      border-right: 1px solid var(--border);
+      padding: 20px 14px;
+      z-index: 1000;
+      overflow-y: auto;
     }
 
-    .lower-grid{
-
-        grid-template-columns:1fr;
+    .main {
+      margin-left: var(--sidebar);
+      min-height: 100vh;
     }
 
-}
-
-
-@media(max-width:600px){
-
-    .topbar{
-
-        height:65px;
-
-        padding:0 13px;
+    .container {
+      width: min(1400px, calc(100% - 36px));
+      margin: auto;
     }
 
-    .content{
+    /* =========================
+       BRAND
+    ========================= */
 
-        padding:15px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 6px 8px 24px;
     }
 
-    .page-heading h1{
-
-        font-size:16px;
+    .brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      padding: 5px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.05);
     }
 
-    .page-heading p{
-
-        display:none;
+    .brand-title {
+      font-weight: 800;
+      font-size: 15px;
     }
 
-    .topbar-actions{
-
-        gap:4px;
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
     }
 
-    .topbar-btn{
+    /* =========================
+       SIDEBAR
+    ========================= */
 
-        width:33px;
-        height:33px;
-
-        font-size:13px;
+    .nav-label {
+      color: #64748b;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 16px 10px 8px;
     }
 
-    .welcome{
-
-        padding:20px;
-
-        align-items:flex-start;
-
-        flex-direction:column;
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 11px;
+      color: #94a3b8;
+      font-size: 12px;
+      margin-bottom: 4px;
+      border: 1px solid transparent;
+      transition: .2s ease;
     }
 
-    .welcome h2{
-
-        font-size:20px;
+    .nav-item:hover,
+    .nav-item.active {
+      color: #fff;
+      background: rgba(99,102,241,.12);
+      border-color: rgba(99,102,241,.15);
     }
 
-    .welcome-badge{
-
-        font-size:8px;
+    .nav-icon {
+      width: 23px;
+      text-align: center;
+      font-size: 15px;
     }
 
-    .stats-grid{
-
-        grid-template-columns:1fr;
-
-        gap:10px;
+    .sidebar-bottom {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
     }
 
-    .stat-card{
+    /* =========================
+       TOPBAR
+    ========================= */
 
-        padding:15px;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      background: rgba(7,11,20,.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .quick-actions{
-
-        grid-template-columns:repeat(2,1fr);
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
     }
 
-    .section-header{
-
-        align-items:flex-start;
+    .page-heading h1 {
+      font-size: 20px;
+      font-weight: 800;
     }
 
-}
-
-
-/* =========================================================
-   PRINT
-   ========================================================= */
-
-@media print{
-
-    .sidebar,
-    .topbar,
-    .quick-actions,
-    .footer{
-
-        display:none !important;
+    .page-heading p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 4px;
     }
 
-    .main{
-
-        margin:0;
-
-        width:100%;
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .content{
-
-        padding:0;
+    .admin-badge {
+      padding: 8px 11px;
+      border-radius: 10px;
+      background: rgba(34,197,94,.10);
+      color: #86efac;
+      border: 1px solid rgba(34,197,94,.15);
+      font-size: 11px;
+      font-weight: 700;
     }
 
-}
+    .icon-btn,
+    .logout-btn,
+    .menu-btn {
+      min-height: 39px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: #e2e8f0;
+      padding: 0 11px;
+    }
 
-</style>
+    .logout-btn {
+      color: #fecaca;
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content {
+      padding: 28px 0 50px;
+    }
+
+    /* =========================
+       EXAM HERO
+    ========================= */
+
+    .exam-hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(99,102,241,.24),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(99,102,241,.12),
+          rgba(15,23,42,.78)
+        );
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .exam-hero::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(99,102,241,.16);
+      border-radius: 50%;
+      right: -80px;
+      bottom: -100px;
+    }
+
+    .exam-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(34,197,94,.10);
+      color: #86efac;
+      border: 1px solid rgba(34,197,94,.15);
+      font-size: 10px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .exam-title {
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .exam-title span {
+      color: #a5b4fc;
+    }
+
+    .exam-description {
+      max-width: 680px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .completed-box {
+      min-width: 175px;
+      padding: 16px;
+      border-radius: 15px;
+      background: rgba(34,197,94,.08);
+      border: 1px solid rgba(34,197,94,.18);
+      text-align: center;
+    }
+
+    .completed-box strong {
+      display: block;
+      color: #86efac;
+      font-size: 14px;
+    }
+
+    .completed-box small {
+      display: block;
+      color: #64748b;
+      font-size: 10px;
+      margin-top: 5px;
+    }
+
+    .exam-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .meta-chip {
+      padding: 8px 10px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+      font-size: 10px;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 13px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 17px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .stat-note {
+      color: #64748b;
+      font-size: 9px;
+      margin-top: 5px;
+    }
+
+    /* =========================
+       PANEL
+    ========================= */
+
+    .panel {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 19px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+
+    .panel-header {
+      padding: 19px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .panel-subtitle {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       TOOLBAR
+    ========================= */
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1.5fr .8fr .8fr auto;
+      gap: 9px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .control {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255,255,255,.035);
+      color: #f8fafc;
+      padding: 0 11px;
+      outline: none;
+      font-size: 11px;
+    }
+
+    .control:focus {
+      border-color: rgba(99,102,241,.5);
+      box-shadow: 0 0 0 3px rgba(99,102,241,.08);
+    }
+
+    select.control option {
+      background: #0f172a;
+      color: white;
+    }
+
+    .btn {
+      min-height: 40px;
+      border: 0;
+      border-radius: 10px;
+      padding: 0 13px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary2)
+      );
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.05);
+      color: #e2e8f0;
+      border: 1px solid var(--border);
+    }
+
+    .btn-success {
+      background: rgba(34,197,94,.12);
+      color: #86efac;
+      border: 1px solid rgba(34,197,94,.18);
+    }
+
+    .btn-danger {
+      background: rgba(239,68,68,.10);
+      color: #fca5a5;
+      border: 1px solid rgba(239,68,68,.18);
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    th,
+    td {
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(148,163,184,.08);
+      text-align: left;
+      font-size: 11px;
+    }
+
+    th {
+      color: #64748b;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      background: rgba(255,255,255,.018);
+    }
+
+    td {
+      color: #cbd5e1;
+    }
+
+    tr:hover td {
+      background: rgba(99,102,241,.025);
+    }
+
+    .student-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .student-avatar {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary2)
+      );
+      color: white;
+      font-weight: 800;
+      font-size: 11px;
+    }
+
+    .student-name-cell {
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .student-id-cell {
+      color: #64748b;
+      font-size: 9px;
+      margin-top: 3px;
+    }
+
+    .status {
+      display: inline-flex;
+      padding: 5px 8px;
+      border-radius: 8px;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .status-pending {
+      background: rgba(245,158,11,.10);
+      color: #fbbf24;
+    }
+
+    .status-published {
+      background: rgba(34,197,94,.10);
+      color: #86efac;
+    }
+
+    .status-pass {
+      background: rgba(34,197,94,.10);
+      color: #86efac;
+    }
+
+    .status-fail {
+      background: rgba(239,68,68,.10);
+      color: #fca5a5;
+    }
+
+    .status-absent {
+      background: rgba(239,68,68,.08);
+      color: #fca5a5;
+    }
+
+    .status-present {
+      background: rgba(34,197,94,.08);
+      color: #86efac;
+    }
+
+    .action-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .small-btn {
+      min-height: 30px;
+      padding: 0 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: #cbd5e1;
+      font-size: 9px;
+    }
+
+    .small-btn:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    /* =========================
+       EXAM ATTENDANCE
+    ========================= */
+
+    .attendance-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 18px 20px;
+    }
+
+    .attendance-stat {
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .attendance-stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      margin-bottom: 6px;
+    }
+
+    .attendance-stat strong {
+      font-size: 21px;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(2,6,23,.78);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(580px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #0b1120;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-header {
+      padding: 19px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .close-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: #cbd5e1;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      color: #94a3b8;
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    textarea.control {
+      min-height: 90px;
+      padding: 10px 11px;
+      resize: vertical;
+    }
+
+    .result-preview {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,.025);
+      padding: 15px;
+      margin-bottom: 16px;
+    }
+
+    .result-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .result-mini {
+      text-align: center;
+      padding: 10px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .result-mini small {
+      display: block;
+      color: #64748b;
+      font-size: 8px;
+    }
+
+    .result-mini strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 15px;
+    }
+
+    .modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    .empty {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--muted);
+      display: none;
+    }
+
+    .empty-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .empty strong {
+      display: block;
+      color: #cbd5e1;
+      margin-bottom: 5px;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    #toastContainer {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 5000;
+      width: min(350px, calc(100% - 36px));
+      display: grid;
+      gap: 8px;
+    }
+
+    .toast {
+      padding: 13px 15px;
+      border-radius: 12px;
+      background: #111827;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      color: #e2e8f0;
+      font-size: 11px;
+      animation: toastIn .2s ease;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1150px) {
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .attendance-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+
+    @media (max-width: 850px) {
+
+      :root {
+        --sidebar: 0px;
+      }
+
+      .sidebar {
+        width: 260px;
+        transform: translateX(-100%);
+        transition: .25s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .menu-btn {
+        display: inline-block;
+      }
+
+      .exam-top {
+        flex-direction: column;
+      }
+
+      .completed-box {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .container {
+        width: min(100% - 22px, 1400px);
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .attendance-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .top-actions .admin-badge {
+        display: none;
+      }
+
+      .exam-hero {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .attendance-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* =========================
+       PRINT
+    ========================= */
+
+    @media print {
+      .sidebar,
+      .topbar,
+      .toolbar,
+      .action-group,
+      .modal,
+      #toastContainer {
+        display: none !important;
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      body {
+        background: white !important;
+        color: #111 !important;
+      }
+
+      .panel,
+      .exam-hero,
+      .stat-card {
+        background: white !important;
+        color: #111 !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+      }
+
+      td,
+      th,
+      .panel-title,
+      .exam-title,
+      .stat-value {
+        color: #111 !important;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-
-<!-- =========================================================
-     APP
-     ========================================================= -->
-
 <div class="app">
 
+  <!-- =========================
+       SIDEBAR
+  ========================= -->
 
-<!-- =========================================================
-     SIDEBAR
-     ========================================================= -->
+  <aside class="sidebar" id="sidebar">
 
-<aside
-class="sidebar"
-id="sidebar">
+    <div class="brand">
+
+      <img
+        src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+        alt="SNK IT Institute"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        <div class="brand-title">
+          SNK IT Institute
+        </div>
+
+        <div class="brand-subtitle">
+          Administrator Panel
+        </div>
+      </div>
+
+    </div>
 
 
-<div class="sidebar-logo">
+    <div class="nav-label">
+      Main
+    </div>
 
-<img
-src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-alt="SNK IT Institute Logo"
+    <a href="admin.html" class="nav-item active">
+      <span class="nav-icon">📊</span>
+      Dashboard
+    </a>
+
+    <a href="students.html" class="nav-item">
+      <span class="nav-icon">👨‍🎓</span>
+      Students
+    </a>
+
+    <a href="courses.html" class="nav-item">
+      <span class="nav-icon">📚</span>
+      Courses
+    </a>
+
+
+    <div class="nav-label">
+      Academic
+    </div>
+
+    <a href="admin-assignments.html" class="nav-item">
+      <span class="nav-icon">📝</span>
+      Assignments
+    </a>
+
+    <a href="admin-submissions.html" class="nav-item">
+      <span class="nav-icon">📤</span>
+      Submissions
+    </a>
+
+    <a href="quiz.html" class="nav-item">
+      <span class="nav-icon">❓</span>
+      Quiz
+    </a>
+
+    <a href="results.html" class="nav-item">
+      <span class="nav-icon">🏆</span>
+      Results
+    </a>
+
+
+    <div class="nav-label">
+      Attendance
+    </div>
+
+    <a href="attendance.html" class="nav-item">
+      <span class="nav-icon">📅</span>
+      Attendance
+    </a>
+
+    <a href="attendance-overview.html" class="nav-item">
+      <span class="nav-icon">📈</span>
+      Attendance Overview
+    </a>
+
+
+    <div class="nav-label">
+      Student Portal
+    </div>
+
+    <a href="student-dashboard.html" class="nav-item">
+      <span class="nav-icon">🎓</span>
+      Student Dashboard
+    </a>
+
+    <a href="student-resources.html" class="nav-item">
+      <span class="nav-icon">📖</span>
+      Resources
+    </a>
+
+
+    <div class="sidebar-bottom">
+
+      <button
+        class="nav-item"
+        id="themeBtn"
+        type="button"
+      >
+        <span class="nav-icon">◐</span>
+        Toggle Theme
+      </button>
+
+      <button
+        class="nav-item"
+        id="logoutBtn"
+        type="button"
+      >
+        <span class="nav-icon">↪</span>
+        Logout
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       MAIN
+  ========================= -->
+
+  <main class="main">
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+      <div class="container topbar-inner">
+
+        <div class="page-heading">
+
+          <h1>
+            Admin Dashboard
+          </h1>
+
+          <p>
+            SNK IT Institute • Academic Management
+          </p>
+
+        </div>
+
+        <div class="top-actions">
+
+          <span class="admin-badge">
+            ● Admin
+          </span>
+
+          <button
+            class="menu-btn"
+            id="menuBtn"
+            type="button"
+          >
+            ☰
+          </button>
+
+          <button
+            class="icon-btn"
+            id="printBtn"
+            type="button"
+          >
+            🖨 Print
+          </button>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+      <div class="container">
+
+
+        <!-- =========================
+             EXAM HERO
+        ========================= -->
+
+        <section class="exam-hero">
+
+          <div class="exam-top">
+
+            <div>
+
+              <div class="eyebrow">
+                EXAM COMPLETED
+              </div>
+
+              <h2 class="exam-title">
+                Computer Office
+                <span>Application Exam</span>
+              </h2>
+
+              <p class="exam-description">
+                08 September 2026-এর পরীক্ষা সম্পন্ন হয়েছে।
+                এখন Admin panel থেকে Exam Attendance, Marks,
+                Pass/Fail এবং Result Publish করা যাবে।
+              </p>
+
+              <div class="exam-meta">
+
+                <span class="meta-chip">
+                  📅 08 September 2026
+                </span>
+
+                <span class="meta-chip">
+                  🎓 Batch 01
+                </span>
+
+                <span class="meta-chip">
+                  💻 Computer Office Application
+                </span>
+
+                <span class="meta-chip">
+                  🏫 Offline
+                </span>
+
+                <span class="meta-chip">
+                  📊 Result Management
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="completed-box">
+
+              <strong>
+                ✓ Completed
+              </strong>
+
+              <small>
+                Exam Date: 08 Sep 2026
+              </small>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATS
+        ========================= -->
+
+        <section class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Total Students
+            </div>
+
+            <div
+              class="stat-value"
+              id="totalStudents"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              Registered students
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Exam Present
+            </div>
+
+            <div
+              class="stat-value"
+              id="examPresent"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              Present students
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Exam Absent
+            </div>
+
+            <div
+              class="stat-value"
+              id="examAbsent"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              Absent students
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Results Entered
+            </div>
+
+            <div
+              class="stat-value"
+              id="resultsEntered"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              Marks available
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-label">
+              Published
+            </div>
+
+            <div
+              class="stat-value"
+              id="resultsPublished"
+            >
+              0
+            </div>
+
+            <div class="stat-note">
+              Visible to students
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             EXAM ATTENDANCE
+        ========================= -->
+
+        <section class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <div class="panel-title">
+                Exam Attendance
+              </div>
+
+              <div class="panel-subtitle">
+                08 September 2026 examination attendance
+              </div>
+
+            </div>
+
+            <button
+              class="btn btn-secondary"
+              id="markAllPresentBtn"
+              type="button"
+            >
+              Mark All Present
+            </button>
+
+          </div>
+
+
+          <div class="attendance-grid">
+
+            <div class="attendance-stat">
+              <span>Total</span>
+              <strong id="attendanceTotal">
+                0
+              </strong>
+            </div>
+
+            <div class="attendance-stat">
+              <span>Present</span>
+              <strong id="attendancePresent">
+                0
+              </strong>
+            </div>
+
+            <div class="attendance-stat">
+              <span>Absent</span>
+              <strong id="attendanceAbsent">
+                0
+              </strong>
+            </div>
+
+            <div class="attendance-stat">
+              <span>Attendance %</span>
+              <strong id="attendancePercentage">
+                0%
+              </strong>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             STUDENT EXAM TABLE
+        ========================= -->
+
+        <section class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <div class="panel-title">
+                Exam & Result Management
+              </div>
+
+              <div class="panel-subtitle">
+                Student attendance, marks এবং result publish control
+              </div>
+
+            </div>
+
+            <button
+              class="btn btn-primary"
+              id="publishAllBtn"
+              type="button"
+            >
+              Publish Eligible Results
+            </button>
+
+          </div>
+
+
+          <!-- TOOLBAR -->
+
+          <div class="toolbar">
+
+            <input
+              id="searchInput"
+              class="control"
+              type="search"
+              placeholder="Search student name or ID..."
+            >
+
+            <select
+              id="attendanceFilter"
+              class="control"
+            >
+              <option value="all">
+                All Attendance
+              </option>
+
+              <option value="present">
+                Present
+              </option>
+
+              <option value="absent">
+                Absent
+              </option>
+            </select>
+
+            <select
+              id="resultFilter"
+              class="control"
+            >
+              <option value="all">
+                All Results
+              </option>
+
+              <option value="pending">
+                Result Pending
+              </option>
+
+              <option value="entered">
+                Marks Entered
+              </option>
+
+              <option value="published">
+                Published
+              </option>
+
+              <option value="pass">
+                Pass
+              </option>
+
+              <option value="fail">
+                Fail
+              </option>
+            </select>
+
+            <button
+              class="btn btn-secondary"
+              id="resetFiltersBtn"
+              type="button"
+            >
+              Reset
+            </button>
+
+          </div>
+
+
+          <!-- TABLE -->
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Student
+                  </th>
+
+                  <th>
+                    Attendance
+                  </th>
+
+                  <th>
+                    Marks
+                  </th>
+
+                  <th>
+                    Percentage
+                  </th>
+
+                  <th>
+                    Result
+                  </th>
+
+                  <th>
+                    Publish
+                  </th>
+
+                  <th>
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="studentTableBody"></tbody>
+
+            </table>
+
+          </div>
+
+
+          <div
+            class="empty"
+            id="emptyState"
+          >
+
+            <div class="empty-icon">
+              📋
+            </div>
+
+            <strong>
+              No student found
+            </strong>
+
+            <span>
+              Search/filter পরিবর্তন করে আবার চেষ্টা করুন।
+            </span>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             EXAM INFORMATION
+        ========================= -->
+
+        <section class="panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <div class="panel-title">
+                Exam Information
+              </div>
+
+              <div class="panel-subtitle">
+                Current examination configuration
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div style="padding:20px;">
+
+            <div
+              style="
+                display:grid;
+                grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+                gap:10px;
+              "
+            >
+
+              <div class="attendance-stat">
+                <span>Exam</span>
+                <strong style="font-size:13px;">
+                  Computer Office Application
+                </strong>
+              </div>
+
+              <div class="attendance-stat">
+                <span>Date</span>
+                <strong style="font-size:13px;">
+                  08 Sep 2026
+                </strong>
+              </div>
+
+              <div class="attendance-stat">
+                <span>Batch</span>
+                <strong style="font-size:13px;">
+                  Batch 01
+                </strong>
+              </div>
+
+              <div class="attendance-stat">
+                <span>Status</span>
+                <strong
+                  style="
+                    font-size:13px;
+                    color:#86efac;
+                  "
+                >
+                  Completed
+                </strong>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- =========================
+     RESULT MODAL
+========================= -->
+
+<div
+  class="modal"
+  id="resultModal"
 >
 
-<div class="sidebar-logo-text">
+  <div class="modal-box">
 
-SNK IT Institute
+    <div class="modal-header">
 
-<small>
-Admin Control Panel
-</small>
+      <div class="modal-title">
+        Enter / Edit Student Result
+      </div>
 
-</div>
-
-</div>
-
-
-
-<div class="sidebar-menu">
-
-
-<div class="menu-label">
-Main
-</div>
-
-
-<button
-class="menu-item active"
-onclick="showDemo('Dashboard')">
-
-<span class="menu-icon">
-📊
-</span>
-
-<span>
-Dashboard
-</span>
-
-</button>
-
-
-
-<button
-class="menu-item"
-onclick="openModule('Students')">
-
-<span class="menu-icon">
-👨‍🎓
-</span>
-
-<span>
-Students
-</span>
-
-<span class="menu-badge">
-25
-</span>
-
-</button>
-
-
-
-<button
-class="menu-item"
-onclick="openModule('Courses')">
-
-<span class="menu-icon">
-🎓
-</span>
-
-<span>
-Courses
-</span>
-
-</button>
-
-
-
-<div class="menu-label">
-Academic
-</div>
-
-
-<button
-class="menu-item"
-onclick="openModule('Assignments')">
-
-<span class="menu-icon">
-📝
-</span>
-
-<span>
-Assignments
-</span>
-
-<span class="menu-badge">
-2
-</span>
-
-</button>
-
-
-
-<button
-class="menu-item"
-onclick="openModule('Quiz')">
-
-<span class="menu-icon">
-🎯
-</span>
-
-<span>
-Quiz
-</span>
-
-</button>
-
-
-
-<button
-class="menu-item"
-onclick="openModule('Results')">
-
-<span class="menu-icon">
-🏆
-</span>
-
-<span>
-Results
-</span>
-
-</button>
-
-
-
-<button
-class="menu-item"
-onclick="openModule('Attendance')">
-
-<span class="menu-icon">
-📅
-</span>
-
-<span>
-Attendance
-</span>
-
-</button>
-
-
-
-<div class="menu-label">
-Content
-</div>
-
-
-<button
-class="menu-item"
-onclick="openModule('Resources')">
-
-<span class="menu-icon">
-📚
-</span>
-
-<span>
-Resources
-</span>
-
-</button>
-
-
-
-<button
-class="menu-item"
-onclick="showDemo('Notices')">
-
-<span class="menu-icon">
-📢
-</span>
-
-<span>
-Notices
-</span>
-
-</button>
-
-
-
-<div class="menu-label">
-System
-</div>
-
-
-<button
-class="menu-item"
-onclick="showDemo('Settings')">
-
-<span class="menu-icon">
-⚙️
-</span>
-
-<span>
-Settings
-</span>
-
-</button>
-
-
-</div>
-
-
-
-<div class="sidebar-footer">
-
-
-<div class="admin-mini">
-
-<div class="admin-avatar">
-👨‍💼
-</div>
-
-
-<div class="admin-mini-info">
-
-<strong>
-Super Admin
-</strong>
-
-<span>
-Administrator
-</span>
-
-</div>
-
-
-<button
-class="logout-small"
-onclick="logoutDemo()"
-title="Logout">
-🚪
-</button>
-
-</div>
-
-
-</div>
-
-</aside>
-
-
-
-<div
-class="sidebar-overlay"
-id="sidebarOverlay"
-onclick="closeSidebar()">
-</div>
-
-
-
-<!-- =========================================================
-     MAIN
-     ========================================================= -->
-
-<main class="main">
-
-
-<!-- =====================================================
-     TOPBAR
-     ===================================================== -->
-
-<header class="topbar">
-
-
-<div class="topbar-left">
-
-
-<button
-class="mobile-menu-btn"
-onclick="toggleSidebar()">
-☰
-</button>
-
-
-<div class="page-heading">
-
-<h1>
-Admin Dashboard
-</h1>
-
-<p>
-SNK IT Institute • Offline Course Management
-</p>
-
-</div>
-
-</div>
-
-
-
-<div class="topbar-actions">
-
-
-<button
-class="topbar-btn"
-onclick="toggleTheme()"
-id="themeBtn"
-title="Theme">
-🌙
-</button>
-
-
-<button
-class="topbar-btn"
-onclick="showDemo('Notifications')"
-title="Notifications">
-🔔
-</button>
-
-
-<div class="admin-top-profile">
-
-<div class="top-avatar">
-👨‍💼
-</div>
-
-
-<div class="top-profile-text">
-
-<strong>
-Super Admin
-</strong>
-
-<span>
-Online
-</span>
-
-</div>
-
-</div>
-
-
-</div>
-
-</header>
-
-
-
-<!-- =====================================================
-     CONTENT
-     ===================================================== -->
-
-<div class="content">
-
-
-<!-- =====================================================
-     WELCOME
-     ===================================================== -->
-
-<section class="welcome">
-
-
-<div class="welcome-content">
-
-<h2>
-👋 Welcome, Super Admin
-</h2>
-
-<p>
-SNK IT Institute-এর Offline Course Management
-Dashboard থেকে Students, Assignments, Quiz,
-Marks, Results ও Resources পরিচালনা করা যাবে।
-</p>
-
-</div>
-
-
-<div class="welcome-badge">
-VERSION 1.11 • DEMO UI
-</div>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     STATISTICS
-     ===================================================== -->
-
-<section>
-
-
-<div class="stats-grid">
-
-
-<!-- STUDENTS -->
-
-<div class="stat-card">
-
-<div class="stat-top">
-
-<div class="stat-icon">
-👨‍🎓
-</div>
-
-<span class="stat-change up">
-+3
-</span>
-
-</div>
-
-
-<div class="stat-number">
-25
-</div>
-
-<h3>
-Total Students
-</h3>
-
-<p>
-Active student accounts
-</p>
-
-</div>
-
-
-
-<!-- COURSES -->
-
-<div class="stat-card">
-
-<div class="stat-top">
-
-<div class="stat-icon">
-🎓
-</div>
-
-<span class="stat-change up">
-Active
-</span>
-
-</div>
-
-
-<div class="stat-number">
-3
-</div>
-
-<h3>
-Active Courses
-</h3>
-
-<p>
-Offline courses
-</p>
-
-</div>
-
-
-
-<!-- ASSIGNMENTS -->
-
-<div class="stat-card">
-
-<div class="stat-top">
-
-<div class="stat-icon">
-📝
-</div>
-
-<span class="stat-change warning">
-2
-</span>
-
-</div>
-
-
-<div class="stat-number">
-2
-</div>
-
-<h3>
-Open Assignments
-</h3>
-
-<p>
-Waiting for submission
-</p>
-
-</div>
-
-
-
-<!-- RESULTS -->
-
-<div class="stat-card">
-
-<div class="stat-top">
-
-<div class="stat-icon">
-🏆
-</div>
-
-<span class="stat-change warning">
-Pending
-</span>
-
-</div>
-
-
-<div class="stat-number">
-8
-</div>
-
-<h3>
-Pending Results
-</h3>
-
-<p>
-Need admin marking
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     DASHBOARD MAIN GRID
-     ===================================================== -->
-
-<section class="dashboard-grid">
-
-
-<!-- RECENT ASSIGNMENTS -->
-
-<div class="panel">
-
-
-<div class="panel-header">
-
-<div>
-
-<h3>
-📝 Recent Assignments
-</h3>
-
-<span>
-Latest academic activities
-</span>
-
-</div>
-
-
-<button
-class="view-all"
-onclick="showDemo('All Assignments')">
-View All
-</button>
-
-</div>
-
-
-<div class="panel-body">
-
-
-<div class="assignment-row">
-
-<div class="assignment-row-icon">
-📄
-</div>
-
-
-<div class="assignment-row-info">
-
-<strong>
-MS Word Assignment
-</strong>
-
-<span>
-Computer Office Application • 20 Marks
-</span>
-
-</div>
-
-
-<span class="assignment-status status-open">
-Open
-</span>
-
-</div>
-
-
-
-<div class="assignment-row">
-
-<div class="assignment-row-icon">
-📊
-</div>
-
-
-<div class="assignment-row-info">
-
-<strong>
-MS Excel Assignment
-</strong>
-
-<span>
-Computer Office Application • 25 Marks
-</span>
-
-</div>
-
-
-<span class="assignment-status status-pending">
-Upcoming
-</span>
-
-</div>
-
-
-
-<div class="assignment-row">
-
-<div class="assignment-row-icon">
-📑
-</div>
-
-
-<div class="assignment-row-info">
-
-<strong>
-PowerPoint Assignment
-</strong>
-
-<span>
-Presentation Basics • 20 Marks
-</span>
-
-</div>
-
-
-<span class="assignment-status status-closed">
-Closed
-</span>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
-<!-- COURSE PROGRESS -->
-
-<div class="panel">
-
-
-<div class="panel-header">
-
-<div>
-
-<h3>
-📈 Course Progress
-</h3>
-
-<span>
-Current batch overview
-</span>
-
-</div>
-
-</div>
-
-
-<div class="panel-body">
-
-
-<div class="progress-item">
-
-<div class="progress-title">
-
-<span>
-Computer Office Application
-</span>
-
-<strong>
-65%
-</strong>
-
-</div>
-
-
-<div class="progress-bar">
-
-<div
-class="progress-fill"
-style="width:65%">
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="progress-item">
-
-<div class="progress-title">
-
-<span>
-Graphics Design
-</span>
-
-<strong>
-42%
-</strong>
-
-</div>
-
-
-<div class="progress-bar">
-
-<div
-class="progress-fill purple"
-style="width:42%">
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="progress-item">
-
-<div class="progress-title">
-
-<span>
-Digital Marketing
-</span>
-
-<strong>
-28%
-</strong>
-
-</div>
-
-
-<div class="progress-bar">
-
-<div
-class="progress-fill green"
-style="width:28%">
-</div>
-
-</div>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     QUICK ACTIONS
-     ===================================================== -->
-
-<section class="panel" style="margin-bottom:24px;">
-
-
-<div class="panel-header">
-
-<div>
-
-<h3>
-⚡ Quick Actions
-</h3>
-
-<span>
-Frequently used admin functions
-</span>
-
-</div>
-
-</div>
-
-
-<div class="panel-body">
-
-
-<div class="quick-actions">
-
-
-<button
-class="quick-action"
-onclick="showDemo('Add Student')">
-
-<span class="quick-action-icon">
-👨‍🎓
-</span>
-
-Add Student
-
-</button>
-
-
-
-<button
-class="quick-action"
-onclick="showDemo('Create Assignment')">
-
-<span class="quick-action-icon">
-📝
-</span>
-
-Create Assignment
-
-</button>
-
-
-
-<button
-class="quick-action"
-onclick="showDemo('Create Quiz')">
-
-<span class="quick-action-icon">
-🎯
-</span>
-
-Create Quiz
-
-</button>
-
-
-
-<button
-class="quick-action"
-onclick="showDemo('Give Marks')">
-
-<span class="quick-action-icon">
-✏️
-</span>
-
-Give Marks
-
-</button>
-
-
-
-<button
-class="quick-action"
-onclick="showDemo('Add Resource')">
-
-<span class="quick-action-icon">
-📚
-</span>
-
-Add Resource
-
-</button>
-
-
-
-<button
-class="quick-action"
-onclick="showDemo('Notice')">
-
-<span class="quick-action-icon">
-📢
-</span>
-
-Publish Notice
-
-</button>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     STUDENTS TABLE
-     ===================================================== -->
+      <button
+        class="close-btn"
+        id="closeModalBtn"
+        type="button"
+      >
+        ✕
+      </button>
 
-<section class="table-panel">
+    </div>
 
 
-<div class="panel-header">
+    <div class="modal-body">
 
-<div>
+      <div class="result-preview">
 
-<h3>
-👨‍🎓 Recent Students
-</h3>
+        <strong id="modalStudentName">
+          Student
+        </strong>
 
-<span>
-Recently registered / active students
-</span>
+        <div
+          style="
+            color:#64748b;
+            font-size:10px;
+            margin-top:4px;
+          "
+          id="modalStudentId"
+        >
+          SNK-1001
+        </div>
 
-</div>
-
-
-<button
-class="view-all"
-onclick="openModule('Students')">
-Manage Students
-</button>
-
-</div>
-
-
-<div class="table-wrapper">
-
-
-<table>
-
-
-<thead>
-
-<tr>
-
-<th>
-Student
-</th>
-
-<th>
-Student ID
-</th>
-
-<th>
-Course
-</th>
-
-<th>
-Batch
-</th>
-
-<th>
-Status
-</th>
-
-<th>
-Action
-</th>
-
-</tr>
-
-</thead>
-
-
-<tbody>
-
-
-<tr>
-
-<td>
-
-<div class="student-cell">
-
-<div class="table-avatar">
-👨‍🎓
-</div>
-
-
-<div class="student-name">
-
-<strong>
-Demo Student
-</strong>
-
-<span>
-demo@student.com
-</span>
-
-</div>
-
-</div>
-
-</td>
-
-
-<td>
-SNK-1001
-</td>
-
-
-<td>
-Computer Office
-</td>
-
-
-<td>
-Batch 01
-</td>
-
-
-<td>
-
-<span style="color:var(--success);font-size:8px;">
-<span class="active-dot"></span>
-Active
-</span>
-
-</td>
-
-
-<td>
-
-<button
-class="table-action"
-onclick="showDemo('Student SNK-1001')">
-View
-</button>
-
-</td>
-
-</tr>
-
-
-
-<tr>
-
-<td>
-
-<div class="student-cell">
-
-<div class="table-avatar">
-👩‍🎓
-</div>
-
-
-<div class="student-name">
-
-<strong>
-Student Two
-</strong>
-
-<span>
-student2@example.com
-</span>
-
-</div>
-
-</div>
-
-</td>
-
-
-<td>
-SNK-1002
-</td>
-
-
-<td>
-Graphics Design
-</td>
-
-
-<td>
-Batch 01
-</td>
-
-
-<td>
-
-<span style="color:var(--success);font-size:8px;">
-<span class="active-dot"></span>
-Active
-</span>
-
-</td>
-
-
-<td>
-
-<button
-class="table-action"
-onclick="showDemo('Student SNK-1002')">
-View
-</button>
-
-</td>
-
-</tr>
-
-
-
-<tr>
-
-<td>
-
-<div class="student-cell">
-
-<div class="table-avatar">
-👨‍🎓
-</div>
-
-
-<div class="student-name">
-
-<strong>
-Student Three
-</strong>
-
-<span>
-student3@example.com
-</span>
-
-</div>
-
-</div>
-
-</td>
-
-
-<td>
-SNK-1003
-</td>
-
-
-<td>
-Digital Marketing
-</td>
-
-
-<td>
-Batch 02
-</td>
-
-
-<td>
-
-<span style="color:var(--warning);font-size:8px;">
-● Pending
-</span>
-
-</td>
-
-
-<td>
-
-<button
-class="table-action"
-onclick="showDemo('Student SNK-1003')">
-View
-</button>
-
-</td>
-
-</tr>
-
-
-
-</tbody>
-
-</table>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     LOWER GRID
-     ===================================================== -->
-
-<section class="lower-grid">
-
-
-<!-- PENDING RESULTS -->
+        <div class="result-preview-grid">
 
-<div class="panel">
+          <div class="result-mini">
 
+            <small>
+              Attendance
+            </small>
 
-<div class="panel-header">
+            <strong id="modalAttendance">
+              Present
+            </strong>
 
-<div>
+          </div>
 
-<h3>
-🏆 Pending Results
-</h3>
+          <div class="result-mini">
 
-<span>
-Assignments waiting for marking
-</span>
+            <small>
+              Total Marks
+            </small>
 
-</div>
-
-
-<button
-class="view-all"
-onclick="showDemo('Pending Results')">
-View All
-</button>
-
-</div>
-
-
-<div class="panel-body">
-
-
-<div class="result-row">
-
-<div class="result-avatar">
-👨‍🎓
-</div>
-
-
-<div class="result-info">
-
-<strong>
-Demo Student
-</strong>
-
-<span>
-MS Word Assignment • SNK-1001
-</span>
-
-</div>
-
-
-<div class="mark pending">
-Pending
-</div>
-
-</div>
-
-
-
-<div class="result-row">
-
-<div class="result-avatar">
-👩‍🎓
-</div>
-
-
-<div class="result-info">
-
-<strong>
-Student Two
-</strong>
-
-<span>
-MS Word Assignment • SNK-1002
-</span>
-
-</div>
-
-
-<div class="mark pending">
-Pending
-</div>
-
-</div>
-
-
-
-<div class="result-row">
-
-<div class="result-avatar">
-👨‍🎓
-</div>
-
-
-<div class="result-info">
-
-<strong>
-Student Three
-</strong>
-
-<span>
-PowerPoint Assignment • SNK-1003
-</span>
-
-</div>
-
-
-<div class="mark">
-18/20
-</div>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
-<!-- NOTICES -->
-
-<div class="panel">
+            <strong>
+              100
+            </strong>
 
+          </div>
 
-<div class="panel-header">
+          <div class="result-mini">
 
-<div>
+            <small>
+              Exam Date
+            </small>
 
-<h3>
-📢 Recent Notices
-</h3>
+            <strong>
+              08 Sep
+            </strong>
 
-<span>
-Institute announcements
-</span>
+          </div>
 
-</div>
-
-
-<button
-class="view-all"
-onclick="showDemo('Notices')">
-Manage
-</button>
-
-</div>
-
-
-<div class="panel-body">
-
-
-<div class="notice-row">
-
-<div class="notice-icon">
-📢
-</div>
-
-
-<div class="notice-info">
-
-<strong>
-Assignment Deadline Reminder
-</strong>
-
-<span>
-MS Word Assignment-এর deadline 10 September 2026।
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="notice-row">
-
-<div class="notice-icon">
-🎯
-</div>
-
-
-<div class="notice-info">
-
-<strong>
-New Quiz Available
-</strong>
-
-<span>
-Computer Basic Quiz এখন Student Portal-এ available।
-</span>
-
-</div>
-
-</div>
+        </div>
 
+      </div>
 
 
-<div class="notice-row">
+      <form id="resultForm">
 
-<div class="notice-icon">
-📅
-</div>
-
-
-<div class="notice-info">
-
-<strong>
-Class Schedule Updated
-</strong>
-
-<span>
-Batch 01-এর নতুন class schedule update করা হয়েছে।
-</span>
-
-</div>
-
-</div>
-
-
-
-</div>
-
-</div>
-
+        <div class="form-grid">
 
-</section>
+          <div class="form-group">
 
+            <label class="form-label">
+              Obtained Marks
+            </label>
 
+            <input
+              id="marksInput"
+              class="control"
+              type="number"
+              min="0"
+              max="100"
+              required
+              placeholder="Example: 75"
+            >
 
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
+          </div>
 
-<footer class="footer">
 
-SNK IT Institute • Admin Dashboard 1.11 • Offline Course Management
+          <div class="form-group">
 
-<br>
+            <label class="form-label">
+              Pass Mark
+            </label>
 
-© 2026 SNK IT Institute. All Rights Reserved.
+            <input
+              id="passMarkInput"
+              class="control"
+              type="number"
+              min="0"
+              max="100"
+              value="40"
+              required
+            >
 
-</footer>
+          </div>
 
 
-</div>
-
-</main>
-
-</div>
-
-
-
-<!-- =========================================================
-     DEMO MODAL
-     ========================================================= -->
-
-<div
-class="modal-overlay"
-id="demoModal"
-onclick="closeModalOutside(event)">
+          <div class="form-group full">
 
+            <label class="form-label">
+              Teacher/Admin Note
+            </label>
 
-<div class="modal">
+            <textarea
+              id="resultNote"
+              class="control"
+              placeholder="Optional note..."
+            ></textarea>
 
+          </div>
 
-<div class="modal-header">
+        </div>
 
-<h3 id="modalTitle">
-Demo Function
-</h3>
+      </form>
 
+    </div>
 
-<button
-class="modal-close"
-onclick="closeModal()">
-×
-</button>
 
-</div>
-
-
-<p id="modalText">
-এই function পরবর্তী ধাপে তৈরি করা হবে।
-</p>
-
+    <div class="modal-footer">
 
-<div class="demo-box">
+      <button
+        class="btn btn-secondary"
+        id="cancelModalBtn"
+        type="button"
+      >
+        Cancel
+      </button>
 
-<strong>
-🔧 Current Version: 1.11
-</strong>
+      <button
+        class="btn btn-primary"
+        id="saveResultBtn"
+        type="button"
+      >
+        Save Result
+      </button>
 
-<span>
-এটি এখন UI/Demo mode-এ আছে। Existing project modules-এর direct navigation যুক্ত হয়েছে। Real database পরে যুক্ত হবে।
-</span>
+    </div>
 
-</div>
-
+  </div>
 
-<button
-class="modal-btn"
-onclick="closeModal()">
-ঠিক আছে
-</button>
-
-
 </div>
 
-</div>
 
+<!-- =========================
+     TOAST
+========================= -->
 
+<div id="toastContainer"></div>
 
-<!-- =========================================================
-     JAVASCRIPT
-     ========================================================= -->
 
 <script>
-
-
 /* =========================================================
-   THEME
-   ========================================================= */
-
-function toggleTheme(){
-
-    document.body.classList.toggle("dark");
-
-    const isDark =
-        document.body.classList.contains("dark");
-
-    localStorage.setItem(
-        "snkAdminTheme",
-        isDark ? "dark" : "light"
-    );
-
-    document.getElementById("themeBtn").textContent =
-        isDark ? "☀️" : "🌙";
-}
+   SNK IT INSTITUTE
+   ADMIN EXAM MANAGEMENT
+   STEP 2.1
+========================================================= */
 
 
-(function(){
+/* =========================
+   STORAGE
+========================= */
 
-    const savedTheme =
-        localStorage.getItem("snkAdminTheme");
+const STORAGE = {
 
-    if(savedTheme === "dark"){
+  adminLogin:
+    "shoppingMelaAdminLoggedIn",
 
-        document.body.classList.add("dark");
+  adminSession:
+    "snkAdminLoggedIn",
 
-        document.getElementById("themeBtn").textContent =
-            "☀️";
+  results:
+    "snkAdminExamResultsV21",
+
+  examAttendance:
+    "snkExamAttendanceV21",
+
+  studentList:
+    "snkStudents",
+
+  theme:
+    "snkTheme"
+
+};
+
+
+/* =========================
+   EXAM CONFIG
+========================= */
+
+const EXAM = {
+
+  id:
+    "SNK-EXAM-2026-09-08",
+
+  name:
+    "Computer Office Application Exam",
+
+  course:
+    "Computer Office Application",
+
+  batch:
+    "Batch 01",
+
+  date:
+    "08 September 2026",
+
+  isoDate:
+    "2026-09-08",
+
+  totalMarks:
+    100,
+
+  passMark:
+    40
+
+};
+
+
+/* =========================
+   DEMO STUDENTS
+   Used only if no student
+   data exists yet.
+========================= */
+
+const DEFAULT_STUDENTS = [
+
+  {
+    id: "SNK-1001",
+    name: "Student",
+    course: "Computer Office Application",
+    batch: "Batch 01"
+  }
+
+];
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function getJSON(key, fallback) {
+
+  try {
+
+    const raw =
+      localStorage.getItem(key);
+
+    if (!raw) {
+      return fallback;
     }
 
-})();
+    const parsed =
+      JSON.parse(raw);
 
+    return parsed ?? fallback;
 
+  } catch (error) {
 
-/* =========================================================
-   MOBILE SIDEBAR
-   ========================================================= */
+    return fallback;
 
-function toggleSidebar(){
+  }
 
-    document
-        .getElementById("sidebar")
-        .classList.toggle("open");
-
-    document
-        .getElementById("sidebarOverlay")
-        .classList.toggle("show");
 }
 
 
-function closeSidebar(){
+function saveJSON(key, value) {
 
-    document
-        .getElementById("sidebar")
-        .classList.remove("open");
+  localStorage.setItem(
+    key,
+    JSON.stringify(value)
+  );
 
-    document
-        .getElementById("sidebarOverlay")
-        .classList.remove("show");
 }
 
 
+/* =========================
+   STUDENT DATA
+========================= */
 
-/* =========================================================
-   SIDEBAR MENU
-   ========================================================= */
+function getStudents() {
 
-const menuItems =
-    document.querySelectorAll(".menu-item");
+  const possibleKeys = [
+
+    "snkStudents",
+    "students",
+    "shoppingMelaUsers"
+
+  ];
 
 
-menuItems.forEach(function(item){
+  for (const key of possibleKeys) {
 
-    item.addEventListener(
-        "click",
-        function(){
+    const data =
+      getJSON(key, null);
 
-            menuItems.forEach(function(menu){
 
-                menu.classList.remove("active");
+    if (Array.isArray(data) && data.length) {
 
-            });
+      const normalized =
+        data
+          .map((student, index) => {
 
-            item.classList.add("active");
+            const id =
+              student.studentId ||
+              student.id ||
+              student.userId ||
+              `SNK-${1000 + index + 1}`;
 
-            if(window.innerWidth <= 800){
 
-                closeSidebar();
+            const name =
+              student.name ||
+              student.studentName ||
+              student.fullName ||
+              "Student";
 
+
+            return {
+
+              id: String(id),
+
+              name: String(name),
+
+              course:
+                student.course ||
+                EXAM.course,
+
+              batch:
+                student.batch ||
+                EXAM.batch
+
+            };
+
+          });
+
+
+      if (normalized.length) {
+
+        return normalized;
+
+      }
+
+    }
+
+  }
+
+
+  return [...DEFAULT_STUDENTS];
+
+}
+
+
+/* =========================
+   ATTENDANCE
+========================= */
+
+function getAttendance() {
+
+  const data =
+    getJSON(
+      STORAGE.examAttendance,
+      {}
+    );
+
+
+  return data &&
+    typeof data === "object"
+    ? data
+    : {};
+
+}
+
+
+function saveAttendance(data) {
+
+  saveJSON(
+    STORAGE.examAttendance,
+    data
+  );
+
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+function getResults() {
+
+  const data =
+    getJSON(
+      STORAGE.results,
+      []
+    );
+
+
+  return Array.isArray(data)
+    ? data
+    : [];
+
+}
+
+
+function saveResults(data) {
+
+  saveJSON(
+    STORAGE.results,
+    data
+  );
+
+}
+
+
+/* =========================
+   DATA INITIALIZATION
+========================= */
+
+let students =
+  getStudents();
+
+let attendance =
+  getAttendance();
+
+let results =
+  getResults();
+
+let selectedStudentId =
+  null;
+
+
+/* =========================
+   NORMALIZE EXISTING RESULT
+========================= */
+
+function getStudentResult(studentId) {
+
+  return results.find(
+    result =>
+      String(result.studentId) ===
+      String(studentId) &&
+      result.examId === EXAM.id
+  );
+
+}
+
+
+/* =========================
+   ATTENDANCE STATUS
+========================= */
+
+function getStudentAttendance(studentId) {
+
+  const value =
+    attendance[String(studentId)];
+
+
+  if (
+    value === "present" ||
+    value === "Present"
+  ) {
+
+    return "present";
+
+  }
+
+
+  if (
+    value === "absent" ||
+    value === "Absent"
+  ) {
+
+    return "absent";
+
+  }
+
+
+  return "absent";
+
+}
+
+
+/* =========================
+   MARK ATTENDANCE
+========================= */
+
+function markStudentAttendance(
+  studentId,
+  status
+) {
+
+  attendance[String(studentId)] =
+    status;
+
+
+  saveAttendance(
+    attendance
+  );
+
+
+  renderAll();
+
+  showToast(
+    status === "present"
+      ? "Student marked Present."
+      : "Student marked Absent."
+  );
+
+}
+
+
+/* =========================
+   MARK ALL PRESENT
+========================= */
+
+document
+  .getElementById(
+    "markAllPresentBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      students.forEach(
+        student => {
+
+          attendance[
+            String(student.id)
+          ] = "present";
+
+        }
+      );
+
+
+      saveAttendance(
+        attendance
+      );
+
+
+      renderAll();
+
+
+      showToast(
+        "All students marked Present."
+      );
+
+    }
+  );
+
+
+/* =========================
+   FILTERS
+========================= */
+
+const searchInput =
+  document.getElementById(
+    "searchInput"
+  );
+
+const attendanceFilter =
+  document.getElementById(
+    "attendanceFilter"
+  );
+
+const resultFilter =
+  document.getElementById(
+    "resultFilter"
+  );
+
+
+function getFilteredStudents() {
+
+  const search =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+
+  const attendanceValue =
+    attendanceFilter.value;
+
+
+  const resultValue =
+    resultFilter.value;
+
+
+  return students.filter(
+    student => {
+
+      const studentResult =
+        getStudentResult(
+          student.id
+        );
+
+
+      const studentAttendance =
+        getStudentAttendance(
+          student.id
+        );
+
+
+      const searchable =
+        (
+          student.name +
+          " " +
+          student.id +
+          " " +
+          student.course +
+          " " +
+          student.batch
+        )
+          .toLowerCase();
+
+
+      const searchMatch =
+        !search ||
+        searchable.includes(search);
+
+
+      const attendanceMatch =
+        attendanceValue === "all" ||
+        studentAttendance ===
+          attendanceValue;
+
+
+      let resultMatch = true;
+
+
+      if (
+        resultValue === "pending"
+      ) {
+
+        resultMatch =
+          !studentResult;
+
+      }
+
+
+      if (
+        resultValue === "entered"
+      ) {
+
+        resultMatch =
+          !!studentResult;
+
+      }
+
+
+      if (
+        resultValue === "published"
+      ) {
+
+        resultMatch =
+          !!studentResult &&
+          studentResult.published === true;
+
+      }
+
+
+      if (
+        resultValue === "pass"
+      ) {
+
+        resultMatch =
+          !!studentResult &&
+          studentResult.result === "Pass";
+
+      }
+
+
+      if (
+        resultValue === "fail"
+      ) {
+
+        resultMatch =
+          !!studentResult &&
+          studentResult.result === "Fail";
+
+      }
+
+
+      return (
+        searchMatch &&
+        attendanceMatch &&
+        resultMatch
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   RENDER TABLE
+========================= */
+
+function renderStudents() {
+
+  const body =
+    document.getElementById(
+      "studentTableBody"
+    );
+
+
+  const empty =
+    document.getElementById(
+      "emptyState"
+    );
+
+
+  const list =
+    getFilteredStudents();
+
+
+  body.innerHTML = "";
+
+
+  if (!list.length) {
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  empty.style.display =
+    "none";
+
+
+  list.forEach(
+    student => {
+
+      const attendanceStatus =
+        getStudentAttendance(
+          student.id
+        );
+
+
+      const result =
+        getStudentResult(
+          student.id
+        );
+
+
+      let marks =
+        "—";
+
+
+      let percentage =
+        "—";
+
+
+      let resultStatus =
+        "Pending";
+
+
+      let resultClass =
+        "status-pending";
+
+
+      let publishStatus =
+        "Not Published";
+
+
+      let publishClass =
+        "status-pending";
+
+
+      if (result) {
+
+        marks =
+          `${result.marks}/${EXAM.totalMarks}`;
+
+
+        percentage =
+          `${result.percentage}%`;
+
+
+        resultStatus =
+          result.result;
+
+
+        resultClass =
+          result.result === "Pass"
+            ? "status-pass"
+            : "status-fail";
+
+
+        if (result.published) {
+
+          publishStatus =
+            "Published";
+
+          publishClass =
+            "status-published";
+
+        }
+
+      }
+
+
+      const row =
+        document.createElement(
+          "tr"
+        );
+
+
+      const firstLetter =
+        student.name
+          .trim()
+          .charAt(0)
+          .toUpperCase() ||
+        "S";
+
+
+      row.innerHTML = `
+
+        <td>
+
+          <div class="student-cell">
+
+            <div class="student-avatar">
+              ${escapeHTML(firstLetter)}
+            </div>
+
+            <div>
+
+              <div class="student-name-cell">
+                ${escapeHTML(student.name)}
+              </div>
+
+              <div class="student-id-cell">
+                ${escapeHTML(student.id)}
+              </div>
+
+            </div>
+
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <div class="action-group">
+
+            <button
+              class="small-btn"
+              data-attendance="present"
+              data-id="${escapeHTML(student.id)}"
+            >
+              ✓ Present
+            </button>
+
+            <button
+              class="small-btn"
+              data-attendance="absent"
+              data-id="${escapeHTML(student.id)}"
+            >
+              ✕ Absent
+            </button>
+
+          </div>
+
+          <div style="margin-top:6px;">
+
+            <span class="
+              status
+              ${
+                attendanceStatus === "present"
+                  ? "status-present"
+                  : "status-absent"
+              }
+            ">
+              ${
+                attendanceStatus === "present"
+                  ? "Present"
+                  : "Absent"
+              }
+            </span>
+
+          </div>
+
+        </td>
+
+
+        <td>
+          <strong>
+            ${marks}
+          </strong>
+        </td>
+
+
+        <td>
+          ${percentage}
+        </td>
+
+
+        <td>
+
+          <span class="
+            status
+            ${resultClass}
+          ">
+            ${resultStatus}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <span class="
+            status
+            ${publishClass}
+          ">
+            ${publishStatus}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <div class="action-group">
+
+            <button
+              class="small-btn edit-result-btn"
+              data-id="${escapeHTML(student.id)}"
+            >
+              ${
+                result
+                  ? "Edit Marks"
+                  : "Enter Marks"
+              }
+            </button>
+
+            ${
+              result
+                ? `
+                  <button
+                    class="small-btn toggle-publish-btn"
+                    data-id="${escapeHTML(student.id)}"
+                  >
+                    ${
+                      result.published
+                        ? "Unpublish"
+                        : "Publish"
+                    }
+                  </button>
+                `
+                : ""
             }
 
-        }
+          </div>
+
+        </td>
+
+      `;
+
+
+      body.appendChild(row);
+
+    }
+  );
+
+
+  attachTableEvents();
+
+}
+
+
+/* =========================
+   TABLE EVENTS
+========================= */
+
+function attachTableEvents() {
+
+  document
+    .querySelectorAll(
+      "[data-attendance]"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            markStudentAttendance(
+              button.dataset.id,
+              button.dataset.attendance
+            );
+
+          }
+        );
+
+      }
     );
 
-});
 
+  document
+    .querySelectorAll(
+      ".edit-result-btn"
+    )
+    .forEach(
+      button => {
 
+        button.addEventListener(
+          "click",
+          () => {
 
-/* =========================================================
-   DEMO MODAL
-   ========================================================= */
+            openResultModal(
+              button.dataset.id
+            );
 
-function showDemo(name){
-
-    document.getElementById("modalTitle").textContent =
-        name;
-
-    document.getElementById("modalText").textContent =
-        name +
-        " management function এখন Demo UI হিসেবে দেখানো হচ্ছে। পরবর্তী development step-এ এই function-এর real working system তৈরি করা হবে।";
-
-    document
-        .getElementById("demoModal")
-        .classList.add("show");
-}
-
-
-function closeModal(){
-
-    document
-        .getElementById("demoModal")
-        .classList.remove("show");
-}
-
-
-function closeModalOutside(event){
-
-    if(
-        event.target ===
-        document.getElementById("demoModal")
-    ){
-
-        closeModal();
-
-    }
-
-}
-
-
-
-/* =========================================================
-   DEMO LOGOUT
-   ========================================================= */
-
-function logoutDemo(){
-
-    const confirmLogout =
-        confirm(
-            "Demo Admin Logout করতে চান?"
+          }
         );
 
-    if(confirmLogout){
+      }
+    );
 
-        alert(
-            "Demo Logout সম্পন্ন হয়েছে।\n\nReal Admin Login/Logout system পরবর্তী নির্ধারিত ধাপে যুক্ত হবে।"
+
+  document
+    .querySelectorAll(
+      ".toggle-publish-btn"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            togglePublish(
+              button.dataset.id
+            );
+
+          }
         );
 
-    }
+      }
+    );
 
 }
 
 
+/* =========================
+   RESULT MODAL
+========================= */
 
-/* =========================================================
-   ESC KEY
-   ========================================================= */
+const resultModal =
+  document.getElementById(
+    "resultModal"
+  );
 
-document.addEventListener(
-    "keydown",
-    function(event){
 
-        if(event.key === "Escape"){
+function openResultModal(
+  studentId
+) {
 
-            closeModal();
+  const student =
+    students.find(
+      item =>
+        String(item.id) ===
+        String(studentId)
+    );
 
-            closeSidebar();
 
-        }
+  if (!student) {
+    return;
+  }
+
+
+  selectedStudentId =
+    String(student.id);
+
+
+  const result =
+    getStudentResult(
+      student.id
+    );
+
+
+  const attendanceStatus =
+    getStudentAttendance(
+      student.id
+    );
+
+
+  document.getElementById(
+    "modalStudentName"
+  ).textContent =
+    student.name;
+
+
+  document.getElementById(
+    "modalStudentId"
+  ).textContent =
+    student.id;
+
+
+  document.getElementById(
+    "modalAttendance"
+  ).textContent =
+    attendanceStatus === "present"
+      ? "Present"
+      : "Absent";
+
+
+  document.getElementById(
+    "marksInput"
+  ).value =
+    result
+      ? result.marks
+      : "";
+
+
+  document.getElementById(
+    "passMarkInput"
+  ).value =
+    result
+      ? result.passMark
+      : EXAM.passMark;
+
+
+  document.getElementById(
+    "resultNote"
+  ).value =
+    result
+      ? result.note || ""
+      : "";
+
+
+  resultModal.classList.add(
+    "show"
+  );
+
+}
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeResultModal() {
+
+  resultModal.classList.remove(
+    "show"
+  );
+
+  selectedStudentId =
+    null;
+
+}
+
+
+document
+  .getElementById(
+    "closeModalBtn"
+  )
+  .addEventListener(
+    "click",
+    closeResultModal
+  );
+
+
+document
+  .getElementById(
+    "cancelModalBtn"
+  )
+  .addEventListener(
+    "click",
+    closeResultModal
+  );
+
+
+resultModal.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target ===
+      resultModal
+    ) {
+
+      closeResultModal();
 
     }
+
+  }
 );
 
 
-</script>
+/* =========================
+   SAVE RESULT
+========================= */
 
+document
+  .getElementById(
+    "saveResultBtn"
+  )
+  .addEventListener(
+    "click",
+    saveResult
+  );
+
+
+function saveResult() {
+
+  if (!selectedStudentId) {
+
+    showToast(
+      "Student select করা হয়নি।"
+    );
+
+    return;
+
+  }
+
+
+  const student =
+    students.find(
+      item =>
+        String(item.id) ===
+        String(selectedStudentId)
+    );
+
+
+  if (!student) {
+    return;
+  }
+
+
+  const marks =
+    Number(
+      document.getElementById(
+        "marksInput"
+      ).value
+    );
+
+
+  const passMark =
+    Number(
+      document.getElementById(
+        "passMarkInput"
+      ).value
+    );
+
+
+  const note =
+    document.getElementById(
+      "resultNote"
+    ).value.trim();
+
+
+  if (
+    !Number.isFinite(marks) ||
+    marks < 0 ||
+    marks > EXAM.totalMarks
+  ) {
+
+    showToast(
+      `Marks অবশ্যই 0 থেকে ${EXAM.totalMarks}-এর মধ্যে হতে হবে।`
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !Number.isFinite(passMark) ||
+    passMark < 0 ||
+    passMark > EXAM.totalMarks
+  ) {
+
+    showToast(
+      "Valid pass mark দিন।"
+    );
+
+    return;
+
+  }
+
+
+  const percentage =
+    Number(
+      (
+        (marks / EXAM.totalMarks) *
+        100
+      ).toFixed(2)
+    );
+
+
+  const resultStatus =
+    marks >= passMark
+      ? "Pass"
+      : "Fail";
+
+
+  const existingIndex =
+    results.findIndex(
+      item =>
+        String(item.studentId) ===
+          String(student.id) &&
+        item.examId === EXAM.id
+    );
+
+
+  const oldResult =
+    existingIndex >= 0
+      ? results[existingIndex]
+      : null;
+
+
+  const resultObject = {
+
+    id:
+      oldResult?.id ||
+      `RESULT-${Date.now()}`,
+
+    examId:
+      EXAM.id,
+
+    examName:
+      EXAM.name,
+
+    examDate:
+      EXAM.isoDate,
+
+    studentId:
+      student.id,
+
+    studentName:
+      student.name,
+
+    course:
+      student.course ||
+      EXAM.course,
+
+    batch:
+      student.batch ||
+      EXAM.batch,
+
+    totalMarks:
+      EXAM.totalMarks,
+
+    marks:
+      marks,
+
+    percentage:
+      percentage,
+
+    passMark:
+      passMark,
+
+    result:
+      resultStatus,
+
+    note:
+      note,
+
+    published:
+      oldResult
+        ? oldResult.published === true
+        : false,
+
+    createdAt:
+      oldResult?.createdAt ||
+      new Date().toISOString(),
+
+    updatedAt:
+      new Date().toISOString()
+
+  };
+
+
+  if (existingIndex >= 0) {
+
+    results[existingIndex] =
+      resultObject;
+
+  } else {
+
+    results.push(
+      resultObject
+    );
+
+  }
+
+
+  saveResults(
+    results
+  );
+
+
+  closeResultModal();
+
+  renderAll();
+
+
+  showToast(
+    `${student.name}-এর result save হয়েছে।`
+  );
+
+}
+
+
+/* =========================
+   PUBLISH / UNPUBLISH
+========================= */
+
+function togglePublish(
+  studentId
+) {
+
+  const index =
+    results.findIndex(
+      result =>
+        String(result.studentId) ===
+          String(studentId) &&
+        result.examId === EXAM.id
+    );
+
+
+  if (index < 0) {
+
+    showToast(
+      "আগে marks enter করুন।"
+    );
+
+    return;
+
+  }
+
+
+  const result =
+    results[index];
+
+
+  result.published =
+    !result.published;
+
+
+  result.updatedAt =
+    new Date().toISOString();
+
+
+  saveResults(
+    results
+  );
+
+
+  renderAll();
+
+
+  showToast(
+    result.published
+      ? "Result published হয়েছে।"
+      : "Result unpublished হয়েছে।"
+  );
+
+}
+
+
+/* =========================
+   PUBLISH ELIGIBLE
+========================= */
+
+document
+  .getElementById(
+    "publishAllBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      let count = 0;
+
+
+      results =
+        results.map(
+          result => {
+
+            if (
+              result.examId === EXAM.id &&
+              !result.published &&
+              typeof result.marks === "number"
+            ) {
+
+              count++;
+
+              return {
+
+                ...result,
+
+                published: true,
+
+                updatedAt:
+                  new Date().toISOString()
+
+              };
+
+            }
+
+
+            return result;
+
+          }
+        );
+
+
+      saveResults(
+        results
+      );
+
+
+      renderAll();
+
+
+      showToast(
+        count
+          ? `${count}টি result publish করা হয়েছে।`
+          : "Publish করার মতো কোনো pending result নেই।"
+      );
+
+    }
+  );
+
+
+/* =========================
+   FILTER EVENTS
+========================= */
+
+searchInput.addEventListener(
+  "input",
+  renderStudents
+);
+
+
+attendanceFilter.addEventListener(
+  "change",
+  renderStudents
+);
+
+
+resultFilter.addEventListener(
+  "change",
+  renderStudents
+);
+
+
+document
+  .getElementById(
+    "resetFiltersBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      searchInput.value = "";
+
+      attendanceFilter.value =
+        "all";
+
+      resultFilter.value =
+        "all";
+
+      renderStudents();
+
+    }
+  );
+
+
+/* =========================
+   STATS
+========================= */
+
+function renderStats() {
+
+  const total =
+    students.length;
+
+
+  let present = 0;
+  let absent = 0;
+  let entered = 0;
+  let published = 0;
+
+
+  students.forEach(
+    student => {
+
+      const attendanceStatus =
+        getStudentAttendance(
+          student.id
+        );
+
+
+      if (
+        attendanceStatus ===
+        "present"
+      ) {
+
+        present++;
+
+      } else {
+
+        absent++;
+
+      }
+
+
+      const result =
+        getStudentResult(
+          student.id
+        );
+
+
+      if (result) {
+
+        entered++;
+
+        if (result.published) {
+
+          published++;
+
+        }
+
+      }
+
+    }
+  );
+
+
+  const percentage =
+    total
+      ? Number(
+          (
+            (present / total) *
+            100
+          ).toFixed(1)
+        )
+      : 0;
+
+
+  document.getElementById(
+    "totalStudents"
+  ).textContent =
+    total;
+
+
+  document.getElementById(
+    "examPresent"
+  ).textContent =
+    present;
+
+
+  document.getElementById(
+    "examAbsent"
+  ).textContent =
+    absent;
+
+
+  document.getElementById(
+    "resultsEntered"
+  ).textContent =
+    entered;
+
+
+  document.getElementById(
+    "resultsPublished"
+  ).textContent =
+    published;
+
+
+  document.getElementById(
+    "attendanceTotal"
+  ).textContent =
+    total;
+
+
+  document.getElementById(
+    "attendancePresent"
+  ).textContent =
+    present;
+
+
+  document.getElementById(
+    "attendanceAbsent"
+  ).textContent =
+    absent;
+
+
+  document.getElementById(
+    "attendancePercentage"
+  ).textContent =
+    `${percentage}%`;
+
+}
+
+
+/* =========================
+   RENDER ALL
+========================= */
+
+function renderAll() {
+
+  students =
+    getStudents();
+
+  attendance =
+    getAttendance();
+
+  results =
+    getResults();
+
+
+  renderStats();
+
+  renderStudents();
+
+}
+
+
+/* =========================
+   THEME
+========================= */
+
+function applyTheme() {
+
+  const theme =
+    localStorage.getItem(
+      STORAGE.theme
+    ) || "dark";
+
+
+  if (theme === "light") {
+
+    document.body.style.background =
+      "#f8fafc";
+
+    document.body.style.color =
+      "#0f172a";
+
+  } else {
+
+    document.body.style.background = "";
+
+    document.body.style.color = "";
+
+  }
+
+}
+
+
+document
+  .getElementById(
+    "themeBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const current =
+        localStorage.getItem(
+          STORAGE.theme
+        ) || "dark";
+
+
+      const next =
+        current === "dark"
+          ? "light"
+          : "dark";
+
+
+      localStorage.setItem(
+        STORAGE.theme,
+        next
+      );
+
+
+      applyTheme();
+
+
+      showToast(
+        next === "dark"
+          ? "Dark mode enabled."
+          : "Light mode enabled."
+      );
+
+    }
+  );
+
+
+/* =========================
+   MOBILE SIDEBAR
+========================= */
+
+document
+  .getElementById(
+    "menuBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "sidebar"
+        )
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+  .getElementById(
+    "logoutBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const confirmed =
+        confirm(
+          "Admin panel থেকে logout করতে চান?"
+        );
+
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      sessionStorage.removeItem(
+        STORAGE.adminSession
+      );
+
+
+      sessionStorage.removeItem(
+        "shoppingMelaAdminLoggedIn"
+      );
+
+
+      window.location.href =
+        "admin-login.html";
+
+    }
+  );
+
+
+/* =========================
+   PRINT
+========================= */
+
+document
+  .getElementById(
+    "printBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      window.print();
+
+    }
+  );
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message) {
+
+  const container =
+    document.getElementById(
+      "toastContainer"
+    );
+
+
+  const toast =
+    document.createElement(
+      "div"
+    );
+
+
+  toast.className =
+    "toast";
+
+
+  toast.textContent =
+    message;
+
+
+  container.appendChild(
+    toast
+  );
+
+
+  setTimeout(
+    () => {
+
+      toast.style.opacity =
+        "0";
+
+      toast.style.transform =
+        "translateY(8px)";
+
+
+      setTimeout(
+        () => toast.remove(),
+        250
+      );
+
+    },
+    2800
+  );
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closeResultModal();
+
+      document
+        .getElementById(
+          "sidebar"
+        )
+        .classList.remove(
+          "open"
+        );
+
+    }
+
+  }
+);
+
+
+/* =========================
+   STORAGE SYNC
+========================= */
+
+window.addEventListener(
+  "storage",
+  () => {
+
+    renderAll();
+
+    applyTheme();
+
+  }
+);
+
+
+/* =========================
+   VISIBILITY REFRESH
+========================= */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if (!document.hidden) {
+
+      renderAll();
+
+      applyTheme();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   GLOBAL ADMIN API
+========================= */
+
+window.SNKAdminExam = {
+
+  exam:
+    EXAM,
+
+  getStudents:
+    () => [...students],
+
+  getAttendance:
+    () => ({...attendance}),
+
+  getResults:
+    () => [...results],
+
+  refresh:
+    renderAll,
+
+  markAttendance:
+    markStudentAttendance,
+
+  saveResult:
+    saveResult,
+
+  publish:
+    togglePublish
+
+};
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+applyTheme();
+
+renderAll();
+
+
+console.log(
+  "SNK IT Admin Exam Management Step 2.1 loaded.",
+  EXAM
+);
+
+</script>
 
 </body>
 </html>
+```
