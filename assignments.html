@@ -6,34 +6,37 @@
 
   <title>Assignments | SNK IT Institute</title>
 
+  <meta
+    name="description"
+    content="SNK IT Institute Student Portal - Assignments"
+  >
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     :root{
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --text:#172033;
-      --muted:#687386;
-      --border:#e5e9f2;
-      --primary:#2563eb;
-      --primary-dark:#1d4ed8;
-      --success:#16a34a;
-      --warning:#d97706;
-      --danger:#dc2626;
-      --purple:#7c3aed;
-      --shadow:0 10px 30px rgba(15,23,42,.08);
-      --radius:18px;
-    }
+      --bg:#07111f;
+      --bg2:#0b1728;
+      --card:rgba(15,29,48,.88);
+      --card2:rgba(255,255,255,.045);
+      --text:#f7fbff;
+      --muted:#9db0c6;
+      --line:rgba(255,255,255,.09);
 
-    body.dark{
-      --bg:#0b1220;
-      --card:#111827;
-      --text:#f1f5f9;
-      --muted:#94a3b8;
-      --border:#243047;
-      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --primary:#4f8cff;
+      --primary2:#7b61ff;
+
+      --success:#22c55e;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+
+      --shadow:0 20px 60px rgba(0,0,0,.30);
     }
 
     *{
@@ -47,23 +50,57 @@
     }
 
     body{
-      font-family:"Noto Sans Bengali",sans-serif;
-      background:var(--bg);
+      min-height:100vh;
+      font-family:"Inter","Noto Sans Bengali",sans-serif;
       color:var(--text);
       line-height:1.6;
-      transition:.25s ease;
+
+      background:
+        radial-gradient(
+          circle at 15% 8%,
+          rgba(79,140,255,.15),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 12%,
+          rgba(123,97,255,.14),
+          transparent 27%
+        ),
+        linear-gradient(
+          145deg,
+          var(--bg),
+          var(--bg2)
+        );
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.07;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.8) 1px,
+          transparent 1px
+        );
+
+      background-size:90px 90px;
     }
 
     a{
-      text-decoration:none;
       color:inherit;
+      text-decoration:none;
     }
 
     button,
     input,
     textarea,
     select{
-      font-family:inherit;
+      font:inherit;
     }
 
     button{
@@ -71,1032 +108,1997 @@
     }
 
     .container{
-      width:min(1180px,92%);
+      width:min(1180px,calc(100% - 32px));
       margin:auto;
     }
 
     /* =========================
-       HEADER
-    ========================== */
+       NAVBAR
+    ========================= */
 
-    header{
+    .navbar{
       position:sticky;
       top:0;
       z-index:1000;
-      background:rgba(255,255,255,.92);
-      border-bottom:1px solid var(--border);
-      backdrop-filter:blur(12px);
+
+      background:rgba(7,17,31,.86);
+      backdrop-filter:blur(18px);
+
+      border-bottom:1px solid var(--line);
     }
 
-    body.dark header{
-      background:rgba(17,24,39,.92);
-    }
-
-    .nav{
+    .nav-inner{
       min-height:72px;
+
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:20px;
+      gap:16px;
     }
 
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
-      font-weight:800;
+      gap:11px;
+      white-space:nowrap;
     }
 
-    .brand img{
-      width:45px;
-      height:45px;
+    .brand-logo{
+      width:44px;
+      height:44px;
+
+      padding:5px;
+
       object-fit:contain;
-      border-radius:12px;
+
+      border-radius:13px;
+
       background:#fff;
-      padding:4px;
-      border:1px solid var(--border);
     }
 
     .brand-text{
       display:flex;
       flex-direction:column;
-      line-height:1.2;
+
+      line-height:1.15;
     }
 
     .brand-title{
-      font-size:17px;
+      font-size:15px;
       font-weight:800;
     }
 
-    .brand-subtitle{
+    .brand-sub{
       color:var(--muted);
       font-size:11px;
-      margin-top:3px;
+      font-weight:600;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:3px;
+    }
+
+    .nav-links a{
+      padding:9px 10px;
+
+      border-radius:10px;
+
+      color:#c9d7e7;
+
+      font-size:11px;
+      font-weight:600;
+
+      transition:.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:#fff;
+      background:rgba(79,140,255,.12);
     }
 
     .nav-actions{
       display:flex;
-      align-items:center;
       gap:8px;
     }
 
-    .nav-btn{
-      border:1px solid var(--border);
-      background:var(--card);
-      color:var(--text);
-      min-height:40px;
-      padding:0 13px;
-      border-radius:11px;
-      font-weight:700;
-      font-size:13px;
-      transition:.2s ease;
+    .icon-btn{
+      width:40px;
+      height:40px;
+
+      display:grid;
+      place-items:center;
+
+      border:1px solid var(--line);
+      border-radius:12px;
+
+      background:rgba(255,255,255,.04);
+      color:#fff;
+
+      transition:.2s;
     }
 
-    .nav-btn:hover{
-      transform:translateY(-1px);
-      border-color:var(--primary);
-      color:var(--primary);
+    .icon-btn:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.08);
     }
 
-    .logout-btn{
-      color:var(--danger);
+    .menu-btn{
+      display:none;
     }
 
     /* =========================
        HERO
-    ========================== */
+    ========================= */
 
     .hero{
-      padding:42px 0 28px;
+      padding:45px 0 26px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:20px;
     }
 
     .hero-card{
       position:relative;
       overflow:hidden;
-      border-radius:24px;
-      padding:32px;
-      background:linear-gradient(135deg,#1d4ed8,#2563eb,#4f46e5);
-      color:#fff;
-      box-shadow:0 20px 50px rgba(37,99,235,.25);
+
+      padding:34px;
+
+      border-radius:27px;
+
+      border:1px solid var(--line);
+
+      background:
+        radial-gradient(
+          circle at 85% 15%,
+          rgba(123,97,255,.18),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 15% 85%,
+          rgba(79,140,255,.14),
+          transparent 32%
+        ),
+        rgba(12,27,46,.82);
+
+      box-shadow:var(--shadow);
     }
 
     .hero-card::after{
       content:"";
+
       position:absolute;
-      width:260px;
-      height:260px;
+
+      width:250px;
+      height:250px;
+
+      right:-90px;
+      top:-90px;
+
+      border:1px solid rgba(79,140,255,.15);
+
       border-radius:50%;
-      background:rgba(255,255,255,.09);
-      right:-80px;
-      top:-100px;
+
+      box-shadow:
+        0 0 0 38px rgba(79,140,255,.025),
+        0 0 0 76px rgba(123,97,255,.025);
     }
 
-    .hero-content{
-      position:relative;
-      z-index:2;
-    }
-
-    .hero-badge{
+    .eyebrow{
       display:inline-flex;
       align-items:center;
       gap:7px;
-      padding:7px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.15);
-      border:1px solid rgba(255,255,255,.2);
-      font-size:12px;
-      font-weight:700;
+
       margin-bottom:14px;
+
+      padding:7px 12px;
+
+      border-radius:999px;
+
+      color:#8ff0ae;
+
+      background:rgba(34,197,94,.09);
+
+      border:1px solid rgba(34,197,94,.2);
+
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .eyebrow-dot{
+      width:7px;
+      height:7px;
+
+      border-radius:50%;
+
+      background:var(--success);
+
+      box-shadow:
+        0 0 12px
+        rgba(34,197,94,.8);
     }
 
     .hero h1{
-      font-size:clamp(27px,4vw,40px);
-      line-height:1.2;
-      margin-bottom:10px;
+      font-size:clamp(34px,5vw,52px);
+      line-height:1.08;
+
+      letter-spacing:-1.5px;
+
+      margin-bottom:13px;
     }
 
-    .hero p{
-      max-width:720px;
-      opacity:.92;
-      font-size:15px;
+    .hero h1 span{
+      color:transparent;
+
+      background:
+        linear-gradient(
+          90deg,
+          #6ea4ff,
+          #a28dff
+        );
+
+      -webkit-background-clip:text;
+      background-clip:text;
     }
 
-    .hero-info{
+    .hero-description{
+      max-width:650px;
+
+      color:var(--muted);
+
+      font-size:13px;
+    }
+
+    .hero-actions{
       display:flex;
       flex-wrap:wrap;
-      gap:10px;
-      margin-top:20px;
+      gap:9px;
+
+      margin-top:21px;
     }
 
-    .hero-info span{
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.18);
-      padding:8px 12px;
-      border-radius:10px;
-      font-size:12px;
-      font-weight:600;
+    .primary-btn,
+    .secondary-btn{
+      min-height:42px;
+
+      padding:0 16px;
+
+      border-radius:12px;
+
+      font-size:11px;
+      font-weight:700;
+
+      border:1px solid transparent;
+
+      transition:.2s;
+    }
+
+    .primary-btn{
+      color:#fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+    }
+
+    .secondary-btn{
+      color:#dce8f8;
+
+      background:rgba(255,255,255,.04);
+
+      border-color:var(--line);
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover{
+      transform:translateY(-2px);
     }
 
     /* =========================
-       STUDENT BAR
-    ========================== */
-
-    .student-bar{
-      margin:0 0 28px;
-    }
+       STUDENT CARD
+    ========================= */
 
     .student-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+
+      padding:26px;
+
+      border-radius:24px;
+
+      border:1px solid var(--line);
+
+      background:rgba(255,255,255,.045);
+
       box-shadow:var(--shadow);
-      padding:18px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
     }
 
-    .student-info{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
+    .avatar{
+      width:64px;
+      height:64px;
 
-    .student-avatar{
-      width:52px;
-      height:52px;
-      border-radius:15px;
       display:grid;
       place-items:center;
-      background:rgba(37,99,235,.1);
-      color:var(--primary);
-      font-size:21px;
+
+      margin-bottom:13px;
+
+      border-radius:19px;
+
+      color:#fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+
+      font-size:24px;
       font-weight:800;
     }
 
-    .student-info h3{
-      font-size:16px;
+    .student-card h3{
+      font-size:19px;
+    }
+
+    .student-id{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .student-meta{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+
+      gap:9px;
+
+      margin-top:16px;
+    }
+
+    .meta-box{
+      padding:10px;
+
+      border:1px solid var(--line);
+
+      border-radius:12px;
+
+      background:rgba(255,255,255,.035);
+    }
+
+    .meta-label{
+      display:block;
+
+      color:var(--muted);
+
+      font-size:9px;
       margin-bottom:2px;
     }
 
-    .student-info p{
-      color:var(--muted);
-      font-size:12px;
-    }
+    .meta-value{
+      display:block;
 
-    .student-status{
-      padding:7px 12px;
-      border-radius:999px;
-      background:rgba(22,163,74,.1);
-      color:var(--success);
-      font-size:12px;
-      font-weight:800;
+      font-size:11px;
+      font-weight:700;
     }
 
     /* =========================
-       NOTICE
-    ========================== */
+       MAIN
+    ========================= */
 
-    .notice{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-left:4px solid var(--primary);
-      border-radius:16px;
-      padding:18px 20px;
-      margin-bottom:28px;
-      box-shadow:var(--shadow);
+    main{
+      padding-bottom:60px;
     }
 
-    .notice h3{
-      font-size:16px;
-      margin-bottom:5px;
-    }
-
-    .notice p{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    /* =========================
-       SECTION
-    ========================== */
-
-    .section{
-      padding:0 0 45px;
-    }
-
-    .section-heading{
+    .section-head{
       display:flex;
       align-items:end;
       justify-content:space-between;
+
       gap:15px;
-      margin-bottom:18px;
+
+      margin:27px 0 16px;
     }
 
-    .section-heading h2{
+    .section-head h2{
       font-size:23px;
     }
 
-    .section-heading p{
+    .section-head p{
       color:var(--muted);
-      font-size:13px;
+      font-size:11px;
     }
 
     /* =========================
-       SUMMARY
-    ========================== */
+       STATS
+    ========================= */
 
-    .summary-grid{
+    .stats-grid{
       display:grid;
       grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      margin-bottom:30px;
+
+      gap:12px;
     }
 
-    .summary-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:16px;
+    .stat{
       padding:18px;
+
+      border-radius:18px;
+
+      border:1px solid var(--line);
+
+      background:var(--card);
+
       box-shadow:var(--shadow);
     }
 
-    .summary-icon{
-      width:40px;
-      height:40px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      background:rgba(37,99,235,.1);
-      color:var(--primary);
-      margin-bottom:12px;
-      font-size:18px;
+    .stat-icon{
+      font-size:21px;
+      margin-bottom:5px;
     }
 
-    .summary-card strong{
-      display:block;
-      font-size:24px;
-      line-height:1.2;
-    }
-
-    .summary-card span{
+    .stat-label{
       color:var(--muted);
-      font-size:12px;
+      font-size:10px;
+    }
+
+    .stat-value{
+      font-size:18px;
+      font-weight:800;
     }
 
     /* =========================
        ASSIGNMENT GRID
-    ========================== */
+    ========================= */
 
     .assignment-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
-      gap:18px;
+
+      gap:17px;
     }
 
     .assignment-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:20px;
-      box-shadow:var(--shadow);
+      position:relative;
+
       overflow:hidden;
-      transition:.2s ease;
+
+      padding:23px;
+
+      border-radius:22px;
+
+      border:1px solid var(--line);
+
+      background:var(--card);
+
+      box-shadow:var(--shadow);
+
+      transition:.2s;
     }
 
     .assignment-card:hover{
       transform:translateY(-3px);
+
+      border-color:
+        rgba(79,140,255,.24);
     }
 
     .assignment-top{
-      padding:20px;
-      border-bottom:1px solid var(--border);
       display:flex;
-      justify-content:space-between;
-      gap:15px;
       align-items:flex-start;
+      justify-content:space-between;
+
+      gap:15px;
+
+      margin-bottom:14px;
     }
 
-    .assignment-number{
-      width:43px;
-      height:43px;
-      border-radius:13px;
+    .assignment-icon{
+      width:48px;
+      height:48px;
+
       display:grid;
       place-items:center;
-      background:rgba(124,58,237,.1);
-      color:var(--purple);
-      font-weight:800;
-      flex-shrink:0;
+
+      border-radius:14px;
+
+      background:rgba(79,140,255,.1);
+
+      font-size:22px;
     }
 
-    .assignment-title-wrap{
-      display:flex;
-      gap:12px;
-      flex:1;
+    .status{
+      display:inline-flex;
+      align-items:center;
+
+      padding:5px 9px;
+
+      border-radius:999px;
+
+      font-size:9px;
+      font-weight:800;
     }
 
-    .assignment-title{
-      font-size:17px;
-      font-weight:800;
+    .status.pending{
+      color:#ffd891;
+      background:rgba(245,158,11,.11);
+      border:1px solid rgba(245,158,11,.2);
+    }
+
+    .status.upcoming{
+      color:#b8d0ff;
+      background:rgba(79,140,255,.1);
+      border:1px solid rgba(79,140,255,.18);
+    }
+
+    .status.submitted{
+      color:#8ff0ae;
+      background:rgba(34,197,94,.1);
+      border:1px solid rgba(34,197,94,.2);
+    }
+
+    .status.late{
+      color:#ffb3b3;
+      background:rgba(239,68,68,.1);
+      border:1px solid rgba(239,68,68,.2);
+    }
+
+    .assignment-card h3{
+      font-size:18px;
       margin-bottom:4px;
     }
 
     .assignment-description{
       color:var(--muted);
-      font-size:12px;
-    }
-
-    .status{
-      padding:6px 10px;
-      border-radius:999px;
       font-size:11px;
-      font-weight:800;
-      white-space:nowrap;
+
+      min-height:40px;
     }
 
-    .status.open{
-      background:rgba(37,99,235,.1);
-      color:var(--primary);
-    }
-
-    .status.upcoming{
-      background:rgba(217,119,6,.1);
-      color:var(--warning);
-    }
-
-    .status.submitted{
-      background:rgba(22,163,74,.1);
-      color:var(--success);
-    }
-
-    .status.overdue{
-      background:rgba(220,38,38,.1);
-      color:var(--danger);
-    }
-
-    .assignment-body{
-      padding:20px;
-    }
-
-    .assignment-meta{
+    .assignment-details{
       display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      margin-bottom:17px;
+      grid-template-columns:1fr 1fr;
+
+      gap:9px;
+
+      margin-top:17px;
     }
 
-    .meta-box{
-      background:var(--bg);
-      border:1px solid var(--border);
+    .detail{
+      padding:10px;
+
       border-radius:12px;
-      padding:11px;
+
+      background:rgba(255,255,255,.035);
+
+      border:1px solid var(--line);
     }
 
-    .meta-box span{
+    .detail span{
       display:block;
+
       color:var(--muted);
-      font-size:10px;
-      margin-bottom:3px;
+
+      font-size:9px;
+      margin-bottom:2px;
     }
 
-    .meta-box strong{
-      font-size:12px;
-    }
-
-    .countdown-box{
-      border-radius:13px;
-      padding:12px 14px;
-      margin-bottom:16px;
-      background:rgba(37,99,235,.07);
-      border:1px dashed rgba(37,99,235,.3);
-    }
-
-    .countdown-box.warning{
-      background:rgba(217,119,6,.07);
-      border-color:rgba(217,119,6,.3);
-    }
-
-    .countdown-box.danger{
-      background:rgba(220,38,38,.07);
-      border-color:rgba(220,38,38,.3);
-    }
-
-    .countdown-label{
-      color:var(--muted);
+    .detail strong{
       font-size:11px;
-      margin-bottom:3px;
+    }
+
+    .assignment-footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      gap:10px;
+
+      margin-top:16px;
+      padding-top:14px;
+
+      border-top:1px solid var(--line);
     }
 
     .countdown{
-      color:var(--primary);
-      font-size:15px;
+      color:#9ec0ff;
+
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .submit-btn{
+      min-height:36px;
+
+      padding:0 13px;
+
+      border:0;
+
+      border-radius:10px;
+
+      color:#fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+
+      font-size:10px;
       font-weight:800;
     }
 
-    .countdown-box.warning .countdown{
-      color:var(--warning);
-    }
-
-    .countdown-box.danger .countdown{
-      color:var(--danger);
-    }
-
-    .assignment-actions{
-      display:flex;
-      gap:9px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      min-height:42px;
-      padding:0 15px;
-      border-radius:11px;
-      border:1px solid var(--border);
-      background:var(--card);
-      color:var(--text);
-      font-size:12px;
-      font-weight:800;
-      transition:.2s ease;
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-    }
-
-    .btn-primary{
-      background:var(--primary);
-      border-color:var(--primary);
-      color:#fff;
-    }
-
-    .btn-primary:hover{
-      background:var(--primary-dark);
-    }
-
-    .btn-success{
-      background:var(--success);
-      border-color:var(--success);
-      color:#fff;
-    }
-
-    .btn-disabled{
-      opacity:.5;
+    .submit-btn:disabled{
+      opacity:.45;
       cursor:not-allowed;
     }
 
     /* =========================
-       EMPTY / INFO
-    ========================== */
+       COURSE INFO
+    ========================= */
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+
+      gap:16px;
+    }
 
     .info-card{
-      margin-top:25px;
+      padding:22px;
+
+      border-radius:21px;
+
+      border:1px solid var(--line);
+
       background:var(--card);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:20px;
+
       box-shadow:var(--shadow);
     }
 
     .info-card h3{
       font-size:16px;
-      margin-bottom:8px;
+      margin-bottom:13px;
     }
 
-    .info-card p,
-    .info-card li{
+    .info-list{
+      display:grid;
+      gap:9px;
+    }
+
+    .info-row{
+      display:flex;
+      justify-content:space-between;
+
+      gap:14px;
+
+      padding-bottom:8px;
+
+      border-bottom:1px dashed
+        rgba(255,255,255,.08);
+
+      font-size:11px;
+    }
+
+    .info-row:last-child{
+      border-bottom:0;
+      padding-bottom:0;
+    }
+
+    .info-row span:first-child{
       color:var(--muted);
-      font-size:12px;
     }
 
-    .info-card ul{
-      padding-left:20px;
+    .info-row span:last-child{
+      text-align:right;
+      font-weight:700;
+    }
+
+    /* =========================
+       NOTICE
+    ========================= */
+
+    .notice{
+      margin-top:17px;
+
+      padding:15px 17px;
+
+      border-radius:16px;
+
+      color:#d0e0f8;
+
+      background:rgba(79,140,255,.07);
+
+      border:1px solid rgba(79,140,255,.14);
+
+      font-size:10px;
     }
 
     /* =========================
        MODAL
-    ========================== */
+    ========================= */
 
     .modal{
       position:fixed;
       inset:0;
+
       z-index:3000;
-      background:rgba(2,6,23,.7);
+
       display:none;
       align-items:center;
       justify-content:center;
+
       padding:20px;
+
+      background:rgba(0,0,0,.68);
+
+      backdrop-filter:blur(7px);
     }
 
     .modal.show{
       display:flex;
     }
 
-    .modal-card{
-      width:min(600px,100%);
+    .modal-box{
+      width:min(520px,100%);
+
       max-height:90vh;
+
       overflow:auto;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:20px;
-      box-shadow:0 30px 80px rgba(0,0,0,.3);
+
+      padding:25px;
+
+      border-radius:23px;
+
+      border:1px solid var(--line);
+
+      background:#0d1d31;
+
+      box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.5);
     }
 
-    .modal-header{
-      padding:20px;
-      border-bottom:1px solid var(--border);
+    .modal-head{
       display:flex;
       align-items:center;
       justify-content:space-between;
+
       gap:15px;
+
+      margin-bottom:18px;
     }
 
-    .modal-header h3{
-      font-size:18px;
+    .modal-head h3{
+      font-size:20px;
     }
 
     .close-btn{
-      width:36px;
-      height:36px;
-      border:1px solid var(--border);
-      border-radius:10px;
-      background:var(--card);
-      color:var(--text);
-      font-size:18px;
-    }
+      width:35px;
+      height:35px;
 
-    .modal-body{
-      padding:20px;
+      display:grid;
+      place-items:center;
+
+      border-radius:10px;
+
+      border:1px solid var(--line);
+
+      background:rgba(255,255,255,.04);
+
+      color:#fff;
     }
 
     .form-group{
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
 
     .form-group label{
       display:block;
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:7px;
+
+      margin-bottom:6px;
+
+      color:#c9d7e7;
+
+      font-size:10px;
+      font-weight:700;
     }
 
-    .form-control{
+    .form-group input,
+    .form-group textarea{
       width:100%;
-      min-height:44px;
-      border:1px solid var(--border);
-      background:var(--bg);
-      color:var(--text);
+
+      padding:11px 12px;
+
       border-radius:11px;
-      padding:10px 12px;
+
+      border:1px solid var(--line);
+
       outline:none;
-      font-size:12px;
+
+      background:rgba(255,255,255,.04);
+
+      color:#fff;
+
+      font-size:11px;
     }
 
-    textarea.form-control{
-      min-height:120px;
+    .form-group textarea{
+      min-height:105px;
       resize:vertical;
     }
 
-    .form-control:focus{
-      border-color:var(--primary);
+    .form-group input:focus,
+    .form-group textarea:focus{
+      border-color:
+        rgba(79,140,255,.55);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(79,140,255,.08);
     }
 
-    .submission-note{
-      background:rgba(217,119,6,.08);
-      border:1px solid rgba(217,119,6,.25);
-      color:var(--warning);
-      border-radius:12px;
-      padding:12px;
-      font-size:11px;
-      margin-bottom:17px;
+    .student-readonly{
+      opacity:.8;
+      cursor:not-allowed;
     }
 
-    .modal-footer{
+    .modal-actions{
       display:flex;
       justify-content:flex-end;
-      gap:10px;
-      padding:16px 20px 20px;
-      border-top:1px solid var(--border);
+
+      gap:9px;
+
+      margin-top:18px;
     }
 
     /* =========================
        TOAST
-    ========================== */
+    ========================= */
 
-    .toast{
+    #toastContainer{
       position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:5000;
-      background:#111827;
-      color:#fff;
-      padding:13px 16px;
-      border-radius:12px;
-      font-size:12px;
-      box-shadow:0 15px 40px rgba(0,0,0,.25);
-      transform:translateY(100px);
-      opacity:0;
-      pointer-events:none;
-      transition:.3s ease;
-      max-width:330px;
+
+      right:18px;
+      bottom:18px;
+
+      z-index:4000;
+
+      display:grid;
+
+      gap:8px;
     }
 
-    .toast.show{
-      transform:translateY(0);
-      opacity:1;
+    .toast{
+      min-width:240px;
+
+      padding:12px 15px;
+
+      border-radius:13px;
+
+      background:#102238;
+
+      border:1px solid var(--line);
+
+      color:#fff;
+
+      box-shadow:var(--shadow);
+
+      font-size:11px;
+
+      animation:
+        toastIn .25s ease;
+    }
+
+    @keyframes toastIn{
+
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
     }
 
     /* =========================
        FOOTER
-    ========================== */
+    ========================= */
 
     footer{
-      border-top:1px solid var(--border);
       padding:25px 0;
+
+      border-top:1px solid var(--line);
+
       color:var(--muted);
-      font-size:11px;
+
       text-align:center;
+
+      font-size:10px;
     }
 
     /* =========================
        RESPONSIVE
-    ========================== */
+    ========================= */
 
-    @media(max-width:900px){
-      .summary-grid{
+    @media(max-width:1050px){
+
+      .nav-links{
+        position:absolute;
+
+        top:72px;
+        left:15px;
+        right:15px;
+
+        display:none;
+
+        flex-direction:column;
+        align-items:stretch;
+
+        padding:10px;
+
+        border-radius:17px;
+
+        border:1px solid var(--line);
+
+        background:#0b1a2d;
+
+        box-shadow:var(--shadow);
+      }
+
+      .nav-links.open{
+        display:flex;
+      }
+
+      .nav-links a{
+        padding:12px;
+      }
+
+      .menu-btn{
+        display:grid;
+      }
+
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .stats-grid{
         grid-template-columns:repeat(2,1fr);
       }
 
-      .assignment-grid{
-        grid-template-columns:1fr;
-      }
     }
 
-    @media(max-width:650px){
-      .nav{
-        min-height:64px;
-      }
+    @media(max-width:760px){
 
-      .brand-subtitle{
-        display:none;
-      }
-
-      .nav-btn span{
-        display:none;
+      .container{
+        width:min(100% - 22px,1180px);
       }
 
       .hero{
-        padding-top:25px;
+        padding-top:28px;
       }
 
       .hero-card{
-        padding:24px 20px;
-        border-radius:20px;
-      }
-
-      .student-card{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .student-status{
-        align-self:flex-start;
-      }
-
-      .summary-grid{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-      }
-
-      .summary-card{
-        padding:14px;
-      }
-
-      .summary-card strong{
-        font-size:20px;
-      }
-
-      .assignment-top{
-        flex-direction:column;
-      }
-
-      .status{
-        align-self:flex-start;
-      }
-
-      .assignment-meta{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .assignment-actions{
-        display:grid;
-        grid-template-columns:1fr;
-      }
-
-      .assignment-actions .btn{
-        width:100%;
-      }
-    }
-
-    @media(max-width:420px){
-      .brand-title{
-        font-size:14px;
-      }
-
-      .brand img{
-        width:40px;
-        height:40px;
+        padding:26px;
       }
 
       .hero h1{
-        font-size:25px;
+        font-size:36px;
       }
 
-      .summary-grid{
+      .assignment-grid,
+      .info-grid{
         grid-template-columns:1fr;
       }
 
-      .assignment-meta{
+      .section-head{
+        display:block;
+      }
+
+      .section-head p{
+        margin-top:3px;
+      }
+
+    }
+
+    @media(max-width:520px){
+
+      .brand-sub{
+        display:none;
+      }
+
+      .student-meta{
         grid-template-columns:1fr;
       }
+
+      .stats-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .assignment-details{
+        grid-template-columns:1fr;
+      }
+
+      .assignment-footer{
+        align-items:stretch;
+        flex-direction:column;
+      }
+
+      .submit-btn{
+        width:100%;
+      }
+
+      .hero-actions{
+        flex-direction:column;
+      }
+
+      .hero-actions .primary-btn,
+      .hero-actions .secondary-btn{
+        width:100%;
+      }
+
+      #toastContainer{
+        left:12px;
+        right:12px;
+        bottom:12px;
+      }
+
+      .toast{
+        min-width:0;
+      }
+
+    }
+
+    @media(max-width:370px){
+
+      .stats-grid{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+    /* =========================
+       PRINT
+    ========================= */
+
+    @media print{
+
+      body{
+        background:#fff;
+        color:#111;
+      }
+
+      body::before,
+      .navbar,
+      .hero-actions,
+      .submit-btn,
+      .notice,
+      footer,
+      #toastContainer{
+        display:none !important;
+      }
+
+      .hero{
+        padding-top:0;
+      }
+
+      .hero-card,
+      .student-card,
+      .stat,
+      .assignment-card,
+      .info-card{
+        background:#fff !important;
+        color:#111 !important;
+
+        border:1px solid #ddd;
+
+        box-shadow:none;
+      }
+
+      .hero-description,
+      .student-id,
+      .assignment-description,
+      .section-head p,
+      .info-row span:first-child,
+      .stat-label{
+        color:#555 !important;
+      }
+
+      .assignment-card{
+        break-inside:avoid;
+      }
+
+    }
+
+    @media(prefers-reduced-motion:reduce){
+
+      *,
+      *::before,
+      *::after{
+        animation-duration:.01ms !important;
+        transition-duration:.01ms !important;
+        scroll-behavior:auto !important;
+      }
+
     }
   </style>
 </head>
 
 <body>
 
+
   <!-- =========================
-       HEADER
-  ========================== -->
+       NAVBAR
+  ========================= -->
 
-  <header>
-    <div class="container nav">
+  <header class="navbar">
 
-      <a href="student-dashboard.html" class="brand">
+    <div class="container nav-inner">
+
+      <a href="index.html" class="brand">
+
         <img
+          class="brand-logo"
           src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
           alt="SNK IT Institute Logo"
+          onerror="this.style.display='none'"
         >
 
-        <div class="brand-text">
-          <div class="brand-title">SNK IT Institute</div>
-          <div class="brand-subtitle">Student Portal</div>
-        </div>
+        <span class="brand-text">
+
+          <span class="brand-title">
+            SNK IT Institute
+          </span>
+
+          <span class="brand-sub">
+            Student Portal
+          </span>
+
+        </span>
+
       </a>
+
+
+      <nav class="nav-links" id="navLinks">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="student-dashboard.html">
+          My Dashboard
+        </a>
+
+        <a href="courses.html">
+          My Course
+        </a>
+
+        <a href="student-class.html">
+          My Class
+        </a>
+
+        <a
+          href="assignments.html"
+          class="active"
+        >
+          Assignment
+        </a>
+
+        <a href="quiz.html">
+          Quiz
+        </a>
+
+        <a href="results.html">
+          Result
+        </a>
+
+        <a href="student-attendance.html">
+          Attendance
+        </a>
+
+        <a href="student-timetable.html">
+          Timetable
+        </a>
+
+        <a href="student-resources.html">
+          Resources
+        </a>
+
+      </nav>
+
 
       <div class="nav-actions">
 
-        <a href="student-dashboard.html" class="nav-btn">
-          🏠 <span>Dashboard</span>
-        </a>
-
-        <button class="nav-btn" id="themeBtn" onclick="toggleTheme()">
-          🌙
+        <button
+          class="icon-btn"
+          id="themeBtn"
+          type="button"
+          title="Toggle Theme"
+          aria-label="Toggle Theme"
+        >
+          ◐
         </button>
 
-        <button class="nav-btn logout-btn" onclick="logout()">
-          🚪 <span>Logout</span>
+
+        <button
+          class="icon-btn menu-btn"
+          id="menuBtn"
+          type="button"
+          title="Menu"
+          aria-label="Open Menu"
+        >
+          ☰
+        </button>
+
+
+        <button
+          class="icon-btn"
+          id="logoutBtn"
+          type="button"
+          title="Logout"
+          aria-label="Logout"
+        >
+          ↪
         </button>
 
       </div>
+
     </div>
+
   </header>
 
 
   <!-- =========================
-       MAIN
-  ========================== -->
+       HERO
+  ========================= -->
 
-  <main>
+  <section class="hero">
 
-    <!-- HERO -->
+    <div class="container">
 
-    <section class="hero">
-      <div class="container">
+      <div class="hero-grid">
+
 
         <div class="hero-card">
 
-          <div class="hero-content">
+          <div class="eyebrow">
 
-            <div class="hero-badge">
-              📝 Student Portal • Assignments
-            </div>
+            <span class="eyebrow-dot"></span>
 
-            <h1>My Assignments</h1>
+            Student Assignment Center
 
-            <p>
-              আপনার কোর্সের সকল Assignment এখানে দেখতে পারবেন।
-              Publish Date, Deadline, Marks এবং Submission Status এক জায়গায় দেখুন।
-            </p>
+          </div>
 
-            <div class="hero-info">
-              <span>💻 Computer Office Application</span>
-              <span>🎓 Batch 01</span>
-              <span>📅 Class Starts: 08 September 2026</span>
-              <span>⏰ 4:00 PM – 6:00 PM</span>
-            </div>
+
+          <h1>
+            My <span>Assignments</span>
+          </h1>
+
+
+          <p class="hero-description">
+
+            আপনার Course-এর Assignment,
+            deadline এবং submission status
+            এখানে এক জায়গা থেকে দেখতে পারবেন।
+
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a
+              href="student-dashboard.html"
+              class="primary-btn"
+            >
+              Back to Dashboard
+            </a>
+
+
+            <button
+              class="secondary-btn"
+              id="printBtn"
+              type="button"
+            >
+              🖨 Print Assignments
+            </button>
 
           </div>
 
         </div>
 
-      </div>
-    </section>
-
-
-    <!-- STUDENT INFO -->
-
-    <section class="student-bar">
-      <div class="container">
 
         <div class="student-card">
 
-          <div class="student-info">
-
-            <div class="student-avatar" id="studentAvatar">
-              S
-            </div>
-
-            <div>
-              <h3 id="studentName">Demo Student</h3>
-              <p>
-                Student ID:
-                <strong id="studentId">SNK-1001</strong>
-              </p>
-            </div>
-
+          <div
+            class="avatar"
+            id="studentAvatar"
+          >
+            S
           </div>
 
-          <div class="student-status">
-            ● Active Student
+
+          <h3 id="studentName">
+            Student
+          </h3>
+
+
+          <div
+            class="student-id"
+            id="studentId"
+          >
+            SNK-1001
+          </div>
+
+
+          <div class="student-meta">
+
+
+            <div class="meta-box">
+
+              <span class="meta-label">
+                Course
+              </span>
+
+              <span
+                class="meta-value"
+                id="studentCourse"
+              >
+                Computer Office Application
+              </span>
+
+            </div>
+
+
+            <div class="meta-box">
+
+              <span class="meta-label">
+                Batch
+              </span>
+
+              <span
+                class="meta-value"
+                id="studentBatch"
+              >
+                Batch 01
+              </span>
+
+            </div>
+
+
           </div>
 
         </div>
 
       </div>
-    </section>
+
+    </div>
+
+  </section>
 
 
-    <!-- NOTICE -->
+  <!-- =========================
+       MAIN
+  ========================= -->
 
-    <section>
-      <div class="container">
+  <main>
 
-        <div class="notice">
+    <div class="container">
 
-          <h3>📢 Assignment Notice</h3>
+
+      <!-- STATS -->
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            Assignment Overview
+          </h2>
 
           <p>
-            আপনার ক্লাস শুরু হবে
-            <strong>08 September 2026</strong> থেকে।
-            Assignment-এর Publish Date ও Deadline খেয়াল করে সময়মতো কাজ জমা দিন।
+            আপনার account-এর assignment summary
           </p>
 
         </div>
 
       </div>
-    </section>
 
 
-    <!-- SUMMARY -->
+      <div class="stats-grid">
 
-    <section class="section">
-      <div class="container">
 
-        <div class="section-heading">
+        <div class="stat">
 
-          <div>
-            <h2>Assignment Overview</h2>
-            <p>আপনার Assignment-এর বর্তমান অবস্থা</p>
+          <div class="stat-icon">
+            📝
+          </div>
+
+          <div class="stat-label">
+            Total Assignments
+          </div>
+
+          <div
+            class="stat-value"
+            id="totalAssignments"
+          >
+            2
           </div>
 
         </div>
 
 
-        <div class="summary-grid">
+        <div class="stat">
 
-          <div class="summary-card">
-            <div class="summary-icon">📚</div>
-            <strong id="totalAssignments">0</strong>
-            <span>Total Assignments</span>
+          <div class="stat-icon">
+            ⏳
           </div>
 
-          <div class="summary-card">
-            <div class="summary-icon">🔓</div>
-            <strong id="openAssignments">0</strong>
-            <span>Open</span>
+          <div class="stat-label">
+            Pending
           </div>
 
-          <div class="summary-card">
-            <div class="summary-icon">📤</div>
-            <strong id="submittedAssignments">0</strong>
-            <span>Submitted</span>
-          </div>
-
-          <div class="summary-card">
-            <div class="summary-icon">⏳</div>
-            <strong id="upcomingAssignments">0</strong>
-            <span>Upcoming</span>
+          <div
+            class="stat-value"
+            id="pendingAssignments"
+          >
+            1
           </div>
 
         </div>
 
 
-        <!-- ASSIGNMENTS -->
+        <div class="stat">
 
-        <div class="section-heading">
+          <div class="stat-icon">
+            ✅
+          </div>
 
-          <div>
-            <h2>My Assignment List</h2>
-            <p>Publish এবং Deadline অনুযায়ী Assignment দেখুন</p>
+          <div class="stat-label">
+            Submitted
+          </div>
+
+          <div
+            class="stat-value"
+            id="submittedAssignments"
+          >
+            0
           </div>
 
         </div>
 
 
-        <div class="assignment-grid" id="assignmentGrid">
-          <!-- JavaScript will render assignments -->
-        </div>
+        <div class="stat">
 
+          <div class="stat-icon">
+            🎯
+          </div>
 
-        <!-- INFO -->
+          <div class="stat-label">
+            Total Marks
+          </div>
 
-        <div class="info-card">
-
-          <h3>📌 Assignment Submission Rules</h3>
-
-          <ul>
-            <li>Assignment-এর Deadline-এর আগে কাজ জমা দিন।</li>
-            <li>Publish Date-এর আগে Assignment submit করা যাবে না।</li>
-            <li>Submission এখন Demo LocalStorage system-এ সংরক্ষিত হবে।</li>
-            <li>পরে Firebase integration করলে real online submission system করা যাবে।</li>
-            <li>Submitted Assignment আবার submit করলে আগের submission update হবে।</li>
-          </ul>
+          <div
+            class="stat-value"
+            id="totalMarks"
+          >
+            45
+          </div>
 
         </div>
 
       </div>
-    </section>
+
+
+      <!-- ASSIGNMENTS -->
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            My Assignments
+          </h2>
+
+          <p>
+            Current course assignments
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="assignment-grid"
+        id="assignmentGrid"
+      >
+
+
+        <!-- Assignment 1 -->
+
+        <article
+          class="assignment-card"
+          data-assignment-id="ASSIGN-001"
+          data-deadline="2026-09-10T23:59:00"
+        >
+
+          <div class="assignment-top">
+
+            <div class="assignment-icon">
+              📄
+            </div>
+
+            <span
+              class="status pending"
+              id="status-ASSIGN-001"
+            >
+              Not Submitted
+            </span>
+
+          </div>
+
+
+          <h3>
+            MS Word Assignment
+          </h3>
+
+
+          <p class="assignment-description">
+
+            একটি professional document তৈরি করুন।
+            Formatting, paragraph, table এবং page setup
+            ব্যবহার করুন।
+
+          </p>
+
+
+          <div class="assignment-details">
+
+
+            <div class="detail">
+
+              <span>
+                Publish Date
+              </span>
+
+              <strong>
+                25 Aug 2026
+              </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+              <span>
+                Deadline
+              </span>
+
+              <strong>
+                10 Sep 2026
+              </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+              <span>
+                Marks
+              </span>
+
+              <strong>
+                20 Marks
+              </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+              <span>
+                Course
+              </span>
+
+              <strong>
+                MS Word
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="assignment-footer">
+
+            <span
+              class="countdown"
+              id="countdown-ASSIGN-001"
+            >
+              Checking deadline...
+            </span>
+
+
+            <button
+              type="button"
+              class="submit-btn"
+              data-submit="ASSIGN-001"
+            >
+              Submit Assignment
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- Assignment 2 -->
+
+        <article
+          class="assignment-card"
+          data-assignment-id="ASSIGN-002"
+          data-deadline="2026-09-25T23:59:00"
+        >
+
+          <div class="assignment-top">
+
+            <div class="assignment-icon">
+              📊
+            </div>
+
+            <span
+              class="status upcoming"
+              id="status-ASSIGN-002"
+            >
+              Upcoming
+            </span>
+
+          </div>
+
+
+          <h3>
+            MS Excel Assignment
+          </h3>
+
+
+          <p class="assignment-description">
+
+            Spreadsheet তৈরি করে data entry,
+            formula, calculation এবং basic formatting
+            practice করতে হবে।
+
+          </p>
+
+
+          <div class="assignment-details">
+
+
+            <div class="detail">
+
+              <span>
+                Publish Date
+              </span>
+
+              <strong>
+                12 Sep 2026
+              </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+              <span>
+                Deadline
+              </span>
+
+              <strong>
+                25 Sep 2026
+              </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+              <span>
+                Marks
+              </span>
+
+              <strong>
+                25 Marks
+              </strong>
+
+            </div>
+
+
+            <div class="detail">
+
+              <span>
+                Course
+              </span>
+
+              <strong>
+                MS Excel
+              </strong>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="assignment-footer">
+
+            <span
+              class="countdown"
+              id="countdown-ASSIGN-002"
+            >
+              Upcoming
+            </span>
+
+
+            <button
+              type="button"
+              class="submit-btn"
+              data-submit="ASSIGN-002"
+              disabled
+            >
+              Not Available Yet
+            </button>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+
+      <!-- NOTICE -->
+
+      <div class="notice">
+
+        <strong>
+          Demo / Local Storage:
+        </strong>
+
+        এই Student Portal-এর Assignment submission
+        বর্তমানে browser-এর
+        <strong>localStorage</strong>-এ save হচ্ছে।
+
+        ভবিষ্যতে Firebase/Admin database connect করলে
+        submission সরাসরি Admin panel-এ দেখা ও manage করা যাবে।
+
+      </div>
+
+
+      <!-- =========================
+           COURSE INFO
+      ========================= -->
+
+      <div class="section-head">
+
+        <div>
+
+          <h2>
+            Course Information
+          </h2>
+
+          <p>
+            Current student account-এর course details
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="info-grid">
+
+
+        <div class="info-card">
+
+          <h3>
+            Student Information
+          </h3>
+
+
+          <div class="info-list">
+
+
+            <div class="info-row">
+
+              <span>
+                Student Name
+              </span>
+
+              <span id="infoStudentName">
+                Student
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>
+                Student ID
+              </span>
+
+              <span id="infoStudentId">
+                SNK-1001
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>
+                Course
+              </span>
+
+              <span id="infoCourse">
+                Computer Office Application
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>
+                Batch
+              </span>
+
+              <span id="infoBatch">
+                Batch 01
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <h3>
+            Assignment Rules
+          </h3>
+
+
+          <div class="info-list">
+
+
+            <div class="info-row">
+
+              <span>
+                Submission
+              </span>
+
+              <span>
+                Online / Portal
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>
+                File Type
+              </span>
+
+              <span>
+                Document / File
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>
+                Late Submission
+              </span>
+
+              <span>
+                Admin Review
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>
+                Course Start
+              </span>
+
+              <span>
+                08 Sep 2026
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>
+                Class Time
+              </span>
+
+              <span>
+                4–6 PM
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>
+                Mode
+              </span>
+
+              <span>
+                Offline
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
 
   </main>
 
 
   <!-- =========================
        SUBMISSION MODAL
-  ========================== -->
+  ========================= -->
 
-  <div class="modal" id="submissionModal">
+  <div
+    class="modal"
+    id="submissionModal"
+    aria-hidden="true"
+  >
 
-    <div class="modal-card">
+    <div class="modal-box">
 
-      <div class="modal-header">
 
-        <h3 id="modalTitle">
+      <div class="modal-head">
+
+        <h3>
           Submit Assignment
         </h3>
 
+
         <button
+          type="button"
           class="close-btn"
-          onclick="closeSubmissionModal()"
+          id="closeModal"
           aria-label="Close"
         >
           ×
@@ -1107,81 +2109,111 @@
 
       <form id="submissionForm">
 
-        <div class="modal-body">
 
-          <div class="submission-note">
-            ⚠️ এটি বর্তমানে Demo Submission System।
-            আপনার তথ্য এই browser-এর LocalStorage-এ save হবে।
-            এখনো server/Firebase-এ upload হবে না।
-          </div>
+        <input
+          type="hidden"
+          id="selectedAssignmentId"
+        >
 
 
-          <div class="form-group">
+        <div class="form-group">
 
-            <label>Assignment</label>
+          <label>
+            Assignment
+          </label>
 
-            <input
-              type="text"
-              class="form-control"
-              id="modalAssignmentName"
-              readonly
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="submissionText">
-              আপনার উত্তর / Submission Note
-            </label>
-
-            <textarea
-              id="submissionText"
-              class="form-control"
-              placeholder="আপনার Assignment সম্পর্কে সংক্ষিপ্ত তথ্য লিখুন..."
-              required
-            ></textarea>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="submissionLink">
-              File / Google Drive Link (Optional)
-            </label>
-
-            <input
-              type="url"
-              id="submissionLink"
-              class="form-control"
-              placeholder="https://..."
-            >
-
-          </div>
+          <input
+            type="text"
+            id="selectedAssignmentName"
+            class="student-readonly"
+            readonly
+          >
 
         </div>
 
 
-        <div class="modal-footer">
+        <div class="form-group">
+
+          <label>
+            Student Name
+          </label>
+
+          <input
+            type="text"
+            id="submissionStudentName"
+            class="student-readonly"
+            readonly
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Student ID
+          </label>
+
+          <input
+            type="text"
+            id="submissionStudentId"
+            class="student-readonly"
+            readonly
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Submission Link / File Name
+          </label>
+
+          <input
+            type="text"
+            id="submissionFile"
+            placeholder="যেমন: MS-Word-Assignment.docx"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Note
+          </label>
+
+          <textarea
+            id="submissionNote"
+            placeholder="Teacher-এর জন্য কোনো note থাকলে লিখুন..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="modal-actions">
 
           <button
             type="button"
-            class="btn"
-            onclick="closeSubmissionModal()"
+            class="secondary-btn"
+            id="cancelSubmission"
           >
             Cancel
           </button>
 
+
           <button
             type="submit"
-            class="btn btn-primary"
+            class="primary-btn"
           >
-            📤 Submit Assignment
+            Submit Now
           </button>
 
         </div>
+
 
       </form>
 
@@ -1190,130 +2222,785 @@
   </div>
 
 
-  <!-- TOAST -->
-
-  <div class="toast" id="toast"></div>
-
-
-  <!-- FOOTER -->
+  <!-- =========================
+       FOOTER
+  ========================= -->
 
   <footer>
+
     <div class="container">
-      © 2026 SNK IT Institute • Student Portal • Assignments
+
+      ©
+      <span id="year"></span>
+      SNK IT Institute.
+      All Rights Reserved.
+
     </div>
+
   </footer>
+
+
+  <div id="toastContainer"></div>
 
 
   <!-- =========================
        JAVASCRIPT
-  ========================== -->
+  ========================= -->
 
   <script>
 
-    /* ==========================================
-       SESSION PROTECTION
-    ========================================== */
+    /* =====================================
+       STORAGE
+    ===================================== */
 
-    if(sessionStorage.getItem("snkStudentLoggedIn") !== "true"){
-      window.location.replace("login.html");
-    }
+    const STORAGE = {
+
+      theme:
+        "snkTheme",
+
+      loggedIn:
+        "snkStudentLoggedIn",
+
+      studentId:
+        "snkStudentId",
+
+      studentName:
+        "snkStudentName",
+
+      studentCourse:
+        "snkStudentCourse",
+
+      studentBatch:
+        "snkStudentBatch",
+
+      studentProfile:
+        "snkStudentProfile",
+
+      submissions:
+        "snkAssignmentSubmissions"
+
+    };
 
 
-    /* ==========================================
-       STUDENT DATA
-    ========================================== */
+    /* =====================================
+       DEFAULT STUDENT
+    ===================================== */
 
-    const studentId =
-      sessionStorage.getItem("snkStudentId") || "SNK-1001";
+    const DEFAULT_STUDENT = {
 
-    const studentName =
-      sessionStorage.getItem("snkStudentName") || "Demo Student";
+      id:
+        "SNK-1001",
+
+      name:
+        "Student",
+
+      course:
+        "Computer Office Application",
+
+      batch:
+        "Batch 01"
+
+    };
 
 
-    document.getElementById("studentId").textContent = studentId;
-    document.getElementById("studentName").textContent = studentName;
-
-    const firstLetter =
-      studentName.trim().charAt(0).toUpperCase() || "S";
-
-    document.getElementById("studentAvatar").textContent = firstLetter;
-
-
-    /* ==========================================
+    /* =====================================
        ASSIGNMENT DATA
-    ========================================== */
+    ===================================== */
 
-    const assignments = [
+    const ASSIGNMENTS = [
 
       {
-        id: "ASSIGN-001",
-        title: "MS Word Assignment",
-        description:
-          "Microsoft Word-এর basic formatting, document creation এবং practical task সম্পন্ন করুন।",
-        publishDate: "2026-08-25T00:00:00",
-        deadline: "2026-09-10T23:59:59",
-        marks: 20
+
+        id:
+          "ASSIGN-001",
+
+        name:
+          "MS Word Assignment",
+
+        publishDate:
+          "2026-08-25",
+
+        deadline:
+          "2026-09-10T23:59:00",
+
+        marks:
+          20,
+
+        subject:
+          "MS Word",
+
+        available:
+          true
+
       },
 
+
       {
-        id: "ASSIGN-002",
-        title: "MS Excel Assignment",
-        description:
-          "Microsoft Excel-এর basic formula, table এবং spreadsheet practical task।",
-        publishDate: "2026-09-12T00:00:00",
-        deadline: "2026-09-25T23:59:59",
-        marks: 25
+
+        id:
+          "ASSIGN-002",
+
+        name:
+          "MS Excel Assignment",
+
+        publishDate:
+          "2026-09-12",
+
+        deadline:
+          "2026-09-25T23:59:00",
+
+        marks:
+          25,
+
+        subject:
+          "MS Excel",
+
+        available:
+          false
+
       }
 
     ];
 
 
-    /* ==========================================
-       LOCAL STORAGE
-    ========================================== */
+    /* =====================================
+       LOGIN CHECK
+    ===================================== */
 
-    const SUBMISSION_KEY = "snkAssignmentSubmissions";
+    function isLoggedIn(){
+
+      return (
+
+        sessionStorage.getItem(
+          STORAGE.loggedIn
+        ) === "true"
+
+        ||
+
+        localStorage.getItem(
+          STORAGE.loggedIn
+        ) === "true"
+
+      );
+
+    }
 
 
-    function getSubmissions(){
+    function protectPage(){
+
+      if(!isLoggedIn()){
+
+        const shouldLogin =
+          confirm(
+            "Student Portal ব্যবহার করতে Login করতে হবে।\n\nLogin page-এ যাবেন?"
+          );
+
+
+        if(shouldLogin){
+
+          window.location.href =
+            "login.html";
+
+        }
+
+      }
+
+    }
+
+
+    /* =====================================
+       JSON HELPER
+    ===================================== */
+
+    function readJSON(key){
 
       try{
 
-        const data =
-          JSON.parse(localStorage.getItem(SUBMISSION_KEY));
-
-        if(Array.isArray(data)){
-          return data;
-        }
-
-        return [];
+        return JSON.parse(
+          localStorage.getItem(key) || "null"
+        );
 
       }catch(error){
 
-        return [];
+        return null;
 
       }
+
+    }
+
+
+    function saveJSON(key,value){
+
+      localStorage.setItem(
+        key,
+        JSON.stringify(value)
+      );
+
+    }
+
+
+    /* =====================================
+       STUDENT DATA SYNC
+    ===================================== */
+
+    function getStudent(){
+
+      const profile =
+        readJSON(
+          STORAGE.studentProfile
+        ) || {};
+
+
+      const id =
+
+        sessionStorage.getItem(
+          STORAGE.studentId
+        )
+
+        ||
+
+        localStorage.getItem(
+          STORAGE.studentId
+        )
+
+        ||
+
+        profile.studentId
+
+        ||
+
+        DEFAULT_STUDENT.id;
+
+
+      const name =
+
+        sessionStorage.getItem(
+          STORAGE.studentName
+        )
+
+        ||
+
+        localStorage.getItem(
+          STORAGE.studentName
+        )
+
+        ||
+
+        profile.name
+
+        ||
+
+        DEFAULT_STUDENT.name;
+
+
+      const course =
+
+        sessionStorage.getItem(
+          STORAGE.studentCourse
+        )
+
+        ||
+
+        localStorage.getItem(
+          STORAGE.studentCourse
+        )
+
+        ||
+
+        profile.course
+
+        ||
+
+        DEFAULT_STUDENT.course;
+
+
+      const batch =
+
+        sessionStorage.getItem(
+          STORAGE.studentBatch
+        )
+
+        ||
+
+        localStorage.getItem(
+          STORAGE.studentBatch
+        )
+
+        ||
+
+        profile.batch
+
+        ||
+
+        DEFAULT_STUDENT.batch;
+
+
+      return {
+
+        id,
+        name,
+        course,
+        batch
+
+      };
+
+    }
+
+
+    /* =====================================
+       UPDATE STUDENT UI
+    ===================================== */
+
+    function updateStudentUI(){
+
+      const student =
+        getStudent();
+
+
+      window.SNKStudent = student;
+
+
+      document.getElementById(
+        "studentName"
+      ).textContent =
+        student.name;
+
+
+      document.getElementById(
+        "studentId"
+      ).textContent =
+        student.id;
+
+
+      document.getElementById(
+        "studentCourse"
+      ).textContent =
+        student.course;
+
+
+      document.getElementById(
+        "studentBatch"
+      ).textContent =
+        student.batch;
+
+
+      document.getElementById(
+        "infoStudentName"
+      ).textContent =
+        student.name;
+
+
+      document.getElementById(
+        "infoStudentId"
+      ).textContent =
+        student.id;
+
+
+      document.getElementById(
+        "infoCourse"
+      ).textContent =
+        student.course;
+
+
+      document.getElementById(
+        "infoBatch"
+      ).textContent =
+        student.batch;
+
+
+      document.getElementById(
+        "submissionStudentName"
+      ).value =
+        student.name;
+
+
+      document.getElementById(
+        "submissionStudentId"
+      ).value =
+        student.id;
+
+
+      const initial =
+        (student.name || "S")
+          .trim()
+          .charAt(0)
+          .toUpperCase();
+
+
+      document.getElementById(
+        "studentAvatar"
+      ).textContent =
+        initial || "S";
+
+    }
+
+
+    /* =====================================
+       SUBMISSIONS
+    ===================================== */
+
+    function getSubmissions(){
+
+      const data =
+        readJSON(
+          STORAGE.submissions
+        );
+
+
+      if(!Array.isArray(data)){
+        return [];
+      }
+
+
+      return data;
 
     }
 
 
     function saveSubmissions(data){
 
-      localStorage.setItem(
-        SUBMISSION_KEY,
-        JSON.stringify(data)
+      saveJSON(
+        STORAGE.submissions,
+        data
       );
 
     }
 
 
-    /* ==========================================
-       DATE HELPERS
-    ========================================== */
+    function getCurrentStudentSubmissions(){
 
-    function formatDate(dateString){
+      const student =
+        getStudent();
 
-      const date = new Date(dateString);
+
+      return getSubmissions()
+        .filter(
+          item =>
+            String(item.studentId) ===
+            String(student.id)
+        );
+
+    }
+
+
+    function findSubmission(
+      assignmentId
+    ){
+
+      const student =
+        getStudent();
+
+
+      return getSubmissions()
+        .find(
+          item =>
+
+            String(item.studentId) ===
+            String(student.id)
+
+            &&
+
+            String(item.assignmentId) ===
+            String(assignmentId)
+        );
+
+    }
+
+
+    /* =====================================
+       ASSIGNMENT STATUS
+    ===================================== */
+
+    function updateAssignmentStatuses(){
+
+      const now =
+        new Date();
+
+
+      let submittedCount =
+        0;
+
+      let pendingCount =
+        0;
+
+      let totalMarks =
+        0;
+
+
+      ASSIGNMENTS.forEach(
+        assignment => {
+
+          totalMarks +=
+            Number(assignment.marks) || 0;
+
+
+          const card =
+            document.querySelector(
+              `[data-assignment-id="${assignment.id}"]`
+            );
+
+
+          const statusElement =
+            document.getElementById(
+              `status-${assignment.id}`
+            );
+
+
+          const countdownElement =
+            document.getElementById(
+              `countdown-${assignment.id}`
+            );
+
+
+          const submitButton =
+            document.querySelector(
+              `[data-submit="${assignment.id}"]`
+            );
+
+
+          const submission =
+            findSubmission(
+              assignment.id
+            );
+
+
+          if(submission){
+
+            submittedCount++;
+
+
+            statusElement.textContent =
+              "Submitted";
+
+
+            statusElement.className =
+              "status submitted";
+
+
+            submitButton.disabled =
+              false;
+
+
+            submitButton.textContent =
+              "View / Resubmit";
+
+
+            const submittedDate =
+              submission.submittedAt
+                ? new Date(
+                    submission.submittedAt
+                  )
+                : null;
+
+
+            countdownElement.textContent =
+              submittedDate
+                ? "Submitted: " +
+                  formatDateTime(
+                    submittedDate
+                  )
+                : "Submitted";
+
+            return;
+
+          }
+
+
+          const deadline =
+            new Date(
+              assignment.deadline
+            );
+
+
+          if(
+            !assignment.available
+          ){
+
+            statusElement.textContent =
+              "Upcoming";
+
+            statusElement.className =
+              "status upcoming";
+
+            submitButton.disabled =
+              true;
+
+            submitButton.textContent =
+              "Not Available Yet";
+
+            countdownElement.textContent =
+              "Available from " +
+              formatDate(
+                assignment.publishDate
+              );
+
+            return;
+
+          }
+
+
+          if(now > deadline){
+
+            statusElement.textContent =
+              "Deadline Passed";
+
+            statusElement.className =
+              "status late";
+
+            submitButton.disabled =
+              false;
+
+            submitButton.textContent =
+              "Submit Late";
+
+            countdownElement.textContent =
+              "Deadline passed";
+
+            pendingCount++;
+
+            return;
+
+          }
+
+
+          statusElement.textContent =
+            "Not Submitted";
+
+          statusElement.className =
+            "status pending";
+
+
+          submitButton.disabled =
+            false;
+
+
+          submitButton.textContent =
+            "Submit Assignment";
+
+
+          countdownElement.textContent =
+            getRemainingTime(
+              deadline
+            );
+
+
+          pendingCount++;
+
+        }
+      );
+
+
+      document.getElementById(
+        "totalAssignments"
+      ).textContent =
+        ASSIGNMENTS.length;
+
+
+      document.getElementById(
+        "pendingAssignments"
+      ).textContent =
+        pendingCount;
+
+
+      document.getElementById(
+        "submittedAssignments"
+      ).textContent =
+        submittedCount;
+
+
+      document.getElementById(
+        "totalMarks"
+      ).textContent =
+        totalMarks;
+
+    }
+
+
+    /* =====================================
+       COUNTDOWN
+    ===================================== */
+
+    function getRemainingTime(
+      deadline
+    ){
+
+      const now =
+        new Date();
+
+
+      const diff =
+        deadline.getTime() -
+        now.getTime();
+
+
+      if(diff <= 0){
+        return "Deadline passed";
+      }
+
+
+      const days =
+        Math.floor(
+          diff /
+          (1000 * 60 * 60 * 24)
+        );
+
+
+      const hours =
+        Math.floor(
+          (
+            diff %
+            (1000 * 60 * 60 * 24)
+          ) /
+          (1000 * 60 * 60)
+        );
+
+
+      const minutes =
+        Math.floor(
+          (
+            diff %
+            (1000 * 60 * 60)
+          ) /
+          (1000 * 60)
+        );
+
+
+      if(days > 0){
+
+        return (
+          days +
+          " day " +
+          hours +
+          " hr remaining"
+        );
+
+      }
+
+
+      return (
+        hours +
+        " hr " +
+        minutes +
+        " min remaining"
+      );
+
+    }
+
+
+    /* =====================================
+       DATE FORMAT
+    ===================================== */
+
+    function formatDate(
+      dateString
+    ){
+
+      const date =
+        new Date(
+          dateString +
+          "T00:00:00"
+        );
+
 
       return date.toLocaleDateString(
         "en-GB",
@@ -1327,560 +3014,42 @@
     }
 
 
-    function getSubmission(assignmentId){
-
-      const submissions = getSubmissions();
-
-      return submissions.find(
-        item =>
-          item.assignmentId === assignmentId &&
-          item.studentId === studentId
-      );
-
-    }
-
-
-    /* ==========================================
-       STATUS
-    ========================================== */
-
-    function getAssignmentStatus(assignment){
-
-      const now = new Date();
-
-      const publish =
-        new Date(assignment.publishDate);
-
-      const deadline =
-        new Date(assignment.deadline);
-
-      const submission =
-        getSubmission(assignment.id);
-
-
-      if(submission){
-        return {
-          key:"submitted",
-          label:"Submitted"
-        };
-      }
-
-
-      if(now < publish){
-        return {
-          key:"upcoming",
-          label:"Upcoming"
-        };
-      }
-
-
-      if(now > deadline){
-        return {
-          key:"overdue",
-          label:"Overdue"
-        };
-      }
-
-
-      return {
-        key:"open",
-        label:"Open"
-      };
-
-    }
-
-
-    /* ==========================================
-       COUNTDOWN
-    ========================================== */
-
-    function getCountdownText(assignment){
-
-      const now = new Date();
-
-      const publish =
-        new Date(assignment.publishDate);
-
-      const deadline =
-        new Date(assignment.deadline);
-
-
-      if(now < publish){
-
-        const difference =
-          publish.getTime() - now.getTime();
-
-        return {
-          text:
-            "Publish হবে: " +
-            formatDuration(difference),
-          type:"warning"
-        };
-
-      }
-
-
-      if(now <= deadline){
-
-        const difference =
-          deadline.getTime() - now.getTime();
-
-        return {
-          text:
-            "Deadline: " +
-            formatDuration(difference),
-          type:
-            difference < 86400000
-              ? "danger"
-              : ""
-        };
-
-      }
-
-
-      return {
-        text:"Deadline শেষ হয়েছে",
-        type:"danger"
-      };
-
-    }
-
-
-    function formatDuration(milliseconds){
-
-      if(milliseconds <= 0){
-        return "সময় শেষ";
-      }
-
-
-      const totalSeconds =
-        Math.floor(milliseconds / 1000);
-
-      const days =
-        Math.floor(totalSeconds / 86400);
-
-      const hours =
-        Math.floor(
-          (totalSeconds % 86400) / 3600
-        );
-
-      const minutes =
-        Math.floor(
-          (totalSeconds % 3600) / 60
-        );
-
-      const seconds =
-        totalSeconds % 60;
-
-
-      if(days > 0){
-
-        return (
-          days + " দিন " +
-          hours + " ঘণ্টা " +
-          minutes + " মিনিট"
-        );
-
-      }
-
-
-      if(hours > 0){
-
-        return (
-          hours + " ঘণ্টা " +
-          minutes + " মিনিট " +
-          seconds + " সেকেন্ড"
-        );
-
-      }
-
-
-      return (
-        minutes + " মিনিট " +
-        seconds + " সেকেন্ড"
-      );
-
-    }
-
-
-    /* ==========================================
-       RENDER ASSIGNMENTS
-    ========================================== */
-
-    function renderAssignments(){
-
-      const grid =
-        document.getElementById("assignmentGrid");
-
-      grid.innerHTML = "";
-
-
-      assignments.forEach(
-        (assignment,index) => {
-
-          const status =
-            getAssignmentStatus(assignment);
-
-          const countdown =
-            getCountdownText(assignment);
-
-          const submission =
-            getSubmission(assignment.id);
-
-
-          const card =
-            document.createElement("article");
-
-          card.className =
-            "assignment-card";
-
-
-          let actionButton = "";
-
-
-          if(status.key === "upcoming"){
-
-            actionButton = `
-              <button
-                class="btn btn-disabled"
-                disabled
-              >
-                🔒 Not Available Yet
-              </button>
-            `;
-
-          }
-
-          else if(status.key === "open"){
-
-            actionButton = `
-              <button
-                class="btn btn-primary"
-                onclick="openSubmissionModal('${assignment.id}')"
-              >
-                📤 Submit Assignment
-              </button>
-            `;
-
-          }
-
-          else if(status.key === "submitted"){
-
-            actionButton = `
-              <button
-                class="btn btn-success"
-                onclick="openSubmissionModal('${assignment.id}')"
-              >
-                ✓ Submitted • Update
-              </button>
-            `;
-
-          }
-
-          else{
-
-            actionButton = `
-              <button
-                class="btn btn-disabled"
-                disabled
-              >
-                ⛔ Deadline Over
-              </button>
-            `;
-
-          }
-
-
-          card.innerHTML = `
-
-            <div class="assignment-top">
-
-              <div class="assignment-title-wrap">
-
-                <div class="assignment-number">
-                  ${index + 1}
-                </div>
-
-                <div>
-
-                  <div class="assignment-title">
-                    ${assignment.title}
-                  </div>
-
-                  <div class="assignment-description">
-                    ${assignment.description}
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div class="status ${status.key}">
-                ${status.label}
-              </div>
-
-            </div>
-
-
-            <div class="assignment-body">
-
-              <div class="assignment-meta">
-
-                <div class="meta-box">
-
-                  <span>Publish Date</span>
-
-                  <strong>
-                    ${formatDate(assignment.publishDate)}
-                  </strong>
-
-                </div>
-
-
-                <div class="meta-box">
-
-                  <span>Deadline</span>
-
-                  <strong>
-                    ${formatDate(assignment.deadline)}
-                  </strong>
-
-                </div>
-
-
-                <div class="meta-box">
-
-                  <span>Total Marks</span>
-
-                  <strong>
-                    ${assignment.marks} Marks
-                  </strong>
-
-                </div>
-
-
-                <div class="meta-box">
-
-                  <span>Submission</span>
-
-                  <strong>
-                    ${
-                      submission
-                        ? "Submitted"
-                        : "Not Submitted"
-                    }
-                  </strong>
-
-                </div>
-
-              </div>
-
-
-              <div
-                class="countdown-box ${countdown.type}"
-                id="countdown-${assignment.id}"
-              >
-
-                <div class="countdown-label">
-                  ⏱ Live Status
-                </div>
-
-                <div class="countdown">
-                  ${countdown.text}
-                </div>
-
-              </div>
-
-
-              <div class="assignment-actions">
-
-                ${actionButton}
-
-                <button
-                  class="btn"
-                  onclick="viewAssignment('${assignment.id}')"
-                >
-                  👁 View Details
-                </button>
-
-              </div>
-
-            </div>
-          `;
-
-
-          grid.appendChild(card);
-
+    function formatDateTime(
+      date
+    ){
+
+      return date.toLocaleDateString(
+        "en-GB",
+        {
+          day:"2-digit",
+          month:"short",
+          year:"numeric"
         }
-      );
-
-
-      updateSummary();
-
-    }
-
-
-    /* ==========================================
-       SUMMARY
-    ========================================== */
-
-    function updateSummary(){
-
-      let open = 0;
-      let submitted = 0;
-      let upcoming = 0;
-
-
-      assignments.forEach(
-        assignment => {
-
-          const status =
-            getAssignmentStatus(assignment);
-
-
-          if(status.key === "open"){
-            open++;
-          }
-
-          if(status.key === "submitted"){
-            submitted++;
-          }
-
-          if(status.key === "upcoming"){
-            upcoming++;
-          }
-
-        }
-      );
-
-
-      document.getElementById(
-        "totalAssignments"
-      ).textContent = assignments.length;
-
-
-      document.getElementById(
-        "openAssignments"
-      ).textContent = open;
-
-
-      document.getElementById(
-        "submittedAssignments"
-      ).textContent = submitted;
-
-
-      document.getElementById(
-        "upcomingAssignments"
-      ).textContent = upcoming;
-
-    }
-
-
-    /* ==========================================
-       LIVE COUNTDOWN REFRESH
-    ========================================== */
-
-    function updateCountdowns(){
-
-      assignments.forEach(
-        assignment => {
-
-          const element =
-            document.getElementById(
-              "countdown-" + assignment.id
-            );
-
-          if(!element){
-            return;
-          }
-
-
-          const result =
-            getCountdownText(assignment);
-
-
-          element.className =
-            "countdown-box " +
-            result.type;
-
-
-          const countdown =
-            element.querySelector(".countdown");
-
-
-          if(countdown){
-            countdown.textContent =
-              result.text;
-          }
-
+      ) +
+      " " +
+      date.toLocaleTimeString(
+        "en-US",
+        {
+          hour:"2-digit",
+          minute:"2-digit"
         }
       );
 
     }
 
 
-    /* ==========================================
-       VIEW DETAILS
-    ========================================== */
-
-    function viewAssignment(id){
-
-      const assignment =
-        assignments.find(
-          item => item.id === id
-        );
-
-
-      if(!assignment){
-        return;
-      }
-
-
-      const status =
-        getAssignmentStatus(assignment);
-
-
-      const message =
-        assignment.title +
-        "\n\n" +
-
-        "Publish Date: " +
-        formatDate(assignment.publishDate) +
-        "\n" +
-
-        "Deadline: " +
-        formatDate(assignment.deadline) +
-        "\n" +
-
-        "Marks: " +
-        assignment.marks +
-        "\n" +
-
-        "Status: " +
-        status.label +
-        "\n\n" +
-
-        assignment.description;
-
-
-      alert(message);
-
-    }
-
-
-    /* ==========================================
+    /* =====================================
        OPEN SUBMISSION MODAL
-    ========================================== */
+    ===================================== */
 
-    let activeAssignmentId = null;
-
-
-    function openSubmissionModal(id){
+    function openSubmissionModal(
+      assignmentId
+    ){
 
       const assignment =
-        assignments.find(
-          item => item.id === id
+        ASSIGNMENTS.find(
+          item =>
+            item.id === assignmentId
         );
 
 
@@ -1889,17 +3058,10 @@
       }
 
 
-      const status =
-        getAssignmentStatus(assignment);
-
-
-      if(
-        status.key !== "open" &&
-        status.key !== "submitted"
-      ){
+      if(!assignment.available){
 
         showToast(
-          "এই Assignment এখন Submit করা যাবে না।"
+          "এই Assignment এখনো available নয়।"
         );
 
         return;
@@ -1907,68 +3069,139 @@
       }
 
 
-      activeAssignmentId = id;
-
-
-      const submission =
-        getSubmission(id);
-
-
-      document.getElementById(
-        "modalTitle"
-      ).textContent =
-        submission
-          ? "Update Assignment Submission"
-          : "Submit Assignment";
+      const existing =
+        findSubmission(
+          assignmentId
+        );
 
 
       document.getElementById(
-        "modalAssignmentName"
+        "selectedAssignmentId"
       ).value =
-        assignment.title;
+        assignment.id;
 
 
       document.getElementById(
-        "submissionText"
+        "selectedAssignmentName"
       ).value =
-        submission
-          ? submission.note || ""
-          : "";
+        assignment.name;
+
+
+      const student =
+        getStudent();
 
 
       document.getElementById(
-        "submissionLink"
+        "submissionStudentName"
       ).value =
-        submission
-          ? submission.link || ""
-          : "";
+        student.name;
 
 
       document.getElementById(
-        "submissionModal"
-      ).classList.add("show");
+        "submissionStudentId"
+      ).value =
+        student.id;
+
+
+      document.getElementById(
+        "submissionFile"
+      ).value =
+        existing?.fileName || "";
+
+
+      document.getElementById(
+        "submissionNote"
+      ).value =
+        existing?.note || "";
+
+
+      const modal =
+        document.getElementById(
+          "submissionModal"
+        );
+
+
+      modal.classList.add(
+        "show"
+      );
+
+
+      modal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      document.getElementById(
+        "submissionFile"
+      ).focus();
 
     }
 
 
-    /* ==========================================
+    /* =====================================
        CLOSE MODAL
-    ========================================== */
+    ===================================== */
 
     function closeSubmissionModal(){
 
-      activeAssignmentId = null;
+      const modal =
+        document.getElementById(
+          "submissionModal"
+        );
 
-      document.getElementById(
-        "submissionModal"
-      ).classList.remove("show");
+
+      modal.classList.remove(
+        "show"
+      );
+
+
+      modal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
 
     }
 
 
-    /* ==========================================
+    document.getElementById(
+      "closeModal"
+    ).addEventListener(
+      "click",
+      closeSubmissionModal
+    );
+
+
+    document.getElementById(
+      "cancelSubmission"
+    ).addEventListener(
+      "click",
+      closeSubmissionModal
+    );
+
+
+    document.getElementById(
+      "submissionModal"
+    ).addEventListener(
+      "click",
+      function(event){
+
+        if(
+          event.target ===
+          this
+        ){
+
+          closeSubmissionModal();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================
        SUBMIT FORM
-    ========================================== */
+    ===================================== */
 
     document.getElementById(
       "submissionForm"
@@ -1979,39 +3212,51 @@
         event.preventDefault();
 
 
-        if(!activeAssignmentId){
-          return;
-        }
+        const student =
+          getStudent();
+
+
+        const assignmentId =
+          document.getElementById(
+            "selectedAssignmentId"
+          ).value;
 
 
         const assignment =
-          assignments.find(
+          ASSIGNMENTS.find(
             item =>
-              item.id === activeAssignmentId
+              item.id ===
+              assignmentId
           );
 
 
         if(!assignment){
+
+          showToast(
+            "Assignment পাওয়া যায়নি।"
+          );
+
           return;
+
         }
+
+
+        const fileName =
+          document.getElementById(
+            "submissionFile"
+          ).value.trim();
 
 
         const note =
           document.getElementById(
-            "submissionText"
+            "submissionNote"
           ).value.trim();
 
 
-        const link =
-          document.getElementById(
-            "submissionLink"
-          ).value.trim();
-
-
-        if(!note){
+        if(!fileName){
 
           showToast(
-            "অনুগ্রহ করে Submission Note লিখুন।"
+            "Submission file/link লিখুন।"
           );
 
           return;
@@ -2026,46 +3271,95 @@
         const existingIndex =
           submissions.findIndex(
             item =>
-              item.assignmentId === activeAssignmentId &&
-              item.studentId === studentId
+
+              String(item.studentId) ===
+              String(student.id)
+
+              &&
+
+              String(item.assignmentId) ===
+              String(assignmentId)
           );
 
 
-        const submissionData = {
+        const now =
+          new Date().toISOString();
+
+
+        const deadline =
+          new Date(
+            assignment.deadline
+          );
+
+
+        const isLate =
+          new Date() >
+          deadline;
+
+
+        const submission = {
+
+          id:
+            existingIndex >= 0
+
+              ? submissions[
+                  existingIndex
+                ].id
+
+              : "SUB-" +
+                Date.now(),
 
           assignmentId:
-            activeAssignmentId,
+            assignment.id,
 
           assignmentName:
-            assignment.title,
+            assignment.name,
 
           studentId:
-            studentId,
+            student.id,
 
           studentName:
-            studentName,
+            student.name,
+
+          course:
+            student.course,
+
+          batch:
+            student.batch,
+
+          fileName:
+            fileName,
 
           note:
             note,
 
-          link:
-            link,
+          status:
+            isLate
+              ? "Late Submitted"
+              : "Submitted",
 
           submittedAt:
-            new Date().toISOString()
+            now,
+
+          updatedAt:
+            now
 
         };
 
 
-        if(existingIndex >= 0){
+        if(
+          existingIndex >= 0
+        ){
 
-          submissions[existingIndex] =
-            submissionData;
+          submissions[
+            existingIndex
+          ] =
+            submission;
 
         }else{
 
           submissions.push(
-            submissionData
+            submission
           );
 
         }
@@ -2078,208 +3372,353 @@
 
         closeSubmissionModal();
 
-        renderAssignments();
+
+        updateAssignmentStatuses();
+
 
         showToast(
-          "✓ Assignment সফলভাবে Demo হিসেবে Submit হয়েছে।"
+          isLate
+            ? "Assignment late submission save হয়েছে।"
+            : "Assignment successfully submitted।"
         );
 
       }
     );
 
 
-    /* ==========================================
-       CLICK OUTSIDE MODAL
-    ========================================== */
+    /* =====================================
+       SUBMIT BUTTONS
+    ===================================== */
 
-    document.getElementById(
-      "submissionModal"
-    ).addEventListener(
-      "click",
-      function(event){
+    document.querySelectorAll(
+      "[data-submit]"
+    ).forEach(
+      button => {
 
-        if(event.target === this){
-          closeSubmissionModal();
-        }
+        button.addEventListener(
+          "click",
+          function(){
 
-      }
-    );
+            const id =
+              this.dataset.submit;
 
 
-    /* ==========================================
-       ESC CLOSE MODAL
-    ========================================== */
+            openSubmissionModal(
+              id
+            );
 
-    document.addEventListener(
-      "keydown",
-      function(event){
-
-        if(event.key === "Escape"){
-          closeSubmissionModal();
-        }
+          }
+        );
 
       }
     );
 
 
-    /* ==========================================
+    /* =====================================
        THEME
-    ========================================== */
+    ===================================== */
 
     function applyTheme(){
 
       const theme =
-        localStorage.getItem("snkTheme") ||
-        "light";
+        localStorage.getItem(
+          STORAGE.theme
+        ) || "dark";
 
 
-      if(theme === "dark"){
+      if(theme === "light"){
 
-        document.body.classList.add("dark");
+        document.body.style.background =
+          "linear-gradient(145deg,#f5f8ff,#eef3fa)";
 
-        document.getElementById(
-          "themeBtn"
-        ).textContent = "☀️";
+        document.body.style.color =
+          "#101828";
 
       }else{
 
-        document.body.classList.remove("dark");
+        document.body.style.background =
+          "radial-gradient(circle at 15% 8%,rgba(79,140,255,.15),transparent 28%),radial-gradient(circle at 85% 12%,rgba(123,97,255,.14),transparent 27%),linear-gradient(145deg,#07111f,#0b1728)";
 
-        document.getElementById(
-          "themeBtn"
-        ).textContent = "🌙";
+        document.body.style.color =
+          "#f7fbff";
 
       }
 
     }
 
 
-    function toggleTheme(){
+    document.getElementById(
+      "themeBtn"
+    ).addEventListener(
+      "click",
+      function(){
 
-      const isDark =
-        document.body.classList.contains("dark");
+        const current =
+          localStorage.getItem(
+            STORAGE.theme
+          ) || "dark";
 
 
-      if(isDark){
+        const next =
+          current === "dark"
+            ? "light"
+            : "dark";
+
 
         localStorage.setItem(
-          "snkTheme",
-          "light"
+          STORAGE.theme,
+          next
         );
 
-      }else{
 
-        localStorage.setItem(
-          "snkTheme",
-          "dark"
+        applyTheme();
+
+
+        showToast(
+          next === "dark"
+            ? "Dark theme চালু হয়েছে"
+            : "Light theme চালু হয়েছে"
         );
 
       }
+    );
 
 
-      applyTheme();
+    /* =====================================
+       MOBILE MENU
+    ===================================== */
 
-    }
+    document.getElementById(
+      "menuBtn"
+    ).addEventListener(
+      "click",
+      function(){
+
+        document
+          .getElementById("navLinks")
+          .classList.toggle("open");
+
+      }
+    );
 
 
-    /* ==========================================
+    document.addEventListener(
+      "click",
+      function(event){
+
+        const nav =
+          document.getElementById(
+            "navLinks"
+          );
+
+
+        const menu =
+          document.getElementById(
+            "menuBtn"
+          );
+
+
+        if(
+
+          nav.classList.contains("open")
+
+          &&
+
+          !nav.contains(event.target)
+
+          &&
+
+          !menu.contains(event.target)
+
+        ){
+
+          nav.classList.remove(
+            "open"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =====================================
        LOGOUT
-    ========================================== */
+    ===================================== */
 
-    function logout(){
+    document.getElementById(
+      "logoutBtn"
+    ).addEventListener(
+      "click",
+      function(){
 
-      const confirmLogout =
-        confirm(
-          "আপনি কি Student Portal থেকে Logout করতে চান?"
+        const confirmLogout =
+          confirm(
+            "আপনি কি Student Portal থেকে Logout করতে চান?"
+          );
+
+
+        if(!confirmLogout){
+          return;
+        }
+
+
+        sessionStorage.removeItem(
+          STORAGE.loggedIn
+        );
+
+        sessionStorage.removeItem(
+          STORAGE.studentId
+        );
+
+        sessionStorage.removeItem(
+          STORAGE.studentName
+        );
+
+        sessionStorage.removeItem(
+          STORAGE.studentCourse
+        );
+
+        sessionStorage.removeItem(
+          STORAGE.studentBatch
         );
 
 
-      if(!confirmLogout){
-        return;
+        localStorage.removeItem(
+          STORAGE.loggedIn
+        );
+
+
+        showToast(
+          "Logout successful"
+        );
+
+
+        setTimeout(
+          function(){
+
+            window.location.href =
+              "login.html";
+
+          },
+          650
+        );
+
       }
+    );
 
 
-      sessionStorage.removeItem(
-        "snkStudentLoggedIn"
-      );
+    /* =====================================
+       PRINT
+    ===================================== */
 
-      sessionStorage.removeItem(
-        "snkStudentId"
-      );
+    document.getElementById(
+      "printBtn"
+    ).addEventListener(
+      "click",
+      function(){
 
-      sessionStorage.removeItem(
-        "snkStudentName"
-      );
+        window.print();
 
-      sessionStorage.removeItem(
-        "snkStudentCourse"
-      );
-
-
-      window.location.replace(
-        "login.html"
-      );
-
-    }
+      }
+    );
 
 
-    /* ==========================================
+    /* =====================================
        TOAST
-    ========================================== */
+    ===================================== */
 
-    let toastTimer;
+    function showToast(
+      message
+    ){
 
+      const container =
+        document.getElementById(
+          "toastContainer"
+        );
 
-    function showToast(message){
 
       const toast =
-        document.getElementById("toast");
+        document.createElement(
+          "div"
+        );
+
+
+      toast.className =
+        "toast";
 
 
       toast.textContent =
         message;
 
 
-      toast.classList.add("show");
+      container.appendChild(
+        toast
+      );
 
 
-      clearTimeout(toastTimer);
+      setTimeout(
+        function(){
+
+          toast.style.opacity =
+            "0";
+
+          toast.style.transform =
+            "translateY(10px)";
 
 
-      toastTimer =
-        setTimeout(
-          function(){
+          setTimeout(
+            function(){
 
-            toast.classList.remove("show");
+              toast.remove();
 
-          },
-          3000
-        );
+            },
+            250
+          );
+
+        },
+        2500
+      );
 
     }
 
 
-    /* ==========================================
-       STORAGE / VISIBILITY REFRESH
-    ========================================== */
+    /* =====================================
+       STORAGE SYNC
+    ===================================== */
 
     window.addEventListener(
       "storage",
       function(){
 
-        renderAssignments();
+        updateStudentUI();
+
+        updateAssignmentStatuses();
+
+        applyTheme();
 
       }
     );
 
 
+    /* =====================================
+       VISIBILITY SYNC
+    ===================================== */
+
     document.addEventListener(
       "visibilitychange",
       function(){
 
-        if(!document.hidden){
+        if(
+          document.visibilityState ===
+          "visible"
+        ){
 
-          renderAssignments();
+          updateStudentUI();
+
+          updateAssignmentStatuses();
+
+          applyTheme();
 
         }
 
@@ -2287,26 +3726,68 @@
     );
 
 
-    /* ==========================================
-       INITIAL LOAD
-    ========================================== */
+    /* =====================================
+       ESCAPE MODAL
+    ===================================== */
 
-    applyTheme();
+    document.addEventListener(
+      "keydown",
+      function(event){
 
-    renderAssignments();
+        if(
+          event.key ===
+          "Escape"
+        ){
+
+          closeSubmissionModal();
+
+        }
+
+      }
+    );
 
 
-    /* ==========================================
-       LIVE UPDATE EVERY SECOND
-    ========================================== */
+    /* =====================================
+       YEAR
+    ===================================== */
+
+    document.getElementById(
+      "year"
+    ).textContent =
+      new Date().getFullYear();
+
+
+    /* =====================================
+       COUNTDOWN REFRESH
+    ===================================== */
 
     setInterval(
       function(){
 
-        updateCountdowns();
+        updateAssignmentStatuses();
 
       },
-      1000
+      30000
+    );
+
+
+    /* =====================================
+       INITIALIZE
+    ===================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function(){
+
+        protectPage();
+
+        updateStudentUI();
+
+        updateAssignmentStatuses();
+
+        applyTheme();
+
+      }
     );
 
   </script>
