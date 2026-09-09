@@ -4,890 +4,1013 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>My Course — SNK IT Institute</title>
+  <title>My Course | SNK IT Institute</title>
 
-  <meta name="description" content="SNK IT Institute Student Course Portal">
-  <meta name="theme-color" content="#2563eb">
+  <meta
+    name="description"
+    content="SNK IT Institute Student Portal - My Course"
+  >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root{
+      --bg:#07111f;
+      --bg2:#0b1728;
+      --card:rgba(15,29,48,.82);
+      --card2:rgba(18,36,58,.92);
+      --text:#f7fbff;
+      --muted:#9db0c6;
+      --line:rgba(255,255,255,.09);
+
+      --primary:#4f8cff;
+      --primary2:#7b61ff;
+      --success:#22c55e;
+      --warning:#f59e0b;
+
+      --shadow:0 20px 60px rgba(0,0,0,.30);
+      --radius:22px;
     }
 
-    html {
-      scroll-behavior: smooth;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    body {
-      font-family: "Noto Sans Bengali", sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-      min-height: 100vh;
-      transition: 0.3s ease;
+    html{
+      scroll-behavior:smooth;
     }
 
-    body.dark {
-      background: #0f172a;
-      color: #e5e7eb;
+    body{
+      font-family:"Inter","Noto Sans Bengali",sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%,rgba(79,140,255,.14),transparent 28%),
+        radial-gradient(circle at 85% 15%,rgba(123,97,255,.13),transparent 25%),
+        linear-gradient(145deg,var(--bg),var(--bg2));
+      color:var(--text);
+      min-height:100vh;
+      line-height:1.6;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(circle,rgba(255,255,255,.55) 1px,transparent 1px);
+      background-size:90px 90px;
+      opacity:.08;
+      z-index:-1;
     }
 
-    button {
-      font-family: inherit;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
-    /* =========================
-       HEADER
-    ========================== */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e5e7eb;
+    button,
+    input{
+      font:inherit;
     }
 
-    body.dark header {
-      background: rgba(15,23,42,0.96);
-      border-color: #263247;
+    button{
+      cursor:pointer;
     }
 
-    .header-inner {
-      max-width: 1200px;
-      margin: auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .brand img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      background: #fff;
-      border-radius: 12px;
-      padding: 4px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-
-    .brand-title {
-      color: #2563eb;
-      font-size: 19px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .brand-subtitle {
-      color: #64748b;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    body.dark .brand-subtitle {
-      color: #94a3b8;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-      border: 1px solid #dbe2ea;
-      background: #fff;
-      color: #172033;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: 0.2s;
-    }
-
-    .icon-btn:hover {
-      transform: translateY(-2px);
-      border-color: #2563eb;
-    }
-
-    body.dark .icon-btn {
-      background: #172033;
-      color: #e5e7eb;
-      border-color: #334155;
+    .container{
+      width:min(1180px,calc(100% - 32px));
+      margin:auto;
     }
 
     /* =========================
-       MAIN
-    ========================== */
+       NAVBAR
+    ========================= */
 
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 28px 20px 50px;
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(7,17,31,.82);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
     }
 
-    .page-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
+    .nav-inner{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
     }
 
-    .page-title h1 {
-      font-size: 30px;
-      font-weight: 800;
-      margin-bottom: 5px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      white-space:nowrap;
     }
 
-    .page-title p {
-      color: #64748b;
-      font-size: 14px;
+    .brand-logo{
+      width:44px;
+      height:44px;
+      border-radius:13px;
+      background:#fff;
+      padding:5px;
+      object-fit:contain;
+      box-shadow:0 8px 25px rgba(79,140,255,.18);
     }
 
-    body.dark .page-title p {
-      color: #94a3b8;
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.15;
     }
 
-    .top-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .brand-title{
+      font-size:15px;
     }
 
-    .btn {
-      border: none;
-      border-radius: 11px;
-      padding: 11px 16px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      transition: 0.2s;
+    .brand-sub{
+      font-size:11px;
+      color:var(--muted);
+      font-weight:600;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:5px;
     }
 
-    .btn-primary {
-      background: #2563eb;
-      color: #fff;
+    .nav-links a{
+      padding:9px 12px;
+      border-radius:10px;
+      color:#c9d7e7;
+      font-size:13px;
+      font-weight:600;
+      transition:.2s;
     }
 
-    .btn-secondary {
-      background: #e8eef8;
-      color: #1e293b;
+    .nav-links a:hover,
+    .nav-links a.active{
+      background:rgba(79,140,255,.12);
+      color:#fff;
     }
 
-    body.dark .btn-secondary {
-      background: #1e293b;
-      color: #e5e7eb;
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
     }
 
-    .btn-danger {
-      background: #dc2626;
-      color: #fff;
+    .icon-btn{
+      width:40px;
+      height:40px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      transition:.2s;
     }
 
-    /* =========================
-       START NOTICE
-    ========================== */
-
-    .start-notice {
-      background: linear-gradient(135deg, #eff6ff, #dbeafe);
-      border: 1px solid #bfdbfe;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
+    .icon-btn:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.08);
     }
 
-    body.dark .start-notice {
-      background: linear-gradient(135deg, #172554, #1e3a8a);
-      border-color: #1d4ed8;
-    }
-
-    .notice-icon {
-      width: 52px;
-      height: 52px;
-      flex-shrink: 0;
-      border-radius: 14px;
-      background: #2563eb;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-    }
-
-    .notice-content {
-      flex: 1;
-    }
-
-    .notice-content h3 {
-      font-size: 17px;
-      margin-bottom: 3px;
-    }
-
-    .notice-content p {
-      font-size: 13px;
-      color: #475569;
-      line-height: 1.7;
-    }
-
-    body.dark .notice-content p {
-      color: #dbeafe;
-    }
-
-    .notice-date {
-      font-weight: 800;
-      color: #1d4ed8;
-    }
-
-    body.dark .notice-date {
-      color: #bfdbfe;
+    .menu-btn{
+      display:none;
     }
 
     /* =========================
-       COURSE HERO
-    ========================== */
+       HERO
+    ========================= */
 
-    .course-hero {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8 60%, #1e40af);
-      color: white;
-      border-radius: 22px;
-      padding: 30px;
-      margin-bottom: 22px;
-      box-shadow: 0 12px 35px rgba(37,99,235,0.20);
+    .hero{
+      padding:55px 0 35px;
     }
 
-    .course-hero-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 20px;
-      flex-wrap: wrap;
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.45fr .85fr;
+      gap:24px;
+      align-items:stretch;
     }
 
-    .course-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      margin-bottom: 15px;
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      min-height:300px;
+      padding:36px;
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 80% 20%,rgba(123,97,255,.18),transparent 30%),
+        radial-gradient(circle at 20% 80%,rgba(79,140,255,.15),transparent 30%),
+        rgba(12,27,46,.78);
+      box-shadow:var(--shadow);
     }
 
-    .course-hero h2 {
-      font-size: 30px;
-      margin-bottom: 6px;
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      width:230px;
+      height:230px;
+      border:1px solid rgba(79,140,255,.16);
+      border-radius:50%;
+      right:-70px;
+      top:-80px;
+      box-shadow:
+        0 0 0 35px rgba(79,140,255,.03),
+        0 0 0 70px rgba(123,97,255,.025);
     }
 
-    .course-hero p {
-      opacity: 0.9;
-      font-size: 14px;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 11px;
+      border-radius:999px;
+      background:rgba(34,197,94,.1);
+      border:1px solid rgba(34,197,94,.22);
+      color:#8ff0ae;
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:16px;
     }
 
-    .active-badge {
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 800;
+    .eyebrow-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--success);
+      box-shadow:0 0 12px rgba(34,197,94,.8);
     }
 
-    /* =========================
-       COURSE META
-    ========================== */
-
-    .meta-grid {
-      margin-top: 25px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+    .hero h1{
+      font-size:clamp(32px,5vw,52px);
+      line-height:1.08;
+      letter-spacing:-1.5px;
+      margin-bottom:15px;
     }
 
-    .meta-item {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 13px;
-      padding: 14px;
+    .hero h1 span{
+      background:linear-gradient(90deg,#6ea4ff,#a28dff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
     }
 
-    .meta-item span {
-      display: block;
-      font-size: 11px;
-      opacity: 0.78;
-      margin-bottom: 4px;
+    .hero-description{
+      color:var(--muted);
+      max-width:680px;
+      font-size:15px;
     }
 
-    .meta-item strong {
-      font-size: 14px;
+    .student-mini{
+      padding:26px;
+      border-radius:24px;
+      background:rgba(255,255,255,.045);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
 
-    /* =========================
-       GRID
-    ========================== */
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    .avatar{
+      width:66px;
+      height:66px;
+      border-radius:20px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      color:#fff;
+      font-size:25px;
+      font-weight:800;
+      margin-bottom:15px;
     }
 
-    .card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 6px 20px rgba(15,23,42,0.05);
+    .student-mini h3{
+      font-size:19px;
+      margin-bottom:3px;
     }
 
-    body.dark .card {
-      background: #111c31;
-      border-color: #263247;
-      box-shadow: none;
+    .student-mini p{
+      color:var(--muted);
+      font-size:13px;
     }
 
-    .card.full {
-      grid-column: 1 / -1;
+    .student-meta{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:18px;
     }
 
-    .card-title {
-      font-size: 18px;
-      font-weight: 800;
-      padding-bottom: 13px;
-      margin-bottom: 17px;
-      border-bottom: 1px solid #e5e7eb;
+    .meta-box{
+      padding:11px;
+      border-radius:13px;
+      background:rgba(255,255,255,.035);
+      border:1px solid var(--line);
     }
 
-    body.dark .card-title {
-      border-color: #263247;
+    .meta-label{
+      display:block;
+      color:var(--muted);
+      font-size:10px;
+      margin-bottom:2px;
     }
 
-    /* =========================
-       SCHEDULE
-    ========================== */
-
-    .schedule-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .schedule-item {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      padding: 13px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 13px;
-    }
-
-    body.dark .schedule-item {
-      background: #0f172a;
-      border-color: #334155;
-    }
-
-    .schedule-day {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    body.dark .schedule-day {
-      background: #172554;
-      color: #93c5fd;
-    }
-
-    .schedule-info {
-      flex: 1;
-    }
-
-    .schedule-info strong {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 3px;
-    }
-
-    .schedule-info span {
-      font-size: 12px;
-      color: #64748b;
-    }
-
-    body.dark .schedule-info span {
-      color: #94a3b8;
+    .meta-value{
+      font-size:13px;
+      font-weight:700;
     }
 
     /* =========================
-       PROGRESS
-    ========================== */
+       MAIN COURSE
+    ========================= */
 
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+    main{
+      padding-bottom:55px;
     }
 
-    .progress-header span {
-      font-size: 13px;
-      color: #64748b;
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:15px;
+      margin:30px 0 18px;
     }
 
-    body.dark .progress-header span {
-      color: #94a3b8;
+    .section-head h2{
+      font-size:25px;
     }
 
-    .progress-header strong {
-      font-size: 18px;
-      color: #2563eb;
+    .section-head p{
+      color:var(--muted);
+      font-size:13px;
     }
 
-    .progress-bar {
-      width: 100%;
-      height: 12px;
-      background: #e2e8f0;
-      border-radius: 20px;
-      overflow: hidden;
+    .course-card{
+      background:linear-gradient(
+        145deg,
+        rgba(21,40,65,.94),
+        rgba(11,25,42,.94)
+      );
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:26px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
     }
 
-    body.dark .progress-bar {
-      background: #334155;
+    .course-top{
+      padding:28px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:20px;
+      align-items:center;
+      border-bottom:1px solid var(--line);
     }
 
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: #2563eb;
-      border-radius: 20px;
-      transition: width 0.6s ease;
+    .course-title{
+      display:flex;
+      align-items:center;
+      gap:15px;
     }
 
-    .progress-text {
-      margin-top: 10px;
-      color: #64748b;
-      font-size: 12px;
-      line-height: 1.6;
+    .course-icon{
+      width:62px;
+      height:62px;
+      flex:0 0 62px;
+      display:grid;
+      place-items:center;
+      border-radius:18px;
+      background:linear-gradient(
+        135deg,
+        rgba(79,140,255,.22),
+        rgba(123,97,255,.22)
+      );
+      border:1px solid rgba(79,140,255,.18);
+      font-size:28px;
     }
 
-    body.dark .progress-text {
-      color: #94a3b8;
+    .course-title h2{
+      font-size:24px;
+      margin-bottom:3px;
+    }
+
+    .course-title p{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .status-badge{
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(34,197,94,.11);
+      border:1px solid rgba(34,197,94,.2);
+      color:#8ff0ae;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .course-body{
+      padding:28px;
+    }
+
+    .course-stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:13px;
+      margin-bottom:25px;
+    }
+
+    .stat{
+      padding:17px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      border-radius:17px;
+    }
+
+    .stat-label{
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:4px;
+    }
+
+    .stat-value{
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .progress-section{
+      padding:20px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.025);
+      margin-bottom:25px;
+    }
+
+    .progress-head{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:9px;
+    }
+
+    .progress-head strong{
+      font-size:14px;
+    }
+
+    .progress-head span{
+      color:#8fb7ff;
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .progress-bar{
+      height:10px;
+      background:rgba(255,255,255,.08);
+      border-radius:99px;
+      overflow:hidden;
+    }
+
+    .progress-fill{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,var(--primary),var(--primary2));
+      border-radius:inherit;
+      transition:width .6s ease;
+    }
+
+    .progress-note{
+      margin-top:9px;
+      color:var(--muted);
+      font-size:11px;
     }
 
     /* =========================
-       STATS
-    ========================== */
+       MODULES
+    ========================= */
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    .modules-title{
+      margin-bottom:14px;
+      font-size:18px;
     }
 
-    .stat-box {
-      padding: 17px;
-      border-radius: 14px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      text-align: center;
+    .modules{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
     }
 
-    body.dark .stat-box {
-      background: #0f172a;
-      border-color: #334155;
+    .module{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      padding:15px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.025);
+      transition:.2s;
     }
 
-    .stat-icon {
-      font-size: 22px;
-      margin-bottom: 7px;
+    .module:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.045);
+      border-color:rgba(79,140,255,.2);
     }
 
-    .stat-number {
-      font-size: 24px;
-      font-weight: 800;
-      margin-bottom: 2px;
+    .module-number{
+      width:37px;
+      height:37px;
+      flex:0 0 37px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      background:rgba(79,140,255,.11);
+      color:#8eb5ff;
+      font-size:12px;
+      font-weight:800;
     }
 
-    .stat-label {
-      color: #64748b;
-      font-size: 11px;
+    .module h4{
+      font-size:13px;
+      margin-bottom:2px;
     }
 
-    body.dark .stat-label {
-      color: #94a3b8;
-    }
-
-    /* =========================
-       INFO TABLE
-    ========================== */
-
-    .info-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .info-table tr {
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    body.dark .info-table tr {
-      border-color: #263247;
-    }
-
-    .info-table tr:last-child {
-      border-bottom: none;
-    }
-
-    .info-table td {
-      padding: 12px 5px;
-      font-size: 13px;
-    }
-
-    .info-table td:first-child {
-      color: #64748b;
-      font-weight: 600;
-      width: 42%;
-    }
-
-    body.dark .info-table td:first-child {
-      color: #94a3b8;
-    }
-
-    .info-table td:last-child {
-      font-weight: 700;
-      text-align: right;
+    .module p{
+      color:var(--muted);
+      font-size:11px;
     }
 
     /* =========================
-       SYLLABUS
-    ========================== */
+       INFO GRID
+    ========================= */
 
-    .module-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:20px;
     }
 
-    .module {
-      padding: 15px;
-      border: 1px solid #e2e8f0;
-      border-radius: 13px;
-      background: #f8fafc;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
+    .info-card{
+      padding:24px;
+      border-radius:22px;
+      background:var(--card);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
     }
 
-    body.dark .module {
-      background: #0f172a;
-      border-color: #334155;
+    .info-card h3{
+      font-size:18px;
+      margin-bottom:15px;
     }
 
-    .module-number {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      flex-shrink: 0;
-      font-size: 12px;
+    .info-list{
+      display:grid;
+      gap:10px;
     }
 
-    body.dark .module-number {
-      background: #172554;
-      color: #93c5fd;
+    .info-row{
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      padding-bottom:10px;
+      border-bottom:1px dashed rgba(255,255,255,.08);
+      font-size:13px;
     }
 
-    .module h4 {
-      font-size: 14px;
-      margin-bottom: 4px;
+    .info-row:last-child{
+      border-bottom:0;
+      padding-bottom:0;
     }
 
-    .module p {
-      font-size: 11px;
-      color: #64748b;
-      line-height: 1.6;
+    .info-row span:first-child{
+      color:var(--muted);
     }
 
-    body.dark .module p {
-      color: #94a3b8;
+    .info-row span:last-child{
+      font-weight:700;
+      text-align:right;
+    }
+
+    /* =========================
+       QUICK LINKS
+    ========================= */
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:13px;
+      margin-top:20px;
+    }
+
+    .quick{
+      padding:18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(255,255,255,.035);
+      transition:.2s;
+    }
+
+    .quick:hover{
+      transform:translateY(-3px);
+      background:rgba(79,140,255,.07);
+      border-color:rgba(79,140,255,.2);
+    }
+
+    .quick-icon{
+      font-size:23px;
+      margin-bottom:9px;
+    }
+
+    .quick h4{
+      font-size:13px;
+      margin-bottom:3px;
+    }
+
+    .quick p{
+      color:var(--muted);
+      font-size:11px;
     }
 
     /* =========================
        NOTICE
-    ========================== */
+    ========================= */
 
-    .info-notice {
-      margin-top: 20px;
-      padding: 15px 17px;
-      border-radius: 13px;
-      background: #ecfdf5;
-      border: 1px solid #bbf7d0;
-      color: #166534;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    body.dark .info-notice {
-      background: #052e16;
-      border-color: #14532d;
-      color: #bbf7d0;
-    }
-
-    /* =========================
-       TOAST
-    ========================== */
-
-    .toast {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 5000;
-      background: #172033;
-      color: white;
-      padding: 13px 17px;
-      border-radius: 11px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.20);
-      opacity: 0;
-      transform: translateY(20px);
-      pointer-events: none;
-      transition: 0.3s;
-      font-size: 13px;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
+    .notice{
+      margin-top:20px;
+      padding:18px 20px;
+      border-radius:18px;
+      background:rgba(79,140,255,.07);
+      border:1px solid rgba(79,140,255,.15);
+      color:#cfe0ff;
+      font-size:12px;
     }
 
     /* =========================
        FOOTER
-    ========================== */
+    ========================= */
 
-    footer {
-      text-align: center;
-      padding: 25px 20px;
-      color: #64748b;
-      font-size: 12px;
-    }
-
-    body.dark footer {
-      color: #94a3b8;
+    footer{
+      border-top:1px solid var(--line);
+      padding:25px 0;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
     }
 
     /* =========================
-       RESPONSIVE
-    ========================== */
+       TOAST
+    ========================= */
 
-    @media (max-width: 900px) {
-
-      .meta-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .card.full {
-        grid-column: auto;
-      }
-
+    #toastContainer{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      z-index:2000;
+      display:grid;
+      gap:10px;
     }
 
-    @media (max-width: 650px) {
-
-      .header-inner {
-        padding: 10px 14px;
-      }
-
-      .brand img {
-        width: 42px;
-        height: 42px;
-      }
-
-      .brand-title {
-        font-size: 16px;
-      }
-
-      .brand-subtitle {
-        font-size: 10px;
-      }
-
-      .header-actions .dashboard-text {
-        display: none;
-      }
-
-      main {
-        padding: 20px 14px 40px;
-      }
-
-      .page-title h1 {
-        font-size: 25px;
-      }
-
-      .top-actions {
-        width: 100%;
-      }
-
-      .top-actions .btn {
-        flex: 1;
-      }
-
-      .course-hero {
-        padding: 22px;
-        border-radius: 18px;
-      }
-
-      .course-hero h2 {
-        font-size: 23px;
-      }
-
-      .meta-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .module-list {
-        grid-template-columns: 1fr;
-      }
-
-      .start-notice {
-        align-items: flex-start;
-      }
-
-      .notice-icon {
-        width: 45px;
-        height: 45px;
-      }
-
+    .toast{
+      min-width:250px;
+      max-width:340px;
+      padding:13px 16px;
+      border-radius:14px;
+      background:#102238;
+      border:1px solid var(--line);
+      color:#fff;
+      box-shadow:var(--shadow);
+      font-size:12px;
+      animation:toastIn .25s ease;
     }
 
-    @media (max-width: 430px) {
-
-      .meta-grid {
-        grid-template-columns: 1fr;
+    @keyframes toastIn{
+      from{
+        opacity:0;
+        transform:translateY(12px);
       }
-
-      .schedule-item {
-        align-items: flex-start;
+      to{
+        opacity:1;
+        transform:translateY(0);
       }
-
-      .info-table td:last-child {
-        text-align: right;
-      }
-
     }
 
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media(max-width:900px){
+
+      .nav-links{
+        position:absolute;
+        top:72px;
+        left:16px;
+        right:16px;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        padding:10px;
+        background:#0b1a2d;
+        border:1px solid var(--line);
+        border-radius:18px;
+        box-shadow:var(--shadow);
+      }
+
+      .nav-links.open{
+        display:flex;
+      }
+
+      .nav-links a{
+        padding:12px;
+      }
+
+      .menu-btn{
+        display:grid;
+      }
+
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .course-stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:650px){
+
+      .container{
+        width:min(100% - 22px,1180px);
+      }
+
+      .nav-inner{
+        min-height:64px;
+      }
+
+      .brand-logo{
+        width:40px;
+        height:40px;
+      }
+
+      .brand-sub{
+        display:none;
+      }
+
+      .nav-actions .login-btn{
+        display:none;
+      }
+
+      .hero{
+        padding-top:28px;
+      }
+
+      .hero-card{
+        padding:25px;
+        min-height:auto;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+
+      .student-mini{
+        padding:22px;
+      }
+
+      .course-top{
+        grid-template-columns:1fr;
+        padding:22px;
+      }
+
+      .course-body{
+        padding:22px;
+      }
+
+      .course-title h2{
+        font-size:20px;
+      }
+
+      .course-stats{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .modules{
+        grid-template-columns:1fr;
+      }
+
+      .info-grid{
+        grid-template-columns:1fr;
+      }
+
+      .quick-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .section-head{
+        display:block;
+      }
+
+      .section-head p{
+        margin-top:3px;
+      }
+
+      #toastContainer{
+        left:12px;
+        right:12px;
+        bottom:12px;
+      }
+
+      .toast{
+        min-width:0;
+        max-width:none;
+      }
+    }
+
+    @media(max-width:420px){
+
+      .quick-grid{
+        grid-template-columns:1fr;
+      }
+
+      .course-stats{
+        grid-template-columns:1fr;
+      }
+
+      .student-meta{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,
+      *::before,
+      *::after{
+        scroll-behavior:auto !important;
+        animation-duration:.01ms !important;
+        transition-duration:.01ms !important;
+      }
+    }
+
+    @media print{
+
+      body{
+        background:#fff;
+        color:#111;
+      }
+
+      body::before,
+      .navbar,
+      .quick-grid,
+      .notice,
+      footer,
+      #toastContainer{
+        display:none !important;
+      }
+
+      .hero{
+        padding-top:0;
+      }
+
+      .hero-card,
+      .student-mini,
+      .course-card,
+      .info-card{
+        background:#fff;
+        color:#111;
+        box-shadow:none;
+        border:1px solid #ddd;
+      }
+
+      .hero-description,
+      .student-mini p,
+      .section-head p,
+      .course-title p,
+      .stat-label,
+      .progress-note,
+      .module p,
+      .info-row span:first-child{
+        color:#555;
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <!-- =========================
-       HEADER
-  ========================== -->
+       NAVBAR
+  ========================= -->
 
-  <header>
+  <header class="navbar">
 
-    <div class="header-inner">
+    <div class="container nav-inner">
 
-      <a
-        href="student-dashboard.html"
-        class="brand"
-      >
+      <a href="index.html" class="brand">
 
         <img
+          class="brand-logo"
           src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
           alt="SNK IT Institute Logo"
+          onerror="this.style.display='none'"
         >
 
-        <div>
-
-          <div class="brand-title">
-            SNK IT Institute
-          </div>
-
-          <div class="brand-subtitle">
-            Student Portal
-          </div>
-
-        </div>
+        <span class="brand-text">
+          <span class="brand-title">SNK IT Institute</span>
+          <span class="brand-sub">Student Portal</span>
+        </span>
 
       </a>
 
+      <nav class="nav-links" id="navLinks">
 
-      <div class="header-actions">
+        <a href="index.html">Home</a>
+
+        <a href="student-dashboard.html">
+          My Dashboard
+        </a>
+
+        <a href="courses.html" class="active">
+          My Course
+        </a>
+
+        <a href="assignments.html">
+          Assignment
+        </a>
+
+        <a href="quiz.html">
+          Quiz
+        </a>
+
+        <a href="results.html">
+          Result
+        </a>
+
+        <a href="student-attendance.html">
+          Attendance
+        </a>
+
+        <a href="student-resources.html">
+          Resources
+        </a>
+
+        <a href="student-support.html">
+          Support
+        </a>
+
+      </nav>
+
+      <div class="nav-actions">
 
         <button
-          type="button"
           class="icon-btn"
           id="themeBtn"
-          title="Theme"
+          type="button"
+          title="Toggle Theme"
+          aria-label="Toggle Theme"
         >
-          🌙
+          ◐
         </button>
 
-        <a
-          href="student-dashboard.html"
-          class="btn btn-secondary"
+        <button
+          class="icon-btn menu-btn"
+          id="menuBtn"
+          type="button"
+          title="Menu"
+          aria-label="Open Menu"
         >
-          🏠
-          <span class="dashboard-text">
-            Dashboard
-          </span>
-        </a>
+          ☰
+        </button>
+
+        <button
+          class="icon-btn"
+          id="logoutBtn"
+          type="button"
+          title="Logout"
+          aria-label="Logout"
+        >
+          ↪
+        </button>
 
       </div>
 
@@ -897,768 +1020,694 @@
 
 
   <!-- =========================
-       MAIN
-  ========================== -->
+       HERO
+  ========================= -->
 
-  <main>
+  <section class="hero">
 
+    <div class="container">
 
-    <!-- PAGE TOP -->
+      <div class="hero-grid">
 
-    <div class="page-top">
+        <div class="hero-card">
 
-      <div class="page-title">
-
-        <h1>
-          📚 My Course
-        </h1>
-
-        <p>
-          আপনার Course, Batch এবং Class Schedule-এর তথ্য এখানে দেখুন।
-        </p>
-
-      </div>
-
-
-      <div class="top-actions">
-
-        <a
-          href="student-dashboard.html"
-          class="btn btn-secondary"
-        >
-          ← Dashboard
-        </a>
-
-        <button
-          type="button"
-          class="btn btn-danger"
-          id="logoutBtn"
-        >
-          Logout
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         CLASS START NOTICE
-    ========================== -->
-
-    <section class="start-notice">
-
-      <div class="notice-icon">
-        📅
-      </div>
-
-      <div class="notice-content">
-
-        <h3>
-          আপনার Class শীঘ্রই শুরু হচ্ছে
-        </h3>
-
-        <p>
-          Batch 01-এর নিয়মিত Class শুরু হবে
-          <span class="notice-date">
-            08 September 2026
-          </span>
-          থেকে।
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         COURSE HERO
-    ========================== -->
-
-    <section class="course-hero">
-
-      <div class="course-hero-top">
-
-        <div>
-
-          <div class="course-icon">
-            💻
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Course Active
           </div>
 
-          <h2>
-            Computer Office Application
-          </h2>
+          <h1>
+            My <span>Course</span>
+          </h1>
 
-          <p>
-            Professional Computer & Office Application Course
+          <p class="hero-description">
+            আপনার বর্তমান কোর্স, ক্লাস রুটিন, কোর্স মডিউল এবং
+            শিক্ষার অগ্রগতি এখান থেকে দেখতে পারবেন।
           </p>
 
         </div>
 
 
-        <div class="active-badge">
-          ● ACTIVE COURSE
-        </div>
+        <div class="student-mini">
 
-      </div>
+          <div class="avatar" id="studentAvatar">
+            S
+          </div>
 
-
-      <div class="meta-grid">
-
-        <div class="meta-item">
-
-          <span>
+          <h3 id="studentName">
             Student
-          </span>
+          </h3>
 
-          <strong id="studentName">
-            Demo Student
-          </strong>
-
-        </div>
-
-
-        <div class="meta-item">
-
-          <span>
-            Student ID
-          </span>
-
-          <strong id="studentId">
+          <p id="studentId">
             SNK-1001
-          </strong>
+          </p>
 
-        </div>
+          <div class="student-meta">
 
+            <div class="meta-box">
+              <span class="meta-label">Course</span>
+              <span class="meta-value" id="studentCourse">
+                Computer Office Application
+              </span>
+            </div>
 
-        <div class="meta-item">
+            <div class="meta-box">
+              <span class="meta-label">Batch</span>
+              <span class="meta-value" id="studentBatch">
+                Batch 01
+              </span>
+            </div>
 
-          <span>
-            Batch
-          </span>
-
-          <strong>
-            Batch 01
-          </strong>
-
-        </div>
-
-
-        <div class="meta-item">
-
-          <span>
-            Course Type
-          </span>
-
-          <strong>
-            Offline
-          </strong>
+          </div>
 
         </div>
 
       </div>
 
-    </section>
+    </div>
+
+  </section>
 
 
-    <!-- =========================
-         CONTENT GRID
-    ========================== -->
+  <!-- =========================
+       MAIN
+  ========================= -->
 
-    <div class="content-grid">
+  <main>
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <div>
+          <h2>Current Course</h2>
+
+          <p>
+            আপনার Student Account-এর সাথে সংযুক্ত কোর্স
+          </p>
+        </div>
+
+      </div>
 
 
-      <!-- CLASS SCHEDULE -->
+      <!-- COURSE CARD -->
 
-      <section class="card">
+      <section class="course-card">
 
-        <div class="card-title">
-          🗓️ Class Schedule
+        <div class="course-top">
+
+          <div class="course-title">
+
+            <div class="course-icon">
+              💻
+            </div>
+
+            <div>
+
+              <h2 id="courseTitle">
+                Computer Office Application
+              </h2>
+
+              <p>
+                Professional Computer & Office Application Course
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="status-badge">
+            Active Course
+          </div>
+
         </div>
 
 
-        <div class="schedule-list">
+        <div class="course-body">
 
-          <div class="schedule-item">
+          <!-- STATS -->
 
-            <div class="schedule-day">
-              S
+          <div class="course-stats">
+
+            <div class="stat">
+
+              <div class="stat-label">
+                Batch
+              </div>
+
+              <div
+                class="stat-value"
+                id="courseBatch"
+              >
+                Batch 01
+              </div>
+
             </div>
 
-            <div class="schedule-info">
+
+            <div class="stat">
+
+              <div class="stat-label">
+                Mode
+              </div>
+
+              <div class="stat-value">
+                Offline
+              </div>
+
+            </div>
+
+
+            <div class="stat">
+
+              <div class="stat-label">
+                Duration
+              </div>
+
+              <div class="stat-value">
+                6 Months
+              </div>
+
+            </div>
+
+
+            <div class="stat">
+
+              <div class="stat-label">
+                Class Time
+              </div>
+
+              <div class="stat-value">
+                4:00 PM – 6:00 PM
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- PROGRESS -->
+
+          <div class="progress-section">
+
+            <div class="progress-head">
 
               <strong>
-                Saturday
+                Course Progress
               </strong>
 
+              <span id="progressText">
+                0%
+              </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+              <div
+                class="progress-fill"
+                id="progressFill"
+              ></div>
+
+            </div>
+
+            <p class="progress-note">
+              Class শুরু হওয়ার পর আপনার
+              attendance, assignment এবং quiz activity অনুযায়ী
+              progress আপডেট হবে।
+            </p>
+
+          </div>
+
+
+          <!-- MODULES -->
+
+          <h3 class="modules-title">
+            Course Modules
+          </h3>
+
+          <div class="modules">
+
+            <div class="module">
+
+              <div class="module-number">
+                01
+              </div>
+
+              <div>
+                <h4>Computer Basics</h4>
+                <p>Computer fundamentals & basic concepts</p>
+              </div>
+
+            </div>
+
+
+            <div class="module">
+
+              <div class="module-number">
+                02
+              </div>
+
+              <div>
+                <h4>Windows & File Management</h4>
+                <p>Windows, folders, files & system basics</p>
+              </div>
+
+            </div>
+
+
+            <div class="module">
+
+              <div class="module-number">
+                03
+              </div>
+
+              <div>
+                <h4>Microsoft Word</h4>
+                <p>Document creation, formatting & printing</p>
+              </div>
+
+            </div>
+
+
+            <div class="module">
+
+              <div class="module-number">
+                04
+              </div>
+
+              <div>
+                <h4>Microsoft Excel</h4>
+                <p>Spreadsheet, formulas & data management</p>
+              </div>
+
+            </div>
+
+
+            <div class="module">
+
+              <div class="module-number">
+                05
+              </div>
+
+              <div>
+                <h4>Microsoft PowerPoint</h4>
+                <p>Presentation design & slideshow</p>
+              </div>
+
+            </div>
+
+
+            <div class="module">
+
+              <div class="module-number">
+                06
+              </div>
+
+              <div>
+                <h4>Internet & Online Skills</h4>
+                <p>Internet, email & online productivity</p>
+              </div>
+
+            </div>
+
+
+            <div class="module">
+
+              <div class="module-number">
+                07
+              </div>
+
+              <div>
+                <h4>Typing Practice</h4>
+                <p>Bangla & English typing practice</p>
+              </div>
+
+            </div>
+
+
+            <div class="module">
+
+              <div class="module-number">
+                08
+              </div>
+
+              <div>
+                <h4>Practical Project</h4>
+                <p>Final practical computer project</p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           COURSE INFO
+      ========================= -->
+
+      <div class="info-grid">
+
+
+        <div class="info-card">
+
+          <h3>
+            Course Information
+          </h3>
+
+          <div class="info-list">
+
+            <div class="info-row">
+
+              <span>Student</span>
+
+              <span id="infoStudentName">
+                Student
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>Student ID</span>
+
+              <span id="infoStudentId">
+                SNK-1001
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>Course</span>
+
+              <span id="infoCourse">
+                Computer Office Application
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>Batch</span>
+
+              <span id="infoBatch">
+                Batch 01
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>Learning Mode</span>
+
               <span>
-                Class Time: 4:00 PM – 6:00 PM
+                Offline
               </span>
 
             </div>
 
           </div>
 
+        </div>
 
-          <div class="schedule-item">
 
-            <div class="schedule-day">
-              S
-            </div>
+        <div class="info-card">
 
-            <div class="schedule-info">
+          <h3>
+            Class Schedule
+          </h3>
 
-              <strong>
-                Sunday
-              </strong>
+          <div class="info-list">
+
+            <div class="info-row">
+
+              <span>Regular Days</span>
 
               <span>
-                Class Time: 4:00 PM – 6:00 PM
+                Saturday – Monday
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>Class Time</span>
+
+              <span>
+                4:00 PM – 6:00 PM
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>Course Start</span>
+
+              <span>
+                08 September 2026
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>Instructor</span>
+
+              <span>
+                SNK IT Instructor
+              </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+              <span>Duration</span>
+
+              <span>
+                6 Months
               </span>
 
             </div>
 
           </div>
 
+        </div>
 
-          <div class="schedule-item">
+      </div>
 
-            <div class="schedule-day">
-              M
-            </div>
 
-            <div class="schedule-info">
+      <!-- =========================
+           QUICK LINKS
+      ========================= -->
 
-              <strong>
-                Monday
-              </strong>
+      <div class="section-head">
 
-              <span>
-                Class Time: 4:00 PM – 6:00 PM
-              </span>
+        <div>
 
-            </div>
+          <h2>
+            Student Learning
+          </h2>
 
-          </div>
+          <p>
+            আপনার কোর্সের সাথে সম্পর্কিত গুরুত্বপূর্ণ পেজ
+          </p>
 
         </div>
 
-      </section>
+      </div>
 
 
-      <!-- COURSE PROGRESS -->
+      <div class="quick-grid">
 
-      <section class="card">
+        <a
+          class="quick"
+          href="student-class.html"
+        >
 
-        <div class="card-title">
-          📊 Course Progress
-        </div>
-
-
-        <div class="progress-header">
-
-          <span>
-            Current Progress
-          </span>
-
-          <strong>
-            0%
-          </strong>
-
-        </div>
-
-
-        <div class="progress-bar">
-
-          <div
-            class="progress-fill"
-            style="width: 0%;"
-          ></div>
-
-        </div>
-
-
-        <div class="progress-text">
-          Class এখনো শুরু হয়নি। Class শুরু হওয়ার পর আপনার attendance,
-          completed class এবং learning progress অনুযায়ী এই progress update হবে।
-        </div>
-
-
-        <div style="height:18px;"></div>
-
-
-        <div class="stats-grid">
-
-          <div class="stat-box">
-
-            <div class="stat-icon">
-              📚
-            </div>
-
-            <div class="stat-number">
-              0
-            </div>
-
-            <div class="stat-label">
-              Classes Completed
-            </div>
-
+          <div class="quick-icon">
+            🎓
           </div>
 
+          <h4>
+            My Class
+          </h4>
 
-          <div class="stat-box">
+          <p>
+            ক্লাস ও পরবর্তী সেশন দেখুন
+          </p>
 
-            <div class="stat-icon">
-              ⏳
-            </div>
+        </a>
 
-            <div class="stat-number">
-              0
-            </div>
 
-            <div class="stat-label">
-              Classes Remaining
-            </div>
+        <a
+          class="quick"
+          href="assignments.html"
+        >
 
+          <div class="quick-icon">
+            📝
           </div>
 
+          <h4>
+            Assignments
+          </h4>
 
-          <div class="stat-box">
+          <p>
+            Assignment দেখুন ও submit করুন
+          </p>
 
-            <div class="stat-icon">
-              📈
-            </div>
+        </a>
 
-            <div class="stat-number">
-              0%
-            </div>
 
-            <div class="stat-label">
-              Course Progress
-            </div>
+        <a
+          class="quick"
+          href="quiz.html"
+        >
 
+          <div class="quick-icon">
+            🧠
           </div>
 
-        </div>
+          <h4>
+            Quiz
+          </h4>
 
-      </section>
+          <p>
+            Online quiz practice করুন
+          </p>
 
+        </a>
 
-      <!-- COURSE INFORMATION -->
 
-      <section class="card">
+        <a
+          class="quick"
+          href="student-resources.html"
+        >
 
-        <div class="card-title">
-          ℹ️ Course Information
-        </div>
-
-
-        <table class="info-table">
-
-          <tr>
-
-            <td>
-              Course Name
-            </td>
-
-            <td>
-              Computer Office Application
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Course Type
-            </td>
-
-            <td>
-              Offline
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Duration
-            </td>
-
-            <td>
-              6 Months
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Batch
-            </td>
-
-            <td>
-              Batch 01
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Class Days
-            </td>
-
-            <td>
-              Saturday – Monday
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Class Time
-            </td>
-
-            <td>
-              4:00 PM – 6:00 PM
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Class Start
-            </td>
-
-            <td>
-              08 September 2026
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Instructor
-            </td>
-
-            <td>
-              SNK IT Instructor
-            </td>
-
-          </tr>
-
-        </table>
-
-      </section>
-
-
-      <!-- BATCH INFORMATION -->
-
-      <section class="card">
-
-        <div class="card-title">
-          🏷️ Batch Information
-        </div>
-
-
-        <table class="info-table">
-
-          <tr>
-
-            <td>
-              Batch Name
-            </td>
-
-            <td>
-              Batch 01
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Admission
-            </td>
-
-            <td>
-              01 January 2026
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Class Start
-            </td>
-
-            <td>
-              08 September 2026
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Learning Mode
-            </td>
-
-            <td>
-              Offline
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Class Duration
-            </td>
-
-            <td>
-              2 Hours
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Weekly Classes
-            </td>
-
-            <td>
-              3 Days
-            </td>
-
-          </tr>
-
-
-          <tr>
-
-            <td>
-              Status
-            </td>
-
-            <td>
-              Active
-            </td>
-
-          </tr>
-
-        </table>
-
-      </section>
-
-
-      <!-- SYLLABUS -->
-
-      <section class="card full">
-
-        <div class="card-title">
-          📖 Course Modules
-        </div>
-
-
-        <div class="module-list">
-
-
-          <div class="module">
-
-            <div class="module-number">
-              01
-            </div>
-
-            <div>
-
-              <h4>
-                Computer Basics
-              </h4>
-
-              <p>
-                Computer fundamentals, hardware, software এবং basic computer operation।
-              </p>
-
-            </div>
-
+          <div class="quick-icon">
+            📚
           </div>
 
+          <h4>
+            Resources
+          </h4>
 
-          <div class="module">
+          <p>
+            Notes ও learning materials
+          </p>
 
-            <div class="module-number">
-              02
-            </div>
+        </a>
 
-            <div>
 
-              <h4>
-                Windows & File Management
-              </h4>
+        <a
+          class="quick"
+          href="student-attendance.html"
+        >
 
-              <p>
-                Windows operation, folders, files, storage এবং basic system management।
-              </p>
-
-            </div>
-
+          <div class="quick-icon">
+            📅
           </div>
 
+          <h4>
+            Attendance
+          </h4>
 
-          <div class="module">
+          <p>
+            আপনার উপস্থিতি দেখুন
+          </p>
 
-            <div class="module-number">
-              03
-            </div>
+        </a>
 
-            <div>
 
-              <h4>
-                Microsoft Word
-              </h4>
+        <a
+          class="quick"
+          href="results.html"
+        >
 
-              <p>
-                Document creation, formatting, tables, page setup, printing এবং practical work।
-              </p>
-
-            </div>
-
+          <div class="quick-icon">
+            🏆
           </div>
 
+          <h4>
+            Results
+          </h4>
 
-          <div class="module">
+          <p>
+            Quiz ও course result দেখুন
+          </p>
 
-            <div class="module-number">
-              04
-            </div>
+        </a>
 
-            <div>
 
-              <h4>
-                Microsoft Excel
-              </h4>
+        <a
+          class="quick"
+          href="student-timetable.html"
+        >
 
-              <p>
-                Spreadsheet, formulas, functions, formatting, charts এবং practical calculation।
-              </p>
-
-            </div>
-
+          <div class="quick-icon">
+            🕐
           </div>
 
+          <h4>
+            Timetable
+          </h4>
 
-          <div class="module">
+          <p>
+            Weekly class routine দেখুন
+          </p>
 
-            <div class="module-number">
-              05
-            </div>
+        </a>
 
-            <div>
 
-              <h4>
-                Microsoft PowerPoint
-              </h4>
+        <a
+          class="quick"
+          href="student-dashboard.html"
+        >
 
-              <p>
-                Presentation design, slides, animations, transitions এবং presentation practice।
-              </p>
-
-            </div>
-
+          <div class="quick-icon">
+            📊
           </div>
 
+          <h4>
+            Dashboard
+          </h4>
 
-          <div class="module">
+          <p>
+            Student dashboard খুলুন
+          </p>
 
-            <div class="module-number">
-              06
-            </div>
+        </a>
 
-            <div>
-
-              <h4>
-                Internet & Online Skills
-              </h4>
-
-              <p>
-                Internet basics, email, online search, digital services এবং practical online skills।
-              </p>
-
-            </div>
-
-          </div>
+      </div>
 
 
-          <div class="module">
+      <!-- NOTICE -->
 
-            <div class="module-number">
-              07
-            </div>
+      <div class="notice">
 
-            <div>
+        <strong>Student Data Sync:</strong>
 
-              <h4>
-                Typing Practice
-              </h4>
+        এই পেজটি আপনার Student Login-এর
+        <strong>Student ID, Name, Course এবং Batch</strong>
+        session/local storage থেকে পড়ছে।
 
-              <p>
-                Bangla ও English typing practice এবং typing speed improvement।
-              </p>
+        ভবিষ্যতে Firebase/Admin Database যুক্ত হলে
+        একই data automaticভাবে update করা যাবে।
 
-            </div>
-
-          </div>
-
-
-          <div class="module">
-
-            <div class="module-number">
-              08
-            </div>
-
-            <div>
-
-              <h4>
-                Practical Project
-              </h4>
-
-              <p>
-                Course-এর বিভিন্ন skill ব্যবহার করে practical project এবং final practice।
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="info-notice">
-          💡 <strong>Important:</strong>
-          Course-এর actual progress Class শুরু হওয়ার পর attendance, completed classes,
-          assignments এবং learning activities অনুযায়ী update করা হবে।
-        </div>
-
-      </section>
-
+      </div>
 
     </div>
 
@@ -1667,160 +1716,522 @@
 
   <!-- =========================
        FOOTER
-  ========================== -->
+  ========================= -->
 
   <footer>
 
-    © 2026 SNK IT Institute — Student Portal
+    <div class="container">
+
+      © <span id="year"></span>
+      SNK IT Institute.
+      All Rights Reserved.
+
+    </div>
 
   </footer>
 
 
-  <!-- =========================
-       TOAST
-  ========================== -->
+  <!-- TOAST -->
 
-  <div
-    class="toast"
-    id="toast"
-  ></div>
+  <div id="toastContainer"></div>
 
 
   <!-- =========================
        JAVASCRIPT
-  ========================== -->
+  ========================= -->
 
   <script>
 
-    /* =========================================
-       STUDENT SESSION PROTECTION
+    /* ==========================================
+       STORAGE KEYS
     ========================================== */
 
-    const loggedIn =
-      sessionStorage.getItem("snkStudentLoggedIn");
+    const STORAGE = {
+
+      theme: "snkTheme",
+
+      loggedIn: "snkStudentLoggedIn",
+
+      studentId: "snkStudentId",
+
+      studentName: "snkStudentName",
+
+      studentCourse: "snkStudentCourse",
+
+      studentBatch: "snkStudentBatch",
+
+      studentProfile: "snkStudentProfile"
+
+    };
 
 
-    if (loggedIn !== "true") {
+    /* ==========================================
+       DEFAULT STUDENT
+    ========================================== */
 
-      window.location.replace("login.html");
+    const DEFAULT_STUDENT = {
+
+      id: "SNK-1001",
+
+      name: "Student",
+
+      course: "Computer Office Application",
+
+      batch: "Batch 01"
+
+    };
+
+
+    /* ==========================================
+       SESSION CHECK
+    ========================================== */
+
+    function isLoggedIn(){
+
+      return (
+
+        sessionStorage.getItem(STORAGE.loggedIn) === "true"
+
+        ||
+
+        localStorage.getItem(STORAGE.loggedIn) === "true"
+
+      );
 
     }
 
 
-    /* =========================================
-       SESSION DATA
-    ========================================== */
+    function protectPage(){
 
-    const studentName =
-      sessionStorage.getItem("snkStudentName") ||
-      "Demo Student";
+      if(!isLoggedIn()){
 
+        const shouldLogin = confirm(
+          "Student Portal ব্যবহার করতে Login করতে হবে।\n\nLogin page-এ যাবেন?"
+        );
 
-    const studentId =
-      sessionStorage.getItem("snkStudentId") ||
-      "SNK-1001";
+        if(shouldLogin){
 
+          window.location.href = "login.html";
 
-    /* =========================================
-       ELEMENTS
-    ========================================== */
-
-    const studentNameElement =
-      document.getElementById("studentName");
-
-
-    const studentIdElement =
-      document.getElementById("studentId");
-
-
-    const themeBtn =
-      document.getElementById("themeBtn");
-
-
-    const logoutBtn =
-      document.getElementById("logoutBtn");
-
-
-    const toast =
-      document.getElementById("toast");
-
-
-    /* =========================================
-       LOAD STUDENT INFORMATION
-    ========================================== */
-
-    studentNameElement.textContent =
-      studentName;
-
-
-    studentIdElement.textContent =
-      studentId;
-
-
-    /* =========================================
-       TOAST
-    ========================================== */
-
-    function showToast(message) {
-
-      toast.textContent =
-        message;
-
-      toast.classList.add("show");
-
-
-      setTimeout(function() {
-
-        toast.classList.remove("show");
-
-      }, 2500);
-
-    }
-
-
-    /* =========================================
-       THEME
-    ========================================== */
-
-    function applyTheme() {
-
-      const theme =
-        localStorage.getItem("snkTheme") ||
-        "light";
-
-
-      if (theme === "dark") {
-
-        document.body.classList.add("dark");
-
-        themeBtn.textContent =
-          "☀️";
-
-      } else {
-
-        document.body.classList.remove("dark");
-
-        themeBtn.textContent =
-          "🌙";
+        }
 
       }
 
     }
 
 
-    themeBtn.addEventListener(
-      "click",
-      function() {
+    /* ==========================================
+       READ STUDENT DATA
+    ========================================== */
 
-        const isDark =
-          document.body.classList.contains("dark");
+    function readJSON(key){
 
+      try{
 
-        localStorage.setItem(
-          "snkTheme",
-          isDark ? "light" : "dark"
+        return JSON.parse(
+          localStorage.getItem(key) || "null"
         );
 
+      }catch(error){
+
+        return null;
+
+      }
+
+    }
+
+
+    function getStudentData(){
+
+      const profile =
+        readJSON(STORAGE.studentProfile) || {};
+
+
+      const id =
+
+        sessionStorage.getItem(STORAGE.studentId)
+
+        ||
+
+        localStorage.getItem(STORAGE.studentId)
+
+        ||
+
+        profile.studentId
+
+        ||
+
+        DEFAULT_STUDENT.id;
+
+
+      const name =
+
+        sessionStorage.getItem(STORAGE.studentName)
+
+        ||
+
+        localStorage.getItem(STORAGE.studentName)
+
+        ||
+
+        profile.name
+
+        ||
+
+        DEFAULT_STUDENT.name;
+
+
+      const course =
+
+        sessionStorage.getItem(STORAGE.studentCourse)
+
+        ||
+
+        localStorage.getItem(STORAGE.studentCourse)
+
+        ||
+
+        profile.course
+
+        ||
+
+        DEFAULT_STUDENT.course;
+
+
+      const batch =
+
+        sessionStorage.getItem(STORAGE.studentBatch)
+
+        ||
+
+        localStorage.getItem(STORAGE.studentBatch)
+
+        ||
+
+        profile.batch
+
+        ||
+
+        DEFAULT_STUDENT.batch;
+
+
+      return {
+
+        id,
+
+        name,
+
+        course,
+
+        batch,
+
+        profile
+
+      };
+
+    }
+
+
+    /* ==========================================
+       SAVE GLOBAL STUDENT OBJECT
+    ========================================== */
+
+    function syncStudentObject(student){
+
+      window.SNKStudent = {
+
+        id: student.id,
+
+        name: student.name,
+
+        course: student.course,
+
+        batch: student.batch
+
+      };
+
+    }
+
+
+    /* ==========================================
+       UPDATE UI
+    ========================================== */
+
+    function updateStudentUI(){
+
+      const student = getStudentData();
+
+      syncStudentObject(student);
+
+
+      const safeName =
+        student.name || DEFAULT_STUDENT.name;
+
+      const safeId =
+        student.id || DEFAULT_STUDENT.id;
+
+      const safeCourse =
+        student.course || DEFAULT_STUDENT.course;
+
+      const safeBatch =
+        student.batch || DEFAULT_STUDENT.batch;
+
+
+      document.getElementById("studentName").textContent =
+        safeName;
+
+      document.getElementById("studentId").textContent =
+        safeId;
+
+      document.getElementById("studentCourse").textContent =
+        safeCourse;
+
+      document.getElementById("studentBatch").textContent =
+        safeBatch;
+
+
+      document.getElementById("courseTitle").textContent =
+        safeCourse;
+
+      document.getElementById("courseBatch").textContent =
+        safeBatch;
+
+
+      document.getElementById("infoStudentName").textContent =
+        safeName;
+
+      document.getElementById("infoStudentId").textContent =
+        safeId;
+
+      document.getElementById("infoCourse").textContent =
+        safeCourse;
+
+      document.getElementById("infoBatch").textContent =
+        safeBatch;
+
+
+      const initial =
+        safeName
+          .trim()
+          .charAt(0)
+          .toUpperCase() || "S";
+
+
+      document.getElementById("studentAvatar").textContent =
+        initial;
+
+    }
+
+
+    /* ==========================================
+       THEME
+    ========================================== */
+
+    function applyTheme(){
+
+      const savedTheme =
+        localStorage.getItem(STORAGE.theme);
+
+      if(savedTheme === "light"){
+
+        document.body.style.background =
+          "linear-gradient(145deg,#f5f8ff,#eef3fa)";
+
+        document.body.style.color =
+          "#101828";
+
+      }else{
+
+        document.body.style.background =
+          "radial-gradient(circle at 15% 10%,rgba(79,140,255,.14),transparent 28%),radial-gradient(circle at 85% 15%,rgba(123,97,255,.13),transparent 25%),linear-gradient(145deg,#07111f,#0b1728)";
+
+        document.body.style.color =
+          "#f7fbff";
+
+      }
+
+    }
+
+
+    function toggleTheme(){
+
+      const current =
+        localStorage.getItem(STORAGE.theme) || "dark";
+
+      const next =
+        current === "dark" ? "light" : "dark";
+
+      localStorage.setItem(
+        STORAGE.theme,
+        next
+      );
+
+      applyTheme();
+
+      showToast(
+        next === "dark"
+          ? "Dark theme চালু হয়েছে"
+          : "Light theme চালু হয়েছে"
+      );
+
+    }
+
+
+    /* ==========================================
+       MOBILE MENU
+    ========================================== */
+
+    function toggleMenu(){
+
+      document
+        .getElementById("navLinks")
+        .classList.toggle("open");
+
+    }
+
+
+    document
+      .getElementById("menuBtn")
+      .addEventListener(
+        "click",
+        toggleMenu
+      );
+
+
+    /* ==========================================
+       LOGOUT
+    ========================================== */
+
+    function logout(){
+
+      const confirmLogout =
+        confirm(
+          "আপনি কি Student Portal থেকে Logout করতে চান?"
+        );
+
+      if(!confirmLogout) return;
+
+
+      sessionStorage.removeItem(
+        STORAGE.loggedIn
+      );
+
+      sessionStorage.removeItem(
+        STORAGE.studentId
+      );
+
+      sessionStorage.removeItem(
+        STORAGE.studentName
+      );
+
+      sessionStorage.removeItem(
+        STORAGE.studentCourse
+      );
+
+      sessionStorage.removeItem(
+        STORAGE.studentBatch
+      );
+
+
+      localStorage.removeItem(
+        STORAGE.loggedIn
+      );
+
+
+      showToast(
+        "Logout successful"
+      );
+
+
+      setTimeout(() => {
+
+        window.location.href =
+          "login.html";
+
+      }, 700);
+
+    }
+
+
+    document
+      .getElementById("logoutBtn")
+      .addEventListener(
+        "click",
+        logout
+      );
+
+
+    /* ==========================================
+       TOAST
+    ========================================== */
+
+    function showToast(message){
+
+      const container =
+        document.getElementById(
+          "toastContainer"
+        );
+
+
+      const toast =
+        document.createElement("div");
+
+
+      toast.className = "toast";
+
+      toast.textContent = message;
+
+
+      container.appendChild(toast);
+
+
+      setTimeout(() => {
+
+        toast.style.opacity = "0";
+
+        toast.style.transform =
+          "translateY(10px)";
+
+        setTimeout(() => {
+
+          toast.remove();
+
+        }, 250);
+
+      }, 2400);
+
+    }
+
+
+    /* ==========================================
+       YEAR
+    ========================================== */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+
+    /* ==========================================
+       THEME BUTTON
+    ========================================== */
+
+    document
+      .getElementById("themeBtn")
+      .addEventListener(
+        "click",
+        toggleTheme
+      );
+
+
+    /* ==========================================
+       STORAGE SYNC
+    ========================================== */
+
+    window.addEventListener(
+      "storage",
+      function(){
+
+        updateStudentUI();
 
         applyTheme();
 
@@ -1828,125 +2239,19 @@
     );
 
 
-    /* =========================================
-       LOGOUT
-    ========================================== */
-
-    logoutBtn.addEventListener(
-      "click",
-      function() {
-
-        const confirmLogout =
-          confirm(
-            "আপনি কি Student Portal থেকে Logout করতে চান?"
-          );
-
-
-        if (!confirmLogout) {
-
-          return;
-
-        }
-
-
-        sessionStorage.removeItem(
-          "snkStudentLoggedIn"
-        );
-
-
-        sessionStorage.removeItem(
-          "snkStudentId"
-        );
-
-
-        sessionStorage.removeItem(
-          "snkStudentName"
-        );
-
-
-        sessionStorage.removeItem(
-          "snkStudentCourse"
-        );
-
-
-        window.location.replace(
-          "login.html"
-        );
-
-      }
-    );
-
-
-    /* =========================================
-       SESSION REFRESH
-    ========================================== */
-
-    window.addEventListener(
-      "storage",
-      function(event) {
-
-        if (
-          event.key === "snkStudentName"
-        ) {
-
-          studentNameElement.textContent =
-            sessionStorage.getItem(
-              "snkStudentName"
-            ) || "Demo Student";
-
-        }
-
-
-        if (
-          event.key === "snkTheme"
-        ) {
-
-          applyTheme();
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       VISIBILITY CHECK
+    /* ==========================================
+       VISIBILITY SYNC
     ========================================== */
 
     document.addEventListener(
       "visibilitychange",
-      function() {
+      function(){
 
-        if (
+        if(
           document.visibilityState === "visible"
-        ) {
+        ){
 
-          if (
-            sessionStorage.getItem(
-              "snkStudentLoggedIn"
-            ) !== "true"
-          ) {
-
-            window.location.replace(
-              "login.html"
-            );
-
-            return;
-
-          }
-
-
-          studentNameElement.textContent =
-            sessionStorage.getItem(
-              "snkStudentName"
-            ) || "Demo Student";
-
-
-          studentIdElement.textContent =
-            sessionStorage.getItem(
-              "snkStudentId"
-            ) || "SNK-1001";
-
+          updateStudentUI();
 
           applyTheme();
 
@@ -1956,11 +2261,74 @@
     );
 
 
-    /* =========================================
-       INITIALIZE
+    /* ==========================================
+       CLOSE MOBILE MENU
     ========================================== */
 
-    applyTheme();
+    document.addEventListener(
+      "click",
+      function(event){
+
+        const nav =
+          document.getElementById(
+            "navLinks"
+          );
+
+        const menu =
+          document.getElementById(
+            "menuBtn"
+          );
+
+
+        if(
+          nav.classList.contains("open")
+          &&
+          !nav.contains(event.target)
+          &&
+          !menu.contains(event.target)
+        ){
+
+          nav.classList.remove("open");
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       INIT
+    ========================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function(){
+
+        protectPage();
+
+        updateStudentUI();
+
+        applyTheme();
+
+        /*
+          Course progress currently 0%.
+          Future Firebase/Admin sync will update this.
+        */
+
+        const progress = 0;
+
+        document.getElementById(
+          "progressFill"
+        ).style.width =
+          progress + "%";
+
+        document.getElementById(
+          "progressText"
+        ).textContent =
+          progress + "%";
+
+      }
+    );
 
   </script>
 
