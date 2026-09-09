@@ -1,2837 +1,1169 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SNK IT Institute | Student Quiz</title>
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<meta
-    name="theme-color"
-    content="#05070c"
->
-
-<title>
-SNK IT Institute | Student Quiz
-</title>
-
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
->
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================================================
-   SNK IT INSTITUTE
-   STUDENT QUIZ
-   STEP 2.5.4
-
-   ADMIN SYNC:
-   snkCourseSettingsV25
-   snkQuizSettingsV25
-   snkQuizQuestionsV25
-   snkQuizResults
-   snkQuizActiveAttemptV25
-   snkQuizAttemptLockV25
-========================================================= */
-
+:root{
+  --bg:#f4f7fb;
+  --card:#fff;
+  --soft:#f7f9fc;
+  --text:#172033;
+  --muted:#667085;
+  --border:#e5eaf1;
+  --primary:#6d4aff;
+  --primary2:#4f8cff;
+  --green:#16a34a;
+  --red:#e5485d;
+  --yellow:#d99b00;
+  --shadow:0 15px 45px rgba(20,30,50,.08);
+}
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
-
-
-:root{
-
-    --bg:#f4f7fb;
-    --card:#ffffff;
-    --text:#172033;
-    --muted:#667085;
-    --border:#e5e7eb;
-
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
-
-    --soft:#eff6ff;
-
-    --success:#16a34a;
-    --success-soft:#ecfdf3;
-
-    --warning:#d97706;
-    --warning-soft:#fff7ed;
-
-    --danger:#dc2626;
-    --danger-soft:#fef2f2;
-
-    --purple:#7c3aed;
-
-    --shadow:
-        0 12px 35px rgba(15,23,42,.08);
-}
-
-
-body.dark{
-
-    --bg:#070b14;
-    --card:#111827;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:#1f2937;
-
-    --soft:#172554;
-
-    --success-soft:#052e16;
-    --warning-soft:#451a03;
-    --danger-soft:#450a0a;
-
-    --shadow:
-        0 15px 40px rgba(0,0,0,.30);
-}
-
-
-html{
-    scroll-behavior:smooth;
-}
-
 
 body{
-
-    font-family:
-        "Hind Siliguri",
-        "Inter",
-        Arial,
-        sans-serif;
-
-    background:
-        radial-gradient(
-            circle at top right,
-            rgba(37,99,235,.08),
-            transparent 30%
-        ),
-        var(--bg);
-
-    color:var(--text);
-
-    min-height:100vh;
-
-    transition:.25s;
+  min-height:100vh;
+  font-family:"Noto Sans Bengali","Inter",sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 0%,rgba(109,74,255,.10),transparent 30%),
+    linear-gradient(135deg,#f4f7fb,#edf2fa);
 }
 
+body.dark{
+  --bg:#05070c;
+  --card:#0d1421;
+  --soft:#111a29;
+  --text:#f5f7fb;
+  --muted:#9aa7bb;
+  --border:rgba(255,255,255,.09);
+  --shadow:0 20px 60px rgba(0,0,0,.30);
 
-button,
-input,
-select,
-textarea{
-
-    font:inherit;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(109,74,255,.16),transparent 30%),
+    linear-gradient(135deg,#05070c,#090e18);
 }
-
 
 button{
-    cursor:pointer;
+  font:inherit;
+  cursor:pointer;
 }
-
 
 a{
-    color:inherit;
-    text-decoration:none;
+  color:inherit;
+  text-decoration:none;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header{
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1000;
-
-    background:
-        rgba(255,255,255,.88);
-
-    backdrop-filter:
-        blur(16px);
-
-    border-bottom:
-        1px solid var(--border);
+.page{
+  width:100%;
+  max-width:1100px;
+  margin:auto;
+  padding:16px;
 }
 
-
-body.dark header{
-
-    background:
-        rgba(7,11,20,.88);
+/* TOP */
+.topbar{
+  min-height:64px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
 }
 
-
-.navbar{
-
-    max-width:1180px;
-
-    margin:auto;
-
-    min-height:70px;
-
-    padding:
-        10px 18px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
-
 
 .logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    font-weight:800;
+  width:46px;
+  height:46px;
+  object-fit:contain;
+  background:#fff;
+  padding:5px;
+  border-radius:14px;
 }
 
-
-.logo img{
-
-    width:45px;
-
-    height:45px;
-
-    object-fit:contain;
-
-    border-radius:10px;
+.brand h1{
+  font-size:17px;
+  font-weight:800;
 }
 
-
-.logo-text{
-
-    font-size:16px;
-
-    line-height:1.2;
+.brand p{
+  color:var(--muted);
+  font-size:10px;
 }
 
-
-.logo-text small{
-
-    display:block;
-
-    color:var(--muted);
-
-    font-size:9px;
-
-    font-weight:600;
-
-    margin-top:3px;
+.actions{
+  display:flex;
+  gap:7px;
 }
 
-
-.nav-actions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    flex-wrap:wrap;
+.small-btn{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:12px;
+  padding:9px 12px;
+  font-size:11px;
+  font-weight:700;
 }
 
-
-.nav-btn{
-
-    border:
-        1px solid var(--border);
-
-    background:
-        var(--card);
-
-    color:
-        var(--text);
-
-    padding:
-        8px 11px;
-
-    border-radius:
-        9px;
-
-    font-size:11px;
-
-    font-weight:700;
-
-    transition:.2s;
-}
-
-
-.nav-btn:hover{
-
-    border-color:
-        var(--primary);
-
-    color:
-        var(--primary);
-}
-
-
-.login-btn{
-
-    background:
-        var(--primary);
-
-    color:#fff;
-
-    border-color:
-        var(--primary);
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.container{
-
-    width:
-        min(1180px, calc(100% - 30px));
-
-    margin:
-        0 auto;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
+/* HERO */
 .hero{
-
-    margin:
-        28px 0 22px;
+  position:relative;
+  overflow:hidden;
+  padding:27px;
+  border-radius:25px;
+  background:var(--card);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
 }
-
-
-.hero-box{
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:25px;
-
-    padding:
-        45px;
-
-    color:#fff;
-
-    background:
-        linear-gradient(
-            135deg,
-            #07111f,
-            #101b38 50%,
-            #111827
-        );
-
-    box-shadow:
-        0 20px 60px rgba(15,23,42,.22);
-}
-
-
-.hero-box::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:300px;
-
-    height:300px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(59,130,246,.35),
-            transparent 65%
-        );
-
-    right:-80px;
-
-    top:-100px;
-
-    animation:
-        floatGlow 5s ease-in-out infinite;
-}
-
-
-.hero-box::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background-image:
-        radial-gradient(
-            white 1px,
-            transparent 1px
-        );
-
-    background-size:
-        45px 45px;
-
-    opacity:.15;
-}
-
-
-@keyframes floatGlow{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(18px);
-    }
-}
-
-
-.hero-content{
-
-    position:relative;
-
-    z-index:2;
-
-    max-width:780px;
-}
-
 
 .hero-badge{
-
-    display:inline-flex;
-
-    padding:
-        7px 12px;
-
-    border:
-        1px solid rgba(255,255,255,.16);
-
-    border-radius:
-        30px;
-
-    background:
-        rgba(255,255,255,.08);
-
-    font-size:10px;
-
-    font-weight:700;
-
-    margin-bottom:14px;
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(109,74,255,.10);
+  color:var(--primary);
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:10px;
 }
 
-
-.hero h1{
-
-    font-family:"Inter","Hind Siliguri",sans-serif;
-
-    font-size:
-        clamp(28px,5vw,48px);
-
-    line-height:1.1;
-
-    margin-bottom:12px;
+.hero h2{
+  font-size:27px;
+  font-weight:800;
+  margin-bottom:7px;
 }
-
 
 .hero p{
-
-    color:
-        rgba(255,255,255,.75);
-
-    line-height:1.8;
-
-    font-size:13px;
-
-    max-width:700px;
-}
-
-
-/* =========================================================
-   STUDENT BAR
-========================================================= */
-
-.student-bar{
-
-    margin:
-        0 0 22px;
-
-    padding:
-        13px 16px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        15px;
-
-    box-shadow:
-        var(--shadow);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-}
-
-
-.student-info{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-}
-
-
-.student-avatar{
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    background:
-        var(--soft);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:21px;
-}
-
-
-.student-info strong{
-
-    display:block;
-
-    font-size:13px;
-}
-
-
-.student-info span{
-
-    display:block;
-
-    color:var(--muted);
-
-    font-size:9px;
-
-    margin-top:2px;
-}
-
-
-.student-badges{
-
-    display:flex;
-
-    gap:6px;
-
-    flex-wrap:wrap;
-}
-
-
-.badge{
-
-    padding:
-        5px 9px;
-
-    border-radius:
-        30px;
-
-    font-size:9px;
-
-    font-weight:800;
-
-    border:
-        1px solid var(--border);
-
-    background:
-        var(--bg);
-}
-
-
-.badge.blue{
-
-    color:
-        var(--primary);
-
-    background:
-        var(--soft);
-}
-
-
-.badge.green{
-
-    color:
-        var(--success);
-
-    background:
-        var(--success-soft);
-}
-
-
-.badge.orange{
-
-    color:
-        var(--warning);
-
-    background:
-        var(--warning-soft);
-}
-
-
-/* =========================================================
-   SECTION
-========================================================= */
-
-.section{
-
-    margin:
-        25px 0;
-}
-
-
-.section-title{
-
-    margin-bottom:
-        15px;
-}
-
-
-.section-title h2{
-
-    font-size:22px;
-
-    font-weight:800;
-}
-
-
-.section-title p{
-
-    color:
-        var(--muted);
-
-    font-size:11px;
-
-    margin-top:4px;
-}
-
-
-/* =========================================================
-   QUIZ STATUS
-========================================================= */
-
-.quiz-status-card{
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        18px;
-
-    padding:
-        18px;
-
-    box-shadow:
-        var(--shadow);
-
-    margin-bottom:
-        18px;
-}
-
-
-.status-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:10px;
-}
-
-
-.status-item{
-
-    border:
-        1px solid var(--border);
-
-    background:
-        var(--bg);
-
-    border-radius:
-        12px;
-
-    padding:
-        12px;
-}
-
-
-.status-item span{
-
-    display:block;
-
-    color:
-        var(--muted);
-
-    font-size:9px;
-
-    margin-bottom:4px;
-}
-
-
-.status-item strong{
-
-    font-size:13px;
-}
-
-
-/* =========================================================
-   START PANEL
-========================================================= */
-
-.start-panel{
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        20px;
-
-    padding:
-        28px;
-
-    box-shadow:
-        var(--shadow);
-
-    text-align:center;
-}
-
-
-.start-icon{
-
-    width:72px;
-
-    height:72px;
-
-    margin:
-        0 auto 13px;
-
-    border-radius:20px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:35px;
-
-    background:
-        var(--soft);
-}
-
-
-.start-panel h3{
-
-    font-size:23px;
-
-    margin-bottom:6px;
-}
-
-
-.start-panel p{
-
-    max-width:650px;
-
-    margin:
-        0 auto 16px;
-
-    color:
-        var(--muted);
-
-    font-size:11px;
-
-    line-height:1.8;
-}
-
-
-.start-note{
-
-    display:inline-block;
-
-    padding:
-        8px 12px;
-
-    background:
-        var(--warning-soft);
-
-    color:
-        var(--warning);
-
-    border-radius:
-        9px;
-
-    font-size:10px;
-
-    font-weight:700;
-
-    margin-bottom:15px;
-}
-
-
-.primary-btn{
-
-    border:0;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--primary-dark)
-        );
-
-    color:#fff;
-
-    padding:
-        11px 20px;
-
-    border-radius:
-        10px;
-
-    font-size:12px;
-
-    font-weight:800;
-
-    box-shadow:
-        0 8px 20px rgba(37,99,235,.22);
-
-    transition:.2s;
-}
-
-
-.primary-btn:hover{
-
-    transform:
-        translateY(-1px);
-}
-
-
-.primary-btn:disabled{
-
-    opacity:.5;
-
-    cursor:not-allowed;
-
-    transform:none;
-}
-
-
-.secondary-btn{
-
-    border:
-        1px solid var(--border);
-
-    background:
-        var(--card);
-
-    color:
-        var(--text);
-
-    padding:
-        10px 15px;
-
-    border-radius:
-        10px;
-
-    font-size:11px;
-
-    font-weight:800;
-}
-
-
-/* =========================================================
-   QUIZ PANEL
-========================================================= */
-
-.quiz-panel{
-
-    display:none;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        20px;
-
-    padding:
-        22px;
-
-    box-shadow:
-        var(--shadow);
-}
-
-
-.quiz-panel.active{
-
-    display:block;
-}
-
-
-.quiz-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-    margin-bottom:17px;
-
-    flex-wrap:wrap;
-}
-
-
-.quiz-name h3{
-
-    font-size:18px;
-
-    font-weight:800;
-}
-
-
-.quiz-name span{
-
-    color:
-        var(--muted);
-
-    font-size:9px;
-}
-
-
-.timer{
-
-    min-width:130px;
-
-    padding:
-        9px 13px;
-
-    border:
-        1px solid #fecaca;
-
-    background:
-        var(--danger-soft);
-
-    border-radius:
-        11px;
-
-    text-align:center;
-}
-
-
-.timer small{
-
-    display:block;
-
-    color:
-        var(--danger);
-
-    font-size:8px;
-
-    font-weight:700;
-}
-
-
-.timer strong{
-
-    display:block;
-
-    color:
-        var(--danger);
-
-    font-family:"Inter",sans-serif;
-
-    font-size:21px;
-
-    line-height:1.1;
-
-    margin-top:2px;
-}
-
-
-.progress-wrap{
-
-    margin-bottom:
-        18px;
-}
-
-
-.progress-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:10px;
-
-    margin-bottom:6px;
-}
-
-
-.progress-top span{
-
-    font-size:9px;
-
-    color:
-        var(--muted);
-}
-
-
-.progress-top strong{
-
-    font-size:9px;
-
-    color:
-        var(--primary);
-}
-
-
-.progress-bar{
-
-    height:7px;
-
-    background:
-        var(--border);
-
-    border-radius:
-        20px;
-
-    overflow:hidden;
-}
-
-
-.progress-fill{
-
-    width:10%;
-
-    height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--primary),
-            var(--purple)
-        );
-
-    transition:.25s;
-}
-
-
-/* =========================================================
-   QUESTION
-========================================================= */
-
-.question-card{
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        15px;
-
-    padding:
-        19px;
-
-    background:
-        var(--bg);
-
-    margin-bottom:
-        17px;
-}
-
-
-.question-number{
-
-    color:
-        var(--primary);
-
-    font-size:9px;
-
-    font-weight:800;
-
-    margin-bottom:7px;
-}
-
-
-.question-text{
-
-    font-size:16px;
-
-    line-height:1.7;
-
-    font-weight:800;
-
-    margin-bottom:15px;
-}
-
-
-.options{
-
-    display:grid;
-
-    gap:9px;
-}
-
-
-.option{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
-    padding:
-        12px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        11px;
-
-    background:
-        var(--card);
-
-    transition:.2s;
-}
-
-
-.option:hover{
-
-    border-color:
-        var(--primary);
-
-    background:
-        var(--soft);
-}
-
-
-.option input{
-
-    accent-color:
-        var(--primary);
-
-    width:16px;
-
-    height:16px;
-
-    flex-shrink:0;
-}
-
-
-.option span{
-
-    font-size:11px;
-
-    font-weight:600;
-
-    line-height:1.5;
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-.quiz-navigation{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:8px;
-
-    padding-top:
-        15px;
-
-    border-top:
-        1px solid var(--border);
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+  max-width:760px;
 }
 
-
-.question-jump{
-
-    display:flex;
-
-    gap:5px;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-}
-
-
-.jump-btn{
-
-    width:30px;
-
-    height:30px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:8px;
-
-    background:
-        var(--card);
-
-    color:
-        var(--text);
-
-    font-size:9px;
-
-    font-weight:800;
-}
-
-
-.jump-btn.active{
-
-    background:
-        var(--primary);
-
-    color:#fff;
-
-    border-color:
-        var(--primary);
-}
-
-
-.jump-btn.answered{
-
-    border-color:
-        var(--success);
-
-    color:
-        var(--success);
-}
-
-
-.navigation-buttons{
-
-    display:flex;
-
-    gap:7px;
-}
-
-
-/* =========================================================
-   RESULT
-========================================================= */
-
-.result-panel{
-
-    display:none;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        20px;
-
-    padding:
-        25px;
-
-    box-shadow:
-        var(--shadow);
-
-    text-align:center;
-}
-
-
-.result-panel.show{
-
-    display:block;
-}
-
-
-.result-icon{
-
-    width:70px;
-
-    height:70px;
-
-    margin:
-        0 auto 12px;
-
-    border-radius:50%;
-
-    background:
-        var(--success-soft);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:34px;
-}
-
-
-.result-panel h2{
-
-    font-size:24px;
-
-    margin-bottom:5px;
+/* INFO */
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:16px;
 }
-
 
-.result-panel > p{
-
-    color:
-        var(--muted);
-
-    font-size:10px;
-
-    margin-bottom:18px;
+.info{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:13px;
+  box-shadow:var(--shadow);
 }
-
 
-.result-score{
-
-    font-family:
-        "Inter",
-        sans-serif;
-
-    font-size:48px;
-
-    font-weight:900;
-
-    color:
-        var(--primary);
-
-    line-height:1;
+.info small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-bottom:4px;
 }
-
-
-.result-score-label{
-
-    color:
-        var(--muted);
 
-    font-size:10px;
-
-    margin-top:5px;
+.info strong{
+  font-size:12px;
+  font-weight:800;
 }
-
-
-.result-grid{
-
-    display:grid;
 
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:9px;
-
-    margin:
-        20px 0;
+/* MAIN */
+.main-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:23px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
 }
-
-
-.result-item{
 
-    padding:
-        13px 8px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        11px;
-
-    background:
-        var(--bg);
+.card-head{
+  padding:17px 20px;
+  border-bottom:1px solid var(--border);
 }
-
-
-.result-item span{
-
-    display:block;
-
-    color:
-        var(--muted);
-
-    font-size:8px;
 
-    margin-bottom:4px;
+.card-head h3{
+  font-size:15px;
+  font-weight:800;
 }
 
-
-.result-item strong{
-
-    font-size:15px;
+.card-head p{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
 }
-
-
-.result-pass{
-
-    display:inline-block;
-
-    padding:
-        7px 14px;
-
-    border-radius:
-        30px;
 
-    background:
-        var(--success-soft);
-
-    color:
-        var(--success);
-
-    font-size:11px;
-
-    font-weight:900;
+/* START */
+#startScreen{
+  padding:30px 22px;
 }
-
 
-.result-fail{
-
-    background:
-        var(--danger-soft);
-
-    color:
-        var(--danger);
+.welcome{
+  text-align:center;
+  max-width:700px;
+  margin:0 auto 24px;
 }
-
-
-.result-actions{
 
-    display:flex;
-
-    justify-content:center;
-
-    gap:8px;
-
-    flex-wrap:wrap;
-
-    margin-top:15px;
+.welcome-icon{
+  width:78px;
+  height:78px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 13px;
+  border-radius:24px;
+  color:#fff;
+  font-size:34px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  box-shadow:0 16px 35px rgba(109,74,255,.25);
 }
-
-
-/* =========================================================
-   INFO
-========================================================= */
-
-.info-card{
-
-    background:
-        var(--card);
 
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        18px;
-
-    padding:
-        20px;
-
-    box-shadow:
-        var(--shadow);
-
-    margin-top:
-        18px;
+.welcome h2{
+  font-size:24px;
+  margin-bottom:7px;
 }
 
-
-.info-card h3{
-
-    font-size:16px;
-
-    margin-bottom:12px;
+.welcome p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
 }
-
 
 .rules{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:9px;
+  max-width:760px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
-
 
 .rule{
-
-    display:flex;
-
-    gap:9px;
-
-    padding:
-        11px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        10px;
-
-    background:
-        var(--bg);
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:13px;
+  background:var(--soft);
+  border:1px solid var(--border);
+  border-radius:15px;
 }
-
 
 .rule-icon{
-
-    font-size:18px;
+  width:33px;
+  height:33px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:rgba(109,74,255,.10);
+  color:var(--primary);
+  font-weight:800;
 }
-
 
 .rule strong{
-
-    display:block;
-
-    font-size:10px;
+  display:block;
+  font-size:11px;
+  margin-bottom:2px;
 }
-
 
 .rule span{
-
-    display:block;
-
-    color:
-        var(--muted);
-
-    font-size:9px;
-
-    margin-top:2px;
-
-    line-height:1.5;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
 }
 
-
-/* =========================================================
-   EMPTY / MESSAGE
-========================================================= */
-
-.message{
-
-    padding:
-        18px;
-
-    border-radius:
-        12px;
-
-    font-size:11px;
-
-    line-height:1.7;
-
-    margin-top:12px;
+.date-status{
+  max-width:760px;
+  margin:17px auto;
+  padding:12px 14px;
+  border-radius:13px;
+  font-size:10px;
+  line-height:1.7;
 }
 
-
-.message.info{
-
-    background:
-        var(--soft);
-
-    color:
-        var(--primary);
+.date-status.good{
+  color:var(--green);
+  background:rgba(22,163,74,.10);
 }
 
-
-.message.warning{
-
-    background:
-        var(--warning-soft);
-
-    color:
-        var(--warning);
+.date-status.warning{
+  color:var(--yellow);
+  background:rgba(217,155,0,.10);
 }
 
-
-.message.danger{
-
-    background:
-        var(--danger-soft);
-
-    color:
-        var(--danger);
+.date-status.bad{
+  color:var(--red);
+  background:rgba(229,72,93,.10);
 }
 
-
-.hidden{
-
-    display:none !important;
+.start-wrap{
+  text-align:center;
+  margin-top:20px;
 }
 
+.start-btn{
+  width:250px;
+  max-width:100%;
+  border:0;
+  padding:14px 20px;
+  border-radius:15px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 14px 30px rgba(109,74,255,.25);
+}
 
-/* =========================================================
-   TOAST
-========================================================= */
+.start-note{
+  color:var(--muted);
+  font-size:9px;
+  margin-top:8px;
+}
 
+/* QUIZ */
+#quizArea{
+  display:none;
+}
+
+#quizArea.active{
+  display:block;
+}
+
+.quiz-top{
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  border-bottom:1px solid var(--border);
+}
+
+.progress-area{
+  flex:1;
+}
+
+.progress-line{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:6px;
+}
+
+.progress-line strong{
+  font-size:11px;
+}
+
+.progress-line span{
+  color:var(--muted);
+  font-size:9px;
+}
+
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,var(--primary),var(--primary2));
+  border-radius:999px;
+  transition:.25s;
+}
+
+.timer{
+  min-width:92px;
+  padding:10px 11px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--soft);
+  text-align:center;
+  font-size:14px;
+  font-weight:800;
+}
+
+.timer.warning{
+  color:var(--yellow);
+}
+
+.timer.danger{
+  color:var(--red);
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+  50%{opacity:.55}
+}
+
+/* QUESTION */
+.question-area{
+  padding:24px 22px 12px;
+}
+
+.question-label{
+  color:var(--primary);
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.question{
+  font-size:20px;
+  line-height:1.65;
+  font-weight:800;
+  margin-bottom:19px;
+}
+
+.options{
+  display:grid;
+  gap:10px;
+}
+
+.option{
+  width:100%;
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:11px 13px;
+  text-align:left;
+  color:var(--text);
+  background:var(--soft);
+  border:2px solid var(--border);
+  border-radius:15px;
+  transition:.18s;
+}
+
+.option:hover{
+  border-color:rgba(109,74,255,.40);
+}
+
+.option.selected{
+  border-color:var(--primary);
+  background:rgba(109,74,255,.09);
+}
+
+.option-key{
+  width:35px;
+  height:35px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:var(--card);
+  border:1px solid var(--border);
+  font-size:12px;
+  font-weight:800;
+}
+
+.option.selected .option-key{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+}
+
+.option-text{
+  font-size:13px;
+  line-height:1.55;
+  font-weight:600;
+}
+
+/* MAP */
+.map-area{
+  padding:14px 22px 20px;
+}
+
+.map-title{
+  color:var(--muted);
+  font-size:9px;
+  margin-bottom:8px;
+}
+
+.map{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.map-btn{
+  width:34px;
+  height:34px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--soft);
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+}
+
+.map-btn.current{
+  color:var(--primary);
+  border-color:var(--primary);
+}
+
+.map-btn.answered{
+  color:#fff;
+  background:var(--green);
+  border-color:var(--green);
+}
+
+.map-btn.answered.current{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+}
+
+/* NAV */
+.nav-area{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:14px 22px 20px;
+  border-top:1px solid var(--border);
+}
+
+.nav-btn{
+  min-width:115px;
+  border:1px solid var(--border);
+  background:var(--soft);
+  color:var(--text);
+  border-radius:12px;
+  padding:11px 14px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.nav-btn.primary{
+  color:#fff;
+  border:0;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+}
+
+.nav-btn.submit{
+  color:#fff;
+  border:0;
+  background:linear-gradient(135deg,#16a34a,#20b866);
+}
+
+/* RESULT */
+#resultArea{
+  display:none;
+  padding:28px 22px;
+}
+
+#resultArea.show{
+  display:block;
+}
+
+.result-top{
+  text-align:center;
+  max-width:650px;
+  margin:0 auto 22px;
+}
+
+.result-icon{
+  width:72px;
+  height:72px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 13px;
+  border-radius:22px;
+  font-size:31px;
+  font-weight:800;
+}
+
+.result-icon.pass{
+  color:var(--green);
+  background:rgba(22,163,74,.10);
+}
+
+.result-icon.fail{
+  color:var(--red);
+  background:rgba(229,72,93,.10);
+}
+
+.result-top h2{
+  font-size:23px;
+  margin-bottom:6px;
+}
+
+.result-top p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.7;
+}
+
+.score{
+  max-width:570px;
+  margin:0 auto 16px;
+  padding:21px;
+  text-align:center;
+  border:1px solid var(--border);
+  border-radius:19px;
+  background:rgba(109,74,255,.07);
+}
+
+.score-number{
+  font-size:43px;
+  line-height:1;
+  font-weight:800;
+}
+
+.score-number span{
+  color:var(--muted);
+  font-size:17px;
+}
+
+.score-label{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:7px;
+}
+
+.result-stats{
+  max-width:750px;
+  margin:0 auto 18px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+}
+
+.result-stat{
+  padding:13px;
+  text-align:center;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--soft);
+}
+
+.result-stat strong{
+  display:block;
+  font-size:18px;
+  margin-bottom:3px;
+}
+
+.result-stat span{
+  color:var(--muted);
+  font-size:9px;
+}
+
+.result-note{
+  max-width:750px;
+  margin:0 auto 17px;
+  padding:12px;
+  text-align:center;
+  color:#2778e8;
+  background:rgba(39,120,232,.08);
+  border-radius:13px;
+  font-size:10px;
+  line-height:1.7;
+}
+
+.result-actions{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,0,0,.60);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:100%;
+  max-width:450px;
+  padding:21px;
+  border-radius:20px;
+  background:var(--card);
+  border:1px solid var(--border);
+  box-shadow:0 25px 80px rgba(0,0,0,.30);
+}
+
+.modal-card h3{
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.modal-card p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.7;
+  margin-bottom:17px;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+/* TOAST */
 .toast{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:22px;
-
-    transform:
-        translate(-50%,20px);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    z-index:3000;
-
-    background:
-        #111827;
-
-    color:#fff;
-
-    padding:
-        10px 15px;
-
-    border-radius:
-        9px;
-
-    font-size:10px;
-
-    transition:.25s;
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:2000;
+  min-width:220px;
+  max-width:340px;
+  padding:11px 13px;
+  color:#fff;
+  background:#111827;
+  border-radius:12px;
+  font-size:10px;
+  opacity:0;
+  transform:translateY(18px);
+  pointer-events:none;
+  transition:.25s;
 }
-
 
 .toast.show{
-
-    opacity:1;
-
-    transform:
-        translate(-50%,0);
+  opacity:1;
+  transform:translateY(0);
 }
 
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
+/* FOOTER */
 footer{
-
-    margin-top:
-        45px;
-
-    padding:
-        25px 15px;
-
-    text-align:center;
-
-    color:
-        var(--muted);
-
-    font-size:9px;
-
-    border-top:
-        1px solid var(--border);
+  text-align:center;
+  color:var(--muted);
+  font-size:9px;
+  padding:22px 0 8px;
 }
 
+/* RESPONSIVE */
+@media(max-width:850px){
 
-/* =========================================================
-   MOBILE
-========================================================= */
+  .info-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-@media(max-width:800px){
-
-    .status-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-
-    .result-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-
-    .hero-box{
-
-        padding:
-            32px 23px;
-    }
-
-
-    .rules{
-
-        grid-template-columns:1fr;
-    }
+  .result-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
 
 }
 
-
-@media(max-width:600px){
-
-    .navbar{
-
-        padding:
-            9px 12px;
-    }
-
-
-    .logo img{
-
-        width:39px;
-
-        height:39px;
-    }
-
-
-    .logo-text{
-
-        font-size:13px;
-    }
-
-
-    .logo-text small{
-
-        font-size:8px;
-    }
-
-
-    .nav-actions{
-
-        gap:4px;
-    }
-
-
-    .nav-btn{
-
-        padding:
-            7px 8px;
-
-        font-size:9px;
-    }
-
-
-    .nav-btn.resources{
-
-        display:none;
-    }
-
-
-    .container{
-
-        width:
-            min(100% - 20px,1180px);
-    }
-
-
-    .hero{
-
-        margin-top:18px;
-    }
-
-
-    .hero-box{
-
-        padding:
-            30px 20px;
-
-        border-radius:
-            20px;
-    }
-
-
-    .hero h1{
-
-        font-size:29px;
-    }
-
-
-    .hero p{
-
-        font-size:12px;
-    }
-
-
-    .student-bar{
-
-        align-items:
-            flex-start;
-    }
-
-
-    .student-badges{
-
-        width:100%;
-    }
-
-
-    .status-grid{
-
-        grid-template-columns:1fr 1fr;
-    }
-
-
-    .quiz-panel{
-
-        padding:
-            15px;
-    }
-
-
-    .quiz-navigation{
-
-        flex-direction:
-            column;
-    }
-
-
-    .question-jump{
-
-        order:1;
-    }
-
-
-    .navigation-buttons{
-
-        width:100%;
-    }
-
-
-    .navigation-buttons button{
-
-        flex:1;
-    }
-
-
-    .result-grid{
-
-        grid-template-columns:
-            1fr 1fr;
-    }
+@media(max-width:650px){
+
+  .page{
+    padding:10px;
+  }
+
+  .brand h1{
+    font-size:14px;
+  }
+
+  .hero{
+    padding:21px;
+  }
+
+  .hero h2{
+    font-size:22px;
+  }
+
+  .rules{
+    grid-template-columns:1fr;
+  }
+
+  .question{
+    font-size:18px;
+  }
+
+  .quiz-top{
+    align-items:flex-start;
+  }
+
+  .timer{
+    min-width:82px;
+  }
+
+  .nav-area{
+    flex-wrap:wrap;
+  }
+
+  .nav-btn{
+    flex:1;
+    min-width:100px;
+  }
 
 }
 
+@media(max-width:430px){
 
-@media print{
+  .actions .small-btn{
+    padding:8px 9px;
+  }
 
-    header,
-    .student-bar,
-    .hero,
-    .info-card,
-    footer,
-    .result-actions,
-    .quiz-navigation{
+  .info{
+    padding:11px;
+  }
 
-        display:none !important;
-    }
+  .info strong{
+    font-size:10px;
+  }
 
+  .question-area{
+    padding:20px 15px 10px;
+  }
 
-    body{
+  .map-area{
+    padding:13px 15px 18px;
+  }
 
-        background:#fff !important;
-
-        color:#000 !important;
-    }
-
-
-    .result-panel{
-
-        display:block !important;
-
-        box-shadow:none;
-
-        border:0;
-    }
+  .nav-area{
+    padding:13px 15px 17px;
+  }
 
 }
-
 </style>
-
 </head>
-
 
 <body>
 
+<div class="page">
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
+  <!-- TOP BAR -->
+  <header class="topbar">
 
-<header>
+    <div class="brand">
 
-<nav class="navbar">
+      <img
+        class="logo"
+        src="https://github.com/yourdocuments/products/blob/main/snkitlogo%20(2).svg"
+        alt="SNK IT Institute"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        <h1>SNK IT Institute</h1>
+        <p>Student Quiz Portal</p>
+      </div>
+
+    </div>
+
+    <div class="actions">
+
+      <button
+        class="small-btn"
+        id="themeBtn"
+        type="button"
+      >
+        🌙 Dark
+      </button>
+
+      <a
+        class="small-btn"
+        href="student-dashboard.html"
+      >
+        🏠 Home
+      </a>
+
+    </div>
+
+  </header>
 
 
-<a
-    href="student-dashboard.html"
-    class="logo"
->
+  <!-- HERO -->
+  <section class="hero">
 
-<img
-    src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-    alt="SNK IT Institute Logo"
->
+    <div class="hero-badge">
+      🎓 STUDENT QUIZ
+    </div>
+
+    <h2 id="heroTitle">
+      সহজভাবে Quiz দিন
+    </h2>
+
+    <p id="heroDescription">
+      প্রশ্ন ভালো করে পড়ে উত্তর নির্বাচন করুন।
+      Start Quiz চাপার পর আপনার সময় শুরু হবে।
+    </p>
+
+  </section>
 
 
-<div class="logo-text">
+  <!-- INFO -->
+  <section
+    class="info-grid"
+    id="courseInfo"
+  ></section>
 
-SNK IT Institute
 
-<small>
-Student Portal • Quiz
-</small>
+  <!-- MAIN -->
+  <section class="main-card">
+
+    <div class="card-head">
+
+      <h3 id="screenTitle">
+        Quiz শুরু করার আগে
+      </h3>
+
+      <p id="screenSubtitle">
+        নিচের তথ্যগুলো দেখে তারপর Quiz শুরু করুন।
+      </p>
+
+    </div>
+
+
+    <!-- START SCREEN -->
+    <div id="startScreen">
+
+      <div class="welcome">
+
+        <div class="welcome-icon">
+          📝
+        </div>
+
+        <h2 id="startQuizTitle">
+          Quiz
+        </h2>
+
+        <p>
+          চিন্তা করার কিছু নেই।
+          প্রতিটি প্রশ্ন এক এক করে আসবে।
+          সঠিক উত্তরটি নির্বাচন করুন।
+        </p>
+
+      </div>
+
+
+      <div
+        class="rules"
+        id="rules"
+      ></div>
+
+
+      <div
+        class="date-status"
+        id="dateStatus"
+      ></div>
+
+
+      <div class="start-wrap">
+
+        <button
+          class="start-btn"
+          id="startBtn"
+          type="button"
+        >
+          🚀 Start Quiz
+        </button>
+
+        <div class="start-note">
+          Start Quiz চাপার পর timer শুরু হবে।
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- QUIZ AREA -->
+    <div
+      id="quizArea"
+      class="quiz-area"
+    >
+
+      <div class="quiz-top">
+
+        <div class="progress-area">
+
+          <div class="progress-line">
+
+            <strong id="questionCounter">
+              Question 1 of 10
+            </strong>
+
+            <span id="answeredCounter">
+              Answered: 0/10
+            </span>
+
+          </div>
+
+          <div class="progress">
+
+            <div
+              class="progress-bar"
+              id="progressBar"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="timer"
+          id="timer"
+        >
+          20:00
+        </div>
+
+      </div>
+
+
+      <div class="question-area">
+
+        <div
+          class="question-label"
+          id="questionLabel"
+        >
+          প্রশ্ন ১
+        </div>
+
+        <div
+          class="question"
+          id="questionText"
+        >
+          Loading...
+        </div>
+
+        <div
+          class="options"
+          id="options"
+        ></div>
+
+      </div>
+
+
+      <div class="map-area">
+
+        <div class="map-title">
+          প্রশ্নের তালিকা — সবুজ মানে উত্তর দেওয়া হয়েছে
+        </div>
+
+        <div
+          class="map"
+          id="questionMap"
+        ></div>
+
+      </div>
+
+
+      <div class="nav-area">
+
+        <button
+          class="nav-btn"
+          id="prevBtn"
+          type="button"
+        >
+          ← Previous
+        </button>
+
+        <button
+          class="nav-btn primary"
+          id="nextBtn"
+          type="button"
+        >
+          Next →
+        </button>
+
+        <button
+          class="nav-btn submit"
+          id="submitBtn"
+          type="button"
+        >
+          ✓ Submit Quiz
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- RESULT -->
+    <div
+      id="resultArea"
+    ></div>
+
+  </section>
+
+
+  <footer>
+    SNK IT Institute • Student Quiz Portal •
+    <span id="year"></span>
+  </footer>
 
 </div>
 
-</a>
 
-
-<div class="nav-actions">
-
-
-<a
-    href="student-dashboard.html"
-    class="nav-btn"
->
-🏠 Dashboard
-</a>
-
-
-<a
-    href="student-results.html"
-    class="nav-btn"
->
-🏆 Result
-</a>
-
-
-<button
-    type="button"
-    class="nav-btn"
-    id="themeBtn"
->
-🌙
-</button>
-
-
-<button
-    type="button"
-    class="nav-btn"
-    id="logoutBtn"
->
-Logout
-</button>
-
-
-</div>
-
-</nav>
-
-</header>
-
-
-
-<main class="container">
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="hero">
-
-<div class="hero-box">
-
-<div class="hero-content">
-
-
-<div class="hero-badge">
-
-🎯 Student Quiz System
-
-</div>
-
-
-<h1 id="heroTitle">
-Timed Quiz
-</h1>
-
-
-<p id="heroText">
-
-Admin Panel থেকে প্রকাশিত Quiz এখানে দেখা যাবে।
-Quiz শুরু করার পরেই আপনার নির্ধারিত timer চালু হবে।
-Date window-এর মধ্যে আপনার সুবিধামতো একবার Quiz শুরু
-করে Submit করতে পারবেন।
-
-</p>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =========================================================
-     STUDENT BAR
-========================================================= -->
-
-<div class="student-bar">
-
-
-<div class="student-info">
-
-
-<div class="student-avatar">
-👨‍🎓
-</div>
-
-
-<div>
-
-<strong id="studentName">
-Demo Student
-</strong>
-
-<span id="studentMeta">
-SNK-1001 • Computer Office Application • Batch 01
-</span>
-
-</div>
-
-</div>
-
-
-<div class="student-badges">
-
-<span
-    class="badge blue"
-    id="courseBadge"
->
-Computer Office Application
-</span>
-
-
-<span
-    class="badge green"
-    id="batchBadge"
->
-Batch 01
-</span>
-
-
-<span
-    class="badge orange"
-    id="quizStatusBadge"
->
-Loading...
-</span>
-
-</div>
-
-</div>
-
-
-
-<!-- =========================================================
-     QUIZ INFORMATION
-========================================================= -->
-
-<section class="section">
-
-
-<div class="section-title">
-
-<h2>
-📋 Quiz Information
-</h2>
-
-<p>
-Admin Panel থেকে পাওয়া বর্তমান Quiz Settings
-</p>
-
-</div>
-
-
-<div class="quiz-status-card">
-
-
-<div class="status-grid">
-
-
-<div class="status-item">
-
-<span>
-Quiz
-</span>
-
-<strong id="infoQuizTitle">
-Loading...
-</strong>
-
-</div>
-
-
-<div class="status-item">
-
-<span>
-Available Date
-</span>
-
-<strong id="infoDate">
-—
-</strong>
-
-</div>
-
-
-<div class="status-item">
-
-<span>
-Time Limit
-</span>
-
-<strong id="infoDuration">
-—
-</strong>
-
-</div>
-
-
-<div class="status-item">
-
-<span>
-Questions
-</span>
-
-<strong id="infoQuestions">
-—
-</strong>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     SYSTEM MESSAGE
-====================================================== -->
-
+<!-- SUBMIT MODAL -->
 <div
-    id="messageBox"
-    class="message info"
+  class="modal"
+  id="submitModal"
 >
 
-Quiz information loading হচ্ছে...
+  <div class="modal-card">
+
+    <h3>
+      Quiz Submit করবেন?
+    </h3>
+
+    <p id="submitModalText">
+      Submit করার আগে আপনার উত্তরগুলো দেখে নিন।
+    </p>
+
+    <div class="modal-actions">
+
+      <button
+        class="small-btn"
+        id="cancelSubmit"
+        type="button"
+      >
+        ফিরে যান
+      </button>
+
+      <button
+        class="nav-btn submit"
+        id="confirmSubmit"
+        type="button"
+      >
+        ✓ Yes, Submit
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
 
-</section>
-
-
-
-<!-- =========================================================
-     START PANEL
-========================================================= -->
-
-<section
-    class="section"
-    id="startSection"
->
-
-
-<div class="start-panel">
-
-
-<div class="start-icon">
-🎯
-</div>
-
-
-<h3 id="startTitle">
-Quiz প্রস্তুত
-</h3>
-
-
-<p id="startDescription">
-
-Admin Panel থেকে Quiz Settings এবং Questions
-লোড হওয়ার পর এখানে Start Quiz button দেখা যাবে।
-
-</p>
-
-
+<!-- TOAST -->
 <div
-    class="start-note"
-    id="startNote"
->
-Loading...
-</div>
-
-
-<br>
-
-
-<button
-    type="button"
-    class="primary-btn"
-    id="startQuizBtn"
-    disabled
->
-▶ Start Quiz
-</button>
-
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     ACTIVE QUIZ
-========================================================= -->
-
-<section
-    class="section"
-    id="quizSection"
->
-
-
-<div class="quiz-panel">
-
-
-<div class="quiz-top">
-
-
-<div class="quiz-name">
-
-
-<h3 id="activeQuizTitle">
-Quiz
-</h3>
-
-
-<span id="activeQuizCourse">
-Computer Office Application
-</span>
-
-
-</div>
-
-
-<div class="timer">
-
-
-<small>
-⏱️ Time Remaining
-</small>
-
-
-<strong id="timerText">
-00:00
-</strong>
-
-
-</div>
-
-
-</div>
-
-
-
-<!-- PROGRESS -->
-
-<div class="progress-wrap">
-
-
-<div class="progress-top">
-
-<span>
-Quiz Progress
-</span>
-
-
-<strong id="progressText">
-Question 1 of 10
-</strong>
-
-</div>
-
-
-<div class="progress-bar">
-
-<div
-    class="progress-fill"
-    id="progressFill"
->
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- QUESTION -->
-
-<div
-    class="question-card"
-    id="questionCard"
->
-
-
-<div
-    class="question-number"
-    id="questionNumber"
->
-Question 01
-</div>
-
-
-<div
-    class="question-text"
-    id="questionText"
->
-Question loading...
-</div>
-
-
-<div
-    class="options"
-    id="optionsContainer"
->
-</div>
-
-
-</div>
-
-
-
-<!-- NAVIGATION -->
-
-<div class="quiz-navigation">
-
-
-<div
-    class="question-jump"
-    id="questionJump"
->
-</div>
-
-
-<div class="navigation-buttons">
-
-
-<button
-    type="button"
-    class="secondary-btn"
-    id="previousBtn"
->
-← Previous
-</button>
-
-
-<button
-    type="button"
-    class="secondary-btn"
-    id="nextBtn"
->
-Next →
-</button>
-
-
-<button
-    type="button"
-    class="primary-btn"
-    id="submitQuizBtn"
->
-📤 Submit Quiz
-</button>
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     RESULT
-========================================================= -->
-
-<section
-    class="section"
-    id="resultSection"
->
-
-
-<div
-    class="result-panel"
-    id="resultPanel"
->
-
-
-<div class="result-icon">
-🏆
-</div>
-
-
-<h2>
-Quiz Submitted
-</h2>
-
-
-<p id="resultMessage">
-আপনার Quiz result তৈরি হয়েছে।
-</p>
-
-
-<div
-    class="result-score"
-    id="resultPercentage"
->
-0%
-</div>
-
-
-<div class="result-score-label">
-Final Score
-</div>
-
-
-<div class="result-grid">
-
-
-<div class="result-item">
-
-<span>
-Obtained
-</span>
-
-<strong id="resultMarks">
-0
-</strong>
-
-</div>
-
-
-<div class="result-item">
-
-<span>
-Total
-</span>
-
-<strong id="resultTotal">
-0
-</strong>
-
-</div>
-
-
-<div class="result-item">
-
-<span>
-Correct
-</span>
-
-<strong id="resultCorrect">
-0
-</strong>
-
-</div>
-
-
-<div class="result-item">
-
-<span>
-Wrong
-</span>
-
-<strong id="resultWrong">
-0
-</strong>
-
-</div>
-
-
-<div class="result-item">
-
-<span>
-Unanswered
-</span>
-
-<strong id="resultUnanswered">
-0
-</strong>
-
-</div>
-
-
-<div class="result-item">
-
-<span>
-Time Taken
-</span>
-
-<strong id="resultTime">
-—
-</strong>
-
-</div>
-
-
-<div class="result-item">
-
-<span>
-Pass Mark
-</span>
-
-<strong id="resultPassMark">
-40%
-</strong>
-
-</div>
-
-
-<div class="result-item">
-
-<span>
-Submit
-</span>
-
-<strong id="resultSubmitMethod">
-Manual
-</strong>
-
-</div>
-
-
-</div>
-
-
-<span
-    class="result-pass"
-    id="resultStatus"
->
-PASS
-</span>
-
-
-<div class="result-actions">
-
-
-<a
-    href="results.html"
-    class="primary-btn"
->
-🏆 View Result
-</a>
-
-
-<button
-    type="button"
-    class="secondary-btn"
-    onclick="window.print()"
->
-🖨️ Print
-</button>
-
-
-<a
-    href="student-dashboard.html"
-    class="secondary-btn"
->
-← Dashboard
-</a>
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     RULES
-========================================================= -->
-
-<section class="section">
-
-
-<div class="info-card">
-
-
-<h3>
-📌 Quiz Rules
-</h3>
-
-
-<div class="rules">
-
-
-<div class="rule">
-
-<div class="rule-icon">
-📅
-</div>
-
-<div>
-
-<strong>
-Date Window
-</strong>
-
-<span>
-Admin নির্ধারিত Start Date থেকে End Date-এর
-মধ্যে Quiz শুরু করা যাবে।
-</span>
-
-</div>
-
-</div>
-
-
-<div class="rule">
-
-<div class="rule-icon">
-▶️
-</div>
-
-<div>
-
-<strong>
-Timer Start
-</strong>
-
-<span>
-Start Quiz button চাপার পরেই timer শুরু হবে।
-</span>
-
-</div>
-
-</div>
-
-
-<div class="rule">
-
-<div class="rule-icon">
-⏱️
-</div>
-
-<div>
-
-<strong>
-Time Limit
-</strong>
-
-<span>
-Admin Panel-এ সেট করা সময় অনুযায়ী timer চলবে।
-</span>
-
-</div>
-
-</div>
-
-
-<div class="rule">
-
-<div class="rule-icon">
-1️⃣
-</div>
-
-<div>
-
-<strong>
-One Attempt
-</strong>
-
-<span>
-একজন Student-এর জন্য একটি Quiz একবারই Submit করা যাবে।
-</span>
-
-</div>
-
-</div>
-
-
-<div class="rule">
-
-<div class="rule-icon">
-🤖
-</div>
-
-<div>
-
-<strong>
-Auto Score
-</strong>
-
-<span>
-Submit করার সঙ্গে সঙ্গে system answer key দিয়ে score calculate করবে।
-</span>
-
-</div>
-
-</div>
-
-
-<div class="rule">
-
-<div class="rule-icon">
-⏰
-</div>
-
-<div>
-
-<strong>
-Auto Submit
-</strong>
-
-<span>
-Timer শেষ হলে Quiz automatically Submit হবে।
-</span>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-
-</main>
-
-
-
-<footer>
-
-SNK IT Institute • Student Quiz System • Step 2.5.4
-
-<br>
-
-© 2026 SNK IT Institute. All Rights Reserved.
-
-</footer>
-
-
-
-<div
-    class="toast"
-    id="toast"
->
-</div>
-
+  class="toast"
+  id="toast"
+></div>
 
 
 <script>
 
-/* =========================================================
-   STEP 2.5.4
-   ADMIN ↔ STUDENT QUIZ SYNC
-========================================================= */
+"use strict";
 
 
 /* =========================================================
@@ -2840,26 +1172,29 @@ SNK IT Institute • Student Quiz System • Step 2.5.4
 
 const STORAGE = {
 
-    theme:
-        "snkTheme",
+  theme:
+    "snkTheme",
 
-    course:
-        "snkCourseSettingsV25",
+  course:
+    "snkCourseSettingsV25",
 
-    quiz:
-        "snkQuizSettingsV25",
+  quiz:
+    "snkQuizSettingsV25",
 
-    questions:
-        "snkQuizQuestionsV25",
+  questions:
+    "snkQuizQuestionsV25",
 
-    results:
-        "snkQuizResults",
+  results:
+    "snkQuizResults",
 
-    activeAttempt:
-        "snkQuizActiveAttemptV25",
+  activeAttempt:
+    "snkQuizActiveAttemptV25",
 
-    attemptLock:
-        "snkQuizAttemptLockV25"
+  attemptLock:
+    "snkQuizAttemptLockV25",
+
+  studentProfile:
+    "snkStudentProfile"
 
 };
 
@@ -2870,26 +1205,26 @@ const STORAGE = {
 
 const DEFAULT_COURSE = {
 
-    name:
-        "Computer Office Application",
+  name:
+    "Computer Office Application",
 
-    batch:
-        "Batch 01",
+  batch:
+    "Batch 01",
 
-    mode:
-        "Offline",
+  mode:
+    "Offline",
 
-    duration:
-        "6 Months",
+  duration:
+    "6 Months",
 
-    days:
-        "Saturday–Monday",
+  days:
+    "Saturday–Monday",
 
-    time:
-        "4:00 PM – 6:00 PM",
+  time:
+    "4:00 PM – 6:00 PM",
 
-    instructor:
-        "SNK IT Instructor"
+  instructor:
+    "SNK IT Instructor"
 
 };
 
@@ -2900,35 +1235,35 @@ const DEFAULT_COURSE = {
 
 const DEFAULT_QUIZ = {
 
-    id:
-        "SNK-QUIZ-2026-01",
+  id:
+    "SNK-QUIZ-2026-01",
 
-    title:
-        "Computer Basics Quiz",
+  title:
+    "Computer Basics Quiz",
 
-    startDate:
-        "2026-09-10",
+  startDate:
+    "2026-09-10",
 
-    endDate:
-        "2026-09-15",
+  endDate:
+    "2026-09-15",
 
-    durationMinutes:
-        20,
+  durationMinutes:
+    20,
 
-    marksPerQuestion:
-        1,
+  marksPerQuestion:
+    1,
 
-    passPercentage:
-        40,
+  passPercentage:
+    40,
 
-    oneAttemptOnly:
-        true,
+  oneAttemptOnly:
+    true,
 
-    autoSubmit:
-        true,
+  autoSubmit:
+    true,
 
-    published:
-        false
+  published:
+    false
 
 };
 
@@ -2939,125 +1274,125 @@ const DEFAULT_QUIZ = {
 
 const DEFAULT_QUESTIONS = [
 
-    {
-        id:"Q1",
-        question:"কম্পিউটারের প্রধান প্রসেসিং ইউনিট কোনটি?",
-        options:{
-            A:"Monitor",
-            B:"CPU",
-            C:"Keyboard",
-            D:"Mouse"
-        },
-        correctAnswer:"B"
+  {
+    id:"Q1",
+    question:"কম্পিউটারের মস্তিষ্ক হিসেবে কোন অংশকে ধরা হয়?",
+    options:{
+      A:"Monitor",
+      B:"CPU",
+      C:"Keyboard",
+      D:"Printer"
     },
+    correctAnswer:"B"
+  },
 
-    {
-        id:"Q2",
-        question:"MS Word-এ লেখা Bold করার Shortcut কোনটি?",
-        options:{
-            A:"Ctrl + B",
-            B:"Ctrl + C",
-            C:"Ctrl + V",
-            D:"Ctrl + X"
-        },
-        correctAnswer:"A"
+  {
+    id:"Q2",
+    question:"Windows কী ধরনের সফটওয়্যার?",
+    options:{
+      A:"Operating System",
+      B:"Game",
+      C:"Printer",
+      D:"Keyboard"
     },
+    correctAnswer:"A"
+  },
 
-    {
-        id:"Q3",
-        question:"MS Excel-এ Formula সাধারণত কোন চিহ্ন দিয়ে শুরু হয়?",
-        options:{
-            A:"#",
-            B:"@",
-            C:"=",
-            D:"$"
-        },
-        correctAnswer:"C"
+  {
+    id:"Q3",
+    question:"MS Word মূলত কোন কাজের জন্য ব্যবহার করা হয়?",
+    options:{
+      A:"Document তৈরি ও সম্পাদনা",
+      B:"Computer বন্ধ করা",
+      C:"Internet cable তৈরি",
+      D:"Sound recording"
     },
+    correctAnswer:"A"
+  },
 
-    {
-        id:"Q4",
-        question:"কম্পিউটারে তথ্য স্থায়ীভাবে সংরক্ষণ করার জন্য কোনটি ব্যবহৃত হয়?",
-        options:{
-            A:"RAM",
-            B:"CPU",
-            C:"Hard Disk",
-            D:"Monitor"
-        },
-        correctAnswer:"C"
+  {
+    id:"Q4",
+    question:"Excel-এ Formula সাধারণত কোন চিহ্ন দিয়ে শুরু হয়?",
+    options:{
+      A:"#",
+      B:"@",
+      C:"=",
+      D:"%"
     },
+    correctAnswer:"C"
+  },
 
-    {
-        id:"Q5",
-        question:"PowerPoint মূলত কোন কাজের জন্য ব্যবহৃত হয়?",
-        options:{
-            A:"Presentation",
-            B:"File Compression",
-            C:"Operating System",
-            D:"Antivirus"
-        },
-        correctAnswer:"A"
+  {
+    id:"Q5",
+    question:"PowerPoint মূলত কী তৈরির জন্য ব্যবহার করা হয়?",
+    options:{
+      A:"Presentation",
+      B:"Antivirus",
+      C:"Keyboard",
+      D:"Operating System"
     },
+    correctAnswer:"A"
+  },
 
-    {
-        id:"Q6",
-        question:"Keyboard-এর Enter key সাধারণত কী কাজে ব্যবহৃত হয়?",
-        options:{
-            A:"Command বা selection confirm করতে",
-            B:"Computer বন্ধ করতে",
-            C:"Screen পরিষ্কার করতে",
-            D:"Sound কমাতে"
-        },
-        correctAnswer:"A"
+  {
+    id:"Q6",
+    question:"Keyboard-এর Enter key সাধারণত কী কাজে ব্যবহার করা হয়?",
+    options:{
+      A:"Input বা command confirm করা",
+      B:"Computer-এর screen পরিষ্কার করা",
+      C:"Mouse বন্ধ করা",
+      D:"Printer চালু করা"
     },
+    correctAnswer:"A"
+  },
 
-    {
-        id:"Q7",
-        question:"MS Word-এ Copy করার Shortcut কোনটি?",
-        options:{
-            A:"Ctrl + X",
-            B:"Ctrl + P",
-            C:"Ctrl + C",
-            D:"Ctrl + Z"
-        },
-        correctAnswer:"C"
+  {
+    id:"Q7",
+    question:"একটি Folder-এর ভিতরে সাধারণত কী রাখা যায়?",
+    options:{
+      A:"File",
+      B:"শুধু Monitor",
+      C:"শুধু Keyboard",
+      D:"শুধু Printer"
     },
+    correctAnswer:"A"
+  },
 
-    {
-        id:"Q8",
-        question:"Internet-এ Website দেখার জন্য কোন ধরনের Software ব্যবহৃত হয়?",
-        options:{
-            A:"Web Browser",
-            B:"Calculator",
-            C:"Text Editor",
-            D:"File Manager"
-        },
-        correctAnswer:"A"
+  {
+    id:"Q8",
+    question:"Internet ব্যবহার করার জন্য সাধারণত কোনটি প্রয়োজন হতে পারে?",
+    options:{
+      A:"Network Connection",
+      B:"শুধু Printer",
+      C:"শুধু Speaker",
+      D:"শুধু Mouse"
     },
+    correctAnswer:"A"
+  },
 
-    {
-        id:"Q9",
-        question:"কম্পিউটারের অস্থায়ী working memory কোনটি?",
-        options:{
-            A:"ROM",
-            B:"RAM",
-            C:"DVD",
-            D:"Hard Disk"
-        },
-        correctAnswer:"B"
+  {
+    id:"Q9",
+    question:"Ctrl + C সাধারণত কী কাজ করে?",
+    options:{
+      A:"Paste",
+      B:"Copy",
+      C:"Save",
+      D:"Print"
     },
+    correctAnswer:"B"
+  },
 
-    {
-        id:"Q10",
-        question:"MS Excel-এ SUM function কী কাজে ব্যবহৃত হয়?",
-        options:{
-            A:"সংখ্যার যোগফল বের করতে",
-            B:"Text colour পরিবর্তন করতে",
-            C:"ছবি Insert করতে",
-            D:"File Save করতে"
-        },
-        correctAnswer:"A"
-    }
+  {
+    id:"Q10",
+    question:"Ctrl + V সাধারণত কী কাজ করে?",
+    options:{
+      A:"Copy",
+      B:"Undo",
+      C:"Paste",
+      D:"Print"
+    },
+    correctAnswer:"C"
+  }
 
 ];
 
@@ -3072,230 +1407,200 @@ let quiz = {};
 
 let questions = [];
 
+let currentStudent = {};
+
 let currentQuestion = 0;
 
 let answers = {};
 
-let activeAttempt = null;
+let startedAt = null;
+
+let expiresAt = null;
+
+let timerSeconds = 0;
 
 let timerInterval = null;
 
-let quizFinished = false;
+let quizSubmitted = false;
 
 
 /* =========================================================
-   STUDENT DATA
+   STORAGE HELPERS
 ========================================================= */
 
-function getStudent(){
+function readJSON(key,fallback){
 
-    const session = {
+  try{
 
-        id:
-            sessionStorage.getItem(
-                "snkStudentId"
-            ),
+    const value =
+      localStorage.getItem(key);
 
-        name:
-            sessionStorage.getItem(
-                "snkStudentName"
-            ),
-
-        course:
-            sessionStorage.getItem(
-                "snkStudentCourse"
-            ),
-
-        batch:
-            sessionStorage.getItem(
-                "snkStudentBatch"
-            )
-
-    };
-
-
-    let profile = null;
-
-
-    try{
-
-        profile =
-            JSON.parse(
-                localStorage.getItem(
-                    "snkStudentProfile"
-                ) || "null"
-            );
-
-    }
-    catch(error){
-
-        profile = null;
-
+    if(!value){
+      return fallback;
     }
 
+    return JSON.parse(value);
 
-    return {
+  }catch(error){
 
-        id:
-            session.id ||
-            localStorage.getItem("snkStudentId") ||
-            profile?.studentId ||
-            profile?.id ||
-            "SNK-1001",
+    console.warn(error);
 
-        name:
-            session.name ||
-            localStorage.getItem("snkStudentName") ||
-            profile?.name ||
-            "Demo Student",
+    return fallback;
 
-        course:
-            session.course ||
-            localStorage.getItem("snkStudentCourse") ||
-            profile?.course ||
-            "",
-
-        batch:
-            session.batch ||
-            localStorage.getItem("snkStudentBatch") ||
-            profile?.batch ||
-            ""
-
-    };
+  }
 
 }
 
 
-const student =
-    getStudent();
+function writeJSON(key,value){
+
+  try{
+
+    localStorage.setItem(
+      key,
+      JSON.stringify(value)
+    );
+
+  }catch(error){
+
+    console.warn(error);
+
+  }
+
+}
 
 
-/* =========================================================
-   SESSION CHECK
-========================================================= */
+function normalize(value){
 
-function checkLogin(){
+  return String(value ?? "")
+    .trim()
+    .toLowerCase();
 
-    const loggedIn =
-        sessionStorage.getItem(
-            "snkStudentLoggedIn"
-        );
+}
 
 
-    if(loggedIn !== "true"){
+function escapeHTML(value){
 
-        const ok =
-            confirm(
-                "Student Login Required\n\nQuiz দিতে Login করতে হবে।\n\nLogin Page-এ যেতে চান?"
-            );
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
-
-        if(ok){
-
-            window.location.href =
-                "login.html";
-
-            return false;
-
-        }
-
-    }
+}
 
 
-    return true;
+function formatTime(seconds){
+
+  seconds =
+    Math.max(
+      0,
+      Number(seconds) || 0
+    );
+
+  const min =
+    Math.floor(seconds / 60);
+
+  const sec =
+    seconds % 60;
+
+  return (
+    String(min).padStart(2,"0")
+    +
+    ":"
+    +
+    String(sec).padStart(2,"0")
+  );
 
 }
 
 
 /* =========================================================
-   LOAD JSON
+   THEME
 ========================================================= */
 
-function readJSON(
-    key,
-    fallback
-){
+function applyTheme(){
 
-    try{
+  const theme =
+    localStorage.getItem(
+      STORAGE.theme
+    ) || "light";
 
-        const raw =
-            localStorage.getItem(key);
+  document.body.classList.toggle(
+    "dark",
+    theme === "dark"
+  );
 
+  document.getElementById(
+    "themeBtn"
+  ).textContent =
+    theme === "dark"
+      ? "☀ Light"
+      : "🌙 Dark";
 
-        if(!raw){
-
-            return fallback;
-
-        }
-
-
-        const parsed =
-            JSON.parse(raw);
-
-
-        return parsed;
-
-    }
-    catch(error){
-
-        console.warn(
-            "Storage read error:",
-            key,
-            error
-        );
+}
 
 
-        return fallback;
+function toggleTheme(){
 
-    }
+  const isDark =
+    document.body.classList.contains(
+      "dark"
+    );
+
+  localStorage.setItem(
+    STORAGE.theme,
+    isDark ? "light" : "dark"
+  );
+
+  applyTheme();
 
 }
 
 
 /* =========================================================
-   COURSE SETTINGS
+   COURSE
 ========================================================= */
 
 function loadCourse(){
 
-    const saved =
-        readJSON(
-            STORAGE.course,
-            null
-        );
+  const saved =
+    readJSON(
+      STORAGE.course,
+      DEFAULT_COURSE
+    );
 
+  course = {
 
-    course = {
+    ...DEFAULT_COURSE,
 
-        ...DEFAULT_COURSE,
+    ...(saved || {})
 
-        ...(saved || {})
-
-    };
+  };
 
 }
 
 
 /* =========================================================
-   QUIZ SETTINGS
+   QUIZ
 ========================================================= */
 
 function loadQuiz(){
 
-    const saved =
-        readJSON(
-            STORAGE.quiz,
-            null
-        );
+  const saved =
+    readJSON(
+      STORAGE.quiz,
+      DEFAULT_QUIZ
+    );
 
+  quiz = {
 
-    quiz = {
+    ...DEFAULT_QUIZ,
 
-        ...DEFAULT_QUIZ,
+    ...(saved || {})
 
-        ...(saved || {})
-
-    };
+  };
 
 }
 
@@ -3306,486 +1611,463 @@ function loadQuiz(){
 
 function loadQuestions(){
 
-    const saved =
-        readJSON(
-            STORAGE.questions,
-            null
-        );
+  const saved =
+    readJSON(
+      STORAGE.questions,
+      DEFAULT_QUESTIONS
+    );
 
 
-    if(
-        Array.isArray(saved) &&
-        saved.length
-    ){
-
-        questions =
-            saved;
-
-    }
-    else{
-
-        questions =
-            DEFAULT_QUESTIONS;
-
-    }
-
+  if(
+    Array.isArray(saved)
+  ){
 
     questions =
-        questions
-        .map(
-            function(item,index){
+      saved;
 
-                return {
+  }else{
 
-                    id:
-                        item.id ||
-                        ("Q" + (index + 1)),
+    questions =
+      DEFAULT_QUESTIONS;
 
-                    question:
-                        item.question ||
-                        "",
+  }
 
-                    options:
-                        {
 
-                            A:
-                                item.options?.A ||
-                                "",
-
-                            B:
-                                item.options?.B ||
-                                "",
-
-                            C:
-                                item.options?.C ||
-                                "",
-
-                            D:
-                                item.options?.D ||
-                                ""
-
-                        },
-
-                    correctAnswer:
-                        String(
-                            item.correctAnswer ||
-                            ""
-                        )
-                        .toUpperCase()
-
-                };
-
-            }
-        )
-        .filter(
-            item =>
-                item.question &&
-                item.options.A &&
-                item.options.B &&
-                item.options.C &&
-                item.options.D &&
-                ["A","B","C","D"]
-                    .includes(
-                        item.correctAnswer
-                    )
-        );
+  questions =
+    questions
+      .slice(0,10)
+      .filter(
+        q =>
+          q &&
+          q.question &&
+          q.options &&
+          q.correctAnswer
+      );
 
 }
 
 
 /* =========================================================
-   VALIDATE QUIZ
+   STUDENT
 ========================================================= */
 
-function validateQuiz(){
+function loadStudent(){
 
-    if(!quiz.published){
-
-        return {
-
-            valid:false,
-
-            message:
-                "এই Quiz এখনো Admin Panel থেকে Published করা হয়নি।"
-
-        };
-
-    }
+  const profile =
+    readJSON(
+      STORAGE.studentProfile,
+      {}
+    );
 
 
-    if(
-        questions.length !== 10
-    ){
-
-        return {
-
-            valid:false,
-
-            message:
-                "Admin Panel-এ Quiz-এর ঠিক 10টি valid question থাকতে হবে।"
-
-        };
-
-    }
-
-
-    return {
-
-        valid:true,
-
-        message:"Quiz Ready"
-
-    };
-
-}
-
-
-/* =========================================================
-   DATE HELPERS
-========================================================= */
-
-function dateAtStart(
-    value
-){
-
-    if(!value){
-
-        return null;
-
-    }
-
-
-    const date =
-        new Date(
-            value + "T00:00:00"
-        );
-
-
-    return Number.isNaN(
-        date.getTime()
+  const studentId =
+    sessionStorage.getItem(
+      "snkStudentId"
     )
-        ? null
-        : date;
-
-}
-
-
-function dateAtEnd(
-    value
-){
-
-    if(!value){
-
-        return null;
-
-    }
-
-
-    const date =
-        new Date(
-            value + "T23:59:59"
-        );
-
-
-    return Number.isNaN(
-        date.getTime()
+    ||
+    localStorage.getItem(
+      "snkStudentId"
     )
-        ? null
-        : date;
+    ||
+    profile.studentId
+    ||
+    "SNK-1001";
+
+
+  const studentName =
+    sessionStorage.getItem(
+      "snkStudentName"
+    )
+    ||
+    localStorage.getItem(
+      "snkStudentName"
+    )
+    ||
+    profile.name
+    ||
+    "Student";
+
+
+  const studentCourse =
+    sessionStorage.getItem(
+      "snkStudentCourse"
+    )
+    ||
+    localStorage.getItem(
+      "snkStudentCourse"
+    )
+    ||
+    profile.course
+    ||
+    course.name;
+
+
+  const studentBatch =
+    sessionStorage.getItem(
+      "snkStudentBatch"
+    )
+    ||
+    localStorage.getItem(
+      "snkStudentBatch"
+    )
+    ||
+    profile.batch
+    ||
+    course.batch;
+
+
+  currentStudent = {
+
+    studentId,
+
+    name:studentName,
+
+    course:studentCourse,
+
+    batch:studentBatch
+
+  };
 
 }
 
 
-function formatDate(
-    value
-){
+/* =========================================================
+   COURSE UI
+========================================================= */
 
-    const date =
-        dateAtStart(value);
+function renderCourseInfo(){
+
+  document.getElementById(
+    "courseInfo"
+  ).innerHTML = `
+
+    <div class="info">
+      <small>Course</small>
+      <strong>
+        ${escapeHTML(course.name)}
+      </strong>
+    </div>
+
+    <div class="info">
+      <small>Student</small>
+      <strong>
+        ${escapeHTML(currentStudent.name)}
+      </strong>
+    </div>
+
+    <div class="info">
+      <small>Student ID</small>
+      <strong>
+        ${escapeHTML(currentStudent.studentId)}
+      </strong>
+    </div>
+
+    <div class="info">
+      <small>Batch</small>
+      <strong>
+        ${escapeHTML(currentStudent.batch)}
+      </strong>
+    </div>
+
+  `;
+
+}
 
 
-    if(!date){
+/* =========================================================
+   RULES UI
+========================================================= */
 
-        return "—";
+function renderRules(){
 
-    }
+  document.getElementById(
+    "rules"
+  ).innerHTML = `
+
+    <div class="rule">
+
+      <div class="rule-icon">
+        1
+      </div>
+
+      <div>
+
+        <strong>
+          মোট প্রশ্ন
+        </strong>
+
+        <span>
+          ${questions.length}টি প্রশ্ন
+        </span>
+
+      </div>
+
+    </div>
 
 
-    return date.toLocaleDateString(
-        "bn-BD",
-        {
-            year:"numeric",
-            month:"long",
-            day:"numeric"
-        }
+    <div class="rule">
+
+      <div class="rule-icon">
+        ⏱
+      </div>
+
+      <div>
+
+        <strong>
+          সময়
+        </strong>
+
+        <span>
+          ${escapeHTML(
+            quiz.durationMinutes
+          )} মিনিট
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="rule">
+
+      <div class="rule-icon">
+        ✓
+      </div>
+
+      <div>
+
+        <strong>
+          প্রতি প্রশ্ন
+        </strong>
+
+        <span>
+          ${escapeHTML(
+            quiz.marksPerQuestion
+          )} নম্বর
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="rule">
+
+      <div class="rule-icon">
+        !
+      </div>
+
+      <div>
+
+        <strong>
+          একবারই দেওয়া যাবে
+        </strong>
+
+        <span>
+          Submit করার পর আবার দেওয়া যাবে না।
+        </span>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   DATE CHECK
+========================================================= */
+
+function isStartDateAllowed(){
+
+  const now =
+    new Date();
+
+
+  const today =
+    new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
     );
 
-}
+
+  const start =
+    new Date(
+      quiz.startDate + "T00:00:00"
+    );
 
 
-/* =========================================================
-   DATE WINDOW
-========================================================= */
-
-function getDateStatus(){
-
-    const now =
-        new Date();
+  const end =
+    new Date(
+      quiz.endDate + "T23:59:59"
+    );
 
 
-    const start =
-        dateAtStart(
-            quiz.startDate
-        );
-
-
-    const end =
-        dateAtEnd(
-            quiz.endDate
-        );
-
-
-    if(!start || !end){
-
-        return {
-
-            status:"invalid",
-
-            message:
-                "Quiz Date Settings সঠিক নয়।"
-
-        };
-
-    }
-
-
-    if(now < start){
-
-        return {
-
-            status:"before",
-
-            message:
-                "Quiz এখনো শুরু হয়নি। Start Date: " +
-                formatDate(quiz.startDate)
-
-        };
-
-    }
-
-
-    if(now > end){
-
-        return {
-
-            status:"after",
-
-            message:
-                "Quiz-এর Date Window শেষ হয়েছে।"
-
-        };
-
-    }
-
-
-    return {
-
-        status:"open",
-
-        message:
-            "Quiz এখন শুরু করা যাবে।"
-
-    };
+  return (
+    today >= start &&
+    today <= end
+  );
 
 }
 
 
 /* =========================================================
-   RESULT DATA
+   DATE STATUS
 ========================================================= */
 
-function getResults(){
+function renderDateStatus(){
 
-    const data =
-        readJSON(
-            STORAGE.results,
-            []
-        );
+  const box =
+    document.getElementById(
+      "dateStatus"
+    );
 
 
-    return Array.isArray(data)
-        ? data
-        : [];
+  const now =
+    new Date();
+
+
+  const today =
+    new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+
+
+  const start =
+    new Date(
+      quiz.startDate + "T00:00:00"
+    );
+
+
+  const end =
+    new Date(
+      quiz.endDate + "T23:59:59"
+    );
+
+
+  if(today < start){
+
+    box.className =
+      "date-status warning";
+
+    box.innerHTML = `
+      📅 Quiz এখনও শুরু হয়নি।
+      <br>
+      Available:
+      <strong>
+        ${escapeHTML(quiz.startDate)}
+      </strong>
+      থেকে
+      <strong>
+        ${escapeHTML(quiz.endDate)}
+      </strong>
+      পর্যন্ত।
+    `;
+
+    return;
+
+  }
+
+
+  if(today > end){
+
+    box.className =
+      "date-status bad";
+
+    box.innerHTML = `
+      ⛔ Quiz-এর সময় শেষ হয়ে গেছে।
+      <br>
+      Quiz window:
+      ${escapeHTML(quiz.startDate)}
+      —
+      ${escapeHTML(quiz.endDate)}
+    `;
+
+    return;
+
+  }
+
+
+  box.className =
+    "date-status good";
+
+  box.innerHTML = `
+    ✓ আজ Quiz দেওয়া যাবে।
+    <br>
+    আপনার সুবিধামতো যেকোনো সময়
+    Start Quiz চাপুন।
+    Start করার পর
+    ${escapeHTML(
+      quiz.durationMinutes
+    )}
+    মিনিটের timer শুরু হবে।
+  `;
 
 }
 
 
 /* =========================================================
-   CURRENT STUDENT RESULT
+   PREVIOUS RESULTS
 ========================================================= */
 
-function getStudentResult(){
+function getAllResults(){
 
-    const results =
-        getResults();
+  const results =
+    readJSON(
+      STORAGE.results,
+      []
+    );
+
+  return Array.isArray(results)
+    ? results
+    : [];
+
+}
 
 
-    const studentId =
-        String(
-            student.id
+function getStudentResults(){
+
+  return getAllResults().filter(
+    result =>
+
+      normalize(
+        result.studentId
+      )
+      ===
+      normalize(
+        currentStudent.studentId
+      )
+
+      &&
+
+      (
+
+        normalize(
+          result.quizId
         )
-        .trim()
-        .toLowerCase();
-
-
-    return results.find(
-        function(result){
-
-            return (
-
-                String(
-                    result.studentId ||
-                    ""
-                )
-                .trim()
-                .toLowerCase()
-                ===
-                studentId
-
-            )
-            &&
-            String(
-                result.quizId ||
-                ""
-            )
-            ===
-            String(
-                quiz.id
-            );
-
-        }
-    ) || null;
-
-}
-
-
-/* =========================================================
-   ATTEMPT LOCK
-========================================================= */
-
-function hasAttemptLock(){
-
-    if(!quiz.oneAttemptOnly){
-
-        return false;
-
-    }
-
-
-    const lockData =
-        readJSON(
-            STORAGE.attemptLock,
-            []
-        );
-
-
-    if(
-        !Array.isArray(lockData)
-    ){
-
-        return false;
-
-    }
-
-
-    return lockData.some(
-        function(item){
-
-            return (
-
-                String(
-                    item.studentId
-                ) ===
-                String(
-                    student.id
-                )
-
-                &&
-
-                String(
-                    item.quizId
-                ) ===
-                String(
-                    quiz.id
-                )
-
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SAVE ATTEMPT LOCK
-========================================================= */
-
-function saveAttemptLock(){
-
-    const current =
-        readJSON(
-            STORAGE.attemptLock,
-            []
-        );
-
-
-    const locks =
-        Array.isArray(current)
-            ? current
-            : [];
-
-
-    const exists =
-        locks.some(
-            item =>
-                String(item.studentId)
-                ===
-                String(student.id)
-                &&
-                String(item.quizId)
-                ===
-                String(quiz.id)
-        );
-
-
-    if(!exists){
-
-        locks.push({
-
-            studentId:
-                student.id,
-
-            quizId:
-                quiz.id,
-
-            lockedAt:
-                new Date().toISOString()
-
-        });
-
-    }
-
-
-    localStorage.setItem(
-
-        STORAGE.attemptLock,
-
-        JSON.stringify(
-            locks
+        ===
+        normalize(
+          quiz.id
         )
 
-    );
+        ||
+
+        normalize(
+          result.quizName
+        )
+        ===
+        normalize(
+          quiz.title
+        )
+
+      )
+
+  );
 
 }
 
@@ -3796,51 +2078,45 @@ function saveAttemptLock(){
 
 function getActiveAttempt(){
 
-    const saved =
-        readJSON(
-            STORAGE.activeAttempt,
-            null
-        );
+  const attempt =
+    readJSON(
+      STORAGE.activeAttempt,
+      null
+    );
 
 
-    if(!saved){
-
-        return null;
-
-    }
+  if(!attempt){
+    return null;
+  }
 
 
-    if(
-        String(
-            saved.studentId
-        )
-        !==
-        String(
-            student.id
-        )
-    ){
-
-        return null;
-
-    }
+  if(
+    normalize(
+      attempt.studentId
+    )
+    !==
+    normalize(
+      currentStudent.studentId
+    )
+  ){
+    return null;
+  }
 
 
-    if(
-        String(
-            saved.quizId
-        )
-        !==
-        String(
-            quiz.id
-        )
-    ){
-
-        return null;
-
-    }
+  if(
+    normalize(
+      attempt.quizId
+    )
+    !==
+    normalize(
+      quiz.id
+    )
+  ){
+    return null;
+  }
 
 
-    return saved;
+  return attempt;
 
 }
 
@@ -3851,590 +2127,321 @@ function getActiveAttempt(){
 
 function saveActiveAttempt(){
 
-    if(!activeAttempt){
+  writeJSON(
+    STORAGE.activeAttempt,
+    {
 
-        return;
+      id:
+        "ATTEMPT-" +
+        currentStudent.studentId +
+        "-" +
+        quiz.id,
+
+      quizId:
+        quiz.id,
+
+      studentId:
+        currentStudent.studentId,
+
+      studentName:
+        currentStudent.name,
+
+      course:
+        currentStudent.course ||
+        course.name,
+
+      batch:
+        currentStudent.batch ||
+        course.batch,
+
+      startedAt:
+        startedAt,
+
+      expiresAt:
+        expiresAt,
+
+      currentQuestion:
+        currentQuestion,
+
+      answers:
+        answers,
+
+      version:
+        "2.5.9",
+
+      updatedAt:
+        new Date().toISOString()
 
     }
-
-
-    activeAttempt.answers =
-        answers;
-
-    activeAttempt.currentQuestion =
-        currentQuestion;
-
-    activeAttempt.updatedAt =
-        new Date().toISOString();
-
-
-    localStorage.setItem(
-
-        STORAGE.activeAttempt,
-
-        JSON.stringify(
-            activeAttempt
-        )
-
-    );
+  );
 
 }
 
 
 /* =========================================================
-   REMOVE ACTIVE ATTEMPT
+   CLEAR ACTIVE ATTEMPT
 ========================================================= */
 
 function clearActiveAttempt(){
 
-    localStorage.removeItem(
-        STORAGE.activeAttempt
-    );
+  localStorage.removeItem(
+    STORAGE.activeAttempt
+  );
 
 }
 
 
 /* =========================================================
-   ESCAPE HTML
+   START BUTTON
 ========================================================= */
 
-function escapeHTML(
-    value
-){
+function prepareStartButton(){
 
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
+  const button =
+    document.getElementById(
+      "startBtn"
     );
+
+
+  if(
+    quiz.published !== true
+  ){
+
+    button.disabled =
+      true;
+
+    button.style.opacity =
+      ".5";
+
+    button.textContent =
+      "Quiz এখনো প্রকাশ হয়নি";
+
+    return;
+
+  }
+
+
+  if(
+    questions.length !== 10
+  ){
+
+    button.disabled =
+      true;
+
+    button.style.opacity =
+      ".5";
+
+    button.textContent =
+      "Quiz প্রস্তুত নয়";
+
+    return;
+
+  }
+
+
+  if(
+    quiz.oneAttemptOnly &&
+    getStudentResults().length > 0
+  ){
+
+    button.disabled =
+      true;
+
+    button.style.opacity =
+      ".5";
+
+    button.textContent =
+      "✓ Quiz Already Submitted";
+
+    return;
+
+  }
+
+
+  if(
+    !isStartDateAllowed()
+  ){
+
+    button.disabled =
+      true;
+
+    button.style.opacity =
+      ".5";
+
+    button.textContent =
+      "Quiz Available নয়";
+
+    return;
+
+  }
+
+
+  const active =
+    getActiveAttempt();
+
+
+  button.disabled =
+    false;
+
+  button.style.opacity =
+    "1";
+
+
+  if(active){
+
+    button.textContent =
+      "▶ Continue Quiz";
+
+  }else{
+
+    button.textContent =
+      "🚀 Start Quiz";
+
+  }
 
 }
 
 
 /* =========================================================
-   START QUIZ
+   START / RESUME
 ========================================================= */
 
 function startQuiz(){
 
-    const validation =
-        validateQuiz();
+  if(
+    quiz.published !== true
+  ){
+
+    showToast(
+      "Quiz এখনো প্রকাশ হয়নি।"
+    );
+
+    return;
+
+  }
 
 
-    if(!validation.valid){
+  if(
+    questions.length !== 10
+  ){
 
-        showMessage(
-            validation.message,
-            "danger"
-        );
+    showToast(
+      "Quiz-এ অবশ্যই 10টি প্রশ্ন থাকতে হবে।"
+    );
 
-        return;
+    return;
 
-    }
-
-
-    const dateStatus =
-        getDateStatus();
+  }
 
 
-    if(
-        dateStatus.status !== "open"
-    ){
+  if(
+    quiz.oneAttemptOnly &&
+    getStudentResults().length > 0
+  ){
 
-        showMessage(
-            dateStatus.message,
-            "warning"
-        );
+    showToast(
+      "আপনি এই Quiz ইতিমধ্যে submit করেছেন।"
+    );
 
-        return;
+    return;
 
-    }
-
-
-    const existingResult =
-        getStudentResult();
+  }
 
 
-    if(
-        quiz.oneAttemptOnly &&
-        existingResult
-    ){
-
-        showExistingResult(
-            existingResult
-        );
-
-        return;
-
-    }
+  let active =
+    getActiveAttempt();
 
 
-    if(
-        quiz.oneAttemptOnly &&
-        hasAttemptLock()
-    ){
+  if(active){
 
-        showMessage(
+    answers =
+      active.answers || {};
 
-            "আপনি এই Quiz ইতিমধ্যে Submit করেছেন। আবার Attempt করা যাবে না।",
+    currentQuestion =
+      Number(
+        active.currentQuestion
+      ) || 0;
 
-            "warning"
+    startedAt =
+      active.startedAt;
 
-        );
+    expiresAt =
+      active.expiresAt;
 
-        return;
+  }else{
 
-    }
+    const now =
+      Date.now();
 
+    startedAt =
+      new Date(
+        now
+      ).toISOString();
 
-    const previousAttempt =
-        getActiveAttempt();
+    expiresAt =
+      new Date(
+        now +
+        (
+          Number(
+            quiz.durationMinutes
+          ) * 60 * 1000
+        )
+      ).toISOString();
 
-
-    if(previousAttempt){
-
-        const continueAttempt =
-            confirm(
-                "আপনার একটি active Quiz attempt পাওয়া গেছে।\n\nআগের attempt continue করতে চান?"
-            );
-
-
-        if(continueAttempt){
-
-            activeAttempt =
-                previousAttempt;
-
-            answers =
-                previousAttempt.answers || {};
-
-            currentQuestion =
-                Number(
-                    previousAttempt.currentQuestion || 0
-                );
-
-            quizFinished = false;
-
-            openQuizPanel();
-
-            startTimer();
-
-            return;
-
-        }
-
-
-        clearActiveAttempt();
-
-    }
-
-
-    activeAttempt = {
-
-        id:
-            "ATTEMPT-" +
-            Date.now(),
-
-        quizId:
-            quiz.id,
-
-        quizTitle:
-            quiz.title,
-
-        studentId:
-            student.id,
-
-        studentName:
-            student.name,
-
-        course:
-            course.name,
-
-        batch:
-            course.batch,
-
-        startedAt:
-            new Date().toISOString(),
-
-        durationMinutes:
-            Number(
-                quiz.durationMinutes
-            ) || 20,
-
-        answers:{},
-
-        currentQuestion:0
-
-    };
-
+    currentQuestion =
+      0;
 
     answers = {};
 
-    currentQuestion = 0;
 
-    quizFinished = false;
+    questions.forEach(
+      question => {
 
+        answers[
+          question.id
+        ] = "";
 
-    saveActiveAttempt();
-
-    openQuizPanel();
-
-    startTimer();
-
-
-    showToast(
-        "Quiz শুরু হয়েছে। Timer এখন চলছে।"
-    );
-
-}
-
-
-/* =========================================================
-   OPEN QUIZ
-========================================================= */
-
-function openQuizPanel(){
-
-    document.getElementById(
-        "startSection"
-    )
-    .classList.add(
-        "hidden"
+      }
     );
 
 
-    document.getElementById(
-        "quizSection"
-    )
-    .style.display =
-        "block";
-
-
-    document
-        .querySelector(
-            ".quiz-panel"
-        )
-        .classList.add(
-            "active"
-        );
-
-
-    document.getElementById(
-        "activeQuizTitle"
-    ).textContent =
-        quiz.title;
-
-
-    document.getElementById(
-        "activeQuizCourse"
-    ).textContent =
-        course.name;
-
-
-    renderQuestionJump();
-
-    renderQuestion();
-
-}
-
-
-/* =========================================================
-   RENDER QUESTION JUMP
-========================================================= */
-
-function renderQuestionJump(){
-
-    const container =
-        document.getElementById(
-            "questionJump"
-        );
-
-
-    container.innerHTML =
-        questions
-        .map(
-            function(question,index){
-
-                const answered =
-                    Boolean(
-                        answers[
-                            question.id
-                        ]
-                    );
-
-
-                const active =
-                    index === currentQuestion;
-
-
-                return `
-
-                    <button
-                        type="button"
-                        class="jump-btn
-                            ${active ? "active" : ""}
-                            ${answered ? "answered" : ""}
-                        "
-                        onclick="goToQuestion(${index})"
-                    >
-                        ${index + 1}
-                    </button>
-
-                `;
-
-            }
-        )
-        .join("");
-
-}
-
-
-/* =========================================================
-   GO TO QUESTION
-========================================================= */
-
-function goToQuestion(
-    index
-){
-
-    if(
-        index < 0 ||
-        index >= questions.length
-    ){
-
-        return;
-
-    }
-
-
-    currentQuestion =
-        index;
-
-
     saveActiveAttempt();
 
-    renderQuestionJump();
+  }
 
-    renderQuestion();
 
-}
+  quizSubmitted =
+    false;
 
 
-/* =========================================================
-   RENDER QUESTION
-========================================================= */
+  document.getElementById(
+    "startScreen"
+  ).style.display =
+    "none";
 
-function renderQuestion(){
 
-    const question =
-        questions[
-            currentQuestion
-        ];
+  document.getElementById(
+    "quizArea"
+  ).classList.add(
+    "active"
+  );
 
 
-    if(!question){
+  document.getElementById(
+    "screenTitle"
+  ).textContent =
+    quiz.title;
 
-        return;
 
-    }
+  document.getElementById(
+    "screenSubtitle"
+  ).textContent =
+    "প্রশ্নের উত্তর দিন। আপনার উত্তর automatically save হচ্ছে।";
 
 
-    document.getElementById(
-        "questionNumber"
-    ).textContent =
-        "Question " +
-        String(
-            currentQuestion + 1
-        )
-        .padStart(
-            2,
-            "0"
-        );
+  renderQuestion();
 
-
-    document.getElementById(
-        "questionText"
-    ).textContent =
-        question.question;
-
-
-    const options =
-        document.getElementById(
-            "optionsContainer"
-        );
-
-
-    options.innerHTML =
-        ["A","B","C","D"]
-        .map(
-            function(letter){
-
-                const checked =
-                    answers[
-                        question.id
-                    ] === letter;
-
-
-                return `
-
-                    <label class="option">
-
-                        <input
-                            type="radio"
-                            name="currentQuestion"
-                            value="${letter}"
-                            ${checked ? "checked" : ""}
-                            onchange="selectAnswer('${letter}')"
-                        >
-
-                        <span>
-                            ${letter}. ${escapeHTML(
-                                question.options[
-                                    letter
-                                ]
-                            )}
-                        </span>
-
-                    </label>
-
-                `;
-
-            }
-        )
-        .join("");
-
-
-    document.getElementById(
-        "progressText"
-    ).textContent =
-        "Question " +
-        (currentQuestion + 1) +
-        " of " +
-        questions.length;
-
-
-    const progress =
-        (
-            (currentQuestion + 1)
-            /
-            questions.length
-        ) * 100;
-
-
-    document.getElementById(
-        "progressFill"
-    ).style.width =
-        progress + "%";
-
-
-    document.getElementById(
-        "previousBtn"
-    ).disabled =
-        currentQuestion === 0;
-
-
-    document.getElementById(
-        "nextBtn"
-    ).disabled =
-        currentQuestion ===
-        questions.length - 1;
-
-
-    renderQuestionJump();
-
-}
-
-
-/* =========================================================
-   SELECT ANSWER
-========================================================= */
-
-function selectAnswer(
-    answer
-){
-
-    const question =
-        questions[
-            currentQuestion
-        ];
-
-
-    if(!question){
-
-        return;
-
-    }
-
-
-    answers[
-        question.id
-    ] =
-        answer;
-
-
-    saveActiveAttempt();
-
-    renderQuestionJump();
-
-}
-
-
-/* =========================================================
-   PREVIOUS
-========================================================= */
-
-function previousQuestion(){
-
-    if(
-        currentQuestion > 0
-    ){
-
-        currentQuestion--;
-
-        saveActiveAttempt();
-
-        renderQuestion();
-
-    }
-
-}
-
-
-/* =========================================================
-   NEXT
-========================================================= */
-
-function nextQuestion(){
-
-    if(
-        currentQuestion <
-        questions.length - 1
-    ){
-
-        currentQuestion++;
-
-        saveActiveAttempt();
-
-        renderQuestion();
-
-    }
+  startTimer();
 
 }
 
@@ -4445,504 +2452,697 @@ function nextQuestion(){
 
 function startTimer(){
 
-    stopTimer();
+  clearInterval(
+    timerInterval
+  );
 
 
-    if(!activeAttempt){
-
-        return;
-
-    }
+  updateTimer();
 
 
-    const durationMs =
-        (
-            Number(
-                activeAttempt.durationMinutes
-            ) || 20
-        )
-        *
-        60
-        *
-        1000;
-
-
-    function tick(){
-
-        if(
-            quizFinished ||
-            !activeAttempt
-        ){
-
-            stopTimer();
-
-            return;
-
-        }
-
-
-        const started =
-            new Date(
-                activeAttempt.startedAt
-            )
-            .getTime();
-
-
-        const now =
-            Date.now();
-
-
-        const elapsed =
-            now - started;
-
+  timerInterval =
+    setInterval(
+      function(){
 
         const remaining =
-            Math.max(
-                0,
-                durationMs - elapsed
-            );
+          Math.ceil(
+            (
+              new Date(
+                expiresAt
+              ).getTime()
+              -
+              Date.now()
+            ) / 1000
+          );
 
 
-        updateTimerDisplay(
+        timerSeconds =
+          Math.max(
+            0,
             remaining
-        );
+          );
+
+
+        updateTimer();
 
 
         if(
-            remaining <= 0
+          timerSeconds <= 0
         ){
 
-            stopTimer();
-
-            if(
-                quiz.autoSubmit
-            ){
-
-                submitQuiz(
-                    "Auto"
-                );
-
-            }
-            else{
-
-                showToast(
-                    "Quiz Time Over"
-                );
-
-            }
-
-        }
-
-    }
-
-
-    tick();
-
-
-    timerInterval =
-        setInterval(
-            tick,
-            1000
-        );
-
-}
-
-
-function stopTimer(){
-
-    if(timerInterval){
-
-        clearInterval(
+          clearInterval(
             timerInterval
-        );
+          );
 
-        timerInterval =
-            null;
+          autoSubmitQuiz();
 
-    }
+        }
+
+      },
+      500
+    );
 
 }
 
 
 /* =========================================================
-   TIMER DISPLAY
+   TIMER UI
 ========================================================= */
 
-function updateTimerDisplay(
-    milliseconds
-){
+function updateTimer(){
 
-    const totalSeconds =
-        Math.max(
-            0,
-            Math.floor(
-                milliseconds / 1000
-            )
-        );
-
-
-    const minutes =
-        Math.floor(
-            totalSeconds / 60
-        );
-
-
-    const seconds =
-        totalSeconds % 60;
-
-
-    const text =
-        String(
-            minutes
-        )
-        .padStart(
-            2,
-            "0"
-        )
-        +
-        ":" +
-        String(
-            seconds
-        )
-        .padStart(
-            2,
-            "0"
-        );
-
-
+  const timer =
     document.getElementById(
-        "timerText"
-    ).textContent =
-        text;
+      "timer"
+    );
+
+
+  timer.textContent =
+    formatTime(
+      timerSeconds
+    );
+
+
+  timer.classList.remove(
+    "warning",
+    "danger"
+  );
+
+
+  if(
+    timerSeconds <= 60
+  ){
+
+    timer.classList.add(
+      "danger"
+    );
+
+  }else if(
+    timerSeconds <= 300
+  ){
+
+    timer.classList.add(
+      "warning"
+    );
+
+  }
 
 }
 
 
 /* =========================================================
-   SUBMIT
+   RENDER QUESTION
 ========================================================= */
 
-function submitQuiz(
-    submitMethod = "Manual"
+function renderQuestion(){
+
+  const question =
+    questions[
+      currentQuestion
+    ];
+
+
+  if(!question){
+    return;
+  }
+
+
+  const number =
+    currentQuestion + 1;
+
+
+  document.getElementById(
+    "questionCounter"
+  ).textContent =
+    `Question ${number} of ${questions.length}`;
+
+
+  document.getElementById(
+    "questionLabel"
+  ).textContent =
+    `প্রশ্ন ${number}`;
+
+
+  document.getElementById(
+    "questionText"
+  ).innerHTML =
+    escapeHTML(
+      question.question
+    );
+
+
+  const selected =
+    answers[
+      question.id
+    ] || "";
+
+
+  const container =
+    document.getElementById(
+      "options"
+    );
+
+
+  container.innerHTML =
+    ["A","B","C","D"]
+      .map(
+        key => {
+
+          const text =
+            question.options[key] || "";
+
+
+          return `
+
+            <button
+              type="button"
+              class="option ${
+                selected === key
+                  ? "selected"
+                  : ""
+              }"
+              data-answer="${key}"
+            >
+
+              <div class="option-key">
+                ${key}
+              </div>
+
+              <div class="option-text">
+                ${escapeHTML(text)}
+              </div>
+
+            </button>
+
+          `;
+
+        }
+      )
+      .join("");
+
+
+  container
+    .querySelectorAll(
+      ".option"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            selectAnswer(
+              question.id,
+              this.dataset.answer
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  document.getElementById(
+    "prevBtn"
+  ).disabled =
+    currentQuestion === 0;
+
+
+  document.getElementById(
+    "nextBtn"
+  ).style.display =
+    currentQuestion ===
+    questions.length - 1
+      ? "none"
+      : "block";
+
+
+  const progress =
+    (
+      (currentQuestion + 1)
+      /
+      questions.length
+    ) * 100;
+
+
+  document.getElementById(
+    "progressBar"
+  ).style.width =
+    progress + "%";
+
+
+  renderQuestionMap();
+
+  updateAnsweredCounter();
+
+}
+
+
+/* =========================================================
+   SELECT ANSWER
+========================================================= */
+
+function selectAnswer(
+  questionId,
+  selectedAnswer
 ){
 
-    if(
-        quizFinished
-    ){
-
-        return;
-
-    }
+  if(
+    quizSubmitted
+  ){
+    return;
+  }
 
 
-    if(!activeAttempt){
-
-        showToast(
-            "Active Quiz পাওয়া যায়নি।"
-        );
-
-        return;
-
-    }
+  answers[
+    questionId
+  ] =
+    selectedAnswer;
 
 
-    if(
-        submitMethod === "Manual"
-    ){
+  saveActiveAttempt();
 
-        const unanswered =
-            questions.filter(
-                question =>
-                    !answers[
-                        question.id
-                    ]
-            ).length;
+  renderQuestion();
+
+  showToast(
+    "উত্তরটি save হয়েছে ✓"
+  );
+
+}
 
 
-        if(unanswered > 0){
+/* =========================================================
+   QUESTION MAP
+========================================================= */
 
-            const confirmSubmit =
-                confirm(
-                    "আপনার " +
-                    unanswered +
-                    "টি প্রশ্নের উত্তর দেওয়া হয়নি।\n\nতারপরও Submit করতে চান?"
-                );
+function renderQuestionMap(){
 
-
-            if(!confirmSubmit){
-
-                return;
-
-            }
-
-        }
-        else{
-
-            const confirmSubmit =
-                confirm(
-                    "আপনি কি Quiz Submit করতে চান?"
-                );
-
-
-            if(!confirmSubmit){
-
-                return;
-
-            }
-
-        }
-
-    }
-
-
-    stopTimer();
-
-    quizFinished = true;
-
-
-    const result =
-        calculateResult(
-            submitMethod
-        );
-
-
-    saveResult(
-        result
+  const map =
+    document.getElementById(
+      "questionMap"
     );
 
 
-    saveAttemptLock();
+  map.innerHTML =
+    questions
+      .map(
+        (question,index) => {
 
-    clearActiveAttempt();
+          const answered =
+            !!answers[
+              question.id
+            ];
 
 
-    showResult(
-        result
-    );
+          const current =
+            index === currentQuestion;
 
 
-    showToast(
-        "Quiz Submit হয়েছে ✓"
+          let classes =
+            "map-btn";
+
+
+          if(answered){
+            classes +=
+              " answered";
+          }
+
+
+          if(current){
+            classes +=
+              " current";
+          }
+
+
+          return `
+
+            <button
+              type="button"
+              class="${classes}"
+              data-index="${index}"
+            >
+              ${index + 1}
+            </button>
+
+          `;
+
+        }
+      )
+      .join("");
+
+
+  map
+    .querySelectorAll(
+      ".map-btn"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            currentQuestion =
+              Number(
+                this.dataset.index
+              );
+
+            saveActiveAttempt();
+
+            renderQuestion();
+
+          }
+        );
+
+      }
     );
 
 }
 
 
 /* =========================================================
-   CALCULATE RESULT
+   ANSWER COUNT
 ========================================================= */
 
-function calculateResult(
-    submitMethod
-){
+function updateAnsweredCounter(){
 
-    let correct = 0;
-
-    let wrong = 0;
-
-    let unanswered = 0;
-
-
-    questions.forEach(
-        function(question){
-
-            const selected =
-                answers[
-                    question.id
-                ];
+  const count =
+    Object.values(
+      answers
+    ).filter(
+      value => !!value
+    ).length;
 
 
-            if(!selected){
+  document.getElementById(
+    "answeredCounter"
+  ).textContent =
+    `Answered: ${count}/${questions.length}`;
 
-                unanswered++;
-
-                return;
-
-            }
-
-
-            if(
-                selected ===
-                question.correctAnswer
-            ){
-
-                correct++;
-
-            }
-            else{
-
-                wrong++;
-
-            }
-
-        }
-    );
+}
 
 
-    const marksPerQuestion =
-        Number(
-            quiz.marksPerQuestion
-        ) || 1;
+/* =========================================================
+   NEXT
+========================================================= */
+
+function nextQuestion(){
+
+  if(
+    currentQuestion <
+    questions.length - 1
+  ){
+
+    currentQuestion++;
+
+    saveActiveAttempt();
+
+    renderQuestion();
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  }
+
+}
 
 
-    const totalMarks =
-        questions.length *
-        marksPerQuestion;
+/* =========================================================
+   PREVIOUS
+========================================================= */
+
+function previousQuestion(){
+
+  if(
+    currentQuestion > 0
+  ){
+
+    currentQuestion--;
+
+    saveActiveAttempt();
+
+    renderQuestion();
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  }
+
+}
 
 
-    const obtainedMarks =
-        correct *
-        marksPerQuestion;
+/* =========================================================
+   SUBMIT MODAL
+========================================================= */
+
+function openSubmitModal(){
+
+  const answered =
+    Object.values(
+      answers
+    ).filter(
+      value => !!value
+    ).length;
 
 
-    const percentage =
-        totalMarks > 0
-            ?
-            Math.round(
-                (
-                    obtainedMarks /
-                    totalMarks
-                ) *
-                100
-            )
-            :
-            0;
+  const unanswered =
+    questions.length -
+    answered;
 
 
-    const passPercentage =
-        Number(
-            quiz.passPercentage
-        ) || 40;
+  document.getElementById(
+    "submitModalText"
+  ).innerHTML = `
 
+    আপনি ${answered}টি প্রশ্নের উত্তর দিয়েছেন।
 
-    const resultStatus =
-        percentage >= passPercentage
-            ?
-            "Pass"
-            :
-            "Fail";
+    <br>
 
-
-    let timeTakenSeconds = 0;
-
-
-    if(activeAttempt){
-
-        const started =
-            new Date(
-                activeAttempt.startedAt
-            )
-            .getTime();
-
-
-        timeTakenSeconds =
-            Math.max(
-                0,
-                Math.floor(
-                    (
-                        Date.now() -
-                        started
-                    ) / 1000
-                )
-            );
-
-
-        const maxSeconds =
-            (
-                Number(
-                    activeAttempt.durationMinutes
-                ) || 20
-            )
-            *
-            60;
-
-
-        timeTakenSeconds =
-            Math.min(
-                timeTakenSeconds,
-                maxSeconds
-            );
-
+    ${
+      unanswered > 0
+        ? `${unanswered}টি প্রশ্নের উত্তর দেওয়া হয়নি।`
+        : "সব প্রশ্নের উত্তর দেওয়া হয়েছে।"
     }
 
+    <br><br>
 
-    return {
+    Submit করার পর আবার এই Quiz দেওয়া যাবে না।
 
-        id:
-            "QUIZ-RESULT-" +
-            Date.now(),
+  `;
 
-        quizId:
-            quiz.id,
 
-        quizName:
-            quiz.title,
+  document.getElementById(
+    "submitModal"
+  ).classList.add(
+    "show"
+  );
 
-        studentId:
-            student.id,
+}
 
-        studentName:
-            student.name,
 
-        course:
-            course.name,
+function closeSubmitModal(){
 
-        batch:
-            course.batch,
+  document.getElementById(
+    "submitModal"
+  ).classList.remove(
+    "show"
+  );
 
-        totalQuestions:
-            questions.length,
+}
 
-        correct:
-            correct,
 
-        wrong:
-            wrong,
+/* =========================================================
+   CALCULATE SCORE
+========================================================= */
 
-        unanswered:
-            unanswered,
+function calculateScore(){
 
-        marksPerQuestion:
-            marksPerQuestion,
+  let correct =
+    0;
 
-        obtainedMarks:
-            obtainedMarks,
+  let wrong =
+    0;
 
-        totalMarks:
-            totalMarks,
+  let unanswered =
+    0;
 
-        percentage:
-            percentage,
 
-        passPercentage:
-            passPercentage,
+  questions.forEach(
+    question => {
 
-        result:
-            resultStatus,
+      const selected =
+        answers[
+          question.id
+        ] || "";
 
-        submitMethod:
-            submitMethod,
 
-        timeTakenSeconds:
-            timeTakenSeconds,
+      if(!selected){
 
-        startedAt:
-            activeAttempt?.startedAt ||
-            null,
+        unanswered++;
 
-        submittedAt:
-            new Date().toISOString(),
+      }else if(
 
-        published:
-            true,
+        normalize(
+          selected
+        )
+        ===
+        normalize(
+          question.correctAnswer
+        )
 
-        source:
-            "student-quiz",
+      ){
 
-        version:
-            "2.5.4"
+        correct++;
 
-    };
+      }else{
+
+        wrong++;
+
+      }
+
+    }
+  );
+
+
+  const marksPerQuestion =
+    Number(
+      quiz.marksPerQuestion
+    ) || 1;
+
+
+  const totalMarks =
+    questions.length *
+    marksPerQuestion;
+
+
+  const obtainedMarks =
+    correct *
+    marksPerQuestion;
+
+
+  const percentage =
+    totalMarks
+      ? (
+          obtainedMarks /
+          totalMarks
+        ) * 100
+      : 0;
+
+
+  const roundedPercentage =
+    Math.round(
+      percentage * 100
+    ) / 100;
+
+
+  const result =
+    roundedPercentage >=
+    Number(
+      quiz.passPercentage
+    )
+      ? "Pass"
+      : "Fail";
+
+
+  return {
+
+    correct,
+
+    wrong,
+
+    unanswered,
+
+    marksPerQuestion,
+
+    totalMarks,
+
+    obtainedMarks,
+
+    percentage:
+      roundedPercentage,
+
+    result
+
+  };
+
+}
+
+
+/* =========================================================
+   BUILD ANSWER SHEET
+========================================================= */
+
+function buildAnswerSheet(){
+
+  const sheet = {};
+
+
+  questions.forEach(
+    question => {
+
+      const selected =
+        answers[
+          question.id
+        ] || "";
+
+
+      const isCorrect =
+        !!selected
+        &&
+        normalize(
+          selected
+        )
+        ===
+        normalize(
+          question.correctAnswer
+        );
+
+
+      sheet[
+        question.id
+      ] = {
+
+        questionId:
+          question.id,
+
+        question:
+          question.question,
+
+        options:
+          question.options,
+
+        selectedAnswer:
+          selected,
+
+        correctAnswer:
+          question.correctAnswer,
+
+        isAnswered:
+          !!selected,
+
+        isCorrect:
+          isCorrect,
+
+        marks:
+          isCorrect
+            ? Number(
+                quiz.marksPerQuestion
+              ) || 1
+            : 0
+
+      };
+
+    }
+  );
+
+
+  return sheet;
 
 }
 
@@ -4952,61 +3152,279 @@ function calculateResult(
 ========================================================= */
 
 function saveResult(
-    result
+  submitMethod
 ){
 
-    const results =
-        getResults();
+  const score =
+    calculateScore();
 
 
-    const studentId =
-        String(
-            result.studentId
-        );
+  const submittedAt =
+    new Date().toISOString();
 
 
-    const quizId =
-        String(
-            result.quizId
-        );
+  let timeTakenSeconds =
+    0;
 
 
-    const filtered =
-        results.filter(
-            function(item){
+  if(startedAt){
 
-                return !(
-                    String(
-                        item.studentId
-                    )
-                    ===
-                    studentId
-                    &&
-                    String(
-                        item.quizId
-                    )
-                    ===
-                    quizId
-                );
-
-            }
-        );
+    const start =
+      new Date(
+        startedAt
+      ).getTime();
 
 
-    filtered.unshift(
-        result
-    );
-
-
-    localStorage.setItem(
-
-        STORAGE.results,
-
-        JSON.stringify(
-            filtered
+    timeTakenSeconds =
+      Math.max(
+        0,
+        Math.floor(
+          (
+            Date.now() -
+            start
+          ) / 1000
         )
+      );
 
+  }
+
+
+  const maximumSeconds =
+    (
+      Number(
+        quiz.durationMinutes
+      ) || 0
+    ) * 60;
+
+
+  timeTakenSeconds =
+    Math.min(
+      timeTakenSeconds,
+      maximumSeconds
     );
+
+
+  const answerSheet =
+    buildAnswerSheet();
+
+
+  const selectedAnswers =
+    {};
+
+
+  questions.forEach(
+    question => {
+
+      selectedAnswers[
+        question.id
+      ] =
+        answers[
+          question.id
+        ] || "";
+
+    }
+  );
+
+
+  const record = {
+
+    id:
+      "QUIZ-RESULT-" +
+      Date.now(),
+
+    quizId:
+      quiz.id,
+
+    quizName:
+      quiz.title,
+
+    studentId:
+      currentStudent.studentId,
+
+    studentName:
+      currentStudent.name,
+
+    course:
+      currentStudent.course ||
+      course.name,
+
+    batch:
+      currentStudent.batch ||
+      course.batch,
+
+    totalQuestions:
+      questions.length,
+
+    correct:
+      score.correct,
+
+    wrong:
+      score.wrong,
+
+    unanswered:
+      score.unanswered,
+
+    marksPerQuestion:
+      score.marksPerQuestion,
+
+    obtainedMarks:
+      score.obtainedMarks,
+
+    totalMarks:
+      score.totalMarks,
+
+    percentage:
+      score.percentage,
+
+    passPercentage:
+      Number(
+        quiz.passPercentage
+      ) || 40,
+
+    result:
+      score.result,
+
+    submitMethod:
+      submitMethod,
+
+    timeTakenSeconds:
+      timeTakenSeconds,
+
+    startedAt:
+      startedAt,
+
+    submittedAt:
+      submittedAt,
+
+    published:
+      true,
+
+    source:
+      "student-quiz",
+
+    version:
+      "2.5.9",
+
+    answers:
+      answerSheet,
+
+    selectedAnswers:
+      selectedAnswers
+
+  };
+
+
+  const results =
+    getAllResults();
+
+
+  results.push(
+    record
+  );
+
+
+  writeJSON(
+    STORAGE.results,
+    results
+  );
+
+
+  writeJSON(
+    STORAGE.attemptLock,
+    {
+
+      quizId:
+        quiz.id,
+
+      studentId:
+        currentStudent.studentId,
+
+      resultId:
+        record.id,
+
+      lockedAt:
+        submittedAt,
+
+      version:
+        "2.5.9"
+
+    }
+  );
+
+
+  clearActiveAttempt();
+
+
+  return record;
+
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+function submitQuiz(
+  method
+){
+
+  if(
+    quizSubmitted
+  ){
+    return;
+  }
+
+
+  quizSubmitted =
+    true;
+
+
+  clearInterval(
+    timerInterval
+  );
+
+
+  const result =
+    saveResult(
+      method
+    );
+
+
+  showResult(
+    result
+  );
+
+}
+
+
+/* =========================================================
+   AUTO SUBMIT
+========================================================= */
+
+function autoSubmitQuiz(){
+
+  if(
+    quizSubmitted
+  ){
+    return;
+  }
+
+
+  showToast(
+    "সময় শেষ হয়েছে। Quiz automatically submit হচ্ছে..."
+  );
+
+
+  setTimeout(
+    function(){
+
+      submitQuiz(
+        "auto"
+      );
+
+    },
+    800
+  );
 
 }
 
@@ -5016,505 +3434,272 @@ function saveResult(
 ========================================================= */
 
 function showResult(
-    result
+  result
 ){
 
+  document.getElementById(
+    "quizArea"
+  ).classList.remove(
+    "active"
+  );
+
+
+  document.getElementById(
+    "startScreen"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "screenTitle"
+  ).textContent =
+    "Quiz Result";
+
+
+  document.getElementById(
+    "screenSubtitle"
+  ).textContent =
+    "আপনার Quiz result এখানে দেখুন।";
+
+
+  const area =
     document.getElementById(
-        "quizSection"
-    ).style.display =
-        "none";
+      "resultArea"
+    );
 
 
-    document.getElementById(
-        "resultSection"
-    ).style.display =
-        "block";
+  area.classList.add(
+    "show"
+  );
 
 
-    document.getElementById(
-        "resultPanel"
+  const passed =
+    normalize(
+      result.result
     )
-    .classList.add(
-        "show"
+    ===
+    "pass";
+
+
+  const totalTime =
+    Number(
+      result.timeTakenSeconds
+    ) || 0;
+
+
+  const minutes =
+    Math.floor(
+      totalTime / 60
     );
 
 
-    document.getElementById(
-        "resultPercentage"
-    ).textContent =
-        result.percentage +
-        "%";
+  const seconds =
+    totalTime % 60;
 
 
-    document.getElementById(
-        "resultMarks"
-    ).textContent =
-        result.obtainedMarks;
+  area.innerHTML = `
+
+    <div class="result-top">
+
+      <div class="result-icon ${
+        passed ? "pass" : "fail"
+      }">
+
+        ${passed ? "✓" : "!"}
+
+      </div>
 
 
-    document.getElementById(
-        "resultTotal"
-    ).textContent =
-        result.totalMarks;
+      <h2>
+
+        ${
+          passed
+            ? "অভিনন্দন! আপনি Pass করেছেন 🎉"
+            : "Quiz সম্পন্ন হয়েছে"
+        }
+
+      </h2>
 
 
-    document.getElementById(
-        "resultCorrect"
-    ).textContent =
-        result.correct;
+      <p>
+
+        ${escapeHTML(
+          currentStudent.name
+        )},
+        আপনার Quiz result নিচে দেওয়া হলো।
+
+      </p>
+
+    </div>
 
 
-    document.getElementById(
-        "resultWrong"
-    ).textContent =
-        result.wrong;
+    <div class="score">
+
+      <div class="score-number">
+
+        ${escapeHTML(
+          result.obtainedMarks
+        )}
+
+        <span>
+          /
+          ${escapeHTML(
+            result.totalMarks
+          )}
+        </span>
+
+      </div>
 
 
-    document.getElementById(
-        "resultUnanswered"
-    ).textContent =
-        result.unanswered;
+      <div class="score-label">
+
+        ${escapeHTML(
+          result.percentage
+        )}%
+
+        •
+
+        ${escapeHTML(
+          result.result
+        )}
+
+      </div>
+
+    </div>
 
 
-    document.getElementById(
-        "resultTime"
-    ).textContent =
-        formatDuration(
-            result.timeTakenSeconds
-        );
+    <div class="result-stats">
+
+      <div class="result-stat">
+
+        <strong>
+          ${escapeHTML(
+            result.correct
+          )}
+        </strong>
+
+        <span>
+          Correct
+        </span>
+
+      </div>
 
 
-    document.getElementById(
-        "resultPassMark"
-    ).textContent =
-        result.passPercentage +
-        "%";
+      <div class="result-stat">
+
+        <strong>
+          ${escapeHTML(
+            result.wrong
+          )}
+        </strong>
+
+        <span>
+          Wrong
+        </span>
+
+      </div>
 
 
-    document.getElementById(
-        "resultSubmitMethod"
-    ).textContent =
-        result.submitMethod;
+      <div class="result-stat">
+
+        <strong>
+          ${escapeHTML(
+            result.unanswered
+          )}
+        </strong>
+
+        <span>
+          Unanswered
+        </span>
+
+      </div>
 
 
-    const status =
-        document.getElementById(
-            "resultStatus"
-        );
+      <div class="result-stat">
+
+        <strong>
+          ${minutes}:${String(
+            seconds
+          ).padStart(2,"0")}
+        </strong>
+
+        <span>
+          Time Used
+        </span>
+
+      </div>
+
+    </div>
 
 
-    const isPass =
-        result.result ===
-        "Pass";
+    <div class="result-note">
+
+      ✓ আপনার Result এবং Answer Sheet
+      Admin Panel-এ সংরক্ষণ করা হয়েছে।
+
+      <br>
+
+      Pass Mark:
+      ${escapeHTML(
+        result.passPercentage
+      )}%
+
+    </div>
 
 
-    status.textContent =
-        isPass
-            ?
-            "✓ PASS"
-            :
-            "✕ FAIL";
+    <div class="result-actions">
 
+      <a
+        href="results.html"
+        class="nav-btn primary"
+      >
+        🏆 View Results
+      </a>
 
-    status.className =
-        isPass
-            ?
-            "result-pass"
-            :
-            "result-pass result-fail";
+      <a
+        href="student-dashboard.html"
+        class="nav-btn"
+      >
+        🏠 Dashboard
+      </a>
 
+    </div>
 
-    document.getElementById(
-        "resultMessage"
-    ).textContent =
-
-        isPass
-
-            ?
-
-            "অভিনন্দন! আপনি Quiz-এ Pass করেছেন। Result Student Portal-এ সংরক্ষণ করা হয়েছে।"
-
-            :
-
-            "Quiz Submit হয়েছে। আপনার score Student Portal-এ সংরক্ষণ করা হয়েছে।";
-
-
-    document.getElementById(
-        "startSection"
-    ).classList.add(
-        "hidden"
-    );
-
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
+  `;
 
 }
 
 
 /* =========================================================
-   EXISTING RESULT
+   PREVIOUS RESULT
 ========================================================= */
 
-function showExistingResult(
-    result
-){
+function showPreviousResult(){
 
-    document.getElementById(
-        "startSection"
-    ).classList.add(
-        "hidden"
-    );
+  const results =
+    getStudentResults();
 
 
-    document.getElementById(
-        "resultSection"
-    ).style.display =
-        "block";
+  if(
+    !results.length
+  ){
+    return;
+  }
 
 
-    showResult(
-        result
-    );
+  const latest =
+    results[
+      results.length - 1
+    ];
 
 
-    showMessage(
-        "আপনি এই Quiz ইতিমধ্যে Submit করেছেন। One Attempt policy অনুযায়ী আবার দেওয়া যাবে না।",
-        "warning"
-    );
+  quizSubmitted =
+    true;
 
-}
 
-
-/* =========================================================
-   FORMAT DURATION
-========================================================= */
-
-function formatDuration(
-    seconds
-){
-
-    const total =
-        Math.max(
-            0,
-            Number(seconds) || 0
-        );
-
-
-    const minutes =
-        Math.floor(
-            total / 60
-        );
-
-
-    const secs =
-        total % 60;
-
-
-    return (
-
-        String(
-            minutes
-        )
-        .padStart(
-            2,
-            "0"
-        )
-
-        +
-
-        ":" +
-
-        String(
-            secs
-        )
-        .padStart(
-            2,
-            "0"
-        )
-
-    );
-
-}
-
-
-/* =========================================================
-   UPDATE UI
-========================================================= */
-
-function updateUI(){
-
-    document.getElementById(
-        "studentName"
-    ).textContent =
-        student.name;
-
-
-    document.getElementById(
-        "studentMeta"
-    ).textContent =
-
-        student.id +
-
-        " • " +
-
-        course.name +
-
-        " • " +
-
-        course.batch;
-
-
-    document.getElementById(
-        "courseBadge"
-    ).textContent =
-        course.name;
-
-
-    document.getElementById(
-        "batchBadge"
-    ).textContent =
-        course.batch;
-
-
-    document.getElementById(
-        "heroTitle"
-    ).textContent =
-        quiz.title;
-
-
-    document.getElementById(
-        "infoQuizTitle"
-    ).textContent =
-        quiz.title;
-
-
-    document.getElementById(
-        "infoDate"
-    ).textContent =
-
-        formatDate(
-            quiz.startDate
-        )
-        +
-
-        " → " +
-
-        formatDate(
-            quiz.endDate
-        );
-
-
-    document.getElementById(
-        "infoDuration"
-    ).textContent =
-
-        (
-            Number(
-                quiz.durationMinutes
-            ) || 0
-        )
-        +
-
-        " Minutes";
-
-
-    document.getElementById(
-        "infoQuestions"
-    ).textContent =
-        questions.length;
-
-
-    const validation =
-        validateQuiz();
-
-
-    const dateStatus =
-        getDateStatus();
-
-
-    const result =
-        getStudentResult();
-
-
-    const lock =
-        hasAttemptLock();
-
-
-    const badge =
-        document.getElementById(
-            "quizStatusBadge"
-        );
-
-
-    const startBtn =
-        document.getElementById(
-            "startQuizBtn"
-        );
-
-
-    if(!validation.valid){
-
-        badge.textContent =
-            "Not Published";
-
-        badge.className =
-            "badge orange";
-
-        startBtn.disabled =
-            true;
-
-        document.getElementById(
-            "startNote"
-        ).textContent =
-            validation.message;
-
-        showMessage(
-            validation.message,
-            "danger"
-        );
-
-        return;
-
-    }
-
-
-    if(result || lock){
-
-        badge.textContent =
-            "Completed";
-
-        badge.className =
-            "badge green";
-
-        startBtn.disabled =
-            true;
-
-        document.getElementById(
-            "startNote"
-        ).textContent =
-            "Quiz already submitted";
-
-        showMessage(
-            "আপনি এই Quiz ইতিমধ্যে Submit করেছেন।",
-            "warning"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        dateStatus.status ===
-        "before"
-    ){
-
-        badge.textContent =
-            "Upcoming";
-
-        badge.className =
-            "badge orange";
-
-        startBtn.disabled =
-            true;
-
-        document.getElementById(
-            "startNote"
-        ).textContent =
-            dateStatus.message;
-
-        showMessage(
-            dateStatus.message,
-            "warning"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        dateStatus.status ===
-        "after"
-    ){
-
-        badge.textContent =
-            "Expired";
-
-        badge.className =
-            "badge orange";
-
-        startBtn.disabled =
-            true;
-
-        document.getElementById(
-            "startNote"
-        ).textContent =
-            dateStatus.message;
-
-        showMessage(
-            dateStatus.message,
-            "warning"
-        );
-
-        return;
-
-    }
-
-
-    badge.textContent =
-        "Available";
-
-    badge.className =
-        "badge green";
-
-
-    startBtn.disabled =
-        false;
-
-
-    document.getElementById(
-        "startNote"
-    ).textContent =
-        "Quiz এখন শুরু করা যাবে। Start চাপলেই timer চালু হবে।";
-
-
-    showMessage(
-        "Quiz Ready — Start Quiz চাপলে আপনার ব্যক্তিগত timer শুরু হবে।",
-        "info"
-    );
-
-}
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-function showMessage(
-    message,
-    type = "info"
-){
-
-    const box =
-        document.getElementById(
-            "messageBox"
-        );
-
-
-    box.textContent =
-        message;
-
-
-    box.className =
-        "message " +
-        type;
+  showResult(
+    latest
+  );
 
 }
 
@@ -5527,476 +3712,145 @@ let toastTimer = null;
 
 
 function showToast(
-    message
+  message
 ){
 
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            function(){
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            2800
-        );
-
-}
-
-
-/* =========================================================
-   THEME
-========================================================= */
-
-function applyTheme(){
-
-    const theme =
-        localStorage.getItem(
-            STORAGE.theme
-        )
-        ||
-        "light";
-
-
-    document.body.classList.toggle(
-        "dark",
-        theme === "dark"
-    );
-
-
+  const toast =
     document.getElementById(
-        "themeBtn"
-    ).textContent =
-        theme === "dark"
-            ?
-            "☀️"
-            :
-            "🌙";
+      "toast"
+    );
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2200
+    );
 
 }
-
-
-document.getElementById(
-    "themeBtn"
-)
-.addEventListener(
-    "click",
-    function(){
-
-        const current =
-            localStorage.getItem(
-                STORAGE.theme
-            )
-            ||
-            "light";
-
-
-        const next =
-            current === "dark"
-                ?
-                "light"
-                :
-                "dark";
-
-
-        localStorage.setItem(
-            STORAGE.theme,
-            next
-        );
-
-
-        applyTheme();
-
-    }
-);
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-document.getElementById(
-    "logoutBtn"
-)
-.addEventListener(
-    "click",
-    function(){
-
-        const ok =
-            confirm(
-                "আপনি কি Logout করতে চান?"
-            );
-
-
-        if(!ok){
-
-            return;
-
-        }
-
-
-        stopTimer();
-
-
-        sessionStorage.removeItem(
-            "snkStudentLoggedIn"
-        );
-
-        sessionStorage.removeItem(
-            "snkStudentId"
-        );
-
-        sessionStorage.removeItem(
-            "snkStudentName"
-        );
-
-        sessionStorage.removeItem(
-            "snkStudentCourse"
-        );
-
-        sessionStorage.removeItem(
-            "snkStudentBatch"
-        );
-
-
-        window.location.href =
-            "login.html";
-
-    }
-);
-
-
-/* =========================================================
-   START BUTTON
-========================================================= */
-
-document.getElementById(
-    "startQuizBtn"
-)
-.addEventListener(
-    "click",
-    startQuiz
-);
-
-
-/* =========================================================
-   PREVIOUS BUTTON
-========================================================= */
-
-document.getElementById(
-    "previousBtn"
-)
-.addEventListener(
-    "click",
-    previousQuestion
-);
-
-
-/* =========================================================
-   NEXT BUTTON
-========================================================= */
-
-document.getElementById(
-    "nextBtn"
-)
-.addEventListener(
-    "click",
-    nextQuestion
-);
-
-
-/* =========================================================
-   SUBMIT BUTTON
-========================================================= */
-
-document.getElementById(
-    "submitQuizBtn"
-)
-.addEventListener(
-    "click",
-    function(){
-
-        submitQuiz(
-            "Manual"
-        );
-
-    }
-);
 
 
 /* =========================================================
    STORAGE SYNC
 ========================================================= */
 
-function refreshFromAdmin(){
-
-    const previousQuizId =
-        quiz.id;
-
-
-    loadCourse();
-
-    loadQuiz();
-
-    loadQuestions();
-
-
-    updateUI();
-
+window.addEventListener(
+  "storage",
+  function(event){
 
     if(
-        previousQuizId &&
-        previousQuizId !== quiz.id
+      [
+        STORAGE.theme,
+        STORAGE.course,
+        STORAGE.quiz,
+        STORAGE.questions,
+        STORAGE.results
+      ].includes(
+        event.key
+      )
     ){
 
-        const attempt =
-            getActiveAttempt();
+      loadCourse();
 
+      loadQuiz();
 
-        if(attempt){
+      loadQuestions();
 
-            clearActiveAttempt();
+      loadStudent();
 
-        }
+      renderCourseInfo();
 
-    }
+      renderRules();
 
-}
+      renderDateStatus();
 
-
-/* =========================================================
-   STORAGE EVENT
-========================================================= */
-
-window.addEventListener(
-    "storage",
-    function(event){
-
-        if(
-
-            event.key ===
-                STORAGE.course
-
-            ||
-
-            event.key ===
-                STORAGE.quiz
-
-            ||
-
-            event.key ===
-                STORAGE.questions
-
-            ||
-
-            event.key ===
-                STORAGE.results
-
-            ||
-
-            event.key ===
-                STORAGE.attemptLock
-
-        ){
-
-            refreshFromAdmin();
-
-        }
+      prepareStartButton();
 
     }
+
+  }
 );
 
 
 /* =========================================================
-   VISIBILITY SYNC
+   VISIBILITY
 ========================================================= */
 
 document.addEventListener(
-    "visibilitychange",
-    function(){
+  "visibilitychange",
+  function(){
 
-        if(
-            !document.hidden
-        ){
+    if(
+      !document.hidden
+    ){
 
-            refreshFromAdmin();
-
-
-            const attempt =
-                getActiveAttempt();
-
-
-            if(
-                attempt &&
-                !quizFinished
-            ){
-
-                activeAttempt =
-                    attempt;
-
-                answers =
-                    attempt.answers || {};
-
-                currentQuestion =
-                    Number(
-                        attempt.currentQuestion || 0
-                    );
-
-
-                openQuizPanel();
-
-                startTimer();
-
-            }
-
-        }
+      applyTheme();
 
     }
+
+  }
 );
 
 
 /* =========================================================
-   PAGE FOCUS
+   KEYBOARD SUPPORT
 ========================================================= */
 
-window.addEventListener(
-    "focus",
-    function(){
+document.addEventListener(
+  "keydown",
+  function(event){
 
-        refreshFromAdmin();
-
+    if(
+      !document
+        .getElementById(
+          "quizArea"
+        )
+        .classList
+        .contains("active")
+    ){
+      return;
     }
-);
-
-
-/* =========================================================
-   BEFORE UNLOAD
-========================================================= */
-
-window.addEventListener(
-    "beforeunload",
-    function(){
-
-        saveActiveAttempt();
-
-    }
-);
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-function init(){
-
-    applyTheme();
 
 
     if(
-        !checkLogin()
+      event.key === "ArrowRight"
     ){
 
-        return;
+      nextQuestion();
 
     }
-
-
-    loadCourse();
-
-    loadQuiz();
-
-    loadQuestions();
-
-
-    updateUI();
-
-
-    const savedAttempt =
-        getActiveAttempt();
-
-
-    if(savedAttempt){
-
-        const validation =
-            validateQuiz();
-
-
-        if(validation.valid){
-
-            activeAttempt =
-                savedAttempt;
-
-            answers =
-                savedAttempt.answers || {};
-
-            currentQuestion =
-                Number(
-                    savedAttempt.currentQuestion || 0
-                );
-
-
-            const dateStatus =
-                getDateStatus();
-
-
-            if(
-                dateStatus.status ===
-                "open"
-            ){
-
-                openQuizPanel();
-
-                startTimer();
-
-            }
-            else{
-
-                clearActiveAttempt();
-
-            }
-
-        }
-
-    }
-
-
-    const existingResult =
-        getStudentResult();
 
 
     if(
-        existingResult &&
-        !savedAttempt
+      event.key === "ArrowLeft"
     ){
 
-        showExistingResult(
-            existingResult
-        );
+      previousQuestion();
 
     }
 
-}
+  }
+);
 
 
 /* =========================================================
@@ -6005,98 +3859,253 @@ function init(){
 
 window.SNKStudentQuiz = {
 
-    getStudent:
-        function(){
+  getCourse:function(){
 
-            return {
-                ...student
-            };
+    return {
+      ...course
+    };
 
-        },
+  },
 
-    getCourse:
-        function(){
 
-            return {
-                ...course
-            };
+  getQuiz:function(){
 
-        },
+    return {
+      ...quiz
+    };
 
-    getQuiz:
-        function(){
+  },
 
-            return {
-                ...quiz
-            };
 
-        },
+  getQuestions:function(){
 
-    getQuestions:
-        function(){
+    return [
+      ...questions
+    ];
 
-            return [
-                ...questions
-            ];
+  },
 
-        },
 
-    getResults:
-        function(){
+  getAnswers:function(){
 
-            return getResults()
-                .filter(
-                    item =>
-                        String(
-                            item.studentId
-                        )
-                        ===
-                        String(
-                            student.id
-                        )
-                );
+    return {
+      ...answers
+    };
 
-        },
+  },
 
-    getCurrentResult:
-        function(){
 
-            return getStudentResult();
+  getStudent:function(){
 
-        },
+    return {
+      ...currentStudent
+    };
 
-    refresh:
-        function(){
+  },
 
-            refreshFromAdmin();
 
-        },
+  getActiveAttempt:function(){
 
-    start:
-        function(){
+    return getActiveAttempt();
 
-            startQuiz();
+  },
 
-        },
 
-    submit:
-        function(){
+  getResults:function(){
 
-            submitQuiz(
-                "Manual"
-            );
+    return getStudentResults();
 
-        }
+  },
+
+
+  start:function(){
+
+    startQuiz();
+
+  },
+
+
+  saveAnswer:function(
+    questionId,
+    answer
+  ){
+
+    selectAnswer(
+      questionId,
+      answer
+    );
+
+  },
+
+
+  submit:function(){
+
+    submitQuiz(
+      "manual"
+    );
+
+  },
+
+
+  refresh:function(){
+
+    loadCourse();
+
+    loadQuiz();
+
+    loadQuestions();
+
+    loadStudent();
+
+    renderCourseInfo();
+
+    renderRules();
+
+    renderDateStatus();
+
+    prepareStartButton();
+
+  }
 
 };
 
 
-init();
+/* =========================================================
+   INIT
+========================================================= */
+
+function init(){
+
+  applyTheme();
+
+  loadCourse();
+
+  loadQuiz();
+
+  loadQuestions();
+
+  loadStudent();
+
+  renderCourseInfo();
+
+  renderRules();
+
+  renderDateStatus();
+
+  document.getElementById(
+    "startQuizTitle"
+  ).textContent =
+    quiz.title;
+
+
+  document.getElementById(
+    "heroDescription"
+  ).textContent =
+    `${quiz.title} — প্রশ্ন ভালো করে পড়ে উত্তর নির্বাচন করুন। Start Quiz চাপার পর timer শুরু হবে।`;
+
+
+  document.getElementById(
+    "year"
+  ).textContent =
+    new Date().getFullYear();
+
+
+  prepareStartButton();
+
+
+  document.getElementById(
+    "themeBtn"
+  ).addEventListener(
+    "click",
+    toggleTheme
+  );
+
+
+  document.getElementById(
+    "startBtn"
+  ).addEventListener(
+    "click",
+    startQuiz
+  );
+
+
+  document.getElementById(
+    "prevBtn"
+  ).addEventListener(
+    "click",
+    previousQuestion
+  );
+
+
+  document.getElementById(
+    "nextBtn"
+  ).addEventListener(
+    "click",
+    nextQuestion
+  );
+
+
+  document.getElementById(
+    "submitBtn"
+  ).addEventListener(
+    "click",
+    openSubmitModal
+  );
+
+
+  document.getElementById(
+    "cancelSubmit"
+  ).addEventListener(
+    "click",
+    closeSubmitModal
+  );
+
+
+  document.getElementById(
+    "confirmSubmit"
+  ).addEventListener(
+    "click",
+    function(){
+
+      closeSubmitModal();
+
+      submitQuiz(
+        "manual"
+      );
+
+    }
+  );
+
+
+  /* Restore active attempt */
+
+  const active =
+    getActiveAttempt();
+
+
+  if(
+    active &&
+    !quizSubmitted &&
+    quiz.published === true &&
+    questions.length === 10
+  ){
+
+    showToast(
+      "আপনার চলমান Quiz পাওয়া গেছে। Continue Quiz চাপুন।"
+    );
+
+  }
+
+}
+
+
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
 
 </script>
 
-
 </body>
-
 </html>
 ```
