@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SNK IT Institute — Admin Exam Result Management</title>
+<meta name="theme-color" content="#0b1020">
+<title>SNK Admin — Course & Quiz Management</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
-    --bg:#07111f;
-    --bg2:#0b1728;
-    --card:#0f1d30;
-    --card2:#13243a;
-    --border:rgba(255,255,255,.09);
-    --text:#f7f9fc;
-    --muted:#9eacc0;
-    --primary:#7c5cff;
-    --primary2:#5b3df5;
-    --success:#20c997;
-    --warning:#ffc107;
-    --danger:#ff5d73;
-    --info:#38bdf8;
-    --shadow:0 18px 50px rgba(0,0,0,.25);
+    --bg:#070b16;
+    --bg2:#0d1324;
+    --card:#11192c;
+    --card2:#172039;
+    --text:#f5f7ff;
+    --muted:#9aa7c2;
+    --line:rgba(255,255,255,.09);
+    --primary:#6d5dfc;
+    --primary2:#8c7cff;
+    --success:#22c55e;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+    --shadow:0 20px 60px rgba(0,0,0,.28);
+    --radius:18px;
 }
 
 *{
@@ -39,13 +39,24 @@ html{
 }
 
 body{
-    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    font-family:Inter,"Noto Sans Bengali",sans-serif;
     background:
-        radial-gradient(circle at 15% 10%,rgba(124,92,255,.15),transparent 28%),
-        radial-gradient(circle at 90% 20%,rgba(56,189,248,.10),transparent 25%),
+        radial-gradient(circle at 10% 10%,rgba(109,93,252,.13),transparent 28%),
+        radial-gradient(circle at 90% 20%,rgba(34,197,94,.07),transparent 25%),
         var(--bg);
     color:var(--text);
     min-height:100vh;
+}
+
+body.light{
+    --bg:#f4f7fb;
+    --bg2:#fff;
+    --card:#fff;
+    --card2:#f7f9fc;
+    --text:#101827;
+    --muted:#667085;
+    --line:rgba(16,24,40,.1);
+    --shadow:0 20px 50px rgba(16,24,40,.08);
 }
 
 button,
@@ -70,19 +81,19 @@ a{
 }
 
 /* SIDEBAR */
-
 .sidebar{
-    width:260px;
+    width:270px;
     position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
+    inset:0 auto 0 0;
+    background:rgba(9,14,27,.96);
+    border-right:1px solid var(--line);
+    padding:22px 16px;
     z-index:1000;
-    padding:20px 14px;
-    background:rgba(7,17,31,.96);
-    border-right:1px solid var(--border);
-    backdrop-filter:blur(18px);
     overflow-y:auto;
+}
+
+.light .sidebar{
+    background:#fff;
 }
 
 .brand{
@@ -90,435 +101,497 @@ a{
     align-items:center;
     gap:12px;
     padding:8px 10px 22px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:18px;
 }
 
-.logo{
+.brand-logo{
     width:44px;
     height:44px;
     border-radius:13px;
-    object-fit:contain;
-    background:#fff;
-    padding:4px;
-}
-
-.brand-text strong{
-    display:block;
-    font-size:16px;
-}
-
-.brand-text span{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.menu-title{
-    color:#687991;
-    font-size:11px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,var(--primary),#a89cff);
+    color:#fff;
     font-weight:800;
-    padding:15px 12px 8px;
-    text-transform:uppercase;
+    font-size:17px;
 }
 
-.menu{
+.brand h1{
+    font-size:16px;
+    font-weight:800;
+}
+
+.brand p{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.nav-title{
+    color:#687594;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.3px;
+    font-weight:800;
+    padding:0 11px 8px;
+}
+
+.nav{
     display:flex;
     flex-direction:column;
     gap:5px;
+    margin-bottom:20px;
 }
 
-.menu a{
+.nav a,
+.nav button{
+    border:0;
+    width:100%;
+    background:transparent;
+    color:var(--muted);
+    padding:11px 12px;
+    border-radius:11px;
     display:flex;
     align-items:center;
     gap:11px;
-    padding:11px 12px;
-    border-radius:11px;
-    color:#aebbd0;
-    font-size:13px;
+    text-align:left;
     transition:.2s;
 }
 
-.menu a:hover,
-.menu a.active{
-    background:rgba(124,92,255,.15);
-    color:#fff;
+.nav a:hover,
+.nav button:hover,
+.nav a.active{
+    background:rgba(109,93,252,.13);
+    color:var(--text);
 }
 
-.menu-icon{
+.nav-icon{
     width:23px;
     text-align:center;
-    font-size:15px;
+    font-size:16px;
 }
 
 .sidebar-bottom{
-    margin-top:20px;
-    padding:12px;
-    border-top:1px solid var(--border);
+    border-top:1px solid var(--line);
+    padding-top:16px;
 }
 
 .admin-mini{
-    display:flex;
-    align-items:center;
-    gap:10px;
+    background:var(--card2);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:12px;
+    margin-bottom:10px;
 }
 
-.admin-avatar{
-    width:38px;
-    height:38px;
-    display:grid;
-    place-items:center;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--primary),#25b7ff);
-    font-weight:800;
-}
-
-.admin-mini small{
-    color:var(--muted);
+.admin-mini strong{
     display:block;
-    font-size:10px;
+    font-size:13px;
 }
 
-.logout-btn{
-    width:100%;
-    margin-top:12px;
-    border:1px solid rgba(255,93,115,.2);
-    background:rgba(255,93,115,.08);
-    color:#ff8a99;
-    padding:9px;
-    border-radius:9px;
+.admin-mini span{
+    color:var(--muted);
+    font-size:11px;
 }
 
 /* MAIN */
-
 .main{
-    width:calc(100% - 260px);
-    margin-left:260px;
-    min-height:100vh;
+    margin-left:270px;
+    width:calc(100% - 270px);
+    min-width:0;
 }
 
 .topbar{
-    height:70px;
+    height:72px;
+    position:sticky;
+    top:0;
+    z-index:500;
     display:flex;
     align-items:center;
     justify-content:space-between;
     padding:0 28px;
-    position:sticky;
-    top:0;
-    z-index:900;
-    background:rgba(7,17,31,.82);
+    background:rgba(7,11,22,.82);
     backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--border);
+    border-bottom:1px solid var(--line);
 }
 
-.page-title h1{
-    font-size:19px;
+.light .topbar{
+    background:rgba(255,255,255,.85);
 }
 
-.page-title p{
-    color:var(--muted);
+.top-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.menu-btn{
+    display:none;
+    width:40px;
+    height:40px;
+    border:1px solid var(--line);
+    border-radius:11px;
+    background:var(--card);
+    color:var(--text);
+}
+
+.top-title{
+    font-size:18px;
+    font-weight:800;
+}
+
+.top-subtitle{
     font-size:11px;
+    color:var(--muted);
     margin-top:2px;
 }
 
 .top-actions{
     display:flex;
-    align-items:center;
     gap:8px;
 }
 
 .icon-btn{
-    width:39px;
-    height:39px;
-    border:1px solid var(--border);
+    width:40px;
+    height:40px;
+    border:1px solid var(--line);
+    border-radius:11px;
     background:var(--card);
-    color:#fff;
-    border-radius:10px;
+    color:var(--text);
 }
-
-.mobile-menu{
-    display:none;
-}
-
-/* CONTENT */
 
 .content{
     padding:28px;
-    max-width:1700px;
+    max-width:1500px;
     margin:auto;
 }
 
-.exam-hero{
+/* HERO */
+.hero{
+    background:
+        linear-gradient(135deg,rgba(109,93,252,.22),rgba(109,93,252,.04)),
+        var(--card);
+    border:1px solid rgba(109,93,252,.2);
+    border-radius:24px;
+    padding:28px;
+    box-shadow:var(--shadow);
+    margin-bottom:22px;
     position:relative;
     overflow:hidden;
-    border:1px solid rgba(124,92,255,.22);
-    border-radius:22px;
-    padding:27px;
-    background:
-        radial-gradient(circle at 90% 0%,rgba(124,92,255,.27),transparent 35%),
-        linear-gradient(135deg,#101e34,#0b1525);
-    box-shadow:var(--shadow);
 }
 
-.exam-hero:after{
+.hero:after{
     content:"";
+    width:260px;
+    height:260px;
     position:absolute;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,.05);
     right:-90px;
-    bottom:-100px;
-}
-
-.hero-flex{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
+    top:-120px;
+    border-radius:50%;
+    border:1px solid rgba(140,124,255,.2);
+    box-shadow:0 0 0 35px rgba(140,124,255,.03),
+               0 0 0 70px rgba(140,124,255,.02);
 }
 
 .badge{
     display:inline-flex;
     align-items:center;
-    gap:6px;
-    padding:6px 11px;
-    border-radius:30px;
+    gap:7px;
+    padding:7px 11px;
+    border-radius:999px;
     font-size:11px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.badge-purple{
+    background:rgba(109,93,252,.13);
+    color:#aaa0ff;
+}
+
+.badge-green{
+    background:rgba(34,197,94,.12);
+    color:#5ee88b;
+}
+
+.badge-red{
+    background:rgba(239,68,68,.12);
+    color:#ff7777;
+}
+
+.hero h2{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    color:var(--muted);
+    max-width:800px;
+    line-height:1.7;
+}
+
+/* CARDS */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px;
+    margin-bottom:22px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.card-head{
+    padding:20px 22px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.card-head h3{
+    font-size:17px;
+}
+
+.card-head p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
+}
+
+.card-body{
+    padding:22px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:12px;
+    color:var(--muted);
+    font-weight:700;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--bg2);
+    color:var(--text);
+    border-radius:11px;
+    padding:11px 12px;
+    outline:none;
+}
+
+textarea{
+    min-height:95px;
+    resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:rgba(109,93,252,.7);
+    box-shadow:0 0 0 3px rgba(109,93,252,.1);
+}
+
+.btn-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:18px;
+}
+
+.btn{
+    border:1px solid var(--line);
+    background:var(--card2);
+    color:var(--text);
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:12px;
     font-weight:800;
 }
 
-.badge-success{
-    background:rgba(32,201,151,.13);
-    color:#55e0b6;
-    border:1px solid rgba(32,201,151,.2);
+.btn-primary{
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    color:#fff;
+    border-color:transparent;
 }
 
-.badge-warning{
-    background:rgba(255,193,7,.12);
-    color:#ffd55c;
+.btn-success{
+    background:rgba(34,197,94,.12);
+    color:#5ee88b;
+    border-color:rgba(34,197,94,.2);
 }
 
-.badge-danger{
-    background:rgba(255,93,115,.12);
-    color:#ff8b9a;
+.btn-danger{
+    background:rgba(239,68,68,.12);
+    color:#ff7777;
+    border-color:rgba(239,68,68,.2);
 }
 
-.badge-info{
-    background:rgba(56,189,248,.12);
-    color:#65d2ff;
-}
-
-.exam-hero h2{
-    font-size:26px;
-    margin:12px 0 7px;
-}
-
-.exam-hero p{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.exam-meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:17px;
-}
-
-.meta{
-    padding:7px 11px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.035);
-    border-radius:8px;
-    color:#c6d0df;
-    font-size:11px;
-}
-
-.hero-side{
-    min-width:180px;
-    text-align:center;
-    position:relative;
-    z-index:2;
-}
-
-.hero-side .big{
-    font-size:35px;
-    font-weight:900;
-}
-
-.hero-side span{
-    display:block;
-    color:var(--muted);
-    font-size:11px;
-}
-
-/* STATS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:14px;
-    margin:20px 0;
-}
-
-.stat{
-    padding:18px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:15px;
-    box-shadow:0 8px 25px rgba(0,0,0,.12);
-}
-
-.stat-top{
-    display:flex;
-    justify-content:space-between;
-    gap:8px;
-}
-
-.stat-icon{
-    width:35px;
-    height:35px;
-    display:grid;
-    place-items:center;
-    border-radius:10px;
-    background:rgba(124,92,255,.12);
-}
-
-.stat-number{
-    font-size:25px;
-    font-weight:900;
-    margin-top:13px;
-}
-
-.stat-label{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:2px;
-}
-
-/* PANELS */
-
-.panel{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    overflow:hidden;
-    margin-bottom:20px;
-}
-
-.panel-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    padding:18px 20px;
-    border-bottom:1px solid var(--border);
-}
-
-.panel-header h3{
-    font-size:15px;
-}
-
-.panel-header p{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:3px;
-}
-
-.panel-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-}
-
-/* BUTTONS */
-
-.btn{
-    border:0;
-    border-radius:9px;
-    padding:9px 13px;
-    font-size:11px;
-    font-weight:700;
-    transition:.2s;
+.btn-warning{
+    background:rgba(245,158,11,.12);
+    color:#fbbf24;
+    border-color:rgba(245,158,11,.2);
 }
 
 .btn:hover{
     transform:translateY(-1px);
 }
 
-.btn-primary{
-    color:#fff;
-    background:linear-gradient(135deg,var(--primary),var(--primary2));
+/* SWITCH */
+.switch-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
 }
 
-.btn-secondary{
-    color:#d9e2ef;
-    background:#182940;
-    border:1px solid var(--border);
+.switch-row:last-child{
+    border-bottom:0;
 }
 
-.btn-success{
-    color:#06261c;
-    background:#48d9ae;
+.switch-text strong{
+    display:block;
+    font-size:13px;
 }
 
-.btn-warning{
-    color:#332600;
-    background:#ffd15c;
-}
-
-.btn-danger{
-    color:#fff;
-    background:#d94860;
-}
-
-.btn-info{
-    color:#03283a;
-    background:#54c8f7;
-}
-
-.btn-sm{
-    padding:6px 9px;
-    font-size:10px;
-}
-
-/* FILTER */
-
-.filters{
-    display:grid;
-    grid-template-columns:1.5fr 1fr 1fr 1fr auto;
-    gap:9px;
-    padding:15px 20px;
-    border-bottom:1px solid var(--border);
-}
-
-.field{
-    position:relative;
-}
-
-.field input,
-.field select,
-.field textarea{
-    width:100%;
-    background:#091627;
-    border:1px solid var(--border);
-    color:#fff;
-    outline:none;
-    border-radius:9px;
-    padding:10px 11px;
+.switch-text span{
+    color:var(--muted);
     font-size:11px;
 }
 
-.field input:focus,
-.field select:focus,
-.field textarea:focus{
-    border-color:rgba(124,92,255,.7);
+.switch{
+    position:relative;
+    width:46px;
+    height:25px;
+    flex:0 0 auto;
 }
 
-.field select option{
-    background:#0c1829;
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+    background:#30394e;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    width:19px;
+    height:19px;
+    left:3px;
+    top:3px;
+    background:#fff;
+    border-radius:50%;
+    transition:.2s;
+}
+
+.switch input:checked + .slider{
+    background:var(--primary);
+}
+
+.switch input:checked + .slider:before{
+    transform:translateX(21px);
+}
+
+/* QUIZ QUESTIONS */
+.questions-card{
+    margin-top:22px;
+}
+
+.question-item{
+    border:1px solid var(--line);
+    border-radius:15px;
+    background:var(--card2);
+    padding:18px;
+    margin-bottom:14px;
+}
+
+.question-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:13px;
+}
+
+.question-number{
+    font-size:13px;
+    font-weight:800;
+}
+
+.question-status{
+    font-size:10px;
+    color:#5ee88b;
+    background:rgba(34,197,94,.1);
+    padding:5px 8px;
+    border-radius:999px;
+}
+
+.option-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin-top:12px;
+}
+
+.option-box{
+    border:1px solid var(--line);
+    padding:10px;
+    border-radius:10px;
+    font-size:12px;
+}
+
+.option-box.correct{
+    border-color:rgba(34,197,94,.35);
+    background:rgba(34,197,94,.07);
+}
+
+.option-label{
+    color:var(--muted);
+    font-size:10px;
+    margin-bottom:4px;
+    font-weight:800;
+}
+
+.question-actions{
+    display:flex;
+    gap:7px;
+    margin-top:14px;
 }
 
 /* TABLE */
-
 .table-wrap{
     overflow-x:auto;
 }
@@ -526,272 +599,100 @@ a{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1050px;
+    min-width:800px;
+}
+
+th,
+td{
+    padding:12px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    font-size:12px;
 }
 
 th{
-    text-align:left;
-    color:#7e8da4;
-    font-size:10px;
-    font-weight:800;
-    padding:12px 15px;
-    border-bottom:1px solid var(--border);
-    white-space:nowrap;
-}
-
-td{
-    padding:13px 15px;
-    border-bottom:1px solid rgba(255,255,255,.055);
-    font-size:11px;
-    vertical-align:middle;
-}
-
-tbody tr:hover{
-    background:rgba(255,255,255,.018);
-}
-
-.student-cell{
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
-
-.student-avatar{
-    width:34px;
-    height:34px;
-    display:grid;
-    place-items:center;
-    border-radius:10px;
-    background:linear-gradient(135deg,#253b62,#7c5cff);
-    font-weight:800;
-    flex:none;
-}
-
-.student-name{
-    font-weight:700;
-}
-
-.student-id{
-    display:block;
-    color:#75859c;
-    font-size:9px;
-    margin-top:2px;
-}
-
-.marks{
-    font-weight:900;
-    font-size:14px;
-}
-
-.percent{
-    font-weight:800;
-}
-
-.action-group{
-    display:flex;
-    flex-wrap:wrap;
-    gap:5px;
-}
-
-/* RESULT ANALYTICS */
-
-.analytics{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:14px;
-}
-
-.analytics-card{
-    padding:18px;
-    background:var(--card2);
-    border:1px solid var(--border);
-    border-radius:14px;
-}
-
-.analytics-card h4{
-    color:#9bacbf;
-    font-size:11px;
-    margin-bottom:12px;
-}
-
-.analytics-value{
-    font-size:26px;
-    font-weight:900;
-}
-
-.analytics-sub{
-    color:#77879d;
-    font-size:10px;
-    margin-top:3px;
-}
-
-.progress{
-    width:100%;
-    height:7px;
-    background:#091526;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:12px;
-}
-
-.progress span{
-    display:block;
-    height:100%;
-    border-radius:20px;
-    background:linear-gradient(90deg,var(--primary),#36c9ff);
-}
-
-/* ATTENDANCE */
-
-.attendance-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
-
-.attendance-list{
-    padding:18px 20px;
-}
-
-.att-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:11px 0;
-    border-bottom:1px solid rgba(255,255,255,.05);
-}
-
-.att-row:last-child{
-    border-bottom:0;
-}
-
-.att-info strong{
-    display:block;
-    font-size:11px;
-}
-
-.att-info span{
     color:var(--muted);
-    font-size:9px;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+}
+
+.empty{
+    padding:35px 15px;
+    text-align:center;
+    color:var(--muted);
 }
 
 /* MODAL */
-
-.modal-overlay{
+.modal{
     position:fixed;
     inset:0;
-    z-index:2000;
+    z-index:3000;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(8px);
     display:none;
     align-items:center;
     justify-content:center;
     padding:20px;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(8px);
 }
 
-.modal-overlay.show{
+.modal.show{
     display:flex;
 }
 
-.modal{
-    width:min(560px,100%);
-    max-height:90vh;
-    overflow-y:auto;
-    background:#0d1b2e;
-    border:1px solid var(--border);
-    border-radius:18px;
+.modal-box{
+    width:min(760px,100%);
+    max-height:92vh;
+    overflow:auto;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
     box-shadow:0 30px 100px rgba(0,0,0,.5);
 }
 
-.modal-header{
+.modal-head{
+    padding:18px 20px;
+    border-bottom:1px solid var(--line);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:17px 20px;
-    border-bottom:1px solid var(--border);
 }
 
-.modal-header h3{
-    font-size:15px;
+.modal-head h3{
+    font-size:17px;
 }
 
-.close{
-    border:0;
-    background:transparent;
-    color:#9cacbf;
-    font-size:22px;
+.modal-close{
+    width:35px;
+    height:35px;
+    border:1px solid var(--line);
+    background:var(--card2);
+    color:var(--text);
+    border-radius:9px;
 }
 
 .modal-body{
     padding:20px;
 }
 
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:13px;
-}
-
-.form-group{
-    margin-bottom:13px;
-}
-
-.form-group.full{
-    grid-column:1/-1;
-}
-
-.form-group label{
-    display:block;
-    color:#9baabd;
-    font-size:10px;
-    margin-bottom:6px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
-    width:100%;
-    padding:10px;
-    border-radius:9px;
-    border:1px solid var(--border);
-    outline:none;
-    color:#fff;
-    background:#081526;
-    font-size:11px;
-}
-
-.form-group textarea{
-    min-height:90px;
-    resize:vertical;
-}
-
-.modal-footer{
-    display:flex;
-    justify-content:flex-end;
-    gap:8px;
-    padding:15px 20px;
-    border-top:1px solid var(--border);
-}
-
 /* TOAST */
-
 .toast{
     position:fixed;
     right:22px;
     bottom:22px;
-    z-index:3000;
-    min-width:260px;
-    max-width:380px;
+    z-index:5000;
+    background:#151d31;
+    color:#fff;
+    border:1px solid var(--line);
     padding:13px 16px;
     border-radius:12px;
-    background:#14243a;
-    border:1px solid var(--border);
     box-shadow:var(--shadow);
     transform:translateY(120px);
     opacity:0;
     pointer-events:none;
     transition:.3s;
-    font-size:11px;
+    font-size:12px;
+    max-width:360px;
 }
 
 .toast.show{
@@ -799,119 +700,8 @@ tbody tr:hover{
     opacity:1;
 }
 
-.toast.success{
-    border-color:rgba(32,201,151,.3);
-}
-
-.toast.error{
-    border-color:rgba(255,93,115,.3);
-}
-
-/* EMPTY */
-
-.empty{
-    padding:40px 20px;
-    text-align:center;
-    color:#7d8ca1;
-}
-
-.empty-icon{
-    font-size:35px;
-    margin-bottom:10px;
-}
-
-/* LIGHT MODE */
-
-body.light{
-    --bg:#f4f7fb;
-    --bg2:#fff;
-    --card:#fff;
-    --card2:#f7f9fc;
-    --border:rgba(20,35,55,.1);
-    --text:#142033;
-    --muted:#65748a;
-    background:#f4f7fb;
-}
-
-body.light .sidebar,
-body.light .topbar{
-    background:rgba(255,255,255,.94);
-}
-
-body.light .field input,
-body.light .field select,
-body.light .field textarea,
-body.light .form-group input,
-body.light .form-group select,
-body.light .form-group textarea{
-    background:#f7f9fc;
-    color:#142033;
-}
-
-body.light .exam-hero{
-    background:linear-gradient(135deg,#fff,#edf2ff);
-}
-
-body.light .meta{
-    background:rgba(20,35,55,.035);
-}
-
-body.light .progress{
-    background:#e7edf5;
-}
-
-/* PRINT */
-
-@media print{
-    .sidebar,
-    .topbar,
-    .panel-actions,
-    .filters,
-    .action-group,
-    .toast,
-    .modal-overlay{
-        display:none!important;
-    }
-
-    .main{
-        width:100%;
-        margin:0;
-    }
-
-    body{
-        background:#fff;
-        color:#111;
-    }
-
-    .content{
-        padding:10px;
-    }
-
-    .panel,
-    .stat,
-    .exam-hero{
-        box-shadow:none;
-        border:1px solid #ddd;
-    }
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1250px){
-    .stats{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .filters{
-        grid-template-columns:1fr 1fr 1fr;
-    }
-
-    .analytics{
-        grid-template-columns:1fr 1fr;
-    }
-}
-
-@media(max-width:900px){
+/* MOBILE */
+@media(max-width:1050px){
     .sidebar{
         transform:translateX(-100%);
         transition:.25s;
@@ -922,72 +712,75 @@ body.light .progress{
     }
 
     .main{
-        width:100%;
         margin-left:0;
+        width:100%;
     }
 
-    .mobile-menu{
+    .menu-btn{
         display:block;
     }
 
-    .hero-flex{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .hero-side{
-        text-align:left;
-    }
-
-    .attendance-grid{
+    .grid{
         grid-template-columns:1fr;
     }
 }
 
 @media(max-width:650px){
     .content{
-        padding:15px;
+        padding:16px;
     }
 
     .topbar{
-        padding:0 15px;
+        padding:0 16px;
     }
 
-    .page-title h1{
+    .top-title{
         font-size:15px;
     }
 
-    .stats{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .filters{
-        grid-template-columns:1fr;
-    }
-
-    .analytics{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full{
-        grid-column:auto;
-    }
-
-    .exam-hero{
+    .hero{
         padding:20px;
     }
 
-    .exam-hero h2{
-        font-size:21px;
+    .hero h2{
+        font-size:23px;
     }
 
-    .panel-header{
-        align-items:flex-start;
-        flex-direction:column;
+    .form-grid,
+    .option-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card-body{
+        padding:16px;
+    }
+}
+
+/* PRINT */
+@media print{
+    .sidebar,
+    .topbar,
+    .btn,
+    .question-actions,
+    .toast{
+        display:none!important;
+    }
+
+    .main{
+        margin:0;
+        width:100%;
+    }
+
+    body{
+        background:#fff;
+        color:#000;
+    }
+
+    .card,
+    .hero{
+        box-shadow:none;
+        border:1px solid #ddd;
+        break-inside:avoid;
     }
 }
 </style>
@@ -998,928 +791,381 @@ body.light .progress{
 <div class="app">
 
 <!-- SIDEBAR -->
-
 <aside class="sidebar" id="sidebar">
 
     <div class="brand">
-        <img
-            class="logo"
-            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-            alt="SNK IT Institute"
-            onerror="this.style.display='none'"
-        >
-
-        <div class="brand-text">
-            <strong>SNK IT Institute</strong>
-            <span>Admin Control Panel</span>
+        <div class="brand-logo">SNK</div>
+        <div>
+            <h1>SNK IT Institute</h1>
+            <p>Admin Control Panel</p>
         </div>
     </div>
 
-    <div class="menu-title">Main</div>
+    <div class="nav-title">Main</div>
 
-    <nav class="menu">
-
-        <a href="admin.html">
-            <span class="menu-icon">⌂</span>
+    <nav class="nav">
+        <a href="admin.html" class="active">
+            <span class="nav-icon">⌂</span>
             Dashboard
         </a>
 
         <a href="students.html">
-            <span class="menu-icon">👨‍🎓</span>
+            <span class="nav-icon">👥</span>
             Students
         </a>
 
         <a href="courses.html">
-            <span class="menu-icon">📚</span>
+            <span class="nav-icon">📚</span>
             Courses
         </a>
 
         <a href="assignments.html">
-            <span class="menu-icon">📝</span>
+            <span class="nav-icon">📝</span>
             Assignments
         </a>
 
-        <a href="admin-submissions.html">
-            <span class="menu-icon">📤</span>
-            Submissions
-        </a>
-
         <a href="quiz.html">
-            <span class="menu-icon">❓</span>
-            Quiz
+            <span class="nav-icon">❓</span>
+            Student Quiz
         </a>
 
-        <a class="active" href="admin.html">
-            <span class="menu-icon">🏆</span>
-            Exam Results
+        <a href="results.html">
+            <span class="nav-icon">🏆</span>
+            Results
+        </a>
+
+        <a href="student-result-details.html">
+            <span class="nav-icon">📄</span>
+            Result Details
         </a>
 
         <a href="attendance.html">
-            <span class="menu-icon">✓</span>
+            <span class="nav-icon">✓</span>
             Attendance
         </a>
-
     </nav>
 
-    <div class="menu-title">Student Portal</div>
+    <div class="nav-title">Student Portal</div>
 
-    <nav class="menu">
-
+    <nav class="nav">
         <a href="student-dashboard.html">
-            <span class="menu-icon">📊</span>
+            <span class="nav-icon">▣</span>
             Student Dashboard
         </a>
 
-        <a href="student-results.html">
-            <span class="menu-icon">📈</span>
-            Student Results
-        </a>
-
         <a href="student-resources.html">
-            <span class="menu-icon">📖</span>
+            <span class="nav-icon">📦</span>
             Resources
         </a>
 
+        <a href="student-notifications.html">
+            <span class="nav-icon">🔔</span>
+            Notifications
+        </a>
     </nav>
 
     <div class="sidebar-bottom">
-
         <div class="admin-mini">
-
-            <div class="admin-avatar">
-                A
-            </div>
-
-            <div>
-                <strong>Administrator</strong>
-                <small>Super Admin</small>
-            </div>
-
+            <strong>Administrator</strong>
+            <span>SNK IT Institute</span>
         </div>
 
-        <button class="logout-btn" id="logoutBtn">
-            🚪 Logout
-        </button>
+        <div class="nav">
+            <button type="button" onclick="toggleTheme()">
+                <span class="nav-icon">◐</span>
+                Theme
+            </button>
 
+            <button type="button" onclick="logoutAdmin()">
+                <span class="nav-icon">↪</span>
+                Logout
+            </button>
+        </div>
     </div>
 
 </aside>
 
-
 <!-- MAIN -->
-
 <main class="main">
 
-<header class="topbar">
+    <header class="topbar">
 
-    <div class="page-title">
+        <div class="top-left">
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
 
-        <button
-            class="icon-btn mobile-menu"
-            id="mobileMenuBtn"
-        >
-            ☰
-        </button>
+            <div>
+                <div class="top-title">Admin Control Panel</div>
+                <div class="top-subtitle">
+                    Course & Quiz Management
+                </div>
+            </div>
+        </div>
 
-        <span style="margin-left:8px;">
-            <strong>Exam Result Management</strong>
-            <p>Student examination result control</p>
-        </span>
+        <div class="top-actions">
+            <button class="icon-btn" onclick="toggleTheme()" title="Theme">◐</button>
+            <button class="icon-btn" onclick="location.reload()" title="Refresh">↻</button>
+            <button class="icon-btn" onclick="window.print()" title="Print">🖨</button>
+        </div>
 
-    </div>
+    </header>
 
-    <div class="top-actions">
+    <section class="content">
 
-        <button
-            class="icon-btn"
-            id="themeBtn"
-            title="Theme"
-        >
-            ◐
-        </button>
+        <!-- HERO -->
+        <div class="hero">
 
-        <button
-            class="icon-btn"
-            onclick="window.print()"
-            title="Print"
-        >
-            🖨
-        </button>
-
-    </div>
-
-</header>
-
-
-<div class="content">
-
-<!-- HERO -->
-
-<section class="exam-hero">
-
-    <div class="hero-flex">
-
-        <div>
-
-            <span class="badge badge-success">
-                ● EXAM COMPLETED
+            <span class="badge badge-purple">
+                ADMIN MANAGEMENT • STEP 2.5
             </span>
 
-            <h2>
-                Computer Office Application Exam
-            </h2>
+            <h2>Course & Quiz Management</h2>
 
             <p>
-                Admin Result Management — Step 2.2
-            </p>
-
-            <div class="exam-meta">
-
-                <span class="meta">
-                    📅 08 September 2026
-                </span>
-
-                <span class="meta">
-                    📚 Computer Office Application
-                </span>
-
-                <span class="meta">
-                    👥 Batch 01
-                </span>
-
-                <span class="meta">
-                    💯 Total Marks: 100
-                </span>
-
-                <span class="meta">
-                    ✓ Pass Mark: 40
-                </span>
-
-            </div>
-
-        </div>
-
-        <div class="hero-side">
-
-            <div class="big" id="heroPublished">
-                0
-            </div>
-
-            <span>
-                Published Results
-            </span>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- STATS -->
-
-<section class="stats">
-
-    <div class="stat">
-
-        <div class="stat-top">
-            <span class="stat-icon">👨‍🎓</span>
-        </div>
-
-        <div
-            class="stat-number"
-            id="totalStudents"
-        >
-            0
-        </div>
-
-        <div class="stat-label">
-            Total Students
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-            <span class="stat-icon">✓</span>
-        </div>
-
-        <div
-            class="stat-number"
-            id="examPresent"
-        >
-            0
-        </div>
-
-        <div class="stat-label">
-            Exam Present
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-            <span class="stat-icon">✕</span>
-        </div>
-
-        <div
-            class="stat-number"
-            id="examAbsent"
-        >
-            0
-        </div>
-
-        <div class="stat-label">
-            Exam Absent
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-            <span class="stat-icon">📝</span>
-        </div>
-
-        <div
-            class="stat-number"
-            id="enteredResults"
-        >
-            0
-        </div>
-
-        <div class="stat-label">
-            Results Entered
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-            <span class="stat-icon">📢</span>
-        </div>
-
-        <div
-            class="stat-number"
-            id="publishedResults"
-        >
-            0
-        </div>
-
-        <div class="stat-label">
-            Published
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div class="stat-top">
-            <span class="stat-icon">🎯</span>
-        </div>
-
-        <div
-            class="stat-number"
-            id="passResults"
-        >
-            0
-        </div>
-
-        <div class="stat-label">
-            Passed
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ANALYTICS -->
-
-<section class="analytics">
-
-    <div class="analytics-card">
-
-        <h4>Average Marks</h4>
-
-        <div
-            class="analytics-value"
-            id="averageMarks"
-        >
-            0
-        </div>
-
-        <div class="analytics-sub">
-            Among entered results
-        </div>
-
-        <div class="progress">
-            <span id="averageBar" style="width:0%"></span>
-        </div>
-
-    </div>
-
-
-    <div class="analytics-card">
-
-        <h4>Highest Marks</h4>
-
-        <div
-            class="analytics-value"
-            id="highestMarks"
-        >
-            0
-        </div>
-
-        <div
-            class="analytics-sub"
-            id="highestStudent"
-        >
-            No result yet
-        </div>
-
-        <div class="progress">
-            <span id="highestBar" style="width:0%"></span>
-        </div>
-
-    </div>
-
-
-    <div class="analytics-card">
-
-        <h4>Lowest Marks</h4>
-
-        <div
-            class="analytics-value"
-            id="lowestMarks"
-        >
-            0
-        </div>
-
-        <div
-            class="analytics-sub"
-            id="lowestStudent"
-        >
-            No result yet
-        </div>
-
-        <div class="progress">
-            <span id="lowestBar" style="width:0%"></span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- RESULT MANAGEMENT -->
-
-<section class="panel">
-
-    <div class="panel-header">
-
-        <div>
-
-            <h3>
-                📊 Student Result Management
-            </h3>
-
-            <p>
-                Search, edit, delete, publish and manage examination results
+                এখান থেকে Administrator Course information এবং Student Quiz
+                সম্পূর্ণভাবে control করতে পারবেন। Student portal এই saved
+                information automatic ব্যবহার করবে।
             </p>
 
         </div>
 
-        <div class="panel-actions">
+        <!-- COURSE + QUIZ SETTINGS -->
+        <div class="grid">
+
+            <!-- COURSE -->
+            <div class="card">
+
+                <div class="card-head">
+                    <div>
+                        <h3>📚 Course Settings</h3>
+                        <p>Student portal-এর course information</p>
+                    </div>
+
+                    <span class="badge badge-green">Editable</span>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-grid">
+
+                        <div class="form-group full">
+                            <label>Course Name</label>
+                            <input
+                                id="courseName"
+                                type="text"
+                                placeholder="Enter course name"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Batch Name</label>
+                            <input
+                                id="batchName"
+                                type="text"
+                                placeholder="Batch 01"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Duration</label>
+                            <input
+                                id="courseDuration"
+                                type="text"
+                                placeholder="6 Months"
+                            >
+                        </div>
+
+                        <div class="form-group full">
+                            <label>Class Days</label>
+                            <input
+                                id="classDays"
+                                type="text"
+                                placeholder="Saturday - Monday"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Class Start Time</label>
+                            <input
+                                id="classStart"
+                                type="time"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label>Class End Time</label>
+                            <input
+                                id="classEnd"
+                                type="time"
+                            >
+                        </div>
+
+                        <div class="form-group full">
+                            <label>Course Mode</label>
+                            <select id="courseMode">
+                                <option value="Offline">Offline</option>
+                                <option value="Online">Online</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="switch-row" style="margin-top:15px;">
+                        <div class="switch-text">
+                            <strong>Course Active</strong>
+                            <span>Student portal-এ course দেখাবে</span>
+                        </div>
+
+                        <label class="switch">
+                            <input id="courseActive" type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="btn btn-primary" onclick="saveCourse()">
+                            Save Course
+                        </button>
+
+                        <button class="btn" onclick="loadCourse()">
+                            Reset
+                        </button>
+                    </div>
 
-            <button
-                class="btn btn-primary"
-                id="addResultBtn"
-            >
-                + Enter Result
-            </button>
+                </div>
 
-            <button
-                class="btn btn-success"
-                id="publishEligibleBtn"
-            >
-                📢 Publish Eligible
-            </button>
-
-            <button
-                class="btn btn-secondary"
-                id="refreshBtn"
-            >
-                ↻ Refresh
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- FILTERS -->
-
-    <div class="filters">
-
-        <div class="field">
-
-            <input
-                id="searchInput"
-                type="search"
-                placeholder="Search student name or ID..."
-            >
-
-        </div>
-
-        <div class="field">
-
-            <select id="attendanceFilter">
-
-                <option value="all">
-                    All Attendance
-                </option>
-
-                <option value="present">
-                    Present
-                </option>
-
-                <option value="absent">
-                    Absent
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <select id="resultFilter">
-
-                <option value="all">
-                    All Results
-                </option>
-
-                <option value="entered">
-                    Result Entered
-                </option>
-
-                <option value="not-entered">
-                    Not Entered
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <select id="publishFilter">
-
-                <option value="all">
-                    All Publish Status
-                </option>
-
-                <option value="published">
-                    Published
-                </option>
-
-                <option value="unpublished">
-                    Unpublished
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <button
-            class="btn btn-secondary"
-            id="resetFiltersBtn"
-        >
-            Reset
-        </button>
-
-    </div>
-
-
-    <!-- TABLE -->
-
-    <div class="table-wrap">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Student
-                    </th>
-
-                    <th>
-                        Attendance
-                    </th>
-
-                    <th>
-                        Marks
-                    </th>
-
-                    <th>
-                        Percentage
-                    </th>
-
-                    <th>
-                        Result
-                    </th>
-
-                    <th>
-                        Publish
-                    </th>
-
-                    <th>
-                        Updated
-                    </th>
-
-                    <th>
-                        Actions
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="resultTableBody">
-            </tbody>
-
-        </table>
-
-    </div>
-
-</section>
-
-
-<!-- ATTENDANCE -->
-
-<div class="attendance-grid">
-
-<section class="panel">
-
-    <div class="panel-header">
-
-        <div>
-
-            <h3>
-                ✓ Exam Attendance
-            </h3>
-
-            <p>
-                Attendance status for 08 September 2026
-            </p>
-
-        </div>
-
-        <button
-            class="btn btn-success btn-sm"
-            id="markAllPresentBtn"
-        >
-            ✓ Mark All Present
-        </button>
-
-    </div>
-
-    <div
-        class="attendance-list"
-        id="attendanceList"
-    >
-    </div>
-
-</section>
-
-
-<section class="panel">
-
-    <div class="panel-header">
-
-        <div>
-
-            <h3>
-                ℹ Result Publishing Rules
-            </h3>
-
-            <p>
-                Step 2.2 management rules
-            </p>
-
-        </div>
-
-    </div>
-
-    <div style="padding:20px;">
-
-        <div class="att-row">
-
-            <div class="att-info">
-                <strong>Minimum Pass Mark</strong>
-                <span>40 out of 100</span>
             </div>
 
-            <span class="badge badge-success">
-                40%
-            </span>
+            <!-- QUIZ SETTINGS -->
+            <div class="card">
 
-        </div>
+                <div class="card-head">
+                    <div>
+                        <h3>❓ Quiz Settings</h3>
+                        <p>Quiz availability ও timing control</p>
+                    </div>
 
+                    <span class="badge badge-purple">Admin Controlled</span>
+                </div>
 
-        <div class="att-row">
+                <div class="card-body">
 
-            <div class="att-info">
-                <strong>Passed</strong>
-                <span>Marks equal to or above pass mark</span>
-            </div>
+                    <div class="form-grid">
 
-            <span class="badge badge-success">
-                PASS
-            </span>
+                        <div class="form-group full">
+                            <label>Quiz Name</label>
+                            <input
+                                id="quizName"
+                                type="text"
+                                placeholder="Computer Basics Quiz"
+                            >
+                        </div>
 
-        </div>
+                        <div class="form-group">
+                            <label>Quiz Start Date</label>
+                            <input
+                                id="quizStartDate"
+                                type="date"
+                            >
+                        </div>
 
+                        <div class="form-group">
+                            <label>Quiz End Date</label>
+                            <input
+                                id="quizEndDate"
+                                type="date"
+                            >
+                        </div>
 
-        <div class="att-row">
+                        <div class="form-group">
+                            <label>Quiz Duration (Minutes)</label>
+                            <input
+                                id="quizDuration"
+                                type="number"
+                                min="1"
+                                max="180"
+                                value="20"
+                            >
+                        </div>
 
-            <div class="att-info">
-                <strong>Failed</strong>
-                <span>Marks below pass mark</span>
-            </div>
+                        <div class="form-group">
+                            <label>Marks Per Question</label>
+                            <input
+                                id="marksPerQuestion"
+                                type="number"
+                                min="1"
+                                value="1"
+                            >
+                        </div>
 
-            <span class="badge badge-danger">
-                FAIL
-            </span>
+                        <div class="form-group">
+                            <label>Pass Percentage</label>
+                            <input
+                                id="passPercentage"
+                                type="number"
+                                min="0"
+                                max="100"
+                                value="40"
+                            >
+                        </div>
 
-        </div>
-
-
-        <div class="att-row">
-
-            <div class="att-info">
-                <strong>Publish</strong>
-                <span>Only admin can publish a result</span>
-            </div>
-
-            <span class="badge badge-info">
-                ADMIN
-            </span>
-
-        </div>
-
-
-        <div class="att-row">
-
-            <div class="att-info">
-                <strong>Student Portal</strong>
-                <span>Published result can appear there</span>
-            </div>
-
-            <span class="badge badge-info">
-                SYNC
-            </span>
-
-        </div>
-
-    </div>
-
-</section>
-
-</div>
-
-
-<!-- FOOTER -->
-
-<footer style="
-    text-align:center;
-    color:#64748b;
-    font-size:10px;
-    padding:15px 0 30px;
-">
-
-    SNK IT Institute • Admin Exam Result Management • Step 2.2
-
-</footer>
-
-</div>
-
-</main>
-
-</div>
-
-
-<!-- RESULT MODAL -->
-
-<div
-    class="modal-overlay"
-    id="resultModal"
->
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h3 id="modalTitle">
-                Enter Student Result
-            </h3>
-
-            <button
-                class="close"
-                id="closeModalBtn"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <form id="resultForm">
-
-            <div class="modal-body">
-
-                <input
-                    type="hidden"
-                    id="editResultId"
-                >
-
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label>
-                            Student
-                        </label>
-
-                        <select
-                            id="studentSelect"
-                            required
-                        >
-                        </select>
+                        <div class="form-group">
+                            <label>Maximum Questions</label>
+                            <input
+                                id="maxQuestions"
+                                type="number"
+                                value="10"
+                                readonly
+                            >
+                        </div>
 
                     </div>
 
+                    <div class="switch-row" style="margin-top:15px;">
+                        <div class="switch-text">
+                            <strong>Quiz Published</strong>
+                            <span>Student quiz page-এ available হবে</span>
+                        </div>
 
-                    <div class="form-group">
-
-                        <label>
-                            Exam Attendance
+                        <label class="switch">
+                            <input id="quizPublished" type="checkbox">
+                            <span class="slider"></span>
                         </label>
-
-                        <select id="formAttendance">
-
-                            <option value="present">
-                                Present
-                            </option>
-
-                            <option value="absent">
-                                Absent
-                            </option>
-
-                        </select>
-
                     </div>
 
+                    <div class="switch-row">
+                        <div class="switch-text">
+                            <strong>One Attempt Only</strong>
+                            <span>একজন Student একবারই Quiz submit করতে পারবে</span>
+                        </div>
 
-                    <div class="form-group">
-
-                        <label>
-                            Total Marks
+                        <label class="switch">
+                            <input id="oneAttempt" type="checkbox" checked>
+                            <span class="slider"></span>
                         </label>
-
-                        <input
-                            type="number"
-                            id="totalMarksInput"
-                            value="100"
-                            min="1"
-                            readonly
-                        >
-
                     </div>
 
+                    <div class="switch-row">
+                        <div class="switch-text">
+                            <strong>Auto Submit</strong>
+                            <span>Timer শেষ হলে automatically submit হবে</span>
+                        </div>
 
-                    <div class="form-group">
-
-                        <label>
-                            Obtained Marks
+                        <label class="switch">
+                            <input id="autoSubmit" type="checkbox" checked>
+                            <span class="slider"></span>
                         </label>
-
-                        <input
-                            type="number"
-                            id="marksInput"
-                            min="0"
-                            max="100"
-                            placeholder="Enter marks"
-                            required
-                        >
-
                     </div>
 
+                    <div class="btn-row">
 
-                    <div class="form-group">
+                        <button class="btn btn-primary" onclick="saveQuizSettings()">
+                            Save Quiz Settings
+                        </button>
 
-                        <label>
-                            Pass Mark
-                        </label>
-
-                        <input
-                            type="number"
-                            id="passMarkInput"
-                            value="40"
-                            min="0"
-                            max="100"
-                            readonly
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>
-                            Result
-                        </label>
-
-                        <select id="resultInput">
-
-                            <option value="Pass">
-                                Pass
-                            </option>
-
-                            <option value="Fail">
-                                Fail
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="form-group full">
-
-                        <label>
-                            Admin Note
-                        </label>
-
-                        <textarea
-                            id="noteInput"
-                            placeholder="Optional note about this result..."
-                        ></textarea>
+                        <button class="btn" onclick="loadQuizSettings()">
+                            Reset
+                        </button>
 
                     </div>
 
@@ -1927,51 +1173,116 @@ body.light .progress{
 
             </div>
 
+        </div>
 
-            <div class="modal-footer">
+        <!-- QUESTIONS -->
+        <div class="card questions-card">
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    id="cancelModalBtn"
-                >
-                    Cancel
-                </button>
+            <div class="card-head">
 
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                >
-                    Save Result
+                <div>
+                    <h3>🧠 Quiz Questions</h3>
+                    <p>
+                        Maximum 10 questions • 4 options • 1 correct answer
+                    </p>
+                </div>
+
+                <button class="btn btn-primary" onclick="openQuestionModal()">
+                    + Add Question
                 </button>
 
             </div>
 
-        </form>
+            <div class="card-body">
 
-    </div>
+                <div id="questionsContainer"></div>
+
+            </div>
+
+        </div>
+
+        <!-- QUIZ PREVIEW -->
+        <div class="card" style="margin-top:22px;">
+
+            <div class="card-head">
+
+                <div>
+                    <h3>📊 Quiz Summary</h3>
+                    <p>Student Quiz page কীভাবে কাজ করবে</p>
+                </div>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Quiz</label>
+                        <input id="summaryQuizName" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total Questions</label>
+                        <input id="summaryQuestions" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Total Marks</label>
+                        <input id="summaryMarks" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <input id="summaryDuration" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Available From</label>
+                        <input id="summaryStart" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Available Until</label>
+                        <input id="summaryEnd" readonly>
+                    </div>
+
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn" onclick="previewQuiz()">
+                        Preview Quiz
+                    </button>
+
+                    <button class="btn btn-success" onclick="validateQuiz()">
+                        ✓ Validate Quiz
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
 
 </div>
 
+<!-- QUESTION MODAL -->
+<div class="modal" id="questionModal">
 
-<!-- CONFIRM DELETE MODAL -->
+    <div class="modal-box">
 
-<div
-    class="modal-overlay"
-    id="deleteModal"
->
+        <div class="modal-head">
 
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <h3>
-                Delete Result
-            </h3>
+            <div>
+                <h3 id="questionModalTitle">Add Question</h3>
+            </div>
 
             <button
-                class="close"
-                id="closeDeleteBtn"
+                class="modal-close"
+                onclick="closeQuestionModal()"
             >
                 ×
             </button>
@@ -1980,42 +1291,79 @@ body.light .progress{
 
         <div class="modal-body">
 
-            <p
-                style="
-                    color:#aab7c8;
-                    font-size:12px;
-                    line-height:1.7;
-                "
-            >
-                আপনি কি নিশ্চিতভাবে এই student's result delete করতে চান?
-                Delete করলে result আবার manually enter করতে হবে।
-            </p>
+            <input type="hidden" id="editQuestionId">
 
-            <p
-                id="deleteStudentName"
-                style="
-                    margin-top:12px;
-                    font-weight:800;
-                "
-            ></p>
+            <div class="form-group">
+                <label>Question</label>
 
-        </div>
+                <textarea
+                    id="questionText"
+                    placeholder="Write your question..."
+                ></textarea>
+            </div>
 
-        <div class="modal-footer">
+            <div class="form-grid" style="margin-top:15px;">
 
-            <button
-                class="btn btn-secondary"
-                id="cancelDeleteBtn"
-            >
-                Cancel
-            </button>
+                <div class="form-group">
+                    <label>Option A</label>
+                    <input id="optionA" type="text">
+                </div>
 
-            <button
-                class="btn btn-danger"
-                id="confirmDeleteBtn"
-            >
-                Delete Result
-            </button>
+                <div class="form-group">
+                    <label>Option B</label>
+                    <input id="optionB" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label>Option C</label>
+                    <input id="optionC" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label>Option D</label>
+                    <input id="optionD" type="text">
+                </div>
+
+                <div class="form-group full">
+                    <label>Correct Answer</label>
+
+                    <select id="correctAnswer">
+                        <option value="">Select correct answer</option>
+                        <option value="A">Option A</option>
+                        <option value="B">Option B</option>
+                        <option value="C">Option C</option>
+                        <option value="D">Option D</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label>Short Explanation</label>
+
+                    <textarea
+                        id="questionExplanation"
+                        placeholder="Optional explanation shown after result..."
+                    ></textarea>
+                </div>
+
+            </div>
+
+            <div class="btn-row">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="saveQuestion()"
+                >
+                    Save Question
+                </button>
+
+                <button
+                    class="btn"
+                    onclick="closeQuestionModal()"
+                >
+                    Cancel
+                </button>
+
+            </div>
 
         </div>
 
@@ -2023,1245 +1371,749 @@ body.light .progress{
 
 </div>
 
-
-<div
-    class="toast"
-    id="toast"
-></div>
-
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-/* =========================================================
-   SNK IT INSTITUTE
-   ADMIN EXAM RESULT MANAGEMENT
-   STEP 2.2
-   ========================================================= */
-
-(function(){
-
 "use strict";
 
-
-/* =========================
-   STORAGE
-========================= */
+/* =========================================================
+   SNK ADMIN — STEP 2.5.1
+   COURSE + QUIZ MANAGEMENT
+========================================================= */
 
 const STORAGE = {
 
-    adminLogin:
-        "shoppingMelaAdminLoggedIn",
+    adminSession: "snkAdminLoggedIn",
 
-    adminSession:
-        "snkAdminLoggedIn",
+    course: "snkCourseSettingsV25",
 
-    results:
-        "snkAdminExamResultsV21",
+    quizSettings: "snkQuizSettingsV25",
 
-    examAttendance:
-        "snkExamAttendanceV21",
+    quizQuestions: "snkQuizQuestionsV25",
 
-    studentList:
-        "snkStudents",
+    quizResults: "snkQuizResults",
 
-    theme:
-        "snkTheme"
+    theme: "snkTheme"
 
 };
 
+/* =========================================================
+   DEFAULT COURSE
+========================================================= */
 
-/* =========================
-   EXAM CONFIG
-========================= */
+const DEFAULT_COURSE = {
 
-const EXAM = {
+    name: "Computer Office Application",
 
-    id:
-        "SNK-EXAM-2026-09-08",
+    batch: "Batch 01",
 
-    name:
-        "Computer Office Application Exam",
+    duration: "6 Months",
 
-    course:
-        "Computer Office Application",
+    days: "Saturday - Monday",
 
-    batch:
-        "Batch 01",
+    startTime: "16:00",
 
-    date:
-        "08 September 2026",
+    endTime: "18:00",
 
-    isoDate:
-        "2026-09-08",
+    mode: "Offline",
 
-    totalMarks:
-        100,
+    active: true,
 
-    passMark:
-        40
+    updatedAt: new Date().toISOString()
 
 };
 
+/* =========================================================
+   DEFAULT QUIZ SETTINGS
+========================================================= */
 
-/* =========================
-   DEFAULT STUDENT
-========================= */
+const DEFAULT_QUIZ_SETTINGS = {
 
-const DEFAULT_STUDENTS = [
+    id: "SNK-QUIZ-2026-01",
+
+    name: "Computer Basics Quiz",
+
+    startDate: "2026-09-10",
+
+    endDate: "2026-09-15",
+
+    durationMinutes: 20,
+
+    marksPerQuestion: 1,
+
+    passPercentage: 40,
+
+    maxQuestions: 10,
+
+    published: false,
+
+    oneAttemptOnly: true,
+
+    autoSubmit: true,
+
+    updatedAt: new Date().toISOString()
+
+};
+
+/* =========================================================
+   DEFAULT QUESTIONS
+========================================================= */
+
+const DEFAULT_QUESTIONS = [
 
     {
+        id:"Q1",
+        question:"কম্পিউটারের প্রধান processing unit কোনটি?",
+        options:{
+            A:"CPU",
+            B:"Monitor",
+            C:"Keyboard",
+            D:"Printer"
+        },
+        correctAnswer:"A",
+        explanation:"CPU কম্পিউটারের প্রধান processing unit।"
+    },
 
-        id:
-            "SNK-1001",
+    {
+        id:"Q2",
+        question:"Windows-এ একটি file copy করার সাধারণ shortcut কোনটি?",
+        options:{
+            A:"Ctrl + X",
+            B:"Ctrl + C",
+            C:"Ctrl + V",
+            D:"Ctrl + Z"
+        },
+        correctAnswer:"B",
+        explanation:"Ctrl + C সাধারণত selected file বা text copy করতে ব্যবহৃত হয়।"
+    },
 
-        name:
-            "Student",
+    {
+        id:"Q3",
+        question:"MS Word মূলত কোন ধরনের কাজের জন্য ব্যবহৃত হয়?",
+        options:{
+            A:"Document তৈরি ও সম্পাদনা",
+            B:"ভিডিও রেকর্ডিং",
+            C:"হার্ডওয়্যার মেরামত",
+            D:"ইন্টারনেট সংযোগ তৈরি"
+        },
+        correctAnswer:"A",
+        explanation:"MS Word document তৈরি, সম্পাদনা ও formatting-এর জন্য ব্যবহৃত হয়।"
+    },
 
-        course:
-            "Computer Office Application",
+    {
+        id:"Q4",
+        question:"Keyboard-এর Enter key সাধারণত কী কাজে ব্যবহৃত হয়?",
+        options:{
+            A:"Command confirm বা নতুন line",
+            B:"Computer বন্ধ করা",
+            C:"Screen capture",
+            D:"Volume বাড়ানো"
+        },
+        correctAnswer:"A",
+        explanation:"Enter key context অনুযায়ী command confirm বা নতুন line তৈরি করতে ব্যবহৃত হয়।"
+    },
 
-        batch:
-            "Batch 01"
+    {
+        id:"Q5",
+        question:"MS Excel-এ formula সাধারণত কোন চিহ্ন দিয়ে শুরু হয়?",
+        options:{
+            A:"#",
+            B:"=",
+            C:"@",
+            D:"%"
+        },
+        correctAnswer:"B",
+        explanation:"Excel formula সাধারণত = চিহ্ন দিয়ে শুরু হয়।"
+    },
 
+    {
+        id:"Q6",
+        question:"PowerPoint মূলত কী তৈরির জন্য ব্যবহৃত হয়?",
+        options:{
+            A:"Presentation",
+            B:"Database server",
+            C:"Operating system",
+            D:"Antivirus"
+        },
+        correctAnswer:"A",
+        explanation:"Microsoft PowerPoint presentation তৈরির জন্য ব্যবহৃত হয়।"
+    },
+
+    {
+        id:"Q7",
+        question:"Internet browsing-এর জন্য কোন ধরনের software ব্যবহৃত হয়?",
+        options:{
+            A:"Web Browser",
+            B:"Calculator",
+            C:"File Explorer only",
+            D:"Paint"
+        },
+        correctAnswer:"A",
+        explanation:"Website access ও browsing-এর জন্য web browser ব্যবহৃত হয়।"
+    },
+
+    {
+        id:"Q8",
+        question:"Ctrl + V shortcut সাধারণত কী করে?",
+        options:{
+            A:"Copy",
+            B:"Paste",
+            C:"Cut",
+            D:"Undo"
+        },
+        correctAnswer:"B",
+        explanation:"Ctrl + V copied বা cut content paste করে।"
+    },
+
+    {
+        id:"Q9",
+        question:"Computer-এ permanent storage-এর একটি উদাহরণ কোনটি?",
+        options:{
+            A:"SSD",
+            B:"Mouse",
+            C:"Keyboard",
+            D:"Monitor"
+        },
+        correctAnswer:"A",
+        explanation:"SSD data storage-এর জন্য ব্যবহৃত একটি storage device।"
+    },
+
+    {
+        id:"Q10",
+        question:"Email পাঠানোর জন্য কোনটি প্রয়োজন?",
+        options:{
+            A:"Email account",
+            B:"Printer only",
+            C:"Scanner only",
+            D:"Speaker only"
+        },
+        correctAnswer:"A",
+        explanation:"Email পাঠাতে সাধারণত একটি email account প্রয়োজন হয়।"
     }
 
 ];
 
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
 
-/* =========================
-   DOM
-========================= */
-
-const $ = id =>
-    document.getElementById(id);
-
-
-/* =========================
-   AUTH
-========================= */
-
-function checkAdminSession(){
-
-    const session =
-        sessionStorage.getItem(STORAGE.adminSession);
-
-    const legacy =
-        sessionStorage.getItem(STORAGE.adminLogin);
-
-    if(
-        session !== "true" &&
-        legacy !== "true"
-    ){
-
-        /*
-          Demo-friendly fallback.
-          If your admin-login.html is already connected,
-          it should set snkAdminLoggedIn=true.
-        */
-
-        console.warn(
-            "Admin session not found."
-        );
-    }
-
-}
-
-
-/* =========================
-   STUDENT DATA
-========================= */
-
-function normalizeStudent(item){
-
-    if(!item || typeof item !== "object"){
-        return null;
-    }
-
-    const id =
-        item.id ||
-        item.studentId ||
-        item.studentID ||
-        item.userId ||
-        "";
-
-    const name =
-        item.name ||
-        item.studentName ||
-        item.fullName ||
-        item.displayName ||
-        "Student";
-
-    return {
-
-        id:
-            String(id || "").trim(),
-
-        name:
-            String(name || "Student").trim(),
-
-        course:
-            item.course ||
-            item.courseName ||
-            EXAM.course,
-
-        batch:
-            item.batch ||
-            item.batchName ||
-            EXAM.batch
-
-    };
-
-}
-
-
-function readStudentStorage(){
-
-    const keys = [
-
-        STORAGE.studentList,
-
-        "students",
-
-        "shoppingMelaUsers"
-
-    ];
-
-    for(const key of keys){
-
-        try{
-
-            const raw =
-                localStorage.getItem(key);
-
-            if(!raw){
-                continue;
-            }
-
-            const parsed =
-                JSON.parse(raw);
-
-            let arr = [];
-
-            if(Array.isArray(parsed)){
-                arr = parsed;
-            }
-            else if(parsed && Array.isArray(parsed.students)){
-                arr = parsed.students;
-            }
-            else if(parsed && Array.isArray(parsed.users)){
-                arr = parsed.users;
-            }
-            else if(parsed && Array.isArray(parsed.data)){
-                arr = parsed.data;
-            }
-
-            const students =
-                arr
-                .map(normalizeStudent)
-                .filter(Boolean)
-                .filter(student => student.id);
-
-            if(students.length){
-                return students;
-            }
-
-        }
-        catch(error){
-
-            console.warn(
-                "Student storage error:",
-                key,
-                error
-            );
-
-        }
-
-    }
-
-    return DEFAULT_STUDENTS.map(
-        student => ({...student})
-    );
-
-}
-
-
-/* =========================
-   RESULTS
-========================= */
-
-function readResults(){
+function readJSON(key, fallback){
 
     try{
 
-        const raw =
-            localStorage.getItem(STORAGE.results);
+        const raw = localStorage.getItem(key);
 
-        if(!raw){
-            return [];
-        }
+        if(!raw) return fallback;
 
-        const parsed =
-            JSON.parse(raw);
+        const parsed = JSON.parse(raw);
 
-        if(Array.isArray(parsed)){
-            return parsed;
-        }
+        return parsed;
 
-        if(
-            parsed &&
-            Array.isArray(parsed.results)
-        ){
-            return parsed.results;
-        }
+    }catch(error){
 
-        return [];
+        console.error("Storage read error:", error);
 
+        return fallback;
     }
-    catch(error){
-
-        console.error(
-            "Result read error:",
-            error
-        );
-
-        return [];
-
-    }
-
 }
 
-
-function saveResults(results){
+function writeJSON(key, value){
 
     localStorage.setItem(
-        STORAGE.results,
-        JSON.stringify(results)
+        key,
+        JSON.stringify(value)
     );
-
 }
 
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-/* =========================
-   ATTENDANCE
-========================= */
+function initializeStorage(){
 
-function readAttendance(){
+    if(!localStorage.getItem(STORAGE.course)){
 
-    try{
-
-        const raw =
-            localStorage.getItem(
-                STORAGE.examAttendance
-            );
-
-        if(!raw){
-            return {};
-        }
-
-        const parsed =
-            JSON.parse(raw);
-
-        if(
-            parsed &&
-            typeof parsed === "object"
-        ){
-
-            if(
-                parsed.records &&
-                typeof parsed.records === "object"
-            ){
-                return parsed.records;
-            }
-
-            return parsed;
-
-        }
-
-    }
-    catch(error){
-
-        console.error(
-            "Attendance read error:",
-            error
+        writeJSON(
+            STORAGE.course,
+            DEFAULT_COURSE
         );
-
     }
 
-    return {};
+    if(!localStorage.getItem(STORAGE.quizSettings)){
 
-}
-
-
-function saveAttendance(data){
-
-    localStorage.setItem(
-        STORAGE.examAttendance,
-        JSON.stringify(data)
-    );
-
-}
-
-
-function getAttendanceStatus(studentId){
-
-    const data =
-        readAttendance();
-
-    const value =
-        data[studentId];
-
-    if(
-        value === true ||
-        value === "present" ||
-        value === "Present"
-    ){
-        return "present";
-    }
-
-    return "absent";
-
-}
-
-
-function markAttendance(
-    studentId,
-    status
-){
-
-    const data =
-        readAttendance();
-
-    data[studentId] =
-        status === "present"
-        ? "present"
-        : "absent";
-
-    saveAttendance(data);
-
-}
-
-
-/* =========================
-   RESULT HELPERS
-========================= */
-
-function findResult(studentId){
-
-    const results =
-        readResults();
-
-    return results.find(
-        result =>
-            String(result.studentId)
-            === String(studentId)
-            &&
-            result.examId === EXAM.id
-    ) || null;
-
-}
-
-
-function calculatePercentage(
-    marks,
-    total
-){
-
-    const m =
-        Number(marks);
-
-    const t =
-        Number(total);
-
-    if(
-        !Number.isFinite(m) ||
-        !Number.isFinite(t) ||
-        t <= 0
-    ){
-        return 0;
-    }
-
-    return Number(
-        ((m / t) * 100).toFixed(2)
-    );
-
-}
-
-
-function calculateResult(
-    marks,
-    passMark
-){
-
-    return Number(marks) >=
-        Number(passMark)
-        ? "Pass"
-        : "Fail";
-
-}
-
-
-/* =========================
-   UI HELPERS
-========================= */
-
-let toastTimer = null;
-
-
-function showToast(
-    message,
-    type = "success"
-){
-
-    const toast =
-        $("toast");
-
-    toast.textContent =
-        message;
-
-    toast.className =
-        "toast show " + type;
-
-    clearTimeout(toastTimer);
-
-    toastTimer =
-        setTimeout(
-            () => {
-
-                toast.className =
-                    "toast";
-
-            },
-            3000
+        writeJSON(
+            STORAGE.quizSettings,
+            DEFAULT_QUIZ_SETTINGS
         );
+    }
+
+    if(!localStorage.getItem(STORAGE.quizQuestions)){
+
+        writeJSON(
+            STORAGE.quizQuestions,
+            DEFAULT_QUESTIONS
+        );
+    }
 
 }
 
-
-/* =========================
+/* =========================================================
    THEME
-========================= */
+========================================================= */
 
-function applyTheme(){
+function loadTheme(){
 
     const theme =
-        localStorage.getItem(
-            STORAGE.theme
-        );
+        localStorage.getItem(STORAGE.theme) || "dark";
 
     document.body.classList.toggle(
         "light",
         theme === "light"
     );
-
 }
-
 
 function toggleTheme(){
 
     const isLight =
-        document.body.classList.contains(
-            "light"
-        );
+        document.body.classList.contains("light");
+
+    const next =
+        isLight ? "dark" : "light";
+
+    document.body.classList.toggle(
+        "light",
+        next === "light"
+    );
 
     localStorage.setItem(
         STORAGE.theme,
-        isLight
-        ? "dark"
-        : "light"
+        next
     );
 
-    applyTheme();
-
-}
-
-
-/* =========================
-   FORMAT DATE
-========================= */
-
-function formatDate(value){
-
-    if(!value){
-        return "—";
-    }
-
-    const date =
-        new Date(value);
-
-    if(Number.isNaN(date.getTime())){
-        return "—";
-    }
-
-    return date.toLocaleString(
-        "en-GB",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric",
-            hour:"2-digit",
-            minute:"2-digit"
-        }
+    showToast(
+        next === "light"
+            ? "Light theme enabled"
+            : "Dark theme enabled"
     );
-
 }
 
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
-/* =========================
-   GET CURRENT STUDENTS
-========================= */
+function toggleSidebar(){
 
-function getStudents(){
-
-    return readStudentStorage();
-
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
 }
 
-
-/* =========================
-   FILTER STUDENTS
-========================= */
-
-function getFilteredStudents(){
-
-    const students =
-        getStudents();
-
-    const results =
-        readResults();
-
-    const search =
-        $("searchInput")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const attendanceFilter =
-        $("attendanceFilter")
-        .value;
-
-    const resultFilter =
-        $("resultFilter")
-        .value;
-
-    const publishFilter =
-        $("publishFilter")
-        .value;
-
-    return students.filter(student => {
-
-        const result =
-            results.find(
-                item =>
-                    String(item.studentId)
-                    === String(student.id)
-                    &&
-                    item.examId === EXAM.id
-            );
-
-        const attendance =
-            getAttendanceStatus(
-                student.id
-            );
-
-        if(search){
-
-            const text =
-                (
-                    student.name +
-                    " " +
-                    student.id
-                ).toLowerCase();
-
-            if(!text.includes(search)){
-                return false;
-            }
-
-        }
-
-        if(
-            attendanceFilter !== "all" &&
-            attendance !== attendanceFilter
-        ){
-            return false;
-        }
-
-        if(resultFilter === "entered" && !result){
-            return false;
-        }
-
-        if(
-            resultFilter === "not-entered" &&
-            result
-        ){
-            return false;
-        }
-
-        if(
-            publishFilter === "published" &&
-            (!result || !result.published)
-        ){
-            return false;
-        }
-
-        if(
-            publishFilter === "unpublished" &&
-            (!result || result.published)
-        ){
-            return false;
-        }
-
-        return true;
-
-    });
-
-}
-
-
-/* =========================
-   RENDER RESULT TABLE
-========================= */
-
-function renderTable(){
-
-    const tbody =
-        $("resultTableBody");
-
-    const students =
-        getFilteredStudents();
-
-    const results =
-        readResults();
-
-    if(!students.length){
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td colspan="8">
-
-                    <div class="empty">
-
-                        <div class="empty-icon">
-                            🔎
-                        </div>
-
-                        No student found
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    tbody.innerHTML =
-        students.map(student => {
-
-            const result =
-                results.find(
-                    item =>
-                        String(item.studentId)
-                        === String(student.id)
-                        &&
-                        item.examId === EXAM.id
-                );
-
-            const attendance =
-                getAttendanceStatus(
-                    student.id
-                );
-
-            const attendanceHTML =
-                attendance === "present"
-
-                ? `
-                    <span class="badge badge-success">
-                        ✓ Present
-                    </span>
-                  `
-
-                : `
-                    <span class="badge badge-danger">
-                        ✕ Absent
-                    </span>
-                  `;
-
-
-            if(!result){
-
-                return `
-
-                    <tr>
-
-                        <td>
-
-                            <div class="student-cell">
-
-                                <div class="student-avatar">
-                                    ${getInitial(student.name)}
-                                </div>
-
-                                <div>
-
-                                    <div class="student-name">
-                                        ${escapeHTML(student.name)}
-                                    </div>
-
-                                    <span class="student-id">
-                                        ${escapeHTML(student.id)}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </td>
-
-                        <td>
-                            ${attendanceHTML}
-                        </td>
-
-                        <td>
-                            <span style="color:#718198;">
-                                Not Entered
-                            </span>
-                        </td>
-
-                        <td>
-                            —
-                        </td>
-
-                        <td>
-                            <span class="badge badge-warning">
-                                Pending
-                            </span>
-                        </td>
-
-                        <td>
-                            <span class="badge badge-warning">
-                                Unpublished
-                            </span>
-                        </td>
-
-                        <td>
-                            —
-                        </td>
-
-                        <td>
-
-                            <div class="action-group">
-
-                                <button
-                                    class="btn btn-primary btn-sm"
-                                    onclick="openAddResult('${escapeAttr(student.id)}')"
-                                >
-                                    + Enter
-                                </button>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-
-
-            const percent =
-                calculatePercentage(
-                    result.marks,
-                    result.totalMarks
-                );
-
-            const resultHTML =
-                result.result === "Pass"
-
-                ? `
-                    <span class="badge badge-success">
-                        PASS
-                    </span>
-                  `
-
-                : `
-                    <span class="badge badge-danger">
-                        FAIL
-                    </span>
-                  `;
-
-
-            const publishHTML =
-                result.published
-
-                ? `
-                    <span class="badge badge-success">
-                        Published
-                    </span>
-                  `
-
-                : `
-                    <span class="badge badge-warning">
-                        Unpublished
-                    </span>
-                  `;
-
-
-            return `
-
-                <tr>
-
-                    <td>
-
-                        <div class="student-cell">
-
-                            <div class="student-avatar">
-                                ${getInitial(student.name)}
-                            </div>
-
-                            <div>
-
-                                <div class="student-name">
-                                    ${escapeHTML(student.name)}
-                                </div>
-
-                                <span class="student-id">
-                                    ${escapeHTML(student.id)}
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </td>
-
-
-                    <td>
-                        ${attendanceHTML}
-                    </td>
-
-
-                    <td>
-
-                        <span class="marks">
-                            ${Number(result.marks)}
-                        </span>
-
-                        <span style="color:#718198;">
-                            / ${Number(result.totalMarks)}
-                        </span>
-
-                    </td>
-
-
-                    <td>
-
-                        <span class="percent">
-                            ${percent}%
-                        </span>
-
-                    </td>
-
-
-                    <td>
-                        ${resultHTML}
-                    </td>
-
-
-                    <td>
-                        ${publishHTML}
-                    </td>
-
-
-                    <td>
-                        <span style="color:#8796aa;font-size:9px;">
-                            ${formatDate(result.updatedAt)}
-                        </span>
-                    </td>
-
-
-                    <td>
-
-                        <div class="action-group">
-
-                            <button
-                                class="btn btn-info btn-sm"
-                                onclick="openEditResult('${escapeAttr(result.id)}')"
-                            >
-                                Edit
-                            </button>
-
-                            <button
-                                class="btn ${result.published ? "btn-warning" : "btn-success"} btn-sm"
-                                onclick="togglePublish('${escapeAttr(result.id)}')"
-                            >
-                                ${result.published ? "Unpublish" : "Publish"}
-                            </button>
-
-                            <button
-                                class="btn btn-danger btn-sm"
-                                onclick="openDeleteResult('${escapeAttr(result.id)}')"
-                            >
-                                Delete
-                            </button>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================
-   RENDER STATS
-========================= */
-
-function renderStats(){
-
-    const students =
-        getStudents();
-
-    const results =
-        readResults();
-
-    const examResults =
-        results.filter(
-            result =>
-                result.examId === EXAM.id
+/* =========================================================
+   COURSE
+========================================================= */
+
+function loadCourse(){
+
+    const course =
+        readJSON(
+            STORAGE.course,
+            DEFAULT_COURSE
         );
 
+    document.getElementById("courseName").value =
+        course.name || "";
 
-    const present =
-        students.filter(
-            student =>
-                getAttendanceStatus(
-                    student.id
-                ) === "present"
-        ).length;
+    document.getElementById("batchName").value =
+        course.batch || "";
 
+    document.getElementById("courseDuration").value =
+        course.duration || "";
 
-    const absent =
-        students.length -
-        present;
+    document.getElementById("classDays").value =
+        course.days || "";
 
+    document.getElementById("classStart").value =
+        course.startTime || "16:00";
 
-    const published =
-        examResults.filter(
-            result =>
-                result.published === true
-        ).length;
+    document.getElementById("classEnd").value =
+        course.endTime || "18:00";
 
+    document.getElementById("courseMode").value =
+        course.mode || "Offline";
 
-    const passed =
-        examResults.filter(
-            result =>
-                result.result === "Pass"
-        ).length;
+    document.getElementById("courseActive").checked =
+        course.active !== false;
 
+}
 
-    $("totalStudents").textContent =
-        students.length;
+function saveCourse(){
 
-    $("examPresent").textContent =
-        present;
+    const name =
+        document.getElementById("courseName").value.trim();
 
-    $("examAbsent").textContent =
-        absent;
+    if(!name){
 
-    $("enteredResults").textContent =
-        examResults.length;
-
-    $("publishedResults").textContent =
-        published;
-
-    $("passResults").textContent =
-        passed;
-
-    $("heroPublished").textContent =
-        published;
-
-
-    if(!examResults.length){
-
-        $("averageMarks").textContent =
-            "0";
-
-        $("highestMarks").textContent =
-            "0";
-
-        $("lowestMarks").textContent =
-            "0";
-
-        $("highestStudent").textContent =
-            "No result yet";
-
-        $("lowestStudent").textContent =
-            "No result yet";
-
-        $("averageBar").style.width =
-            "0%";
-
-        $("highestBar").style.width =
-            "0%";
-
-        $("lowestBar").style.width =
-            "0%";
+        showToast("Course Name দিন");
 
         return;
-
     }
 
+    const existing =
+        readJSON(
+            STORAGE.course,
+            DEFAULT_COURSE
+        );
+
+    const course = {
+
+        ...existing,
+
+        name:name,
+
+        batch:
+            document
+                .getElementById("batchName")
+                .value
+                .trim(),
+
+        duration:
+            document
+                .getElementById("courseDuration")
+                .value
+                .trim(),
+
+        days:
+            document
+                .getElementById("classDays")
+                .value
+                .trim(),
+
+        startTime:
+            document
+                .getElementById("classStart")
+                .value,
+
+        endTime:
+            document
+                .getElementById("classEnd")
+                .value,
+
+        mode:
+            document
+                .getElementById("courseMode")
+                .value,
+
+        active:
+            document
+                .getElementById("courseActive")
+                .checked,
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+    writeJSON(
+        STORAGE.course,
+        course
+    );
+
+    updateSummary();
+
+    showToast(
+        "Course information successfully saved"
+    );
+}
+
+/* =========================================================
+   QUIZ SETTINGS
+========================================================= */
+
+function loadQuizSettings(){
+
+    const quiz =
+        readJSON(
+            STORAGE.quizSettings,
+            DEFAULT_QUIZ_SETTINGS
+        );
+
+    document.getElementById("quizName").value =
+        quiz.name || "";
+
+    document.getElementById("quizStartDate").value =
+        quiz.startDate || "";
+
+    document.getElementById("quizEndDate").value =
+        quiz.endDate || "";
+
+    document.getElementById("quizDuration").value =
+        quiz.durationMinutes || 20;
+
+    document.getElementById("marksPerQuestion").value =
+        quiz.marksPerQuestion || 1;
+
+    document.getElementById("passPercentage").value =
+        quiz.passPercentage ?? 40;
+
+    document.getElementById("maxQuestions").value =
+        quiz.maxQuestions || 10;
+
+    document.getElementById("quizPublished").checked =
+        quiz.published === true;
+
+    document.getElementById("oneAttempt").checked =
+        quiz.oneAttemptOnly !== false;
+
+    document.getElementById("autoSubmit").checked =
+        quiz.autoSubmit !== false;
+
+    updateSummary();
+}
+
+function saveQuizSettings(){
+
+    const name =
+        document.getElementById("quizName").value.trim();
+
+    const startDate =
+        document.getElementById("quizStartDate").value;
+
+    const endDate =
+        document.getElementById("quizEndDate").value;
+
+    const duration =
+        Number(
+            document.getElementById("quizDuration").value
+        );
 
     const marks =
-        examResults.map(
-            result =>
-                Number(result.marks)
+        Number(
+            document.getElementById("marksPerQuestion").value
         );
 
-
-    const average =
-        marks.reduce(
-            (sum,value) =>
-                sum + value,
-            0
-        ) / marks.length;
-
-
-    const highest =
-        Math.max(...marks);
-
-    const lowest =
-        Math.min(...marks);
-
-
-    const highResult =
-        examResults.find(
-            result =>
-                Number(result.marks)
-                === highest
+    const pass =
+        Number(
+            document.getElementById("passPercentage").value
         );
 
-    const lowResult =
-        examResults.find(
-            result =>
-                Number(result.marks)
-                === lowest
-        );
+    if(!name){
 
-
-    $("averageMarks").textContent =
-        average.toFixed(2);
-
-    $("highestMarks").textContent =
-        highest;
-
-    $("lowestMarks").textContent =
-        lowest;
-
-    $("highestStudent").textContent =
-        highResult
-        ? highResult.studentName
-        : "—";
-
-    $("lowestStudent").textContent =
-        lowResult
-        ? lowResult.studentName
-        : "—";
-
-
-    $("averageBar").style.width =
-        Math.min(
-            average,
-            100
-        ) + "%";
-
-    $("highestBar").style.width =
-        Math.min(
-            highest,
-            100
-        ) + "%";
-
-    $("lowestBar").style.width =
-        Math.min(
-            lowest,
-            100
-        ) + "%";
-
-}
-
-
-/* =========================
-   ATTENDANCE LIST
-========================= */
-
-function renderAttendance(){
-
-    const container =
-        $("attendanceList");
-
-    const students =
-        getStudents();
-
-    if(!students.length){
-
-        container.innerHTML =
-            `<div class="empty">No students found</div>`;
+        showToast("Quiz Name দিন");
 
         return;
-
     }
 
+    if(!startDate || !endDate){
+
+        showToast("Quiz Start Date এবং End Date দিন");
+
+        return;
+    }
+
+    if(new Date(endDate) < new Date(startDate)){
+
+        showToast("End Date, Start Date-এর পরে হতে হবে");
+
+        return;
+    }
+
+    if(duration < 1){
+
+        showToast("Quiz Duration কমপক্ষে 1 মিনিট হতে হবে");
+
+        return;
+    }
+
+    if(marks < 1){
+
+        showToast("Marks Per Question কমপক্ষে 1 হতে হবে");
+
+        return;
+    }
+
+    if(pass < 0 || pass > 100){
+
+        showToast("Pass Percentage 0–100 এর মধ্যে দিন");
+
+        return;
+    }
+
+    const existing =
+        readJSON(
+            STORAGE.quizSettings,
+            DEFAULT_QUIZ_SETTINGS
+        );
+
+    const settings = {
+
+        ...existing,
+
+        name:name,
+
+        startDate:startDate,
+
+        endDate:endDate,
+
+        durationMinutes:duration,
+
+        marksPerQuestion:marks,
+
+        passPercentage:pass,
+
+        maxQuestions:10,
+
+        published:
+            document
+                .getElementById("quizPublished")
+                .checked,
+
+        oneAttemptOnly:
+            document
+                .getElementById("oneAttempt")
+                .checked,
+
+        autoSubmit:
+            document
+                .getElementById("autoSubmit")
+                .checked,
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+    writeJSON(
+        STORAGE.quizSettings,
+        settings
+    );
+
+    updateSummary();
+
+    showToast(
+        "Quiz settings successfully saved"
+    );
+}
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+function getQuestions(){
+
+    return readJSON(
+        STORAGE.quizQuestions,
+        []
+    );
+}
+
+function renderQuestions(){
+
+    const container =
+        document.getElementById("questionsContainer");
+
+    const questions =
+        getQuestions();
+
+    if(!questions.length){
+
+        container.innerHTML = `
+            <div class="empty">
+                এখনো কোনো Quiz Question নেই।
+                <br><br>
+                <button
+                    class="btn btn-primary"
+                    onclick="openQuestionModal()"
+                >
+                    + প্রথম Question তৈরি করুন
+                </button>
+            </div>
+        `;
+
+        updateSummary();
+
+        return;
+    }
 
     container.innerHTML =
-        students.map(student => {
-
-            const status =
-                getAttendanceStatus(
-                    student.id
-                );
+        questions.map((q,index)=>{
 
             return `
 
-                <div class="att-row">
+                <div class="question-item">
 
-                    <div class="att-info">
+                    <div class="question-top">
 
-                        <strong>
-                            ${escapeHTML(student.name)}
-                        </strong>
+                        <div>
 
-                        <span>
-                            ${escapeHTML(student.id)}
+                            <div class="question-number">
+                                Question ${index + 1}
+                            </div>
+
+                            <div style="
+                                margin-top:7px;
+                                line-height:1.6;
+                                font-size:13px;
+                                font-weight:700;
+                            ">
+                                ${escapeHTML(q.question)}
+                            </div>
+
+                        </div>
+
+                        <span class="question-status">
+                            ${q.correctAnswer
+                                ? "Answer Set"
+                                : "Pending"}
                         </span>
 
                     </div>
 
-                    <button
-                        class="btn ${
-                            status === "present"
-                            ? "btn-success"
-                            : "btn-danger"
-                        } btn-sm"
-                        onclick="toggleAttendance('${escapeAttr(student.id)}')"
-                    >
-                        ${
-                            status === "present"
-                            ? "✓ Present"
-                            : "✕ Absent"
-                        }
-                    </button>
+                    <div class="option-grid">
+
+                        ${renderOption(
+                            "A",
+                            q.options?.A,
+                            q.correctAnswer === "A"
+                        )}
+
+                        ${renderOption(
+                            "B",
+                            q.options?.B,
+                            q.correctAnswer === "B"
+                        )}
+
+                        ${renderOption(
+                            "C",
+                            q.options?.C,
+                            q.correctAnswer === "C"
+                        )}
+
+                        ${renderOption(
+                            "D",
+                            q.options?.D,
+                            q.correctAnswer === "D"
+                        )}
+
+                    </div>
+
+                    <div class="question-actions">
+
+                        <button
+                            class="btn"
+                            onclick="editQuestion('${q.id}')"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            class="btn btn-danger"
+                            onclick="deleteQuestion('${q.id}')"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -3269,860 +2121,545 @@ function renderAttendance(){
 
         }).join("");
 
+    updateSummary();
 }
 
+function renderOption(letter,text,isCorrect){
 
-/* =========================
-   MODAL STUDENT SELECT
-========================= */
+    return `
 
-function populateStudentSelect(
-    selectedId = ""
-){
+        <div class="option-box ${isCorrect ? "correct" : ""}">
 
-    const select =
-        $("studentSelect");
+            <div class="option-label">
+                OPTION ${letter}
+                ${isCorrect ? " • CORRECT" : ""}
+            </div>
 
-    const students =
-        getStudents();
+            <div>
+                ${escapeHTML(text || "—")}
+            </div>
 
-    select.innerHTML =
-        students.map(student => `
+        </div>
 
-            <option
-                value="${escapeAttr(student.id)}"
-                ${String(student.id) === String(selectedId) ? "selected" : ""}
-            >
-                ${escapeHTML(student.name)}
-                — ${escapeHTML(student.id)}
-            </option>
-
-        `).join("");
-
+    `;
 }
 
+/* =========================================================
+   ADD QUESTION
+========================================================= */
 
-/* =========================
-   ADD RESULT
-========================= */
+function openQuestionModal(){
 
-window.openAddResult =
-function(studentId = ""){
+    const questions =
+        getQuestions();
 
-    $("modalTitle").textContent =
-        "Enter Student Result";
+    if(questions.length >= 10){
 
-    $("editResultId").value =
-        "";
-
-    populateStudentSelect(
-        studentId
-    );
-
-    $("totalMarksInput").value =
-        EXAM.totalMarks;
-
-    $("passMarkInput").value =
-        EXAM.passMark;
-
-    $("marksInput").value =
-        "";
-
-    $("formAttendance").value =
-        studentId
-        ? getAttendanceStatus(studentId)
-        : "present";
-
-    $("resultInput").value =
-        "Pass";
-
-    $("noteInput").value =
-        "";
-
-    $("resultModal")
-        .classList
-        .add("show");
-
-};
-
-
-/* =========================
-   EDIT RESULT
-========================= */
-
-window.openEditResult =
-function(resultId){
-
-    const results =
-        readResults();
-
-    const result =
-        results.find(
-            item =>
-                String(item.id)
-                === String(resultId)
-        );
-
-    if(!result){
         showToast(
-            "Result পাওয়া যায়নি।",
-            "error"
+            "Maximum 10 Questions allowed"
         );
+
         return;
     }
 
+    clearQuestionForm();
 
-    $("modalTitle").textContent =
-        "Edit Student Result";
+    document.getElementById(
+        "questionModalTitle"
+    ).textContent = "Add Question";
 
-    $("editResultId").value =
-        result.id;
+    document
+        .getElementById("questionModal")
+        .classList.add("show");
+}
 
-    populateStudentSelect(
-        result.studentId
-    );
+function closeQuestionModal(){
 
-    $("totalMarksInput").value =
-        result.totalMarks || EXAM.totalMarks;
-
-    $("passMarkInput").value =
-        result.passMark || EXAM.passMark;
-
-    $("marksInput").value =
-        result.marks;
-
-    $("formAttendance").value =
-        getAttendanceStatus(
-            result.studentId
-        );
-
-    $("resultInput").value =
-        result.result || "Fail";
-
-    $("noteInput").value =
-        result.note || "";
-
-    $("resultModal")
-        .classList
-        .add("show");
-
-};
-
-
-/* =========================
-   CLOSE RESULT MODAL
-========================= */
-
-function closeResultModal(){
-
-    $("resultModal")
-        .classList
-        .remove("show");
+    document
+        .getElementById("questionModal")
+        .classList.remove("show");
 
 }
 
+/* =========================================================
+   EDIT QUESTION
+========================================================= */
 
-/* =========================
-   SAVE RESULT
-========================= */
+function editQuestion(id){
 
-function saveResult(event){
+    const questions =
+        getQuestions();
 
-    event.preventDefault();
+    const q =
+        questions.find(item => item.id === id);
 
+    if(!q) return;
 
-    const resultId =
-        $("editResultId").value.trim();
+    document.getElementById("editQuestionId").value =
+        q.id;
 
-    const studentId =
-        $("studentSelect").value;
+    document.getElementById("questionText").value =
+        q.question || "";
 
-    const student =
-        getStudents().find(
-            item =>
-                String(item.id)
-                === String(studentId)
-        );
+    document.getElementById("optionA").value =
+        q.options?.A || "";
 
+    document.getElementById("optionB").value =
+        q.options?.B || "";
 
-    if(!student){
+    document.getElementById("optionC").value =
+        q.options?.C || "";
 
-        showToast(
-            "Student নির্বাচন করুন।",
-            "error"
-        );
+    document.getElementById("optionD").value =
+        q.options?.D || "";
 
-        return;
+    document.getElementById("correctAnswer").value =
+        q.correctAnswer || "";
 
-    }
+    document.getElementById("questionExplanation").value =
+        q.explanation || "";
 
+    document.getElementById(
+        "questionModalTitle"
+    ).textContent = "Edit Question";
 
-    const attendance =
-        $("formAttendance").value;
-
-    const marks =
-        Number(
-            $("marksInput").value
-        );
-
-    const totalMarks =
-        Number(
-            $("totalMarksInput").value
-        );
-
-    const passMark =
-        Number(
-            $("passMarkInput").value
-        );
-
-
-    if(
-        !Number.isFinite(marks) ||
-        marks < 0 ||
-        marks > totalMarks
-    ){
-
-        showToast(
-            "Valid marks দিন।",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    /*
-      If absent, result should not be treated
-      as a fabricated mark.
-    */
-
-    if(attendance === "absent"){
-
-        const confirmAbsent =
-            window.confirm(
-                "Student is marked Absent. Do you still want to save a marks result?"
-            );
-
-        if(!confirmAbsent){
-            return;
-        }
-
-    }
-
-
-    const percentage =
-        calculatePercentage(
-            marks,
-            totalMarks
-        );
-
-
-    const resultStatus =
-        calculateResult(
-            marks,
-            passMark
-        );
-
-
-    const now =
-        new Date().toISOString();
-
-
-    const results =
-        readResults();
-
-
-    if(resultId){
-
-        const index =
-            results.findIndex(
-                item =>
-                    String(item.id)
-                    === String(resultId)
-            );
-
-
-        if(index === -1){
-
-            showToast(
-                "Result পাওয়া যায়নি।",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const old =
-            results[index];
-
-
-        results[index] = {
-
-            ...old,
-
-            examId:
-                EXAM.id,
-
-            examName:
-                EXAM.name,
-
-            examDate:
-                EXAM.isoDate,
-
-            studentId:
-                student.id,
-
-            studentName:
-                student.name,
-
-            course:
-                student.course ||
-                EXAM.course,
-
-            batch:
-                student.batch ||
-                EXAM.batch,
-
-            totalMarks:
-                totalMarks,
-
-            marks:
-                marks,
-
-            percentage:
-                percentage,
-
-            passMark:
-                passMark,
-
-            result:
-                resultStatus,
-
-            note:
-                $("noteInput")
-                .value
-                .trim(),
-
-            updatedAt:
-                now
-
-        };
-
-    }
-    else{
-
-        /*
-          Prevent duplicate result for same exam/student.
-        */
-
-        const existingIndex =
-            results.findIndex(
-                item =>
-                    String(item.studentId)
-                    === String(student.id)
-                    &&
-                    item.examId === EXAM.id
-            );
-
-
-        if(existingIndex !== -1){
-
-            showToast(
-                "এই student-এর result already আছে। Edit ব্যবহার করুন।",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        results.push({
-
-            id:
-                "RESULT-" +
-                Date.now(),
-
-            examId:
-                EXAM.id,
-
-            examName:
-                EXAM.name,
-
-            examDate:
-                EXAM.isoDate,
-
-            studentId:
-                student.id,
-
-            studentName:
-                student.name,
-
-            course:
-                student.course ||
-                EXAM.course,
-
-            batch:
-                student.batch ||
-                EXAM.batch,
-
-            totalMarks:
-                totalMarks,
-
-            marks:
-                marks,
-
-            percentage:
-                percentage,
-
-            passMark:
-                passMark,
-
-            result:
-                resultStatus,
-
-            note:
-                $("noteInput")
-                .value
-                .trim(),
-
-            /*
-              New result starts unpublished.
-            */
-
-            published:
-                false,
-
-            createdAt:
-                now,
-
-            updatedAt:
-                now
-
-        });
-
-    }
-
-
-    /*
-      Save attendance separately.
-    */
-
-    markAttendance(
-        student.id,
-        attendance
-    );
-
-
-    saveResults(
-        results
-    );
-
-
-    closeResultModal();
-
-    renderAll();
-
-    showToast(
-        resultId
-        ? "Result successfully updated."
-        : "Result successfully entered."
-    );
-
+    document
+        .getElementById("questionModal")
+        .classList.add("show");
 }
 
+/* =========================================================
+   SAVE QUESTION
+========================================================= */
 
-/* =========================
-   PUBLISH / UNPUBLISH
-========================= */
+function saveQuestion(){
 
-window.togglePublish =
-function(resultId){
+    const text =
+        document
+            .getElementById("questionText")
+            .value
+            .trim();
 
-    const results =
-        readResults();
+    const A =
+        document
+            .getElementById("optionA")
+            .value
+            .trim();
 
-    const index =
-        results.findIndex(
-            item =>
-                String(item.id)
-                === String(resultId)
-        );
+    const B =
+        document
+            .getElementById("optionB")
+            .value
+            .trim();
 
+    const C =
+        document
+            .getElementById("optionC")
+            .value
+            .trim();
 
-    if(index === -1){
+    const D =
+        document
+            .getElementById("optionD")
+            .value
+            .trim();
+
+    const correct =
+        document
+            .getElementById("correctAnswer")
+            .value;
+
+    const explanation =
+        document
+            .getElementById("questionExplanation")
+            .value
+            .trim();
+
+    const editId =
+        document
+            .getElementById("editQuestionId")
+            .value;
+
+    if(!text){
+
+        showToast("Question লিখুন");
+
+        return;
+    }
+
+    if(!A || !B || !C || !D){
 
         showToast(
-            "Result পাওয়া যায়নি।",
-            "error"
+            "চারটি Option পূরণ করুন"
         );
 
         return;
-
     }
 
+    if(!correct){
 
-    const result =
-        results[index];
-
-
-    const newStatus =
-        !Boolean(
-            result.published
+        showToast(
+            "Correct Answer নির্বাচন করুন"
         );
 
-
-    if(newStatus){
-
-        const confirmed =
-            window.confirm(
-                "এই result Student Portal-এ publish করতে চান?"
-            );
-
-        if(!confirmed){
-            return;
-        }
-
+        return;
     }
 
+    let questions =
+        getQuestions();
 
-    results[index] = {
+    const questionObject = {
 
-        ...result,
+        id:
+            editId ||
+            "Q-" +
+            Date.now(),
 
-        published:
-            newStatus,
+        question:text,
 
-        updatedAt:
-            new Date().toISOString()
+        options:{
+            A:A,
+            B:B,
+            C:C,
+            D:D
+        },
+
+        correctAnswer:correct,
+
+        explanation:explanation
 
     };
 
+    if(editId){
 
-    saveResults(
-        results
-    );
+        questions =
+            questions.map(q =>
+                q.id === editId
+                    ? questionObject
+                    : q
+            );
 
+    }else{
 
-    renderAll();
+        if(questions.length >= 10){
 
+            showToast(
+                "Maximum 10 Questions allowed"
+            );
 
-    showToast(
-        newStatus
-        ? "Result published successfully."
-        : "Result unpublished successfully."
-    );
-
-};
-
-
-/* =========================
-   PUBLISH ELIGIBLE
-========================= */
-
-function publishEligible(){
-
-    const results =
-        readResults();
-
-    let count = 0;
-
-
-    const updated =
-        results.map(result => {
-
-            if(
-                result.examId !== EXAM.id
-            ){
-                return result;
-            }
-
-
-            if(
-                !result.published &&
-                Number.isFinite(
-                    Number(result.marks)
-                )
-            ){
-
-                count++;
-
-                return {
-
-                    ...result,
-
-                    published:
-                        true,
-
-                    updatedAt:
-                        new Date().toISOString()
-
-                };
-
-            }
-
-
-            return result;
-
-        });
-
-
-    if(!count){
-
-        showToast(
-            "Publish করার মতো unpublished result নেই।"
-        );
-
-        return;
-
-    }
-
-
-    const confirmed =
-        window.confirm(
-            `${count}টি result publish করতে চান?`
-        );
-
-
-    if(!confirmed){
-        return;
-    }
-
-
-    saveResults(
-        updated
-    );
-
-
-    renderAll();
-
-
-    showToast(
-        `${count}টি result successfully published.`
-    );
-
-}
-
-
-/* =========================
-   DELETE
-========================= */
-
-let pendingDeleteId =
-    null;
-
-
-window.openDeleteResult =
-function(resultId){
-
-    const result =
-        readResults().find(
-            item =>
-                String(item.id)
-                === String(resultId)
-        );
-
-    if(!result){
-        return;
-    }
-
-
-    pendingDeleteId =
-        result.id;
-
-
-    $("deleteStudentName")
-        .textContent =
-        `${result.studentName} — ${result.studentId}`;
-
-
-    $("deleteModal")
-        .classList
-        .add("show");
-
-};
-
-
-function closeDeleteModal(){
-
-    pendingDeleteId =
-        null;
-
-    $("deleteModal")
-        .classList
-        .remove("show");
-
-}
-
-
-function deleteResult(){
-
-    if(!pendingDeleteId){
-        return;
-    }
-
-
-    const results =
-        readResults();
-
-    const result =
-        results.find(
-            item =>
-                String(item.id)
-                === String(pendingDeleteId)
-        );
-
-
-    const updated =
-        results.filter(
-            item =>
-                String(item.id)
-                !== String(pendingDeleteId)
-        );
-
-
-    saveResults(
-        updated
-    );
-
-
-    closeDeleteModal();
-
-    renderAll();
-
-
-    showToast(
-        result
-        ? `${result.studentName}-এর result deleted.`
-        : "Result deleted."
-    );
-
-}
-
-
-/* =========================
-   ATTENDANCE TOGGLE
-========================= */
-
-window.toggleAttendance =
-function(studentId){
-
-    const current =
-        getAttendanceStatus(
-            studentId
-        );
-
-    const next =
-        current === "present"
-        ? "absent"
-        : "present";
-
-
-    markAttendance(
-        studentId,
-        next
-    );
-
-
-    renderAll();
-
-
-    showToast(
-        next === "present"
-        ? "Student marked Present."
-        : "Student marked Absent."
-    );
-
-};
-
-
-/* =========================
-   MARK ALL PRESENT
-========================= */
-
-function markAllPresent(){
-
-    const students =
-        getStudents();
-
-    if(!students.length){
-        return;
-    }
-
-
-    const confirmed =
-        window.confirm(
-            `সব ${students.length} জন student-কে Present করতে চান?`
-        );
-
-
-    if(!confirmed){
-        return;
-    }
-
-
-    const data =
-        readAttendance();
-
-
-    students.forEach(student => {
-
-        data[student.id] =
-            "present";
-
-    });
-
-
-    saveAttendance(
-        data
-    );
-
-
-    renderAll();
-
-
-    showToast(
-        "All students marked Present."
-    );
-
-}
-
-
-/* =========================
-   MARKS → RESULT AUTO UPDATE
-========================= */
-
-$("marksInput")
-.addEventListener(
-    "input",
-    function(){
-
-        const marks =
-            Number(this.value);
-
-        if(
-            !Number.isFinite(marks)
-        ){
             return;
         }
 
-
-        $("resultInput").value =
-            calculateResult(
-                marks,
-                EXAM.passMark
-            );
-
+        questions.push(
+            questionObject
+        );
     }
-);
 
+    writeJSON(
+        STORAGE.quizQuestions,
+        questions
+    );
 
-/* =========================
+    closeQuestionModal();
+
+    renderQuestions();
+
+    showToast(
+        editId
+            ? "Question updated"
+            : "Question added"
+    );
+}
+
+/* =========================================================
+   DELETE QUESTION
+========================================================= */
+
+function deleteQuestion(id){
+
+    const questions =
+        getQuestions();
+
+    const target =
+        questions.find(q => q.id === id);
+
+    if(!target) return;
+
+    const ok =
+        confirm(
+            "এই Question delete করতে চান?"
+        );
+
+    if(!ok) return;
+
+    const filtered =
+        questions.filter(q => q.id !== id);
+
+    writeJSON(
+        STORAGE.quizQuestions,
+        filtered
+    );
+
+    renderQuestions();
+
+    showToast(
+        "Question deleted"
+    );
+}
+
+/* =========================================================
+   CLEAR QUESTION FORM
+========================================================= */
+
+function clearQuestionForm(){
+
+    document.getElementById(
+        "editQuestionId"
+    ).value = "";
+
+    document.getElementById(
+        "questionText"
+    ).value = "";
+
+    document.getElementById(
+        "optionA"
+    ).value = "";
+
+    document.getElementById(
+        "optionB"
+    ).value = "";
+
+    document.getElementById(
+        "optionC"
+    ).value = "";
+
+    document.getElementById(
+        "optionD"
+    ).value = "";
+
+    document.getElementById(
+        "correctAnswer"
+    ).value = "";
+
+    document.getElementById(
+        "questionExplanation"
+    ).value = "";
+
+}
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+function updateSummary(){
+
+    const quiz =
+        readJSON(
+            STORAGE.quizSettings,
+            DEFAULT_QUIZ_SETTINGS
+        );
+
+    const course =
+        readJSON(
+            STORAGE.course,
+            DEFAULT_COURSE
+        );
+
+    const questions =
+        getQuestions();
+
+    const count =
+        Math.min(
+            questions.length,
+            10
+        );
+
+    const totalMarks =
+        count *
+        Number(
+            quiz.marksPerQuestion || 1
+        );
+
+    document.getElementById(
+        "summaryQuizName"
+    ).value =
+        quiz.name || "";
+
+    document.getElementById(
+        "summaryQuestions"
+    ).value =
+        count + " / 10";
+
+    document.getElementById(
+        "summaryMarks"
+    ).value =
+        totalMarks;
+
+    document.getElementById(
+        "summaryDuration"
+    ).value =
+        (quiz.durationMinutes || 20) +
+        " Minutes";
+
+    document.getElementById(
+        "summaryStart"
+    ).value =
+        quiz.startDate || "—";
+
+    document.getElementById(
+        "summaryEnd"
+    ).value =
+        quiz.endDate || "—";
+}
+
+/* =========================================================
+   VALIDATE QUIZ
+========================================================= */
+
+function validateQuiz(){
+
+    const quiz =
+        readJSON(
+            STORAGE.quizSettings,
+            DEFAULT_QUIZ_SETTINGS
+        );
+
+    const questions =
+        getQuestions();
+
+    const errors = [];
+
+    if(!quiz.name){
+
+        errors.push(
+            "Quiz Name missing"
+        );
+    }
+
+    if(!quiz.startDate){
+
+        errors.push(
+            "Quiz Start Date missing"
+        );
+    }
+
+    if(!quiz.endDate){
+
+        errors.push(
+            "Quiz End Date missing"
+        );
+    }
+
+    if(questions.length !== 10){
+
+        errors.push(
+            "Exactly 10 Questions required"
+        );
+    }
+
+    questions.forEach((q,index)=>{
+
+        if(!q.question){
+
+            errors.push(
+                `Question ${index+1}: question missing`
+            );
+        }
+
+        ["A","B","C","D"].forEach(letter=>{
+
+            if(!q.options?.[letter]){
+
+                errors.push(
+                    `Question ${index+1}: Option ${letter} missing`
+                );
+            }
+
+        });
+
+        if(!["A","B","C","D"].includes(q.correctAnswer)){
+
+            errors.push(
+                `Question ${index+1}: correct answer missing`
+            );
+        }
+
+    });
+
+    if(errors.length){
+
+        alert(
+            "Quiz Validation Failed:\n\n" +
+            errors.join("\n")
+        );
+
+        return false;
+    }
+
+    showToast(
+        "✓ Quiz validation successful — 10/10 questions ready"
+    );
+
+    return true;
+}
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function previewQuiz(){
+
+    const questions =
+        getQuestions();
+
+    if(!questions.length){
+
+        showToast(
+            "Preview করার জন্য Question প্রয়োজন"
+        );
+
+        return;
+    }
+
+    const quiz =
+        readJSON(
+            STORAGE.quizSettings,
+            DEFAULT_QUIZ_SETTINGS
+        );
+
+    let html =
+        "Quiz: " +
+        quiz.name +
+        "\n\n";
+
+    questions.forEach((q,index)=>{
+
+        html +=
+            (index+1) +
+            ". " +
+            q.question +
+            "\n";
+
+        html +=
+            "A. " + q.options.A + "\n";
+
+        html +=
+            "B. " + q.options.B + "\n";
+
+        html +=
+            "C. " + q.options.C + "\n";
+
+        html +=
+            "D. " + q.options.D + "\n\n";
+
+    });
+
+    alert(html);
+}
+
+/* =========================================================
    ESCAPE HTML
-========================= */
+========================================================= */
 
 function escapeHTML(value){
 
@@ -4132,376 +2669,175 @@ function escapeHTML(value){
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#039;");
-
 }
 
+/* =========================================================
+   TOAST
+========================================================= */
 
-function escapeAttr(value){
+let toastTimer;
 
-    return escapeHTML(value);
+function showToast(message){
 
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(()=>{
+
+            toast.classList.remove("show");
+
+        },3000);
 }
 
-
-function getInitial(name){
-
-    const text =
-        String(name || "S")
-        .trim();
-
-    return escapeHTML(
-        text.charAt(0).toUpperCase()
-    );
-
-}
-
-
-/* =========================
-   RENDER ALL
-========================= */
-
-function renderAll(){
-
-    renderStats();
-
-    renderTable();
-
-    renderAttendance();
-
-}
-
-
-/* =========================
-   FILTER EVENTS
-========================= */
-
-[
-    "searchInput",
-    "attendanceFilter",
-    "resultFilter",
-    "publishFilter"
-]
-.forEach(id => {
-
-    $(id).addEventListener(
-        id === "searchInput"
-        ? "input"
-        : "change",
-        renderTable
-    );
-
-});
-
-
-/* =========================
-   RESET FILTER
-========================= */
-
-$("resetFiltersBtn")
-.addEventListener(
-    "click",
-    function(){
-
-        $("searchInput").value =
-            "";
-
-        $("attendanceFilter").value =
-            "all";
-
-        $("resultFilter").value =
-            "all";
-
-        $("publishFilter").value =
-            "all";
-
-        renderTable();
-
-    }
-);
-
-
-/* =========================
-   BUTTON EVENTS
-========================= */
-
-$("addResultBtn")
-.addEventListener(
-    "click",
-    () => openAddResult("")
-);
-
-
-$("publishEligibleBtn")
-.addEventListener(
-    "click",
-    publishEligible
-);
-
-
-$("refreshBtn")
-.addEventListener(
-    "click",
-    function(){
-
-        renderAll();
-
-        showToast(
-            "Data refreshed."
-        );
-
-    }
-);
-
-
-$("markAllPresentBtn")
-.addEventListener(
-    "click",
-    markAllPresent
-);
-
-
-$("themeBtn")
-.addEventListener(
-    "click",
-    toggleTheme
-);
-
-
-/* =========================
-   MODAL EVENTS
-========================= */
-
-$("resultForm")
-.addEventListener(
-    "submit",
-    saveResult
-);
-
-
-$("closeModalBtn")
-.addEventListener(
-    "click",
-    closeResultModal
-);
-
-
-$("cancelModalBtn")
-.addEventListener(
-    "click",
-    closeResultModal
-);
-
-
-$("closeDeleteBtn")
-.addEventListener(
-    "click",
-    closeDeleteModal
-);
-
-
-$("cancelDeleteBtn")
-.addEventListener(
-    "click",
-    closeDeleteModal
-);
-
-
-$("confirmDeleteBtn")
-.addEventListener(
-    "click",
-    deleteResult
-);
-
-
-/* =========================
-   OUTSIDE MODAL CLICK
-========================= */
-
-$("resultModal")
-.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target === this
-        ){
-            closeResultModal();
-        }
-
-    }
-);
-
-
-$("deleteModal")
-.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target === this
-        ){
-            closeDeleteModal();
-        }
-
-    }
-);
-
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-$("mobileMenuBtn")
-.addEventListener(
-    "click",
-    function(){
-
-        $("sidebar")
-            .classList
-            .toggle("open");
-
-    }
-);
-
-
-/* =========================
+/* =========================================================
    LOGOUT
-========================= */
+========================================================= */
 
-$("logoutBtn")
-.addEventListener(
-    "click",
-    function(){
+function logoutAdmin(){
 
-        const confirmed =
-            window.confirm(
-                "Admin logout করতে চান?"
-            );
+    sessionStorage.removeItem(
+        STORAGE.adminSession
+    );
 
-        if(!confirmed){
-            return;
-        }
+    sessionStorage.removeItem(
+        "shoppingMelaAdminLoggedIn"
+    );
 
+    showToast(
+        "Admin session ended"
+    );
 
-        sessionStorage.removeItem(
-            STORAGE.adminSession
-        );
+    setTimeout(()=>{
 
-        sessionStorage.removeItem(
-            STORAGE.adminLogin
-        );
-
-
-        /*
-          If admin-login.html exists,
-          redirect there.
-        */
-
-        window.location.href =
+        location.href =
             "admin-login.html";
 
-    }
-);
+    },700);
+}
 
-
-/* =========================
+/* =========================================================
    STORAGE SYNC
-========================= */
+========================================================= */
 
 window.addEventListener(
     "storage",
-    function(event){
+    function(){
 
-        if(
-            [
-                STORAGE.results,
-                STORAGE.examAttendance,
-                STORAGE.studentList
-            ].includes(event.key)
-        ){
+        loadCourse();
 
-            renderAll();
+        loadQuizSettings();
 
-        }
-
-
-        if(
-            event.key === STORAGE.theme
-        ){
-
-            applyTheme();
-
-        }
+        renderQuestions();
 
     }
 );
-
 
 document.addEventListener(
     "visibilitychange",
     function(){
 
-        if(
-            document.visibilityState ===
-            "visible"
-        ){
+        if(!document.hidden){
 
-            renderAll();
+            loadCourse();
+
+            loadQuizSettings();
+
+            renderQuestions();
 
         }
 
     }
 );
 
+/* =========================================================
+   CLOSE MODAL OUTSIDE
+========================================================= */
 
-/* =========================
-   PUBLIC API
-========================= */
+document
+    .getElementById("questionModal")
+    .addEventListener(
+        "click",
+        function(event){
 
-window.SNKAdminExam = {
+            if(event.target === this){
 
-    exam:
-        EXAM,
+                closeQuestionModal();
 
-    getStudents:
-        getStudents,
+            }
 
-    getAttendance:
-        readAttendance,
+        }
+    );
 
-    getResults:
-        readResults,
+/* =========================================================
+   PUBLIC ADMIN API
+========================================================= */
 
-    refresh:
-        renderAll,
+window.SNKAdminCourseQuiz = {
 
-    markAttendance:
-        markAttendance,
+    getCourse(){
 
-    saveResult:
-        saveResults,
+        return readJSON(
+            STORAGE.course,
+            DEFAULT_COURSE
+        );
 
-    publish:
-        publishEligible,
+    },
 
-    deleteResult:
-        deleteResult
+    getQuizSettings(){
+
+        return readJSON(
+            STORAGE.quizSettings,
+            DEFAULT_QUIZ_SETTINGS
+        );
+
+    },
+
+    getQuestions(){
+
+        return getQuestions();
+
+    },
+
+    saveCourse,
+
+    saveQuizSettings,
+
+    validateQuiz,
+
+    refresh(){
+
+        loadCourse();
+
+        loadQuizSettings();
+
+        renderQuestions();
+
+    }
 
 };
 
-
-/* =========================
+/* =========================================================
    INIT
-========================= */
+========================================================= */
 
-checkAdminSession();
+initializeStorage();
 
-applyTheme();
+loadTheme();
 
-renderAll();
+loadCourse();
 
+loadQuizSettings();
 
-})();
+renderQuestions();
+
 </script>
 
 </body>
