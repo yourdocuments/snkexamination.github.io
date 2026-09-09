@@ -1,1865 +1,2045 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>SNK IT Institute — Admin Panel</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    :root {
-      --bg: #070b14;
-      --bg2: #0b1120;
-      --panel: rgba(15, 23, 42, .88);
-      --panel2: rgba(17, 24, 39, .96);
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --border: rgba(148,163,184,.14);
-
-      --primary: #6366f1;
-      --primary2: #8b5cf6;
-      --success: #22c55e;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --cyan: #06b6d4;
-
-      --sidebar: 250px;
-      --radius: 18px;
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Inter", "Noto Sans Bengali", sans-serif;
-      background:
-        radial-gradient(
-          circle at 10% 0%,
-          rgba(99,102,241,.14),
-          transparent 28%
-        ),
-        linear-gradient(135deg, var(--bg), var(--bg2));
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* =========================
-       LAYOUT
-    ========================= */
-
-    .app {
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: var(--sidebar);
-      background: rgba(5,9,18,.94);
-      border-right: 1px solid var(--border);
-      padding: 20px 14px;
-      z-index: 1000;
-      overflow-y: auto;
-    }
-
-    .main {
-      margin-left: var(--sidebar);
-      min-height: 100vh;
-    }
-
-    .container {
-      width: min(1400px, calc(100% - 36px));
-      margin: auto;
-    }
-
-    /* =========================
-       BRAND
-    ========================= */
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      padding: 6px 8px 24px;
-    }
-
-    .brand img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-      padding: 5px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.05);
-    }
-
-    .brand-title {
-      font-weight: 800;
-      font-size: 15px;
-    }
-
-    .brand-subtitle {
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 3px;
-    }
-
-    /* =========================
-       SIDEBAR
-    ========================= */
-
-    .nav-label {
-      color: #64748b;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      padding: 16px 10px 8px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      width: 100%;
-      padding: 11px 12px;
-      border-radius: 11px;
-      color: #94a3b8;
-      font-size: 12px;
-      margin-bottom: 4px;
-      border: 1px solid transparent;
-      transition: .2s ease;
-    }
-
-    .nav-item:hover,
-    .nav-item.active {
-      color: #fff;
-      background: rgba(99,102,241,.12);
-      border-color: rgba(99,102,241,.15);
-    }
-
-    .nav-icon {
-      width: 23px;
-      text-align: center;
-      font-size: 15px;
-    }
-
-    .sidebar-bottom {
-      margin-top: 22px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-
-    /* =========================
-       TOPBAR
-    ========================= */
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 900;
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      background: rgba(7,11,20,.82);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .page-heading h1 {
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .page-heading p {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 4px;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .admin-badge {
-      padding: 8px 11px;
-      border-radius: 10px;
-      background: rgba(34,197,94,.10);
-      color: #86efac;
-      border: 1px solid rgba(34,197,94,.15);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .icon-btn,
-    .logout-btn,
-    .menu-btn {
-      min-height: 39px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: #e2e8f0;
-      padding: 0 11px;
-    }
-
-    .logout-btn {
-      color: #fecaca;
-    }
-
-    .menu-btn {
-      display: none;
-    }
-
-    /* =========================
-       CONTENT
-    ========================= */
-
-    .content {
-      padding: 28px 0 50px;
-    }
-
-    /* =========================
-       EXAM HERO
-    ========================= */
-
-    .exam-hero {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 28px;
-      background:
-        radial-gradient(
-          circle at 90% 10%,
-          rgba(99,102,241,.24),
-          transparent 28%
-        ),
-        linear-gradient(
-          135deg,
-          rgba(99,102,241,.12),
-          rgba(15,23,42,.78)
-        );
-      box-shadow: var(--shadow);
-      margin-bottom: 22px;
-    }
-
-    .exam-hero::after {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border: 1px solid rgba(99,102,241,.16);
-      border-radius: 50%;
-      right: -80px;
-      bottom: -100px;
-    }
-
-    .exam-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(34,197,94,.10);
-      color: #86efac;
-      border: 1px solid rgba(34,197,94,.15);
-      font-size: 10px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .exam-title {
-      font-size: clamp(24px, 4vw, 38px);
-      font-weight: 800;
-      letter-spacing: -.04em;
-    }
-
-    .exam-title span {
-      color: #a5b4fc;
-    }
-
-    .exam-description {
-      max-width: 680px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 12px;
-      margin-top: 10px;
-    }
-
-    .completed-box {
-      min-width: 175px;
-      padding: 16px;
-      border-radius: 15px;
-      background: rgba(34,197,94,.08);
-      border: 1px solid rgba(34,197,94,.18);
-      text-align: center;
-    }
-
-    .completed-box strong {
-      display: block;
-      color: #86efac;
-      font-size: 14px;
-    }
-
-    .completed-box small {
-      display: block;
-      color: #64748b;
-      font-size: 10px;
-      margin-top: 5px;
-    }
-
-    .exam-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 20px;
-    }
-
-    .meta-chip {
-      padding: 8px 10px;
-      border-radius: 9px;
-      background: rgba(255,255,255,.045);
-      border: 1px solid var(--border);
-      color: #cbd5e1;
-      font-size: 10px;
-    }
-
-    /* =========================
-       STATS
-    ========================= */
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 13px;
-      margin-bottom: 22px;
-    }
-
-    .stat-card {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 16px;
-      padding: 17px;
-    }
-
-    .stat-label {
-      color: var(--muted);
-      font-size: 10px;
-      margin-bottom: 8px;
-    }
-
-    .stat-value {
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .stat-note {
-      color: #64748b;
-      font-size: 9px;
-      margin-top: 5px;
-    }
-
-    /* =========================
-       PANEL
-    ========================= */
-
-    .panel {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 19px;
-      overflow: hidden;
-      margin-bottom: 22px;
-    }
-
-    .panel-header {
-      padding: 19px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .panel-title {
-      font-size: 15px;
-      font-weight: 800;
-    }
-
-    .panel-subtitle {
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 4px;
-    }
-
-    /* =========================
-       TOOLBAR
-    ========================= */
-
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1.5fr .8fr .8fr auto;
-      gap: 9px;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .control {
-      width: 100%;
-      min-height: 40px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: rgba(255,255,255,.035);
-      color: #f8fafc;
-      padding: 0 11px;
-      outline: none;
-      font-size: 11px;
-    }
-
-    .control:focus {
-      border-color: rgba(99,102,241,.5);
-      box-shadow: 0 0 0 3px rgba(99,102,241,.08);
-    }
-
-    select.control option {
-      background: #0f172a;
-      color: white;
-    }
-
-    .btn {
-      min-height: 40px;
-      border: 0;
-      border-radius: 10px;
-      padding: 0 13px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .btn-primary {
-      background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--primary2)
-      );
-      color: white;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,.05);
-      color: #e2e8f0;
-      border: 1px solid var(--border);
-    }
-
-    .btn-success {
-      background: rgba(34,197,94,.12);
-      color: #86efac;
-      border: 1px solid rgba(34,197,94,.18);
-    }
-
-    .btn-danger {
-      background: rgba(239,68,68,.10);
-      color: #fca5a5;
-      border: 1px solid rgba(239,68,68,.18);
-    }
-
-    /* =========================
-       TABLE
-    ========================= */
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 900px;
-    }
-
-    th,
-    td {
-      padding: 13px 16px;
-      border-bottom: 1px solid rgba(148,163,184,.08);
-      text-align: left;
-      font-size: 11px;
-    }
-
-    th {
-      color: #64748b;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      background: rgba(255,255,255,.018);
-    }
-
-    td {
-      color: #cbd5e1;
-    }
-
-    tr:hover td {
-      background: rgba(99,102,241,.025);
-    }
-
-    .student-cell {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .student-avatar {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: linear-gradient(
-        135deg,
-        var(--primary),
-        var(--primary2)
-      );
-      color: white;
-      font-weight: 800;
-      font-size: 11px;
-    }
-
-    .student-name-cell {
-      font-weight: 700;
-      color: #f1f5f9;
-    }
-
-    .student-id-cell {
-      color: #64748b;
-      font-size: 9px;
-      margin-top: 3px;
-    }
-
-    .status {
-      display: inline-flex;
-      padding: 5px 8px;
-      border-radius: 8px;
-      font-size: 9px;
-      font-weight: 800;
-    }
-
-    .status-pending {
-      background: rgba(245,158,11,.10);
-      color: #fbbf24;
-    }
-
-    .status-published {
-      background: rgba(34,197,94,.10);
-      color: #86efac;
-    }
-
-    .status-pass {
-      background: rgba(34,197,94,.10);
-      color: #86efac;
-    }
-
-    .status-fail {
-      background: rgba(239,68,68,.10);
-      color: #fca5a5;
-    }
-
-    .status-absent {
-      background: rgba(239,68,68,.08);
-      color: #fca5a5;
-    }
-
-    .status-present {
-      background: rgba(34,197,94,.08);
-      color: #86efac;
-    }
-
-    .action-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .small-btn {
-      min-height: 30px;
-      padding: 0 8px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: #cbd5e1;
-      font-size: 9px;
-    }
-
-    .small-btn:hover {
-      background: rgba(255,255,255,.08);
-    }
-
-    /* =========================
-       EXAM ATTENDANCE
-    ========================= */
-
-    .attendance-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      padding: 18px 20px;
-    }
-
-    .attendance-stat {
-      padding: 15px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: rgba(255,255,255,.025);
-    }
-
-    .attendance-stat span {
-      display: block;
-      color: var(--muted);
-      font-size: 9px;
-      margin-bottom: 6px;
-    }
-
-    .attendance-stat strong {
-      font-size: 21px;
-    }
-
-    /* =========================
-       MODAL
-    ========================= */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 3000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: rgba(2,6,23,.78);
-      backdrop-filter: blur(8px);
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-box {
-      width: min(580px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      background: #0b1120;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .modal-header {
-      padding: 19px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .modal-title {
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .close-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: #cbd5e1;
-    }
-
-    .modal-body {
-      padding: 20px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 11px;
-    }
-
-    .form-group {
-      margin-bottom: 12px;
-    }
-
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
-    .form-label {
-      display: block;
-      color: #94a3b8;
-      font-size: 10px;
-      margin-bottom: 6px;
-    }
-
-    textarea.control {
-      min-height: 90px;
-      padding: 10px 11px;
-      resize: vertical;
-    }
-
-    .result-preview {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: rgba(255,255,255,.025);
-      padding: 15px;
-      margin-bottom: 16px;
-    }
-
-    .result-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .result-mini {
-      text-align: center;
-      padding: 10px;
-      border-radius: 9px;
-      background: rgba(255,255,255,.035);
-    }
-
-    .result-mini small {
-      display: block;
-      color: #64748b;
-      font-size: 8px;
-    }
-
-    .result-mini strong {
-      display: block;
-      margin-top: 3px;
-      font-size: 15px;
-    }
-
-    .modal-footer {
-      padding: 16px 20px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-
-    /* =========================
-       EMPTY
-    ========================= */
-
-    .empty {
-      padding: 40px 20px;
-      text-align: center;
-      color: var(--muted);
-      display: none;
-    }
-
-    .empty-icon {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .empty strong {
-      display: block;
-      color: #cbd5e1;
-      margin-bottom: 5px;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    #toastContainer {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 5000;
-      width: min(350px, calc(100% - 36px));
-      display: grid;
-      gap: 8px;
-    }
-
-    .toast {
-      padding: 13px 15px;
-      border-radius: 12px;
-      background: #111827;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      color: #e2e8f0;
-      font-size: 11px;
-      animation: toastIn .2s ease;
-    }
-
-    @keyframes toastIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 1150px) {
-      .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .toolbar {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .attendance-grid {
-        grid-template-columns: repeat(2,1fr);
-      }
-    }
-
-    @media (max-width: 850px) {
-
-      :root {
-        --sidebar: 0px;
-      }
-
-      .sidebar {
-        width: 260px;
-        transform: translateX(-100%);
-        transition: .25s ease;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .main {
-        margin-left: 0;
-      }
-
-      .menu-btn {
-        display: inline-block;
-      }
-
-      .exam-top {
-        flex-direction: column;
-      }
-
-      .completed-box {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 620px) {
-
-      .container {
-        width: min(100% - 22px, 1400px);
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .toolbar {
-        grid-template-columns: 1fr;
-      }
-
-      .attendance-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-group.full {
-        grid-column: auto;
-      }
-
-      .top-actions .admin-badge {
-        display: none;
-      }
-
-      .exam-hero {
-        padding: 22px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .attendance-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* =========================
-       PRINT
-    ========================= */
-
-    @media print {
-      .sidebar,
-      .topbar,
-      .toolbar,
-      .action-group,
-      .modal,
-      #toastContainer {
-        display: none !important;
-      }
-
-      .main {
-        margin-left: 0;
-      }
-
-      body {
-        background: white !important;
-        color: #111 !important;
-      }
-
-      .panel,
-      .exam-hero,
-      .stat-card {
-        background: white !important;
-        color: #111 !important;
-        border: 1px solid #ddd !important;
-        box-shadow: none !important;
-      }
-
-      td,
-      th,
-      .panel-title,
-      .exam-title,
-      .stat-value {
-        color: #111 !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SNK IT Institute — Admin Exam Result Management</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#07111f;
+    --bg2:#0b1728;
+    --card:#0f1d30;
+    --card2:#13243a;
+    --border:rgba(255,255,255,.09);
+    --text:#f7f9fc;
+    --muted:#9eacc0;
+    --primary:#7c5cff;
+    --primary2:#5b3df5;
+    --success:#20c997;
+    --warning:#ffc107;
+    --danger:#ff5d73;
+    --info:#38bdf8;
+    --shadow:0 18px 50px rgba(0,0,0,.25);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%,rgba(124,92,255,.15),transparent 28%),
+        radial-gradient(circle at 90% 20%,rgba(56,189,248,.10),transparent 25%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:260px;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    z-index:1000;
+    padding:20px 14px;
+    background:rgba(7,17,31,.96);
+    border-right:1px solid var(--border);
+    backdrop-filter:blur(18px);
+    overflow-y:auto;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:8px 10px 22px;
+}
+
+.logo{
+    width:44px;
+    height:44px;
+    border-radius:13px;
+    object-fit:contain;
+    background:#fff;
+    padding:4px;
+}
+
+.brand-text strong{
+    display:block;
+    font-size:16px;
+}
+
+.brand-text span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.menu-title{
+    color:#687991;
+    font-size:11px;
+    font-weight:800;
+    padding:15px 12px 8px;
+    text-transform:uppercase;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 12px;
+    border-radius:11px;
+    color:#aebbd0;
+    font-size:13px;
+    transition:.2s;
+}
+
+.menu a:hover,
+.menu a.active{
+    background:rgba(124,92,255,.15);
+    color:#fff;
+}
+
+.menu-icon{
+    width:23px;
+    text-align:center;
+    font-size:15px;
+}
+
+.sidebar-bottom{
+    margin-top:20px;
+    padding:12px;
+    border-top:1px solid var(--border);
+}
+
+.admin-mini{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.admin-avatar{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),#25b7ff);
+    font-weight:800;
+}
+
+.admin-mini small{
+    color:var(--muted);
+    display:block;
+    font-size:10px;
+}
+
+.logout-btn{
+    width:100%;
+    margin-top:12px;
+    border:1px solid rgba(255,93,115,.2);
+    background:rgba(255,93,115,.08);
+    color:#ff8a99;
+    padding:9px;
+    border-radius:9px;
+}
+
+/* MAIN */
+
+.main{
+    width:calc(100% - 260px);
+    margin-left:260px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:900;
+    background:rgba(7,17,31,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.page-title h1{
+    font-size:19px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:2px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.icon-btn{
+    width:39px;
+    height:39px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:#fff;
+    border-radius:10px;
+}
+
+.mobile-menu{
+    display:none;
+}
+
+/* CONTENT */
+
+.content{
+    padding:28px;
+    max-width:1700px;
+    margin:auto;
+}
+
+.exam-hero{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(124,92,255,.22);
+    border-radius:22px;
+    padding:27px;
+    background:
+        radial-gradient(circle at 90% 0%,rgba(124,92,255,.27),transparent 35%),
+        linear-gradient(135deg,#101e34,#0b1525);
+    box-shadow:var(--shadow);
+}
+
+.exam-hero:after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.05);
+    right:-90px;
+    bottom:-100px;
+}
+
+.hero-flex{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 11px;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.badge-success{
+    background:rgba(32,201,151,.13);
+    color:#55e0b6;
+    border:1px solid rgba(32,201,151,.2);
+}
+
+.badge-warning{
+    background:rgba(255,193,7,.12);
+    color:#ffd55c;
+}
+
+.badge-danger{
+    background:rgba(255,93,115,.12);
+    color:#ff8b9a;
+}
+
+.badge-info{
+    background:rgba(56,189,248,.12);
+    color:#65d2ff;
+}
+
+.exam-hero h2{
+    font-size:26px;
+    margin:12px 0 7px;
+}
+
+.exam-hero p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.exam-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:17px;
+}
+
+.meta{
+    padding:7px 11px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.035);
+    border-radius:8px;
+    color:#c6d0df;
+    font-size:11px;
+}
+
+.hero-side{
+    min-width:180px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+.hero-side .big{
+    font-size:35px;
+    font-weight:900;
+}
+
+.hero-side span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+    margin:20px 0;
+}
+
+.stat{
+    padding:18px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+}
+
+.stat-icon{
+    width:35px;
+    height:35px;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    background:rgba(124,92,255,.12);
+}
+
+.stat-number{
+    font-size:25px;
+    font-weight:900;
+    margin-top:13px;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:2px;
+}
+
+/* PANELS */
+
+.panel{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:18px 20px;
+    border-bottom:1px solid var(--border);
+}
+
+.panel-header h3{
+    font-size:15px;
+}
+
+.panel-header p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
+}
+
+.panel-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+/* BUTTONS */
+
+.btn{
+    border:0;
+    border-radius:9px;
+    padding:9px 13px;
+    font-size:11px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    color:#fff;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+}
+
+.btn-secondary{
+    color:#d9e2ef;
+    background:#182940;
+    border:1px solid var(--border);
+}
+
+.btn-success{
+    color:#06261c;
+    background:#48d9ae;
+}
+
+.btn-warning{
+    color:#332600;
+    background:#ffd15c;
+}
+
+.btn-danger{
+    color:#fff;
+    background:#d94860;
+}
+
+.btn-info{
+    color:#03283a;
+    background:#54c8f7;
+}
+
+.btn-sm{
+    padding:6px 9px;
+    font-size:10px;
+}
+
+/* FILTER */
+
+.filters{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr auto;
+    gap:9px;
+    padding:15px 20px;
+    border-bottom:1px solid var(--border);
+}
+
+.field{
+    position:relative;
+}
+
+.field input,
+.field select,
+.field textarea{
+    width:100%;
+    background:#091627;
+    border:1px solid var(--border);
+    color:#fff;
+    outline:none;
+    border-radius:9px;
+    padding:10px 11px;
+    font-size:11px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:rgba(124,92,255,.7);
+}
+
+.field select option{
+    background:#0c1829;
+}
+
+/* TABLE */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1050px;
+}
+
+th{
+    text-align:left;
+    color:#7e8da4;
+    font-size:10px;
+    font-weight:800;
+    padding:12px 15px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+}
+
+td{
+    padding:13px 15px;
+    border-bottom:1px solid rgba(255,255,255,.055);
+    font-size:11px;
+    vertical-align:middle;
+}
+
+tbody tr:hover{
+    background:rgba(255,255,255,.018);
+}
+
+.student-cell{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.student-avatar{
+    width:34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    background:linear-gradient(135deg,#253b62,#7c5cff);
+    font-weight:800;
+    flex:none;
+}
+
+.student-name{
+    font-weight:700;
+}
+
+.student-id{
+    display:block;
+    color:#75859c;
+    font-size:9px;
+    margin-top:2px;
+}
+
+.marks{
+    font-weight:900;
+    font-size:14px;
+}
+
+.percent{
+    font-weight:800;
+}
+
+.action-group{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+/* RESULT ANALYTICS */
+
+.analytics{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:14px;
+}
+
+.analytics-card{
+    padding:18px;
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:14px;
+}
+
+.analytics-card h4{
+    color:#9bacbf;
+    font-size:11px;
+    margin-bottom:12px;
+}
+
+.analytics-value{
+    font-size:26px;
+    font-weight:900;
+}
+
+.analytics-sub{
+    color:#77879d;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.progress{
+    width:100%;
+    height:7px;
+    background:#091526;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:12px;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg,var(--primary),#36c9ff);
+}
+
+/* ATTENDANCE */
+
+.attendance-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.attendance-list{
+    padding:18px 20px;
+}
+
+.att-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:11px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.att-row:last-child{
+    border-bottom:0;
+}
+
+.att-info strong{
+    display:block;
+    font-size:11px;
+}
+
+.att-info span{
+    color:var(--muted);
+    font-size:9px;
+}
+
+/* MODAL */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(8px);
+}
+
+.modal-overlay.show{
+    display:flex;
+}
+
+.modal{
+    width:min(560px,100%);
+    max-height:90vh;
+    overflow-y:auto;
+    background:#0d1b2e;
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 30px 100px rgba(0,0,0,.5);
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:17px 20px;
+    border-bottom:1px solid var(--border);
+}
+
+.modal-header h3{
+    font-size:15px;
+}
+
+.close{
+    border:0;
+    background:transparent;
+    color:#9cacbf;
+    font-size:22px;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
+}
+
+.form-group{
+    margin-bottom:13px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    display:block;
+    color:#9baabd;
+    font-size:10px;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:10px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    outline:none;
+    color:#fff;
+    background:#081526;
+    font-size:11px;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.modal-footer{
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    padding:15px 20px;
+    border-top:1px solid var(--border);
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:3000;
+    min-width:260px;
+    max-width:380px;
+    padding:13px 16px;
+    border-radius:12px;
+    background:#14243a;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    transform:translateY(120px);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    font-size:11px;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+.toast.success{
+    border-color:rgba(32,201,151,.3);
+}
+
+.toast.error{
+    border-color:rgba(255,93,115,.3);
+}
+
+/* EMPTY */
+
+.empty{
+    padding:40px 20px;
+    text-align:center;
+    color:#7d8ca1;
+}
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+/* LIGHT MODE */
+
+body.light{
+    --bg:#f4f7fb;
+    --bg2:#fff;
+    --card:#fff;
+    --card2:#f7f9fc;
+    --border:rgba(20,35,55,.1);
+    --text:#142033;
+    --muted:#65748a;
+    background:#f4f7fb;
+}
+
+body.light .sidebar,
+body.light .topbar{
+    background:rgba(255,255,255,.94);
+}
+
+body.light .field input,
+body.light .field select,
+body.light .field textarea,
+body.light .form-group input,
+body.light .form-group select,
+body.light .form-group textarea{
+    background:#f7f9fc;
+    color:#142033;
+}
+
+body.light .exam-hero{
+    background:linear-gradient(135deg,#fff,#edf2ff);
+}
+
+body.light .meta{
+    background:rgba(20,35,55,.035);
+}
+
+body.light .progress{
+    background:#e7edf5;
+}
+
+/* PRINT */
+
+@media print{
+    .sidebar,
+    .topbar,
+    .panel-actions,
+    .filters,
+    .action-group,
+    .toast,
+    .modal-overlay{
+        display:none!important;
+    }
+
+    .main{
+        width:100%;
+        margin:0;
+    }
+
+    body{
+        background:#fff;
+        color:#111;
+    }
+
+    .content{
+        padding:10px;
+    }
+
+    .panel,
+    .stat,
+    .exam-hero{
+        box-shadow:none;
+        border:1px solid #ddd;
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1250px){
+    .stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .filters{
+        grid-template-columns:1fr 1fr 1fr;
+    }
+
+    .analytics{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:900px){
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        width:100%;
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .hero-flex{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .hero-side{
+        text-align:left;
+    }
+
+    .attendance-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:650px){
+    .content{
+        padding:15px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .page-title h1{
+        font-size:15px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .analytics{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .exam-hero{
+        padding:20px;
+    }
+
+    .exam-hero h2{
+        font-size:21px;
+    }
+
+    .panel-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <div class="app">
 
-  <!-- =========================
-       SIDEBAR
-  ========================= -->
+<!-- SIDEBAR -->
 
-  <aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar">
 
     <div class="brand">
+        <img
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+            onerror="this.style.display='none'"
+        >
 
-      <img
-        src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-        alt="SNK IT Institute"
-        onerror="this.style.display='none'"
-      >
-
-      <div>
-        <div class="brand-title">
-          SNK IT Institute
+        <div class="brand-text">
+            <strong>SNK IT Institute</strong>
+            <span>Admin Control Panel</span>
         </div>
-
-        <div class="brand-subtitle">
-          Administrator Panel
-        </div>
-      </div>
-
     </div>
 
+    <div class="menu-title">Main</div>
 
-    <div class="nav-label">
-      Main
-    </div>
+    <nav class="menu">
 
-    <a href="admin.html" class="nav-item active">
-      <span class="nav-icon">📊</span>
-      Dashboard
-    </a>
+        <a href="admin.html">
+            <span class="menu-icon">⌂</span>
+            Dashboard
+        </a>
 
-    <a href="students.html" class="nav-item">
-      <span class="nav-icon">👨‍🎓</span>
-      Students
-    </a>
+        <a href="students.html">
+            <span class="menu-icon">👨‍🎓</span>
+            Students
+        </a>
 
-    <a href="courses.html" class="nav-item">
-      <span class="nav-icon">📚</span>
-      Courses
-    </a>
+        <a href="courses.html">
+            <span class="menu-icon">📚</span>
+            Courses
+        </a>
 
+        <a href="assignments.html">
+            <span class="menu-icon">📝</span>
+            Assignments
+        </a>
 
-    <div class="nav-label">
-      Academic
-    </div>
+        <a href="admin-submissions.html">
+            <span class="menu-icon">📤</span>
+            Submissions
+        </a>
 
-    <a href="admin-assignments.html" class="nav-item">
-      <span class="nav-icon">📝</span>
-      Assignments
-    </a>
+        <a href="quiz.html">
+            <span class="menu-icon">❓</span>
+            Quiz
+        </a>
 
-    <a href="admin-submissions.html" class="nav-item">
-      <span class="nav-icon">📤</span>
-      Submissions
-    </a>
+        <a class="active" href="admin.html">
+            <span class="menu-icon">🏆</span>
+            Exam Results
+        </a>
 
-    <a href="quiz.html" class="nav-item">
-      <span class="nav-icon">❓</span>
-      Quiz
-    </a>
+        <a href="attendance.html">
+            <span class="menu-icon">✓</span>
+            Attendance
+        </a>
 
-    <a href="results.html" class="nav-item">
-      <span class="nav-icon">🏆</span>
-      Results
-    </a>
+    </nav>
 
+    <div class="menu-title">Student Portal</div>
 
-    <div class="nav-label">
-      Attendance
-    </div>
+    <nav class="menu">
 
-    <a href="attendance.html" class="nav-item">
-      <span class="nav-icon">📅</span>
-      Attendance
-    </a>
+        <a href="student-dashboard.html">
+            <span class="menu-icon">📊</span>
+            Student Dashboard
+        </a>
 
-    <a href="attendance-overview.html" class="nav-item">
-      <span class="nav-icon">📈</span>
-      Attendance Overview
-    </a>
+        <a href="student-results.html">
+            <span class="menu-icon">📈</span>
+            Student Results
+        </a>
 
+        <a href="student-resources.html">
+            <span class="menu-icon">📖</span>
+            Resources
+        </a>
 
-    <div class="nav-label">
-      Student Portal
-    </div>
-
-    <a href="student-dashboard.html" class="nav-item">
-      <span class="nav-icon">🎓</span>
-      Student Dashboard
-    </a>
-
-    <a href="student-resources.html" class="nav-item">
-      <span class="nav-icon">📖</span>
-      Resources
-    </a>
-
+    </nav>
 
     <div class="sidebar-bottom">
 
-      <button
-        class="nav-item"
-        id="themeBtn"
-        type="button"
-      >
-        <span class="nav-icon">◐</span>
-        Toggle Theme
-      </button>
+        <div class="admin-mini">
 
-      <button
-        class="nav-item"
-        id="logoutBtn"
-        type="button"
-      >
-        <span class="nav-icon">↪</span>
-        Logout
-      </button>
+            <div class="admin-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Administrator</strong>
+                <small>Super Admin</small>
+            </div>
+
+        </div>
+
+        <button class="logout-btn" id="logoutBtn">
+            🚪 Logout
+        </button>
 
     </div>
 
-  </aside>
+</aside>
 
 
-  <!-- =========================
-       MAIN
-  ========================= -->
+<!-- MAIN -->
 
-  <main class="main">
+<main class="main">
 
-    <!-- TOPBAR -->
+<header class="topbar">
 
-    <header class="topbar">
+    <div class="page-title">
 
-      <div class="container topbar-inner">
-
-        <div class="page-heading">
-
-          <h1>
-            Admin Dashboard
-          </h1>
-
-          <p>
-            SNK IT Institute • Academic Management
-          </p>
-
-        </div>
-
-        <div class="top-actions">
-
-          <span class="admin-badge">
-            ● Admin
-          </span>
-
-          <button
-            class="menu-btn"
-            id="menuBtn"
-            type="button"
-          >
+        <button
+            class="icon-btn mobile-menu"
+            id="mobileMenuBtn"
+        >
             ☰
-          </button>
+        </button>
 
-          <button
+        <span style="margin-left:8px;">
+            <strong>Exam Result Management</strong>
+            <p>Student examination result control</p>
+        </span>
+
+    </div>
+
+    <div class="top-actions">
+
+        <button
             class="icon-btn"
-            id="printBtn"
-            type="button"
-          >
-            🖨 Print
-          </button>
+            id="themeBtn"
+            title="Theme"
+        >
+            ◐
+        </button>
+
+        <button
+            class="icon-btn"
+            onclick="window.print()"
+            title="Print"
+        >
+            🖨
+        </button>
+
+    </div>
+
+</header>
+
+
+<div class="content">
+
+<!-- HERO -->
+
+<section class="exam-hero">
+
+    <div class="hero-flex">
+
+        <div>
+
+            <span class="badge badge-success">
+                ● EXAM COMPLETED
+            </span>
+
+            <h2>
+                Computer Office Application Exam
+            </h2>
+
+            <p>
+                Admin Result Management — Step 2.2
+            </p>
+
+            <div class="exam-meta">
+
+                <span class="meta">
+                    📅 08 September 2026
+                </span>
+
+                <span class="meta">
+                    📚 Computer Office Application
+                </span>
+
+                <span class="meta">
+                    👥 Batch 01
+                </span>
+
+                <span class="meta">
+                    💯 Total Marks: 100
+                </span>
+
+                <span class="meta">
+                    ✓ Pass Mark: 40
+                </span>
+
+            </div>
 
         </div>
 
-      </div>
+        <div class="hero-side">
 
-    </header>
-
-
-    <!-- CONTENT -->
-
-    <div class="content">
-
-      <div class="container">
-
-
-        <!-- =========================
-             EXAM HERO
-        ========================= -->
-
-        <section class="exam-hero">
-
-          <div class="exam-top">
-
-            <div>
-
-              <div class="eyebrow">
-                EXAM COMPLETED
-              </div>
-
-              <h2 class="exam-title">
-                Computer Office
-                <span>Application Exam</span>
-              </h2>
-
-              <p class="exam-description">
-                08 September 2026-এর পরীক্ষা সম্পন্ন হয়েছে।
-                এখন Admin panel থেকে Exam Attendance, Marks,
-                Pass/Fail এবং Result Publish করা যাবে।
-              </p>
-
-              <div class="exam-meta">
-
-                <span class="meta-chip">
-                  📅 08 September 2026
-                </span>
-
-                <span class="meta-chip">
-                  🎓 Batch 01
-                </span>
-
-                <span class="meta-chip">
-                  💻 Computer Office Application
-                </span>
-
-                <span class="meta-chip">
-                  🏫 Offline
-                </span>
-
-                <span class="meta-chip">
-                  📊 Result Management
-                </span>
-
-              </div>
-
+            <div class="big" id="heroPublished">
+                0
             </div>
 
+            <span>
+                Published Results
+            </span>
 
-            <div class="completed-box">
+        </div>
 
-              <strong>
-                ✓ Completed
-              </strong>
+    </div>
 
-              <small>
-                Exam Date: 08 Sep 2026
-              </small>
-
-            </div>
-
-          </div>
-
-        </section>
+</section>
 
 
-        <!-- =========================
-             STATS
-        ========================= -->
+<!-- STATS -->
 
-        <section class="stats-grid">
+<section class="stats">
 
-          <div class="stat-card">
+    <div class="stat">
 
-            <div class="stat-label">
-              Total Students
-            </div>
+        <div class="stat-top">
+            <span class="stat-icon">👨‍🎓</span>
+        </div>
 
-            <div
-              class="stat-value"
-              id="totalStudents"
-            >
-              0
-            </div>
+        <div
+            class="stat-number"
+            id="totalStudents"
+        >
+            0
+        </div>
 
-            <div class="stat-note">
-              Registered students
-            </div>
+        <div class="stat-label">
+            Total Students
+        </div>
 
-          </div>
+    </div>
 
 
-          <div class="stat-card">
+    <div class="stat">
 
-            <div class="stat-label">
-              Exam Present
-            </div>
+        <div class="stat-top">
+            <span class="stat-icon">✓</span>
+        </div>
 
-            <div
-              class="stat-value"
-              id="examPresent"
-            >
-              0
-            </div>
+        <div
+            class="stat-number"
+            id="examPresent"
+        >
+            0
+        </div>
 
-            <div class="stat-note">
-              Present students
-            </div>
+        <div class="stat-label">
+            Exam Present
+        </div>
 
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Exam Absent
-            </div>
-
-            <div
-              class="stat-value"
-              id="examAbsent"
-            >
-              0
-            </div>
-
-            <div class="stat-note">
-              Absent students
-            </div>
-
-          </div>
+    </div>
 
 
-          <div class="stat-card">
+    <div class="stat">
 
-            <div class="stat-label">
-              Results Entered
-            </div>
+        <div class="stat-top">
+            <span class="stat-icon">✕</span>
+        </div>
 
-            <div
-              class="stat-value"
-              id="resultsEntered"
-            >
-              0
-            </div>
+        <div
+            class="stat-number"
+            id="examAbsent"
+        >
+            0
+        </div>
 
-            <div class="stat-note">
-              Marks available
-            </div>
+        <div class="stat-label">
+            Exam Absent
+        </div>
 
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-label">
-              Published
-            </div>
-
-            <div
-              class="stat-value"
-              id="resultsPublished"
-            >
-              0
-            </div>
-
-            <div class="stat-note">
-              Visible to students
-            </div>
-
-          </div>
-
-        </section>
+    </div>
 
 
-        <!-- =========================
-             EXAM ATTENDANCE
-        ========================= -->
+    <div class="stat">
 
-        <section class="panel">
+        <div class="stat-top">
+            <span class="stat-icon">📝</span>
+        </div>
 
-          <div class="panel-header">
+        <div
+            class="stat-number"
+            id="enteredResults"
+        >
+            0
+        </div>
 
-            <div>
+        <div class="stat-label">
+            Results Entered
+        </div>
 
-              <div class="panel-title">
-                Exam Attendance
-              </div>
+    </div>
 
-              <div class="panel-subtitle">
-                08 September 2026 examination attendance
-              </div>
 
-            </div>
+    <div class="stat">
+
+        <div class="stat-top">
+            <span class="stat-icon">📢</span>
+        </div>
+
+        <div
+            class="stat-number"
+            id="publishedResults"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Published
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-top">
+            <span class="stat-icon">🎯</span>
+        </div>
+
+        <div
+            class="stat-number"
+            id="passResults"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+            Passed
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ANALYTICS -->
+
+<section class="analytics">
+
+    <div class="analytics-card">
+
+        <h4>Average Marks</h4>
+
+        <div
+            class="analytics-value"
+            id="averageMarks"
+        >
+            0
+        </div>
+
+        <div class="analytics-sub">
+            Among entered results
+        </div>
+
+        <div class="progress">
+            <span id="averageBar" style="width:0%"></span>
+        </div>
+
+    </div>
+
+
+    <div class="analytics-card">
+
+        <h4>Highest Marks</h4>
+
+        <div
+            class="analytics-value"
+            id="highestMarks"
+        >
+            0
+        </div>
+
+        <div
+            class="analytics-sub"
+            id="highestStudent"
+        >
+            No result yet
+        </div>
+
+        <div class="progress">
+            <span id="highestBar" style="width:0%"></span>
+        </div>
+
+    </div>
+
+
+    <div class="analytics-card">
+
+        <h4>Lowest Marks</h4>
+
+        <div
+            class="analytics-value"
+            id="lowestMarks"
+        >
+            0
+        </div>
+
+        <div
+            class="analytics-sub"
+            id="lowestStudent"
+        >
+            No result yet
+        </div>
+
+        <div class="progress">
+            <span id="lowestBar" style="width:0%"></span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RESULT MANAGEMENT -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h3>
+                📊 Student Result Management
+            </h3>
+
+            <p>
+                Search, edit, delete, publish and manage examination results
+            </p>
+
+        </div>
+
+        <div class="panel-actions">
 
             <button
-              class="btn btn-secondary"
-              id="markAllPresentBtn"
-              type="button"
+                class="btn btn-primary"
+                id="addResultBtn"
             >
-              Mark All Present
+                + Enter Result
             </button>
-
-          </div>
-
-
-          <div class="attendance-grid">
-
-            <div class="attendance-stat">
-              <span>Total</span>
-              <strong id="attendanceTotal">
-                0
-              </strong>
-            </div>
-
-            <div class="attendance-stat">
-              <span>Present</span>
-              <strong id="attendancePresent">
-                0
-              </strong>
-            </div>
-
-            <div class="attendance-stat">
-              <span>Absent</span>
-              <strong id="attendanceAbsent">
-                0
-              </strong>
-            </div>
-
-            <div class="attendance-stat">
-              <span>Attendance %</span>
-              <strong id="attendancePercentage">
-                0%
-              </strong>
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =========================
-             STUDENT EXAM TABLE
-        ========================= -->
-
-        <section class="panel">
-
-          <div class="panel-header">
-
-            <div>
-
-              <div class="panel-title">
-                Exam & Result Management
-              </div>
-
-              <div class="panel-subtitle">
-                Student attendance, marks এবং result publish control
-              </div>
-
-            </div>
 
             <button
-              class="btn btn-primary"
-              id="publishAllBtn"
-              type="button"
+                class="btn btn-success"
+                id="publishEligibleBtn"
             >
-              Publish Eligible Results
+                📢 Publish Eligible
             </button>
 
-          </div>
+            <button
+                class="btn btn-secondary"
+                id="refreshBtn"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+    </div>
 
 
-          <!-- TOOLBAR -->
+    <!-- FILTERS -->
 
-          <div class="toolbar">
+    <div class="filters">
+
+        <div class="field">
 
             <input
-              id="searchInput"
-              class="control"
-              type="search"
-              placeholder="Search student name or ID..."
+                id="searchInput"
+                type="search"
+                placeholder="Search student name or ID..."
             >
 
-            <select
-              id="attendanceFilter"
-              class="control"
-            >
-              <option value="all">
-                All Attendance
-              </option>
+        </div>
 
-              <option value="present">
-                Present
-              </option>
+        <div class="field">
 
-              <option value="absent">
-                Absent
-              </option>
+            <select id="attendanceFilter">
+
+                <option value="all">
+                    All Attendance
+                </option>
+
+                <option value="present">
+                    Present
+                </option>
+
+                <option value="absent">
+                    Absent
+                </option>
+
             </select>
 
-            <select
-              id="resultFilter"
-              class="control"
-            >
-              <option value="all">
-                All Results
-              </option>
+        </div>
 
-              <option value="pending">
-                Result Pending
-              </option>
 
-              <option value="entered">
-                Marks Entered
-              </option>
+        <div class="field">
 
-              <option value="published">
-                Published
-              </option>
+            <select id="resultFilter">
 
-              <option value="pass">
-                Pass
-              </option>
+                <option value="all">
+                    All Results
+                </option>
 
-              <option value="fail">
-                Fail
-              </option>
+                <option value="entered">
+                    Result Entered
+                </option>
+
+                <option value="not-entered">
+                    Not Entered
+                </option>
+
             </select>
 
-            <button
-              class="btn btn-secondary"
-              id="resetFiltersBtn"
-              type="button"
-            >
-              Reset
-            </button>
-
-          </div>
+        </div>
 
 
-          <!-- TABLE -->
+        <div class="field">
 
-          <div class="table-wrap">
+            <select id="publishFilter">
 
-            <table>
+                <option value="all">
+                    All Publish Status
+                </option>
 
-              <thead>
+                <option value="published">
+                    Published
+                </option>
+
+                <option value="unpublished">
+                    Unpublished
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="btn btn-secondary"
+            id="resetFiltersBtn"
+        >
+            Reset
+        </button>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
 
                 <tr>
 
-                  <th>
-                    Student
-                  </th>
+                    <th>
+                        Student
+                    </th>
 
-                  <th>
-                    Attendance
-                  </th>
+                    <th>
+                        Attendance
+                    </th>
 
-                  <th>
-                    Marks
-                  </th>
+                    <th>
+                        Marks
+                    </th>
 
-                  <th>
-                    Percentage
-                  </th>
+                    <th>
+                        Percentage
+                    </th>
 
-                  <th>
-                    Result
-                  </th>
+                    <th>
+                        Result
+                    </th>
 
-                  <th>
-                    Publish
-                  </th>
+                    <th>
+                        Publish
+                    </th>
 
-                  <th>
-                    Action
-                  </th>
+                    <th>
+                        Updated
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
 
                 </tr>
 
-              </thead>
+            </thead>
 
-              <tbody id="studentTableBody"></tbody>
+            <tbody id="resultTableBody">
+            </tbody>
 
-            </table>
+        </table>
 
-          </div>
+    </div>
+
+</section>
 
 
-          <div
-            class="empty"
-            id="emptyState"
-          >
+<!-- ATTENDANCE -->
 
-            <div class="empty-icon">
-              📋
+<div class="attendance-grid">
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h3>
+                ✓ Exam Attendance
+            </h3>
+
+            <p>
+                Attendance status for 08 September 2026
+            </p>
+
+        </div>
+
+        <button
+            class="btn btn-success btn-sm"
+            id="markAllPresentBtn"
+        >
+            ✓ Mark All Present
+        </button>
+
+    </div>
+
+    <div
+        class="attendance-list"
+        id="attendanceList"
+    >
+    </div>
+
+</section>
+
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h3>
+                ℹ Result Publishing Rules
+            </h3>
+
+            <p>
+                Step 2.2 management rules
+            </p>
+
+        </div>
+
+    </div>
+
+    <div style="padding:20px;">
+
+        <div class="att-row">
+
+            <div class="att-info">
+                <strong>Minimum Pass Mark</strong>
+                <span>40 out of 100</span>
             </div>
 
-            <strong>
-              No student found
-            </strong>
-
-            <span>
-              Search/filter পরিবর্তন করে আবার চেষ্টা করুন।
+            <span class="badge badge-success">
+                40%
             </span>
 
-          </div>
-
-        </section>
+        </div>
 
 
-        <!-- =========================
-             EXAM INFORMATION
-        ========================= -->
+        <div class="att-row">
 
-        <section class="panel">
-
-          <div class="panel-header">
-
-            <div>
-
-              <div class="panel-title">
-                Exam Information
-              </div>
-
-              <div class="panel-subtitle">
-                Current examination configuration
-              </div>
-
+            <div class="att-info">
+                <strong>Passed</strong>
+                <span>Marks equal to or above pass mark</span>
             </div>
 
-          </div>
+            <span class="badge badge-success">
+                PASS
+            </span>
+
+        </div>
 
 
-          <div style="padding:20px;">
+        <div class="att-row">
 
-            <div
-              style="
-                display:grid;
-                grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-                gap:10px;
-              "
-            >
-
-              <div class="attendance-stat">
-                <span>Exam</span>
-                <strong style="font-size:13px;">
-                  Computer Office Application
-                </strong>
-              </div>
-
-              <div class="attendance-stat">
-                <span>Date</span>
-                <strong style="font-size:13px;">
-                  08 Sep 2026
-                </strong>
-              </div>
-
-              <div class="attendance-stat">
-                <span>Batch</span>
-                <strong style="font-size:13px;">
-                  Batch 01
-                </strong>
-              </div>
-
-              <div class="attendance-stat">
-                <span>Status</span>
-                <strong
-                  style="
-                    font-size:13px;
-                    color:#86efac;
-                  "
-                >
-                  Completed
-                </strong>
-              </div>
-
+            <div class="att-info">
+                <strong>Failed</strong>
+                <span>Marks below pass mark</span>
             </div>
 
-          </div>
+            <span class="badge badge-danger">
+                FAIL
+            </span>
 
-        </section>
+        </div>
 
-      </div>
+
+        <div class="att-row">
+
+            <div class="att-info">
+                <strong>Publish</strong>
+                <span>Only admin can publish a result</span>
+            </div>
+
+            <span class="badge badge-info">
+                ADMIN
+            </span>
+
+        </div>
+
+
+        <div class="att-row">
+
+            <div class="att-info">
+                <strong>Student Portal</strong>
+                <span>Published result can appear there</span>
+            </div>
+
+            <span class="badge badge-info">
+                SYNC
+            </span>
+
+        </div>
 
     </div>
 
-  </main>
+</section>
 
 </div>
 
 
-<!-- =========================
-     RESULT MODAL
-========================= -->
+<!-- FOOTER -->
+
+<footer style="
+    text-align:center;
+    color:#64748b;
+    font-size:10px;
+    padding:15px 0 30px;
+">
+
+    SNK IT Institute • Admin Exam Result Management • Step 2.2
+
+</footer>
+
+</div>
+
+</main>
+
+</div>
+
+
+<!-- RESULT MODAL -->
 
 <div
-  class="modal"
-  id="resultModal"
+    class="modal-overlay"
+    id="resultModal"
 >
 
-  <div class="modal-box">
+    <div class="modal">
 
-    <div class="modal-header">
+        <div class="modal-header">
 
-      <div class="modal-title">
-        Enter / Edit Student Result
-      </div>
+            <h3 id="modalTitle">
+                Enter Student Result
+            </h3>
 
-      <button
-        class="close-btn"
-        id="closeModalBtn"
-        type="button"
-      >
-        ✕
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-      <div class="result-preview">
-
-        <strong id="modalStudentName">
-          Student
-        </strong>
-
-        <div
-          style="
-            color:#64748b;
-            font-size:10px;
-            margin-top:4px;
-          "
-          id="modalStudentId"
-        >
-          SNK-1001
-        </div>
-
-        <div class="result-preview-grid">
-
-          <div class="result-mini">
-
-            <small>
-              Attendance
-            </small>
-
-            <strong id="modalAttendance">
-              Present
-            </strong>
-
-          </div>
-
-          <div class="result-mini">
-
-            <small>
-              Total Marks
-            </small>
-
-            <strong>
-              100
-            </strong>
-
-          </div>
-
-          <div class="result-mini">
-
-            <small>
-              Exam Date
-            </small>
-
-            <strong>
-              08 Sep
-            </strong>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <form id="resultForm">
-
-        <div class="form-grid">
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Obtained Marks
-            </label>
-
-            <input
-              id="marksInput"
-              class="control"
-              type="number"
-              min="0"
-              max="100"
-              required
-              placeholder="Example: 75"
+            <button
+                class="close"
+                id="closeModalBtn"
             >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label class="form-label">
-              Pass Mark
-            </label>
-
-            <input
-              id="passMarkInput"
-              class="control"
-              type="number"
-              min="0"
-              max="100"
-              value="40"
-              required
-            >
-
-          </div>
-
-
-          <div class="form-group full">
-
-            <label class="form-label">
-              Teacher/Admin Note
-            </label>
-
-            <textarea
-              id="resultNote"
-              class="control"
-              placeholder="Optional note..."
-            ></textarea>
-
-          </div>
+                ×
+            </button>
 
         </div>
 
-      </form>
+
+        <form id="resultForm">
+
+            <div class="modal-body">
+
+                <input
+                    type="hidden"
+                    id="editResultId"
+                >
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Student
+                        </label>
+
+                        <select
+                            id="studentSelect"
+                            required
+                        >
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Exam Attendance
+                        </label>
+
+                        <select id="formAttendance">
+
+                            <option value="present">
+                                Present
+                            </option>
+
+                            <option value="absent">
+                                Absent
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Total Marks
+                        </label>
+
+                        <input
+                            type="number"
+                            id="totalMarksInput"
+                            value="100"
+                            min="1"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Obtained Marks
+                        </label>
+
+                        <input
+                            type="number"
+                            id="marksInput"
+                            min="0"
+                            max="100"
+                            placeholder="Enter marks"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Pass Mark
+                        </label>
+
+                        <input
+                            type="number"
+                            id="passMarkInput"
+                            value="40"
+                            min="0"
+                            max="100"
+                            readonly
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Result
+                        </label>
+
+                        <select id="resultInput">
+
+                            <option value="Pass">
+                                Pass
+                            </option>
+
+                            <option value="Fail">
+                                Fail
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Admin Note
+                        </label>
+
+                        <textarea
+                            id="noteInput"
+                            placeholder="Optional note about this result..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="cancelModalBtn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Save Result
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
-
-
-    <div class="modal-footer">
-
-      <button
-        class="btn btn-secondary"
-        id="cancelModalBtn"
-        type="button"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="btn btn-primary"
-        id="saveResultBtn"
-        type="button"
-      >
-        Save Result
-      </button>
-
-    </div>
-
-  </div>
 
 </div>
 
 
-<!-- =========================
-     TOAST
-========================= -->
+<!-- CONFIRM DELETE MODAL -->
 
-<div id="toastContainer"></div>
+<div
+    class="modal-overlay"
+    id="deleteModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h3>
+                Delete Result
+            </h3>
+
+            <button
+                class="close"
+                id="closeDeleteBtn"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <p
+                style="
+                    color:#aab7c8;
+                    font-size:12px;
+                    line-height:1.7;
+                "
+            >
+                আপনি কি নিশ্চিতভাবে এই student's result delete করতে চান?
+                Delete করলে result আবার manually enter করতে হবে।
+            </p>
+
+            <p
+                id="deleteStudentName"
+                style="
+                    margin-top:12px;
+                    font-weight:800;
+                "
+            ></p>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="btn btn-secondary"
+                id="cancelDeleteBtn"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="btn btn-danger"
+                id="confirmDeleteBtn"
+            >
+                Delete Result
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
 
 
 <script>
 /* =========================================================
    SNK IT INSTITUTE
-   ADMIN EXAM MANAGEMENT
-   STEP 2.1
-========================================================= */
+   ADMIN EXAM RESULT MANAGEMENT
+   STEP 2.2
+   ========================================================= */
+
+(function(){
+
+"use strict";
 
 
 /* =========================
@@ -1868,23 +2048,23 @@
 
 const STORAGE = {
 
-  adminLogin:
-    "shoppingMelaAdminLoggedIn",
+    adminLogin:
+        "shoppingMelaAdminLoggedIn",
 
-  adminSession:
-    "snkAdminLoggedIn",
+    adminSession:
+        "snkAdminLoggedIn",
 
-  results:
-    "snkAdminExamResultsV21",
+    results:
+        "snkAdminExamResultsV21",
 
-  examAttendance:
-    "snkExamAttendanceV21",
+    examAttendance:
+        "snkExamAttendanceV21",
 
-  studentList:
-    "snkStudents",
+    studentList:
+        "snkStudents",
 
-  theme:
-    "snkTheme"
+    theme:
+        "snkTheme"
 
 };
 
@@ -1895,86 +2075,93 @@ const STORAGE = {
 
 const EXAM = {
 
-  id:
-    "SNK-EXAM-2026-09-08",
+    id:
+        "SNK-EXAM-2026-09-08",
 
-  name:
-    "Computer Office Application Exam",
+    name:
+        "Computer Office Application Exam",
 
-  course:
-    "Computer Office Application",
+    course:
+        "Computer Office Application",
 
-  batch:
-    "Batch 01",
+    batch:
+        "Batch 01",
 
-  date:
-    "08 September 2026",
+    date:
+        "08 September 2026",
 
-  isoDate:
-    "2026-09-08",
+    isoDate:
+        "2026-09-08",
 
-  totalMarks:
-    100,
+    totalMarks:
+        100,
 
-  passMark:
-    40
+    passMark:
+        40
 
 };
 
 
 /* =========================
-   DEMO STUDENTS
-   Used only if no student
-   data exists yet.
+   DEFAULT STUDENT
 ========================= */
 
 const DEFAULT_STUDENTS = [
 
-  {
-    id: "SNK-1001",
-    name: "Student",
-    course: "Computer Office Application",
-    batch: "Batch 01"
-  }
+    {
+
+        id:
+            "SNK-1001",
+
+        name:
+            "Student",
+
+        course:
+            "Computer Office Application",
+
+        batch:
+            "Batch 01"
+
+    }
 
 ];
 
 
 /* =========================
-   HELPERS
+   DOM
 ========================= */
 
-function getJSON(key, fallback) {
+const $ = id =>
+    document.getElementById(id);
 
-  try {
 
-    const raw =
-      localStorage.getItem(key);
+/* =========================
+   AUTH
+========================= */
 
-    if (!raw) {
-      return fallback;
+function checkAdminSession(){
+
+    const session =
+        sessionStorage.getItem(STORAGE.adminSession);
+
+    const legacy =
+        sessionStorage.getItem(STORAGE.adminLogin);
+
+    if(
+        session !== "true" &&
+        legacy !== "true"
+    ){
+
+        /*
+          Demo-friendly fallback.
+          If your admin-login.html is already connected,
+          it should set snkAdminLoggedIn=true.
+        */
+
+        console.warn(
+            "Admin session not found."
+        );
     }
-
-    const parsed =
-      JSON.parse(raw);
-
-    return parsed ?? fallback;
-
-  } catch (error) {
-
-    return fallback;
-
-  }
-
-}
-
-
-function saveJSON(key, value) {
-
-  localStorage.setItem(
-    key,
-    JSON.stringify(value)
-  );
 
 }
 
@@ -1983,105 +2170,116 @@ function saveJSON(key, value) {
    STUDENT DATA
 ========================= */
 
-function getStudents() {
+function normalizeStudent(item){
 
-  const possibleKeys = [
+    if(!item || typeof item !== "object"){
+        return null;
+    }
 
-    "snkStudents",
-    "students",
-    "shoppingMelaUsers"
+    const id =
+        item.id ||
+        item.studentId ||
+        item.studentID ||
+        item.userId ||
+        "";
 
-  ];
+    const name =
+        item.name ||
+        item.studentName ||
+        item.fullName ||
+        item.displayName ||
+        "Student";
 
+    return {
 
-  for (const key of possibleKeys) {
+        id:
+            String(id || "").trim(),
 
-    const data =
-      getJSON(key, null);
+        name:
+            String(name || "Student").trim(),
 
+        course:
+            item.course ||
+            item.courseName ||
+            EXAM.course,
 
-    if (Array.isArray(data) && data.length) {
+        batch:
+            item.batch ||
+            item.batchName ||
+            EXAM.batch
 
-      const normalized =
-        data
-          .map((student, index) => {
+    };
 
-            const id =
-              student.studentId ||
-              student.id ||
-              student.userId ||
-              `SNK-${1000 + index + 1}`;
-
-
-            const name =
-              student.name ||
-              student.studentName ||
-              student.fullName ||
-              "Student";
-
-
-            return {
-
-              id: String(id),
-
-              name: String(name),
-
-              course:
-                student.course ||
-                EXAM.course,
-
-              batch:
-                student.batch ||
-                EXAM.batch
-
-            };
-
-          });
+}
 
 
-      if (normalized.length) {
+function readStudentStorage(){
 
-        return normalized;
+    const keys = [
 
-      }
+        STORAGE.studentList,
+
+        "students",
+
+        "shoppingMelaUsers"
+
+    ];
+
+    for(const key of keys){
+
+        try{
+
+            const raw =
+                localStorage.getItem(key);
+
+            if(!raw){
+                continue;
+            }
+
+            const parsed =
+                JSON.parse(raw);
+
+            let arr = [];
+
+            if(Array.isArray(parsed)){
+                arr = parsed;
+            }
+            else if(parsed && Array.isArray(parsed.students)){
+                arr = parsed.students;
+            }
+            else if(parsed && Array.isArray(parsed.users)){
+                arr = parsed.users;
+            }
+            else if(parsed && Array.isArray(parsed.data)){
+                arr = parsed.data;
+            }
+
+            const students =
+                arr
+                .map(normalizeStudent)
+                .filter(Boolean)
+                .filter(student => student.id);
+
+            if(students.length){
+                return students;
+            }
+
+        }
+        catch(error){
+
+            console.warn(
+                "Student storage error:",
+                key,
+                error
+            );
+
+        }
 
     }
 
-  }
-
-
-  return [...DEFAULT_STUDENTS];
-
-}
-
-
-/* =========================
-   ATTENDANCE
-========================= */
-
-function getAttendance() {
-
-  const data =
-    getJSON(
-      STORAGE.examAttendance,
-      {}
+    return DEFAULT_STUDENTS.map(
+        student => ({...student})
     );
-
-
-  return data &&
-    typeof data === "object"
-    ? data
-    : {};
-
-}
-
-
-function saveAttendance(data) {
-
-  saveJSON(
-    STORAGE.examAttendance,
-    data
-  );
 
 }
 
@@ -2090,1343 +2288,250 @@ function saveAttendance(data) {
    RESULTS
 ========================= */
 
-function getResults() {
+function readResults(){
 
-  const data =
-    getJSON(
-      STORAGE.results,
-      []
+    try{
+
+        const raw =
+            localStorage.getItem(STORAGE.results);
+
+        if(!raw){
+            return [];
+        }
+
+        const parsed =
+            JSON.parse(raw);
+
+        if(Array.isArray(parsed)){
+            return parsed;
+        }
+
+        if(
+            parsed &&
+            Array.isArray(parsed.results)
+        ){
+            return parsed.results;
+        }
+
+        return [];
+
+    }
+    catch(error){
+
+        console.error(
+            "Result read error:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+function saveResults(results){
+
+    localStorage.setItem(
+        STORAGE.results,
+        JSON.stringify(results)
     );
 
-
-  return Array.isArray(data)
-    ? data
-    : [];
-
-}
-
-
-function saveResults(data) {
-
-  saveJSON(
-    STORAGE.results,
-    data
-  );
-
 }
 
 
 /* =========================
-   DATA INITIALIZATION
+   ATTENDANCE
 ========================= */
 
-let students =
-  getStudents();
+function readAttendance(){
 
-let attendance =
-  getAttendance();
+    try{
 
-let results =
-  getResults();
+        const raw =
+            localStorage.getItem(
+                STORAGE.examAttendance
+            );
 
-let selectedStudentId =
-  null;
+        if(!raw){
+            return {};
+        }
 
+        const parsed =
+            JSON.parse(raw);
 
-/* =========================
-   NORMALIZE EXISTING RESULT
-========================= */
+        if(
+            parsed &&
+            typeof parsed === "object"
+        ){
 
-function getStudentResult(studentId) {
+            if(
+                parsed.records &&
+                typeof parsed.records === "object"
+            ){
+                return parsed.records;
+            }
 
-  return results.find(
-    result =>
-      String(result.studentId) ===
-      String(studentId) &&
-      result.examId === EXAM.id
-  );
+            return parsed;
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Attendance read error:",
+            error
+        );
+
+    }
+
+    return {};
 
 }
 
 
-/* =========================
-   ATTENDANCE STATUS
-========================= */
+function saveAttendance(data){
 
-function getStudentAttendance(studentId) {
+    localStorage.setItem(
+        STORAGE.examAttendance,
+        JSON.stringify(data)
+    );
 
-  const value =
-    attendance[String(studentId)];
-
-
-  if (
-    value === "present" ||
-    value === "Present"
-  ) {
-
-    return "present";
-
-  }
+}
 
 
-  if (
-    value === "absent" ||
-    value === "Absent"
-  ) {
+function getAttendanceStatus(studentId){
+
+    const data =
+        readAttendance();
+
+    const value =
+        data[studentId];
+
+    if(
+        value === true ||
+        value === "present" ||
+        value === "Present"
+    ){
+        return "present";
+    }
 
     return "absent";
 
-  }
+}
 
 
-  return "absent";
+function markAttendance(
+    studentId,
+    status
+){
+
+    const data =
+        readAttendance();
+
+    data[studentId] =
+        status === "present"
+        ? "present"
+        : "absent";
+
+    saveAttendance(data);
 
 }
 
 
 /* =========================
-   MARK ATTENDANCE
+   RESULT HELPERS
 ========================= */
 
-function markStudentAttendance(
-  studentId,
-  status
-) {
+function findResult(studentId){
 
-  attendance[String(studentId)] =
-    status;
+    const results =
+        readResults();
 
-
-  saveAttendance(
-    attendance
-  );
-
-
-  renderAll();
-
-  showToast(
-    status === "present"
-      ? "Student marked Present."
-      : "Student marked Absent."
-  );
+    return results.find(
+        result =>
+            String(result.studentId)
+            === String(studentId)
+            &&
+            result.examId === EXAM.id
+    ) || null;
 
 }
 
 
-/* =========================
-   MARK ALL PRESENT
-========================= */
-
-document
-  .getElementById(
-    "markAllPresentBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      students.forEach(
-        student => {
-
-          attendance[
-            String(student.id)
-          ] = "present";
-
-        }
-      );
-
-
-      saveAttendance(
-        attendance
-      );
-
-
-      renderAll();
-
-
-      showToast(
-        "All students marked Present."
-      );
-
-    }
-  );
-
-
-/* =========================
-   FILTERS
-========================= */
-
-const searchInput =
-  document.getElementById(
-    "searchInput"
-  );
-
-const attendanceFilter =
-  document.getElementById(
-    "attendanceFilter"
-  );
-
-const resultFilter =
-  document.getElementById(
-    "resultFilter"
-  );
-
-
-function getFilteredStudents() {
-
-  const search =
-    searchInput.value
-      .trim()
-      .toLowerCase();
-
-
-  const attendanceValue =
-    attendanceFilter.value;
-
-
-  const resultValue =
-    resultFilter.value;
-
-
-  return students.filter(
-    student => {
-
-      const studentResult =
-        getStudentResult(
-          student.id
-        );
-
-
-      const studentAttendance =
-        getStudentAttendance(
-          student.id
-        );
-
-
-      const searchable =
-        (
-          student.name +
-          " " +
-          student.id +
-          " " +
-          student.course +
-          " " +
-          student.batch
-        )
-          .toLowerCase();
-
-
-      const searchMatch =
-        !search ||
-        searchable.includes(search);
-
-
-      const attendanceMatch =
-        attendanceValue === "all" ||
-        studentAttendance ===
-          attendanceValue;
-
-
-      let resultMatch = true;
-
-
-      if (
-        resultValue === "pending"
-      ) {
-
-        resultMatch =
-          !studentResult;
-
-      }
-
-
-      if (
-        resultValue === "entered"
-      ) {
-
-        resultMatch =
-          !!studentResult;
-
-      }
-
-
-      if (
-        resultValue === "published"
-      ) {
-
-        resultMatch =
-          !!studentResult &&
-          studentResult.published === true;
-
-      }
-
-
-      if (
-        resultValue === "pass"
-      ) {
-
-        resultMatch =
-          !!studentResult &&
-          studentResult.result === "Pass";
-
-      }
-
-
-      if (
-        resultValue === "fail"
-      ) {
-
-        resultMatch =
-          !!studentResult &&
-          studentResult.result === "Fail";
-
-      }
-
-
-      return (
-        searchMatch &&
-        attendanceMatch &&
-        resultMatch
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================
-   RENDER TABLE
-========================= */
-
-function renderStudents() {
-
-  const body =
-    document.getElementById(
-      "studentTableBody"
-    );
-
-
-  const empty =
-    document.getElementById(
-      "emptyState"
-    );
-
-
-  const list =
-    getFilteredStudents();
-
-
-  body.innerHTML = "";
-
-
-  if (!list.length) {
-
-    empty.style.display =
-      "block";
-
-    return;
-
-  }
-
-
-  empty.style.display =
-    "none";
-
-
-  list.forEach(
-    student => {
-
-      const attendanceStatus =
-        getStudentAttendance(
-          student.id
-        );
-
-
-      const result =
-        getStudentResult(
-          student.id
-        );
-
-
-      let marks =
-        "—";
-
-
-      let percentage =
-        "—";
-
-
-      let resultStatus =
-        "Pending";
-
-
-      let resultClass =
-        "status-pending";
-
-
-      let publishStatus =
-        "Not Published";
-
-
-      let publishClass =
-        "status-pending";
-
-
-      if (result) {
-
-        marks =
-          `${result.marks}/${EXAM.totalMarks}`;
-
-
-        percentage =
-          `${result.percentage}%`;
-
-
-        resultStatus =
-          result.result;
-
-
-        resultClass =
-          result.result === "Pass"
-            ? "status-pass"
-            : "status-fail";
-
-
-        if (result.published) {
-
-          publishStatus =
-            "Published";
-
-          publishClass =
-            "status-published";
-
-        }
-
-      }
-
-
-      const row =
-        document.createElement(
-          "tr"
-        );
-
-
-      const firstLetter =
-        student.name
-          .trim()
-          .charAt(0)
-          .toUpperCase() ||
-        "S";
-
-
-      row.innerHTML = `
-
-        <td>
-
-          <div class="student-cell">
-
-            <div class="student-avatar">
-              ${escapeHTML(firstLetter)}
-            </div>
-
-            <div>
-
-              <div class="student-name-cell">
-                ${escapeHTML(student.name)}
-              </div>
-
-              <div class="student-id-cell">
-                ${escapeHTML(student.id)}
-              </div>
-
-            </div>
-
-          </div>
-
-        </td>
-
-
-        <td>
-
-          <div class="action-group">
-
-            <button
-              class="small-btn"
-              data-attendance="present"
-              data-id="${escapeHTML(student.id)}"
-            >
-              ✓ Present
-            </button>
-
-            <button
-              class="small-btn"
-              data-attendance="absent"
-              data-id="${escapeHTML(student.id)}"
-            >
-              ✕ Absent
-            </button>
-
-          </div>
-
-          <div style="margin-top:6px;">
-
-            <span class="
-              status
-              ${
-                attendanceStatus === "present"
-                  ? "status-present"
-                  : "status-absent"
-              }
-            ">
-              ${
-                attendanceStatus === "present"
-                  ? "Present"
-                  : "Absent"
-              }
-            </span>
-
-          </div>
-
-        </td>
-
-
-        <td>
-          <strong>
-            ${marks}
-          </strong>
-        </td>
-
-
-        <td>
-          ${percentage}
-        </td>
-
-
-        <td>
-
-          <span class="
-            status
-            ${resultClass}
-          ">
-            ${resultStatus}
-          </span>
-
-        </td>
-
-
-        <td>
-
-          <span class="
-            status
-            ${publishClass}
-          ">
-            ${publishStatus}
-          </span>
-
-        </td>
-
-
-        <td>
-
-          <div class="action-group">
-
-            <button
-              class="small-btn edit-result-btn"
-              data-id="${escapeHTML(student.id)}"
-            >
-              ${
-                result
-                  ? "Edit Marks"
-                  : "Enter Marks"
-              }
-            </button>
-
-            ${
-              result
-                ? `
-                  <button
-                    class="small-btn toggle-publish-btn"
-                    data-id="${escapeHTML(student.id)}"
-                  >
-                    ${
-                      result.published
-                        ? "Unpublish"
-                        : "Publish"
-                    }
-                  </button>
-                `
-                : ""
-            }
-
-          </div>
-
-        </td>
-
-      `;
-
-
-      body.appendChild(row);
-
-    }
-  );
-
-
-  attachTableEvents();
-
-}
-
-
-/* =========================
-   TABLE EVENTS
-========================= */
-
-function attachTableEvents() {
-
-  document
-    .querySelectorAll(
-      "[data-attendance]"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            markStudentAttendance(
-              button.dataset.id,
-              button.dataset.attendance
-            );
-
-          }
-        );
-
-      }
-    );
-
-
-  document
-    .querySelectorAll(
-      ".edit-result-btn"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            openResultModal(
-              button.dataset.id
-            );
-
-          }
-        );
-
-      }
-    );
-
-
-  document
-    .querySelectorAll(
-      ".toggle-publish-btn"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            togglePublish(
-              button.dataset.id
-            );
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-/* =========================
-   RESULT MODAL
-========================= */
-
-const resultModal =
-  document.getElementById(
-    "resultModal"
-  );
-
-
-function openResultModal(
-  studentId
-) {
-
-  const student =
-    students.find(
-      item =>
-        String(item.id) ===
-        String(studentId)
-    );
-
-
-  if (!student) {
-    return;
-  }
-
-
-  selectedStudentId =
-    String(student.id);
-
-
-  const result =
-    getStudentResult(
-      student.id
-    );
-
-
-  const attendanceStatus =
-    getStudentAttendance(
-      student.id
-    );
-
-
-  document.getElementById(
-    "modalStudentName"
-  ).textContent =
-    student.name;
-
-
-  document.getElementById(
-    "modalStudentId"
-  ).textContent =
-    student.id;
-
-
-  document.getElementById(
-    "modalAttendance"
-  ).textContent =
-    attendanceStatus === "present"
-      ? "Present"
-      : "Absent";
-
-
-  document.getElementById(
-    "marksInput"
-  ).value =
-    result
-      ? result.marks
-      : "";
-
-
-  document.getElementById(
-    "passMarkInput"
-  ).value =
-    result
-      ? result.passMark
-      : EXAM.passMark;
-
-
-  document.getElementById(
-    "resultNote"
-  ).value =
-    result
-      ? result.note || ""
-      : "";
-
-
-  resultModal.classList.add(
-    "show"
-  );
-
-}
-
-
-/* =========================
-   CLOSE MODAL
-========================= */
-
-function closeResultModal() {
-
-  resultModal.classList.remove(
-    "show"
-  );
-
-  selectedStudentId =
-    null;
-
-}
-
-
-document
-  .getElementById(
-    "closeModalBtn"
-  )
-  .addEventListener(
-    "click",
-    closeResultModal
-  );
-
-
-document
-  .getElementById(
-    "cancelModalBtn"
-  )
-  .addEventListener(
-    "click",
-    closeResultModal
-  );
-
-
-resultModal.addEventListener(
-  "click",
-  event => {
-
-    if (
-      event.target ===
-      resultModal
-    ) {
-
-      closeResultModal();
-
-    }
-
-  }
-);
-
-
-/* =========================
-   SAVE RESULT
-========================= */
-
-document
-  .getElementById(
-    "saveResultBtn"
-  )
-  .addEventListener(
-    "click",
-    saveResult
-  );
-
-
-function saveResult() {
-
-  if (!selectedStudentId) {
-
-    showToast(
-      "Student select করা হয়নি।"
-    );
-
-    return;
-
-  }
-
-
-  const student =
-    students.find(
-      item =>
-        String(item.id) ===
-        String(selectedStudentId)
-    );
-
-
-  if (!student) {
-    return;
-  }
-
-
-  const marks =
-    Number(
-      document.getElementById(
-        "marksInput"
-      ).value
-    );
-
-
-  const passMark =
-    Number(
-      document.getElementById(
-        "passMarkInput"
-      ).value
-    );
-
-
-  const note =
-    document.getElementById(
-      "resultNote"
-    ).value.trim();
-
-
-  if (
-    !Number.isFinite(marks) ||
-    marks < 0 ||
-    marks > EXAM.totalMarks
-  ) {
-
-    showToast(
-      `Marks অবশ্যই 0 থেকে ${EXAM.totalMarks}-এর মধ্যে হতে হবে।`
-    );
-
-    return;
-
-  }
-
-
-  if (
-    !Number.isFinite(passMark) ||
-    passMark < 0 ||
-    passMark > EXAM.totalMarks
-  ) {
-
-    showToast(
-      "Valid pass mark দিন।"
-    );
-
-    return;
-
-  }
-
-
-  const percentage =
-    Number(
-      (
-        (marks / EXAM.totalMarks) *
-        100
-      ).toFixed(2)
-    );
-
-
-  const resultStatus =
-    marks >= passMark
-      ? "Pass"
-      : "Fail";
-
-
-  const existingIndex =
-    results.findIndex(
-      item =>
-        String(item.studentId) ===
-          String(student.id) &&
-        item.examId === EXAM.id
-    );
-
-
-  const oldResult =
-    existingIndex >= 0
-      ? results[existingIndex]
-      : null;
-
-
-  const resultObject = {
-
-    id:
-      oldResult?.id ||
-      `RESULT-${Date.now()}`,
-
-    examId:
-      EXAM.id,
-
-    examName:
-      EXAM.name,
-
-    examDate:
-      EXAM.isoDate,
-
-    studentId:
-      student.id,
-
-    studentName:
-      student.name,
-
-    course:
-      student.course ||
-      EXAM.course,
-
-    batch:
-      student.batch ||
-      EXAM.batch,
-
-    totalMarks:
-      EXAM.totalMarks,
-
-    marks:
-      marks,
-
-    percentage:
-      percentage,
-
-    passMark:
-      passMark,
-
-    result:
-      resultStatus,
-
-    note:
-      note,
-
-    published:
-      oldResult
-        ? oldResult.published === true
-        : false,
-
-    createdAt:
-      oldResult?.createdAt ||
-      new Date().toISOString(),
-
-    updatedAt:
-      new Date().toISOString()
-
-  };
-
-
-  if (existingIndex >= 0) {
-
-    results[existingIndex] =
-      resultObject;
-
-  } else {
-
-    results.push(
-      resultObject
-    );
-
-  }
-
-
-  saveResults(
-    results
-  );
-
-
-  closeResultModal();
-
-  renderAll();
-
-
-  showToast(
-    `${student.name}-এর result save হয়েছে।`
-  );
-
-}
-
-
-/* =========================
-   PUBLISH / UNPUBLISH
-========================= */
-
-function togglePublish(
-  studentId
-) {
-
-  const index =
-    results.findIndex(
-      result =>
-        String(result.studentId) ===
-          String(studentId) &&
-        result.examId === EXAM.id
-    );
-
-
-  if (index < 0) {
-
-    showToast(
-      "আগে marks enter করুন।"
-    );
-
-    return;
-
-  }
-
-
-  const result =
-    results[index];
-
-
-  result.published =
-    !result.published;
-
-
-  result.updatedAt =
-    new Date().toISOString();
-
-
-  saveResults(
-    results
-  );
-
-
-  renderAll();
-
-
-  showToast(
-    result.published
-      ? "Result published হয়েছে।"
-      : "Result unpublished হয়েছে।"
-  );
-
-}
-
-
-/* =========================
-   PUBLISH ELIGIBLE
-========================= */
-
-document
-  .getElementById(
-    "publishAllBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      let count = 0;
-
-
-      results =
-        results.map(
-          result => {
-
-            if (
-              result.examId === EXAM.id &&
-              !result.published &&
-              typeof result.marks === "number"
-            ) {
-
-              count++;
-
-              return {
-
-                ...result,
-
-                published: true,
-
-                updatedAt:
-                  new Date().toISOString()
-
-              };
-
-            }
-
-
-            return result;
-
-          }
-        );
-
-
-      saveResults(
-        results
-      );
-
-
-      renderAll();
-
-
-      showToast(
-        count
-          ? `${count}টি result publish করা হয়েছে।`
-          : "Publish করার মতো কোনো pending result নেই।"
-      );
-
-    }
-  );
-
-
-/* =========================
-   FILTER EVENTS
-========================= */
-
-searchInput.addEventListener(
-  "input",
-  renderStudents
-);
-
-
-attendanceFilter.addEventListener(
-  "change",
-  renderStudents
-);
-
-
-resultFilter.addEventListener(
-  "change",
-  renderStudents
-);
-
-
-document
-  .getElementById(
-    "resetFiltersBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      searchInput.value = "";
-
-      attendanceFilter.value =
-        "all";
-
-      resultFilter.value =
-        "all";
-
-      renderStudents();
-
-    }
-  );
-
-
-/* =========================
-   STATS
-========================= */
-
-function renderStats() {
-
-  const total =
-    students.length;
-
-
-  let present = 0;
-  let absent = 0;
-  let entered = 0;
-  let published = 0;
-
-
-  students.forEach(
-    student => {
-
-      const attendanceStatus =
-        getStudentAttendance(
-          student.id
-        );
-
-
-      if (
-        attendanceStatus ===
-        "present"
-      ) {
-
-        present++;
-
-      } else {
-
-        absent++;
-
-      }
-
-
-      const result =
-        getStudentResult(
-          student.id
-        );
-
-
-      if (result) {
-
-        entered++;
-
-        if (result.published) {
-
-          published++;
-
-        }
-
-      }
-
-    }
-  );
-
-
-  const percentage =
+function calculatePercentage(
+    marks,
     total
-      ? Number(
-          (
-            (present / total) *
-            100
-          ).toFixed(1)
-        )
-      : 0;
+){
+
+    const m =
+        Number(marks);
+
+    const t =
+        Number(total);
+
+    if(
+        !Number.isFinite(m) ||
+        !Number.isFinite(t) ||
+        t <= 0
+    ){
+        return 0;
+    }
+
+    return Number(
+        ((m / t) * 100).toFixed(2)
+    );
+
+}
 
 
-  document.getElementById(
-    "totalStudents"
-  ).textContent =
-    total;
+function calculateResult(
+    marks,
+    passMark
+){
 
-
-  document.getElementById(
-    "examPresent"
-  ).textContent =
-    present;
-
-
-  document.getElementById(
-    "examAbsent"
-  ).textContent =
-    absent;
-
-
-  document.getElementById(
-    "resultsEntered"
-  ).textContent =
-    entered;
-
-
-  document.getElementById(
-    "resultsPublished"
-  ).textContent =
-    published;
-
-
-  document.getElementById(
-    "attendanceTotal"
-  ).textContent =
-    total;
-
-
-  document.getElementById(
-    "attendancePresent"
-  ).textContent =
-    present;
-
-
-  document.getElementById(
-    "attendanceAbsent"
-  ).textContent =
-    absent;
-
-
-  document.getElementById(
-    "attendancePercentage"
-  ).textContent =
-    `${percentage}%`;
+    return Number(marks) >=
+        Number(passMark)
+        ? "Pass"
+        : "Fail";
 
 }
 
 
 /* =========================
-   RENDER ALL
+   UI HELPERS
 ========================= */
 
-function renderAll() {
-
-  students =
-    getStudents();
-
-  attendance =
-    getAttendance();
-
-  results =
-    getResults();
+let toastTimer = null;
 
 
-  renderStats();
+function showToast(
+    message,
+    type = "success"
+){
 
-  renderStudents();
+    const toast =
+        $("toast");
+
+    toast.textContent =
+        message;
+
+    toast.className =
+        "toast show " + type;
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.className =
+                    "toast";
+
+            },
+            3000
+        );
 
 }
 
@@ -3435,248 +2540,1867 @@ function renderAll() {
    THEME
 ========================= */
 
-function applyTheme() {
+function applyTheme(){
 
-  const theme =
-    localStorage.getItem(
-      STORAGE.theme
-    ) || "dark";
-
-
-  if (theme === "light") {
-
-    document.body.style.background =
-      "#f8fafc";
-
-    document.body.style.color =
-      "#0f172a";
-
-  } else {
-
-    document.body.style.background = "";
-
-    document.body.style.color = "";
-
-  }
-
-}
-
-
-document
-  .getElementById(
-    "themeBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      const current =
+    const theme =
         localStorage.getItem(
-          STORAGE.theme
-        ) || "dark";
-
-
-      const next =
-        current === "dark"
-          ? "light"
-          : "dark";
-
-
-      localStorage.setItem(
-        STORAGE.theme,
-        next
-      );
-
-
-      applyTheme();
-
-
-      showToast(
-        next === "dark"
-          ? "Dark mode enabled."
-          : "Light mode enabled."
-      );
-
-    }
-  );
-
-
-/* =========================
-   MOBILE SIDEBAR
-========================= */
-
-document
-  .getElementById(
-    "menuBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      document
-        .getElementById(
-          "sidebar"
-        )
-        .classList.toggle(
-          "open"
+            STORAGE.theme
         );
 
-    }
-  );
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-document
-  .getElementById(
-    "logoutBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      const confirmed =
-        confirm(
-          "Admin panel থেকে logout করতে চান?"
-        );
-
-
-      if (!confirmed) {
-        return;
-      }
-
-
-      sessionStorage.removeItem(
-        STORAGE.adminSession
-      );
-
-
-      sessionStorage.removeItem(
-        "shoppingMelaAdminLoggedIn"
-      );
-
-
-      window.location.href =
-        "admin-login.html";
-
-    }
-  );
-
-
-/* =========================
-   PRINT
-========================= */
-
-document
-  .getElementById(
-    "printBtn"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      window.print();
-
-    }
-  );
-
-
-/* =========================
-   TOAST
-========================= */
-
-function showToast(message) {
-
-  const container =
-    document.getElementById(
-      "toastContainer"
+    document.body.classList.toggle(
+        "light",
+        theme === "light"
     );
-
-
-  const toast =
-    document.createElement(
-      "div"
-    );
-
-
-  toast.className =
-    "toast";
-
-
-  toast.textContent =
-    message;
-
-
-  container.appendChild(
-    toast
-  );
-
-
-  setTimeout(
-    () => {
-
-      toast.style.opacity =
-        "0";
-
-      toast.style.transform =
-        "translateY(8px)";
-
-
-      setTimeout(
-        () => toast.remove(),
-        250
-      );
-
-    },
-    2800
-  );
 
 }
+
+
+function toggleTheme(){
+
+    const isLight =
+        document.body.classList.contains(
+            "light"
+        );
+
+    localStorage.setItem(
+        STORAGE.theme,
+        isLight
+        ? "dark"
+        : "light"
+    );
+
+    applyTheme();
+
+}
+
+
+/* =========================
+   FORMAT DATE
+========================= */
+
+function formatDate(value){
+
+    if(!value){
+        return "—";
+    }
+
+    const date =
+        new Date(value);
+
+    if(Number.isNaN(date.getTime())){
+        return "—";
+    }
+
+    return date.toLocaleString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =========================
+   GET CURRENT STUDENTS
+========================= */
+
+function getStudents(){
+
+    return readStudentStorage();
+
+}
+
+
+/* =========================
+   FILTER STUDENTS
+========================= */
+
+function getFilteredStudents(){
+
+    const students =
+        getStudents();
+
+    const results =
+        readResults();
+
+    const search =
+        $("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const attendanceFilter =
+        $("attendanceFilter")
+        .value;
+
+    const resultFilter =
+        $("resultFilter")
+        .value;
+
+    const publishFilter =
+        $("publishFilter")
+        .value;
+
+    return students.filter(student => {
+
+        const result =
+            results.find(
+                item =>
+                    String(item.studentId)
+                    === String(student.id)
+                    &&
+                    item.examId === EXAM.id
+            );
+
+        const attendance =
+            getAttendanceStatus(
+                student.id
+            );
+
+        if(search){
+
+            const text =
+                (
+                    student.name +
+                    " " +
+                    student.id
+                ).toLowerCase();
+
+            if(!text.includes(search)){
+                return false;
+            }
+
+        }
+
+        if(
+            attendanceFilter !== "all" &&
+            attendance !== attendanceFilter
+        ){
+            return false;
+        }
+
+        if(resultFilter === "entered" && !result){
+            return false;
+        }
+
+        if(
+            resultFilter === "not-entered" &&
+            result
+        ){
+            return false;
+        }
+
+        if(
+            publishFilter === "published" &&
+            (!result || !result.published)
+        ){
+            return false;
+        }
+
+        if(
+            publishFilter === "unpublished" &&
+            (!result || result.published)
+        ){
+            return false;
+        }
+
+        return true;
+
+    });
+
+}
+
+
+/* =========================
+   RENDER RESULT TABLE
+========================= */
+
+function renderTable(){
+
+    const tbody =
+        $("resultTableBody");
+
+    const students =
+        getFilteredStudents();
+
+    const results =
+        readResults();
+
+    if(!students.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td colspan="8">
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            🔎
+                        </div>
+
+                        No student found
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        students.map(student => {
+
+            const result =
+                results.find(
+                    item =>
+                        String(item.studentId)
+                        === String(student.id)
+                        &&
+                        item.examId === EXAM.id
+                );
+
+            const attendance =
+                getAttendanceStatus(
+                    student.id
+                );
+
+            const attendanceHTML =
+                attendance === "present"
+
+                ? `
+                    <span class="badge badge-success">
+                        ✓ Present
+                    </span>
+                  `
+
+                : `
+                    <span class="badge badge-danger">
+                        ✕ Absent
+                    </span>
+                  `;
+
+
+            if(!result){
+
+                return `
+
+                    <tr>
+
+                        <td>
+
+                            <div class="student-cell">
+
+                                <div class="student-avatar">
+                                    ${getInitial(student.name)}
+                                </div>
+
+                                <div>
+
+                                    <div class="student-name">
+                                        ${escapeHTML(student.name)}
+                                    </div>
+
+                                    <span class="student-id">
+                                        ${escapeHTML(student.id)}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            ${attendanceHTML}
+                        </td>
+
+                        <td>
+                            <span style="color:#718198;">
+                                Not Entered
+                            </span>
+                        </td>
+
+                        <td>
+                            —
+                        </td>
+
+                        <td>
+                            <span class="badge badge-warning">
+                                Pending
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge badge-warning">
+                                Unpublished
+                            </span>
+                        </td>
+
+                        <td>
+                            —
+                        </td>
+
+                        <td>
+
+                            <div class="action-group">
+
+                                <button
+                                    class="btn btn-primary btn-sm"
+                                    onclick="openAddResult('${escapeAttr(student.id)}')"
+                                >
+                                    + Enter
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+
+
+            const percent =
+                calculatePercentage(
+                    result.marks,
+                    result.totalMarks
+                );
+
+            const resultHTML =
+                result.result === "Pass"
+
+                ? `
+                    <span class="badge badge-success">
+                        PASS
+                    </span>
+                  `
+
+                : `
+                    <span class="badge badge-danger">
+                        FAIL
+                    </span>
+                  `;
+
+
+            const publishHTML =
+                result.published
+
+                ? `
+                    <span class="badge badge-success">
+                        Published
+                    </span>
+                  `
+
+                : `
+                    <span class="badge badge-warning">
+                        Unpublished
+                    </span>
+                  `;
+
+
+            return `
+
+                <tr>
+
+                    <td>
+
+                        <div class="student-cell">
+
+                            <div class="student-avatar">
+                                ${getInitial(student.name)}
+                            </div>
+
+                            <div>
+
+                                <div class="student-name">
+                                    ${escapeHTML(student.name)}
+                                </div>
+
+                                <span class="student-id">
+                                    ${escapeHTML(student.id)}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        ${attendanceHTML}
+                    </td>
+
+
+                    <td>
+
+                        <span class="marks">
+                            ${Number(result.marks)}
+                        </span>
+
+                        <span style="color:#718198;">
+                            / ${Number(result.totalMarks)}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="percent">
+                            ${percent}%
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${resultHTML}
+                    </td>
+
+
+                    <td>
+                        ${publishHTML}
+                    </td>
+
+
+                    <td>
+                        <span style="color:#8796aa;font-size:9px;">
+                            ${formatDate(result.updatedAt)}
+                        </span>
+                    </td>
+
+
+                    <td>
+
+                        <div class="action-group">
+
+                            <button
+                                class="btn btn-info btn-sm"
+                                onclick="openEditResult('${escapeAttr(result.id)}')"
+                            >
+                                Edit
+                            </button>
+
+                            <button
+                                class="btn ${result.published ? "btn-warning" : "btn-success"} btn-sm"
+                                onclick="togglePublish('${escapeAttr(result.id)}')"
+                            >
+                                ${result.published ? "Unpublish" : "Publish"}
+                            </button>
+
+                            <button
+                                class="btn btn-danger btn-sm"
+                                onclick="openDeleteResult('${escapeAttr(result.id)}')"
+                            >
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================
+   RENDER STATS
+========================= */
+
+function renderStats(){
+
+    const students =
+        getStudents();
+
+    const results =
+        readResults();
+
+    const examResults =
+        results.filter(
+            result =>
+                result.examId === EXAM.id
+        );
+
+
+    const present =
+        students.filter(
+            student =>
+                getAttendanceStatus(
+                    student.id
+                ) === "present"
+        ).length;
+
+
+    const absent =
+        students.length -
+        present;
+
+
+    const published =
+        examResults.filter(
+            result =>
+                result.published === true
+        ).length;
+
+
+    const passed =
+        examResults.filter(
+            result =>
+                result.result === "Pass"
+        ).length;
+
+
+    $("totalStudents").textContent =
+        students.length;
+
+    $("examPresent").textContent =
+        present;
+
+    $("examAbsent").textContent =
+        absent;
+
+    $("enteredResults").textContent =
+        examResults.length;
+
+    $("publishedResults").textContent =
+        published;
+
+    $("passResults").textContent =
+        passed;
+
+    $("heroPublished").textContent =
+        published;
+
+
+    if(!examResults.length){
+
+        $("averageMarks").textContent =
+            "0";
+
+        $("highestMarks").textContent =
+            "0";
+
+        $("lowestMarks").textContent =
+            "0";
+
+        $("highestStudent").textContent =
+            "No result yet";
+
+        $("lowestStudent").textContent =
+            "No result yet";
+
+        $("averageBar").style.width =
+            "0%";
+
+        $("highestBar").style.width =
+            "0%";
+
+        $("lowestBar").style.width =
+            "0%";
+
+        return;
+
+    }
+
+
+    const marks =
+        examResults.map(
+            result =>
+                Number(result.marks)
+        );
+
+
+    const average =
+        marks.reduce(
+            (sum,value) =>
+                sum + value,
+            0
+        ) / marks.length;
+
+
+    const highest =
+        Math.max(...marks);
+
+    const lowest =
+        Math.min(...marks);
+
+
+    const highResult =
+        examResults.find(
+            result =>
+                Number(result.marks)
+                === highest
+        );
+
+    const lowResult =
+        examResults.find(
+            result =>
+                Number(result.marks)
+                === lowest
+        );
+
+
+    $("averageMarks").textContent =
+        average.toFixed(2);
+
+    $("highestMarks").textContent =
+        highest;
+
+    $("lowestMarks").textContent =
+        lowest;
+
+    $("highestStudent").textContent =
+        highResult
+        ? highResult.studentName
+        : "—";
+
+    $("lowestStudent").textContent =
+        lowResult
+        ? lowResult.studentName
+        : "—";
+
+
+    $("averageBar").style.width =
+        Math.min(
+            average,
+            100
+        ) + "%";
+
+    $("highestBar").style.width =
+        Math.min(
+            highest,
+            100
+        ) + "%";
+
+    $("lowestBar").style.width =
+        Math.min(
+            lowest,
+            100
+        ) + "%";
+
+}
+
+
+/* =========================
+   ATTENDANCE LIST
+========================= */
+
+function renderAttendance(){
+
+    const container =
+        $("attendanceList");
+
+    const students =
+        getStudents();
+
+    if(!students.length){
+
+        container.innerHTML =
+            `<div class="empty">No students found</div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        students.map(student => {
+
+            const status =
+                getAttendanceStatus(
+                    student.id
+                );
+
+            return `
+
+                <div class="att-row">
+
+                    <div class="att-info">
+
+                        <strong>
+                            ${escapeHTML(student.name)}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(student.id)}
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="btn ${
+                            status === "present"
+                            ? "btn-success"
+                            : "btn-danger"
+                        } btn-sm"
+                        onclick="toggleAttendance('${escapeAttr(student.id)}')"
+                    >
+                        ${
+                            status === "present"
+                            ? "✓ Present"
+                            : "✕ Absent"
+                        }
+                    </button>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================
+   MODAL STUDENT SELECT
+========================= */
+
+function populateStudentSelect(
+    selectedId = ""
+){
+
+    const select =
+        $("studentSelect");
+
+    const students =
+        getStudents();
+
+    select.innerHTML =
+        students.map(student => `
+
+            <option
+                value="${escapeAttr(student.id)}"
+                ${String(student.id) === String(selectedId) ? "selected" : ""}
+            >
+                ${escapeHTML(student.name)}
+                — ${escapeHTML(student.id)}
+            </option>
+
+        `).join("");
+
+}
+
+
+/* =========================
+   ADD RESULT
+========================= */
+
+window.openAddResult =
+function(studentId = ""){
+
+    $("modalTitle").textContent =
+        "Enter Student Result";
+
+    $("editResultId").value =
+        "";
+
+    populateStudentSelect(
+        studentId
+    );
+
+    $("totalMarksInput").value =
+        EXAM.totalMarks;
+
+    $("passMarkInput").value =
+        EXAM.passMark;
+
+    $("marksInput").value =
+        "";
+
+    $("formAttendance").value =
+        studentId
+        ? getAttendanceStatus(studentId)
+        : "present";
+
+    $("resultInput").value =
+        "Pass";
+
+    $("noteInput").value =
+        "";
+
+    $("resultModal")
+        .classList
+        .add("show");
+
+};
+
+
+/* =========================
+   EDIT RESULT
+========================= */
+
+window.openEditResult =
+function(resultId){
+
+    const results =
+        readResults();
+
+    const result =
+        results.find(
+            item =>
+                String(item.id)
+                === String(resultId)
+        );
+
+    if(!result){
+        showToast(
+            "Result পাওয়া যায়নি।",
+            "error"
+        );
+        return;
+    }
+
+
+    $("modalTitle").textContent =
+        "Edit Student Result";
+
+    $("editResultId").value =
+        result.id;
+
+    populateStudentSelect(
+        result.studentId
+    );
+
+    $("totalMarksInput").value =
+        result.totalMarks || EXAM.totalMarks;
+
+    $("passMarkInput").value =
+        result.passMark || EXAM.passMark;
+
+    $("marksInput").value =
+        result.marks;
+
+    $("formAttendance").value =
+        getAttendanceStatus(
+            result.studentId
+        );
+
+    $("resultInput").value =
+        result.result || "Fail";
+
+    $("noteInput").value =
+        result.note || "";
+
+    $("resultModal")
+        .classList
+        .add("show");
+
+};
+
+
+/* =========================
+   CLOSE RESULT MODAL
+========================= */
+
+function closeResultModal(){
+
+    $("resultModal")
+        .classList
+        .remove("show");
+
+}
+
+
+/* =========================
+   SAVE RESULT
+========================= */
+
+function saveResult(event){
+
+    event.preventDefault();
+
+
+    const resultId =
+        $("editResultId").value.trim();
+
+    const studentId =
+        $("studentSelect").value;
+
+    const student =
+        getStudents().find(
+            item =>
+                String(item.id)
+                === String(studentId)
+        );
+
+
+    if(!student){
+
+        showToast(
+            "Student নির্বাচন করুন।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const attendance =
+        $("formAttendance").value;
+
+    const marks =
+        Number(
+            $("marksInput").value
+        );
+
+    const totalMarks =
+        Number(
+            $("totalMarksInput").value
+        );
+
+    const passMark =
+        Number(
+            $("passMarkInput").value
+        );
+
+
+    if(
+        !Number.isFinite(marks) ||
+        marks < 0 ||
+        marks > totalMarks
+    ){
+
+        showToast(
+            "Valid marks দিন।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /*
+      If absent, result should not be treated
+      as a fabricated mark.
+    */
+
+    if(attendance === "absent"){
+
+        const confirmAbsent =
+            window.confirm(
+                "Student is marked Absent. Do you still want to save a marks result?"
+            );
+
+        if(!confirmAbsent){
+            return;
+        }
+
+    }
+
+
+    const percentage =
+        calculatePercentage(
+            marks,
+            totalMarks
+        );
+
+
+    const resultStatus =
+        calculateResult(
+            marks,
+            passMark
+        );
+
+
+    const now =
+        new Date().toISOString();
+
+
+    const results =
+        readResults();
+
+
+    if(resultId){
+
+        const index =
+            results.findIndex(
+                item =>
+                    String(item.id)
+                    === String(resultId)
+            );
+
+
+        if(index === -1){
+
+            showToast(
+                "Result পাওয়া যায়নি।",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const old =
+            results[index];
+
+
+        results[index] = {
+
+            ...old,
+
+            examId:
+                EXAM.id,
+
+            examName:
+                EXAM.name,
+
+            examDate:
+                EXAM.isoDate,
+
+            studentId:
+                student.id,
+
+            studentName:
+                student.name,
+
+            course:
+                student.course ||
+                EXAM.course,
+
+            batch:
+                student.batch ||
+                EXAM.batch,
+
+            totalMarks:
+                totalMarks,
+
+            marks:
+                marks,
+
+            percentage:
+                percentage,
+
+            passMark:
+                passMark,
+
+            result:
+                resultStatus,
+
+            note:
+                $("noteInput")
+                .value
+                .trim(),
+
+            updatedAt:
+                now
+
+        };
+
+    }
+    else{
+
+        /*
+          Prevent duplicate result for same exam/student.
+        */
+
+        const existingIndex =
+            results.findIndex(
+                item =>
+                    String(item.studentId)
+                    === String(student.id)
+                    &&
+                    item.examId === EXAM.id
+            );
+
+
+        if(existingIndex !== -1){
+
+            showToast(
+                "এই student-এর result already আছে। Edit ব্যবহার করুন।",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        results.push({
+
+            id:
+                "RESULT-" +
+                Date.now(),
+
+            examId:
+                EXAM.id,
+
+            examName:
+                EXAM.name,
+
+            examDate:
+                EXAM.isoDate,
+
+            studentId:
+                student.id,
+
+            studentName:
+                student.name,
+
+            course:
+                student.course ||
+                EXAM.course,
+
+            batch:
+                student.batch ||
+                EXAM.batch,
+
+            totalMarks:
+                totalMarks,
+
+            marks:
+                marks,
+
+            percentage:
+                percentage,
+
+            passMark:
+                passMark,
+
+            result:
+                resultStatus,
+
+            note:
+                $("noteInput")
+                .value
+                .trim(),
+
+            /*
+              New result starts unpublished.
+            */
+
+            published:
+                false,
+
+            createdAt:
+                now,
+
+            updatedAt:
+                now
+
+        });
+
+    }
+
+
+    /*
+      Save attendance separately.
+    */
+
+    markAttendance(
+        student.id,
+        attendance
+    );
+
+
+    saveResults(
+        results
+    );
+
+
+    closeResultModal();
+
+    renderAll();
+
+    showToast(
+        resultId
+        ? "Result successfully updated."
+        : "Result successfully entered."
+    );
+
+}
+
+
+/* =========================
+   PUBLISH / UNPUBLISH
+========================= */
+
+window.togglePublish =
+function(resultId){
+
+    const results =
+        readResults();
+
+    const index =
+        results.findIndex(
+            item =>
+                String(item.id)
+                === String(resultId)
+        );
+
+
+    if(index === -1){
+
+        showToast(
+            "Result পাওয়া যায়নি।",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const result =
+        results[index];
+
+
+    const newStatus =
+        !Boolean(
+            result.published
+        );
+
+
+    if(newStatus){
+
+        const confirmed =
+            window.confirm(
+                "এই result Student Portal-এ publish করতে চান?"
+            );
+
+        if(!confirmed){
+            return;
+        }
+
+    }
+
+
+    results[index] = {
+
+        ...result,
+
+        published:
+            newStatus,
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+
+    saveResults(
+        results
+    );
+
+
+    renderAll();
+
+
+    showToast(
+        newStatus
+        ? "Result published successfully."
+        : "Result unpublished successfully."
+    );
+
+};
+
+
+/* =========================
+   PUBLISH ELIGIBLE
+========================= */
+
+function publishEligible(){
+
+    const results =
+        readResults();
+
+    let count = 0;
+
+
+    const updated =
+        results.map(result => {
+
+            if(
+                result.examId !== EXAM.id
+            ){
+                return result;
+            }
+
+
+            if(
+                !result.published &&
+                Number.isFinite(
+                    Number(result.marks)
+                )
+            ){
+
+                count++;
+
+                return {
+
+                    ...result,
+
+                    published:
+                        true,
+
+                    updatedAt:
+                        new Date().toISOString()
+
+                };
+
+            }
+
+
+            return result;
+
+        });
+
+
+    if(!count){
+
+        showToast(
+            "Publish করার মতো unpublished result নেই।"
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        window.confirm(
+            `${count}টি result publish করতে চান?`
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    saveResults(
+        updated
+    );
+
+
+    renderAll();
+
+
+    showToast(
+        `${count}টি result successfully published.`
+    );
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+let pendingDeleteId =
+    null;
+
+
+window.openDeleteResult =
+function(resultId){
+
+    const result =
+        readResults().find(
+            item =>
+                String(item.id)
+                === String(resultId)
+        );
+
+    if(!result){
+        return;
+    }
+
+
+    pendingDeleteId =
+        result.id;
+
+
+    $("deleteStudentName")
+        .textContent =
+        `${result.studentName} — ${result.studentId}`;
+
+
+    $("deleteModal")
+        .classList
+        .add("show");
+
+};
+
+
+function closeDeleteModal(){
+
+    pendingDeleteId =
+        null;
+
+    $("deleteModal")
+        .classList
+        .remove("show");
+
+}
+
+
+function deleteResult(){
+
+    if(!pendingDeleteId){
+        return;
+    }
+
+
+    const results =
+        readResults();
+
+    const result =
+        results.find(
+            item =>
+                String(item.id)
+                === String(pendingDeleteId)
+        );
+
+
+    const updated =
+        results.filter(
+            item =>
+                String(item.id)
+                !== String(pendingDeleteId)
+        );
+
+
+    saveResults(
+        updated
+    );
+
+
+    closeDeleteModal();
+
+    renderAll();
+
+
+    showToast(
+        result
+        ? `${result.studentName}-এর result deleted.`
+        : "Result deleted."
+    );
+
+}
+
+
+/* =========================
+   ATTENDANCE TOGGLE
+========================= */
+
+window.toggleAttendance =
+function(studentId){
+
+    const current =
+        getAttendanceStatus(
+            studentId
+        );
+
+    const next =
+        current === "present"
+        ? "absent"
+        : "present";
+
+
+    markAttendance(
+        studentId,
+        next
+    );
+
+
+    renderAll();
+
+
+    showToast(
+        next === "present"
+        ? "Student marked Present."
+        : "Student marked Absent."
+    );
+
+};
+
+
+/* =========================
+   MARK ALL PRESENT
+========================= */
+
+function markAllPresent(){
+
+    const students =
+        getStudents();
+
+    if(!students.length){
+        return;
+    }
+
+
+    const confirmed =
+        window.confirm(
+            `সব ${students.length} জন student-কে Present করতে চান?`
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    const data =
+        readAttendance();
+
+
+    students.forEach(student => {
+
+        data[student.id] =
+            "present";
+
+    });
+
+
+    saveAttendance(
+        data
+    );
+
+
+    renderAll();
+
+
+    showToast(
+        "All students marked Present."
+    );
+
+}
+
+
+/* =========================
+   MARKS → RESULT AUTO UPDATE
+========================= */
+
+$("marksInput")
+.addEventListener(
+    "input",
+    function(){
+
+        const marks =
+            Number(this.value);
+
+        if(
+            !Number.isFinite(marks)
+        ){
+            return;
+        }
+
+
+        $("resultInput").value =
+            calculateResult(
+                marks,
+                EXAM.passMark
+            );
+
+    }
+);
 
 
 /* =========================
    ESCAPE HTML
 ========================= */
 
-function escapeHTML(value) {
+function escapeHTML(value){
 
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttr(value){
+
+    return escapeHTML(value);
+
+}
+
+
+function getInitial(name){
+
+    const text =
+        String(name || "S")
+        .trim();
+
+    return escapeHTML(
+        text.charAt(0).toUpperCase()
+    );
 
 }
 
 
 /* =========================
-   KEYBOARD
+   RENDER ALL
 ========================= */
 
-document.addEventListener(
-  "keydown",
-  event => {
+function renderAll(){
 
-    if (
-      event.key === "Escape"
-    ) {
+    renderStats();
 
-      closeResultModal();
+    renderTable();
 
-      document
-        .getElementById(
-          "sidebar"
-        )
-        .classList.remove(
-          "open"
+    renderAttendance();
+
+}
+
+
+/* =========================
+   FILTER EVENTS
+========================= */
+
+[
+    "searchInput",
+    "attendanceFilter",
+    "resultFilter",
+    "publishFilter"
+]
+.forEach(id => {
+
+    $(id).addEventListener(
+        id === "searchInput"
+        ? "input"
+        : "change",
+        renderTable
+    );
+
+});
+
+
+/* =========================
+   RESET FILTER
+========================= */
+
+$("resetFiltersBtn")
+.addEventListener(
+    "click",
+    function(){
+
+        $("searchInput").value =
+            "";
+
+        $("attendanceFilter").value =
+            "all";
+
+        $("resultFilter").value =
+            "all";
+
+        $("publishFilter").value =
+            "all";
+
+        renderTable();
+
+    }
+);
+
+
+/* =========================
+   BUTTON EVENTS
+========================= */
+
+$("addResultBtn")
+.addEventListener(
+    "click",
+    () => openAddResult("")
+);
+
+
+$("publishEligibleBtn")
+.addEventListener(
+    "click",
+    publishEligible
+);
+
+
+$("refreshBtn")
+.addEventListener(
+    "click",
+    function(){
+
+        renderAll();
+
+        showToast(
+            "Data refreshed."
         );
 
     }
+);
 
-  }
+
+$("markAllPresentBtn")
+.addEventListener(
+    "click",
+    markAllPresent
+);
+
+
+$("themeBtn")
+.addEventListener(
+    "click",
+    toggleTheme
+);
+
+
+/* =========================
+   MODAL EVENTS
+========================= */
+
+$("resultForm")
+.addEventListener(
+    "submit",
+    saveResult
+);
+
+
+$("closeModalBtn")
+.addEventListener(
+    "click",
+    closeResultModal
+);
+
+
+$("cancelModalBtn")
+.addEventListener(
+    "click",
+    closeResultModal
+);
+
+
+$("closeDeleteBtn")
+.addEventListener(
+    "click",
+    closeDeleteModal
+);
+
+
+$("cancelDeleteBtn")
+.addEventListener(
+    "click",
+    closeDeleteModal
+);
+
+
+$("confirmDeleteBtn")
+.addEventListener(
+    "click",
+    deleteResult
+);
+
+
+/* =========================
+   OUTSIDE MODAL CLICK
+========================= */
+
+$("resultModal")
+.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === this
+        ){
+            closeResultModal();
+        }
+
+    }
+);
+
+
+$("deleteModal")
+.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === this
+        ){
+            closeDeleteModal();
+        }
+
+    }
+);
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+$("mobileMenuBtn")
+.addEventListener(
+    "click",
+    function(){
+
+        $("sidebar")
+            .classList
+            .toggle("open");
+
+    }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+$("logoutBtn")
+.addEventListener(
+    "click",
+    function(){
+
+        const confirmed =
+            window.confirm(
+                "Admin logout করতে চান?"
+            );
+
+        if(!confirmed){
+            return;
+        }
+
+
+        sessionStorage.removeItem(
+            STORAGE.adminSession
+        );
+
+        sessionStorage.removeItem(
+            STORAGE.adminLogin
+        );
+
+
+        /*
+          If admin-login.html exists,
+          redirect there.
+        */
+
+        window.location.href =
+            "admin-login.html";
+
+    }
 );
 
 
@@ -3685,84 +4409,99 @@ document.addEventListener(
 ========================= */
 
 window.addEventListener(
-  "storage",
-  () => {
+    "storage",
+    function(event){
 
-    renderAll();
+        if(
+            [
+                STORAGE.results,
+                STORAGE.examAttendance,
+                STORAGE.studentList
+            ].includes(event.key)
+        ){
 
-    applyTheme();
+            renderAll();
 
-  }
-);
+        }
 
 
-/* =========================
-   VISIBILITY REFRESH
-========================= */
+        if(
+            event.key === STORAGE.theme
+        ){
 
-document.addEventListener(
-  "visibilitychange",
-  () => {
+            applyTheme();
 
-    if (!document.hidden) {
-
-      renderAll();
-
-      applyTheme();
+        }
 
     }
+);
 
-  }
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            document.visibilityState ===
+            "visible"
+        ){
+
+            renderAll();
+
+        }
+
+    }
 );
 
 
 /* =========================
-   GLOBAL ADMIN API
+   PUBLIC API
 ========================= */
 
 window.SNKAdminExam = {
 
-  exam:
-    EXAM,
+    exam:
+        EXAM,
 
-  getStudents:
-    () => [...students],
+    getStudents:
+        getStudents,
 
-  getAttendance:
-    () => ({...attendance}),
+    getAttendance:
+        readAttendance,
 
-  getResults:
-    () => [...results],
+    getResults:
+        readResults,
 
-  refresh:
-    renderAll,
+    refresh:
+        renderAll,
 
-  markAttendance:
-    markStudentAttendance,
+    markAttendance:
+        markAttendance,
 
-  saveResult:
-    saveResult,
+    saveResult:
+        saveResults,
 
-  publish:
-    togglePublish
+    publish:
+        publishEligible,
+
+    deleteResult:
+        deleteResult
 
 };
 
 
 /* =========================
-   INITIALIZE
+   INIT
 ========================= */
+
+checkAdminSession();
 
 applyTheme();
 
 renderAll();
 
 
-console.log(
-  "SNK IT Admin Exam Management Step 2.1 loaded.",
-  EXAM
-);
-
+})();
 </script>
 
 </body>
