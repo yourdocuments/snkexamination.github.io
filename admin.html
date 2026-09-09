@@ -1,36 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SNK IT Institute — Admin Dashboard</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0b1020">
+<title>SNK IT Institute | Admin Quiz Management</title>
 
 <style>
-:root{
-  --bg:#070b14;
-  --panel:#0d1422;
-  --panel2:#111a2b;
-  --border:rgba(255,255,255,.09);
-  --text:#f4f7fb;
-  --muted:#8e9bb0;
-  --primary:#6d5dfc;
-  --primary2:#8b7cff;
-  --success:#20c997;
-  --danger:#ff5d73;
-  --warning:#ffb020;
-  --info:#38bdf8;
-  --shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+}
+
+:root{
+  --bg:#070b14;
+  --bg2:#0d1322;
+  --card:#101827;
+  --card2:#141e31;
+  --border:#243149;
+  --text:#f5f7fb;
+  --muted:#9ca9bd;
+  --primary:#6c63ff;
+  --primary2:#8b83ff;
+  --success:#20c997;
+  --danger:#ff5d73;
+  --warning:#ffbd59;
+  --info:#4dabf7;
+  --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+
+body.light{
+  --bg:#f4f7fb;
+  --bg2:#ffffff;
+  --card:#ffffff;
+  --card2:#f7f9fc;
+  --border:#dce3ee;
+  --text:#182235;
+  --muted:#68758a;
+  --shadow:0 15px 40px rgba(27,39,67,.10);
 }
 
 html{
@@ -38,10 +46,10 @@ html{
 }
 
 body{
-  font-family:"Noto Sans Bengali",Arial,sans-serif;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
   background:
-    radial-gradient(circle at 10% 0%,rgba(109,93,252,.14),transparent 30%),
-    radial-gradient(circle at 90% 10%,rgba(56,189,248,.08),transparent 28%),
+    radial-gradient(circle at 10% 10%,rgba(108,99,255,.12),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(77,171,247,.08),transparent 30%),
     var(--bg);
   color:var(--text);
   min-height:100vh;
@@ -63,30 +71,38 @@ a{
   text-decoration:none;
 }
 
+/* =========================
+   LAYOUT
+========================= */
+
 .app{
   display:flex;
   min-height:100vh;
 }
 
-/* SIDEBAR */
-
 .sidebar{
-  width:270px;
-  background:rgba(9,14,25,.96);
-  border-right:1px solid var(--border);
+  width:260px;
   position:fixed;
-  inset:0 auto 0 0;
-  z-index:100;
+  left:0;
+  top:0;
+  bottom:0;
+  background:rgba(10,15,27,.96);
+  border-right:1px solid var(--border);
+  z-index:1000;
   overflow-y:auto;
-  transition:.3s;
+  transition:.25s ease;
 }
 
-.brand{
-  padding:24px 20px;
+body.light .sidebar{
+  background:#fff;
+}
+
+.sidebar-head{
+  padding:22px 18px;
   border-bottom:1px solid var(--border);
 }
 
-.brand-box{
+.brand{
   display:flex;
   align-items:center;
   gap:12px;
@@ -95,36 +111,34 @@ a{
 .logo{
   width:46px;
   height:46px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  font-weight:800;
+  border-radius:13px;
+  object-fit:contain;
+  background:#fff;
+  padding:5px;
+}
+
+.brand-title{
   font-size:16px;
-  background:linear-gradient(135deg,var(--primary),#3c8cff);
-  box-shadow:0 10px 30px rgba(109,93,252,.3);
+  font-weight:800;
 }
 
-.brand h2{
-  font-size:17px;
-}
-
-.brand p{
+.brand-sub{
   color:var(--muted);
-  font-size:11px;
-  margin-top:2px;
+  font-size:12px;
+  margin-top:3px;
 }
 
 .nav{
-  padding:15px 12px;
+  padding:14px 10px 30px;
 }
 
-.nav-title{
-  color:#66738a;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1px;
-  padding:14px 10px 7px;
+.nav-label{
+  color:#6f7c91;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
   text-transform:uppercase;
+  padding:14px 12px 7px;
 }
 
 .nav a{
@@ -133,46 +147,58 @@ a{
   gap:11px;
   padding:11px 12px;
   border-radius:11px;
-  color:#aeb8c9;
-  font-size:13px;
-  margin-bottom:4px;
+  color:#aeb9ca;
+  font-size:14px;
+  margin:3px 0;
   transition:.2s;
+}
+
+body.light .nav a{
+  color:#5d687b;
 }
 
 .nav a:hover,
 .nav a.active{
-  background:rgba(109,93,252,.13);
+  background:rgba(108,99,255,.15);
   color:#fff;
+}
+
+body.light .nav a:hover,
+body.light .nav a.active{
+  color:var(--primary);
 }
 
 .nav-icon{
   width:23px;
   text-align:center;
+  font-size:16px;
 }
 
-/* MAIN */
-
 .main{
-  margin-left:270px;
-  width:calc(100% - 270px);
+  width:calc(100% - 260px);
+  margin-left:260px;
   min-width:0;
 }
 
 .topbar{
-  height:74px;
-  padding:0 28px;
-  border-bottom:1px solid var(--border);
-  background:rgba(7,11,20,.78);
-  backdrop-filter:blur(18px);
+  height:70px;
+  position:sticky;
+  top:0;
+  z-index:900;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  position:sticky;
-  top:0;
-  z-index:80;
+  padding:0 25px;
+  background:rgba(7,11,20,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
 }
 
-.topbar-left{
+body.light .topbar{
+  background:rgba(255,255,255,.88);
+}
+
+.top-left{
   display:flex;
   align-items:center;
   gap:13px;
@@ -181,22 +207,22 @@ a{
 .menu-btn{
   display:none;
   border:1px solid var(--border);
-  background:var(--panel);
-  color:#fff;
+  background:var(--card);
+  color:var(--text);
   width:40px;
   height:40px;
   border-radius:10px;
 }
 
 .page-title{
-  font-size:20px;
+  font-size:18px;
   font-weight:800;
 }
 
-.page-sub{
+.page-subtitle{
+  font-size:12px;
   color:var(--muted);
-  font-size:11px;
-  margin-top:2px;
+  margin-top:3px;
 }
 
 .top-actions{
@@ -210,127 +236,194 @@ a{
   height:40px;
   border-radius:10px;
   border:1px solid var(--border);
-  background:var(--panel);
-  color:#fff;
+  background:var(--card);
+  color:var(--text);
 }
 
-.content{
-  padding:28px;
-  max-width:1600px;
+.container{
+  max-width:1500px;
   margin:auto;
+  padding:25px;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
+  position:relative;
+  overflow:hidden;
   border:1px solid var(--border);
-  border-radius:22px;
+  border-radius:24px;
   padding:28px;
   background:
-    radial-gradient(circle at 85% 15%,rgba(109,93,252,.28),transparent 30%),
-    linear-gradient(135deg,#11192b,#0a101c);
+    radial-gradient(circle at 90% 20%,rgba(108,99,255,.18),transparent 30%),
+    linear-gradient(135deg,var(--card),var(--card2));
   box-shadow:var(--shadow);
-  margin-bottom:22px;
 }
 
-.hero-flex{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
+.hero::after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  right:-80px;
+  bottom:-100px;
+  border:1px solid rgba(108,99,255,.25);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 25px rgba(108,99,255,.04),
+    0 0 0 50px rgba(108,99,255,.025);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.badge{
+  display:inline-flex;
   align-items:center;
-}
-
-.eyebrow{
-  color:#a99fff;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:1.3px;
-  text-transform:uppercase;
-  margin-bottom:8px;
+  gap:7px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(32,201,151,.12);
+  color:#58e2b5;
+  border:1px solid rgba(32,201,151,.22);
+  font-size:12px;
+  font-weight:700;
 }
 
 .hero h1{
-  font-size:28px;
-  line-height:1.2;
-  margin-bottom:8px;
+  font-size:clamp(25px,3vw,40px);
+  margin:16px 0 8px;
 }
 
 .hero p{
   color:var(--muted);
-  font-size:13px;
-  max-width:700px;
+  max-width:780px;
+  line-height:1.7;
 }
 
-.status{
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+  font-size:13px;
+  transition:.2s;
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:7px;
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:800;
-  background:rgba(32,201,151,.12);
-  color:#56e0b3;
-  border:1px solid rgba(32,201,151,.2);
-  white-space:nowrap;
 }
 
-/* STATS */
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+
+.btn-success{
+  background:var(--success);
+  color:#061a14;
+}
+
+.btn-danger{
+  background:var(--danger);
+  color:#fff;
+}
+
+.btn-warning{
+  background:var(--warning);
+  color:#281b00;
+}
+
+.btn-info{
+  background:var(--info);
+  color:#071522;
+}
+
+.btn-secondary{
+  background:var(--card2);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.btn-sm{
+  padding:8px 10px;
+  font-size:12px;
+}
+
+/* =========================
+   STATS
+========================= */
 
 .stats{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:14px;
-  margin-bottom:22px;
+  margin-top:18px;
 }
 
 .stat{
-  background:var(--panel);
+  background:var(--card);
   border:1px solid var(--border);
-  border-radius:17px;
+  border-radius:18px;
   padding:18px;
+  box-shadow:var(--shadow);
 }
 
 .stat-label{
   color:var(--muted);
-  font-size:11px;
-  margin-bottom:8px;
+  font-size:12px;
 }
 
 .stat-value{
-  font-size:25px;
+  font-size:27px;
   font-weight:800;
+  margin-top:8px;
 }
 
-.stat-note{
-  color:#69778c;
-  font-size:10px;
+.stat-small{
+  color:var(--muted);
+  font-size:11px;
   margin-top:4px;
 }
 
-/* GRID */
+/* =========================
+   GRID
+========================= */
 
 .grid-2{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:20px;
-  margin-bottom:22px;
+  gap:18px;
+  margin-top:18px;
 }
 
 .card{
-  background:rgba(13,20,34,.92);
+  background:var(--card);
   border:1px solid var(--border);
   border-radius:20px;
-  padding:22px;
-  box-shadow:0 12px 40px rgba(0,0,0,.18);
+  box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
-.card-header{
+.card-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
   display:flex;
   justify-content:space-between;
+  gap:15px;
   align-items:center;
-  gap:12px;
-  margin-bottom:18px;
 }
 
 .card-title{
@@ -340,11 +433,17 @@ a{
 
 .card-sub{
   color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
+  font-size:12px;
+  margin-top:4px;
 }
 
-/* FORM */
+.card-body{
+  padding:20px;
+}
+
+/* =========================
+   FORM
+========================= */
 
 .form-grid{
   display:grid;
@@ -352,282 +451,202 @@ a{
   gap:14px;
 }
 
-.field{
+.form-group{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:7px;
 }
 
-.field.full{
+.form-group.full{
   grid-column:1/-1;
 }
 
 label{
-  color:#aeb8c9;
-  font-size:11px;
+  font-size:12px;
   font-weight:700;
+  color:var(--muted);
 }
 
 input,
 select,
 textarea{
   width:100%;
+  background:var(--bg2);
+  color:var(--text);
   border:1px solid var(--border);
-  background:#09101c;
-  color:#fff;
-  border-radius:11px;
+  border-radius:10px;
   padding:11px 12px;
   outline:none;
-  transition:.2s;
+}
+
+textarea{
+  resize:vertical;
+  min-height:90px;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
-  border-color:rgba(109,93,252,.75);
-  box-shadow:0 0 0 3px rgba(109,93,252,.09);
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(108,99,255,.10);
 }
 
-textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-.actions{
+.checkbox-row{
   display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-  margin-top:16px;
+  align-items:center;
+  gap:8px;
+  color:var(--text);
+  font-size:13px;
 }
 
-.btn{
-  border:0;
-  border-radius:10px;
-  padding:10px 15px;
-  font-size:12px;
+.checkbox-row input{
+  width:auto;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:inline-flex;
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:11px;
   font-weight:800;
-  transition:.2s;
 }
 
-.btn:hover{
-  transform:translateY(-1px);
+.status.green{
+  background:rgba(32,201,151,.12);
+  color:#48dcae;
 }
 
-.btn-primary{
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:#fff;
-}
-
-.btn-success{
-  background:rgba(32,201,151,.15);
-  border:1px solid rgba(32,201,151,.22);
-  color:#59e4b8;
-}
-
-.btn-danger{
+.status.red{
   background:rgba(255,93,115,.12);
-  border:1px solid rgba(255,93,115,.2);
-  color:#ff8798;
+  color:#ff7285;
 }
 
-.btn-secondary{
-  background:#182235;
-  border:1px solid var(--border);
-  color:#dce3ed;
+.status.yellow{
+  background:rgba(255,189,89,.12);
+  color:#ffc86e;
 }
 
-.btn-warning{
-  background:rgba(255,176,32,.12);
-  border:1px solid rgba(255,176,32,.2);
-  color:#ffc45e;
+.status.blue{
+  background:rgba(77,171,247,.12);
+  color:#70c1ff;
 }
 
-/* QUIZ */
-
-.quiz-meta{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-bottom:18px;
-}
-
-.meta-box{
-  background:#09101c;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:12px;
-}
-
-.meta-label{
-  color:#69778c;
-  font-size:9px;
-}
-
-.meta-value{
-  font-size:14px;
-  font-weight:800;
-  margin-top:4px;
-}
-
-.quiz-actions{
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-}
-
-/* QUESTION */
+/* =========================
+   QUESTION BUILDER
+========================= */
 
 .question-list{
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:15px;
 }
 
 .question-card{
   border:1px solid var(--border);
-  border-radius:15px;
-  background:#09101c;
-  padding:16px;
+  background:var(--card2);
+  border-radius:16px;
+  padding:17px;
 }
 
 .question-top{
   display:flex;
-  justify-content:space-between;
-  gap:12px;
   align-items:center;
-  margin-bottom:12px;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:14px;
 }
 
 .question-number{
   font-weight:800;
-  font-size:13px;
+  font-size:14px;
 }
 
-.question-delete{
-  border:1px solid rgba(255,93,115,.2);
-  background:rgba(255,93,115,.08);
-  color:#ff8496;
-  border-radius:8px;
-  padding:6px 9px;
-  font-size:10px;
-}
-
-.options{
+.option-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
   margin-top:10px;
 }
 
 .correct-row{
   display:flex;
   align-items:center;
-  gap:9px;
-  margin-top:10px;
+  gap:10px;
+  margin-top:12px;
 }
 
 .correct-row select{
-  max-width:150px;
+  max-width:180px;
 }
 
-/* TABLE */
+/* =========================
+   RESULTS
+========================= */
+
+.result-toolbar{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
 
 .table-wrap{
-  overflow:auto;
-  border:1px solid var(--border);
-  border-radius:14px;
+  overflow-x:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:700px;
+  min-width:850px;
 }
 
 th,
 td{
-  padding:12px;
+  padding:12px 13px;
   border-bottom:1px solid var(--border);
   text-align:left;
-  font-size:11px;
+  font-size:12px;
 }
 
 th{
-  color:#8997ab;
-  background:#0a111e;
-  font-weight:800;
-}
-
-td{
-  color:#dbe2ed;
-}
-
-tr:last-child td{
-  border-bottom:0;
-}
-
-.badge{
-  display:inline-flex;
-  padding:5px 8px;
-  border-radius:999px;
-  font-size:9px;
-  font-weight:800;
-}
-
-.badge-green{
-  background:rgba(32,201,151,.1);
-  color:#56e0b3;
-}
-
-.badge-red{
-  background:rgba(255,93,115,.1);
-  color:#ff8596;
-}
-
-.badge-yellow{
-  background:rgba(255,176,32,.1);
-  color:#ffc35c;
-}
-
-/* EXAM */
-
-.exam-box{
-  background:#09101c;
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:16px;
-}
-
-.exam-title{
-  font-size:14px;
-  font-weight:800;
-}
-
-.exam-date{
   color:var(--muted);
   font-size:11px;
-  margin-top:4px;
+  text-transform:uppercase;
 }
 
-.exam-actions{
-  margin-top:13px;
+.student-name{
+  font-weight:700;
+}
+
+.student-id{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.action-row{
   display:flex;
-  gap:8px;
+  gap:6px;
   flex-wrap:wrap;
 }
 
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.72);
+  background:rgba(0,0,0,.70);
   backdrop-filter:blur(8px);
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:500;
   padding:18px;
+  z-index:3000;
 }
 
 .modal.show{
@@ -635,55 +654,73 @@ tr:last-child td{
 }
 
 .modal-box{
-  width:min(900px,100%);
+  width:min(760px,100%);
   max-height:90vh;
   overflow:auto;
-  background:#0c1422;
+  background:var(--card);
   border:1px solid var(--border);
   border-radius:20px;
-  padding:22px;
-  box-shadow:0 30px 100px rgba(0,0,0,.55);
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
 }
 
 .modal-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:18px;
+  justify-content:space-between;
 }
 
-.modal-title{
-  font-size:18px;
-  font-weight:800;
+.modal-body{
+  padding:20px;
 }
 
-.close{
-  width:36px;
-  height:36px;
-  border-radius:9px;
+.modal-foot{
+  padding:16px 20px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+/* =========================
+   NOTICE
+========================= */
+
+.notice{
+  padding:13px 15px;
+  border-radius:12px;
   border:1px solid var(--border);
-  background:#111a2b;
-  color:#fff;
+  background:var(--card2);
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
 }
 
-/* TOAST */
+.notice strong{
+  color:var(--text);
+}
+
+/* =========================
+   TOAST
+========================= */
 
 .toast{
   position:fixed;
-  right:22px;
-  bottom:22px;
-  z-index:1000;
-  background:#101a2b;
-  border:1px solid var(--border);
+  right:20px;
+  bottom:20px;
+  background:#151d2e;
   color:#fff;
-  padding:12px 15px;
+  border:1px solid #29364e;
   border-radius:12px;
-  font-size:11px;
-  box-shadow:var(--shadow);
+  padding:12px 15px;
+  box-shadow:0 20px 50px rgba(0,0,0,.3);
   transform:translateY(30px);
   opacity:0;
   pointer-events:none;
-  transition:.3s;
+  transition:.25s;
+  z-index:5000;
+  font-size:13px;
 }
 
 .toast.show{
@@ -691,37 +728,20 @@ tr:last-child td{
   opacity:1;
 }
 
-/* LIGHT */
+/* =========================
+   FOOTER
+========================= */
 
-body.light{
-  --bg:#f3f6fb;
-  --panel:#fff;
-  --panel2:#f7f9fc;
-  --border:rgba(15,23,42,.1);
-  --text:#172033;
-  --muted:#68758a;
+.footer{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 0 10px;
+  font-size:11px;
 }
 
-body.light .sidebar,
-body.light .topbar{
-  background:rgba(255,255,255,.94);
-}
-
-body.light input,
-body.light select,
-body.light textarea,
-body.light .question-card,
-body.light .meta-box,
-body.light .exam-box{
-  background:#f7f9fc;
-  color:#172033;
-}
-
-body.light th{
-  background:#f5f7fa;
-}
-
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:1200px){
   .stats{
@@ -729,7 +749,7 @@ body.light th{
   }
 }
 
-@media(max-width:950px){
+@media(max-width:900px){
   .sidebar{
     transform:translateX(-100%);
   }
@@ -739,8 +759,8 @@ body.light th{
   }
 
   .main{
-    margin-left:0;
     width:100%;
+    margin-left:0;
   }
 
   .menu-btn{
@@ -752,26 +772,18 @@ body.light th{
   }
 }
 
-@media(max-width:700px){
-  .content{
-    padding:16px;
+@media(max-width:650px){
+  .topbar{
+    padding:0 14px;
   }
 
-  .topbar{
-    padding:0 16px;
+  .container{
+    padding:14px;
   }
 
   .hero{
     padding:20px;
-  }
-
-  .hero-flex{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .hero h1{
-    font-size:23px;
+    border-radius:18px;
   }
 
   .stats{
@@ -782,12 +794,17 @@ body.light th{
     grid-template-columns:1fr;
   }
 
-  .quiz-meta{
-    grid-template-columns:1fr 1fr;
+  .option-grid{
+    grid-template-columns:1fr;
   }
 
-  .options{
-    grid-template-columns:1fr;
+  .top-actions .hide-mobile{
+    display:none;
+  }
+
+  .card-head{
+    align-items:flex-start;
+    flex-direction:column;
   }
 }
 
@@ -796,17 +813,19 @@ body.light th{
     grid-template-columns:1fr;
   }
 
-  .quiz-meta{
-    grid-template-columns:1fr;
+  .hero h1{
+    font-size:25px;
   }
 }
+
+/* =========================
+   PRINT
+========================= */
 
 @media print{
   .sidebar,
   .topbar,
-  .actions,
-  .quiz-actions,
-  .exam-actions,
+  .no-print,
   .modal,
   .toast{
     display:none!important;
@@ -819,14 +838,15 @@ body.light th{
 
   body{
     background:#fff;
-    color:#111;
+    color:#000;
   }
 
   .card,
-  .hero,
-  .stat{
+  .stat,
+  .hero{
     box-shadow:none;
-    break-inside:avoid;
+    color:#000;
+    border:1px solid #ccc;
   }
 }
 </style>
@@ -836,621 +856,654 @@ body.light th{
 
 <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+<!-- =========================
+     SIDEBAR
+========================= -->
+<aside class="sidebar" id="sidebar">
 
+  <div class="sidebar-head">
     <div class="brand">
-      <div class="brand-box">
-        <div class="logo">SNK</div>
-        <div>
-          <h2>SNK IT Institute</h2>
-          <p>Admin Control Center</p>
-        </div>
+      <img
+        class="logo"
+        src="https://github.com/yourdocuments/products/blob/main/snkitlogo%20(2).svg?raw=true"
+        alt="SNK IT Institute"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        <div class="brand-title">SNK IT Institute</div>
+        <div class="brand-sub">Admin Control Panel</div>
       </div>
     </div>
+  </div>
 
-    <nav class="nav">
+  <nav class="nav">
 
-      <div class="nav-title">Dashboard</div>
+    <div class="nav-label">Main</div>
 
-      <a href="admin.html" class="active">
-        <span class="nav-icon">▣</span>
-        Dashboard
-      </a>
+    <a href="admin.html" class="active">
+      <span class="nav-icon">📊</span>
+      <span>Admin Dashboard</span>
+    </a>
 
-      <a href="students.html">
-        <span class="nav-icon">👥</span>
-        Students
-      </a>
+    <a href="students.html">
+      <span class="nav-icon">👨‍🎓</span>
+      <span>Students</span>
+    </a>
 
-      <a href="courses.html">
-        <span class="nav-icon">📚</span>
-        Courses
-      </a>
+    <a href="courses.html">
+      <span class="nav-icon">📚</span>
+      <span>Courses</span>
+    </a>
 
-      <div class="nav-title">Academic</div>
+    <div class="nav-label">Academic</div>
 
-      <a href="assignments.html">
-        <span class="nav-icon">📝</span>
-        Assignments
-      </a>
+    <a href="assignments.html">
+      <span class="nav-icon">📝</span>
+      <span>Assignments</span>
+    </a>
 
-      <a href="quiz.html">
-        <span class="nav-icon">❓</span>
-        Student Quiz
-      </a>
+    <a href="admin-submissions.html">
+      <span class="nav-icon">📥</span>
+      <span>Submissions</span>
+    </a>
 
-      <a href="results.html">
-        <span class="nav-icon">🏆</span>
-        Student Results
-      </a>
+    <a href="quiz.html">
+      <span class="nav-icon">❓</span>
+      <span>Student Quiz</span>
+    </a>
 
-      <a href="attendance.html">
-        <span class="nav-icon">✓</span>
-        Attendance
-      </a>
+    <a href="admin-quiz-results.html">
+      <span class="nav-icon">📈</span>
+      <span>Quiz Results</span>
+    </a>
 
-      <div class="nav-title">Admin Tools</div>
+    <a href="admin-quiz-result-details.html">
+      <span class="nav-icon">📄</span>
+      <span>Result Details</span>
+    </a>
 
-      <a href="admin-assignments.html">
-        <span class="nav-icon">📋</span>
-        Assignment Manager
-      </a>
+    <a href="admin-quiz-answer-review.html">
+      <span class="nav-icon">🔍</span>
+      <span>Answer Review</span>
+    </a>
 
-      <a href="admin-submissions.html">
-        <span class="nav-icon">📤</span>
-        Submissions
-      </a>
+    <div class="nav-label">Exam</div>
 
-      <a href="student-result-details.html">
-        <span class="nav-icon">🧾</span>
-        Marksheet
-      </a>
+    <a href="student-result-details.html">
+      <span class="nav-icon">🎓</span>
+      <span>Exam Marksheet</span>
+    </a>
 
-      <div class="nav-title">Student Portal</div>
+    <a href="admin-attendance.html">
+      <span class="nav-icon">✅</span>
+      <span>Exam Attendance</span>
+    </a>
 
-      <a href="student-dashboard.html">
-        <span class="nav-icon">🏠</span>
-        Student Dashboard
-      </a>
+    <div class="nav-label">Student Portal</div>
 
-      <a href="student-resources.html">
-        <span class="nav-icon">📦</span>
-        Resources
-      </a>
+    <a href="student-dashboard.html">
+      <span class="nav-icon">🏠</span>
+      <span>Student Dashboard</span>
+    </a>
 
-      <a href="student-notifications.html">
-        <span class="nav-icon">🔔</span>
-        Notifications
-      </a>
+    <a href="student-resources.html">
+      <span class="nav-icon">📦</span>
+      <span>Resources</span>
+    </a>
 
-    </nav>
-  </aside>
+    <a href="student-notifications.html">
+      <span class="nav-icon">🔔</span>
+      <span>Notifications</span>
+    </a>
 
-  <!-- MAIN -->
-  <main class="main">
+    <a href="student-support.html">
+      <span class="nav-icon">💬</span>
+      <span>Support</span>
+    </a>
 
-    <header class="topbar">
+  </nav>
+</aside>
 
-      <div class="topbar-left">
+<!-- =========================
+     MAIN
+========================= -->
+<main class="main">
 
-        <button class="menu-btn" id="menuBtn">☰</button>
+  <header class="topbar">
 
-        <div>
-          <div class="page-title">Admin Dashboard</div>
-          <div class="page-sub">SNK IT Institute Student Portal</div>
+    <div class="top-left">
+
+      <button
+        class="menu-btn"
+        id="menuBtn"
+        type="button"
+        aria-label="Menu"
+      >
+        ☰
+      </button>
+
+      <div>
+        <div class="page-title">Quiz Management</div>
+        <div class="page-subtitle">
+          Course, Quiz, Questions & Student Results
         </div>
-
       </div>
 
-      <div class="top-actions">
-
-        <button class="icon-btn" id="themeBtn" title="Theme">
-          ◐
-        </button>
-
-        <button class="icon-btn" onclick="window.print()" title="Print">
-          🖨
-        </button>
-
-      </div>
-
-    </header>
-
-    <section class="content">
-
-      <!-- HERO -->
-
-      <div class="hero">
-
-        <div class="hero-flex">
-
-          <div>
-
-            <div class="eyebrow">
-              EXAMINATION + QUIZ CONTROL
-            </div>
-
-            <h1>Course & Quiz Management</h1>
-
-            <p>
-              এখান থেকে Course information এবং Student Quiz সম্পূর্ণভাবে
-              manage করা যাবে। Student quiz-এর timer শুধু Start Quiz
-              button click করার পর শুরু হবে।
-            </p>
-
-          </div>
-
-          <div class="status">
-            ● Admin System Active
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- STATS -->
-
-      <div class="stats">
-
-        <div class="stat">
-          <div class="stat-label">Total Students</div>
-          <div class="stat-value" id="statStudents">0</div>
-          <div class="stat-note">Registered students</div>
-        </div>
-
-        <div class="stat">
-          <div class="stat-label">Quiz Questions</div>
-          <div class="stat-value" id="statQuestions">0/10</div>
-          <div class="stat-note">Required questions</div>
-        </div>
-
-        <div class="stat">
-          <div class="stat-label">Quiz Attempts</div>
-          <div class="stat-value" id="statQuizResults">0</div>
-          <div class="stat-note">Submitted attempts</div>
-        </div>
-
-        <div class="stat">
-          <div class="stat-label">Published Quiz</div>
-          <div class="stat-value" id="statPublished">No</div>
-          <div class="stat-note">Student availability</div>
-        </div>
-
-        <div class="stat">
-          <div class="stat-label">Exam Results</div>
-          <div class="stat-value" id="statExamResults">0</div>
-          <div class="stat-note">Admin entered</div>
-        </div>
-
-      </div>
-
-      <!-- COURSE + QUIZ SETTINGS -->
-
-      <div class="grid-2">
-
-        <!-- COURSE -->
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <div class="card-title">
-                📚 Course Settings
-              </div>
-
-              <div class="card-sub">
-                Student portal-এর course information এখান থেকে পরিবর্তন করুন।
-              </div>
-            </div>
-
-          </div>
-
-          <div class="form-grid">
-
-            <div class="field full">
-              <label>Course Name</label>
-              <input
-                id="courseName"
-                type="text"
-                placeholder="Computer Office Application"
-              >
-            </div>
-
-            <div class="field">
-              <label>Batch</label>
-              <input
-                id="courseBatch"
-                type="text"
-                placeholder="Batch 01"
-              >
-            </div>
-
-            <div class="field">
-              <label>Mode</label>
-
-              <select id="courseMode">
-                <option>Offline</option>
-                <option>Online</option>
-                <option>Hybrid</option>
-              </select>
-
-            </div>
-
-            <div class="field">
-              <label>Duration</label>
-
-              <input
-                id="courseDuration"
-                type="text"
-                placeholder="6 Months"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>Class Days</label>
-
-              <input
-                id="courseDays"
-                type="text"
-                placeholder="Saturday–Monday"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>Class Time</label>
-
-              <input
-                id="courseTime"
-                type="text"
-                placeholder="4:00 PM – 6:00 PM"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>Instructor</label>
-
-              <input
-                id="courseInstructor"
-                type="text"
-                placeholder="SNK IT Instructor"
-              >
-
-            </div>
-
-          </div>
-
-          <div class="actions">
-
-            <button
-              class="btn btn-primary"
-              onclick="saveCourseSettings()"
-            >
-              Save Course
-            </button>
-
-            <button
-              class="btn btn-secondary"
-              onclick="loadCourseSettings()"
-            >
-              Reset
-            </button>
-
-          </div>
-
-        </div>
-
-        <!-- QUIZ SETTINGS -->
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <div class="card-title">
-                ❓ Quiz Settings
-              </div>
-
-              <div class="card-sub">
-                Quiz date, timer এবং result rules manage করুন।
-              </div>
-            </div>
-
-          </div>
-
-          <div class="form-grid">
-
-            <div class="field full">
-              <label>Quiz Title</label>
-
-              <input
-                id="quizTitle"
-                type="text"
-                placeholder="Computer Basics Quiz"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>Start Date</label>
-
-              <input
-                id="quizStartDate"
-                type="date"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>End Date</label>
-
-              <input
-                id="quizEndDate"
-                type="date"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>Duration (Minutes)</label>
-
-              <input
-                id="quizDuration"
-                type="number"
-                min="1"
-                max="180"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>Marks / Question</label>
-
-              <input
-                id="quizMarks"
-                type="number"
-                min="1"
-                max="100"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>Pass Percentage</label>
-
-              <input
-                id="quizPass"
-                type="number"
-                min="1"
-                max="100"
-              >
-
-            </div>
-
-            <div class="field">
-              <label>Attempt Rule</label>
-
-              <select id="quizAttemptRule">
-
-                <option value="one">
-                  One Attempt Only
-                </option>
-
-              </select>
-
-            </div>
-
-            <div class="field">
-              <label>Auto Submit</label>
-
-              <select id="quizAutoSubmit">
-
-                <option value="true">
-                  Yes
-                </option>
-
-                <option value="false">
-                  No
-                </option>
-
-              </select>
-
-            </div>
-
-          </div>
-
-          <div class="actions">
-
-            <button
-              class="btn btn-primary"
-              onclick="saveQuizSettings()"
-            >
-              Save Quiz Settings
-            </button>
-
-            <button
-              class="btn btn-success"
-              id="publishQuizBtn"
-              onclick="toggleQuizPublish()"
-            >
-              Publish Quiz
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- QUIZ BUILDER -->
-
-      <div class="card" id="quizBuilderCard">
-
-        <div class="card-header">
-
-          <div>
-
-            <div class="card-title">
-              🧠 Quiz Question Builder
-            </div>
-
-            <div class="card-sub">
-              Exactly 10টি MCQ question তৈরি করুন।
-              প্রতিটি প্রশ্নে A, B, C, D এবং একটি correct answer থাকবে।
-            </div>
-
-          </div>
-
-          <div class="badge badge-yellow" id="questionCounter">
-            0 / 10
-          </div>
-
-        </div>
-
-        <div id="questionList" class="question-list"></div>
-
-        <div class="actions">
-
-          <button
-            class="btn btn-secondary"
-            id="addQuestionBtn"
-            onclick="addQuestion()"
-          >
-            + Add Question
-          </button>
+    </div>
+
+    <div class="top-actions">
+
+      <button
+        class="icon-btn"
+        id="refreshBtn"
+        type="button"
+        title="Refresh"
+      >
+        ↻
+      </button>
+
+      <button
+        class="icon-btn"
+        id="themeBtn"
+        type="button"
+        title="Theme"
+      >
+        🌙
+      </button>
+
+    </div>
+
+  </header>
+
+  <div class="container">
+
+    <!-- =========================
+         HERO
+    ========================= -->
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <span class="badge">
+          ● ADMIN QUIZ CONTROL
+        </span>
+
+        <h1 id="heroQuizTitle">
+          Computer Basics Quiz
+        </h1>
+
+        <p>
+          এখান থেকে Admin এক জায়গা থেকেই Quiz-এর course,
+          date, timer, pass mark, questions এবং student result
+          manage করতে পারবেন।
+        </p>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
 
           <button
             class="btn btn-primary"
-            onclick="saveQuestions()"
+            type="button"
+            onclick="scrollToSection('quizSettingsCard')"
           >
-            Save All Questions
+            ⚙ Quiz Settings
           </button>
-
-          <button
-            class="btn btn-warning"
-            onclick="loadQuestions()"
-          >
-            Reload Questions
-          </button>
-
-        </div>
-
-      </div>
-
-      <br>
-
-      <!-- EXAM -->
-
-      <div class="grid-2">
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-
-              <div class="card-title">
-                🧾 Final Exam
-              </div>
-
-              <div class="card-sub">
-                Exam date already completed.
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="exam-box">
-
-            <div class="exam-title">
-              Computer Office Application Exam
-            </div>
-
-            <div class="exam-date">
-              📅 08 September 2026
-            </div>
-
-            <div class="exam-date">
-              Total Marks: 100 • Pass Mark: 40
-            </div>
-
-            <div class="exam-actions">
-
-              <button
-                class="btn btn-secondary"
-                onclick="location.href='student-result-details.html'"
-              >
-                View Marksheet
-              </button>
-
-              <button
-                class="btn btn-secondary"
-                onclick="location.href='results.html'"
-              >
-                Student Results
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- QUIZ STATUS -->
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-
-              <div class="card-title">
-                ⚡ Quiz Status
-              </div>
-
-              <div class="card-sub">
-                Current Student Quiz configuration.
-              </div>
-
-            </div>
-
-          </div>
-
-          <div id="quizStatusBox"></div>
-
-        </div>
-
-      </div>
-
-      <!-- QUIZ RESULT TABLE -->
-
-      <div class="card">
-
-        <div class="card-header">
-
-          <div>
-
-            <div class="card-title">
-              📊 Quiz Results
-            </div>
-
-            <div class="card-sub">
-              Student quiz submit করলে result automatically এখানে আসবে।
-            </div>
-
-          </div>
 
           <button
             class="btn btn-secondary"
-            onclick="refreshAll()"
+            type="button"
+            onclick="scrollToSection('questionCard')"
           >
-            Refresh
+            ❓ Questions
           </button>
+
+          <button
+            class="btn btn-success"
+            type="button"
+            onclick="publishQuiz()"
+          >
+            🚀 Publish Quiz
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
+         STATS
+    ========================= -->
+    <section class="stats">
+
+      <div class="stat">
+        <div class="stat-label">Quiz Status</div>
+        <div class="stat-value" id="statPublished">Draft</div>
+        <div class="stat-small">Published / Unpublished</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Questions</div>
+        <div class="stat-value" id="statQuestions">0</div>
+        <div class="stat-small">Required: 10</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Submitted</div>
+        <div class="stat-value" id="statSubmitted">0</div>
+        <div class="stat-small">Student attempts</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Passed</div>
+        <div class="stat-value" id="statPassed">0</div>
+        <div class="stat-small">Based on pass mark</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Average</div>
+        <div class="stat-value" id="statAverage">0%</div>
+        <div class="stat-small">Submitted results</div>
+      </div>
+
+    </section>
+
+    <!-- =========================
+         COURSE + QUIZ
+    ========================= -->
+    <section class="grid-2">
+
+      <!-- COURSE -->
+      <div class="card">
+
+        <div class="card-head">
+
+          <div>
+            <div class="card-title">📚 Course Settings</div>
+            <div class="card-sub">
+              Student portal-এর course information
+            </div>
+          </div>
+
+          <span class="status blue">SYNC</span>
+
+        </div>
+
+        <div class="card-body">
+
+          <form id="courseForm">
+
+            <div class="form-grid">
+
+              <div class="form-group full">
+                <label>Course Name</label>
+                <input
+                  id="courseName"
+                  type="text"
+                  placeholder="Course Name"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Batch</label>
+                <input
+                  id="courseBatch"
+                  type="text"
+                  placeholder="Batch 01"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Mode</label>
+                <select id="courseMode">
+                  <option value="Offline">Offline</option>
+                  <option value="Online">Online</option>
+                  <option value="Hybrid">Hybrid</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Duration</label>
+                <input
+                  id="courseDuration"
+                  type="text"
+                  placeholder="6 Months"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Class Days</label>
+                <input
+                  id="courseDays"
+                  type="text"
+                  placeholder="Saturday–Monday"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Class Time</label>
+                <input
+                  id="courseTime"
+                  type="text"
+                  placeholder="4:00 PM – 6:00 PM"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Instructor</label>
+                <input
+                  id="courseInstructor"
+                  type="text"
+                  placeholder="SNK IT Instructor"
+                >
+              </div>
+
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:15px;">
+
+              <button
+                class="btn btn-primary"
+                type="submit"
+              >
+                💾 Save Course
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+      <!-- QUIZ SETTINGS -->
+      <div class="card" id="quizSettingsCard">
+
+        <div class="card-head">
+
+          <div>
+            <div class="card-title">⚙ Quiz Settings</div>
+            <div class="card-sub">
+              Date window, timer & result rules
+            </div>
+          </div>
+
+          <span
+            id="quizStatusBadge"
+            class="status yellow"
+          >
+            DRAFT
+          </span>
+
+        </div>
+
+        <div class="card-body">
+
+          <form id="quizForm">
+
+            <div class="form-grid">
+
+              <div class="form-group full">
+                <label>Quiz Title</label>
+                <input
+                  id="quizTitle"
+                  type="text"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Start Date</label>
+                <input
+                  id="quizStartDate"
+                  type="date"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label>End Date</label>
+                <input
+                  id="quizEndDate"
+                  type="date"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Duration (Minutes)</label>
+                <input
+                  id="quizDuration"
+                  type="number"
+                  min="1"
+                  max="300"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Marks Per Question</label>
+                <input
+                  id="quizMarks"
+                  type="number"
+                  min="1"
+                  max="100"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Pass Percentage</label>
+                <input
+                  id="quizPass"
+                  type="number"
+                  min="1"
+                  max="100"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Quiz ID</label>
+                <input
+                  id="quizId"
+                  type="text"
+                  readonly
+                >
+              </div>
+
+            </div>
+
+            <div style="margin-top:15px;display:flex;flex-direction:column;gap:10px;">
+
+              <label class="checkbox-row">
+                <input
+                  id="oneAttemptOnly"
+                  type="checkbox"
+                >
+                <span>একজন Student শুধুমাত্র ১ বার submit করতে পারবে</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input
+                  id="autoSubmit"
+                  type="checkbox"
+                >
+                <span>Timer শেষ হলে automatically submit হবে</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input
+                  id="published"
+                  type="checkbox"
+                >
+                <span>Quiz Student-এর জন্য Published থাকবে</span>
+              </label>
+
+            </div>
+
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:17px;flex-wrap:wrap;">
+
+              <button
+                class="btn btn-secondary"
+                type="button"
+                onclick="resetQuizSettings()"
+              >
+                ↺ Reset
+              </button>
+
+              <button
+                class="btn btn-primary"
+                type="submit"
+              >
+                💾 Save Quiz Settings
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
+         NOTICE
+    ========================= -->
+    <div class="notice" style="margin-top:18px;">
+
+      <strong>Important:</strong>
+      Student-এর timer Quiz Start button চাপার পরে শুরু হবে।
+      Date window শুধু কোন তারিখে Quiz শুরু করা যাবে তা control করবে।
+      Student refresh করলে active attempt continue করবে।
+
+    </div>
+
+    <!-- =========================
+         QUESTIONS
+    ========================= -->
+    <section class="card" id="questionCard" style="margin-top:18px;">
+
+      <div class="card-head">
+
+        <div>
+          <div class="card-title">❓ Quiz Questions</div>
+          <div class="card-sub">
+            Exactly 10টি MCQ রাখতে হবে
+          </div>
+        </div>
+
+        <div class="result-toolbar">
+
+          <button
+            class="btn btn-secondary btn-sm"
+            type="button"
+            onclick="loadQuestionsIntoBuilder()"
+          >
+            ↻ Reload
+          </button>
+
+          <button
+            class="btn btn-primary btn-sm"
+            type="button"
+            onclick="addQuestion()"
+            id="addQuestionBtn"
+          >
+            ＋ Add Question
+          </button>
+
+          <button
+            class="btn btn-success btn-sm"
+            type="button"
+            onclick="saveQuestions()"
+          >
+            💾 Save Questions
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div
+          class="notice"
+          style="margin-bottom:15px;"
+        >
+          প্রতিটি Question-এ Question Text, A/B/C/D options এবং Correct Answer
+          অবশ্যই দিতে হবে।
+        </div>
+
+        <div
+          class="question-list"
+          id="questionList"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
+         RESULTS
+    ========================= -->
+    <section class="card" style="margin-top:18px;">
+
+      <div class="card-head">
+
+        <div>
+          <div class="card-title">📈 Student Quiz Results</div>
+          <div class="card-sub">
+            সর্বশেষ student submissions
+          </div>
+        </div>
+
+        <div class="result-toolbar">
+
+          <button
+            class="btn btn-secondary btn-sm"
+            type="button"
+            onclick="location.href='admin-quiz-results.html'"
+          >
+            Open Full Results
+          </button>
+
+          <button
+            class="btn btn-secondary btn-sm"
+            type="button"
+            onclick="printPage()"
+          >
+            🖨 Print
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="result-toolbar" style="margin-bottom:14px;">
+
+          <input
+            id="resultSearch"
+            type="search"
+            placeholder="Student ID / Name search..."
+            style="max-width:300px;"
+          >
+
+          <select
+            id="resultFilter"
+            style="max-width:180px;"
+          >
+            <option value="all">All Results</option>
+            <option value="pass">Passed</option>
+            <option value="fail">Failed</option>
+            <option value="published">Published</option>
+            <option value="unpublished">Unpublished</option>
+          </select>
 
         </div>
 
@@ -1462,17 +1515,19 @@ body.light th{
 
               <tr>
                 <th>Student</th>
-                <th>Quiz</th>
-                <th>Marks</th>
-                <th>Percentage</th>
+                <th>Score</th>
+                <th>Correct</th>
+                <th>Wrong</th>
+                <th>Unanswered</th>
                 <th>Result</th>
-                <th>Time Taken</th>
+                <th>Published</th>
                 <th>Submitted</th>
+                <th>Action</th>
               </tr>
 
             </thead>
 
-            <tbody id="quizResultTable"></tbody>
+            <tbody id="resultTableBody"></tbody>
 
           </table>
 
@@ -1482,242 +1537,291 @@ body.light th{
 
     </section>
 
-  </main>
+    <div class="footer">
+      SNK IT Institute Admin Panel • Quiz Management v2.5.11
+    </div>
+
+  </div>
+
+</main>
 
 </div>
 
-<!-- TOAST -->
+<!-- =========================
+     RESULT MODAL
+========================= -->
+<div
+  class="modal"
+  id="resultModal"
+>
 
-<div class="toast" id="toast"></div>
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div>
+        <div class="card-title">Student Result</div>
+        <div
+          class="card-sub"
+          id="modalStudentName"
+        >
+          Result Details
+        </div>
+      </div>
+
+      <button
+        class="icon-btn"
+        type="button"
+        onclick="closeModal()"
+      >
+        ✕
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div
+        id="modalResultContent"
+      ></div>
+
+      <div class="form-group" style="margin-top:18px;">
+
+        <label>Admin Note</label>
+
+        <textarea
+          id="adminNote"
+          placeholder="Optional admin note..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="closeModal()"
+      >
+        Close
+      </button>
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="saveAdminNote()"
+      >
+        💾 Save Note
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+     TOAST
+========================= -->
+<div
+  class="toast"
+  id="toast"
+></div>
 
 <script>
+"use strict";
+
 /* =========================================================
-   SNK IT INSTITUTE
-   ADMIN COURSE + QUIZ BUILDER
-   STEP 2.5.3
-   ========================================================= */
+   STORAGE
+========================================================= */
 
 const STORAGE = {
-
   theme: "snkTheme",
 
-  course:
-    "snkCourseSettingsV25",
+  course: "snkCourseSettingsV25",
 
-  quizSettings:
-    "snkQuizSettingsV25",
+  quiz: "snkQuizSettingsV25",
 
-  quizQuestions:
-    "snkQuizQuestionsV25",
+  questions: "snkQuizQuestionsV25",
 
-  quizResults:
-    "snkQuizResults",
+  results: "snkQuizResults",
 
-  students:
-    "snkStudents",
+  students: "snkStudents",
 
-  examResults:
-    "snkAdminExamResultsV21",
+  activeAttempt: "snkQuizActiveAttemptV25",
 
-  examAttendance:
-    "snkExamAttendanceV21"
-
+  attemptLock: "snkQuizAttemptLockV25"
 };
 
 
 /* =========================================================
    DEFAULT COURSE
-   ========================================================= */
+========================================================= */
 
 const DEFAULT_COURSE = {
-
-  name:
-    "Computer Office Application",
-
-  batch:
-    "Batch 01",
-
-  mode:
-    "Offline",
-
-  duration:
-    "6 Months",
-
-  days:
-    "Saturday–Monday",
-
-  time:
-    "4:00 PM – 6:00 PM",
-
-  instructor:
-    "SNK IT Instructor"
-
+  name: "Computer Office Application",
+  batch: "Batch 01",
+  mode: "Offline",
+  duration: "6 Months",
+  days: "Saturday–Monday",
+  time: "4:00 PM – 6:00 PM",
+  instructor: "SNK IT Instructor"
 };
 
 
 /* =========================================================
    DEFAULT QUIZ
-   ========================================================= */
+========================================================= */
 
 const DEFAULT_QUIZ = {
+  id: "SNK-QUIZ-2026-01",
 
-  id:
-    "SNK-QUIZ-2026-01",
+  title: "Computer Basics Quiz",
 
-  title:
-    "Computer Basics Quiz",
+  startDate: "2026-09-10",
 
-  startDate:
-    "2026-09-10",
+  endDate: "2026-09-15",
 
-  endDate:
-    "2026-09-15",
+  durationMinutes: 20,
 
-  durationMinutes:
-    20,
+  marksPerQuestion: 1,
 
-  marksPerQuestion:
-    1,
+  passPercentage: 40,
 
-  passPercentage:
-    40,
+  oneAttemptOnly: true,
 
-  oneAttemptOnly:
-    true,
+  autoSubmit: true,
 
-  autoSubmit:
-    true,
-
-  published:
-    false
-
+  published: false
 };
 
 
 /* =========================================================
    DEFAULT QUESTIONS
-   ========================================================= */
+========================================================= */
 
 const DEFAULT_QUESTIONS = [
 
   {
-    id:"Q1",
-    question:"What does CPU stand for?",
-    options:{
-      A:"Central Processing Unit",
-      B:"Computer Personal Unit",
-      C:"Central Program Utility",
-      D:"Computer Processing User"
+    id: "Q1",
+    question: "কম্পিউটারের প্রধান মস্তিষ্ক কোনটি?",
+    options: {
+      A: "CPU",
+      B: "Monitor",
+      C: "Keyboard",
+      D: "Mouse"
     },
-    correctAnswer:"A"
+    correctAnswer: "A"
   },
 
   {
-    id:"Q2",
-    question:"Which device is used to type text?",
-    options:{
-      A:"Monitor",
-      B:"Keyboard",
-      C:"Printer",
-      D:"Speaker"
+    id: "Q2",
+    question: "কোনটি একটি Input Device?",
+    options: {
+      A: "Monitor",
+      B: "Printer",
+      C: "Keyboard",
+      D: "Speaker"
     },
-    correctAnswer:"B"
+    correctAnswer: "C"
   },
 
   {
-    id:"Q3",
-    question:"Which one is an operating system?",
-    options:{
-      A:"Microsoft Word",
-      B:"Google Chrome",
-      C:"Windows",
-      D:"Excel"
+    id: "Q3",
+    question: "MS Word মূলত কী কাজে ব্যবহার করা হয়?",
+    options: {
+      A: "Document তৈরি ও সম্পাদনা",
+      B: "ভিডিও দেখা",
+      C: "গান শোনা",
+      D: "ছবি তোলা"
     },
-    correctAnswer:"C"
+    correctAnswer: "A"
   },
 
   {
-    id:"Q4",
-    question:"Which software is mainly used for documents?",
-    options:{
-      A:"MS Word",
-      B:"Calculator",
-      C:"Paint",
-      D:"Media Player"
+    id: "Q4",
+    question: "কোনটি একটি Operating System?",
+    options: {
+      A: "Windows",
+      B: "Google",
+      C: "YouTube",
+      D: "Facebook"
     },
-    correctAnswer:"A"
+    correctAnswer: "A"
   },
 
   {
-    id:"Q5",
-    question:"Which software is used for spreadsheets?",
-    options:{
-      A:"PowerPoint",
-      B:"Excel",
-      C:"WordPad",
-      D:"Notepad"
+    id: "Q5",
+    question: "Keyboard-এর Enter key সাধারণত কী কাজে ব্যবহৃত হয়?",
+    options: {
+      A: "নতুন line বা command confirm",
+      B: "কম্পিউটার বন্ধ",
+      C: "শব্দ বাড়ানো",
+      D: "ছবি আঁকা"
     },
-    correctAnswer:"B"
+    correctAnswer: "A"
   },
 
   {
-    id:"Q6",
-    question:"Which key is commonly used to delete characters?",
-    options:{
-      A:"Shift",
-      B:"Alt",
-      C:"Backspace",
-      D:"Tab"
+    id: "Q6",
+    question: "MS Excel-এ তথ্য সাধারণত কোথায় লেখা হয়?",
+    options: {
+      A: "Cell",
+      B: "Slide",
+      C: "Page",
+      D: "Frame"
     },
-    correctAnswer:"C"
+    correctAnswer: "A"
   },
 
   {
-    id:"Q7",
-    question:"Which device displays computer output?",
-    options:{
-      A:"Keyboard",
-      B:"Mouse",
-      C:"Monitor",
-      D:"Scanner"
+    id: "Q7",
+    question: "Internet ব্যবহার করতে কোনটি প্রয়োজন হতে পারে?",
+    options: {
+      A: "Network Connection",
+      B: "Printer Ink",
+      C: "Paper",
+      D: "Scanner Glass"
     },
-    correctAnswer:"C"
+    correctAnswer: "A"
   },
 
   {
-    id:"Q8",
-    question:"What is used to browse websites?",
-    options:{
-      A:"Web Browser",
-      B:"Calculator",
-      C:"File Manager",
-      D:"Paint"
+    id: "Q8",
+    question: "PowerPoint মূলত কী তৈরির জন্য ব্যবহার করা হয়?",
+    options: {
+      A: "Presentation",
+      B: "Database Server",
+      C: "Operating System",
+      D: "Keyboard Driver"
     },
-    correctAnswer:"A"
+    correctAnswer: "A"
   },
 
   {
-    id:"Q9",
-    question:"Which is an example of a web browser?",
-    options:{
-      A:"Excel",
-      B:"Chrome",
-      C:"Word",
-      D:"PowerPoint"
+    id: "Q9",
+    question: "কম্পিউটারে লেখা মুছে ফেলতে কোন key ব্যবহার করা যায়?",
+    options: {
+      A: "Backspace",
+      B: "Caps Lock",
+      C: "Shift",
+      D: "Tab"
     },
-    correctAnswer:"B"
+    correctAnswer: "A"
   },
 
   {
-    id:"Q10",
-    question:"Which shortcut is commonly used to copy selected text?",
-    options:{
-      A:"Ctrl + X",
-      B:"Ctrl + V",
-      C:"Ctrl + C",
-      D:"Ctrl + Z"
+    id: "Q10",
+    question: "কম্পিউটারে File সংরক্ষণ করার shortcut কোনটি?",
+    options: {
+      A: "Ctrl + S",
+      B: "Ctrl + P",
+      C: "Ctrl + X",
+      D: "Ctrl + Z"
     },
-    correctAnswer:"C"
+    correctAnswer: "A"
   }
 
 ];
@@ -1725,46 +1829,68 @@ const DEFAULT_QUESTIONS = [
 
 /* =========================================================
    HELPERS
-   ========================================================= */
+========================================================= */
 
-function readJSON(key, fallback){
+function readJSON(storage, key, fallback){
 
   try{
 
-    const raw =
-      localStorage.getItem(key);
+    const value = storage.getItem(key);
 
-    if(!raw){
+    if(!value){
       return fallback;
     }
 
-    const parsed =
-      JSON.parse(raw);
-
-    return parsed ?? fallback;
+    return JSON.parse(value);
 
   }catch(error){
 
-    console.warn(
-      "Storage read error:",
-      key,
-      error
-    );
+    console.warn("Storage read error:", key, error);
 
     return fallback;
-
   }
-
 }
 
 
-function writeJSON(key, value){
+function writeJSON(storage, key, value){
 
-  localStorage.setItem(
+  try{
+
+    storage.setItem(
+      key,
+      JSON.stringify(value)
+    );
+
+    return true;
+
+  }catch(error){
+
+    console.error("Storage write error:", key, error);
+
+    showToast("Data save করা যায়নি");
+
+    return false;
+  }
+}
+
+
+function getLocal(key, fallback){
+
+  return readJSON(
+    localStorage,
     key,
-    JSON.stringify(value)
+    fallback
   );
+}
 
+
+function setLocal(key, value){
+
+  return writeJSON(
+    localStorage,
+    key,
+    value
+  );
 }
 
 
@@ -1776,7 +1902,6 @@ function escapeHTML(value){
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
-
 }
 
 
@@ -1785,28 +1910,73 @@ function showToast(message){
   const toast =
     document.getElementById("toast");
 
-  toast.textContent =
-    message;
+  if(!toast){
+    return;
+  }
+
+  toast.textContent = message;
 
   toast.classList.add("show");
 
   clearTimeout(
-    window.__toastTimer
+    window.__snkToastTimer
   );
 
-  window.__toastTimer =
-    setTimeout(()=>{
+  window.__snkToastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove("show");
+      },
+      2500
+    );
+}
 
-      toast.classList.remove("show");
 
-    },2500);
+function scrollToSection(id){
 
+  const element =
+    document.getElementById(id);
+
+  if(element){
+
+    element.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+}
+
+
+function formatDateTime(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const date =
+    new Date(value);
+
+  if(Number.isNaN(date.getTime())){
+    return value;
+  }
+
+  return date.toLocaleString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
 }
 
 
 /* =========================================================
    THEME
-   ========================================================= */
+========================================================= */
 
 function applyTheme(){
 
@@ -1815,760 +1985,665 @@ function applyTheme(){
       STORAGE.theme
     ) || "dark";
 
-  document.body.classList.toggle(
-    "light",
-    theme === "light"
-  );
+  if(theme === "light"){
 
+    document.body.classList.add("light");
+
+    document.getElementById("themeBtn").textContent = "☀️";
+
+  }else{
+
+    document.body.classList.remove("light");
+
+    document.getElementById("themeBtn").textContent = "🌙";
+
+  }
 }
 
 
-document
-  .getElementById("themeBtn")
-  .addEventListener("click",()=>{
+function toggleTheme(){
 
-    const current =
-      localStorage.getItem(
-        STORAGE.theme
-      ) || "dark";
+  const isLight =
+    document.body.classList.contains("light");
 
-    const next =
-      current === "light"
-        ? "dark"
-        : "light";
+  localStorage.setItem(
+    STORAGE.theme,
+    isLight ? "dark" : "light"
+  );
 
-    localStorage.setItem(
-      STORAGE.theme,
-      next
+  applyTheme();
+}
+
+
+/* =========================================================
+   LOAD COURSE
+========================================================= */
+
+function getCourse(){
+
+  const saved =
+    getLocal(
+      STORAGE.course,
+      null
     );
 
-    applyTheme();
-
-  });
-
-
-/* =========================================================
-   MOBILE MENU
-   ========================================================= */
-
-document
-  .getElementById("menuBtn")
-  .addEventListener("click",()=>{
-
-    document
-      .getElementById("sidebar")
-      .classList.toggle("open");
-
-  });
-
-
-/* =========================================================
-   COURSE SETTINGS
-   ========================================================= */
-
-function getCourseSettings(){
-
-  return readJSON(
-    STORAGE.course,
-    DEFAULT_COURSE
-  );
-
+  return {
+    ...DEFAULT_COURSE,
+    ...(saved || {})
+  };
 }
 
 
-function loadCourseSettings(){
+function loadCourse(){
 
   const course =
-    getCourseSettings();
+    getCourse();
 
-  document.getElementById(
-    "courseName"
-  ).value =
+  document.getElementById("courseName").value =
     course.name || "";
 
-  document.getElementById(
-    "courseBatch"
-  ).value =
+  document.getElementById("courseBatch").value =
     course.batch || "";
 
-  document.getElementById(
-    "courseMode"
-  ).value =
+  document.getElementById("courseMode").value =
     course.mode || "Offline";
 
-  document.getElementById(
-    "courseDuration"
-  ).value =
+  document.getElementById("courseDuration").value =
     course.duration || "";
 
-  document.getElementById(
-    "courseDays"
-  ).value =
+  document.getElementById("courseDays").value =
     course.days || "";
 
-  document.getElementById(
-    "courseTime"
-  ).value =
+  document.getElementById("courseTime").value =
     course.time || "";
 
-  document.getElementById(
-    "courseInstructor"
-  ).value =
+  document.getElementById("courseInstructor").value =
     course.instructor || "";
-
 }
 
 
-function saveCourseSettings(){
+function saveCourse(event){
+
+  event.preventDefault();
 
   const course = {
 
     name:
-      document.getElementById(
-        "courseName"
-      ).value.trim(),
+      document.getElementById("courseName").value.trim(),
 
     batch:
-      document.getElementById(
-        "courseBatch"
-      ).value.trim(),
+      document.getElementById("courseBatch").value.trim(),
 
     mode:
-      document.getElementById(
-        "courseMode"
-      ).value,
+      document.getElementById("courseMode").value,
 
     duration:
-      document.getElementById(
-        "courseDuration"
-      ).value.trim(),
+      document.getElementById("courseDuration").value.trim(),
 
     days:
-      document.getElementById(
-        "courseDays"
-      ).value.trim(),
+      document.getElementById("courseDays").value.trim(),
 
     time:
-      document.getElementById(
-        "courseTime"
-      ).value.trim(),
+      document.getElementById("courseTime").value.trim(),
 
     instructor:
-      document.getElementById(
-        "courseInstructor"
-      ).value.trim()
+      document.getElementById("courseInstructor").value.trim(),
+
+    updatedAt:
+      new Date().toISOString()
 
   };
 
-
   if(!course.name){
 
-    showToast(
-      "Course Name দিতে হবে।"
-    );
+    showToast("Course Name দিন");
 
     return;
-
   }
 
-
-  writeJSON(
+  setLocal(
     STORAGE.course,
     course
   );
 
-
-  showToast(
-    "Course settings saved successfully."
-  );
-
+  showToast("Course settings saved");
 
   refreshAll();
-
 }
 
 
 /* =========================================================
-   QUIZ SETTINGS
-   ========================================================= */
+   LOAD QUIZ
+========================================================= */
 
-function getQuizSettings(){
+function getQuiz(){
 
-  return readJSON(
-    STORAGE.quizSettings,
-    DEFAULT_QUIZ
-  );
+  const saved =
+    getLocal(
+      STORAGE.quiz,
+      null
+    );
 
+  return {
+    ...DEFAULT_QUIZ,
+    ...(saved || {})
+  };
 }
 
 
-function loadQuizSettings(){
+function loadQuiz(){
 
   const quiz =
-    getQuizSettings();
+    getQuiz();
 
-  document.getElementById(
-    "quizTitle"
-  ).value =
+  document.getElementById("quizTitle").value =
     quiz.title || "";
 
-  document.getElementById(
-    "quizStartDate"
-  ).value =
+  document.getElementById("quizStartDate").value =
     quiz.startDate || "";
 
-  document.getElementById(
-    "quizEndDate"
-  ).value =
+  document.getElementById("quizEndDate").value =
     quiz.endDate || "";
 
-  document.getElementById(
-    "quizDuration"
-  ).value =
-    quiz.durationMinutes || 20;
+  document.getElementById("quizDuration").value =
+    Number(quiz.durationMinutes) || 20;
 
-  document.getElementById(
-    "quizMarks"
-  ).value =
-    quiz.marksPerQuestion || 1;
+  document.getElementById("quizMarks").value =
+    Number(quiz.marksPerQuestion) || 1;
 
-  document.getElementById(
-    "quizPass"
-  ).value =
-    quiz.passPercentage || 40;
+  document.getElementById("quizPass").value =
+    Number(quiz.passPercentage) || 40;
 
-  document.getElementById(
-    "quizAttemptRule"
-  ).value =
-    "one";
+  document.getElementById("quizId").value =
+    quiz.id || DEFAULT_QUIZ.id;
 
-  document.getElementById(
-    "quizAutoSubmit"
-  ).value =
-    quiz.autoSubmit === false
-      ? "false"
-      : "true";
+  document.getElementById("oneAttemptOnly").checked =
+    quiz.oneAttemptOnly !== false;
 
-  updatePublishButton();
+  document.getElementById("autoSubmit").checked =
+    quiz.autoSubmit !== false;
 
+  document.getElementById("published").checked =
+    quiz.published === true;
+
+  updateQuizStatusUI();
 }
 
 
-function saveQuizSettings(){
+function saveQuiz(event){
 
-  const title =
-    document.getElementById(
-      "quizTitle"
-    ).value.trim();
-
-  const startDate =
-    document.getElementById(
-      "quizStartDate"
-    ).value;
-
-  const endDate =
-    document.getElementById(
-      "quizEndDate"
-    ).value;
-
-  const duration =
-    Number(
-      document.getElementById(
-        "quizDuration"
-      ).value
-    );
-
-  const marks =
-    Number(
-      document.getElementById(
-        "quizMarks"
-      ).value
-    );
-
-  const pass =
-    Number(
-      document.getElementById(
-        "quizPass"
-      ).value
-    );
-
-  const autoSubmit =
-    document.getElementById(
-      "quizAutoSubmit"
-    ).value === "true";
-
-
-  if(!title){
-
-    showToast(
-      "Quiz title দিতে হবে।"
-    );
-
-    return;
-
-  }
-
-
-  if(!startDate || !endDate){
-
-    showToast(
-      "Quiz Start Date এবং End Date দিন।"
-    );
-
-    return;
-
-  }
-
-
-  if(endDate < startDate){
-
-    showToast(
-      "End Date অবশ্যই Start Date-এর পরে হতে হবে।"
-    );
-
-    return;
-
-  }
-
-
-  if(duration < 1){
-
-    showToast(
-      "Timer কমপক্ষে 1 মিনিট হতে হবে।"
-    );
-
-    return;
-
-  }
-
-
-  if(marks < 1){
-
-    showToast(
-      "Marks per question সঠিক দিন।"
-    );
-
-    return;
-
-  }
-
-
-  if(pass < 1 || pass > 100){
-
-    showToast(
-      "Pass percentage 1–100 হতে হবে।"
-    );
-
-    return;
-
-  }
-
-
-  const old =
-    getQuizSettings();
-
+  event.preventDefault();
 
   const quiz = {
 
-    ...DEFAULT_QUIZ,
-    ...old,
-
     id:
-      old.id ||
-      DEFAULT_QUIZ.id,
+      document.getElementById("quizId").value.trim()
+      || DEFAULT_QUIZ.id,
 
-    title,
-    startDate,
-    endDate,
+    title:
+      document.getElementById("quizTitle").value.trim(),
+
+    startDate:
+      document.getElementById("quizStartDate").value,
+
+    endDate:
+      document.getElementById("quizEndDate").value,
 
     durationMinutes:
-      duration,
+      Math.max(
+        1,
+        Number(
+          document.getElementById("quizDuration").value
+        ) || 20
+      ),
 
     marksPerQuestion:
-      marks,
+      Math.max(
+        1,
+        Number(
+          document.getElementById("quizMarks").value
+        ) || 1
+      ),
 
     passPercentage:
-      pass,
+      Math.min(
+        100,
+        Math.max(
+          1,
+          Number(
+            document.getElementById("quizPass").value
+          ) || 40
+        )
+      ),
 
     oneAttemptOnly:
-      true,
+      document.getElementById("oneAttemptOnly").checked,
 
-    autoSubmit,
+    autoSubmit:
+      document.getElementById("autoSubmit").checked,
 
     published:
-      old.published === true
+      document.getElementById("published").checked,
+
+    updatedAt:
+      new Date().toISOString()
 
   };
 
 
-  writeJSON(
-    STORAGE.quizSettings,
-    quiz
-  );
+  if(!quiz.title){
+
+    showToast("Quiz Title দিন");
+
+    return;
+  }
 
 
-  showToast(
-    "Quiz settings saved successfully."
-  );
+  if(!quiz.startDate || !quiz.endDate){
+
+    showToast("Start এবং End Date দিন");
+
+    return;
+  }
 
 
-  refreshAll();
+  if(
+    new Date(quiz.endDate) <
+    new Date(quiz.startDate)
+  ){
 
-}
+    showToast("End Date, Start Date-এর পরে হতে হবে");
 
-
-/* =========================================================
-   PUBLISH / UNPUBLISH
-   ========================================================= */
-
-function toggleQuizPublish(){
-
-  const quiz =
-    getQuizSettings();
-
-  const questions =
-    getQuestions();
+    return;
+  }
 
 
-  if(!quiz.published){
+  if(quiz.published){
+
+    const questions =
+      getQuestions();
 
     if(questions.length !== 10){
 
       showToast(
-        "Publish করার আগে exactly 10টি question থাকতে হবে।"
+        "Publish করার আগে exactly 10টি question দিন"
       );
 
-      return;
+      document.getElementById("published").checked =
+        false;
 
-    }
-
-
-    const invalid =
-      questions.some(q => {
-
-        if(!q.question.trim()){
-          return true;
-        }
-
-        const values =
-          Object.values(q.options);
-
-        return values.some(
-          option => !String(option).trim()
-        );
-
-      });
-
-
-    if(invalid){
-
-      showToast(
-        "সব question এবং A/B/C/D option পূরণ করুন।"
-      );
-
-      return;
-
+      quiz.published = false;
     }
 
   }
 
 
-  quiz.published =
-    !quiz.published;
-
-
-  writeJSON(
-    STORAGE.quizSettings,
+  setLocal(
+    STORAGE.quiz,
     quiz
   );
 
-
   showToast(
     quiz.published
-      ? "Quiz published successfully."
-      : "Quiz unpublished."
+      ? "Quiz settings saved & published"
+      : "Quiz settings saved"
   );
 
-
   refreshAll();
-
 }
 
 
-function updatePublishButton(){
+/* =========================================================
+   QUIZ STATUS UI
+========================================================= */
+
+function updateQuizStatusUI(){
 
   const quiz =
-    getQuizSettings();
+    getQuiz();
 
-  const button =
-    document.getElementById(
-      "publishQuizBtn"
-    );
+  const badge =
+    document.getElementById("quizStatusBadge");
+
+  const stat =
+    document.getElementById("statPublished");
+
+  const hero =
+    document.getElementById("heroQuizTitle");
+
+  hero.textContent =
+    quiz.title || "Quiz Management";
+
 
   if(quiz.published){
 
-    button.textContent =
-      "Unpublish Quiz";
+    badge.textContent = "PUBLISHED";
 
-    button.className =
-      "btn btn-danger";
+    badge.className =
+      "status green";
+
+    stat.textContent =
+      "Published";
 
   }else{
 
-    button.textContent =
-      "Publish Quiz";
+    badge.textContent = "DRAFT";
 
-    button.className =
-      "btn btn-success";
+    badge.className =
+      "status yellow";
 
+    stat.textContent =
+      "Draft";
   }
+}
 
+
+/* =========================================================
+   RESET QUIZ
+========================================================= */
+
+function resetQuizSettings(){
+
+  const current =
+    getQuiz();
+
+  const resetData = {
+
+    ...DEFAULT_QUIZ,
+
+    id:
+      current.id || DEFAULT_QUIZ.id,
+
+    title:
+      current.title || DEFAULT_QUIZ.title
+
+  };
+
+  setLocal(
+    STORAGE.quiz,
+    resetData
+  );
+
+  loadQuiz();
+
+  showToast(
+    "Quiz settings default অবস্থায় reset হয়েছে"
+  );
 }
 
 
 /* =========================================================
    QUESTIONS
-   ========================================================= */
+========================================================= */
 
 function getQuestions(){
 
-  const stored =
-    readJSON(
-      STORAGE.quizQuestions,
-      DEFAULT_QUESTIONS
+  const saved =
+    getLocal(
+      STORAGE.questions,
+      null
     );
 
-  return Array.isArray(stored)
-    ? stored
-    : [];
+  if(
+    Array.isArray(saved) &&
+    saved.length
+  ){
 
+    return saved;
+  }
+
+  return DEFAULT_QUESTIONS;
 }
 
 
-function loadQuestions(){
+function normalizeQuestion(question,index){
 
-  renderQuestions(
+  const options =
+    question &&
+    question.options &&
+    typeof question.options === "object"
+      ? question.options
+      : {};
+
+  return {
+
+    id:
+      question.id ||
+      `Q${index + 1}`,
+
+    question:
+      String(
+        question.question || ""
+      ),
+
+    options: {
+
+      A:
+        String(options.A || ""),
+
+      B:
+        String(options.B || ""),
+
+      C:
+        String(options.C || ""),
+
+      D:
+        String(options.D || "")
+
+    },
+
+    correctAnswer:
+      ["A","B","C","D"].includes(
+        question.correctAnswer
+      )
+        ? question.correctAnswer
+        : "A"
+
+  };
+}
+
+
+function loadQuestionsIntoBuilder(){
+
+  const questions =
     getQuestions()
-  );
+      .map(normalizeQuestion);
 
-}
+  const list =
+    document.getElementById("questionList");
 
-
-function renderQuestions(questions){
-
-  const container =
-    document.getElementById(
-      "questionList"
-    );
-
-  container.innerHTML = "";
-
+  list.innerHTML = "";
 
   questions.forEach(
     (question,index)=>{
-
-      const card =
-        document.createElement(
-          "div"
-        );
-
-      card.className =
-        "question-card";
-
-
-      card.dataset.index =
-        index;
-
-
-      card.innerHTML = `
-
-        <div class="question-top">
-
-          <div class="question-number">
-            Question ${index + 1}
-          </div>
-
-          <button
-            class="question-delete"
-            onclick="deleteQuestion(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Question
-          </label>
-
-          <textarea
-            class="q-text"
-            data-index="${index}"
-            placeholder="Write your question..."
-          >${escapeHTML(
-            question.question
-          )}</textarea>
-
-        </div>
-
-
-        <div class="options">
-
-          <div class="field">
-
-            <label>
-              Option A
-            </label>
-
-            <input
-              class="q-option"
-              data-index="${index}"
-              data-option="A"
-              value="${escapeHTML(
-                question.options?.A || ""
-              )}"
-              placeholder="Option A"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Option B
-            </label>
-
-            <input
-              class="q-option"
-              data-index="${index}"
-              data-option="B"
-              value="${escapeHTML(
-                question.options?.B || ""
-              )}"
-              placeholder="Option B"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Option C
-            </label>
-
-            <input
-              class="q-option"
-              data-index="${index}"
-              data-option="C"
-              value="${escapeHTML(
-                question.options?.C || ""
-              )}"
-              placeholder="Option C"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Option D
-            </label>
-
-            <input
-              class="q-option"
-              data-index="${index}"
-              data-option="D"
-              value="${escapeHTML(
-                question.options?.D || ""
-              )}"
-              placeholder="Option D"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="correct-row">
-
-          <label>
-            Correct Answer
-          </label>
-
-          <select
-            class="q-correct"
-            data-index="${index}"
-          >
-
-            <option value="A"
-              ${question.correctAnswer==="A"?"selected":""}>
-              A
-            </option>
-
-            <option value="B"
-              ${question.correctAnswer==="B"?"selected":""}>
-              B
-            </option>
-
-            <option value="C"
-              ${question.correctAnswer==="C"?"selected":""}>
-              C
-            </option>
-
-            <option value="D"
-              ${question.correctAnswer==="D"?"selected":""}>
-              D
-            </option>
-
-          </select>
-
-        </div>
-
-      `;
-
-
-      container.appendChild(card);
-
+      renderQuestionCard(
+        question,
+        index
+      );
     }
   );
 
+  updateQuestionStats();
 
-  updateQuestionCounter();
+  showToast(
+    `${questions.length}টি question loaded`
+  );
+}
 
+
+function renderQuestionCard(question,index){
+
+  const list =
+    document.getElementById("questionList");
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "question-card";
+
+  card.dataset.index =
+    index;
+
+  card.innerHTML = `
+
+    <div class="question-top">
+
+      <div class="question-number">
+        Question ${index + 1}
+      </div>
+
+      <button
+        class="btn btn-danger btn-sm"
+        type="button"
+        onclick="removeQuestion(${index})"
+      >
+        🗑 Delete
+      </button>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Question</label>
+
+      <textarea
+        class="question-text"
+        data-field="question"
+        placeholder="Question লিখুন..."
+      >${escapeHTML(question.question)}</textarea>
+
+    </div>
+
+    <div class="option-grid">
+
+      <div class="form-group">
+
+        <label>Option A</label>
+
+        <input
+          type="text"
+          class="option-input"
+          data-option="A"
+          value="${escapeHTML(question.options.A)}"
+          placeholder="Option A"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Option B</label>
+
+        <input
+          type="text"
+          class="option-input"
+          data-option="B"
+          value="${escapeHTML(question.options.B)}"
+          placeholder="Option B"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Option C</label>
+
+        <input
+          type="text"
+          class="option-input"
+          data-option="C"
+          value="${escapeHTML(question.options.C)}"
+          placeholder="Option C"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Option D</label>
+
+        <input
+          type="text"
+          class="option-input"
+          data-option="D"
+          value="${escapeHTML(question.options.D)}"
+          placeholder="Option D"
+        >
+
+      </div>
+
+    </div>
+
+    <div class="correct-row">
+
+      <label>Correct Answer</label>
+
+      <select
+        class="correct-select"
+      >
+
+        <option
+          value="A"
+          ${question.correctAnswer === "A" ? "selected" : ""}
+        >
+          A
+        </option>
+
+        <option
+          value="B"
+          ${question.correctAnswer === "B" ? "selected" : ""}
+        >
+          B
+        </option>
+
+        <option
+          value="C"
+          ${question.correctAnswer === "C" ? "selected" : ""}
+        >
+          C
+        </option>
+
+        <option
+          value="D"
+          ${question.correctAnswer === "D" ? "selected" : ""}
+        >
+          D
+        </option>
+
+      </select>
+
+    </div>
+
+  `;
+
+  list.appendChild(card);
 }
 
 
 function addQuestion(){
 
-  const questions =
-    getQuestions();
+  const list =
+    document.getElementById("questionList");
 
+  const count =
+    list.children.length;
 
-  if(questions.length >= 10){
+  if(count >= 10){
 
     showToast(
-      "Maximum 10টি question রাখা যাবে।"
+      "Maximum 10টি question রাখা যাবে"
     );
 
     return;
-
   }
 
-
-  questions.push({
+  const question = {
 
     id:
-      "Q" +
-      (questions.length + 1),
+      `Q${count + 1}`,
 
-    question:
-      "",
+    question:"",
 
     options:{
       A:"",
@@ -2577,141 +2652,171 @@ function addQuestion(){
       D:""
     },
 
-    correctAnswer:
-      "A"
+    correctAnswer:"A"
 
-  });
+  };
 
-
-  renderQuestions(
-    questions
+  renderQuestionCard(
+    question,
+    count
   );
 
+  updateQuestionStats();
+
+  const cards =
+    list.querySelectorAll(
+      ".question-card"
+    );
+
+  const last =
+    cards[cards.length - 1];
+
+  if(last){
+
+    last.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }
+
+  showToast(
+    "New question added"
+  );
 }
 
 
-function deleteQuestion(index){
+function removeQuestion(index){
 
-  const questions =
-    getQuestions();
+  const list =
+    document.getElementById("questionList");
 
+  const cards =
+    [...list.querySelectorAll(
+      ".question-card"
+    )];
 
-  if(questions.length <= 1){
+  if(cards.length <= 1){
 
     showToast(
-      "কমপক্ষে 1টি question রাখতে হবে।"
+      "কমপক্ষে ১টি question রাখতে হবে"
     );
 
     return;
-
   }
 
+  const card =
+    cards[index];
 
-  if(
-    !confirm(
-      "এই question delete করবেন?"
-    )
-  ){
-
-    return;
-
+  if(card){
+    card.remove();
   }
 
+  renumberQuestionCards();
 
-  questions.splice(
-    index,
-    1
-  );
-
-
-  questions.forEach(
-    (question,i)=>{
-
-      question.id =
-        "Q" +
-        (i + 1);
-
-    }
-  );
-
-
-  writeJSON(
-    STORAGE.quizQuestions,
-    questions
-  );
-
-
-  renderQuestions(
-    questions
-  );
-
-
-  showToast(
-    "Question deleted."
-  );
-
+  updateQuestionStats();
 }
 
 
-function collectQuestionsFromUI(){
+function renumberQuestionCards(){
+
+  const cards =
+    document.querySelectorAll(
+      "#questionList .question-card"
+    );
+
+  cards.forEach(
+    (card,index)=>{
+
+      card.dataset.index =
+        index;
+
+      const title =
+        card.querySelector(
+          ".question-number"
+        );
+
+      if(title){
+
+        title.textContent =
+          `Question ${index + 1}`;
+
+      }
+
+      const deleteButton =
+        card.querySelector(
+          ".btn-danger"
+        );
+
+      if(deleteButton){
+
+        deleteButton.setAttribute(
+          "onclick",
+          `removeQuestion(${index})`
+        );
+
+      }
+
+    }
+  );
+}
+
+
+function collectQuestions(){
 
   const cards =
     [
       ...document.querySelectorAll(
-        ".question-card"
+        "#questionList .question-card"
       )
     ];
-
 
   return cards.map(
     (card,index)=>{
 
       const question =
         card.querySelector(
-          ".q-text"
-        ).value.trim();
+          ".question-text"
+        )?.value.trim() || "";
 
+      const options = {};
 
-      const options = {
-
-        A:
-          card.querySelector(
-            '.q-option[data-option="A"]'
-          ).value.trim(),
-
-        B:
-          card.querySelector(
-            '.q-option[data-option="B"]'
-          ).value.trim(),
-
-        C:
-          card.querySelector(
-            '.q-option[data-option="C"]'
-          ).value.trim(),
-
-        D:
-          card.querySelector(
-            '.q-option[data-option="D"]'
-          ).value.trim()
-
-      };
-
+      card
+        .querySelectorAll(
+          ".option-input"
+        )
+        .forEach(
+          input=>{
+            options[
+              input.dataset.option
+            ] =
+              input.value.trim();
+          }
+        );
 
       const correctAnswer =
         card.querySelector(
-          ".q-correct"
-        ).value;
-
+          ".correct-select"
+        )?.value || "A";
 
       return {
 
         id:
-          "Q" +
-          (index + 1),
+          `Q${index + 1}`,
 
         question,
 
-        options,
+        options:{
+
+          A:options.A || "",
+
+          B:options.B || "",
+
+          C:options.C || "",
+
+          D:options.D || ""
+
+        },
 
         correctAnswer
 
@@ -2719,260 +2824,400 @@ function collectQuestionsFromUI(){
 
     }
   );
+}
 
+
+function validateQuestions(questions){
+
+  if(questions.length !== 10){
+
+    return {
+      ok:false,
+      message:
+        "Exactly 10টি question প্রয়োজন"
+    };
+  }
+
+
+  for(let i=0;i<questions.length;i++){
+
+    const q =
+      questions[i];
+
+    if(!q.question){
+
+      return {
+        ok:false,
+        message:
+          `Question ${i+1} empty`
+      };
+    }
+
+
+    for(
+      const option of
+      ["A","B","C","D"]
+    ){
+
+      if(!q.options[option]){
+
+        return {
+          ok:false,
+          message:
+            `Question ${i+1}-এর Option ${option} empty`
+        };
+
+      }
+
+    }
+
+
+    if(
+      !["A","B","C","D"].includes(
+        q.correctAnswer
+      )
+    ){
+
+      return {
+        ok:false,
+        message:
+          `Question ${i+1}-এর correct answer ঠিক করুন`
+      };
+
+    }
+
+  }
+
+
+  return {
+    ok:true,
+    message:"OK"
+  };
 }
 
 
 function saveQuestions(){
 
   const questions =
-    collectQuestionsFromUI();
+    collectQuestions();
 
+  const validation =
+    validateQuestions(
+      questions
+    );
 
-  if(questions.length !== 10){
+  if(!validation.ok){
 
     showToast(
-      "Quiz-এর জন্য exactly 10টি question লাগবে।"
+      validation.message
     );
 
     return;
-
   }
 
-
-  for(
-    let i=0;
-    i<questions.length;
-    i++
-  ){
-
-    const q =
-      questions[i];
-
-
-    if(!q.question){
-
-      showToast(
-        `Question ${i+1} empty আছে।`
-      );
-
-      return;
-
-    }
-
-
-    if(
-      !q.options.A ||
-      !q.options.B ||
-      !q.options.C ||
-      !q.options.D
-    ){
-
-      showToast(
-        `Question ${i+1}-এর সব option পূরণ করুন।`
-      );
-
-      return;
-
-    }
-
-
-    if(
-      !["A","B","C","D"]
-        .includes(
-          q.correctAnswer
-        )
-    ){
-
-      showToast(
-        `Question ${i+1}-এর correct answer select করুন।`
-      );
-
-      return;
-
-    }
-
-  }
-
-
-  writeJSON(
-    STORAGE.quizQuestions,
+  setLocal(
+    STORAGE.questions,
     questions
   );
 
-
   showToast(
-    "All 10 questions saved successfully."
+    "Exactly 10টি question saved"
   );
 
+  updateQuestionStats();
 
-  refreshAll();
-
+  updateQuizStatusUI();
 }
 
 
 /* =========================================================
-   QUESTION COUNTER
-   ========================================================= */
+   QUESTION STATS
+========================================================= */
 
-function updateQuestionCounter(){
+function updateQuestionStats(){
 
   const count =
-    getQuestions().length;
-
-
-  document.getElementById(
-    "questionCounter"
-  ).textContent =
-    count + " / 10";
-
+    document.querySelectorAll(
+      "#questionList .question-card"
+    ).length;
 
   document.getElementById(
     "statQuestions"
   ).textContent =
-    count + "/10";
+    count;
+}
 
 
-  const addButton =
-    document.getElementById(
-      "addQuestionBtn"
+/* =========================================================
+   PUBLISH QUIZ
+========================================================= */
+
+function publishQuiz(){
+
+  const questions =
+    collectQuestions();
+
+  const validation =
+    validateQuestions(
+      questions
     );
 
+  if(!validation.ok){
 
-  if(count >= 10){
+    showToast(
+      validation.message
+    );
 
-    addButton.disabled =
-      true;
+    scrollToSection(
+      "questionCard"
+    );
 
-    addButton.style.opacity =
-      ".5";
-
-  }else{
-
-    addButton.disabled =
-      false;
-
-    addButton.style.opacity =
-      "1";
-
+    return;
   }
 
+  setLocal(
+    STORAGE.questions,
+    questions
+  );
+
+
+  const quiz =
+    getQuiz();
+
+  quiz.published =
+    true;
+
+  quiz.updatedAt =
+    new Date().toISOString();
+
+  setLocal(
+    STORAGE.quiz,
+    quiz
+  );
+
+  document.getElementById(
+    "published"
+  ).checked = true;
+
+  updateQuizStatusUI();
+
+  showToast(
+    "Quiz successfully published"
+  );
+}
+
+
+function unpublishQuiz(){
+
+  const quiz =
+    getQuiz();
+
+  quiz.published =
+    false;
+
+  quiz.updatedAt =
+    new Date().toISOString();
+
+  setLocal(
+    STORAGE.quiz,
+    quiz
+  );
+
+  document.getElementById(
+    "published"
+  ).checked = false;
+
+  updateQuizStatusUI();
+
+  showToast(
+    "Quiz unpublished"
+  );
 }
 
 
 /* =========================================================
-   STUDENTS
-   ========================================================= */
+   RESULTS
+========================================================= */
 
-function getStudents(){
+function getResults(){
 
-  const sources = [
-
-    STORAGE.students,
-    "students",
-    "shoppingMelaUsers"
-
-  ];
-
-
-  for(
-    const key of sources
-  ){
-
-    const data =
-      readJSON(
-        key,
-        null
-      );
-
-
-    if(
-      Array.isArray(data) &&
-      data.length
-    ){
-
-      return data;
-
-    }
-
-  }
-
-
-  return [
-
-    {
-
-      studentId:
-        "SNK-1001",
-
-      id:
-        "SNK-1001",
-
-      name:
-        "Student",
-
-      studentName:
-        "Student",
-
-      course:
-        getCourseSettings().name,
-
-      batch:
-        getCourseSettings().batch
-
-    }
-
-  ];
-
-}
-
-
-/* =========================================================
-   QUIZ RESULTS
-   ========================================================= */
-
-function getQuizResults(){
-
-  const data =
-    readJSON(
-      STORAGE.quizResults,
+  const saved =
+    getLocal(
+      STORAGE.results,
       []
     );
 
-
-  return Array.isArray(data)
-    ? data
+  return Array.isArray(saved)
+    ? saved
     : [];
-
 }
 
 
-function renderQuizResults(){
+function getStudents(){
 
-  const tbody =
-    document.getElementById(
-      "quizResultTable"
+  const saved =
+    getLocal(
+      STORAGE.students,
+      []
     );
 
+  if(
+    Array.isArray(saved) &&
+    saved.length
+  ){
 
-  const results =
-    getQuizResults();
+    return saved;
+  }
+
+  return [
+    {
+      studentId:"SNK-1001",
+      studentName:"Student",
+      course:"Computer Office Application",
+      batch:"Batch 01"
+    }
+  ];
+}
 
 
-  tbody.innerHTML = "";
+function getCurrentQuizResults(){
+
+  const quiz =
+    getQuiz();
+
+  return getResults()
+    .filter(
+      result=>{
+
+        if(
+          result.quizId &&
+          result.quizId === quiz.id
+        ){
+
+          return true;
+        }
+
+        if(
+          result.quizName &&
+          result.quizName === quiz.title
+        ){
+
+          return true;
+        }
+
+        return false;
+
+      }
+    )
+    .sort(
+      (a,b)=>
+        new Date(
+          b.submittedAt || b.updatedAt || 0
+        ) -
+        new Date(
+          a.submittedAt || a.updatedAt || 0
+        )
+    );
+}
+
+
+function renderResults(){
+
+  const body =
+    document.getElementById(
+      "resultTableBody"
+    );
+
+  const search =
+    document.getElementById(
+      "resultSearch"
+    ).value
+      .trim()
+      .toLowerCase();
+
+  const filter =
+    document.getElementById(
+      "resultFilter"
+    ).value;
+
+
+  let results =
+    getCurrentQuizResults();
+
+
+  results =
+    results.filter(
+      result=>{
+
+        const studentId =
+          String(
+            result.studentId || ""
+          ).toLowerCase();
+
+        const studentName =
+          String(
+            result.studentName || ""
+          ).toLowerCase();
+
+        const matchesSearch =
+          !search ||
+          studentId.includes(search) ||
+          studentName.includes(search);
+
+        if(!matchesSearch){
+          return false;
+        }
+
+
+        if(filter === "pass"){
+
+          return String(
+            result.result || ""
+          ).toLowerCase() === "pass";
+
+        }
+
+
+        if(filter === "fail"){
+
+          return String(
+            result.result || ""
+          ).toLowerCase() === "fail";
+
+        }
+
+
+        if(filter === "published"){
+
+          return result.published === true;
+
+        }
+
+
+        if(filter === "unpublished"){
+
+          return result.published !== true;
+
+        }
+
+
+        return true;
+
+      }
+    );
 
 
   if(!results.length){
 
-    tbody.innerHTML = `
+    body.innerHTML = `
 
       <tr>
 
-        <td colspan="7"
-            style="text-align:center;color:#718096;padding:30px">
-
-          No quiz result yet.
-
+        <td
+          colspan="9"
+          style="text-align:center;padding:30px;color:var(--muted);"
+        >
+          এই Quiz-এর কোনো result পাওয়া যায়নি।
         </td>
 
       </tr>
@@ -2980,353 +3225,935 @@ function renderQuizResults(){
     `;
 
     return;
-
   }
 
 
-  results
-    .slice()
-    .reverse()
-    .forEach(result=>{
+  body.innerHTML =
+    results.map(
+      result=>{
 
-      const tr =
-        document.createElement(
-          "tr"
-        );
+        const percentage =
+          Number(
+            result.percentage || 0
+          );
 
+        const resultText =
+          String(
+            result.result || ""
+          ).toLowerCase();
 
-      const percentage =
-        Number(
-          result.percentage || 0
-        );
-
-
-      const pass =
-        String(
-          result.result || ""
-        ).toLowerCase()
-          === "pass";
+        const isPass =
+          resultText === "pass";
 
 
-      tr.innerHTML = `
+        return `
 
-        <td>
+          <tr>
 
-          <strong>
-            ${escapeHTML(
-              result.studentName ||
-              "Student"
-            )}
-          </strong>
+            <td>
 
-          <div style="color:#718096;font-size:9px">
-            ${escapeHTML(
-              result.studentId || ""
-            )}
-          </div>
+              <div class="student-name">
+                ${escapeHTML(
+                  result.studentName ||
+                  "Student"
+                )}
+              </div>
 
-        </td>
+              <div class="student-id">
+                ${escapeHTML(
+                  result.studentId ||
+                  "—"
+                )}
+              </div>
 
-        <td>
-          ${escapeHTML(
-            result.quizName ||
-            result.title ||
-            "Quiz"
-          )}
-        </td>
+            </td>
 
-        <td>
-          ${Number(
-            result.obtainedMarks || 0
-          )}
-          /
-          ${Number(
-            result.totalMarks || 0
-          )}
-        </td>
+            <td>
+              <strong>
+                ${escapeHTML(
+                  result.obtainedMarks ??
+                  result.correct ??
+                  0
+                )}
+                /
+                ${escapeHTML(
+                  result.totalMarks ??
+                  (
+                    Number(
+                      result.totalQuestions || 10
+                    ) *
+                    Number(
+                      result.marksPerQuestion || 1
+                    )
+                  )
+                )}
+              </strong>
 
-        <td>
-          ${percentage}%
-        </td>
+              <div
+                style="color:var(--muted);margin-top:3px;"
+              >
+                ${percentage}%
+              </div>
 
-        <td>
+            </td>
 
-          <span class="badge ${
-            pass
-              ? "badge-green"
-              : "badge-red"
-          }">
+            <td>
+              ${escapeHTML(
+                result.correct ?? 0
+              )}
+            </td>
 
-            ${pass
-              ? "PASS"
-              : "FAIL"}
+            <td>
+              ${escapeHTML(
+                result.wrong ?? 0
+              )}
+            </td>
 
-          </span>
+            <td>
+              ${escapeHTML(
+                result.unanswered ?? 0
+              )}
+            </td>
 
-        </td>
+            <td>
 
-        <td>
-          ${escapeHTML(
-            result.timeTakenText ||
-            (
-              Number(
-                result.timeTakenSeconds || 0
-              ) + " sec"
-            )
-          )}
-        </td>
+              <span
+                class="status ${isPass ? "green" : "red"}"
+              >
+                ${isPass ? "PASS" : "FAIL"}
+              </span>
 
-        <td>
-          ${formatDateTime(
-            result.submittedAt
-          )}
-        </td>
+            </td>
 
-      `;
+            <td>
 
+              <span
+                class="status ${
+                  result.published === true
+                    ? "green"
+                    : "yellow"
+                }"
+              >
+                ${
+                  result.published === true
+                    ? "Published"
+                    : "Unpublished"
+                }
+              </span>
 
-      tbody.appendChild(tr);
+            </td>
 
-    });
+            <td>
+              ${escapeHTML(
+                formatDateTime(
+                  result.submittedAt
+                )
+              )}
+            </td>
 
+            <td>
+
+              <div class="action-row">
+
+                <button
+                  class="btn btn-secondary btn-sm"
+                  type="button"
+                  onclick="viewResult('${escapeHTML(
+                    result.id || ""
+                  )}')"
+                >
+                  View
+                </button>
+
+                <button
+                  class="btn ${
+                    result.published === true
+                      ? "btn-warning"
+                      : "btn-success"
+                  } btn-sm"
+                  type="button"
+                  onclick="toggleResultPublish('${escapeHTML(
+                    result.id || ""
+                  )}')"
+                >
+                  ${
+                    result.published === true
+                      ? "Unpublish"
+                      : "Publish"
+                  }
+                </button>
+
+                <button
+                  class="btn btn-danger btn-sm"
+                  type="button"
+                  onclick="deleteResult('${escapeHTML(
+                    result.id || ""
+                  )}')"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    ).join("");
 }
 
 
 /* =========================================================
-   QUIZ STATUS
-   ========================================================= */
+   VIEW RESULT
+========================================================= */
 
-function renderQuizStatus(){
-
-  const quiz =
-    getQuizSettings();
-
-  const questions =
-    getQuestions();
+let currentResultId = null;
 
 
-  const box =
-    document.getElementById(
-      "quizStatusBox"
+function viewResult(id){
+
+  const result =
+    getResults()
+      .find(
+        item =>
+          String(item.id) ===
+          String(id)
+      );
+
+
+  if(!result){
+
+    showToast(
+      "Result পাওয়া যায়নি"
+    );
+
+    return;
+  }
+
+
+  currentResultId =
+    result.id;
+
+
+  document.getElementById(
+    "modalStudentName"
+  ).textContent =
+    `${result.studentName || "Student"} • ${result.studentId || ""}`;
+
+
+  const percentage =
+    Number(
+      result.percentage || 0
     );
 
 
-  const publishBadge =
-    quiz.published
-
-      ? `
-        <span class="badge badge-green">
-          PUBLISHED
-        </span>
-      `
-
-      : `
-        <span class="badge badge-yellow">
-          DRAFT
-        </span>
-      `;
+  const resultText =
+    String(
+      result.result || ""
+    ).toUpperCase();
 
 
-  box.innerHTML = `
+  document.getElementById(
+    "modalResultContent"
+  ).innerHTML = `
 
-    <div class="exam-box">
+    <div class="grid-2" style="margin-top:0;">
 
-      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+      <div class="stat">
 
-        <div class="exam-title">
+        <div class="stat-label">
+          Score
+        </div>
+
+        <div class="stat-value">
           ${escapeHTML(
-            quiz.title
+            result.obtainedMarks ??
+            result.correct ??
+            0
+          )}
+          /
+          ${escapeHTML(
+            result.totalMarks ??
+            10
           )}
         </div>
 
-        ${publishBadge}
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Percentage
+        </div>
+
+        <div class="stat-value">
+          ${percentage}%
+        </div>
 
       </div>
 
+    </div>
 
-      <div class="exam-date">
-        📅
+    <div
+      style="
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:10px;
+        margin-top:14px;
+      "
+    >
+
+      <div class="notice">
+        <strong>Correct</strong><br>
         ${escapeHTML(
-          quiz.startDate
+          result.correct ?? 0
         )}
-        →
+      </div>
+
+      <div class="notice">
+        <strong>Wrong</strong><br>
         ${escapeHTML(
-          quiz.endDate
+          result.wrong ?? 0
         )}
       </div>
 
-
-      <div class="exam-date">
-        ⏱
-        ${Number(
-          quiz.durationMinutes
-        )} minutes
+      <div class="notice">
+        <strong>Unanswered</strong><br>
+        ${escapeHTML(
+          result.unanswered ?? 0
+        )}
       </div>
 
-
-      <div class="exam-date">
-        📝
-        ${questions.length}/10 questions
+      <div class="notice">
+        <strong>Status</strong><br>
+        ${escapeHTML(
+          resultText || "—"
+        )}
       </div>
 
+    </div>
 
-      <div class="exam-date">
-        🎯
-        Pass:
-        ${Number(
-          quiz.passPercentage
-        )}%
-      </div>
+    <div
+      class="notice"
+      style="margin-top:14px;"
+    >
 
+      <strong>Course:</strong>
+      ${escapeHTML(
+        result.course || getCourse().name
+      )}
 
-      <div class="exam-date">
-        🔒
-        One Attempt Only
-      </div>
+      <br>
 
+      <strong>Batch:</strong>
+      ${escapeHTML(
+        result.batch || getCourse().batch
+      )}
 
-      <div class="exam-date">
-        ⚡
-        Timer starts after Start Quiz click
-      </div>
+      <br>
+
+      <strong>Started:</strong>
+      ${escapeHTML(
+        formatDateTime(
+          result.startedAt
+        )
+      )}
+
+      <br>
+
+      <strong>Submitted:</strong>
+      ${escapeHTML(
+        formatDateTime(
+          result.submittedAt
+        )
+      )}
+
+      <br>
+
+      <strong>Time Taken:</strong>
+      ${escapeHTML(
+        formatSeconds(
+          result.timeTakenSeconds
+        )
+      )}
 
     </div>
 
   `;
 
+
+  document.getElementById(
+    "adminNote"
+  ).value =
+    result.adminNote || "";
+
+
+  document.getElementById(
+    "resultModal"
+  ).classList.add("show");
+}
+
+
+function closeModal(){
+
+  document.getElementById(
+    "resultModal"
+  ).classList.remove("show");
+
+  currentResultId =
+    null;
 }
 
 
 /* =========================================================
-   DATE/TIME
-   ========================================================= */
+   SAVE ADMIN NOTE
+========================================================= */
 
-function formatDateTime(value){
+function saveAdminNote(){
 
-  if(!value){
-    return "—";
+  if(!currentResultId){
+
+    return;
+  }
+
+  const note =
+    document.getElementById(
+      "adminNote"
+    ).value.trim();
+
+  const results =
+    getResults();
+
+  const index =
+    results.findIndex(
+      result =>
+        String(result.id) ===
+        String(currentResultId)
+    );
+
+  if(index === -1){
+
+    showToast(
+      "Result পাওয়া যায়নি"
+    );
+
+    return;
+  }
+
+  results[index].adminNote =
+    note;
+
+  results[index].updatedAt =
+    new Date().toISOString();
+
+  setLocal(
+    STORAGE.results,
+    results
+  );
+
+  showToast(
+    "Admin note saved"
+  );
+
+  closeModal();
+
+  renderResults();
+}
+
+
+/* =========================================================
+   PUBLISH RESULT
+========================================================= */
+
+function toggleResultPublish(id){
+
+  const results =
+    getResults();
+
+  const index =
+    results.findIndex(
+      result =>
+        String(result.id) ===
+        String(id)
+    );
+
+  if(index === -1){
+
+    showToast(
+      "Result পাওয়া যায়নি"
+    );
+
+    return;
   }
 
 
-  const date =
-    new Date(value);
+  results[index].published =
+    results[index].published !== true;
 
 
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
-
-    return "—";
-
-  }
+  results[index].updatedAt =
+    new Date().toISOString();
 
 
-  return date.toLocaleString(
-    "en-BD",
-    {
-      dateStyle:"medium",
-      timeStyle:"short"
+  setLocal(
+    STORAGE.results,
+    results
+  );
+
+
+  showToast(
+    results[index].published
+      ? "Result published"
+      : "Result unpublished"
+  );
+
+
+  renderResults();
+
+  updateResultStats();
+}
+
+
+function publishEligibleResults(){
+
+  const results =
+    getResults();
+
+  const quiz =
+    getQuiz();
+
+  let changed = 0;
+
+
+  results.forEach(
+    result=>{
+
+      const sameQuiz =
+        (
+          result.quizId === quiz.id
+        ) ||
+        (
+          result.quizName === quiz.title
+        );
+
+      if(
+        sameQuiz &&
+        result.published !== true
+      ){
+
+        result.published = true;
+
+        result.updatedAt =
+          new Date().toISOString();
+
+        changed++;
+
+      }
+
     }
   );
 
+
+  if(changed){
+
+    setLocal(
+      STORAGE.results,
+      results
+    );
+  }
+
+
+  showToast(
+    changed
+      ? `${changed}টি result published`
+      : "Publish করার মতো result নেই"
+  );
+
+
+  renderResults();
+
+  updateResultStats();
 }
 
 
 /* =========================================================
-   STATS
-   ========================================================= */
+   DELETE RESULT
+========================================================= */
 
-function renderStats(){
+function deleteResult(id){
 
-  const students =
-    getStudents();
+  const results =
+    getResults();
 
-  const questions =
-    getQuestions();
+  const index =
+    results.findIndex(
+      result =>
+        String(result.id) ===
+        String(id)
+    );
 
-  const quiz =
-    getQuizSettings();
+  if(index === -1){
 
-  const quizResults =
-    getQuizResults();
+    showToast(
+      "Result পাওয়া যায়নি"
+    );
 
-  const examResults =
-    readJSON(
-      STORAGE.examResults,
-      []
+    return;
+  }
+
+
+  const result =
+    results[index];
+
+
+  const ok =
+    confirm(
+      `${result.studentName || "Student"}-এর quiz result delete করবেন?`
     );
 
 
-  document.getElementById(
-    "statStudents"
-  ).textContent =
-    students.length;
+  if(!ok){
+    return;
+  }
+
+
+  results.splice(
+    index,
+    1
+  );
+
+
+  setLocal(
+    STORAGE.results,
+    results
+  );
+
+
+  showToast(
+    "Result deleted"
+  );
+
+
+  renderResults();
+
+  updateResultStats();
+}
+
+
+/* =========================================================
+   RESULT STATS
+========================================================= */
+
+function updateResultStats(){
+
+  const results =
+    getCurrentQuizResults();
+
+
+  const submitted =
+    results.length;
+
+
+  const passed =
+    results.filter(
+      result =>
+        String(
+          result.result || ""
+        ).toLowerCase() ===
+        "pass"
+    ).length;
+
+
+  const percentages =
+    results
+      .map(
+        result =>
+          Number(
+            result.percentage
+          )
+      )
+      .filter(
+        value =>
+          Number.isFinite(value)
+      );
+
+
+  const average =
+    percentages.length
+      ? (
+          percentages.reduce(
+            (sum,value)=>
+              sum + value,
+            0
+          ) /
+          percentages.length
+        )
+        .toFixed(1)
+      : "0";
 
 
   document.getElementById(
-    "statQuestions"
+    "statSubmitted"
   ).textContent =
-    questions.length + "/10";
+    submitted;
 
 
   document.getElementById(
-    "statQuizResults"
+    "statPassed"
   ).textContent =
-    quizResults.length;
+    passed;
 
 
   document.getElementById(
-    "statPublished"
+    "statAverage"
   ).textContent =
-    quiz.published
-      ? "Yes"
-      : "No";
+    `${average}%`;
+}
 
 
-  document.getElementById(
-    "statExamResults"
-  ).textContent =
-    Array.isArray(examResults)
-      ? examResults.length
-      : 0;
+/* =========================================================
+   FORMAT SECONDS
+========================================================= */
 
+function formatSeconds(seconds){
+
+  const value =
+    Number(seconds);
+
+  if(
+    !Number.isFinite(value) ||
+    value < 0
+  ){
+
+    return "—";
+  }
+
+
+  const minutes =
+    Math.floor(
+      value / 60
+    );
+
+  const sec =
+    value % 60;
+
+
+  return `${minutes}m ${String(sec).padStart(2,"0")}s`;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printPage(){
+
+  window.print();
 }
 
 
 /* =========================================================
    REFRESH
-   ========================================================= */
+========================================================= */
 
 function refreshAll(){
 
-  loadCourseSettings();
+  loadCourse();
 
-  loadQuizSettings();
+  loadQuiz();
 
-  loadQuestions();
+  loadQuestionsIntoBuilder();
 
-  renderQuizResults();
+  renderResults();
 
-  renderQuizStatus();
+  updateResultStats();
 
-  renderStats();
+  updateQuestionStats();
 
-  updateQuestionCounter();
-
-  updatePublishButton();
-
+  updateQuizStatusUI();
 }
 
 
 /* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function toggleSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+}
+
+
+/* =========================================================
+   PUBLIC API
+========================================================= */
+
+window.SNKAdminQuiz = {
+
+  getCourse,
+
+  getQuiz,
+
+  getQuestions,
+
+  getResults,
+
+  saveCourse,
+
+  saveQuiz,
+
+  saveQuestions,
+
+  publishQuiz,
+
+  unpublishQuiz,
+
+  publishEligibleResults,
+
+  refresh:refreshAll
+
+};
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+document
+  .getElementById("themeBtn")
+  .addEventListener(
+    "click",
+    toggleTheme
+  );
+
+
+document
+  .getElementById("refreshBtn")
+  .addEventListener(
+    "click",
+    ()=>{
+      refreshAll();
+      showToast("Data refreshed");
+    }
+  );
+
+
+document
+  .getElementById("menuBtn")
+  .addEventListener(
+    "click",
+    toggleSidebar
+  );
+
+
+document
+  .getElementById("courseForm")
+  .addEventListener(
+    "submit",
+    saveCourse
+  );
+
+
+document
+  .getElementById("quizForm")
+  .addEventListener(
+    "submit",
+    saveQuiz
+  );
+
+
+document
+  .getElementById("resultSearch")
+  .addEventListener(
+    "input",
+    renderResults
+  );
+
+
+document
+  .getElementById("resultFilter")
+  .addEventListener(
+    "change",
+    renderResults
+  );
+
+
+document
+  .getElementById("resultModal")
+  .addEventListener(
+    "click",
+    event=>{
+
+      if(
+        event.target.id ===
+        "resultModal"
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key === "Escape"
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
    STORAGE SYNC
-   ========================================================= */
+========================================================= */
 
 window.addEventListener(
   "storage",
-  refreshAll
+  event=>{
+
+    if(
+      [
+        STORAGE.theme,
+        STORAGE.course,
+        STORAGE.quiz,
+        STORAGE.questions,
+        STORAGE.results,
+        STORAGE.students
+      ].includes(
+        event.key
+      )
+    ){
+
+      applyTheme();
+
+      refreshAll();
+
+    }
+
+  }
+);
+
+
+window.addEventListener(
+  "focus",
+  ()=>{
+    refreshAll();
+  }
 );
 
 
@@ -3337,54 +4164,25 @@ document.addEventListener(
       document.visibilityState ===
       "visible"
     ){
+
       refreshAll();
+
     }
   }
 );
 
 
 /* =========================================================
-   PUBLIC API
-   ========================================================= */
+   INITIALIZE
+========================================================= */
 
-window.SNKAdminQuiz = {
+(function init(){
 
-  getCourse:
-    getCourseSettings,
+  applyTheme();
 
-  getQuiz:
-    getQuizSettings,
+  refreshAll();
 
-  getQuestions,
-
-  getResults:
-    getQuizResults,
-
-  saveCourse:
-    saveCourseSettings,
-
-  saveQuiz:
-    saveQuizSettings,
-
-  saveQuestions,
-
-  publishQuiz:
-    toggleQuizPublish,
-
-  refresh:
-    refreshAll
-
-};
-
-
-/* =========================================================
-   INIT
-   ========================================================= */
-
-applyTheme();
-
-refreshAll();
-
+})();
 </script>
 
 </body>
