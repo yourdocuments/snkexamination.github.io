@@ -1,25 +1,6 @@
-// ============================================================
-// SNK IT Institute - Firebase Configuration
-// Step 3.5
-// Project: snkexamination
-// ============================================================
-
-// Firebase App
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-// Firebase Authentication
-import {
-  getAuth
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-// Firebase Firestore
-import {
-  getFirestore
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-// ============================================================
-// Firebase Configuration
-// ============================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBInbSGmGGZ6yIS0gYb4rVFaH7E5cOSPwA",
@@ -31,25 +12,14 @@ const firebaseConfig = {
   measurementId: "G-HEWT99CHXK"
 };
 
-// ============================================================
-// Initialize Firebase
-// ============================================================
-
 const app = initializeApp(firebaseConfig);
 
-// Authentication
 const auth = getAuth(app);
 
-// Firestore Database
 const db = getFirestore(app);
-
-// ============================================================
-// Export
-// ============================================================
 
 export {
   app,
   auth,
   db
 };
-```
