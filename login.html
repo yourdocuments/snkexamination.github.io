@@ -6,8 +6,6 @@
 
   <title>SNK IT Institute | Student Login</title>
 
-  <meta name="description" content="SNK IT Institute Student Portal Login">
-
   <style>
     * {
       margin: 0;
@@ -24,8 +22,8 @@
       --border: rgba(255,255,255,0.09);
       --primary: #7c5cff;
       --primary2: #5b3df5;
-      --success: #19c37d;
       --danger: #ff5d73;
+      --success: #19c37d;
       --input: #080b12;
     }
 
@@ -42,9 +40,18 @@
     body {
       font-family: Arial, "Noto Sans Bengali", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(124,92,255,0.15), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(25,195,125,0.08), transparent 35%),
+        radial-gradient(
+          circle at top left,
+          rgba(124,92,255,0.15),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(25,195,125,0.08),
+          transparent 35%
+        ),
         var(--bg);
+
       color: var(--text);
       min-height: 100vh;
       transition: 0.25s ease;
@@ -61,20 +68,37 @@
     .login-wrapper {
       width: 100%;
       max-width: 980px;
+
       display: grid;
       grid-template-columns: 1fr 1fr;
+
       background: var(--card);
+
       border: 1px solid var(--border);
+
       border-radius: 28px;
+
       overflow: hidden;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+
+      box-shadow:
+        0 25px 80px rgba(0,0,0,0.35);
     }
+
+    /* =====================================================
+       BRAND SIDE
+       ===================================================== */
 
     .brand-side {
       padding: 50px;
+
       background:
-        linear-gradient(145deg, rgba(124,92,255,0.25), transparent 55%),
+        linear-gradient(
+          145deg,
+          rgba(124,92,255,0.25),
+          transparent 55%
+        ),
         var(--card2);
+
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -83,90 +107,134 @@
     .logo-box {
       width: 76px;
       height: 76px;
+
       border-radius: 20px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       background: rgba(124,92,255,0.15);
+
       border: 1px solid rgba(124,92,255,0.35);
+
       margin-bottom: 25px;
+
       overflow: hidden;
+
+      color: white;
+      font-weight: 800;
+      font-size: 22px;
     }
 
     .logo-box img {
       width: 100%;
       height: 100%;
+
       object-fit: contain;
+
       padding: 8px;
     }
 
     .brand-side h1 {
       font-size: 36px;
       line-height: 1.15;
+
       margin-bottom: 14px;
     }
 
     .brand-side p {
       color: var(--muted);
+
       font-size: 16px;
+
       line-height: 1.7;
+
       max-width: 410px;
     }
 
     .features {
       margin-top: 32px;
+
       display: grid;
+
       gap: 13px;
     }
 
     .feature {
       display: flex;
+
       align-items: center;
+
       gap: 12px;
+
       color: var(--muted);
+
       font-size: 14px;
     }
 
     .feature-icon {
       width: 32px;
       height: 32px;
+
       border-radius: 10px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       background: rgba(124,92,255,0.14);
+
       color: var(--primary);
+
       font-weight: bold;
     }
 
+    /* =====================================================
+       FORM SIDE
+       ===================================================== */
+
     .form-side {
       padding: 50px;
+
       display: flex;
+
       align-items: center;
     }
 
     .form-container {
       width: 100%;
+
       max-width: 420px;
+
       margin: auto;
     }
 
     .top-actions {
       display: flex;
+
       justify-content: flex-end;
+
       gap: 8px;
+
       margin-bottom: 25px;
     }
 
     .icon-btn {
       border: 1px solid var(--border);
+
       background: transparent;
+
       color: var(--text);
+
       width: 40px;
       height: 40px;
+
       border-radius: 12px;
+
       cursor: pointer;
-      font-size: 17px;
+
+      font-size: 15px;
     }
 
     .icon-btn:hover {
@@ -175,126 +243,35 @@
 
     .form-title {
       font-size: 30px;
+
       margin-bottom: 8px;
     }
 
     .form-subtitle {
       color: var(--muted);
+
       margin-bottom: 28px;
+
       line-height: 1.6;
+
       font-size: 14px;
     }
 
-    .field {
-      margin-bottom: 18px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .input-wrap {
-      position: relative;
-    }
-
-    .input-wrap input {
-      width: 100%;
-      height: 52px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      outline: none;
-      background: var(--input);
-      color: var(--text);
-      padding: 0 45px 0 15px;
-      font-size: 15px;
-      transition: 0.2s;
-    }
-
-    .input-wrap input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(124,92,255,0.12);
-    }
-
-    .input-icon {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      pointer-events: none;
-    }
-
-    .password-toggle {
-      position: absolute;
-      right: 13px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    .remember-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin: 4px 0 20px;
-      font-size: 13px;
-    }
-
-    .remember {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-    }
-
-    .remember input {
-      accent-color: var(--primary);
-    }
-
-    .forgot {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .login-btn {
-      width: 100%;
-      height: 54px;
-      border: 0;
-      border-radius: 15px;
-      background: linear-gradient(135deg, var(--primary), var(--primary2));
-      color: white;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 10px 30px rgba(92,61,245,0.25);
-    }
-
-    .login-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .login-btn:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-      transform: none;
-    }
+    /* =====================================================
+       MESSAGE
+       ===================================================== */
 
     .message {
       display: none;
+
       margin-bottom: 18px;
+
       padding: 13px 14px;
+
       border-radius: 12px;
+
       font-size: 13px;
+
       line-height: 1.5;
     }
 
@@ -304,50 +281,253 @@
 
     .message.error {
       background: rgba(255,93,115,0.10);
+
       border: 1px solid rgba(255,93,115,0.25);
+
       color: #ff8798;
     }
 
     .message.success {
       background: rgba(25,195,125,0.10);
+
       border: 1px solid rgba(25,195,125,0.25);
+
       color: #42d99a;
     }
 
-    .demo-box {
-      margin-top: 20px;
-      padding: 14px;
-      border: 1px dashed var(--border);
+    /* =====================================================
+       FIELD
+       ===================================================== */
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+
+      font-size: 14px;
+
+      font-weight: 600;
+
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap input {
+      width: 100%;
+
+      height: 52px;
+
+      border: 1px solid var(--border);
+
       border-radius: 14px;
+
+      outline: none;
+
+      background: var(--input);
+
+      color: var(--text);
+
+      padding: 0 45px 0 15px;
+
+      font-size: 15px;
+
+      transition: 0.2s;
+    }
+
+    .input-wrap input:focus {
+      border-color: var(--primary);
+
+      box-shadow:
+        0 0 0 3px rgba(124,92,255,0.12);
+    }
+
+    .input-icon {
+      position: absolute;
+
+      right: 15px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
       color: var(--muted);
+
+      pointer-events: none;
+    }
+
+    .password-toggle {
+      position: absolute;
+
+      right: 13px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: 0;
+
+      background: transparent;
+
+      color: var(--muted);
+
+      cursor: pointer;
+
+      font-size: 15px;
+    }
+
+    /* =====================================================
+       OPTIONS
+       ===================================================== */
+
+    .remember-row {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin: 4px 0 20px;
+
+      font-size: 13px;
+    }
+
+    .remember {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color: var(--muted);
+    }
+
+    .remember input {
+      accent-color: var(--primary);
+    }
+
+    .forgot {
+      color: var(--primary);
+
+      text-decoration: none;
+
+      font-weight: 600;
+    }
+
+    /* =====================================================
+       LOGIN BUTTON
+       ===================================================== */
+
+    .login-btn {
+      width: 100%;
+
+      height: 54px;
+
+      border: 0;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary2)
+        );
+
+      color: white;
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+
+      box-shadow:
+        0 10px 30px rgba(92,61,245,0.25);
+    }
+
+    .login-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.65;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+    /* =====================================================
+       INFO BOX
+       ===================================================== */
+
+    .firebase-box {
+      margin-top: 20px;
+
+      padding: 15px;
+
+      border: 1px dashed var(--border);
+
+      border-radius: 14px;
+
+      color: var(--muted);
+
       font-size: 12px;
+
       line-height: 1.6;
     }
 
-    .demo-box strong {
+    .firebase-box strong {
       color: var(--text);
     }
 
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+
     .footer {
       text-align: center;
+
       margin-top: 22px;
+
       color: var(--muted);
+
       font-size: 12px;
     }
 
+    /* =====================================================
+       LOADING
+       ===================================================== */
+
     .loading {
       display: inline-flex;
+
       align-items: center;
+
       gap: 8px;
+
       justify-content: center;
     }
 
     .spinner {
       width: 16px;
       height: 16px;
+
       border: 2px solid rgba(255,255,255,0.35);
+
       border-top-color: white;
+
       border-radius: 50%;
+
       animation: spin 0.7s linear infinite;
     }
 
@@ -357,9 +537,15 @@
       }
     }
 
+    /* =====================================================
+       MOBILE
+       ===================================================== */
+
     @media (max-width: 800px) {
+
       .login-wrapper {
         grid-template-columns: 1fr;
+
         max-width: 520px;
       }
 
@@ -381,6 +567,7 @@
     }
 
     @media (max-width: 480px) {
+
       .page {
         padding: 12px;
       }
@@ -401,6 +588,11 @@
       .form-title {
         font-size: 25px;
       }
+
+      .remember-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -411,44 +603,83 @@
 
     <section class="login-wrapper">
 
-      <!-- LEFT SIDE -->
+      <!-- =================================================
+           LEFT SIDE
+           ================================================= -->
+
       <div class="brand-side">
 
         <div class="logo-box">
+
           <img
             src="https://github.com/yourdocuments/products/blob/main/snkitlogo%20(2).svg?raw=true"
             alt="SNK IT Institute Logo"
-            onerror="this.style.display='none'; this.parentElement.innerHTML='SNK';"
+            onerror="
+              this.style.display='none';
+              this.parentElement.textContent='SNK';
+            "
           >
+
         </div>
 
-        <h1>SNK IT Institute</h1>
+        <h1>
+          SNK IT Institute
+        </h1>
 
         <p>
           Offline Course Student Portal-এ login করে
-          আপনার course, assignment, quiz, result ও attendance দেখুন।
+          আপনার course, assignment, quiz, result ও attendance
+          দেখুন।
         </p>
 
         <div class="features">
 
           <div class="feature">
-            <div class="feature-icon">✓</div>
-            <span>নিজের Student Dashboard</span>
+
+            <div class="feature-icon">
+              ✓
+            </div>
+
+            <span>
+              Student Dashboard
+            </span>
+
           </div>
 
           <div class="feature">
-            <div class="feature-icon">✓</div>
-            <span>Assignment ও Quiz</span>
+
+            <div class="feature-icon">
+              ✓
+            </div>
+
+            <span>
+              Assignment ও Quiz
+            </span>
+
           </div>
 
           <div class="feature">
-            <div class="feature-icon">✓</div>
-            <span>Result ও Attendance</span>
+
+            <div class="feature-icon">
+              ✓
+            </div>
+
+            <span>
+              Result ও Attendance
+            </span>
+
           </div>
 
           <div class="feature">
-            <div class="feature-icon">✓</div>
-            <span>Secure Firebase Login</span>
+
+            <div class="feature-icon">
+              ✓
+            </div>
+
+            <span>
+              Firebase Secure Login
+            </span>
+
           </div>
 
         </div>
@@ -456,7 +687,10 @@
       </div>
 
 
-      <!-- RIGHT SIDE -->
+      <!-- =================================================
+           RIGHT SIDE
+           ================================================= -->
+
       <div class="form-side">
 
         <div class="form-container">
@@ -483,14 +717,25 @@
 
           </div>
 
-          <h2 class="form-title" id="loginTitle">
+
+          <h2
+            class="form-title"
+            id="loginTitle"
+          >
             Student Login
           </h2>
 
-          <p class="form-subtitle" id="loginSubtitle">
-            আপনার Email ও Password দিয়ে login করুন।
+
+          <p
+            class="form-subtitle"
+            id="loginSubtitle"
+          >
+            Firebase account-এর Email ও Password দিয়ে
+            login করুন।
           </p>
 
+
+          <!-- MESSAGE -->
 
           <div
             id="message"
@@ -499,11 +744,21 @@
           ></div>
 
 
-          <form id="loginForm">
+          <!-- LOGIN FORM -->
+
+          <form
+            id="loginForm"
+            autocomplete="on"
+          >
+
+            <!-- EMAIL -->
 
             <div class="field">
 
-              <label for="email" id="emailLabel">
+              <label
+                for="email"
+                id="emailLabel"
+              >
                 Email
               </label>
 
@@ -512,6 +767,7 @@
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   placeholder="student@example.com"
                   autocomplete="email"
                   required
@@ -526,9 +782,14 @@
             </div>
 
 
+            <!-- PASSWORD -->
+
             <div class="field">
 
-              <label for="password" id="passwordLabel">
+              <label
+                for="password"
+                id="passwordLabel"
+              >
                 Password
               </label>
 
@@ -537,7 +798,8 @@
                 <input
                   type="password"
                   id="password"
-                  placeholder="আপনার password"
+                  name="password"
+                  placeholder="আপনার Firebase password"
                   autocomplete="current-password"
                   required
                 >
@@ -556,6 +818,8 @@
             </div>
 
 
+            <!-- OPTIONS -->
+
             <div class="remember-row">
 
               <label class="remember">
@@ -571,6 +835,7 @@
 
               </label>
 
+
               <a
                 href="#"
                 class="forgot"
@@ -581,6 +846,8 @@
 
             </div>
 
+
+            <!-- LOGIN -->
 
             <button
               type="submit"
@@ -593,11 +860,24 @@
           </form>
 
 
-          <div class="demo-box">
-            <strong>নতুন Firebase Login:</strong><br>
-            Admin Firebase Authentication থেকে student
-            account তৈরি করলে সেই Email ও Password দিয়ে login
-            করা যাবে।
+          <!-- FIREBASE INFO -->
+
+          <div class="firebase-box">
+
+            <strong>
+              Firebase Login
+            </strong>
+
+            <br>
+
+            এই portal-এ login করার জন্য Firebase
+            Authentication-এ তৈরি করা Email ও Password
+            ব্যবহার করুন।
+
+            <br><br>
+
+            পুরোনো Demo Password এখানে কাজ করবে না।
+
           </div>
 
 
@@ -614,9 +894,9 @@
   </main>
 
 
-  <!-- ======================================================
-       FIREBASE LOGIN
-       ====================================================== -->
+  <!-- =====================================================
+       FIREBASE AUTHENTICATION
+       ===================================================== -->
 
   <script type="module">
 
@@ -624,56 +904,75 @@
 
     import {
       signInWithEmailAndPassword,
-      sendPasswordResetEmail,
-      onAuthStateChanged
+      sendPasswordResetEmail
     } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 
-    /* ======================================================
-       STORAGE
-       ====================================================== */
+    /* =====================================================
+       STORAGE KEYS
+       ===================================================== */
 
-    const THEME_KEY = "snkTheme";
-    const LANGUAGE_KEY = "snkLanguage";
+    const THEME_KEY =
+      "snkTheme";
 
-    const LOGIN_KEY = "snkStudentLoggedIn";
-    const STUDENT_ID_KEY = "snkStudentId";
-    const STUDENT_NAME_KEY = "snkStudentName";
-    const STUDENT_COURSE_KEY = "snkStudentCourse";
-    const STUDENT_BATCH_KEY = "snkStudentBatch";
+    const LANGUAGE_KEY =
+      "snkLanguage";
 
-    const REMEMBER_KEY = "snkRememberMe";
+    const LOGIN_KEY =
+      "snkStudentLoggedIn";
+
+    const STUDENT_ID_KEY =
+      "snkStudentId";
+
+    const STUDENT_NAME_KEY =
+      "snkStudentName";
+
+    const STUDENT_COURSE_KEY =
+      "snkStudentCourse";
+
+    const STUDENT_BATCH_KEY =
+      "snkStudentBatch";
+
+    const FIREBASE_UID_KEY =
+      "snkFirebaseUid";
+
+    const REMEMBER_KEY =
+      "snkRememberMe";
+
+    const EMAIL_KEY =
+      "snkLoginEmail";
 
 
-    /* ======================================================
-       DEFAULT STUDENT INFORMATION
-       ====================================================== */
-
-    const DEFAULT_STUDENT = {
-      id: "SNK-1001",
-      name: "Demo Student",
-      course: "Computer Office Application",
-      batch: "Batch 01"
-    };
-
-
-    /* ======================================================
+    /* =====================================================
        ELEMENTS
-       ====================================================== */
+       ===================================================== */
 
-    const body = document.body;
+    const body =
+      document.body;
 
-    const loginForm = document.getElementById("loginForm");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const rememberMe = document.getElementById("rememberMe");
+    const loginForm =
+      document.getElementById("loginForm");
 
-    const loginBtn = document.getElementById("loginBtn");
+    const emailInput =
+      document.getElementById("email");
 
-    const message = document.getElementById("message");
+    const passwordInput =
+      document.getElementById("password");
 
-    const themeBtn = document.getElementById("themeBtn");
-    const languageBtn = document.getElementById("languageBtn");
+    const rememberMe =
+      document.getElementById("rememberMe");
+
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const message =
+      document.getElementById("message");
+
+    const themeBtn =
+      document.getElementById("themeBtn");
+
+    const languageBtn =
+      document.getElementById("languageBtn");
 
     const passwordToggle =
       document.getElementById("passwordToggle");
@@ -682,9 +981,9 @@
       document.getElementById("forgotPassword");
 
 
-    /* ======================================================
+    /* =====================================================
        LANGUAGE
-       ====================================================== */
+       ===================================================== */
 
     let currentLanguage =
       localStorage.getItem(LANGUAGE_KEY) || "bn";
@@ -694,56 +993,72 @@
 
       if (currentLanguage === "en") {
 
-        document.documentElement.lang = "en";
+        document.documentElement.lang =
+          "en";
 
-        document.getElementById("loginTitle").textContent =
+        document.getElementById(
+          "loginTitle"
+        ).textContent =
           "Student Login";
 
-        document.getElementById("loginSubtitle").textContent =
-          "Login with your Email and Password.";
+        document.getElementById(
+          "loginSubtitle"
+        ).textContent =
+          "Login with your Firebase Email and Password.";
 
-        document.getElementById("emailLabel").textContent =
+        document.getElementById(
+          "emailLabel"
+        ).textContent =
           "Email";
 
-        document.getElementById("passwordLabel").textContent =
+        document.getElementById(
+          "passwordLabel"
+        ).textContent =
           "Password";
 
-        document.getElementById("rememberText").textContent =
+        document.getElementById(
+          "rememberText"
+        ).textContent =
           "Remember me";
 
         forgotPassword.textContent =
           "Forgot password?";
-
-        loginBtn.textContent =
-          "Login";
 
         languageBtn.textContent =
           "BN";
 
       } else {
 
-        document.documentElement.lang = "bn";
+        document.documentElement.lang =
+          "bn";
 
-        document.getElementById("loginTitle").textContent =
+        document.getElementById(
+          "loginTitle"
+        ).textContent =
           "Student Login";
 
-        document.getElementById("loginSubtitle").textContent =
-          "আপনার Email ও Password দিয়ে login করুন।";
+        document.getElementById(
+          "loginSubtitle"
+        ).textContent =
+          "Firebase account-এর Email ও Password দিয়ে login করুন।";
 
-        document.getElementById("emailLabel").textContent =
+        document.getElementById(
+          "emailLabel"
+        ).textContent =
           "Email";
 
-        document.getElementById("passwordLabel").textContent =
+        document.getElementById(
+          "passwordLabel"
+        ).textContent =
           "Password";
 
-        document.getElementById("rememberText").textContent =
+        document.getElementById(
+          "rememberText"
+        ).textContent =
           "আমাকে মনে রাখুন";
 
         forgotPassword.textContent =
           "Password ভুলে গেছেন?";
-
-        loginBtn.textContent =
-          "Login";
 
         languageBtn.textContent =
           "EN";
@@ -752,88 +1067,123 @@
     }
 
 
-    languageBtn.addEventListener("click", () => {
+    languageBtn.addEventListener(
+      "click",
+      () => {
 
-      currentLanguage =
-        currentLanguage === "bn" ? "en" : "bn";
+        currentLanguage =
+          currentLanguage === "bn"
+            ? "en"
+            : "bn";
 
-      localStorage.setItem(
-        LANGUAGE_KEY,
-        currentLanguage
-      );
+        localStorage.setItem(
+          LANGUAGE_KEY,
+          currentLanguage
+        );
 
-      applyLanguage();
+        applyLanguage();
 
-    });
+      }
+    );
 
 
-    /* ======================================================
+    /* =====================================================
        THEME
-       ====================================================== */
+       ===================================================== */
 
     function applyTheme() {
 
       const savedTheme =
-        localStorage.getItem(THEME_KEY) || "dark";
+        localStorage.getItem(
+          THEME_KEY
+        ) || "dark";
+
 
       if (savedTheme === "light") {
 
         body.classList.add("light");
-        themeBtn.textContent = "☾";
+
+        themeBtn.textContent =
+          "☾";
 
       } else {
 
         body.classList.remove("light");
-        themeBtn.textContent = "☀";
+
+        themeBtn.textContent =
+          "☀";
 
       }
 
     }
 
 
-    themeBtn.addEventListener("click", () => {
+    themeBtn.addEventListener(
+      "click",
+      () => {
 
-      const isLight =
-        body.classList.contains("light");
+        const isLight =
+          body.classList.contains(
+            "light"
+          );
 
-      localStorage.setItem(
-        THEME_KEY,
-        isLight ? "dark" : "light"
-      );
+        localStorage.setItem(
+          THEME_KEY,
+          isLight
+            ? "dark"
+            : "light"
+        );
 
-      applyTheme();
-
-    });
-
-
-    /* ======================================================
-       PASSWORD SHOW / HIDE
-       ====================================================== */
-
-    passwordToggle.addEventListener("click", () => {
-
-      if (passwordInput.type === "password") {
-
-        passwordInput.type = "text";
-        passwordToggle.textContent = "🙈";
-
-      } else {
-
-        passwordInput.type = "password";
-        passwordToggle.textContent = "👁";
+        applyTheme();
 
       }
+    );
 
-    });
+
+    /* =====================================================
+       PASSWORD SHOW / HIDE
+       ===================================================== */
+
+    passwordToggle.addEventListener(
+      "click",
+      () => {
+
+        if (
+          passwordInput.type ===
+          "password"
+        ) {
+
+          passwordInput.type =
+            "text";
+
+          passwordToggle.textContent =
+            "🙈";
+
+        } else {
+
+          passwordInput.type =
+            "password";
+
+          passwordToggle.textContent =
+            "👁";
+
+        }
+
+      }
+    );
 
 
-    /* ======================================================
+    /* =====================================================
        MESSAGE
-       ====================================================== */
+       ===================================================== */
 
-    function showMessage(text, type = "error") {
+    function showMessage(
+      text,
+      type = "error"
+    ) {
 
-      message.textContent = text;
+      message.textContent =
+        text;
 
       message.className =
         "message show " + type;
@@ -843,7 +1193,8 @@
 
     function hideMessage() {
 
-      message.textContent = "";
+      message.textContent =
+        "";
 
       message.className =
         "message";
@@ -851,11 +1202,13 @@
     }
 
 
-    /* ======================================================
-       FIREBASE ERROR MESSAGE
-       ====================================================== */
+    /* =====================================================
+       FIREBASE ERROR
+       ===================================================== */
 
-    function firebaseErrorMessage(errorCode) {
+    function getFirebaseErrorMessage(
+      code
+    ) {
 
       const messages = {
 
@@ -863,16 +1216,16 @@
           "Email address সঠিক নয়।",
 
         "auth/user-not-found":
-          "এই Email দিয়ে কোনো account পাওয়া যায়নি।",
+          "এই Email দিয়ে Firebase-এ কোনো account পাওয়া যায়নি।",
 
         "auth/wrong-password":
-          "Password সঠিক নয়।",
+          "Firebase Password সঠিক নয়।",
 
         "auth/invalid-credential":
           "Email অথবা Password সঠিক নয়।",
 
         "auth/user-disabled":
-          "এই accountটি disabled করা হয়েছে।",
+          "এই Firebase account disabled করা হয়েছে।",
 
         "auth/too-many-requests":
           "অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।",
@@ -881,57 +1234,42 @@
           "Internet connection সমস্যা হয়েছে।",
 
         "auth/operation-not-allowed":
-          "Firebase Authentication-এ Email/Password এখনো Enable করা হয়নি।"
+          "Firebase-এ Email/Password Authentication Enable করা হয়নি।",
+
+        "auth/weak-password":
+          "Password যথেষ্ট শক্তিশালী নয়।"
 
       };
 
-      return messages[errorCode] ||
-        "Login করা যায়নি। আবার চেষ্টা করুন।";
+
+      return (
+        messages[code] ||
+        "Firebase Login করা যায়নি। আবার চেষ্টা করুন।"
+      );
 
     }
 
 
-    /* ======================================================
-       SAVE STUDENT SESSION
-       ====================================================== */
+    /* =====================================================
+       SAVE FIREBASE SESSION
+       ===================================================== */
 
-    function saveStudentSession(user) {
+    function saveFirebaseSession(
+      user
+    ) {
 
       /*
-       * Firebase User UID
+       * Firebase UID
        */
 
-      const firebaseUid =
-        user.uid || "";
+      sessionStorage.setItem(
+        FIREBASE_UID_KEY,
+        user.uid
+      );
 
 
       /*
-       * Demo/local student information.
-       *
-       * Later Firestore থেকে actual student profile
-       * এখানে automatically নেওয়া হবে.
-       */
-
-      const studentId =
-        localStorage.getItem(STUDENT_ID_KEY) ||
-        DEFAULT_STUDENT.id;
-
-      const studentName =
-        localStorage.getItem(STUDENT_NAME_KEY) ||
-        user.displayName ||
-        DEFAULT_STUDENT.name;
-
-      const studentCourse =
-        localStorage.getItem(STUDENT_COURSE_KEY) ||
-        DEFAULT_STUDENT.course;
-
-      const studentBatch =
-        localStorage.getItem(STUDENT_BATCH_KEY) ||
-        DEFAULT_STUDENT.batch;
-
-
-      /*
-       * Session Storage
+       * Login state
        */
 
       sessionStorage.setItem(
@@ -939,202 +1277,269 @@
         "true"
       );
 
-      sessionStorage.setItem(
-        STUDENT_ID_KEY,
-        studentId
-      );
+
+      /*
+       * Firebase user email
+       */
 
       sessionStorage.setItem(
-        STUDENT_NAME_KEY,
-        studentName
-      );
-
-      sessionStorage.setItem(
-        STUDENT_COURSE_KEY,
-        studentCourse
-      );
-
-      sessionStorage.setItem(
-        STUDENT_BATCH_KEY,
-        studentBatch
-      );
-
-      sessionStorage.setItem(
-        "snkFirebaseUid",
-        firebaseUid
+        "snkFirebaseEmail",
+        user.email || ""
       );
 
 
       /*
-       * Local Storage
+       * Student ID
+       *
+       * এখন Firestore profile না আসা পর্যন্ত
+       * existing saved Student ID থাকলে সেটি ব্যবহার করবে।
        */
 
-      localStorage.setItem(
-        STUDENT_ID_KEY,
-        studentId
-      );
+      const savedStudentId =
+        localStorage.getItem(
+          STUDENT_ID_KEY
+        );
 
-      localStorage.setItem(
-        STUDENT_NAME_KEY,
-        studentName
-      );
 
-      localStorage.setItem(
-        STUDENT_COURSE_KEY,
-        studentCourse
-      );
+      if (savedStudentId) {
 
-      localStorage.setItem(
-        STUDENT_BATCH_KEY,
-        studentBatch
-      );
+        sessionStorage.setItem(
+          STUDENT_ID_KEY,
+          savedStudentId
+        );
+
+      }
+
+
+      /*
+       * Existing profile data থাকলে
+       * session-এ রাখা হবে।
+       *
+       * কোনো নতুন Demo password বা
+       * Demo login তৈরি করা হচ্ছে না।
+       */
+
+      const savedName =
+        localStorage.getItem(
+          STUDENT_NAME_KEY
+        );
+
+      const savedCourse =
+        localStorage.getItem(
+          STUDENT_COURSE_KEY
+        );
+
+      const savedBatch =
+        localStorage.getItem(
+          STUDENT_BATCH_KEY
+        );
+
+
+      if (savedName) {
+
+        sessionStorage.setItem(
+          STUDENT_NAME_KEY,
+          savedName
+        );
+
+      }
+
+
+      if (savedCourse) {
+
+        sessionStorage.setItem(
+          STUDENT_COURSE_KEY,
+          savedCourse
+        );
+
+      }
+
+
+      if (savedBatch) {
+
+        sessionStorage.setItem(
+          STUDENT_BATCH_KEY,
+          savedBatch
+        );
+
+      }
 
     }
 
 
-    /* ======================================================
-       LOGIN
-       ====================================================== */
+    /* =====================================================
+       FIREBASE LOGIN
+       ===================================================== */
 
-    loginForm.addEventListener("submit", async (event) => {
+    loginForm.addEventListener(
+      "submit",
+      async (event) => {
 
-      event.preventDefault();
+        event.preventDefault();
 
-      hideMessage();
-
-      const email =
-        emailInput.value.trim();
-
-      const password =
-        passwordInput.value;
+        hideMessage();
 
 
-      if (!email) {
+        const email =
+          emailInput.value.trim();
 
-        showMessage(
-          "Email দিন।"
-        );
-
-        emailInput.focus();
-
-        return;
-      }
+        const password =
+          passwordInput.value;
 
 
-      if (!password) {
+        if (!email) {
 
-        showMessage(
-          "Password দিন।"
-        );
-
-        passwordInput.focus();
-
-        return;
-      }
-
-
-      loginBtn.disabled = true;
-
-      loginBtn.innerHTML = `
-        <span class="loading">
-          <span class="spinner"></span>
-          Login হচ্ছে...
-        </span>
-      `;
-
-
-      try {
-
-        const result =
-          await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
+          showMessage(
+            "Email দিন।"
           );
 
+          emailInput.focus();
 
-        const user =
-          result.user;
-
-
-        /*
-         * Remember Me
-         */
-
-        if (rememberMe.checked) {
-
-          localStorage.setItem(
-            REMEMBER_KEY,
-            "true"
-          );
-
-          localStorage.setItem(
-            "snkLoginEmail",
-            email
-          );
-
-        } else {
-
-          localStorage.removeItem(
-            REMEMBER_KEY
-          );
-
-          localStorage.removeItem(
-            "snkLoginEmail"
-          );
+          return;
 
         }
 
 
-        /*
-         * Save Student Session
-         */
+        if (!password) {
 
-        saveStudentSession(user);
+          showMessage(
+            "Password দিন।"
+          );
 
+          passwordInput.focus();
 
-        showMessage(
-          currentLanguage === "en"
-            ? "Login successful. Opening dashboard..."
-            : "Login সফল হয়েছে। Dashboard খুলছে...",
-          "success"
-        );
+          return;
+
+        }
 
 
-        setTimeout(() => {
-
-          window.location.href =
-            "student-dashboard.html";
-
-        }, 700);
+        loginBtn.disabled =
+          true;
 
 
-      } catch (error) {
+        loginBtn.innerHTML = `
+          <span class="loading">
+            <span class="spinner"></span>
+            Firebase Login হচ্ছে...
+          </span>
+        `;
 
-        console.error(
-          "Firebase Login Error:",
-          error
-        );
 
-        showMessage(
-          firebaseErrorMessage(
-            error.code
-          )
-        );
+        try {
 
-        loginBtn.disabled = false;
+          /*
+           * IMPORTANT:
+           *
+           * এখানে শুধুমাত্র Firebase Authentication
+           * ব্যবহার করা হচ্ছে।
+           *
+           * কোনো Demo password নেই।
+           */
 
-        loginBtn.textContent =
-          "Login";
+          const result =
+            await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+
+          const user =
+            result.user;
+
+
+          /*
+           * Remember Email
+           */
+
+          if (
+            rememberMe.checked
+          ) {
+
+            localStorage.setItem(
+              REMEMBER_KEY,
+              "true"
+            );
+
+            localStorage.setItem(
+              EMAIL_KEY,
+              email
+            );
+
+          } else {
+
+            localStorage.removeItem(
+              REMEMBER_KEY
+            );
+
+            localStorage.removeItem(
+              EMAIL_KEY
+            );
+
+          }
+
+
+          /*
+           * Save Firebase Session
+           */
+
+          saveFirebaseSession(
+            user
+          );
+
+
+          showMessage(
+            currentLanguage === "en"
+              ? "Firebase login successful. Opening dashboard..."
+              : "Firebase login সফল হয়েছে। Dashboard খুলছে...",
+            "success"
+          );
+
+
+          /*
+           * Dashboard redirect
+           */
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "student-dashboard.html";
+
+            },
+            700
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Firebase Login Error:",
+            error
+          );
+
+
+          showMessage(
+            getFirebaseErrorMessage(
+              error.code
+            )
+          );
+
+
+          loginBtn.disabled =
+            false;
+
+          loginBtn.textContent =
+            "Login";
+
+        }
 
       }
+    );
 
-    });
 
-
-    /* ======================================================
+    /* =====================================================
        PASSWORD RESET
-       ====================================================== */
+       ===================================================== */
 
     forgotPassword.addEventListener(
       "click",
@@ -1143,6 +1548,7 @@
         event.preventDefault();
 
         hideMessage();
+
 
         const email =
           emailInput.value.trim();
@@ -1159,6 +1565,7 @@
           emailInput.focus();
 
           return;
+
         }
 
 
@@ -1181,12 +1588,13 @@
         } catch (error) {
 
           console.error(
-            "Password Reset Error:",
+            "Firebase Password Reset Error:",
             error
           );
 
+
           showMessage(
-            firebaseErrorMessage(
+            getFirebaseErrorMessage(
               error.code
             )
           );
@@ -1197,13 +1605,13 @@
     );
 
 
-    /* ======================================================
+    /* =====================================================
        REMEMBERED EMAIL
-       ====================================================== */
+       ===================================================== */
 
     const savedEmail =
       localStorage.getItem(
-        "snkLoginEmail"
+        EMAIL_KEY
       );
 
     const savedRemember =
@@ -1226,39 +1634,12 @@
     }
 
 
-    /* ======================================================
-       FIREBASE AUTH STATE
-       ====================================================== */
-
-    onAuthStateChanged(
-      auth,
-      (user) => {
-
-        if (user) {
-
-          /*
-           * Firebase already knows this user.
-           *
-           * Do not automatically redirect here,
-           * because user may intentionally be on login page.
-           */
-
-          console.log(
-            "Firebase user:",
-            user.uid
-          );
-
-        }
-
-      }
-    );
-
-
-    /* ======================================================
+    /* =====================================================
        INITIALIZE
-       ====================================================== */
+       ===================================================== */
 
     applyTheme();
+
     applyLanguage();
 
   </script>
