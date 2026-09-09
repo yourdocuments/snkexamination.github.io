@@ -1,0 +1,6579 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#05070c">
+
+<title>SNK IT Institute | Admin Quiz Results</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+>
+
+
+<style>
+
+/* =========================================================
+   SNK IT INSTITUTE
+   ADMIN QUIZ RESULT MANAGEMENT
+   STEP 2.5.5
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --bg:#f4f7fb;
+    --sidebar:#ffffff;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#667085;
+    --border:#e5e7eb;
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+
+    --soft:#eff6ff;
+
+    --success:#16a34a;
+    --success-soft:#ecfdf3;
+
+    --warning:#d97706;
+    --warning-soft:#fff7ed;
+
+    --danger:#dc2626;
+    --danger-soft:#fef2f2;
+
+    --purple:#7c3aed;
+
+    --shadow:
+        0 12px 35px rgba(15,23,42,.08);
+}
+
+body.dark{
+
+    --bg:#070b14;
+    --sidebar:#0d1320;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1f2937;
+
+    --soft:#172554;
+
+    --success-soft:#052e16;
+    --warning-soft:#451a03;
+    --danger-soft:#450a0a;
+
+    --shadow:
+        0 15px 40px rgba(0,0,0,.28);
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:
+        "Hind Siliguri",
+        "Inter",
+        Arial,
+        sans-serif;
+
+    background:var(--bg);
+    color:var(--text);
+
+    min-height:100vh;
+
+    transition:.25s;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.app{
+
+    min-height:100vh;
+
+    display:flex;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+
+    width:245px;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    z-index:1200;
+
+    background:var(--sidebar);
+
+    border-right:
+        1px solid var(--border);
+
+    padding:18px 12px;
+
+    overflow-y:auto;
+
+    transition:.25s;
+}
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+        6px 8px 18px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    margin-bottom:15px;
+}
+
+.brand img{
+
+    width:42px;
+    height:42px;
+
+    object-fit:contain;
+
+    border-radius:10px;
+}
+
+.brand strong{
+
+    display:block;
+
+    font-family:"Inter","Hind Siliguri",sans-serif;
+
+    font-size:13px;
+}
+
+.brand span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    margin-top:3px;
+}
+
+.menu-title{
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+
+    padding:
+        8px 10px;
+
+    margin-top:5px;
+}
+
+.menu{
+
+    display:grid;
+
+    gap:4px;
+}
+
+.menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:
+        10px 11px;
+
+    border-radius:9px;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    color:var(--muted);
+
+    transition:.2s;
+}
+
+.menu a:hover{
+
+    background:var(--soft);
+
+    color:var(--primary);
+}
+
+.menu a.active{
+
+    background:var(--primary);
+
+    color:#fff;
+
+    box-shadow:
+        0 7px 18px rgba(37,99,235,.20);
+}
+
+.menu-icon{
+
+    width:20px;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+
+    width:calc(100% - 245px);
+
+    margin-left:245px;
+
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+
+    height:68px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:900;
+
+    background:
+        rgba(255,255,255,.88);
+
+    backdrop-filter:
+        blur(15px);
+
+    border-bottom:
+        1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:
+        0 22px;
+}
+
+body.dark .topbar{
+
+    background:
+        rgba(7,11,20,.88);
+}
+
+.top-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.page-title{
+
+    font-size:17px;
+
+    font-weight:800;
+}
+
+.page-subtitle{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:2px;
+}
+
+.mobile-menu{
+
+    display:none;
+
+    width:36px;
+
+    height:36px;
+
+    border:
+        1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border-radius:8px;
+}
+
+.top-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+}
+
+.top-btn{
+
+    border:
+        1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    padding:
+        8px 10px;
+
+    border-radius:8px;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+.top-btn:hover{
+
+    border-color:var(--primary);
+
+    color:var(--primary);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+
+    width:
+        min(1400px, calc(100% - 35px));
+
+    margin:
+        0 auto;
+
+    padding:
+        22px 0 45px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #07111f,
+            #111c3a 55%,
+            #111827
+        );
+
+    color:#fff;
+
+    border-radius:20px;
+
+    padding:
+        25px 28px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+        0 18px 50px rgba(15,23,42,.18);
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    right:-80px;
+    top:-100px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(59,130,246,.38),
+            transparent 65%
+        );
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.hero-badge{
+
+    display:inline-flex;
+
+    padding:
+        5px 9px;
+
+    border:
+        1px solid rgba(255,255,255,.16);
+
+    background:
+        rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    margin-bottom:8px;
+}
+
+.hero h1{
+
+    font-family:
+        "Inter",
+        "Hind Siliguri",
+        sans-serif;
+
+    font-size:
+        clamp(23px,4vw,35px);
+
+    line-height:1.15;
+
+    margin-bottom:6px;
+}
+
+.hero p{
+
+    color:
+        rgba(255,255,255,.70);
+
+    font-size:10px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   QUIZ INFO
+========================================================= */
+
+.quiz-info{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:18px;
+}
+
+.quiz-info-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.quiz-icon{
+
+    width:48px;
+    height:48px;
+
+    border-radius:12px;
+
+    background:var(--soft);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:23px;
+}
+
+.quiz-info h2{
+
+    font-size:16px;
+}
+
+.quiz-info p{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:2px;
+}
+
+.status-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:
+        6px 10px;
+
+    border-radius:20px;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    background:var(--success-soft);
+
+    color:var(--success);
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(7,1fr);
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+.stat-card{
+
+    background:var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:13px;
+
+    padding:13px;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+
+    font-size:18px;
+
+    margin-bottom:8px;
+}
+
+.stat-card span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    margin-bottom:3px;
+}
+
+.stat-card strong{
+
+    display:block;
+
+    font-family:"Inter",sans-serif;
+
+    font-size:19px;
+
+    line-height:1.2;
+}
+
+.stat-card small{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.panel{
+
+    background:var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:18px;
+}
+
+.panel-header{
+
+    padding:
+        15px 17px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+}
+
+.panel-title h3{
+
+    font-size:14px;
+}
+
+.panel-title p{
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    margin-top:2px;
+}
+
+.toolbar{
+
+    padding:
+        13px 15px;
+
+    display:grid;
+
+    grid-template-columns:
+        1.8fr
+        1fr
+        1fr
+        1fr
+        auto
+        auto;
+
+    gap:8px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.input,
+.select{
+
+    width:100%;
+
+    border:
+        1px solid var(--border);
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    border-radius:8px;
+
+    padding:
+        9px 10px;
+
+    font-size:9px;
+
+    outline:none;
+}
+
+.input:focus,
+.select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.08);
+}
+
+.action-btn{
+
+    border:
+        1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    padding:
+        8px 11px;
+
+    border-radius:8px;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+.action-btn:hover{
+
+    border-color:var(--primary);
+
+    color:var(--primary);
+}
+
+.action-btn.primary{
+
+    background:var(--primary);
+
+    color:#fff;
+
+    border-color:var(--primary);
+}
+
+.action-btn.success{
+
+    background:var(--success);
+
+    color:#fff;
+
+    border-color:var(--success);
+}
+
+.action-btn.danger{
+
+    color:var(--danger);
+
+    border-color:#fecaca;
+
+    background:var(--danger-soft);
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap{
+
+    overflow-x:auto;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:1000px;
+}
+
+th{
+
+    background:var(--bg);
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    text-align:left;
+
+    padding:
+        11px 10px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    white-space:nowrap;
+}
+
+td{
+
+    padding:
+        11px 10px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    font-size:9px;
+
+    vertical-align:middle;
+}
+
+tr:last-child td{
+
+    border-bottom:0;
+}
+
+tbody tr:hover{
+
+    background:
+        rgba(37,99,235,.025);
+}
+
+.student-cell{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+.student-avatar{
+
+    width:30px;
+    height:30px;
+
+    flex-shrink:0;
+
+    border-radius:8px;
+
+    background:var(--soft);
+
+    color:var(--primary);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:13px;
+
+    font-weight:800;
+}
+
+.student-cell strong{
+
+    display:block;
+
+    font-size:9px;
+}
+
+.student-cell span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    margin-top:2px;
+}
+
+.score{
+
+    font-family:"Inter",sans-serif;
+
+    font-weight:900;
+
+    font-size:11px;
+}
+
+.percentage{
+
+    font-family:"Inter",sans-serif;
+
+    font-weight:900;
+
+    color:var(--primary);
+}
+
+.mini-badge{
+
+    display:inline-flex;
+
+    padding:
+        4px 7px;
+
+    border-radius:20px;
+
+    font-size:7px;
+
+    font-weight:900;
+}
+
+.mini-badge.pass{
+
+    color:var(--success);
+
+    background:var(--success-soft);
+}
+
+.mini-badge.fail{
+
+    color:var(--danger);
+
+    background:var(--danger-soft);
+}
+
+.mini-badge.published{
+
+    color:var(--primary);
+
+    background:var(--soft);
+}
+
+.mini-badge.unpublished{
+
+    color:var(--warning);
+
+    background:var(--warning-soft);
+}
+
+.row-actions{
+
+    display:flex;
+
+    gap:4px;
+
+    flex-wrap:wrap;
+}
+
+.row-btn{
+
+    border:
+        1px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    padding:
+        5px 7px;
+
+    border-radius:6px;
+
+    font-size:8px;
+
+    font-weight:800;
+}
+
+.row-btn:hover{
+
+    border-color:var(--primary);
+
+    color:var(--primary);
+}
+
+.row-btn.delete:hover{
+
+    color:var(--danger);
+
+    border-color:var(--danger);
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+
+    padding:
+        45px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+}
+
+.empty-icon{
+
+    font-size:35px;
+
+    margin-bottom:8px;
+}
+
+.empty h3{
+
+    color:var(--text);
+
+    font-size:15px;
+
+    margin-bottom:4px;
+}
+
+.empty p{
+
+    font-size:9px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:2500;
+
+    background:
+        rgba(2,6,23,.72);
+
+    backdrop-filter:
+        blur(5px);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:18px;
+}
+
+.modal.show{
+
+    display:flex;
+}
+
+.modal-box{
+
+    width:
+        min(760px,100%);
+
+    max-height:
+        calc(100vh - 36px);
+
+    overflow-y:auto;
+
+    background:var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:18px;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.30);
+}
+
+.modal-header{
+
+    padding:
+        15px 17px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.modal-header h3{
+
+    font-size:15px;
+}
+
+.close-btn{
+
+    width:31px;
+    height:31px;
+
+    border:
+        1px solid var(--border);
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    border-radius:8px;
+
+    font-size:14px;
+}
+
+.modal-body{
+
+    padding:18px;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.details-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:9px;
+
+    margin-bottom:14px;
+}
+
+.detail-item{
+
+    padding:
+        10px;
+
+    background:var(--bg);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:9px;
+}
+
+.detail-item span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    margin-bottom:4px;
+}
+
+.detail-item strong{
+
+    display:block;
+
+    font-size:10px;
+
+    word-break:break-word;
+}
+
+.result-highlight{
+
+    padding:
+        18px;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--soft),
+            var(--card)
+        );
+
+    border:
+        1px solid var(--border);
+
+    text-align:center;
+
+    margin-bottom:14px;
+}
+
+.result-highlight .big-score{
+
+    font-family:"Inter",sans-serif;
+
+    font-size:42px;
+
+    font-weight:900;
+
+    color:var(--primary);
+}
+
+.result-highlight p{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:3px;
+}
+
+.result-summary{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:8px;
+
+    margin-top:12px;
+}
+
+.summary-item{
+
+    padding:
+        11px 7px;
+
+    text-align:center;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:9px;
+
+    background:var(--bg);
+}
+
+.summary-item span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:7px;
+
+    margin-bottom:4px;
+}
+
+.summary-item strong{
+
+    font-family:"Inter",sans-serif;
+
+    font-size:14px;
+}
+
+.note-box{
+
+    padding:
+        11px;
+
+    border-radius:9px;
+
+    background:var(--warning-soft);
+
+    color:var(--warning);
+
+    font-size:9px;
+
+    line-height:1.6;
+
+    margin-top:12px;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.modal-footer{
+
+    padding:
+        13px 17px;
+
+    border-top:
+        1px solid var(--border);
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:7px;
+
+    flex-wrap:wrap;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:20px;
+
+    z-index:4000;
+
+    transform:
+        translate(-50%,20px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    background:#111827;
+
+    color:#fff;
+
+    padding:
+        10px 15px;
+
+    border-radius:8px;
+
+    font-size:9px;
+
+    transition:.25s;
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,0);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    padding:
+        20px 0 0;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+#printArea{
+
+    display:none;
+}
+
+@media print{
+
+    body{
+
+        background:#fff !important;
+
+        color:#000 !important;
+    }
+
+    .sidebar,
+    .topbar,
+    .hero,
+    .quiz-info,
+    .stats,
+    .toolbar,
+    .panel-header,
+    .footer,
+    .modal,
+    .no-print{
+
+        display:none !important;
+    }
+
+    .main{
+
+        width:100%;
+
+        margin:0;
+    }
+
+    .content{
+
+        width:100%;
+
+        padding:0;
+    }
+
+    .panel{
+
+        display:none;
+    }
+
+    #printArea{
+
+        display:block !important;
+
+        color:#000;
+
+        padding:25px;
+    }
+
+    .print-title{
+
+        text-align:center;
+
+        margin-bottom:20px;
+    }
+
+    .print-title h1{
+
+        font-size:22px;
+    }
+
+    .print-title p{
+
+        font-size:10px;
+
+        margin-top:3px;
+    }
+
+    .print-stats{
+
+        display:grid;
+
+        grid-template-columns:
+            repeat(4,1fr);
+
+        gap:8px;
+
+        margin-bottom:15px;
+    }
+
+    .print-stat{
+
+        border:1px solid #ccc;
+
+        padding:10px;
+
+        text-align:center;
+    }
+
+    .print-stat span{
+
+        display:block;
+
+        font-size:8px;
+    }
+
+    .print-stat strong{
+
+        display:block;
+
+        font-size:15px;
+
+        margin-top:4px;
+    }
+
+    .print-table{
+
+        width:100%;
+
+        border-collapse:collapse;
+    }
+
+    .print-table th,
+    .print-table td{
+
+        border:1px solid #bbb;
+
+        padding:7px;
+
+        font-size:8px;
+
+        text-align:left;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1150px){
+
+    .stats{
+
+        grid-template-columns:
+            repeat(4,1fr);
+    }
+
+    .toolbar{
+
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+
+        transform:
+            translateX(-100%);
+    }
+
+    .sidebar.open{
+
+        transform:
+            translateX(0);
+    }
+
+    .main{
+
+        width:100%;
+
+        margin-left:0;
+    }
+
+    .mobile-menu{
+
+        display:block;
+    }
+
+    .stats{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .details-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .result-summary{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .topbar{
+
+        padding:
+            0 12px;
+    }
+
+    .top-btn.dashboard{
+
+        display:none;
+    }
+
+    .content{
+
+        width:
+            calc(100% - 20px);
+
+        padding-top:14px;
+    }
+
+    .hero{
+
+        padding:
+            20px;
+
+        border-radius:15px;
+    }
+
+    .stats{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .toolbar{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .toolbar .search{
+
+        grid-column:
+            1 / -1;
+    }
+
+    .details-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.sidebar-overlay{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:1100;
+
+    background:
+        rgba(2,6,23,.55);
+}
+
+.sidebar-overlay.show{
+
+    display:block;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =======================================================
+     SIDEBAR
+======================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+
+<div class="brand">
+
+<img
+    src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+    alt="SNK IT Institute"
+>
+
+<div>
+
+<strong>
+SNK IT Institute
+</strong>
+
+<span>
+Admin Management Panel
+</span>
+
+</div>
+
+</div>
+
+
+<div class="menu-title">
+Main
+</div>
+
+
+<nav class="menu">
+
+
+<a href="admin.html">
+
+<span class="menu-icon">
+📊
+</span>
+
+Dashboard
+
+</a>
+
+
+<a href="admin.html">
+
+<span class="menu-icon">
+🎯
+</span>
+
+Quiz Management
+
+</a>
+
+
+<a
+    href="admin-quiz-results.html"
+    class="active"
+>
+
+<span class="menu-icon">
+🏆
+</span>
+
+Quiz Results
+
+</a>
+
+
+<a href="students.html">
+
+<span class="menu-icon">
+👨‍🎓
+</span>
+
+Students
+
+</a>
+
+
+<a href="courses.html">
+
+<span class="menu-icon">
+📚
+</span>
+
+Courses
+
+</a>
+
+
+<a href="assignments.html">
+
+<span class="menu-icon">
+📝
+</span>
+
+Assignments
+
+</a>
+
+
+<a href="admin-submissions.html">
+
+<span class="menu-icon">
+📤
+</span>
+
+Submissions
+
+</a>
+
+
+</nav>
+
+
+<div class="menu-title">
+Exam
+</div>
+
+
+<nav class="menu">
+
+
+<a href="admin.html">
+
+<span class="menu-icon">
+🧾
+</span>
+
+Exam Results
+
+</a>
+
+
+<a href="student-result-details.html">
+
+<span class="menu-icon">
+📄
+</span>
+
+Printable Marksheet
+
+</a>
+
+
+<a href="admin-attendance.html">
+
+<span class="menu-icon">
+📅
+</span>
+
+Attendance
+
+</a>
+
+
+</nav>
+
+
+<div class="menu-title">
+Student Portal
+</div>
+
+
+<nav class="menu">
+
+
+<a href="student-dashboard.html">
+
+<span class="menu-icon">
+🏠
+</span>
+
+Student Dashboard
+
+</a>
+
+
+<a href="quiz.html">
+
+<span class="menu-icon">
+🎯
+</span>
+
+Student Quiz
+
+</a>
+
+
+<a href="results.html">
+
+<span class="menu-icon">
+🏆
+</span>
+
+Student Result
+
+</a>
+
+
+</nav>
+
+
+</aside>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<!-- =======================================================
+     MAIN
+======================================================== -->
+
+<div class="main">
+
+
+<!-- =======================================================
+     TOPBAR
+======================================================== -->
+
+<header class="topbar">
+
+
+<div class="top-left">
+
+
+<button
+    class="mobile-menu"
+    id="mobileMenuBtn"
+>
+☰
+</button>
+
+
+<div>
+
+<div class="page-title">
+Quiz Result Management
+</div>
+
+<div class="page-subtitle">
+Student Quiz Result • Search • Filter • Publish • Print
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="top-actions">
+
+
+<a
+    href="admin.html"
+    class="top-btn dashboard"
+>
+← Admin
+</a>
+
+
+<button
+    type="button"
+    class="top-btn"
+    id="themeBtn"
+>
+🌙
+</button>
+
+
+<button
+    type="button"
+    class="top-btn"
+    id="refreshBtn"
+>
+↻ Refresh
+</button>
+
+
+</div>
+
+
+</header>
+
+
+<!-- =======================================================
+     CONTENT
+======================================================== -->
+
+<main class="content">
+
+
+<!-- =======================================================
+     HERO
+======================================================== -->
+
+<section class="hero">
+
+
+<div class="hero-content">
+
+
+<div class="hero-badge">
+ADMIN • QUIZ RESULT MANAGEMENT
+</div>
+
+
+<h1>
+Quiz Results
+</h1>
+
+
+<p>
+Student-এর Quiz submission, score, Pass/Fail,
+publish status এবং detailed result এখান থেকে manage করুন।
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =======================================================
+     QUIZ INFO
+======================================================== -->
+
+<section class="quiz-info">
+
+
+<div class="quiz-info-left">
+
+
+<div class="quiz-icon">
+🎯
+</div>
+
+
+<div>
+
+<h2 id="quizTitle">
+Computer Basics Quiz
+</h2>
+
+<p id="quizMeta">
+Computer Office Application • Batch 01
+</p>
+
+</div>
+
+
+</div>
+
+
+<div
+    class="status-badge"
+    id="quizPublishedBadge"
+>
+Loading...
+</div>
+
+
+</section>
+
+
+
+<!-- =======================================================
+     STATISTICS
+======================================================== -->
+
+<section class="stats">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+👨‍🎓
+</div>
+
+<span>
+Total Students
+</span>
+
+<strong id="totalStudents">
+0
+</strong>
+
+<small>
+Student database
+</small>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📝
+</div>
+
+<span>
+Submitted
+</span>
+
+<strong id="submittedCount">
+0
+</strong>
+
+<small>
+Quiz attempts
+</small>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+⏳
+</div>
+
+<span>
+Not Submitted
+</span>
+
+<strong id="notSubmittedCount">
+0
+</strong>
+
+<small>
+No result yet
+</small>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+✅
+</div>
+
+<span>
+Passed
+</span>
+
+<strong id="passedCount">
+0
+</strong>
+
+<small>
+Pass result
+</small>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+❌
+</div>
+
+<span>
+Failed
+</span>
+
+<strong id="failedCount">
+0
+</strong>
+
+<small>
+Fail result
+</small>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📊
+</div>
+
+<span>
+Average
+</span>
+
+<strong id="averageScore">
+0%
+</strong>
+
+<small>
+Submitted students
+</small>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🏆
+</div>
+
+<span>
+Highest
+</span>
+
+<strong id="highestScore">
+0%
+</strong>
+
+<small>
+Best score
+</small>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =======================================================
+     RESULT PANEL
+======================================================== -->
+
+<section class="panel">
+
+
+<div class="panel-header">
+
+
+<div class="panel-title">
+
+<h3>
+📋 Student Quiz Results
+</h3>
+
+<p id="resultCountText">
+0 results found
+</p>
+
+</div>
+
+
+<div>
+
+<button
+    type="button"
+    class="action-btn primary"
+    id="printAllBtn"
+>
+🖨 Print Results
+</button>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     TOOLBAR
+====================================================== -->
+
+<div class="toolbar">
+
+
+<input
+    type="search"
+    id="searchInput"
+    class="input search"
+    placeholder="Search Student ID or Name..."
+>
+
+
+<select
+    id="statusFilter"
+    class="select"
+>
+
+<option value="all">
+All Status
+</option>
+
+<option value="pass">
+Passed
+</option>
+
+<option value="fail">
+Failed
+</option>
+
+<option value="submitted">
+Submitted
+</option>
+
+<option value="not-submitted">
+Not Submitted
+</option>
+
+</select>
+
+
+<select
+    id="publishFilter"
+    class="select"
+>
+
+<option value="all">
+All Publish
+</option>
+
+<option value="published">
+Published
+</option>
+
+<option value="unpublished">
+Unpublished
+</option>
+
+</select>
+
+
+<select
+    id="sortSelect"
+    class="select"
+>
+
+<option value="latest">
+Latest Submitted
+</option>
+
+<option value="oldest">
+Oldest Submitted
+</option>
+
+<option value="highest">
+Highest Score
+</option>
+
+<option value="lowest">
+Lowest Score
+</option>
+
+<option value="student">
+Student ID
+</option>
+
+</select>
+
+
+<button
+    type="button"
+    class="action-btn"
+    id="resetFilterBtn"
+>
+Reset
+</button>
+
+
+<button
+    type="button"
+    class="action-btn"
+    id="publishAllBtn"
+>
+Publish Eligible
+</button>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     TABLE
+====================================================== -->
+
+<div
+    class="table-wrap"
+    id="tableWrap"
+>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>
+Student
+</th>
+
+<th>
+Course / Batch
+</th>
+
+<th>
+Score
+</th>
+
+<th>
+Percentage
+</th>
+
+<th>
+Correct
+</th>
+
+<th>
+Wrong
+</th>
+
+<th>
+Unanswered
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Publish
+</th>
+
+<th>
+Submitted
+</th>
+
+<th>
+Actions
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="resultsTableBody">
+</tbody>
+
+
+</table>
+
+
+<div
+    class="empty"
+    id="emptyState"
+    style="display:none;"
+>
+
+
+<div class="empty-icon">
+📭
+</div>
+
+
+<h3>
+No Quiz Results
+</h3>
+
+
+<p>
+এই Quiz-এর জন্য এখনো কোনো matching result পাওয়া যায়নি।
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<div class="footer">
+
+SNK IT Institute • Admin Quiz Result Management • Step 2.5.5
+
+<br>
+
+© 2026 SNK IT Institute. All Rights Reserved.
+
+</div>
+
+
+</main>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =======================================================
+     DETAILS MODAL
+======================================================== -->
+
+<div
+    class="modal"
+    id="detailsModal"
+>
+
+
+<div class="modal-box">
+
+
+<div class="modal-header">
+
+
+<h3>
+🏆 Quiz Result Details
+</h3>
+
+
+<button
+    type="button"
+    class="close-btn"
+    onclick="closeModal('detailsModal')"
+>
+×
+</button>
+
+
+</div>
+
+
+<div
+    class="modal-body"
+    id="detailsBody"
+>
+</div>
+
+
+<div class="modal-footer">
+
+
+<button
+    type="button"
+    class="action-btn"
+    id="modalPrintBtn"
+>
+🖨 Print Result
+</button>
+
+
+<button
+    type="button"
+    class="action-btn"
+    onclick="closeModal('detailsModal')"
+>
+Close
+</button>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =======================================================
+     DELETE MODAL
+======================================================== -->
+
+<div
+    class="modal"
+    id="deleteModal"
+>
+
+
+<div class="modal-box">
+
+
+<div class="modal-header">
+
+
+<h3>
+⚠️ Delete Quiz Result
+</h3>
+
+
+<button
+    type="button"
+    class="close-btn"
+    onclick="closeModal('deleteModal')"
+>
+×
+</button>
+
+
+</div>
+
+
+<div class="modal-body">
+
+
+<div class="message danger"
+style="
+padding:14px;
+border-radius:10px;
+background:var(--danger-soft);
+color:var(--danger);
+font-size:10px;
+line-height:1.7;
+">
+
+এই Result delete করলে LocalStorage থেকে result record
+মুছে যাবে। Student Portal-এও আর এই result পাওয়া যাবে না।
+
+<br><br>
+
+<strong id="deleteStudentText">
+—
+</strong>
+
+</div>
+
+
+</div>
+
+
+<div class="modal-footer">
+
+
+<button
+    type="button"
+    class="action-btn"
+    onclick="closeModal('deleteModal')"
+>
+Cancel
+</button>
+
+
+<button
+    type="button"
+    class="action-btn danger"
+    id="confirmDeleteBtn"
+>
+Delete Result
+</button>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =======================================================
+     TOAST
+======================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
+
+<!-- =======================================================
+     PRINT AREA
+======================================================== -->
+
+<div id="printArea">
+
+<div class="print-title">
+
+<h1>
+SNK IT Institute
+</h1>
+
+<p>
+Student Quiz Result Report
+</p>
+
+<p id="printQuizTitle">
+Computer Basics Quiz
+</p>
+
+</div>
+
+
+<div class="print-stats">
+
+<div class="print-stat">
+
+<span>
+Total Students
+</span>
+
+<strong id="printTotal">
+0
+</strong>
+
+</div>
+
+
+<div class="print-stat">
+
+<span>
+Submitted
+</span>
+
+<strong id="printSubmitted">
+0
+</strong>
+
+</div>
+
+
+<div class="print-stat">
+
+<span>
+Passed
+</span>
+
+<strong id="printPassed">
+0
+</strong>
+
+</div>
+
+
+<div class="print-stat">
+
+<span>
+Failed
+</span>
+
+<strong id="printFailed">
+0
+</strong>
+
+</div>
+
+</div>
+
+
+<table class="print-table">
+
+
+<thead>
+
+<tr>
+
+<th>
+Student ID
+</th>
+
+<th>
+Student Name
+</th>
+
+<th>
+Course
+</th>
+
+<th>
+Batch
+</th>
+
+<th>
+Score
+</th>
+
+<th>
+Percentage
+</th>
+
+<th>
+Correct
+</th>
+
+<th>
+Wrong
+</th>
+
+<th>
+Unanswered
+</th>
+
+<th>
+Result
+</th>
+
+<th>
+Submitted
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="printTableBody">
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   STEP 2.5.5
+   ADMIN QUIZ RESULT MANAGEMENT
+========================================================= */
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const STORAGE = {
+
+    theme:
+        "snkTheme",
+
+    course:
+        "snkCourseSettingsV25",
+
+    quiz:
+        "snkQuizSettingsV25",
+
+    questions:
+        "snkQuizQuestionsV25",
+
+    results:
+        "snkQuizResults",
+
+    students:
+        "snkStudents"
+
+};
+
+
+/* =========================================================
+   DEFAULT COURSE
+========================================================= */
+
+const DEFAULT_COURSE = {
+
+    name:
+        "Computer Office Application",
+
+    batch:
+        "Batch 01",
+
+    mode:
+        "Offline",
+
+    duration:
+        "6 Months",
+
+    days:
+        "Saturday–Monday",
+
+    time:
+        "4:00 PM – 6:00 PM",
+
+    instructor:
+        "SNK IT Instructor"
+
+};
+
+
+/* =========================================================
+   DEFAULT QUIZ
+========================================================= */
+
+const DEFAULT_QUIZ = {
+
+    id:
+        "SNK-QUIZ-2026-01",
+
+    title:
+        "Computer Basics Quiz",
+
+    startDate:
+        "2026-09-10",
+
+    endDate:
+        "2026-09-15",
+
+    durationMinutes:
+        20,
+
+    marksPerQuestion:
+        1,
+
+    passPercentage:
+        40,
+
+    oneAttemptOnly:
+        true,
+
+    autoSubmit:
+        true,
+
+    published:
+        false
+
+};
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let course = {};
+
+let quiz = {};
+
+let allResults = [];
+
+let allStudents = [];
+
+let filteredResults = [];
+
+let selectedResult = null;
+
+let deleteTarget = null;
+
+
+/* =========================================================
+   JSON HELPER
+========================================================= */
+
+function readJSON(
+    key,
+    fallback
+){
+
+    try{
+
+        const raw =
+            localStorage.getItem(key);
+
+        if(!raw){
+
+            return fallback;
+
+        }
+
+        const parsed =
+            JSON.parse(raw);
+
+        return parsed;
+
+    }
+    catch(error){
+
+        console.warn(
+            "Storage error:",
+            key,
+            error
+        );
+
+        return fallback;
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD SETTINGS
+========================================================= */
+
+function loadSettings(){
+
+    const savedCourse =
+        readJSON(
+            STORAGE.course,
+            null
+        );
+
+    course = {
+
+        ...DEFAULT_COURSE,
+
+        ...(savedCourse || {})
+
+    };
+
+
+    const savedQuiz =
+        readJSON(
+            STORAGE.quiz,
+            null
+        );
+
+    quiz = {
+
+        ...DEFAULT_QUIZ,
+
+        ...(savedQuiz || {})
+
+    };
+
+}
+
+
+/* =========================================================
+   LOAD STUDENTS
+========================================================= */
+
+function loadStudents(){
+
+    let students =
+        readJSON(
+            STORAGE.students,
+            null
+        );
+
+
+    if(
+        !Array.isArray(students)
+    ){
+
+        students =
+            readJSON(
+                "students",
+                null
+            );
+
+    }
+
+
+    if(
+        !Array.isArray(students)
+    ){
+
+        students =
+            [];
+
+    }
+
+
+    if(
+        students.length === 0
+    ){
+
+        students = [
+
+            {
+                studentId:
+                    "SNK-1001",
+
+                id:
+                    "SNK-1001",
+
+                name:
+                    "Demo Student",
+
+                course:
+                    course.name,
+
+                batch:
+                    course.batch
+
+            }
+
+        ];
+
+    }
+
+
+    allStudents =
+        students
+        .map(
+            function(item){
+
+                return {
+
+                    studentId:
+                        item.studentId ||
+                        item.id ||
+                        item.userId ||
+                        "",
+
+                    name:
+                        item.name ||
+                        item.studentName ||
+                        item.fullName ||
+                        "Student",
+
+                    course:
+                        item.course ||
+                        item.courseName ||
+                        course.name,
+
+                    batch:
+                        item.batch ||
+                        item.batchName ||
+                        course.batch
+
+                };
+
+            }
+        )
+        .filter(
+            item =>
+                item.studentId
+        );
+
+}
+
+
+/* =========================================================
+   LOAD RESULTS
+========================================================= */
+
+function loadResults(){
+
+    const results =
+        readJSON(
+            STORAGE.results,
+            []
+        );
+
+
+    allResults =
+        Array.isArray(results)
+            ?
+            results
+            :
+            [];
+
+}
+
+
+/* =========================================================
+   RESULT FOR CURRENT QUIZ
+========================================================= */
+
+function getQuizResults(){
+
+    return allResults.filter(
+        function(result){
+
+            return (
+
+                String(
+                    result.quizId ||
+                    ""
+                )
+                ===
+                String(
+                    quiz.id
+                )
+
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   NORMALIZE STUDENT ID
+========================================================= */
+
+function normalizeId(
+    value
+){
+
+    return String(
+        value || ""
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* =========================================================
+   MERGE STUDENTS + RESULTS
+========================================================= */
+
+function buildRows(){
+
+    const quizResults =
+        getQuizResults();
+
+
+    const resultMap =
+        new Map();
+
+
+    quizResults.forEach(
+        function(result){
+
+            const id =
+                normalizeId(
+                    result.studentId
+                );
+
+
+            if(id){
+
+                resultMap.set(
+                    id,
+                    result
+                );
+
+            }
+
+        }
+    );
+
+
+    const rows = [];
+
+
+    allStudents.forEach(
+        function(student){
+
+            const id =
+                normalizeId(
+                    student.studentId
+                );
+
+
+            const result =
+                resultMap.get(id);
+
+
+            if(result){
+
+                rows.push({
+
+                    ...result,
+
+                    _submitted:
+                        true,
+
+                    _student:
+                        student
+
+                });
+
+            }
+            else{
+
+                rows.push({
+
+                    studentId:
+                        student.studentId,
+
+                    studentName:
+                        student.name,
+
+                    course:
+                        student.course,
+
+                    batch:
+                        student.batch,
+
+                    _submitted:
+                        false,
+
+                    _student:
+                        student
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /*
+       If a result exists for a student who is not currently
+       in the student list, still show that result.
+    */
+
+    quizResults.forEach(
+        function(result){
+
+            const exists =
+                rows.some(
+                    row =>
+                        normalizeId(
+                            row.studentId
+                        )
+                        ===
+                        normalizeId(
+                            result.studentId
+                        )
+                );
+
+
+            if(!exists){
+
+                rows.push({
+
+                    ...result,
+
+                    _submitted:true,
+
+                    _student:{
+
+                        studentId:
+                            result.studentId,
+
+                        name:
+                            result.studentName,
+
+                        course:
+                            result.course ||
+                            course.name,
+
+                        batch:
+                            result.batch ||
+                            course.batch
+
+                    }
+
+                });
+
+            }
+
+        }
+    );
+
+
+    return rows;
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDateTime(
+    value
+){
+
+    if(!value){
+
+        return "—";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+function escapeHTML(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE QUIZ INFO
+========================================================= */
+
+function updateQuizInfo(){
+
+    document.getElementById(
+        "quizTitle"
+    ).textContent =
+        quiz.title;
+
+
+    document.getElementById(
+        "quizMeta"
+    ).textContent =
+
+        course.name +
+
+        " • " +
+
+        course.batch +
+
+        " • " +
+
+        quiz.startDate +
+
+        " → " +
+
+        quiz.endDate;
+
+
+    const badge =
+        document.getElementById(
+            "quizPublishedBadge"
+        );
+
+
+    if(quiz.published){
+
+        badge.textContent =
+            "✓ Published";
+
+        badge.style.background =
+            "var(--success-soft)";
+
+        badge.style.color =
+            "var(--success)";
+
+    }
+    else{
+
+        badge.textContent =
+            "Unpublished";
+
+        badge.style.background =
+            "var(--warning-soft)";
+
+        badge.style.color =
+            "var(--warning)";
+
+    }
+
+}
+
+
+/* =========================================================
+   CALCULATE STATS
+========================================================= */
+
+function calculateStats(
+    rows
+){
+
+    const submitted =
+        rows.filter(
+            row =>
+                row._submitted
+        );
+
+
+    const passed =
+        submitted.filter(
+            row =>
+                String(
+                    row.result ||
+                    ""
+                ).toLowerCase()
+                ===
+                "pass"
+        );
+
+
+    const failed =
+        submitted.filter(
+            row =>
+                String(
+                    row.result ||
+                    ""
+                ).toLowerCase()
+                ===
+                "fail"
+        );
+
+
+    const percentages =
+        submitted.map(
+            row =>
+                Number(
+                    row.percentage
+                ) || 0
+        );
+
+
+    const average =
+        percentages.length
+            ?
+            percentages.reduce(
+                (a,b) =>
+                    a + b,
+                0
+            )
+            /
+            percentages.length
+            :
+            0;
+
+
+    const highest =
+        percentages.length
+            ?
+            Math.max(
+                ...percentages
+            )
+            :
+            0;
+
+
+    return {
+
+        total:
+            rows.length,
+
+        submitted:
+            submitted.length,
+
+        notSubmitted:
+            Math.max(
+                0,
+                rows.length -
+                submitted.length
+            ),
+
+        passed:
+            passed.length,
+
+        failed:
+            failed.length,
+
+        average:
+            Math.round(
+                average
+            ),
+
+        highest:
+            Math.round(
+                highest
+            )
+
+    };
+
+}
+
+
+/* =========================================================
+   UPDATE STATS
+========================================================= */
+
+function updateStats(
+    rows
+){
+
+    const stats =
+        calculateStats(
+            rows
+        );
+
+
+    document.getElementById(
+        "totalStudents"
+    ).textContent =
+        stats.total;
+
+
+    document.getElementById(
+        "submittedCount"
+    ).textContent =
+        stats.submitted;
+
+
+    document.getElementById(
+        "notSubmittedCount"
+    ).textContent =
+        stats.notSubmitted;
+
+
+    document.getElementById(
+        "passedCount"
+    ).textContent =
+        stats.passed;
+
+
+    document.getElementById(
+        "failedCount"
+    ).textContent =
+        stats.failed;
+
+
+    document.getElementById(
+        "averageScore"
+    ).textContent =
+        stats.average +
+        "%";
+
+
+    document.getElementById(
+        "highestScore"
+    ).textContent =
+        stats.highest +
+        "%";
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function applyFilters(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const status =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    const publish =
+        document.getElementById(
+            "publishFilter"
+        ).value;
+
+
+    const sort =
+        document.getElementById(
+            "sortSelect"
+        ).value;
+
+
+    let rows =
+        buildRows();
+
+
+    if(search){
+
+        rows =
+            rows.filter(
+                function(row){
+
+                    const id =
+                        String(
+                            row.studentId ||
+                            ""
+                        )
+                        .toLowerCase();
+
+
+                    const name =
+                        String(
+                            row.studentName ||
+                            row._student?.name ||
+                            ""
+                        )
+                        .toLowerCase();
+
+
+                    return (
+
+                        id.includes(search)
+                        ||
+                        name.includes(search)
+
+                    );
+
+                }
+            );
+
+    }
+
+
+    if(status === "submitted"){
+
+        rows =
+            rows.filter(
+                row =>
+                    row._submitted
+            );
+
+    }
+
+
+    if(status === "not-submitted"){
+
+        rows =
+            rows.filter(
+                row =>
+                    !row._submitted
+            );
+
+    }
+
+
+    if(status === "pass"){
+
+        rows =
+            rows.filter(
+                row =>
+                    row._submitted &&
+                    String(
+                        row.result ||
+                        ""
+                    )
+                    .toLowerCase()
+                    ===
+                    "pass"
+            );
+
+    }
+
+
+    if(status === "fail"){
+
+        rows =
+            rows.filter(
+                row =>
+                    row._submitted &&
+                    String(
+                        row.result ||
+                        ""
+                    )
+                    .toLowerCase()
+                    ===
+                    "fail"
+            );
+
+    }
+
+
+    if(publish === "published"){
+
+        rows =
+            rows.filter(
+                row =>
+                    row._submitted &&
+                    row.published === true
+            );
+
+    }
+
+
+    if(publish === "unpublished"){
+
+        rows =
+            rows.filter(
+                row =>
+                    row._submitted &&
+                    row.published !== true
+            );
+
+    }
+
+
+    if(sort === "highest"){
+
+        rows.sort(
+            (a,b) =>
+                (
+                    Number(
+                        b.percentage
+                    ) || 0
+                )
+                -
+                (
+                    Number(
+                        a.percentage
+                    ) || 0
+                )
+        );
+
+    }
+    else if(sort === "lowest"){
+
+        rows.sort(
+            (a,b) =>
+                (
+                    Number(
+                        a.percentage
+                    ) || 0
+                )
+                -
+                (
+                    Number(
+                        b.percentage
+                    ) || 0
+                )
+        );
+
+    }
+    else if(sort === "student"){
+
+        rows.sort(
+            (a,b) =>
+                String(
+                    a.studentId ||
+                    ""
+                )
+                .localeCompare(
+                    String(
+                        b.studentId ||
+                        ""
+                    )
+                )
+        );
+
+    }
+    else if(sort === "oldest"){
+
+        rows.sort(
+            (a,b) =>
+                new Date(
+                    a.submittedAt ||
+                    0
+                )
+                -
+                new Date(
+                    b.submittedAt ||
+                    0
+                )
+        );
+
+    }
+    else{
+
+        rows.sort(
+            (a,b) =>
+                new Date(
+                    b.submittedAt ||
+                    0
+                )
+                -
+                new Date(
+                    a.submittedAt ||
+                    0
+                )
+        );
+
+    }
+
+
+    filteredResults =
+        rows;
+
+
+    updateStats(
+        buildRows()
+    );
+
+
+    renderTable();
+
+    preparePrintData();
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderTable(){
+
+    const tbody =
+        document.getElementById(
+            "resultsTableBody"
+        );
+
+
+    const empty =
+        document.getElementById(
+            "emptyState"
+        );
+
+
+    const countText =
+        document.getElementById(
+            "resultCountText"
+        );
+
+
+    countText.textContent =
+        filteredResults.length +
+        " results found";
+
+
+    if(
+        filteredResults.length === 0
+    ){
+
+        tbody.innerHTML =
+            "";
+
+        empty.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    empty.style.display =
+        "none";
+
+
+    tbody.innerHTML =
+        filteredResults
+        .map(
+            function(row,index){
+
+                return renderRow(
+                    row,
+                    index
+                );
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   RENDER ROW
+========================================================= */
+
+function renderRow(
+    row,
+    index
+){
+
+    const studentName =
+        row.studentName ||
+        row._student?.name ||
+        "Student";
+
+
+    const studentId =
+        row.studentId ||
+        row._student?.studentId ||
+        "—";
+
+
+    const rowCourse =
+        row.course ||
+        row._student?.course ||
+        course.name;
+
+
+    const rowBatch =
+        row.batch ||
+        row._student?.batch ||
+        course.batch;
+
+
+    if(!row._submitted){
+
+        return `
+
+            <tr>
+
+                <td>
+
+                    <div class="student-cell">
+
+                        <div class="student-avatar">
+                            👤
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ${escapeHTML(studentName)}
+                            </strong>
+
+                            <span>
+                                ${escapeHTML(studentId)}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(rowCourse)}
+
+                    <br>
+
+                    <span
+                        style="
+                            color:var(--muted);
+                            font-size:7px;
+                        "
+                    >
+                        ${escapeHTML(rowBatch)}
+                    </span>
+
+                </td>
+
+
+                <td>
+                    —
+                </td>
+
+
+                <td>
+                    —
+                </td>
+
+
+                <td>
+                    —
+                </td>
+
+
+                <td>
+                    —
+                </td>
+
+
+                <td>
+                    —
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="mini-badge unpublished"
+                    >
+                        NOT SUBMITTED
+                    </span>
+
+                </td>
+
+
+                <td>
+                    —
+                </td>
+
+
+                <td>
+                    —
+                </td>
+
+
+                <td>
+
+                    <div class="row-actions">
+
+                        <button
+                            type="button"
+                            class="row-btn"
+                            onclick="showNotSubmitted('${escapeJS(studentId)}')"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    const percentage =
+        Number(
+            row.percentage
+        ) || 0;
+
+
+    const resultStatus =
+        String(
+            row.result ||
+            (
+                percentage >=
+                Number(
+                    quiz.passPercentage
+                )
+                ?
+                "Pass"
+                :
+                "Fail"
+            )
+        );
+
+
+    const isPass =
+        resultStatus.toLowerCase()
+        ===
+        "pass";
+
+
+    const published =
+        row.published === true;
+
+
+    return `
+
+        <tr>
+
+            <td>
+
+                <div class="student-cell">
+
+                    <div class="student-avatar">
+                        ${escapeHTML(
+                            studentName
+                                .charAt(0)
+                                .toUpperCase()
+                        )}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${escapeHTML(studentName)}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(studentId)}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <td>
+
+                ${escapeHTML(rowCourse)}
+
+                <br>
+
+                <span
+                    style="
+                        color:var(--muted);
+                        font-size:7px;
+                    "
+                >
+                    ${escapeHTML(rowBatch)}
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="score">
+
+                    ${
+                        Number(
+                            row.obtainedMarks
+                        ) || 0
+                    }
+
+                    /
+
+                    ${
+                        Number(
+                            row.totalMarks
+                        ) || 0
+                    }
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span class="percentage">
+
+                    ${percentage}%
+
+                </span>
+
+            </td>
+
+
+            <td>
+                ${Number(row.correct) || 0}
+            </td>
+
+
+            <td>
+                ${Number(row.wrong) || 0}
+            </td>
+
+
+            <td>
+                ${Number(row.unanswered) || 0}
+            </td>
+
+
+            <td>
+
+                <span
+                    class="
+                        mini-badge
+                        ${isPass ? "pass" : "fail"}
+                    "
+                >
+
+                    ${
+                        isPass
+                            ?
+                            "PASS"
+                            :
+                            "FAIL"
+                    }
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span
+                    class="
+                        mini-badge
+                        ${
+                            published
+                                ?
+                                "published"
+                                :
+                                "unpublished"
+                        }
+                    "
+                >
+
+                    ${
+                        published
+                            ?
+                            "PUBLISHED"
+                            :
+                            "UNPUBLISHED"
+                    }
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <span
+                    style="
+                        font-size:7px;
+                        color:var(--muted);
+                    "
+                >
+
+                    ${formatDateTime(
+                        row.submittedAt
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                <div class="row-actions">
+
+
+                    <button
+                        type="button"
+                        class="row-btn"
+                        onclick="viewResult(${index})"
+                    >
+                        View
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="row-btn"
+                        onclick="togglePublishByIndex(${index})"
+                    >
+                        ${
+                            published
+                                ?
+                                "Unpublish"
+                                :
+                                "Publish"
+                        }
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="row-btn"
+                        onclick="printResultByIndex(${index})"
+                    >
+                        Print
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="row-btn delete"
+                        onclick="deleteResultByIndex(${index})"
+                    >
+                        Delete
+                    </button>
+
+
+                </div>
+
+            </td>
+
+        </tr>
+
+    `;
+
+}
+
+
+/* =========================================================
+   ESCAPE JS
+========================================================= */
+
+function escapeJS(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    )
+    .replace(
+        /"/g,
+        '\\"'
+    );
+
+}
+
+
+/* =========================================================
+   VIEW RESULT
+========================================================= */
+
+function viewResult(
+    index
+){
+
+    const row =
+        filteredResults[
+            index
+        ];
+
+
+    if(
+        !row ||
+        !row._submitted
+    ){
+
+        return;
+
+    }
+
+
+    selectedResult =
+        row;
+
+
+    const percentage =
+        Number(
+            row.percentage
+        ) || 0;
+
+
+    const isPass =
+        String(
+            row.result ||
+            ""
+        )
+        .toLowerCase()
+        ===
+        "pass";
+
+
+    const statusText =
+        isPass
+            ?
+            "PASS"
+            :
+            "FAIL";
+
+
+    const body =
+        document.getElementById(
+            "detailsBody"
+        );
+
+
+    body.innerHTML = `
+
+        <div class="result-highlight">
+
+            <div class="big-score">
+                ${percentage}%
+            </div>
+
+            <p>
+                ${escapeHTML(
+                    row.quizName ||
+                    quiz.title
+                )}
+            </p>
+
+            <div
+                style="
+                    margin-top:8px;
+                "
+            >
+
+                <span
+                    class="
+                        mini-badge
+                        ${
+                            isPass
+                                ?
+                                "pass"
+                                :
+                                "fail"
+                        }
+                    "
+                    style="
+                        font-size:9px;
+                        padding:6px 12px;
+                    "
+                >
+                    ${statusText}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="details-grid">
+
+
+            <div class="detail-item">
+
+                <span>
+                    Student Name
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        row.studentName
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span>
+                    Student ID
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        row.studentId
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span>
+                    Course
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        row.course ||
+                        course.name
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span>
+                    Batch
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        row.batch ||
+                        course.batch
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span>
+                    Quiz Date Window
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        quiz.startDate
+                    )}
+                    →
+                    ${escapeHTML(
+                        quiz.endDate
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span>
+                    Time Taken
+                </span>
+
+                <strong>
+                    ${formatSeconds(
+                        row.timeTakenSeconds
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span>
+                    Started At
+                </span>
+
+                <strong>
+                    ${formatDateTime(
+                        row.startedAt
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span>
+                    Submitted At
+                </span>
+
+                <strong>
+                    ${formatDateTime(
+                        row.submittedAt
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span>
+                    Submit Method
+                </span>
+
+                <strong>
+                    ${escapeHTML(
+                        row.submitMethod ||
+                        "Manual"
+                    )}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="result-summary">
+
+
+            <div class="summary-item">
+
+                <span>
+                    Obtained
+                </span>
+
+                <strong>
+                    ${Number(
+                        row.obtainedMarks
+                    ) || 0}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    ${Number(
+                        row.totalMarks
+                    ) || 0}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Correct
+                </span>
+
+                <strong>
+                    ${Number(
+                        row.correct
+                    ) || 0}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Wrong
+                </span>
+
+                <strong>
+                    ${Number(
+                        row.wrong
+                    ) || 0}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Unanswered
+                </span>
+
+                <strong>
+                    ${Number(
+                        row.unanswered
+                    ) || 0}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Pass Mark
+                </span>
+
+                <strong>
+                    ${
+                        Number(
+                            row.passPercentage ??
+                            quiz.passPercentage
+                        )
+                    }%
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Marks / Question
+                </span>
+
+                <strong>
+                    ${
+                        Number(
+                            row.marksPerQuestion ??
+                            quiz.marksPerQuestion
+                        )
+                    }
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Published
+                </span>
+
+                <strong>
+                    ${
+                        row.published === true
+                            ?
+                            "Yes"
+                            :
+                            "No"
+                    }
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        ${
+            row.note
+                ?
+                `
+                    <div class="note-box">
+
+                        <strong>
+                            Admin Note
+                        </strong>
+
+                        <br>
+
+                        ${escapeHTML(
+                            row.note
+                        )}
+
+                    </div>
+                `
+                :
+                ""
+        }
+
+    `;
+
+
+    document.getElementById(
+        "detailsModal"
+    )
+    .classList.add(
+        "show"
+    );
+
+
+    document.getElementById(
+        "modalPrintBtn"
+    ).onclick =
+        function(){
+
+            printSingleResult(
+                row
+            );
+
+        };
+
+}
+
+
+/* =========================================================
+   NOT SUBMITTED
+========================================================= */
+
+function showNotSubmitted(
+    studentId
+){
+
+    const student =
+        allStudents.find(
+            item =>
+                String(
+                    item.studentId
+                )
+                ===
+                String(
+                    studentId
+                )
+        );
+
+
+    const name =
+        student?.name ||
+        "Student";
+
+
+    alert(
+
+        "Quiz এখনো Submit করা হয়নি.\n\n" +
+
+        "Student: " +
+        name +
+
+        "\nStudent ID: " +
+        studentId
+
+    );
+
+}
+
+
+/* =========================================================
+   TOGGLE PUBLISH
+========================================================= */
+
+function togglePublishByIndex(
+    index
+){
+
+    const row =
+        filteredResults[
+            index
+        ];
+
+
+    if(
+        !row ||
+        !row._submitted
+    ){
+
+        return;
+
+    }
+
+
+    const newValue =
+        row.published !== true;
+
+
+    const results =
+        allResults.map(
+            function(item){
+
+                if(
+
+                    normalizeId(
+                        item.studentId
+                    )
+                    ===
+                    normalizeId(
+                        row.studentId
+                    )
+
+                    &&
+
+                    String(
+                        item.quizId
+                    )
+                    ===
+                    String(
+                        quiz.id
+                    )
+
+                ){
+
+                    return {
+
+                        ...item,
+
+                        published:
+                            newValue,
+
+                        updatedAt:
+                            new Date()
+                            .toISOString(),
+
+                        adminUpdatedAt:
+                            new Date()
+                            .toISOString()
+
+                    };
+
+                }
+
+
+                return item;
+
+            }
+        );
+
+
+    allResults =
+        results;
+
+
+    saveResults();
+
+    renderAll();
+
+
+    showToast(
+
+        newValue
+            ?
+            "Result Published ✓"
+            :
+            "Result Unpublished"
+
+    );
+
+}
+
+
+/* =========================================================
+   PUBLISH ELIGIBLE
+========================================================= */
+
+function publishEligible(){
+
+    const current =
+        getQuizResults();
+
+
+    const unpublished =
+        current.filter(
+            item =>
+                item.published !== true
+        );
+
+
+    if(
+        unpublished.length === 0
+    ){
+
+        showToast(
+            "সব Result already published."
+        );
+
+        return;
+
+    }
+
+
+    const ok =
+        confirm(
+
+            unpublished.length +
+
+            "টি Result publish করতে চান?"
+
+        );
+
+
+    if(!ok){
+
+        return;
+
+    }
+
+
+    const now =
+        new Date()
+        .toISOString();
+
+
+    allResults =
+        allResults.map(
+            function(item){
+
+                const matching =
+                    current.some(
+                        result =>
+                            result === item
+                            &&
+                            item.published !== true
+                    );
+
+
+                if(matching){
+
+                    return {
+
+                        ...item,
+
+                        published:true,
+
+                        updatedAt:
+                            now,
+
+                        adminUpdatedAt:
+                            now
+
+                    };
+
+                }
+
+
+                return item;
+
+            }
+        );
+
+
+    saveResults();
+
+    renderAll();
+
+
+    showToast(
+        "Eligible Results Published ✓"
+    );
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteResultByIndex(
+    index
+){
+
+    const row =
+        filteredResults[
+            index
+        ];
+
+
+    if(
+        !row ||
+        !row._submitted
+    ){
+
+        return;
+
+    }
+
+
+    deleteTarget =
+        row;
+
+
+    document.getElementById(
+        "deleteStudentText"
+    ).textContent =
+
+        (
+            row.studentName ||
+            "Student"
+        )
+
+        +
+
+        " • "
+
+        +
+
+        (
+            row.studentId ||
+            "—"
+        )
+
+        +
+
+        " • "
+
+        +
+
+        (
+            Number(
+                row.percentage
+            ) || 0
+        )
+
+        +
+
+        "%";
+
+
+    document.getElementById(
+        "deleteModal"
+    )
+    .classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   CONFIRM DELETE
+========================================================= */
+
+document.getElementById(
+    "confirmDeleteBtn"
+)
+.addEventListener(
+    "click",
+    function(){
+
+        if(!deleteTarget){
+
+            return;
+
+        }
+
+
+        const studentId =
+            normalizeId(
+                deleteTarget.studentId
+            );
+
+
+        const quizId =
+            String(
+                quiz.id
+            );
+
+
+        allResults =
+            allResults.filter(
+                function(item){
+
+                    return !(
+                        normalizeId(
+                            item.studentId
+                        )
+                        ===
+                        studentId
+
+                        &&
+
+                        String(
+                            item.quizId
+                        )
+                        ===
+                        quizId
+
+                    );
+
+                }
+            );
+
+
+        saveResults();
+
+        closeModal(
+            "deleteModal"
+        );
+
+
+        deleteTarget =
+            null;
+
+
+        renderAll();
+
+
+        showToast(
+            "Quiz Result deleted."
+        );
+
+    }
+);
+
+
+/* =========================================================
+   SAVE RESULTS
+========================================================= */
+
+function saveResults(){
+
+    localStorage.setItem(
+
+        STORAGE.results,
+
+        JSON.stringify(
+            allResults
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   PRINT ALL
+========================================================= */
+
+function preparePrintData(){
+
+    const stats =
+        calculateStats(
+            buildRows()
+        );
+
+
+    document.getElementById(
+        "printQuizTitle"
+    ).textContent =
+        quiz.title;
+
+
+    document.getElementById(
+        "printTotal"
+    ).textContent =
+        stats.total;
+
+
+    document.getElementById(
+        "printSubmitted"
+    ).textContent =
+        stats.submitted;
+
+
+    document.getElementById(
+        "printPassed"
+    ).textContent =
+        stats.passed;
+
+
+    document.getElementById(
+        "printFailed"
+    ).textContent =
+        stats.failed;
+
+
+    const rows =
+        filteredResults;
+
+
+    document.getElementById(
+        "printTableBody"
+    ).innerHTML =
+
+        rows
+        .filter(
+            row =>
+                row._submitted
+        )
+        .map(
+            function(row){
+
+                const percentage =
+                    Number(
+                        row.percentage
+                    ) || 0;
+
+
+                const isPass =
+                    String(
+                        row.result ||
+                        ""
+                    )
+                    .toLowerCase()
+                    ===
+                    "pass";
+
+
+                return `
+
+                    <tr>
+
+                        <td>
+                            ${escapeHTML(
+                                row.studentId
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                row.studentName
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                row.course ||
+                                course.name
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                row.batch ||
+                                course.batch
+                            )}
+                        </td>
+
+                        <td>
+                            ${
+                                Number(
+                                    row.obtainedMarks
+                                ) || 0
+                            } /
+                            ${
+                                Number(
+                                    row.totalMarks
+                                ) || 0
+                            }
+                        </td>
+
+                        <td>
+                            ${percentage}%
+                        </td>
+
+                        <td>
+                            ${Number(
+                                row.correct
+                            ) || 0}
+                        </td>
+
+                        <td>
+                            ${Number(
+                                row.wrong
+                            ) || 0}
+                        </td>
+
+                        <td>
+                            ${Number(
+                                row.unanswered
+                            ) || 0}
+                        </td>
+
+                        <td>
+                            ${
+                                isPass
+                                    ?
+                                    "PASS"
+                                    :
+                                    "FAIL"
+                            }
+                        </td>
+
+                        <td>
+                            ${formatDateTime(
+                                row.submittedAt
+                            )}
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   PRINT ALL BUTTON
+========================================================= */
+
+document.getElementById(
+    "printAllBtn"
+)
+.addEventListener(
+    "click",
+    function(){
+
+        preparePrintData();
+
+        window.print();
+
+    }
+);
+
+
+/* =========================================================
+   PRINT SINGLE RESULT
+========================================================= */
+
+function printSingleResult(
+    row
+){
+
+    const previousTitle =
+        document.title;
+
+
+    document.title =
+
+        "Quiz Result - " +
+
+        (
+            row.studentName ||
+            row.studentId
+        );
+
+
+    const printWindow =
+        window.open(
+            "",
+            "_blank",
+            "width=900,height=700"
+        );
+
+
+    if(!printWindow){
+
+        showToast(
+            "Popup blocked. Browser popup allow করুন।"
+        );
+
+        document.title =
+            previousTitle;
+
+        return;
+
+    }
+
+
+    const percentage =
+        Number(
+            row.percentage
+        ) || 0;
+
+
+    const isPass =
+        String(
+            row.result ||
+            ""
+        )
+        .toLowerCase()
+        ===
+        "pass";
+
+
+    printWindow.document.write(`
+
+        <!DOCTYPE html>
+
+        <html>
+
+        <head>
+
+            <title>
+                Quiz Result
+            </title>
+
+            <style>
+
+                *{
+                    box-sizing:border-box;
+                }
+
+                body{
+
+                    font-family:
+                        Arial,
+                        sans-serif;
+
+                    color:#111;
+
+                    padding:35px;
+
+                }
+
+                .header{
+
+                    text-align:center;
+
+                    border-bottom:
+                        2px solid #111;
+
+                    padding-bottom:15px;
+
+                    margin-bottom:20px;
+
+                }
+
+                .header h1{
+
+                    margin:0;
+
+                    font-size:24px;
+
+                }
+
+                .header p{
+
+                    margin:5px 0;
+
+                    font-size:11px;
+
+                }
+
+                .student{
+
+                    display:grid;
+
+                    grid-template-columns:
+                        repeat(2,1fr);
+
+                    gap:8px;
+
+                    margin-bottom:18px;
+
+                }
+
+                .item{
+
+                    border:
+                        1px solid #ccc;
+
+                    padding:9px;
+
+                }
+
+                .item span{
+
+                    display:block;
+
+                    font-size:8px;
+
+                    color:#666;
+
+                }
+
+                .item strong{
+
+                    display:block;
+
+                    margin-top:3px;
+
+                    font-size:11px;
+
+                }
+
+                .score{
+
+                    text-align:center;
+
+                    padding:20px;
+
+                    border:
+                        1px solid #ccc;
+
+                    margin-bottom:15px;
+
+                }
+
+                .score strong{
+
+                    display:block;
+
+                    font-size:42px;
+
+                }
+
+                table{
+
+                    width:100%;
+
+                    border-collapse:collapse;
+
+                    margin-top:15px;
+
+                }
+
+                th,
+                td{
+
+                    border:
+                        1px solid #bbb;
+
+                    padding:8px;
+
+                    font-size:9px;
+
+                    text-align:left;
+
+                }
+
+                .result{
+
+                    text-align:center;
+
+                    font-weight:bold;
+
+                    font-size:15px;
+
+                    margin-top:18px;
+
+                }
+
+                .footer{
+
+                    text-align:center;
+
+                    margin-top:35px;
+
+                    font-size:8px;
+
+                    color:#666;
+
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+
+            <div class="header">
+
+                <h1>
+                    SNK IT Institute
+                </h1>
+
+                <p>
+                    Student Quiz Result
+                </p>
+
+                <p>
+                    ${escapeHTML(
+                        row.quizName ||
+                        quiz.title
+                    )}
+                </p>
+
+            </div>
+
+
+            <div class="student">
+
+
+                <div class="item">
+
+                    <span>
+                        Student Name
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            row.studentName
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="item">
+
+                    <span>
+                        Student ID
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            row.studentId
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="item">
+
+                    <span>
+                        Course
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            row.course ||
+                            course.name
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="item">
+
+                    <span>
+                        Batch
+                    </span>
+
+                    <strong>
+                        ${escapeHTML(
+                            row.batch ||
+                            course.batch
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="item">
+
+                    <span>
+                        Submitted
+                    </span>
+
+                    <strong>
+                        ${formatDateTime(
+                            row.submittedAt
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="item">
+
+                    <span>
+                        Time Taken
+                    </span>
+
+                    <strong>
+                        ${formatSeconds(
+                            row.timeTakenSeconds
+                        )}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="score">
+
+                <strong>
+                    ${percentage}%
+                </strong>
+
+                Score
+
+                <br>
+
+                ${
+                    Number(
+                        row.obtainedMarks
+                    ) || 0
+                }
+
+                /
+
+                ${
+                    Number(
+                        row.totalMarks
+                    ) || 0
+                }
+
+            </div>
+
+
+            <table>
+
+                <tr>
+
+                    <th>
+                        Correct
+                    </th>
+
+                    <th>
+                        Wrong
+                    </th>
+
+                    <th>
+                        Unanswered
+                    </th>
+
+                    <th>
+                        Pass Mark
+                    </th>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        ${Number(
+                            row.correct
+                        ) || 0}
+                    </td>
+
+                    <td>
+                        ${Number(
+                            row.wrong
+                        ) || 0}
+                    </td>
+
+                    <td>
+                        ${Number(
+                            row.unanswered
+                        ) || 0}
+                    </td>
+
+                    <td>
+                        ${
+                            Number(
+                                row.passPercentage ??
+                                quiz.passPercentage
+                            )
+                        }%
+                    </td>
+
+                </tr>
+
+            </table>
+
+
+            <div class="result">
+
+                ${
+                    isPass
+                        ?
+                        "PASS"
+                        :
+                        "FAIL"
+                }
+
+            </div>
+
+
+            <div class="footer">
+
+                SNK IT Institute • Quiz Result
+
+            </div>
+
+
+            <script>
+
+                window.onload=function(){
+
+                    window.print();
+
+                };
+
+            <\/script>
+
+
+        </body>
+
+        </html>
+
+    `);
+
+
+    printWindow.document.close();
+
+
+    document.title =
+        previousTitle;
+
+}
+
+
+/* =========================================================
+   PRINT RESULT BY INDEX
+========================================================= */
+
+function printResultByIndex(
+    index
+){
+
+    const row =
+        filteredResults[
+            index
+        ];
+
+
+    if(
+        row &&
+        row._submitted
+    ){
+
+        printSingleResult(
+            row
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   FORMAT SECONDS
+========================================================= */
+
+function formatSeconds(
+    seconds
+){
+
+    const value =
+        Math.max(
+            0,
+            Number(seconds) || 0
+        );
+
+
+    const minutes =
+        Math.floor(
+            value / 60
+        );
+
+
+    const secs =
+        value % 60;
+
+
+    return (
+
+        String(
+            minutes
+        )
+        .padStart(
+            2,
+            "0"
+        )
+
+        +
+
+        ":"
+
+        +
+
+        String(
+            secs
+        )
+        .padStart(
+            2,
+            "0"
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(
+    id
+){
+
+    document.getElementById(
+        id
+    )
+    .classList.remove(
+        "show"
+    );
+
+}
+
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target.classList.contains(
+                "modal"
+            )
+        ){
+
+            event.target.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   RESET FILTER
+========================================================= */
+
+document.getElementById(
+    "resetFilterBtn"
+)
+.addEventListener(
+    "click",
+    function(){
+
+        document.getElementById(
+            "searchInput"
+        ).value =
+            "";
+
+        document.getElementById(
+            "statusFilter"
+        ).value =
+            "all";
+
+        document.getElementById(
+            "publishFilter"
+        ).value =
+            "all";
+
+        document.getElementById(
+            "sortSelect"
+        ).value =
+            "latest";
+
+
+        applyFilters();
+
+    }
+);
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+document.getElementById(
+    "searchInput"
+)
+.addEventListener(
+    "input",
+    applyFilters
+);
+
+
+document.getElementById(
+    "statusFilter"
+)
+.addEventListener(
+    "change",
+    applyFilters
+);
+
+
+document.getElementById(
+    "publishFilter"
+)
+.addEventListener(
+    "change",
+    applyFilters
+);
+
+
+document.getElementById(
+    "sortSelect"
+)
+.addEventListener(
+    "change",
+    applyFilters
+);
+
+
+document.getElementById(
+    "publishAllBtn"
+)
+.addEventListener(
+    "click",
+    publishEligible
+);
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function applyTheme(){
+
+    const theme =
+        localStorage.getItem(
+            STORAGE.theme
+        )
+        ||
+        "light";
+
+
+    document.body.classList.toggle(
+        "dark",
+        theme === "dark"
+    );
+
+
+    document.getElementById(
+        "themeBtn"
+    ).textContent =
+        theme === "dark"
+            ?
+            "☀️"
+            :
+            "🌙";
+
+}
+
+
+document.getElementById(
+    "themeBtn"
+)
+.addEventListener(
+    "click",
+    function(){
+
+        const current =
+            localStorage.getItem(
+                STORAGE.theme
+            )
+            ||
+            "light";
+
+
+        const next =
+            current === "dark"
+                ?
+                "light"
+                :
+                "dark";
+
+
+        localStorage.setItem(
+            STORAGE.theme,
+            next
+        );
+
+
+        applyTheme();
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+const sidebar =
+    document.getElementById(
+        "sidebar"
+    );
+
+const overlay =
+    document.getElementById(
+        "sidebarOverlay"
+    );
+
+
+function toggleSidebar(){
+
+    sidebar.classList.toggle(
+        "open"
+    );
+
+    overlay.classList.toggle(
+        "show"
+    );
+
+}
+
+
+document.getElementById(
+    "mobileMenuBtn"
+)
+.addEventListener(
+    "click",
+    toggleSidebar
+);
+
+
+overlay.addEventListener(
+    "click",
+    toggleSidebar
+);
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(
+    message
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2800
+        );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshData(){
+
+    loadSettings();
+
+    loadStudents();
+
+    loadResults();
+
+    updateQuizInfo();
+
+    applyFilters();
+
+}
+
+
+/* =========================================================
+   REFRESH BUTTON
+========================================================= */
+
+document.getElementById(
+    "refreshBtn"
+)
+.addEventListener(
+    "click",
+    function(){
+
+        refreshData();
+
+        showToast(
+            "Quiz Result data refreshed ✓"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   STORAGE SYNC
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+
+            event.key ===
+                STORAGE.results
+
+            ||
+
+            event.key ===
+                STORAGE.quiz
+
+            ||
+
+            event.key ===
+                STORAGE.course
+
+            ||
+
+            event.key ===
+                STORAGE.students
+
+        ){
+
+            refreshData();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   VISIBILITY SYNC
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            !document.hidden
+        ){
+
+            refreshData();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            document
+                .querySelectorAll(
+                    ".modal.show"
+                )
+                .forEach(
+                    modal =>
+                        modal.classList.remove(
+                            "show"
+                        )
+                );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PUBLIC API
+========================================================= */
+
+window.SNKAdminQuizResults = {
+
+    getQuiz:
+        function(){
+
+            return {
+                ...quiz
+            };
+
+        },
+
+    getCourse:
+        function(){
+
+            return {
+                ...course
+            };
+
+        },
+
+    getAllResults:
+        function(){
+
+            return [
+                ...allResults
+            ];
+
+        },
+
+    getQuizResults:
+        function(){
+
+            return [
+                ...getQuizResults()
+            ];
+
+        },
+
+    getStudents:
+        function(){
+
+            return [
+                ...allStudents
+            ];
+
+        },
+
+    refresh:
+        function(){
+
+            refreshData();
+
+        },
+
+    publishEligible:
+        function(){
+
+            publishEligible();
+
+        }
+
+};
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+function init(){
+
+    applyTheme();
+
+    loadSettings();
+
+    loadStudents();
+
+    loadResults();
+
+    updateQuizInfo();
+
+    applyFilters();
+
+}
+
+
+init();
+
+</script>
+
+
+</body>
+
+</html>
+```
