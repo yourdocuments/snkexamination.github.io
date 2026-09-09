@@ -4,668 +4,743 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Student Profile — SNK IT Institute</title>
+  <title>My Profile | SNK IT Institute</title>
 
+  <meta name="theme-color" content="#07111f">
   <meta name="description" content="SNK IT Institute Student Profile">
-  <meta name="theme-color" content="#2563eb">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root{
+      --bg:#07111f;
+      --bg2:#0b1730;
+      --card:rgba(15,27,51,.80);
+      --card2:rgba(19,35,65,.90);
+      --text:#f6f8ff;
+      --muted:#aebbd2;
+      --primary:#6c63ff;
+      --primary2:#8b7cff;
+      --cyan:#22d3ee;
+      --green:#22c55e;
+      --red:#ef4444;
+      --border:rgba(255,255,255,.09);
+      --input:rgba(255,255,255,.045);
+      --shadow:0 18px 55px rgba(0,0,0,.28);
     }
 
-    html {
-      scroll-behavior: smooth;
+    [data-theme="light"]{
+      --bg:#f4f7fb;
+      --bg2:#e9eef8;
+      --card:rgba(255,255,255,.88);
+      --card2:#ffffff;
+      --text:#172033;
+      --muted:#657089;
+      --border:rgba(15,23,42,.10);
+      --input:#f4f6fa;
+      --shadow:0 18px 45px rgba(31,41,55,.10);
     }
 
-    body {
-      font-family: "Noto Sans Bengali", sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-      min-height: 100vh;
-      transition: 0.3s ease;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    body.dark {
-      background: #0f172a;
-      color: #e5e7eb;
+    html{
+      scroll-behavior:smooth;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+    body{
+      min-height:100vh;
+      font-family:"Poppins","Noto Sans Bengali",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 5%,rgba(108,99,255,.14),transparent 25%),
+        radial-gradient(circle at 90% 20%,rgba(34,211,238,.08),transparent 25%),
+        linear-gradient(145deg,var(--bg),var(--bg2));
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(circle,rgba(255,255,255,.6) 1px,transparent 1px),
+        radial-gradient(circle,rgba(255,255,255,.25) 1px,transparent 1px);
+      background-size:130px 130px,210px 210px;
+      background-position:15px 20px,90px 80px;
+      opacity:.08;
+    }
+
+    a{
+      color:inherit;
     }
 
     button,
     input,
     select,
-    textarea {
-      font-family: inherit;
+    textarea{
+      font:inherit;
+    }
+
+    .container{
+      width:min(1180px,calc(100% - 32px));
+      margin:auto;
     }
 
     /* =========================
        HEADER
-    ========================== */
+       ========================= */
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e5e7eb;
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      border-bottom:1px solid var(--border);
+      background:rgba(7,17,31,.82);
+      backdrop-filter:blur(18px);
     }
 
-    body.dark header {
-      background: rgba(15,23,42,0.95);
-      border-color: #263247;
+    [data-theme="light"] .topbar{
+      background:rgba(255,255,255,.84);
     }
 
-    .header-inner {
-      max-width: 1200px;
-      margin: auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
+    .nav{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      flex-shrink:0;
     }
 
-    .brand img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      border-radius: 12px;
-      background: #fff;
-      padding: 4px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    .logo{
+      width:44px;
+      height:44px;
+      border-radius:13px;
+      object-fit:contain;
+      background:#fff;
+      padding:5px;
     }
 
-    .brand-text {
-      min-width: 0;
+    .brand-text strong{
+      display:block;
+      font-size:16px;
+      font-weight:800;
     }
 
-    .brand-title {
-      font-size: 19px;
-      font-weight: 800;
-      color: #2563eb;
-      white-space: nowrap;
+    .brand-text span{
+      display:block;
+      color:var(--muted);
+      font-size:10px;
     }
 
-    .brand-subtitle {
-      font-size: 12px;
-      color: #64748b;
-      white-space: nowrap;
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:4px;
     }
 
-    body.dark .brand-subtitle {
-      color: #94a3b8;
+    .nav-links a{
+      text-decoration:none;
+      color:#bfc9dc;
+      font-size:11px;
+      font-weight:600;
+      padding:9px 10px;
+      border-radius:10px;
+      transition:.2s ease;
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    [data-theme="light"] .nav-links a{
+      color:#5e687c;
     }
 
-    .icon-btn {
-      border: 1px solid #dbe2ea;
-      background: #fff;
-      color: #172033;
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: 0.2s;
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:#fff;
+      background:rgba(108,99,255,.13);
     }
 
-    .icon-btn:hover {
-      transform: translateY(-2px);
-      border-color: #2563eb;
+    [data-theme="light"] .nav-links a:hover,
+    [data-theme="light"] .nav-links a.active{
+      color:#4d43d9;
+      background:rgba(108,99,255,.09);
     }
 
-    body.dark .icon-btn {
-      background: #172033;
-      color: #e5e7eb;
-      border-color: #334155;
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
     }
 
-    /* =========================
-       MAIN
-    ========================== */
-
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 28px 20px 50px;
+    .nav-btn,
+    .logout-btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:10px;
+      padding:9px 11px;
+      cursor:pointer;
+      font-size:11px;
+      font-weight:600;
     }
 
-    .page-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
+    .logout-btn:hover{
+      color:#fecaca;
+      border-color:rgba(239,68,68,.28);
+      background:rgba(239,68,68,.08);
     }
 
-    .page-title h1 {
-      font-size: 30px;
-      font-weight: 800;
-      margin-bottom: 5px;
-    }
-
-    .page-title p {
-      color: #64748b;
-      font-size: 14px;
-    }
-
-    body.dark .page-title p {
-      color: #94a3b8;
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 11px;
-      padding: 11px 16px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 700;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-secondary {
-      background: #e8eef8;
-      color: #1e293b;
-    }
-
-    body.dark .btn-secondary {
-      background: #1e293b;
-      color: #e5e7eb;
-    }
-
-    .btn-danger {
-      background: #dc2626;
-      color: white;
-    }
-
-    .btn-success {
-      background: #16a34a;
-      color: white;
+    .mobile-btn{
+      display:none;
     }
 
     /* =========================
-       PROFILE HEADER
-    ========================== */
+       PAGE
+       ========================= */
 
-    .profile-header {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white;
-      border-radius: 22px;
-      padding: 28px;
-      margin-bottom: 22px;
-      box-shadow: 0 12px 35px rgba(37,99,235,0.20);
+    main{
+      padding:42px 0 60px;
     }
 
-    .profile-header-inner {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
+    .page-heading{
+      margin-bottom:22px;
     }
 
-    .avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.18);
-      border: 3px solid rgba(255,255,255,0.75);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-      font-weight: 800;
-      flex-shrink: 0;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border-radius:999px;
+      color:#c8c3ff;
+      background:rgba(108,99,255,.10);
+      border:1px solid rgba(139,124,255,.18);
+      font-size:10px;
+      font-weight:700;
     }
 
-    .profile-main {
-      flex: 1;
-      min-width: 220px;
+    .eyebrow-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 12px var(--green);
     }
 
-    .profile-main h2 {
-      font-size: 27px;
-      margin-bottom: 5px;
+    .page-heading h1{
+      font-size:clamp(28px,4vw,43px);
+      line-height:1.15;
+      margin:15px 0 7px;
     }
 
-    .profile-main p {
-      opacity: 0.9;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 6px 11px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
+    .page-heading p{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.7;
     }
 
     /* =========================
-       GRID
-    ========================== */
+       LAYOUT
+       ========================= */
 
-    .profile-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    .profile-layout{
+      display:grid;
+      grid-template-columns:310px 1fr;
+      gap:18px;
+      align-items:start;
     }
 
-    .card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 6px 20px rgba(15,23,42,0.05);
-    }
-
-    body.dark .card {
-      background: #111c31;
-      border-color: #263247;
-      box-shadow: none;
-    }
-
-    .card.full {
-      grid-column: 1 / -1;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    body.dark .card-title {
-      border-color: #263247;
+    .card{
+      border:1px solid var(--border);
+      background:var(--card);
+      backdrop-filter:blur(16px);
+      box-shadow:var(--shadow);
+      border-radius:22px;
     }
 
     /* =========================
-       INFO LIST
-    ========================== */
+       PROFILE SIDEBAR
+       ========================= */
 
-    .info-list {
-      display: grid;
-      gap: 13px;
+    .profile-summary{
+      padding:25px;
+      position:sticky;
+      top:92px;
     }
 
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 12px 0;
-      border-bottom: 1px dashed #e2e8f0;
+    .avatar-wrap{
+      display:flex;
+      justify-content:center;
+      margin-bottom:17px;
     }
 
-    body.dark .info-row {
-      border-color: #334155;
+    .avatar{
+      width:100px;
+      height:100px;
+      border-radius:29px;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-size:34px;
+      font-weight:800;
+      background:
+        linear-gradient(135deg,#6c63ff,#22d3ee);
+      box-shadow:0 18px 45px rgba(108,99,255,.24);
+      overflow:hidden;
     }
 
-    .info-row:last-child {
-      border-bottom: none;
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:none;
     }
 
-    .info-label {
-      color: #64748b;
-      font-size: 13px;
-      font-weight: 600;
+    .summary-name{
+      text-align:center;
+      margin-bottom:4px;
+      font-size:19px;
+      font-weight:800;
     }
 
-    body.dark .info-label {
-      color: #94a3b8;
+    .summary-id{
+      text-align:center;
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:20px;
     }
 
-    .info-value {
-      font-size: 14px;
-      font-weight: 700;
-      text-align: right;
+    .active-badge{
+      display:flex;
+      width:max-content;
+      margin:0 auto 22px;
+      align-items:center;
+      gap:7px;
+      padding:7px 10px;
+      border-radius:999px;
+      color:#86efac;
+      background:rgba(34,197,94,.09);
+      border:1px solid rgba(34,197,94,.14);
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .active-dot{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 10px var(--green);
+    }
+
+    .summary-list{
+      display:grid;
+      gap:0;
+    }
+
+    .summary-row{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 0;
+      border-bottom:1px solid var(--border);
+    }
+
+    .summary-row:last-child{
+      border-bottom:0;
+    }
+
+    .summary-row span:first-child{
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .summary-row span:last-child{
+      font-size:10px;
+      font-weight:700;
+      text-align:right;
+    }
+
+    .summary-links{
+      display:grid;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .summary-links a{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:38px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-size:10px;
+      font-weight:700;
+      background:rgba(255,255,255,.025);
+    }
+
+    .summary-links a:hover{
+      border-color:rgba(139,124,255,.3);
+      background:rgba(108,99,255,.08);
     }
 
     /* =========================
        FORM
-    ========================== */
+       ========================= */
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .form-card{
+      padding:28px;
     }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
+    .form-heading{
+      margin-bottom:22px;
     }
 
-    .form-group.full {
-      grid-column: 1 / -1;
+    .form-heading h2{
+      font-size:21px;
+      margin-bottom:5px;
     }
 
-    label {
-      font-size: 13px;
-      font-weight: 700;
-      color: #475569;
+    .form-heading p{
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.7;
     }
 
-    body.dark label {
-      color: #cbd5e1;
+    .form-section{
+      margin-bottom:25px;
+    }
+
+    .form-section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:15px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .section-number{
+      width:26px;
+      height:26px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      background:rgba(108,99,255,.12);
+      color:#bdb6ff;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .form-section-title h3{
+      font-size:13px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+
+    .form-group{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .form-group.full{
+      grid-column:1/-1;
+    }
+
+    label{
+      color:var(--text);
+      font-size:10px;
+      font-weight:700;
     }
 
     input,
-    textarea,
-    select {
-      width: 100%;
-      border: 1px solid #dbe2ea;
-      border-radius: 11px;
-      padding: 12px 13px;
-      outline: none;
-      background: #fff;
-      color: #172033;
-      font-size: 14px;
-      transition: 0.2s;
+    select,
+    textarea{
+      width:100%;
+      border:1px solid var(--border);
+      outline:none;
+      color:var(--text);
+      background:var(--input);
+      border-radius:11px;
+      padding:11px 12px;
+      font-size:11px;
+      transition:.2s ease;
+    }
+
+    input,
+    select{
+      min-height:43px;
+    }
+
+    textarea{
+      min-height:100px;
+      resize:vertical;
+      line-height:1.6;
+    }
+
+    input::placeholder,
+    textarea::placeholder{
+      color:#718099;
     }
 
     input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+    select:focus,
+    textarea:focus{
+      border-color:rgba(139,124,255,.7);
+      box-shadow:0 0 0 3px rgba(108,99,255,.09);
     }
 
-    body.dark input,
-    body.dark textarea,
-    body.dark select {
-      background: #0f172a;
-      color: #e5e7eb;
-      border-color: #334155;
+    input[readonly],
+    select[disabled]{
+      opacity:.68;
+      cursor:not-allowed;
     }
 
-    textarea {
-      min-height: 100px;
-      resize: vertical;
+    .helper{
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.5;
     }
 
-    .readonly {
-      background: #f1f5f9 !important;
-      cursor: not-allowed;
+    .form-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      padding-top:5px;
     }
 
-    body.dark .readonly {
-      background: #1e293b !important;
+    .btn{
+      min-height:43px;
+      padding:0 17px;
+      border-radius:11px;
+      cursor:pointer;
+      border:1px solid var(--border);
+      color:var(--text);
+      background:rgba(255,255,255,.035);
+      font-size:11px;
+      font-weight:700;
     }
 
-    .form-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 18px;
-      flex-wrap: wrap;
+    .btn-primary{
+      border:0;
+      color:#fff;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      box-shadow:0 12px 27px rgba(108,99,255,.2);
     }
 
-    /* =========================
-       COURSE CARD
-    ========================== */
-
-    .course-box {
-      background: #eff6ff;
-      border: 1px solid #dbeafe;
-      border-radius: 15px;
-      padding: 18px;
-    }
-
-    body.dark .course-box {
-      background: #172554;
-      border-color: #1e3a8a;
-    }
-
-    .course-name {
-      font-size: 20px;
-      font-weight: 800;
-      color: #1d4ed8;
-      margin-bottom: 10px;
-    }
-
-    body.dark .course-name {
-      color: #93c5fd;
-    }
-
-    .course-meta {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .course-meta-item {
-      background: rgba(255,255,255,0.7);
-      border-radius: 10px;
-      padding: 10px;
-    }
-
-    body.dark .course-meta-item {
-      background: rgba(15,23,42,0.45);
-    }
-
-    .course-meta-item small {
-      display: block;
-      color: #64748b;
-      font-size: 11px;
-      margin-bottom: 3px;
-    }
-
-    body.dark .course-meta-item small {
-      color: #94a3b8;
-    }
-
-    .course-meta-item strong {
-      font-size: 13px;
+    .btn:hover{
+      transform:translateY(-1px);
     }
 
     /* =========================
        NOTICE
-    ========================== */
+       ========================= */
 
-    .notice {
-      margin-top: 20px;
-      padding: 15px 17px;
-      border-radius: 13px;
-      background: #ecfdf5;
-      border: 1px solid #bbf7d0;
-      color: #166534;
-      font-size: 13px;
-      line-height: 1.7;
+    .notice{
+      margin-top:18px;
+      padding:14px;
+      border-radius:13px;
+      border:1px solid rgba(34,211,238,.14);
+      background:rgba(34,211,238,.05);
+      color:#a7e9f1;
+      font-size:10px;
+      line-height:1.7;
     }
 
-    body.dark .notice {
-      background: #052e16;
-      border-color: #14532d;
-      color: #bbf7d0;
+    [data-theme="light"] .notice{
+      color:#176775;
     }
 
     /* =========================
        TOAST
-    ========================== */
+       ========================= */
 
-    .toast {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 5000;
-      background: #172033;
-      color: white;
-      padding: 13px 17px;
-      border-radius: 11px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.20);
-      opacity: 0;
-      transform: translateY(20px);
-      pointer-events: none;
-      transition: 0.3s;
-      font-size: 13px;
-      max-width: 320px;
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform:translate(-50%,20px);
+      opacity:0;
+      pointer-events:none;
+      z-index:100;
+      padding:12px 17px;
+      border-radius:12px;
+      background:#111c33;
+      border:1px solid var(--border);
+      color:#fff;
+      font-size:11px;
+      box-shadow:0 15px 35px rgba(0,0,0,.35);
+      transition:.25s ease;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
+    .toast.show{
+      opacity:1;
+      transform:translate(-50%,0);
     }
 
     /* =========================
        FOOTER
-    ========================== */
+       ========================= */
 
-    footer {
-      text-align: center;
-      padding: 25px 20px;
-      color: #64748b;
-      font-size: 12px;
-    }
-
-    body.dark footer {
-      color: #94a3b8;
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:9px;
+      padding:0 0 40px;
     }
 
     /* =========================
        RESPONSIVE
-    ========================== */
+       ========================= */
 
-    @media (max-width: 800px) {
-      .profile-grid {
-        grid-template-columns: 1fr;
+    @media(max-width:1050px){
+
+      .nav-links{
+        display:none;
       }
 
-      .card.full {
-        grid-column: auto;
+      .mobile-btn{
+        display:block;
       }
 
-      .form-grid {
-        grid-template-columns: 1fr;
+      .profile-layout{
+        grid-template-columns:1fr;
       }
 
-      .form-group.full {
-        grid-column: auto;
+      .profile-summary{
+        position:static;
       }
+
     }
 
-    @media (max-width: 600px) {
-      .header-inner {
-        padding: 10px 14px;
+    @media(max-width:700px){
+
+      .container{
+        width:min(100% - 22px,1180px);
       }
 
-      .brand img {
-        width: 42px;
-        height: 42px;
+      main{
+        padding-top:30px;
       }
 
-      .brand-title {
-        font-size: 16px;
+      .form-grid{
+        grid-template-columns:1fr;
       }
 
-      .brand-subtitle {
-        font-size: 10px;
+      .form-group.full{
+        grid-column:auto;
       }
 
-      .header-actions .home-text {
-        display: none;
+      .form-card{
+        padding:21px;
       }
 
-      main {
-        padding: 20px 14px 40px;
+      .profile-summary{
+        padding:21px;
       }
 
-      .page-title h1 {
-        font-size: 25px;
+      .form-actions{
+        flex-direction:column;
       }
 
-      .profile-header {
-        padding: 22px;
-        border-radius: 18px;
+      .form-actions .btn{
+        width:100%;
       }
 
-      .avatar {
-        width: 72px;
-        height: 72px;
-        font-size: 28px;
+      .nav-actions .nav-btn{
+        display:none;
       }
 
-      .profile-main h2 {
-        font-size: 22px;
+    }
+
+    @media(max-width:480px){
+
+      .brand-text{
+        display:none;
       }
 
-      .card {
-        padding: 18px;
+      .page-heading h1{
+        font-size:30px;
       }
 
-      .info-row {
-        flex-direction: column;
-        gap: 4px;
+      .avatar{
+        width:85px;
+        height:85px;
+        font-size:29px;
       }
 
-      .info-value {
-        text-align: left;
+    }
+
+    @media(prefers-reduced-motion:reduce){
+
+      *,
+      *::before,
+      *::after{
+        transition:none!important;
+        scroll-behavior:auto!important;
       }
 
-      .course-meta {
-        grid-template-columns: 1fr;
+    }
+
+    @media print{
+
+      .topbar,
+      .summary-links,
+      .form-actions,
+      footer{
+        display:none!important;
       }
 
-      .top-actions {
-        width: 100%;
+      body{
+        background:#fff;
+        color:#000;
       }
 
-      .top-actions .btn {
-        flex: 1;
+      .card{
+        box-shadow:none;
+        background:#fff;
+        border:1px solid #ddd;
       }
+
+      .profile-layout{
+        grid-template-columns:1fr;
+      }
+
+      .profile-summary{
+        position:static;
+      }
+
+      input,
+      select,
+      textarea{
+        color:#000;
+        background:#fff;
+      }
+
     }
   </style>
 </head>
@@ -674,76 +749,88 @@
 
   <!-- =========================
        HEADER
-  ========================== -->
+       ========================= -->
 
-  <header>
-    <div class="header-inner">
+  <header class="topbar">
 
-      <a href="student-dashboard.html" class="brand">
+    <div class="container nav">
+
+      <a href="index.html" class="brand">
 
         <img
+          class="logo"
           src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-          alt="SNK IT Institute Logo"
+          alt="SNK IT Institute"
+          onerror="this.style.display='none'"
         >
 
         <div class="brand-text">
-          <div class="brand-title">SNK IT Institute</div>
-          <div class="brand-subtitle">Student Portal</div>
+          <strong>SNK IT Institute</strong>
+          <span>Student Portal</span>
         </div>
 
       </a>
 
-      <div class="header-actions">
+
+      <nav class="nav-links" id="mainNav">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="student-dashboard.html">
+          My Dashboard
+        </a>
+
+        <a href="courses.html">
+          My Course
+        </a>
+
+        <a href="assignments.html">
+          Assignment
+        </a>
+
+        <a href="quiz.html">
+          Quiz
+        </a>
+
+        <a href="results.html">
+          Result
+        </a>
+
+        <a href="student-attendance.html">
+          Attendance
+        </a>
+
+        <a href="student-profiles.html" class="active">
+          Profile
+        </a>
+
+      </nav>
+
+
+      <div class="nav-actions">
 
         <button
-          class="icon-btn"
-          id="themeBtn"
+          class="nav-btn mobile-btn"
+          id="mobileMenuBtn"
           type="button"
-          title="Theme"
         >
-          🌙
+          Menu
         </button>
 
-        <a
-          href="student-dashboard.html"
-          class="btn btn-secondary"
+        <button
+          class="nav-btn"
+          id="themeToggle"
+          type="button"
         >
-          <span>🏠</span>
-          <span class="home-text">Dashboard</span>
-        </a>
-
-      </div>
-
-    </div>
-  </header>
-
-
-  <!-- =========================
-       MAIN
-  ========================== -->
-
-  <main>
-
-    <div class="page-top">
-
-      <div class="page-title">
-        <h1>👤 Student Profile</h1>
-        <p>আপনার Student Profile তথ্য দেখুন এবং প্রয়োজন হলে আপডেট করুন।</p>
-      </div>
-
-      <div class="top-actions">
-
-        <a
-          href="student-dashboard.html"
-          class="btn btn-secondary"
-        >
-          ← Dashboard
-        </a>
+          Theme
+        </button>
 
         <button
-          type="button"
-          class="btn btn-danger"
+          class="logout-btn"
           id="logoutBtn"
+          type="button"
         >
           Logout
         </button>
@@ -752,444 +839,595 @@
 
     </div>
 
+  </header>
 
-    <!-- =========================
-         PROFILE HEADER
-    ========================== -->
 
-    <section class="profile-header">
+  <!-- =========================
+       MAIN
+       ========================= -->
 
-      <div class="profile-header-inner">
+  <main>
 
-        <div class="avatar" id="avatar">
-          S
+    <div class="container">
+
+      <div class="page-heading">
+
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          Student Profile
         </div>
 
-        <div class="profile-main">
+        <h1>
+          My Profile
+        </h1>
 
-          <h2 id="profileName">
-            Demo Student
-          </h2>
-
-          <p id="profileId">
-            Student ID: SNK-1001
-          </p>
-
-          <span class="status-badge">
-            ● Active Student
-          </span>
-
-        </div>
+        <p>
+          আপনার personal information এবং Student Portal-এর profile information এখান থেকে manage করুন।
+        </p>
 
       </div>
 
-    </section>
 
+      <div class="profile-layout">
 
-    <!-- =========================
-         PROFILE CONTENT
-    ========================== -->
+        <!-- =========================
+             PROFILE SUMMARY
+             ========================= -->
 
-    <div class="profile-grid">
+        <aside class="card profile-summary">
 
-      <!-- BASIC INFORMATION -->
+          <div class="avatar-wrap">
 
-      <section class="card">
+            <div class="avatar" id="avatar">
 
-        <div class="card-title">
-          📋 Basic Information
-        </div>
+              <span id="avatarLetter">
+                S
+              </span>
 
-        <div class="info-list">
-
-          <div class="info-row">
-            <span class="info-label">Student Name</span>
-            <span class="info-value" id="basicName">Demo Student</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Student ID</span>
-            <span class="info-value" id="basicId">SNK-1001</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Course</span>
-            <span class="info-value">Computer Office Application</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Batch</span>
-            <span class="info-value">Batch 01</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Admission Date</span>
-            <span class="info-value">01 January 2026</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Student Status</span>
-            <span class="info-value">Active</span>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- CONTACT INFORMATION -->
-
-      <section class="card">
-
-        <div class="card-title">
-          📞 Contact Information
-        </div>
-
-        <div class="info-list">
-
-          <div class="info-row">
-            <span class="info-label">Mobile</span>
-            <span class="info-value" id="displayPhone">
-              Not added
-            </span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Email</span>
-            <span class="info-value" id="displayEmail">
-              Not added
-            </span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Guardian Name</span>
-            <span class="info-value" id="displayGuardian">
-              Not added
-            </span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Guardian Mobile</span>
-            <span class="info-value" id="displayGuardianPhone">
-              Not added
-            </span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Address</span>
-            <span class="info-value" id="displayAddress">
-              Not added
-            </span>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- COURSE INFORMATION -->
-
-      <section class="card">
-
-        <div class="card-title">
-          🎓 Course & Batch
-        </div>
-
-        <div class="course-box">
-
-          <div class="course-name">
-            Computer Office Application
-          </div>
-
-          <div class="course-meta">
-
-            <div class="course-meta-item">
-              <small>Class Type</small>
-              <strong>Offline</strong>
-            </div>
-
-            <div class="course-meta-item">
-              <small>Duration</small>
-              <strong>6 Months</strong>
-            </div>
-
-            <div class="course-meta-item">
-              <small>Class Days</small>
-              <strong>Saturday – Monday</strong>
-            </div>
-
-            <div class="course-meta-item">
-              <small>Class Time</small>
-              <strong>4:00 PM – 6:00 PM</strong>
-            </div>
-
-            <div class="course-meta-item">
-              <small>Batch</small>
-              <strong>Batch 01</strong>
-            </div>
-
-            <div class="course-meta-item">
-              <small>Class Start</small>
-              <strong>08 September 2026</strong>
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- INSTITUTE INFORMATION -->
-
-      <section class="card">
-
-        <div class="card-title">
-          🏫 Institute Information
-        </div>
-
-        <div class="info-list">
-
-          <div class="info-row">
-            <span class="info-label">Institute</span>
-            <span class="info-value">SNK IT Institute</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Student Portal</span>
-            <span class="info-value">Online Portal</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Learning Mode</span>
-            <span class="info-value">Offline Course</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Instructor</span>
-            <span class="info-value">SNK IT Instructor</span>
-          </div>
-
-          <div class="info-row">
-            <span class="info-label">Class Start</span>
-            <span class="info-value">08 September 2026</span>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- EDIT PROFILE -->
-
-      <section class="card full">
-
-        <div class="card-title">
-          ✏️ Update Profile
-        </div>
-
-        <form id="profileForm">
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label for="fullName">
-                Full Name
-              </label>
-
-              <input
-                type="text"
-                id="fullName"
-                placeholder="আপনার নাম লিখুন"
-                required
+              <img
+                id="avatarImage"
+                src=""
+                alt="Student Photo"
               >
 
             </div>
 
-
-            <div class="form-group">
-
-              <label for="studentId">
-                Student ID
-              </label>
-
-              <input
-                type="text"
-                id="studentId"
-                class="readonly"
-                readonly
-              >
-
-            </div>
+          </div>
 
 
-            <div class="form-group">
-
-              <label for="phone">
-                Mobile Number
-              </label>
-
-              <input
-                type="tel"
-                id="phone"
-                placeholder="01XXXXXXXXX"
-              >
-
-            </div>
+          <h2
+            class="summary-name"
+            id="summaryName"
+          >
+            Student
+          </h2>
 
 
-            <div class="form-group">
+          <div
+            class="summary-id"
+            id="summaryId"
+          >
+            SNK-1001
+          </div>
 
-              <label for="email">
-                Email Address
-              </label>
 
-              <input
-                type="email"
-                id="email"
-                placeholder="example@email.com"
-              >
+          <div class="active-badge">
+
+            <span class="active-dot"></span>
+
+            Active Student
+
+          </div>
+
+
+          <div class="summary-list">
+
+            <div class="summary-row">
+
+              <span>Course</span>
+
+              <span id="summaryCourse">
+                Computer Office Application
+              </span>
 
             </div>
 
 
-            <div class="form-group">
+            <div class="summary-row">
 
-              <label for="guardian">
-                Guardian Name
-              </label>
+              <span>Batch</span>
 
-              <input
-                type="text"
-                id="guardian"
-                placeholder="অভিভাবকের নাম"
-              >
+              <span id="summaryBatch">
+                Batch 01
+              </span>
 
             </div>
 
 
-            <div class="form-group">
+            <div class="summary-row">
 
-              <label for="guardianPhone">
-                Guardian Mobile
-              </label>
+              <span>Mode</span>
 
-              <input
-                type="tel"
-                id="guardianPhone"
-                placeholder="01XXXXXXXXX"
-              >
+              <span>
+                Offline
+              </span>
 
             </div>
 
 
-            <div class="form-group">
+            <div class="summary-row">
 
-              <label for="gender">
-                Gender
-              </label>
+              <span>Duration</span>
 
-              <select id="gender">
-
-                <option value="">
-                  Select Gender
-                </option>
-
-                <option value="Male">
-                  Male
-                </option>
-
-                <option value="Female">
-                  Female
-                </option>
-
-                <option value="Other">
-                  Other
-                </option>
-
-              </select>
+              <span>
+                6 Months
+              </span>
 
             </div>
 
 
-            <div class="form-group">
+            <div class="summary-row">
 
-              <label for="dob">
-                Date of Birth
-              </label>
+              <span>Class Time</span>
 
-              <input
-                type="date"
-                id="dob"
-              >
+              <span>
+                4–6 PM
+              </span>
 
             </div>
 
 
-            <div class="form-group full">
+            <div class="summary-row">
 
-              <label for="address">
-                Address
-              </label>
+              <span>Start Date</span>
 
-              <textarea
-                id="address"
-                placeholder="আপনার বর্তমান ঠিকানা লিখুন"
-              ></textarea>
+              <span>
+                08 Sep 2026
+              </span>
 
             </div>
 
           </div>
 
 
-          <div class="form-actions">
+          <div class="summary-links">
 
-            <button
-              type="submit"
-              class="btn btn-primary"
-            >
-              💾 Save Profile
-            </button>
+            <a href="student-dashboard.html">
+              My Dashboard
+            </a>
 
-            <button
-              type="button"
-              class="btn btn-secondary"
-              id="resetBtn"
-            >
-              ↻ Reset
-            </button>
+            <a href="student-id-cards.html">
+              Student ID Card
+            </a>
+
+            <a href="student-settings.html">
+              Settings
+            </a>
 
           </div>
 
-        </form>
+        </aside>
 
 
-        <div class="notice">
-          ℹ️ <strong>Note:</strong>
-          আপনার Profile-এর editable তথ্য এই browser-এর LocalStorage-এ সংরক্ষণ করা হবে।
-          Student ID, Course, Batch এবং Institute information বর্তমানে system information হিসেবে রাখা হয়েছে।
-        </div>
+        <!-- =========================
+             PROFILE FORM
+             ========================= -->
 
-      </section>
+        <section class="card form-card">
+
+          <div class="form-heading">
+
+            <h2>
+              Profile Information
+            </h2>
+
+            <p>
+              Login করার সময় পাওয়া Student ID, Course এবং Batch automatically connected থাকবে।
+              নিচের personal information আপনি update করতে পারবেন।
+            </p>
+
+          </div>
+
+
+          <form id="profileForm">
+
+            <!-- ACCOUNT -->
+
+            <div class="form-section">
+
+              <div class="form-section-title">
+
+                <span class="section-number">
+                  01
+                </span>
+
+                <h3>
+                  Student Account
+                </h3>
+
+              </div>
+
+
+              <div class="form-grid">
+
+                <div class="form-group">
+
+                  <label for="studentId">
+                    Student ID
+                  </label>
+
+                  <input
+                    type="text"
+                    id="studentId"
+                    readonly
+                  >
+
+                  <div class="helper">
+                    Student ID login system থেকে connected।
+                  </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="studentName">
+                    Student Name
+                  </label>
+
+                  <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Enter your name"
+                    required
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="course">
+                    Course
+                  </label>
+
+                  <input
+                    type="text"
+                    id="course"
+                    readonly
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="batch">
+                    Batch
+                  </label>
+
+                  <input
+                    type="text"
+                    id="batch"
+                    readonly
+                  >
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="form-section">
+
+              <div class="form-section-title">
+
+                <span class="section-number">
+                  02
+                </span>
+
+                <h3>
+                  Contact Information
+                </h3>
+
+              </div>
+
+
+              <div class="form-grid">
+
+                <div class="form-group">
+
+                  <label for="mobile">
+                    Mobile Number
+                  </label>
+
+                  <input
+                    type="tel"
+                    id="mobile"
+                    placeholder="01XXXXXXXXX"
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="email">
+                    Email Address
+                  </label>
+
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="your@email.com"
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="guardianName">
+                    Guardian Name
+                  </label>
+
+                  <input
+                    type="text"
+                    id="guardianName"
+                    placeholder="Guardian name"
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="guardianPhone">
+                    Guardian Phone
+                  </label>
+
+                  <input
+                    type="tel"
+                    id="guardianPhone"
+                    placeholder="Guardian mobile number"
+                  >
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- PERSONAL -->
+
+            <div class="form-section">
+
+              <div class="form-section-title">
+
+                <span class="section-number">
+                  03
+                </span>
+
+                <h3>
+                  Personal Information
+                </h3>
+
+              </div>
+
+
+              <div class="form-grid">
+
+                <div class="form-group">
+
+                  <label for="gender">
+                    Gender
+                  </label>
+
+                  <select id="gender">
+
+                    <option value="">
+                      Select Gender
+                    </option>
+
+                    <option value="Male">
+                      Male
+                    </option>
+
+                    <option value="Female">
+                      Female
+                    </option>
+
+                    <option value="Other">
+                      Other
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="dob">
+                    Date of Birth
+                  </label>
+
+                  <input
+                    type="date"
+                    id="dob"
+                  >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                  <label for="address">
+                    Address
+                  </label>
+
+                  <textarea
+                    id="address"
+                    placeholder="Enter your address"
+                  ></textarea>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- COURSE -->
+
+            <div class="form-section">
+
+              <div class="form-section-title">
+
+                <span class="section-number">
+                  04
+                </span>
+
+                <h3>
+                  Course Information
+                </h3>
+
+              </div>
+
+
+              <div class="form-grid">
+
+                <div class="form-group">
+
+                  <label for="mode">
+                    Learning Mode
+                  </label>
+
+                  <input
+                    type="text"
+                    id="mode"
+                    value="Offline"
+                    readonly
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="duration">
+                    Course Duration
+                  </label>
+
+                  <input
+                    type="text"
+                    id="duration"
+                    value="6 Months"
+                    readonly
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="classDays">
+                    Class Days
+                  </label>
+
+                  <input
+                    type="text"
+                    id="classDays"
+                    value="Saturday – Monday"
+                    readonly
+                  >
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="classTime">
+                    Class Time
+                  </label>
+
+                  <input
+                    type="text"
+                    id="classTime"
+                    value="4:00 PM – 6:00 PM"
+                    readonly
+                  >
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="notice">
+
+              <strong>Important:</strong>
+              Student ID, Course এবং Batch login data থেকে automatically connected।
+              Personal information এই browser-এর localStorage-এ save হবে।
+              ভবিষ্যতে Firebase/Admin database connect করলে একই profile server database-এর সাথে sync করা যাবে।
+
+            </div>
+
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="btn"
+                id="printBtn"
+              >
+                Print Profile
+              </button>
+
+              <button
+                type="reset"
+                class="btn"
+                id="resetBtn"
+              >
+                Reset Changes
+              </button>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+              >
+                Save Profile
+              </button>
+
+            </div>
+
+          </form>
+
+        </section>
+
+      </div>
 
     </div>
 
   </main>
 
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
   <footer>
-    © 2026 SNK IT Institute — Student Portal
+
+    <div class="container">
+
+      © <span id="currentYear"></span>
+      SNK IT Institute • Student Portal
+
+    </div>
+
   </footer>
 
-
-  <!-- =========================
-       TOAST
-  ========================== -->
 
   <div
     class="toast"
@@ -1197,569 +1435,922 @@
   ></div>
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-
   <script>
+    /* =========================================================
+       SNK IT INSTITUTE
+       STUDENT PROFILE
+       STEP 1.19.3.1
 
-    /* =========================================
-       STUDENT SESSION PROTECTION
-    ========================================== */
-
-    const loggedIn =
-      sessionStorage.getItem("snkStudentLoggedIn");
-
-    if (loggedIn !== "true") {
-
-      window.location.replace("login.html");
-
-    }
-
-
-    /* =========================================
-       SESSION STUDENT DATA
-    ========================================== */
-
-    const sessionStudentId =
-      sessionStorage.getItem("snkStudentId") || "SNK-1001";
-
-    const sessionStudentName =
-      sessionStorage.getItem("snkStudentName") || "Demo Student";
+       Connected Storage:
+       snkStudentLoggedIn
+       snkStudentId
+       snkStudentName
+       snkStudentCourse
+       snkStudentBatch
+       snkStudentProfile
+       snkTheme
+       ========================================================= */
 
 
-    /* =========================================
-       STORAGE KEY
-    ========================================== */
+    const STORAGE = {
 
-    const PROFILE_STORAGE_KEY =
-      "snkStudentProfile";
+      theme: "snkTheme",
 
+      loggedIn: "snkStudentLoggedIn",
 
-    /* =========================================
-       DEFAULT PROFILE
-    ========================================== */
+      studentId: "snkStudentId",
 
-    const defaultProfile = {
+      studentName: "snkStudentName",
 
-      name: sessionStudentName,
+      studentCourse: "snkStudentCourse",
 
-      studentId: sessionStudentId,
+      studentBatch: "snkStudentBatch",
 
-      phone: "",
-
-      email: "",
-
-      guardian: "",
-
-      guardianPhone: "",
-
-      gender: "",
-
-      dob: "",
-
-      address: ""
+      studentProfile: "snkStudentProfile"
 
     };
 
 
-    /* =========================================
-       ELEMENTS
-    ========================================== */
+    const DEFAULT_STUDENT = {
 
-    const profileName =
-      document.getElementById("profileName");
+      id: "SNK-1001",
 
-    const profileId =
-      document.getElementById("profileId");
+      name: "Student",
 
-    const avatar =
-      document.getElementById("avatar");
+      course: "Computer Office Application",
 
-    const basicName =
-      document.getElementById("basicName");
+      batch: "Batch 01"
 
-    const basicId =
-      document.getElementById("basicId");
-
-    const displayPhone =
-      document.getElementById("displayPhone");
-
-    const displayEmail =
-      document.getElementById("displayEmail");
-
-    const displayGuardian =
-      document.getElementById("displayGuardian");
-
-    const displayGuardianPhone =
-      document.getElementById("displayGuardianPhone");
-
-    const displayAddress =
-      document.getElementById("displayAddress");
-
-    const profileForm =
-      document.getElementById("profileForm");
-
-    const fullName =
-      document.getElementById("fullName");
-
-    const studentId =
-      document.getElementById("studentId");
-
-    const phone =
-      document.getElementById("phone");
-
-    const email =
-      document.getElementById("email");
-
-    const guardian =
-      document.getElementById("guardian");
-
-    const guardianPhone =
-      document.getElementById("guardianPhone");
-
-    const gender =
-      document.getElementById("gender");
-
-    const dob =
-      document.getElementById("dob");
-
-    const address =
-      document.getElementById("address");
-
-    const resetBtn =
-      document.getElementById("resetBtn");
-
-    const logoutBtn =
-      document.getElementById("logoutBtn");
-
-    const themeBtn =
-      document.getElementById("themeBtn");
-
-    const toast =
-      document.getElementById("toast");
+    };
 
 
-    /* =========================================
-       TOAST
-    ========================================== */
+    const $ = (selector) =>
+      document.querySelector(selector);
 
-    function showToast(message) {
 
-      toast.textContent = message;
+    /* =========================================================
+       LOGIN PROTECTION
+       ========================================================= */
 
-      toast.classList.add("show");
+    function protectPage(){
 
-      setTimeout(() => {
+      const loggedIn =
+        sessionStorage.getItem(
+          STORAGE.loggedIn
+        ) === "true";
 
-        toast.classList.remove("show");
 
-      }, 2800);
+      if(!loggedIn){
+
+        window.location.replace(
+          "login.html"
+        );
+
+        return false;
+
+      }
+
+
+      return true;
 
     }
 
 
-    /* =========================================
-       LOAD PROFILE
-    ========================================== */
+    /* =========================================================
+       READ STUDENT DATA
+       ========================================================= */
 
-    function loadProfile() {
+    function getStudentData(){
 
-      let savedProfile = null;
+      if(
+        sessionStorage.getItem(
+          STORAGE.loggedIn
+        ) !== "true"
+      ){
 
-      try {
+        return null;
 
-        savedProfile =
-          JSON.parse(
-            localStorage.getItem(PROFILE_STORAGE_KEY)
+      }
+
+
+      let profile = {};
+
+
+      try{
+
+        const raw =
+          localStorage.getItem(
+            STORAGE.studentProfile
           );
 
-      } catch (error) {
 
-        savedProfile = null;
+        if(raw){
+
+          profile =
+            JSON.parse(raw) || {};
+
+        }
+
+      }catch(error){
+
+        profile = {};
+
+      }
+
+
+      const id =
+        sessionStorage.getItem(
+          STORAGE.studentId
+        ) ||
+        localStorage.getItem(
+          STORAGE.studentId
+        ) ||
+        profile.studentId ||
+        DEFAULT_STUDENT.id;
+
+
+      const name =
+        sessionStorage.getItem(
+          STORAGE.studentName
+        ) ||
+        localStorage.getItem(
+          STORAGE.studentName
+        ) ||
+        profile.name ||
+        DEFAULT_STUDENT.name;
+
+
+      const course =
+        sessionStorage.getItem(
+          STORAGE.studentCourse
+        ) ||
+        localStorage.getItem(
+          STORAGE.studentCourse
+        ) ||
+        profile.course ||
+        DEFAULT_STUDENT.course;
+
+
+      const batch =
+        sessionStorage.getItem(
+          STORAGE.studentBatch
+        ) ||
+        localStorage.getItem(
+          STORAGE.studentBatch
+        ) ||
+        profile.batch ||
+        DEFAULT_STUDENT.batch;
+
+
+      return {
+
+        id,
+
+        name,
+
+        course,
+
+        batch,
+
+        profile
+
+      };
+
+    }
+
+
+    /* =========================================================
+       LOAD PROFILE
+       ========================================================= */
+
+    function loadProfile(){
+
+      const student =
+        getStudentData();
+
+
+      if(!student){
+
+        return;
+
+      }
+
+
+      const profile =
+        student.profile || {};
+
+
+      $("#studentId").value =
+        student.id;
+
+
+      $("#studentName").value =
+        profile.name ||
+        student.name;
+
+
+      $("#course").value =
+        student.course;
+
+
+      $("#batch").value =
+        student.batch;
+
+
+      $("#mobile").value =
+        profile.mobile ||
+        "";
+
+
+      $("#email").value =
+        profile.email ||
+        "";
+
+
+      $("#guardianName").value =
+        profile.guardianName ||
+        "";
+
+
+      $("#guardianPhone").value =
+        profile.guardianPhone ||
+        "";
+
+
+      $("#gender").value =
+        profile.gender ||
+        "";
+
+
+      $("#dob").value =
+        profile.dob ||
+        "";
+
+
+      $("#address").value =
+        profile.address ||
+        "";
+
+
+      if(profile.photo){
+
+        $("#avatarImage").src =
+          profile.photo;
+
+        $("#avatarImage").style.display =
+          "block";
+
+        $("#avatarLetter").style.display =
+          "none";
+
+      }
+
+
+      updateSummary(
+        student,
+        profile
+      );
+
+    }
+
+
+    /* =========================================================
+       UPDATE SUMMARY
+       ========================================================= */
+
+    function updateSummary(
+      student,
+      profile = {}
+    ){
+
+      const name =
+        profile.name ||
+        student.name ||
+        "Student";
+
+
+      $("#summaryName").textContent =
+        name;
+
+
+      $("#summaryId").textContent =
+        student.id;
+
+
+      $("#summaryCourse").textContent =
+        student.course;
+
+
+      $("#summaryBatch").textContent =
+        student.batch;
+
+
+      const firstLetter =
+        name
+          .trim()
+          .charAt(0)
+          .toUpperCase() ||
+        "S";
+
+
+      $("#avatarLetter").textContent =
+        firstLetter;
+
+    }
+
+
+    /* =========================================================
+       SAVE PROFILE
+       ========================================================= */
+
+    function saveProfile(event){
+
+      event.preventDefault();
+
+
+      const student =
+        getStudentData();
+
+
+      if(!student){
+
+        return;
 
       }
 
 
       const profile = {
 
-        ...defaultProfile,
+        studentId:
+          student.id,
 
-        ...(savedProfile || {})
+        name:
+          $("#studentName").value.trim() ||
+          "Student",
+
+        course:
+          student.course,
+
+        batch:
+          student.batch,
+
+        mobile:
+          $("#mobile").value.trim(),
+
+        email:
+          $("#email").value.trim(),
+
+        guardianName:
+          $("#guardianName").value.trim(),
+
+        guardianPhone:
+          $("#guardianPhone").value.trim(),
+
+        gender:
+          $("#gender").value,
+
+        dob:
+          $("#dob").value,
+
+        address:
+          $("#address").value.trim(),
+
+        updatedAt:
+          new Date().toISOString()
 
       };
 
 
+      localStorage.setItem(
+
+        STORAGE.studentProfile,
+
+        JSON.stringify(profile)
+
+      );
+
+
       /*
-        Session information always has priority
-        for Student ID.
-      */
+       * Keep the main login/session data
+       * synchronized with the new name.
+       */
 
-      profile.studentId =
-        sessionStudentId;
+      sessionStorage.setItem(
 
+        STORAGE.studentName,
 
-      if (!profile.name) {
-
-        profile.name =
-          sessionStudentName;
-
-      }
-
-
-      /* Header */
-
-      profileName.textContent =
-        profile.name;
-
-      profileId.textContent =
-        "Student ID: " + profile.studentId;
-
-
-      /* Avatar */
-
-      const firstLetter =
         profile.name
-          .trim()
-          .charAt(0)
-          .toUpperCase() || "S";
 
-      avatar.textContent =
-        firstLetter;
+      );
 
 
-      /* Basic Information */
+      localStorage.setItem(
 
-      basicName.textContent =
-        profile.name;
+        STORAGE.studentName,
 
-      basicId.textContent =
-        profile.studentId;
+        profile.name
 
-
-      /* Form */
-
-      fullName.value =
-        profile.name;
-
-      studentId.value =
-        profile.studentId;
-
-      phone.value =
-        profile.phone;
-
-      email.value =
-        profile.email;
-
-      guardian.value =
-        profile.guardian;
-
-      guardianPhone.value =
-        profile.guardianPhone;
-
-      gender.value =
-        profile.gender;
-
-      dob.value =
-        profile.dob;
-
-      address.value =
-        profile.address;
+      );
 
 
-      /* Contact display */
+      updateSummary(
+        student,
+        profile
+      );
 
-      displayPhone.textContent =
-        profile.phone || "Not added";
 
-      displayEmail.textContent =
-        profile.email || "Not added";
-
-      displayGuardian.textContent =
-        profile.guardian || "Not added";
-
-      displayGuardianPhone.textContent =
-        profile.guardianPhone || "Not added";
-
-      displayAddress.textContent =
-        profile.address || "Not added";
+      showToast(
+        "Profile saved successfully"
+      );
 
     }
 
 
-    /* =========================================
-       SAVE PROFILE
-    ========================================== */
-
-    profileForm.addEventListener(
-      "submit",
-      function(event) {
-
-        event.preventDefault();
-
-
-        const profile = {
-
-          name:
-            fullName.value.trim() ||
-            sessionStudentName,
-
-          studentId:
-            sessionStudentId,
-
-          phone:
-            phone.value.trim(),
-
-          email:
-            email.value.trim(),
-
-          guardian:
-            guardian.value.trim(),
-
-          guardianPhone:
-            guardianPhone.value.trim(),
-
-          gender:
-            gender.value,
-
-          dob:
-            dob.value,
-
-          address:
-            address.value.trim()
-
-        };
-
-
-        try {
-
-          localStorage.setItem(
-            PROFILE_STORAGE_KEY,
-            JSON.stringify(profile)
-          );
-
-
-          /*
-            Update session name so that
-            Dashboard can use the latest name.
-          */
-
-          sessionStorage.setItem(
-            "snkStudentName",
-            profile.name
-          );
-
-
-          loadProfile();
-
-          showToast(
-            "✅ Profile successfully saved."
-          );
-
-        } catch (error) {
-
-          showToast(
-            "❌ Profile save করা যায়নি।"
-          );
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
+    /* =========================================================
        RESET FORM
-    ========================================== */
+       ========================================================= */
 
-    resetBtn.addEventListener(
-      "click",
-      function() {
+    function resetForm(){
 
-        const confirmReset =
-          confirm(
-            "আপনি কি Profile form reset করতে চান?"
-          );
+      loadProfile();
 
+      showToast(
+        "Changes reset"
+      );
 
-        if (!confirmReset) {
-          return;
-        }
+    }
 
 
-        loadProfile();
+    /* =========================================================
+       THEME
+       ========================================================= */
 
-        showToast(
-          "↻ Form reset হয়েছে।"
-        );
+    function applyTheme(){
+
+      const theme =
+        localStorage.getItem(
+          STORAGE.theme
+        ) ||
+        "dark";
+
+
+      document.documentElement.dataset.theme =
+        theme;
+
+
+      const button =
+        $("#themeToggle");
+
+
+      if(!button){
+
+        return;
 
       }
-    );
 
 
-    /* =========================================
+      button.textContent =
+        theme === "light"
+          ? "Dark"
+          : "Theme";
+
+    }
+
+
+    function toggleTheme(){
+
+      const current =
+        localStorage.getItem(
+          STORAGE.theme
+        ) ||
+        "dark";
+
+
+      const next =
+        current === "dark"
+          ? "light"
+          : "dark";
+
+
+      localStorage.setItem(
+
+        STORAGE.theme,
+
+        next
+
+      );
+
+
+      applyTheme();
+
+
+      showToast(
+
+        next === "dark"
+          ? "Dark theme enabled"
+          : "Light theme enabled"
+
+      );
+
+    }
+
+
+    /* =========================================================
        LOGOUT
-    ========================================== */
+       ========================================================= */
 
-    logoutBtn.addEventListener(
-      "click",
-      function() {
+    function logout(){
 
-        const confirmLogout =
-          confirm(
-            "আপনি কি Student Portal থেকে Logout করতে চান?"
-          );
+      sessionStorage.removeItem(
+        STORAGE.loggedIn
+      );
+
+      sessionStorage.removeItem(
+        STORAGE.studentId
+      );
+
+      sessionStorage.removeItem(
+        STORAGE.studentName
+      );
+
+      sessionStorage.removeItem(
+        STORAGE.studentCourse
+      );
+
+      sessionStorage.removeItem(
+        STORAGE.studentBatch
+      );
 
 
-        if (!confirmLogout) {
-          return;
-        }
+      showToast(
+        "Logged out successfully"
+      );
 
 
-        sessionStorage.removeItem(
-          "snkStudentLoggedIn"
-        );
-
-        sessionStorage.removeItem(
-          "snkStudentId"
-        );
-
-        sessionStorage.removeItem(
-          "snkStudentName"
-        );
-
-        sessionStorage.removeItem(
-          "snkStudentCourse"
-        );
-
+      setTimeout(() => {
 
         window.location.replace(
           "login.html"
         );
 
+      },350);
+
+    }
+
+
+    /* =========================================================
+       MOBILE MENU
+       ========================================================= */
+
+    function setupMobileMenu(){
+
+      const button =
+        $("#mobileMenuBtn");
+
+
+      const nav =
+        $("#mainNav");
+
+
+      if(!button || !nav){
+
+        return;
+
       }
-    );
 
 
-    /* =========================================
-       THEME
-    ========================================== */
+      button.addEventListener(
+        "click",
+        () => {
 
-    function applyTheme() {
-
-      const theme =
-        localStorage.getItem("snkTheme") ||
-        "light";
+          const open =
+            nav.style.display === "flex";
 
 
-      if (theme === "dark") {
+          if(open){
 
-        document.body.classList.add("dark");
+            nav.style.display =
+              "";
 
-        themeBtn.textContent = "☀️";
+            return;
 
-      } else {
+          }
 
-        document.body.classList.remove("dark");
 
-        themeBtn.textContent = "🌙";
+          nav.style.display =
+            "flex";
+
+          nav.style.position =
+            "absolute";
+
+          nav.style.top =
+            "72px";
+
+          nav.style.left =
+            "11px";
+
+          nav.style.right =
+            "11px";
+
+          nav.style.padding =
+            "10px";
+
+          nav.style.flexDirection =
+            "column";
+
+          nav.style.alignItems =
+            "stretch";
+
+          nav.style.background =
+            "rgba(7,17,31,.98)";
+
+          nav.style.border =
+            "1px solid rgba(255,255,255,.09)";
+
+          nav.style.borderRadius =
+            "14px";
+
+          nav.style.zIndex =
+            "60";
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    function showToast(message){
+
+      const toast =
+        $("#toast");
+
+
+      if(!toast){
+
+        return;
+
+      }
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        window.__snkProfileToast
+      );
+
+
+      window.__snkProfileToast =
+        setTimeout(() => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        },2400);
+
+    }
+
+
+    /* =========================================================
+       PRINT
+       ========================================================= */
+
+    function printProfile(){
+
+      window.print();
+
+    }
+
+
+    /* =========================================================
+       CURRENT YEAR
+       ========================================================= */
+
+    function setCurrentYear(){
+
+      const year =
+        $("#currentYear");
+
+
+      if(year){
+
+        year.textContent =
+          new Date().getFullYear();
 
       }
 
     }
 
 
-    themeBtn.addEventListener(
-      "click",
-      function() {
+    /* =========================================================
+       PROFILE IMAGE FALLBACK
+       Future support
+       ========================================================= */
 
-        const isDark =
-          document.body.classList.contains("dark");
+    function setupImageFallback(){
 
-
-        if (isDark) {
-
-          localStorage.setItem(
-            "snkTheme",
-            "light"
-          );
-
-        } else {
-
-          localStorage.setItem(
-            "snkTheme",
-            "dark"
-          );
-
-        }
+      const image =
+        $("#avatarImage");
 
 
-        applyTheme();
+      if(!image){
+
+        return;
 
       }
-    );
 
 
-    /* =========================================
-       STORAGE SYNC
-    ========================================== */
+      image.addEventListener(
+        "error",
+        () => {
 
-    window.addEventListener(
-      "storage",
-      function(event) {
+          image.style.display =
+            "none";
 
-        if (
-          event.key === PROFILE_STORAGE_KEY ||
-          event.key === "snkStudentName" ||
-          event.key === "snkStudentId"
-        ) {
-
-          loadProfile();
+          $("#avatarLetter").style.display =
+            "block";
 
         }
+      );
+
+    }
 
 
-        if (
-          event.key === "snkTheme"
-        ) {
+    /* =========================================================
+       STORAGE REFRESH
+       ========================================================= */
+
+    function setupStorageSync(){
+
+      window.addEventListener(
+        "storage",
+        () => {
+
+          const student =
+            getStudentData();
+
+
+          if(student){
+
+            loadProfile();
+
+          }
+
 
           applyTheme();
 
         }
+      );
+
+
+      document.addEventListener(
+        "visibilitychange",
+        () => {
+
+          if(
+            document.visibilityState ===
+            "visible"
+          ){
+
+            const student =
+              getStudentData();
+
+
+            if(student){
+
+              loadProfile();
+
+            }
+
+
+            applyTheme();
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       INITIALIZATION
+       ========================================================= */
+
+    function init(){
+
+      if(!protectPage()){
+
+        return;
 
       }
-    );
 
 
-    /* =========================================
-       VISIBILITY REFRESH
-    ========================================== */
+      const student =
+        getStudentData();
+
+
+      if(!student){
+
+        window.location.replace(
+          "login.html"
+        );
+
+        return;
+
+      }
+
+
+      loadProfile();
+
+      applyTheme();
+
+      setCurrentYear();
+
+      setupMobileMenu();
+
+      setupImageFallback();
+
+      setupStorageSync();
+
+
+      $("#profileForm")
+        ?.addEventListener(
+          "submit",
+          saveProfile
+        );
+
+
+      $("#resetBtn")
+        ?.addEventListener(
+          "click",
+          resetForm
+        );
+
+
+      $("#printBtn")
+        ?.addEventListener(
+          "click",
+          printProfile
+        );
+
+
+      $("#themeToggle")
+        ?.addEventListener(
+          "click",
+          toggleTheme
+        );
+
+
+      $("#logoutBtn")
+        ?.addEventListener(
+          "click",
+          logout
+        );
+
+
+      /*
+       * Global API for future modules.
+       */
+
+      window.SNKStudentProfileAPI = {
+
+        getStudent:
+          getStudentData,
+
+        reload:
+          loadProfile,
+
+        save:
+          () => {
+
+            $("#profileForm")
+              ?.requestSubmit();
+
+          },
+
+        logout
+
+      };
+
+    }
+
 
     document.addEventListener(
-      "visibilitychange",
-      function() {
-
-        if (
-          document.visibilityState === "visible"
-        ) {
-
-          loadProfile();
-
-          applyTheme();
-
-        }
-
-      }
+      "DOMContentLoaded",
+      init
     );
-
-
-    /* =========================================
-       INITIALIZE
-    ========================================== */
-
-    applyTheme();
-
-    loadProfile();
 
   </script>
 
