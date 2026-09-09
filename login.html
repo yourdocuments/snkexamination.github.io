@@ -1,1366 +1,1087 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Student Login | SNK IT Institute</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
-rel="stylesheet"
->
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --text:#172033;
-    --muted:#667085;
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
-    --border:#e5e7eb;
-    --soft:#eff6ff;
-    --success:#16a34a;
-    --danger:#dc2626;
-    --shadow:0 20px 50px rgba(15,23,42,.10);
-}
-
-body.dark{
-    --bg:#0b1120;
-    --card:#111827;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --primary:#3b82f6;
-    --primary-dark:#2563eb;
-    --border:#1f2937;
-    --soft:#172554;
-    --shadow:0 20px 50px rgba(0,0,0,.30);
-}
-
-body{
-    font-family:"Noto Sans Bengali",Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    transition:.3s;
-}
-
-
-/* =========================
-   HEADER
-   ========================= */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:var(--card);
-    border-bottom:1px solid var(--border);
-}
-
-.navbar{
-    width:min(1150px,94%);
-    margin:auto;
-    min-height:70px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    text-decoration:none;
-    color:var(--text);
-}
-
-.logo img{
-    width:45px;
-    height:45px;
-    object-fit:contain;
-}
-
-.logo-text{
-    font-size:17px;
-    font-weight:800;
-}
-
-.logo-text small{
-    display:block;
-    color:var(--muted);
-    font-size:9px;
-    font-weight:500;
-}
-
-.nav-actions{
-    display:flex;
-    align-items:center;
-    gap:7px;
-}
-
-.nav-btn{
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    padding:8px 11px;
-    border-radius:8px;
-    font-family:inherit;
-    font-size:10px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.nav-btn:hover{
-    border-color:var(--primary);
-    background:var(--soft);
-}
-
-
-/* =========================
-   PAGE
-   ========================= */
-
-.page{
-    width:min(1150px,94%);
-    margin:40px auto;
-}
-
-.login-layout{
-    min-height:calc(100vh - 150px);
-    display:grid;
-    grid-template-columns:1fr 430px;
-    gap:30px;
-    align-items:center;
-}
-
-
-/* =========================
-   LEFT SIDE
-   ========================= */
-
-.intro{
-    padding:30px 10px;
-}
-
-.intro-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    background:var(--soft);
-    color:var(--primary);
-    border:1px solid #bfdbfe;
-    padding:8px 13px;
-    border-radius:25px;
-    font-size:10px;
-    font-weight:800;
-    margin-bottom:18px;
-}
-
-.intro h1{
-    font-size:42px;
-    line-height:1.25;
-    margin-bottom:14px;
-}
-
-.intro h1 span{
-    color:var(--primary);
-}
-
-.intro p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.9;
-    max-width:600px;
-}
-
-.feature-list{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin-top:25px;
-}
-
-.feature{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:15px;
-}
-
-.feature-icon{
-    width:38px;
-    height:38px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--soft);
-    border-radius:10px;
-    font-size:18px;
-    margin-bottom:9px;
-}
-
-.feature h3{
-    font-size:12px;
-    margin-bottom:3px;
-}
-
-.feature p{
-    font-size:9px;
-    line-height:1.6;
-}
-
-
-/* =========================
-   LOGIN CARD
-   ========================= */
-
-.login-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:24px;
-    padding:30px;
-    box-shadow:var(--shadow);
-}
-
-.login-heading{
-    text-align:center;
-    margin-bottom:24px;
-}
-
-.login-icon{
-    width:68px;
-    height:68px;
-    margin:0 auto 13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:18px;
-    background:var(--soft);
-    font-size:31px;
-}
-
-.login-heading h2{
-    font-size:24px;
-    margin-bottom:5px;
-}
-
-.login-heading p{
-    color:var(--muted);
-    font-size:10px;
-}
-
-
-/* =========================
-   FORM
-   ========================= */
-
-.form-group{
-    margin-bottom:16px;
-}
-
-.form-label{
-    display:block;
-    font-size:10px;
-    font-weight:800;
-    margin-bottom:7px;
-}
-
-.input-wrap{
-    position:relative;
-}
-
-.input-icon{
-    position:absolute;
-    left:12px;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:15px;
-    z-index:2;
-}
-
-.form-input{
-    width:100%;
-    height:45px;
-    border:1px solid var(--border);
-    background:var(--bg);
-    color:var(--text);
-    border-radius:10px;
-    padding:0 42px 0 38px;
-    outline:none;
-    font-family:inherit;
-    font-size:11px;
-    transition:.2s;
-}
-
-.form-input:focus{
-    border-color:var(--primary);
-    box-shadow:0 0 0 3px rgba(37,99,235,.10);
-}
-
-.password-toggle{
-    position:absolute;
-    right:10px;
-    top:50%;
-    transform:translateY(-50%);
-    border:none;
-    background:transparent;
-    color:var(--muted);
-    font-size:15px;
-    cursor:pointer;
-}
-
-.form-options{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin:5px 0 18px;
-}
-
-.remember{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    color:var(--muted);
-    font-size:9px;
-}
-
-.remember input{
-    accent-color:var(--primary);
-}
-
-.forgot{
-    color:var(--primary);
-    font-size:9px;
-    font-weight:700;
-    text-decoration:none;
-}
-
-.login-submit{
-    width:100%;
-    height:46px;
-    border:none;
-    border-radius:10px;
-    background:var(--primary);
-    color:#fff;
-    font-family:inherit;
-    font-size:12px;
-    font-weight:800;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.login-submit:hover{
-    background:var(--primary-dark);
-    transform:translateY(-1px);
-}
-
-.login-submit:disabled{
-    opacity:.7;
-    cursor:not-allowed;
-    transform:none;
-}
-
-
-/* =========================
-   MESSAGE
-   ========================= */
-
-.message{
-    display:none;
-    padding:11px 12px;
-    border-radius:9px;
-    margin-bottom:15px;
-    font-size:9px;
-    line-height:1.6;
-}
-
-.message.error{
-    display:block;
-    background:#fef2f2;
-    border:1px solid #fecaca;
-    color:#b91c1c;
-}
-
-.message.success{
-    display:block;
-    background:#f0fdf4;
-    border:1px solid #bbf7d0;
-    color:#166534;
-}
-
-
-/* =========================
-   DEMO LOGIN
-   ========================= */
-
-.demo-box{
-    margin-top:18px;
-    padding:13px;
-    border:1px dashed var(--border);
-    border-radius:11px;
-    background:var(--soft);
-}
-
-.demo-title{
-    font-size:10px;
-    font-weight:800;
-    color:var(--primary);
-    margin-bottom:7px;
-}
-
-.demo-row{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    font-size:9px;
-    color:var(--muted);
-    margin-top:4px;
-}
-
-.demo-row strong{
-    color:var(--text);
-}
-
-
-/* =========================
-   SECURITY NOTE
-   ========================= */
-
-.security-note{
-    margin-top:18px;
-    padding-top:15px;
-    border-top:1px solid var(--border);
-    text-align:center;
-    color:var(--muted);
-    font-size:9px;
-    line-height:1.7;
-}
-
-
-/* =========================
-   FOOTER
-   ========================= */
-
-footer{
-    border-top:1px solid var(--border);
-    background:var(--card);
-    text-align:center;
-    padding:20px;
-}
-
-footer p{
-    color:var(--muted);
-    font-size:9px;
-    margin:3px;
-}
-
-
-/* =========================
-   RESPONSIVE
-   ========================= */
-
-@media(max-width:850px){
-
-    .login-layout{
-        grid-template-columns:1fr;
-        min-height:auto;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Student Login | SNK IT Institute</title>
+
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="SNK IT Institute Student Portal Login">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#0b1730;
+      --card:rgba(14,25,48,.86);
+      --card2:rgba(19,34,63,.92);
+      --text:#f5f7ff;
+      --muted:#aebbd2;
+      --primary:#6c63ff;
+      --primary2:#8b7cff;
+      --cyan:#22d3ee;
+      --green:#22c55e;
+      --danger:#ef4444;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 25px 70px rgba(0,0,0,.38);
     }
 
-    .intro{
-        text-align:center;
-        padding:15px 0 0;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    .intro p{
-        margin:auto;
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      font-family:"Poppins","Noto Sans Bengali",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%,rgba(108,99,255,.18),transparent 28%),
+        radial-gradient(circle at 85% 75%,rgba(34,211,238,.12),transparent 30%),
+        linear-gradient(135deg,var(--bg),var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px),
+        radial-gradient(circle,rgba(255,255,255,.35) 1px,transparent 1px);
+      background-size:110px 110px,180px 180px;
+      background-position:20px 30px,80px 100px;
+      opacity:.16;
+    }
+
+    .login-shell{
+      width:min(1050px,100%);
+      min-height:650px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      position:relative;
+      z-index:1;
+      border:1px solid var(--border);
+      border-radius:30px;
+      overflow:hidden;
+      background:rgba(7,14,29,.65);
+      backdrop-filter:blur(20px);
+      box-shadow:var(--shadow);
+    }
+
+    .visual{
+      position:relative;
+      padding:50px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 30% 30%,rgba(108,99,255,.28),transparent 35%),
+        radial-gradient(circle at 75% 70%,rgba(34,211,238,.14),transparent 35%),
+        linear-gradient(145deg,rgba(20,31,62,.9),rgba(7,14,29,.95));
+    }
+
+    .visual::before,
+    .visual::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      border:1px solid rgba(139,124,255,.18);
+    }
+
+    .visual::before{
+      width:430px;
+      height:430px;
+      top:-150px;
+      right:-150px;
+    }
+
+    .visual::after{
+      width:620px;
+      height:620px;
+      bottom:-350px;
+      left:-250px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:55px;
+      position:relative;
+      z-index:2;
+    }
+
+    .brand-logo{
+      width:55px;
+      height:55px;
+      border-radius:16px;
+      object-fit:contain;
+      background:#fff;
+      padding:7px;
+      box-shadow:0 10px 35px rgba(108,99,255,.3);
+    }
+
+    .brand strong{
+      display:block;
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .brand span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      margin-top:2px;
+    }
+
+    .visual-content{
+      position:relative;
+      z-index:2;
+      max-width:540px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:rgba(108,99,255,.12);
+      border:1px solid rgba(139,124,255,.22);
+      color:#c7c2ff;
+      font-size:12px;
+      font-weight:700;
+      margin-bottom:20px;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 14px var(--green);
+    }
+
+    .visual h1{
+      font-size:clamp(34px,4vw,56px);
+      line-height:1.08;
+      letter-spacing:-1.5px;
+      margin-bottom:20px;
+    }
+
+    .gradient-text{
+      background:linear-gradient(90deg,#fff,#a99fff,#6ee7f7);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .visual p{
+      color:var(--muted);
+      line-height:1.9;
+      font-size:15px;
+      max-width:470px;
     }
 
     .feature-list{
-        text-align:left;
+      list-style:none;
+      margin-top:32px;
+      display:grid;
+      gap:13px;
     }
 
-    .login-card{
-        max-width:500px;
-        width:100%;
-        margin:auto;
-    }
-}
-
-
-@media(max-width:550px){
-
-    .navbar{
-        min-height:62px;
+    .feature-list li{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#dfe6f5;
+      font-size:14px;
     }
 
-    .logo img{
-        width:38px;
-        height:38px;
+    .feature-icon{
+      width:30px;
+      height:30px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      background:rgba(108,99,255,.15);
+      border:1px solid rgba(139,124,255,.18);
+      color:#bdb6ff;
+      font-size:13px;
+      flex-shrink:0;
     }
 
-    .logo-text{
+    .form-panel{
+      padding:48px;
+      background:rgba(11,19,37,.72);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .form-top{
+      margin-bottom:30px;
+    }
+
+    .form-top h2{
+      font-size:31px;
+      margin-bottom:9px;
+    }
+
+    .form-top p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .form-group{
+      margin-bottom:19px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-size:13px;
+      font-weight:600;
+      color:#e8edf9;
+    }
+
+    .input-wrap{
+      position:relative;
+    }
+
+    .input-icon{
+      position:absolute;
+      left:15px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#8593ad;
+      pointer-events:none;
+      font-size:14px;
+    }
+
+    input{
+      width:100%;
+      height:52px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      outline:none;
+      background:rgba(255,255,255,.045);
+      color:var(--text);
+      padding:0 46px 0 43px;
+      font:inherit;
+      transition:.2s ease;
+    }
+
+    input::placeholder{
+      color:#66758e;
+    }
+
+    input:focus{
+      border-color:rgba(139,124,255,.75);
+      box-shadow:0 0 0 4px rgba(108,99,255,.10);
+      background:rgba(255,255,255,.065);
+    }
+
+    .password-toggle{
+      position:absolute;
+      right:13px;
+      top:50%;
+      transform:translateY(-50%);
+      border:0;
+      background:transparent;
+      color:#8997b0;
+      cursor:pointer;
+      padding:7px;
+      font-size:13px;
+    }
+
+    .password-toggle:hover{
+      color:#fff;
+    }
+
+    .form-options{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      margin:2px 0 22px;
+      font-size:12px;
+    }
+
+    .remember{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      cursor:pointer;
+    }
+
+    .remember input{
+      width:15px;
+      height:15px;
+      padding:0;
+      accent-color:var(--primary);
+      box-shadow:none;
+    }
+
+    .forgot{
+      color:#a99fff;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .forgot:hover{
+      color:#fff;
+    }
+
+    .login-btn{
+      width:100%;
+      height:54px;
+      border:0;
+      border-radius:15px;
+      cursor:pointer;
+      color:#fff;
+      font:inherit;
+      font-weight:800;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      box-shadow:0 15px 35px rgba(108,99,255,.24);
+      transition:.2s ease;
+    }
+
+    .login-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 18px 40px rgba(108,99,255,.34);
+    }
+
+    .login-btn:active{
+      transform:translateY(0);
+    }
+
+    .login-btn.loading{
+      opacity:.7;
+      cursor:wait;
+    }
+
+    .message{
+      min-height:22px;
+      margin-top:14px;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .message.error{
+      color:#fca5a5;
+    }
+
+    .message.success{
+      color:#86efac;
+    }
+
+    .demo-box{
+      margin-top:25px;
+      padding:15px;
+      border-radius:15px;
+      border:1px dashed rgba(139,124,255,.28);
+      background:rgba(108,99,255,.06);
+    }
+
+    .demo-box strong{
+      display:block;
+      font-size:12px;
+      margin-bottom:8px;
+      color:#c9c4ff;
+    }
+
+    .demo-box p{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .demo-box code{
+      color:#fff;
+      background:rgba(255,255,255,.07);
+      padding:2px 6px;
+      border-radius:5px;
+    }
+
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:20px;
+      color:var(--muted);
+      text-decoration:none;
+      font-size:12px;
+    }
+
+    .back-link:hover{
+      color:#fff;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:25px;
+      transform:translate(-50%,20px);
+      padding:12px 17px;
+      border-radius:12px;
+      background:#111c33;
+      border:1px solid var(--border);
+      color:#fff;
+      font-size:13px;
+      box-shadow:0 15px 35px rgba(0,0,0,.35);
+      opacity:0;
+      pointer-events:none;
+      transition:.25s ease;
+      z-index:100;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+
+    @media(max-width:850px){
+      .login-shell{
+        grid-template-columns:1fr;
+        max-width:600px;
+      }
+
+      .visual{
+        min-height:390px;
+        padding:35px;
+      }
+
+      .brand{
+        margin-bottom:35px;
+      }
+
+      .visual h1{
+        font-size:38px;
+      }
+
+      .form-panel{
+        padding:35px;
+      }
+    }
+
+    @media(max-width:520px){
+      body{
+        padding:12px;
+      }
+
+      .login-shell{
+        border-radius:22px;
+      }
+
+      .visual,
+      .form-panel{
+        padding:25px 20px;
+      }
+
+      .visual{
+        min-height:350px;
+      }
+
+      .visual h1{
+        font-size:32px;
+      }
+
+      .visual p{
         font-size:13px;
+      }
+
+      .form-top h2{
+        font-size:26px;
+      }
+
+      .form-options{
+        align-items:flex-start;
+      }
     }
 
-    .logo-text small{
-        font-size:7px;
+    @media(prefers-reduced-motion:reduce){
+      *,
+      *::before,
+      *::after{
+        scroll-behavior:auto!important;
+        transition:none!important;
+      }
     }
-
-    .nav-btn{
-        padding:7px 8px;
-        font-size:8px;
-    }
-
-    .page{
-        margin:20px auto;
-    }
-
-    .intro h1{
-        font-size:30px;
-    }
-
-    .intro p{
-        font-size:11px;
-    }
-
-    .feature-list{
-        grid-template-columns:1fr;
-    }
-
-    .login-card{
-        padding:22px 18px;
-        border-radius:19px;
-    }
-
-    .login-heading h2{
-        font-size:21px;
-    }
-}
-
-</style>
-
+  </style>
 </head>
-
 
 <body>
 
+  <main class="login-shell">
+
+    <section class="visual">
+
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+          alt="SNK IT Institute Logo"
+          onerror="this.style.display='none'"
+        >
+
+        <div>
+          <strong>SNK IT Institute</strong>
+          <span>Student Portal</span>
+        </div>
+      </div>
+
+      <div class="visual-content">
+
+        <div class="eyebrow">
+          Student Portal
+        </div>
+
+        <h1>
+          Welcome to your
+          <span class="gradient-text">learning journey.</span>
+        </h1>
+
+        <p>
+          আপনার Student Portal-এ Login করে Course, Class, Assignment,
+          Quiz, Result, Attendance এবং অন্যান্য প্রয়োজনীয় তথ্য এক জায়গা থেকে দেখুন।
+        </p>
+
+        <ul class="feature-list">
+          <li>
+            <span class="feature-icon">✓</span>
+            Student Dashboard Access
+          </li>
 
-<!-- =========================
-     HEADER
-     ========================= -->
+          <li>
+            <span class="feature-icon">✓</span>
+            Course & Class Information
+          </li>
 
-<header>
+          <li>
+            <span class="feature-icon">✓</span>
+            Assignment, Quiz & Result
+          </li>
 
-<nav class="navbar">
+          <li>
+            <span class="feature-icon">✓</span>
+            Attendance & Student Resources
+          </li>
+        </ul>
 
-<a
-href="index.html"
-class="logo"
->
+      </div>
 
-<img
-src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-alt="SNK IT Institute Logo"
->
+    </section>
 
-<div class="logo-text">
 
-SNK IT Institute
+    <section class="form-panel">
 
-<small>
-Offline Course Student Portal
-</small>
+      <div class="form-top">
+        <h2>Student Login</h2>
+        <p>
+          আপনার Student ID এবং Password দিয়ে Portal-এ প্রবেশ করুন।
+        </p>
+      </div>
 
-</div>
+      <form id="loginForm" autocomplete="on">
 
-</a>
+        <div class="form-group">
+          <label for="studentId">Student ID</label>
 
+          <div class="input-wrap">
+            <span class="input-icon">ID</span>
 
-<div class="nav-actions">
+            <input
+              type="text"
+              id="studentId"
+              name="studentId"
+              placeholder="Enter Student ID"
+              autocomplete="username"
+              required
+            >
+          </div>
+        </div>
 
-<button
-class="nav-btn"
-onclick="toggleTheme()"
-id="themeBtn"
->
-🌙
-</button>
 
-<a
-href="index.html"
-class="nav-btn"
->
-← Home
-</a>
+        <div class="form-group">
+          <label for="password">Password</label>
 
-</div>
+          <div class="input-wrap">
+            <span class="input-icon">••</span>
 
-</nav>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter Password"
+              autocomplete="current-password"
+              required
+            >
 
-</header>
+            <button
+              type="button"
+              class="password-toggle"
+              id="passwordToggle"
+              aria-label="Show password"
+            >
+              Show
+            </button>
+          </div>
+        </div>
 
 
+        <div class="form-options">
 
-<!-- =========================
-     MAIN
-     ========================= -->
+          <label class="remember">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
 
-<main class="page">
+          <a href="#" class="forgot" id="forgotPassword">
+            Forgot Password?
+          </a>
 
-<div class="login-layout">
+        </div>
 
 
-<!-- =========================
-     INTRO
-     ========================= -->
+        <button type="submit" class="login-btn" id="loginButton">
+          Login to Student Portal
+        </button>
 
-<section class="intro">
+        <div id="loginMessage" class="message" aria-live="polite"></div>
 
-<span class="intro-badge">
-🔐 Secure Student Portal
-</span>
+      </form>
 
 
-<h1>
-Welcome to
-<span>SNK IT Institute</span>
-Student Portal
-</h1>
+      <div class="demo-box">
+        <strong>Demo Student Account</strong>
 
+        <p>
+          Student ID:
+          <code>SNK-1001</code>
+          <br>
 
-<p>
+          Password:
+          <code>123456</code>
+        </p>
+      </div>
 
-Student ID এবং Password ব্যবহার করে
-আপনার Student Portal-এ Login করুন।
-Login করার পর Course, Assignment, Quiz,
-Attendance এবং Result-এর তথ্য দেখা যাবে।
 
-</p>
+      <a href="index.html" class="back-link">
+        ← Back to Home
+      </a>
 
+    </section>
 
-<div class="feature-list">
+  </main>
 
 
-<div class="feature">
+  <div class="toast" id="toast"></div>
 
-<div class="feature-icon">
-📚
-</div>
 
-<h3>
-My Course
-</h3>
+  <script>
+    /* =========================================================
+       SNK IT INSTITUTE
+       Student Portal Login
+       Step 1.19.2
+       ========================================================= */
 
-<p>
-আপনার Course ও Batch-এর তথ্য দেখুন।
-</p>
+    const STORAGE = {
+      theme: "snkTheme",
+      loggedIn: "snkStudentLoggedIn",
+      studentId: "snkStudentId",
+      studentName: "snkStudentName",
+      studentCourse: "snkStudentCourse",
+      studentBatch: "snkStudentBatch",
+      studentProfile: "snkStudentProfile",
+      rememberMe: "snkRememberMe"
+    };
 
-</div>
 
+    const DEMO_STUDENT = {
+      id: "SNK-1001",
+      name: "Student",
+      course: "Computer Office Application",
+      batch: "Batch 01",
+      password: "123456"
+    };
 
-<div class="feature">
 
-<div class="feature-icon">
-📝
-</div>
+    const $ = (selector) => document.querySelector(selector);
 
-<h3>
-Assignment
-</h3>
 
-<p>
-Assignment এবং Submission manage করুন।
-</p>
+    function showToast(message) {
+      const toast = $("#toast");
 
-</div>
+      if (!toast) return;
 
+      toast.textContent = message;
+      toast.classList.add("show");
 
-<div class="feature">
+      clearTimeout(window.__snkToastTimer);
 
-<div class="feature-icon">
-🎯
-</div>
-
-<h3>
-Quiz
-</h3>
-
-<p>
-Online Timed Quiz দিন।
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<div class="feature-icon">
-📊
-</div>
-
-<h3>
-Result
-</h3>
-
-<p>
-আপনার Result ও Performance দেখুন।
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
-     LOGIN CARD
-     ========================= -->
-
-<section class="login-card">
-
-
-<div class="login-heading">
-
-<div class="login-icon">
-👨‍🎓
-</div>
-
-<h2>
-Student Login
-</h2>
-
-<p>
-আপনার Student Account-এ প্রবেশ করুন
-</p>
-
-</div>
-
-
-
-<div
-id="message"
-class="message"
->
-</div>
-
-
-
-<form
-id="loginForm"
-onsubmit="handleLogin(event)"
->
-
-
-<!-- STUDENT ID -->
-
-<div class="form-group">
-
-<label
-class="form-label"
-for="studentId"
->
-Student ID
-</label>
-
-
-<div class="input-wrap">
-
-<span class="input-icon">
-🆔
-</span>
-
-
-<input
-type="text"
-id="studentId"
-class="form-input"
-placeholder="যেমন: SNK-1001"
-autocomplete="username"
-required
->
-
-</div>
-
-</div>
-
-
-
-<!-- PASSWORD -->
-
-<div class="form-group">
-
-<label
-class="form-label"
-for="password"
->
-Password
-</label>
-
-
-<div class="input-wrap">
-
-<span class="input-icon">
-🔑
-</span>
-
-
-<input
-type="password"
-id="password"
-class="form-input"
-placeholder="আপনার Password লিখুন"
-autocomplete="current-password"
-required
->
-
-
-<button
-type="button"
-class="password-toggle"
-onclick="togglePassword()"
-id="passwordToggle"
-aria-label="Show password"
->
-👁️
-</button>
-
-</div>
-
-</div>
-
-
-
-<!-- OPTIONS -->
-
-<div class="form-options">
-
-<label class="remember">
-
-<input
-type="checkbox"
-id="rememberMe"
->
-
-<span>
-Remember me
-</span>
-
-</label>
-
-
-<a
-href="#"
-class="forgot"
-onclick="forgotPassword(event)"
->
-Forgot Password?
-</a>
-
-</div>
-
-
-
-<!-- LOGIN -->
-
-<button
-type="submit"
-class="login-submit"
-id="loginBtn"
->
-🔐 Login to Student Portal
-</button>
-
-
-</form>
-
-
-
-<!-- DEMO -->
-
-<div class="demo-box">
-
-<div class="demo-title">
-🧪 Demo Login
-</div>
-
-
-<div class="demo-row">
-
-<span>
-Student ID
-</span>
-
-<strong>
-SNK-1001
-</strong>
-
-</div>
-
-
-<div class="demo-row">
-
-<span>
-Password
-</span>
-
-<strong>
-123456
-</strong>
-
-</div>
-
-</div>
-
-
-
-<div class="security-note">
-
-🔒 আপনার Login Session এই Browser-এর
-Session Storage-এ রাখা হবে।
-
-<br>
-
-বর্তমানে এটি Demo Login System।
-পরবর্তী ধাপে Admin/Student Database-এর
-সাথে Connect করা হবে।
-
-</div>
-
-
-</section>
-
-</div>
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-     ========================= -->
-
-<footer>
-
-<p>
-SNK IT Institute • Student Portal
-</p>
-
-<p>
-Class Start: 08 September 2026 • Batch 01
-</p>
-
-<p>
-© 2026 SNK IT Institute. All Rights Reserved.
-</p>
-
-</footer>
-
-
-
-<script>
-
-
-/* =========================================================
-   THEME
-   ========================================================= */
-
-function toggleTheme(){
-
-    document.body.classList.toggle("dark");
-
-    const isDark =
-        document.body.classList.contains("dark");
-
-    localStorage.setItem(
-        "snkTheme",
-        isDark ? "dark" : "light"
-    );
-
-    document.getElementById(
-        "themeBtn"
-    ).textContent =
-        isDark ? "☀️" : "🌙";
-}
-
-
-(function(){
-
-    const savedTheme =
-        localStorage.getItem("snkTheme");
-
-    if(savedTheme === "dark"){
-
-        document.body.classList.add("dark");
-
-        document.getElementById(
-            "themeBtn"
-        ).textContent =
-            "☀️";
+      window.__snkToastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
     }
 
-})();
+
+    function setMessage(message, type = "") {
+      const box = $("#loginMessage");
+
+      if (!box) return;
+
+      box.textContent = message;
+      box.className = "message";
+
+      if (type) {
+        box.classList.add(type);
+      }
+    }
 
 
+    function getSavedStudentProfile() {
+      try {
+        const raw = localStorage.getItem(STORAGE.studentProfile);
 
-/* =========================================================
-   PASSWORD SHOW / HIDE
-   ========================================================= */
+        if (!raw) return {};
 
-function togglePassword(){
+        const profile = JSON.parse(raw);
 
-    const password =
-        document.getElementById("password");
+        return profile && typeof profile === "object"
+          ? profile
+          : {};
 
-    const button =
-        document.getElementById("passwordToggle");
+      } catch (error) {
+        return {};
+      }
+    }
 
 
-    if(password.type === "password"){
+    function saveStudentSession(student) {
 
-        password.type = "text";
+      /*
+       * Session data
+       */
+      sessionStorage.setItem(STORAGE.loggedIn, "true");
+      sessionStorage.setItem(STORAGE.studentId, student.id);
+      sessionStorage.setItem(STORAGE.studentName, student.name);
+      sessionStorage.setItem(STORAGE.studentCourse, student.course);
+      sessionStorage.setItem(STORAGE.studentBatch, student.batch);
 
-        button.textContent = "🙈";
+
+      /*
+       * Persistent student data
+       *
+       * These are kept in localStorage so other student
+       * pages can read the same information.
+       */
+      localStorage.setItem(STORAGE.studentId, student.id);
+      localStorage.setItem(STORAGE.studentName, student.name);
+      localStorage.setItem(STORAGE.studentCourse, student.course);
+      localStorage.setItem(STORAGE.studentBatch, student.batch);
+
+
+      /*
+       * Create/update basic profile
+       */
+      const oldProfile = getSavedStudentProfile();
+
+      const profile = {
+        ...oldProfile,
+
+        studentId: student.id,
+        name: student.name,
+        course: student.course,
+        batch: student.batch,
+
+        updatedAt: new Date().toISOString()
+      };
+
+      localStorage.setItem(
+        STORAGE.studentProfile,
+        JSON.stringify(profile)
+      );
+    }
+
+
+    function loadRememberedStudent() {
+
+      const remember =
+        localStorage.getItem(STORAGE.rememberMe) === "true";
+
+      if (!remember) return;
+
+      const savedId =
+        localStorage.getItem(STORAGE.studentId);
+
+      if (savedId) {
+        $("#studentId").value = savedId;
+        $("#rememberMe").checked = true;
+      }
+    }
+
+
+    function setupPasswordToggle() {
+
+      const button = $("#passwordToggle");
+      const input = $("#password");
+
+      if (!button || !input) return;
+
+      button.addEventListener("click", () => {
+
+        const isPassword =
+          input.type === "password";
+
+        input.type =
+          isPassword ? "text" : "password";
+
+        button.textContent =
+          isPassword ? "Hide" : "Show";
 
         button.setAttribute(
-            "aria-label",
-            "Hide password"
+          "aria-label",
+          isPassword
+            ? "Hide password"
+            : "Show password"
         );
 
-    }
-    else{
-
-        password.type = "password";
-
-        button.textContent = "👁️";
-
-        button.setAttribute(
-            "aria-label",
-            "Show password"
-        );
-
+      });
     }
 
-}
 
+    function setupForgotPassword() {
 
+      const link = $("#forgotPassword");
 
-/* =========================================================
-   MESSAGE
-   ========================================================= */
+      if (!link) return;
 
-function showMessage(
-    text,
-    type
-){
+      link.addEventListener("click", (event) => {
 
-    const message =
-        document.getElementById("message");
+        event.preventDefault();
 
-    message.className =
-        "message " + type;
-
-    message.textContent =
-        text;
-
-}
-
-
-
-/* =========================================================
-   LOGIN
-   ========================================================= */
-
-function handleLogin(event){
-
-    event.preventDefault();
-
-
-    const studentId =
-        document.getElementById(
-            "studentId"
-        ).value
-        .trim()
-        .toUpperCase();
-
-
-    const password =
-        document.getElementById(
-            "password"
-        ).value;
-
-
-    const rememberMe =
-        document.getElementById(
-            "rememberMe"
-        ).checked;
-
-
-    const loginBtn =
-        document.getElementById(
-            "loginBtn"
+        showToast(
+          "Forgot Password recovery will be connected later."
         );
 
+        setMessage(
+          "Password recovery feature is coming soon.",
+          ""
+        );
 
-    /* -------------------------
-       VALIDATION
-       ------------------------- */
+      });
+    }
 
-    if(studentId === ""){
 
-        showMessage(
-            "⚠️ Student ID লিখুন।",
+    function validateStudent(studentId, password) {
+
+      const normalizedId =
+        studentId.trim().toUpperCase();
+
+      if (
+        normalizedId === DEMO_STUDENT.id &&
+        password === DEMO_STUDENT.password
+      ) {
+
+        return {
+          valid: true,
+          student: {
+            id: DEMO_STUDENT.id,
+            name: DEMO_STUDENT.name,
+            course: DEMO_STUDENT.course,
+            batch: DEMO_STUDENT.batch
+          }
+        };
+
+      }
+
+      return {
+        valid: false,
+        student: null
+      };
+    }
+
+
+    function setupLoginForm() {
+
+      const form = $("#loginForm");
+      const button = $("#loginButton");
+
+      if (!form || !button) return;
+
+
+      form.addEventListener("submit", (event) => {
+
+        event.preventDefault();
+
+
+        const studentId =
+          $("#studentId").value.trim();
+
+        const password =
+          $("#password").value;
+
+
+        setMessage("");
+
+
+        if (!studentId) {
+
+          setMessage(
+            "Please enter your Student ID.",
             "error"
-        );
+          );
 
-        return;
-    }
+          $("#studentId").focus();
 
-
-    if(password === ""){
-
-        showMessage(
-            "⚠️ Password লিখুন।",
-            "error"
-        );
-
-        return;
-    }
-
-
-    /* -------------------------
-       DEMO CREDENTIAL
-       ------------------------- */
-
-    const validStudentId =
-        "SNK-1001";
-
-    const validPassword =
-        "123456";
-
-
-    loginBtn.disabled = true;
-
-    loginBtn.textContent =
-        "⏳ Login হচ্ছে...";
-
-
-    setTimeout(function(){
-
-
-        if(
-            studentId === validStudentId &&
-            password === validPassword
-        ){
-
-            /*
-             * Student session
-             */
-
-            sessionStorage.setItem(
-                "snkStudentLoggedIn",
-                "true"
-            );
-
-
-            sessionStorage.setItem(
-                "snkStudentId",
-                studentId
-            );
-
-
-            sessionStorage.setItem(
-                "snkStudentName",
-                "Demo Student"
-            );
-
-
-            sessionStorage.setItem(
-                "snkStudentCourse",
-                "Computer Office Application"
-            );
-
-
-            if(rememberMe){
-
-                localStorage.setItem(
-                    "snkRememberStudent",
-                    "true"
-                );
-
-                localStorage.setItem(
-                    "snkRememberStudentId",
-                    studentId
-                );
-
-            }
-            else{
-
-                localStorage.removeItem(
-                    "snkRememberStudent"
-                );
-
-                localStorage.removeItem(
-                    "snkRememberStudentId"
-                );
-
-            }
-
-
-            showMessage(
-                "✅ Login Successful! Student Dashboard-এ নেওয়া হচ্ছে...",
-                "success"
-            );
-
-
-            loginBtn.textContent =
-                "✅ Login Successful";
-
-
-            setTimeout(function(){
-
-                /*
-                 * Step 1.1-এর পরের Dashboard
-                 * এখন student-dashboard.html থাকলে
-                 * সেখানে যাবে।
-                 */
-
-                window.location.href =
-                    "student-dashboard.html";
-
-            },800);
-
-
-        }
-        else{
-
-            showMessage(
-                "❌ Student ID অথবা Password ভুল। Demo Login: SNK-1001 / 123456",
-                "error"
-            );
-
-
-            loginBtn.disabled = false;
-
-            loginBtn.textContent =
-                "🔐 Login to Student Portal";
-
+          return;
         }
 
-    },500);
 
-}
+        if (!password) {
 
+          setMessage(
+            "Please enter your password.",
+            "error"
+          );
 
+          $("#password").focus();
 
-/* =========================================================
-   REMEMBERED STUDENT
-   ========================================================= */
-
-(function(){
-
-    const remembered =
-        localStorage.getItem(
-            "snkRememberStudent"
-        );
-
-    const rememberedId =
-        localStorage.getItem(
-            "snkRememberStudentId"
-        );
+          return;
+        }
 
 
-    if(
-        remembered === "true" &&
-        rememberedId
-    ){
-
-        document.getElementById(
-            "studentId"
-        ).value =
-            rememberedId;
+        button.disabled = true;
+        button.classList.add("loading");
+        button.textContent = "Checking Login...";
 
 
-        document.getElementById(
-            "rememberMe"
-        ).checked =
-            true;
+        setTimeout(() => {
 
-    }
-
-})();
+          const result =
+            validateStudent(studentId, password);
 
 
+          if (!result.valid) {
 
-/* =========================================================
-   FORGOT PASSWORD
-   ========================================================= */
-
-function forgotPassword(event){
-
-    event.preventDefault();
-
-
-    showMessage(
-        "ℹ️ Forgot Password Recovery পরবর্তী ধাপে তৈরি করা হবে।",
-        "error"
-    );
-
-}
-
-
-
-/* =========================================================
-   ALREADY LOGGED IN CHECK
-   ========================================================= */
-
-(function(){
-
-    const loggedIn =
-        sessionStorage.getItem(
-            "snkStudentLoggedIn"
-        );
-
-
-    if(loggedIn === "true"){
-
-        const message =
-            document.getElementById(
-                "message"
+            setMessage(
+              "Student ID অথবা Password সঠিক নয়।",
+              "error"
             );
 
+            showToast("Login failed.");
 
-        message.className =
-            "message success";
+            button.disabled = false;
+            button.classList.remove("loading");
+            button.textContent =
+              "Login to Student Portal";
 
-        message.textContent =
-            "ℹ️ আপনি ইতিমধ্যে Login করা আছেন। Dashboard-এ যেতে Login button ব্যবহার করুন।";
+            return;
+          }
 
+
+          const student =
+            result.student;
+
+
+          saveStudentSession(student);
+
+
+          const remember =
+            $("#rememberMe").checked;
+
+          localStorage.setItem(
+            STORAGE.rememberMe,
+            remember ? "true" : "false"
+          );
+
+
+          setMessage(
+            "Login successful. Dashboard-এ নেওয়া হচ্ছে...",
+            "success"
+          );
+
+          showToast("Login successful");
+
+
+          setTimeout(() => {
+
+            window.location.href =
+              "student-dashboard.html";
+
+          }, 700);
+
+
+        }, 450);
+
+      });
     }
 
-})();
+
+    function applyTheme() {
+
+      const theme =
+        localStorage.getItem(STORAGE.theme) || "dark";
+
+      document.documentElement.dataset.theme =
+        theme;
+
+      /*
+       * Login page is intentionally dark/premium.
+       * This keeps compatibility with the portal theme key.
+       */
+    }
 
 
-</script>
+    function setupKeyboard() {
+
+      document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape") {
+          $("#password")?.blur();
+        }
+
+      });
+    }
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      applyTheme();
+
+      loadRememberedStudent();
+
+      setupPasswordToggle();
+
+      setupForgotPassword();
+
+      setupLoginForm();
+
+      setupKeyboard();
+
+    });
+  </script>
 
 </body>
-
 </html>
 ```
