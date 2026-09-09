@@ -1,905 +1,1489 @@
-```javascript
 /* =========================================================
-   SNK IT Institute — Student Portal
-   Step 1.18.2 — script.js
-   Premium Student Portal / Galaxy Hero UI
-   ========================================================= */
+   SNK IT INSTITUTE — STUDENT PORTAL
+   Step 1.19.1
+   FULL script.js
+========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  "use strict";
+"use strict";
 
-  /* =======================================================
-     1. BASIC CONFIGURATION
-     ======================================================= */
 
-  const CONFIG = {
-    studentId: "SNK-1001",
-    studentName: "Demo Student",
-    course: "Computer Office Application",
-    batch: "Batch 01",
-    classStart: "08 September 2026",
-    classStartISO: "2026-09-08",
-    classTime: "4:00 PM – 6:00 PM",
-    duration: "6 Months",
-    mode: "Offline",
-    routine: "Saturday – Monday",
-    instructor: "SNK IT Instructor"
-  };
+/* =========================================================
+   1. GLOBAL CONFIG
+========================================================= */
 
-  const STORAGE_KEYS = {
+const SNKPortal = {
+
+  storage: {
     theme: "snkTheme",
     language: "snkLanguage",
-    profile: "snkStudentProfile",
-    loggedIn: "snkStudentLoggedIn",
+
+    studentLoggedIn: "snkStudentLoggedIn",
     studentId: "snkStudentId",
     studentName: "snkStudentName",
-    studentCourse: "snkStudentCourse"
-  };
+    studentCourse: "snkStudentCourse",
 
+    studentProfile: "snkStudentProfile",
+    classReady: "snkClassReady"
+  },
 
-  /* =======================================================
-     2. SAFE DOM HELPERS
-     ======================================================= */
+  student: {
+    defaultId: "SNK-1001",
+    defaultName: "Student",
+    defaultCourse: "Computer Office Application",
+    batch: "Batch 01"
+  },
 
-  const $ = (selector, parent = document) => {
-    return parent.querySelector(selector);
-  };
-
-  const $$ = (selector, parent = document) => {
-    return [...parent.querySelectorAll(selector)];
-  };
-
-  const getStorage = (key, fallback = null) => {
-    try {
-      const value = localStorage.getItem(key);
-      return value === null ? fallback : value;
-    } catch (error) {
-      console.warn("localStorage read failed:", error);
-      return fallback;
-    }
-  };
-
-  const setStorage = (key, value) => {
-    try {
-      localStorage.setItem(key, value);
-      return true;
-    } catch (error) {
-      console.warn("localStorage write failed:", error);
-      return false;
-    }
-  };
-
-  const removeStorage = (key) => {
-    try {
-      localStorage.removeItem(key);
-    } catch (error) {
-      console.warn("localStorage remove failed:", error);
-    }
-  };
-
-
-  /* =======================================================
-     3. STUDENT DATA
-     ======================================================= */
-
-  function loadStudentData() {
-    const storedId = getStorage(
-      STORAGE_KEYS.studentId,
-      CONFIG.studentId
-    );
-
-    const storedName = getStorage(
-      STORAGE_KEYS.studentName,
-      CONFIG.studentName
-    );
-
-    const storedCourse = getStorage(
-      STORAGE_KEYS.studentCourse,
-      CONFIG.course
-    );
-
-    const profileRaw = getStorage(STORAGE_KEYS.profile, null);
-
-    let profile = {};
-
-    if (profileRaw) {
-      try {
-        profile = JSON.parse(profileRaw);
-      } catch (error) {
-        profile = {};
-      }
-    }
-
-    return {
-      id: storedId || CONFIG.studentId,
-      name: storedName || profile.name || CONFIG.studentName,
-      course:
-        storedCourse ||
-        profile.course ||
-        CONFIG.course,
-      batch: profile.batch || CONFIG.batch
-    };
-  }
-
-  const student = loadStudentData();
-
-
-  /* =======================================================
-     4. THEME SYSTEM
-     ======================================================= */
-
-  function getPreferredTheme() {
-    const savedTheme = getStorage(STORAGE_KEYS.theme, "dark");
-
-    if (savedTheme === "light") {
-      return "light";
-    }
-
-    if (savedTheme === "dark") {
-      return "dark";
-    }
-
-    if (
-      savedTheme === "system" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: light)").matches
-    ) {
-      return "light";
-    }
-
-    return "dark";
-  }
-
-  function applyTheme(theme) {
-    let finalTheme = theme;
-
-    if (theme === "system") {
-      finalTheme =
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: light)").matches
-          ? "light"
-          : "dark";
-    }
-
-    document.documentElement.setAttribute(
-      "data-theme",
-      finalTheme
-    );
-
-    document.body.classList.toggle(
-      "light-theme",
-      finalTheme === "light"
-    );
-
-    document.body.classList.toggle(
-      "dark-theme",
-      finalTheme === "dark"
-    );
-
-    updateThemeButtons(finalTheme);
-  }
-
-  function updateThemeButtons(theme) {
-    const buttons = $$(
-      "[data-theme-toggle], #themeToggle, .theme-toggle"
-    );
-
-    buttons.forEach((button) => {
-      if (!button) return;
-
-      button.setAttribute(
-        "aria-label",
-        theme === "dark"
-          ? "Switch to light mode"
-          : "Switch to dark mode"
-      );
-
-      button.setAttribute(
-        "title",
-        theme === "dark"
-          ? "Light Mode"
-          : "Dark Mode"
-      );
-
-      const icon = button.querySelector(
-        "i, .icon"
-      );
-
-      if (icon) {
-        if (
-          icon.classList.contains("fa") ||
-          icon.classList.contains("fas") ||
-          icon.classList.contains("far")
-        ) {
-          icon.className =
-            theme === "dark"
-              ? "fas fa-sun"
-              : "fas fa-moon";
-        } else {
-          icon.textContent =
-            theme === "dark"
-              ? "☀"
-              : "☾";
-        }
-      }
-    });
-  }
-
-  function toggleTheme() {
-    const current =
-      document.documentElement.getAttribute("data-theme") ||
-      getPreferredTheme();
-
-    const next =
-      current === "dark"
-        ? "light"
-        : "dark";
-
-    setStorage(STORAGE_KEYS.theme, next);
-    applyTheme(next);
-
-    showToast(
-      next === "dark"
-        ? "Dark mode চালু হয়েছে"
-        : "Light mode চালু হয়েছে",
-      "success"
-    );
-  }
-
-  function initializeTheme() {
-    const saved = getStorage(
-      STORAGE_KEYS.theme,
-      "dark"
-    );
-
-    applyTheme(saved);
-
-    if (window.matchMedia) {
-      const mediaQuery = window.matchMedia(
-        "(prefers-color-scheme: light)"
-      );
-
-      const handleSystemTheme = () => {
-        const currentSaved =
-          getStorage(STORAGE_KEYS.theme, "dark");
-
-        if (currentSaved === "system") {
-          applyTheme("system");
-        }
-      };
-
-      if (mediaQuery.addEventListener) {
-        mediaQuery.addEventListener(
-          "change",
-          handleSystemTheme
-        );
-      } else if (mediaQuery.addListener) {
-        mediaQuery.addListener(
-          handleSystemTheme
-        );
-      }
-    }
-  }
-
-
-  /* =======================================================
-     5. LANGUAGE SYSTEM
-     ======================================================= */
-
-  function initializeLanguage() {
-    const language =
-      getStorage(
-        STORAGE_KEYS.language,
-        "bn"
-      );
-
-    document.documentElement.setAttribute(
-      "lang",
-      language === "en" ? "en" : "bn"
-    );
-
-    updateLanguageButton(language);
-  }
-
-  function updateLanguageButton(language) {
-    const buttons = $$(
-      "[data-language-toggle], #languageToggle, .language-toggle"
-    );
-
-    buttons.forEach((button) => {
-      if (!button) return;
-
-      button.textContent =
-        language === "bn"
-          ? "English"
-          : "বাংলা";
-
-      button.setAttribute(
-        "title",
-        language === "bn"
-          ? "Switch to English"
-          : "বাংলা ভাষায় ফিরে যান"
-      );
-    });
-  }
-
-  function toggleLanguage() {
-    const current =
-      getStorage(
-        STORAGE_KEYS.language,
-        "bn"
-      );
-
-    const next =
-      current === "bn"
-        ? "en"
-        : "bn";
-
-    setStorage(
-      STORAGE_KEYS.language,
-      next
-    );
-
-    updateLanguageButton(next);
+  course: {
+    name: "Computer Office Application",
+    duration: "6 Months",
+    mode: "Offline",
+    days: "Saturday – Monday",
+    time: "4:00 PM – 6:00 PM",
 
     /*
-      Full bilingual content translation is intentionally
-      kept simple in Step 1.18.2.
-
-      Existing Bangla content remains unchanged.
-      The language state is stored for future portal steps.
+      Course start date
+      08 September 2026
     */
+    startDate: "2026-09-08T16:00:00"
+  },
 
-    showToast(
-      next === "en"
-        ? "English mode selected"
-        : "বাংলা মোড চালু হয়েছে",
-      "success"
+  pages: {
+    home: "index.html",
+    dashboard: "student-dashboard.html",
+    course: "courses.html",
+    assignment: "assignments.html",
+    quiz: "quiz.html",
+    result: "results.html",
+    attendance: "student-attendance.html",
+    resources: "student-resources.html",
+    notifications: "student-notifications.html",
+    support: "student-support.html",
+    settings: "student-settings.html",
+    contact: "student-contact.html",
+    profile: "student-profiles.html",
+    class: "student-class.html",
+    timetable: "student-timetable.html",
+    certificates: "student-certificates.html",
+    idCard: "student-id-cards.html",
+    login: "login.html"
+  }
+
+};
+
+
+/* =========================================================
+   2. SHORT SELECTOR HELPERS
+========================================================= */
+
+function $(selector, parent = document) {
+  return parent.querySelector(selector);
+}
+
+
+function $$(selector, parent = document) {
+  return Array.from(
+    parent.querySelectorAll(selector)
+  );
+}
+
+
+/* =========================================================
+   3. STORAGE HELPERS
+========================================================= */
+
+function getStorageValue(key) {
+
+  try {
+
+    return (
+      sessionStorage.getItem(key) ||
+      localStorage.getItem(key)
     );
+
+  } catch (error) {
+
+    console.warn(
+      "Storage read error:",
+      error
+    );
+
+    return null;
+  }
+
+}
+
+
+function setLocalValue(key, value) {
+
+  try {
+
+    localStorage.setItem(
+      key,
+      value
+    );
+
+    return true;
+
+  } catch (error) {
+
+    console.warn(
+      "LocalStorage write error:",
+      error
+    );
+
+    return false;
+  }
+
+}
+
+
+function setSessionValue(key, value) {
+
+  try {
+
+    sessionStorage.setItem(
+      key,
+      value
+    );
+
+    return true;
+
+  } catch (error) {
+
+    console.warn(
+      "SessionStorage write error:",
+      error
+    );
+
+    return false;
+  }
+
+}
+
+
+function removeStorageValue(key) {
+
+  try {
+
+    localStorage.removeItem(key);
+    sessionStorage.removeItem(key);
+
+  } catch (error) {
+
+    console.warn(
+      "Storage remove error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   4. STUDENT SESSION
+========================================================= */
+
+function isStudentLoggedIn() {
+
+  const sessionLogin =
+    sessionStorage.getItem(
+      SNKPortal.storage.studentLoggedIn
+    );
+
+  const localLogin =
+    localStorage.getItem(
+      SNKPortal.storage.studentLoggedIn
+    );
+
+  return (
+    sessionLogin === "true" ||
+    localLogin === "true"
+  );
+
+}
+
+
+function getStudentData() {
+
+  const studentId =
+    getStorageValue(
+      SNKPortal.storage.studentId
+    ) ||
+    SNKPortal.student.defaultId;
+
+
+  const studentName =
+    getStorageValue(
+      SNKPortal.storage.studentName
+    ) ||
+    SNKPortal.student.defaultName;
+
+
+  const studentCourse =
+    getStorageValue(
+      SNKPortal.storage.studentCourse
+    ) ||
+    SNKPortal.student.defaultCourse;
+
+
+  return {
+
+    id: studentId,
+
+    name: studentName,
+
+    course: studentCourse,
+
+    batch: SNKPortal.student.batch
+
+  };
+
+}
+
+
+/* =========================================================
+   5. UPDATE STUDENT UI
+========================================================= */
+
+function updateStudentUI() {
+
+  const student =
+    getStudentData();
+
+
+  const studentNameElements = $$(
+    "[data-student-name]"
+  );
+
+  studentNameElements.forEach(
+    element => {
+      element.textContent =
+        student.name;
+    }
+  );
+
+
+  const studentIdElements = $$(
+    "[data-student-id]"
+  );
+
+  studentIdElements.forEach(
+    element => {
+      element.textContent =
+        student.id;
+    }
+  );
+
+
+  const studentCourseElements = $$(
+    "[data-student-course]"
+  );
+
+  studentCourseElements.forEach(
+    element => {
+      element.textContent =
+        student.course;
+    }
+  );
+
+
+  const heroName =
+    $("#heroStudentName");
+
+  if (heroName) {
+    heroName.textContent =
+      student.name;
   }
 
 
-  /* =======================================================
-     6. MOBILE NAVIGATION
-     ======================================================= */
+  const heroId =
+    $("#heroStudentId");
 
-  function initializeMobileMenu() {
-    const menuButton =
-      $(
-        "#mobileMenuBtn"
-      ) ||
-      $(
-        "[data-mobile-menu]"
-      ) ||
-      $(
-        ".mobile-menu-btn"
+  if (heroId) {
+
+    heroId.textContent =
+      "Student ID: " +
+      student.id;
+
+  }
+
+
+  const heroCourse =
+    $("#heroCourseName");
+
+  if (heroCourse) {
+
+    heroCourse.textContent =
+      student.course;
+
+  }
+
+
+  updateProfileFromStorage();
+
+}
+
+
+/* =========================================================
+   6. PROFILE DATA CONNECTION
+========================================================= */
+
+function updateProfileFromStorage() {
+
+  let profile = null;
+
+
+  try {
+
+    const raw =
+      localStorage.getItem(
+        SNKPortal.storage.studentProfile
       );
 
-    const nav =
-      $(
-        "#mainNav"
-      ) ||
-      $(
-        ".main-nav"
-      ) ||
-      $(
-        "nav"
-      );
-
-    if (!menuButton || !nav) {
-      return;
+    if (raw) {
+      profile = JSON.parse(raw);
     }
 
-    menuButton.addEventListener(
-      "click",
-      () => {
-        const isOpen =
-          nav.classList.toggle(
-            "mobile-open"
-          );
+  } catch (error) {
 
-        menuButton.classList.toggle(
-          "active",
-          isOpen
-        );
+    console.warn(
+      "Profile data error:",
+      error
+    );
 
-        menuButton.setAttribute(
-          "aria-expanded",
-          String(isOpen)
-        );
+  }
+
+
+  if (!profile) {
+    return;
+  }
+
+
+  const profileName =
+    profile.name ||
+    profile.studentName;
+
+
+  if (profileName) {
+
+    const elements =
+      $$("[data-profile-name]");
+
+    elements.forEach(
+      element => {
+        element.textContent =
+          profileName;
       }
     );
 
-    $$(".nav-link, nav a", nav).forEach(
-      (link) => {
-        link.addEventListener(
-          "click",
-          () => {
-            nav.classList.remove(
-              "mobile-open"
-            );
+  }
 
-            menuButton.classList.remove(
-              "active"
-            );
 
-            menuButton.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-          }
-        );
-      }
+  if (profile.mobile) {
+
+    $$("[data-profile-mobile]")
+      .forEach(element => {
+
+        element.textContent =
+          profile.mobile;
+
+      });
+
+  }
+
+
+  if (profile.email) {
+
+    $$("[data-profile-email]")
+      .forEach(element => {
+
+        element.textContent =
+          profile.email;
+
+      });
+
+  }
+
+
+  if (profile.address) {
+
+    $$("[data-profile-address]")
+      .forEach(element => {
+
+        element.textContent =
+          profile.address;
+
+      });
+
+  }
+
+}
+
+
+/* =========================================================
+   7. THEME SYSTEM
+========================================================= */
+
+function getPreferredTheme() {
+
+  const savedTheme =
+    localStorage.getItem(
+      SNKPortal.storage.theme
     );
 
-    document.addEventListener(
-      "click",
-      (event) => {
-        if (
-          !nav.contains(event.target) &&
-          !menuButton.contains(event.target)
-        ) {
+
+  if (
+    savedTheme === "dark" ||
+    savedTheme === "light"
+  ) {
+
+    return savedTheme;
+
+  }
+
+
+  return "dark";
+
+}
+
+
+function applyTheme(theme) {
+
+  const body =
+    document.body;
+
+
+  if (!body) {
+    return;
+  }
+
+
+  if (theme === "light") {
+
+    body.classList.add(
+      "light-theme"
+    );
+
+  } else {
+
+    body.classList.remove(
+      "light-theme"
+    );
+
+  }
+
+
+  setLocalValue(
+    SNKPortal.storage.theme,
+    theme
+  );
+
+
+  updateThemeButton(theme);
+
+}
+
+
+function updateThemeButton(theme) {
+
+  const buttons = [
+    $("#themeToggle"),
+    $("#themeButton"),
+    $("[data-theme-toggle]")
+  ].filter(Boolean);
+
+
+  buttons.forEach(button => {
+
+    const icon =
+      button.querySelector("i");
+
+
+    if (icon) {
+
+      icon.className =
+        theme === "light"
+          ? "fa-solid fa-sun"
+          : "fa-solid fa-moon";
+
+    }
+
+
+    button.setAttribute(
+      "aria-label",
+      theme === "light"
+        ? "Switch to Dark Theme"
+        : "Switch to Light Theme"
+    );
+
+
+    button.setAttribute(
+      "title",
+      theme === "light"
+        ? "Switch to Dark Theme"
+        : "Switch to Light Theme"
+    );
+
+  });
+
+}
+
+
+function toggleTheme() {
+
+  const currentTheme =
+    getPreferredTheme();
+
+
+  const nextTheme =
+    currentTheme === "dark"
+      ? "light"
+      : "dark";
+
+
+  applyTheme(
+    nextTheme
+  );
+
+
+  showToast(
+    nextTheme === "dark"
+      ? "Dark theme enabled"
+      : "Light theme enabled",
+    "success"
+  );
+
+}
+
+
+/* =========================================================
+   8. LANGUAGE SYSTEM
+========================================================= */
+
+function getLanguage() {
+
+  return (
+    localStorage.getItem(
+      SNKPortal.storage.language
+    ) ||
+    "en"
+  );
+
+}
+
+
+function setLanguage(language) {
+
+  if (
+    language !== "en" &&
+    language !== "bn"
+  ) {
+
+    language = "en";
+
+  }
+
+
+  setLocalValue(
+    SNKPortal.storage.language,
+    language
+  );
+
+
+  updateLanguageButton(
+    language
+  );
+
+
+  /*
+    Full bilingual translation will be
+    connected in a future portal version.
+
+    Current navigation remains English
+    as requested.
+  */
+
+}
+
+
+function toggleLanguage() {
+
+  const current =
+    getLanguage();
+
+
+  const next =
+    current === "en"
+      ? "bn"
+      : "en";
+
+
+  setLanguage(
+    next
+  );
+
+
+  showToast(
+    next === "bn"
+      ? "Bangla mode selected"
+      : "English mode selected",
+    "success"
+  );
+
+}
+
+
+function updateLanguageButton(
+  language
+) {
+
+  const button =
+    $("#languageToggle");
+
+
+  if (!button) {
+    return;
+  }
+
+
+  const span =
+    button.querySelector("span");
+
+
+  if (span) {
+
+    /*
+      Keep button label English.
+      User specifically requested
+      Home to remain English.
+    */
+
+    span.textContent =
+      language === "bn"
+        ? "Bangla"
+        : "English";
+
+  }
+
+}
+
+
+/* =========================================================
+   9. MOBILE NAVIGATION
+========================================================= */
+
+function initMobileNavigation() {
+
+  const menuButton =
+    $("#mobileMenuBtn");
+
+  const nav =
+    $("#mainNav");
+
+
+  if (!menuButton || !nav) {
+    return;
+  }
+
+
+  menuButton.addEventListener(
+    "click",
+    function () {
+
+      const opened =
+        nav.classList.toggle(
+          "mobile-open"
+        );
+
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        opened
+          ? "true"
+          : "false"
+      );
+
+
+      menuButton.innerHTML =
+        opened
+          ? '<i class="fa-solid fa-xmark"></i>'
+          : '<i class="fa-solid fa-bars"></i>';
+
+    }
+  );
+
+
+  $$(".nav-link", nav)
+    .forEach(link => {
+
+      link.addEventListener(
+        "click",
+        function () {
+
           nav.classList.remove(
             "mobile-open"
           );
 
-          menuButton.classList.remove(
-            "active"
-          );
 
           menuButton.setAttribute(
             "aria-expanded",
             "false"
           );
-        }
-      }
-    );
-  }
 
 
-  /* =======================================================
-     7. STUDENT INFORMATION
-     ======================================================= */
+          menuButton.innerHTML =
+            '<i class="fa-solid fa-bars"></i>';
 
-  function updateStudentElements() {
-    const idElements = $$(
-      "[data-student-id], #studentId"
-    );
-
-    const nameElements = $$(
-      "[data-student-name], #studentName"
-    );
-
-    const courseElements = $$(
-      "[data-student-course], #studentCourse"
-    );
-
-    const batchElements = $$(
-      "[data-student-batch], #studentBatch"
-    );
-
-    idElements.forEach(
-      (element) => {
-        element.textContent =
-          student.id;
-      }
-    );
-
-    nameElements.forEach(
-      (element) => {
-        element.textContent =
-          student.name;
-      }
-    );
-
-    courseElements.forEach(
-      (element) => {
-        element.textContent =
-          student.course;
-      }
-    );
-
-    batchElements.forEach(
-      (element) => {
-        element.textContent =
-          student.batch;
-      }
-    );
-  }
-
-
-  /* =======================================================
-     8. CLASS START COUNTDOWN
-     ======================================================= */
-
-  function getClassStartDate() {
-    const date =
-      new Date(
-        `${CONFIG.classStartISO}T16:00:00`
-      );
-
-    return date;
-  }
-
-  function updateClassCountdown() {
-    const countdownElements = $$(
-      "[data-class-countdown], #classCountdown"
-    );
-
-    if (!countdownElements.length) {
-      return;
-    }
-
-    const startDate =
-      getClassStartDate();
-
-    const now = new Date();
-
-    const difference =
-      startDate.getTime() -
-      now.getTime();
-
-    let text = "";
-
-    if (difference <= 0) {
-      text =
-        "ক্লাস শুরু হয়ে গেছে";
-
-      countdownElements.forEach(
-        (element) => {
-          element.textContent = text;
         }
       );
 
-      return;
-    }
-
-    const totalSeconds =
-      Math.floor(
-        difference / 1000
-      );
-
-    const days =
-      Math.floor(
-        totalSeconds / 86400
-      );
-
-    const hours =
-      Math.floor(
-        (totalSeconds % 86400) /
-          3600
-      );
-
-    const minutes =
-      Math.floor(
-        (totalSeconds % 3600) /
-          60
-      );
-
-    const seconds =
-      totalSeconds % 60;
-
-    if (days > 0) {
-      text =
-        `${days} দিন ${hours} ঘণ্টা ${minutes} মিনিট`;
-    } else {
-      text =
-        `${hours} ঘণ্টা ${minutes} মিনিট ${seconds} সেকেন্ড`;
-    }
-
-    countdownElements.forEach(
-      (element) => {
-        element.textContent =
-          text;
-      }
-    );
-  }
-
-  function initializeCountdown() {
-    updateClassCountdown();
-
-    window.setInterval(
-      updateClassCountdown,
-      1000
-    );
-  }
+    });
 
 
-  /* =======================================================
-     9. SCROLL REVEAL ANIMATION
-     ======================================================= */
+  document.addEventListener(
+    "click",
+    function (event) {
 
-  function initializeRevealAnimation() {
-    const elements = $$(
-      ".reveal, .fade-up, .animate-on-scroll, [data-reveal]"
-    );
+      if (
+        nav.classList.contains(
+          "mobile-open"
+        ) &&
+        !nav.contains(event.target) &&
+        !menuButton.contains(event.target)
+      ) {
 
-    if (!elements.length) {
-      return;
-    }
-
-    if (
-      !("IntersectionObserver" in window)
-    ) {
-      elements.forEach(
-        (element) => {
-          element.classList.add(
-            "visible",
-            "show"
-          );
-        }
-      );
-
-      return;
-    }
-
-    const observer =
-      new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach(
-            (entry) => {
-              if (
-                entry.isIntersecting
-              ) {
-                entry.target.classList.add(
-                  "visible",
-                  "show"
-                );
-
-                obs.unobserve(
-                  entry.target
-                );
-              }
-            }
-          );
-        },
-        {
-          threshold: 0.12,
-          rootMargin:
-            "0px 0px -40px 0px"
-        }
-      );
-
-    elements.forEach(
-      (element) => {
-        observer.observe(element);
-      }
-    );
-  }
-
-
-  /* =======================================================
-     10. HERO GALAXY INTERACTION
-     ======================================================= */
-
-  function initializeGalaxyEffects() {
-    const hero =
-      $(
-        ".hero"
-      ) ||
-      $(
-        ".hero-section"
-      ) ||
-      $(
-        "#hero"
-      );
-
-    if (!hero) {
-      return;
-    }
-
-    /*
-      Subtle mouse movement for galaxy/orbit
-      elements. No canvas or external image needed.
-    */
-
-    const orbits = $$(
-      ".orbit, .hero-orbit, .galaxy-orbit",
-      hero
-    );
-
-    const glows = $$(
-      ".glow, .hero-glow, .galaxy-glow",
-      hero
-    );
-
-    if (
-      window.matchMedia &&
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches
-    ) {
-      return;
-    }
-
-    hero.addEventListener(
-      "mousemove",
-      (event) => {
-        const rect =
-          hero.getBoundingClientRect();
-
-        const x =
-          (event.clientX -
-            rect.left) /
-          rect.width;
-
-        const y =
-          (event.clientY -
-            rect.top) /
-          rect.height;
-
-        const moveX =
-          (x - 0.5) * 20;
-
-        const moveY =
-          (y - 0.5) * 20;
-
-        orbits.forEach(
-          (orbit, index) => {
-            const amount =
-              (index + 1) * 0.35;
-
-            orbit.style.transform =
-              `translate(${moveX * amount}px, ${moveY * amount}px)`;
-          }
+        nav.classList.remove(
+          "mobile-open"
         );
 
-        glows.forEach(
-          (glow, index) => {
-            const amount =
-              (index + 1) * 0.6;
 
-            glow.style.transform =
-              `translate(${moveX * amount}px, ${moveY * amount}px)`;
-          }
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
         );
+
+
+        menuButton.innerHTML =
+          '<i class="fa-solid fa-bars"></i>';
+
       }
-    );
 
-    hero.addEventListener(
-      "mouseleave",
-      () => {
-        orbits.forEach(
-          (orbit) => {
-            orbit.style.transform =
-              "";
-          }
-        );
-
-        glows.forEach(
-          (glow) => {
-            glow.style.transform =
-              "";
-          }
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     11. ACTIVE NAVIGATION
-     ======================================================= */
-
-  function initializeActiveNavigation() {
-    const currentPage =
-      window.location.pathname
-        .split("/")
-        .pop()
-        .toLowerCase();
-
-    if (!currentPage) {
-      return;
     }
+  );
 
-    const links = $$(
-      "a[href]"
-    );
-
-    links.forEach(
-      (link) => {
-        const href =
-          link.getAttribute(
-            "href"
-          );
-
-        if (!href) {
-          return;
-        }
-
-        if (
-          href.startsWith("#") ||
-          href.startsWith("http") ||
-          href.startsWith("mailto:") ||
-          href.startsWith("tel:")
-        ) {
-          return;
-        }
-
-        const linkPage =
-          href
-            .split("/")
-            .pop()
-            .split("?")[0]
-            .toLowerCase();
-
-        if (
-          linkPage === currentPage
-        ) {
-          link.classList.add(
-            "active"
-          );
-
-          link.setAttribute(
-            "aria-current",
-            "page"
-          );
-        }
-      }
-    );
-  }
+}
 
 
-  /* =======================================================
-     12. SMOOTH SCROLL
-     ======================================================= */
+/* =========================================================
+   10. LOGIN REQUIRED SYSTEM
+========================================================= */
 
-  function initializeSmoothScroll() {
-    $$(
-      'a[href^="#"]'
-    ).forEach(
-      (link) => {
-        link.addEventListener(
-          "click",
-          (event) => {
-            const targetId =
-              link
-                .getAttribute(
-                  "href"
-                );
+function initProtectedLinks() {
 
-            if (
-              !targetId ||
-              targetId === "#"
-            ) {
-              return;
-            }
+  const protectedLinks =
+    $$("[data-login-required='true']");
 
-            const target =
-              document.querySelector(
-                targetId
-              );
 
-            if (!target) {
-              return;
-            }
+  protectedLinks.forEach(
+    link => {
+
+      link.addEventListener(
+        "click",
+        function (event) {
+
+          if (
+            !isStudentLoggedIn()
+          ) {
 
             event.preventDefault();
 
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
+            showLoginRequiredModal();
+
           }
-        );
-      }
-    );
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+function showLoginRequiredModal() {
+
+  const modal =
+    $("#loginRequiredModal");
+
+
+  if (!modal) {
+
+    /*
+      Fallback if modal is not
+      available on another page.
+    */
+
+    const confirmed =
+      window.confirm(
+        "Please login first to access your student portal."
+      );
+
+
+    if (confirmed) {
+      window.location.href =
+        SNKPortal.pages.login;
+    }
+
+
+    return;
   }
 
 
-  /* =======================================================
-     13. TOAST NOTIFICATION
-     ======================================================= */
+  modal.classList.add(
+    "show"
+  );
 
-  function createToastContainer() {
-    let container =
-      $(
-        "#toastContainer"
+
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+
+  document.body.classList.add(
+    "no-scroll"
+  );
+
+}
+
+
+function closeLoginRequiredModal() {
+
+  const modal =
+    $("#loginRequiredModal");
+
+
+  if (!modal) {
+    return;
+  }
+
+
+  modal.classList.remove(
+    "show"
+  );
+
+
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+
+  document.body.classList.remove(
+    "no-scroll"
+  );
+
+}
+
+
+function initLoginModal() {
+
+  const modal =
+    $("#loginRequiredModal");
+
+
+  const closeButton =
+    $("#closeLoginModal");
+
+
+  const cancelButton =
+    $("#cancelLoginModal");
+
+
+  if (closeButton) {
+
+    closeButton.addEventListener(
+      "click",
+      closeLoginRequiredModal
+    );
+
+  }
+
+
+  if (cancelButton) {
+
+    cancelButton.addEventListener(
+      "click",
+      closeLoginRequiredModal
+    );
+
+  }
+
+
+  if (modal) {
+
+    modal.addEventListener(
+      "click",
+      function (event) {
+
+        if (
+          event.target === modal
+        ) {
+
+          closeLoginRequiredModal();
+
+        }
+
+      }
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   11. LOGOUT
+========================================================= */
+
+function logoutStudent() {
+
+  removeStorageValue(
+    SNKPortal.storage.studentLoggedIn
+  );
+
+  removeStorageValue(
+    SNKPortal.storage.studentId
+  );
+
+  removeStorageValue(
+    SNKPortal.storage.studentName
+  );
+
+  removeStorageValue(
+    SNKPortal.storage.studentCourse
+  );
+
+
+  sessionStorage.removeItem(
+    SNKPortal.storage.studentLoggedIn
+  );
+
+  sessionStorage.removeItem(
+    SNKPortal.storage.studentId
+  );
+
+  sessionStorage.removeItem(
+    SNKPortal.storage.studentName
+  );
+
+  sessionStorage.removeItem(
+    SNKPortal.storage.studentCourse
+  );
+
+
+  showToast(
+    "Logged out successfully",
+    "success"
+  );
+
+
+  setTimeout(
+    function () {
+
+      window.location.href =
+        SNKPortal.pages.login;
+
+    },
+    500
+  );
+
+}
+
+
+/* =========================================================
+   12. LOGOUT BUTTON CONNECTION
+========================================================= */
+
+function initLogoutButtons() {
+
+  const buttons = $$(
+    "[data-logout]"
+  );
+
+
+  buttons.forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        function (event) {
+
+          event.preventDefault();
+
+          logoutStudent();
+
+        }
       );
 
-    if (container) {
-      return container;
     }
+  );
+
+}
+
+
+/* =========================================================
+   13. COUNTDOWN / COURSE STATUS
+========================================================= */
+
+let countdownTimer = null;
+
+
+function updateCountdown() {
+
+  const startDate =
+    new Date(
+      SNKPortal.course.startDate
+    );
+
+
+  const now =
+    new Date();
+
+
+  const difference =
+    startDate.getTime() -
+    now.getTime();
+
+
+  const daysElement =
+    $("#countDays");
+
+  const hoursElement =
+    $("#countHours");
+
+  const minutesElement =
+    $("#countMinutes");
+
+  const secondsElement =
+    $("#countSeconds");
+
+  const titleElement =
+    $("#countdownTitle");
+
+  const boxElement =
+    $("#classCountdownBox");
+
+
+  if (
+    difference <= 0
+  ) {
+
+    if (titleElement) {
+
+      titleElement.textContent =
+        "Course Started";
+
+    }
+
+
+    if (boxElement) {
+
+      boxElement.classList.add(
+        "course-started"
+      );
+
+    }
+
+
+    if (daysElement) {
+      daysElement.textContent =
+        "✓";
+    }
+
+    if (hoursElement) {
+      hoursElement.textContent =
+        "✓";
+    }
+
+    if (minutesElement) {
+      minutesElement.textContent =
+        "✓";
+    }
+
+    if (secondsElement) {
+      secondsElement.textContent =
+        "✓";
+    }
+
+
+    return;
+
+  }
+
+
+  if (boxElement) {
+
+    boxElement.classList.remove(
+      "course-started"
+    );
+
+  }
+
+
+  const totalSeconds =
+    Math.floor(
+      difference / 1000
+    );
+
+
+  const days =
+    Math.floor(
+      totalSeconds / 86400
+    );
+
+
+  const hours =
+    Math.floor(
+      (totalSeconds % 86400) / 3600
+    );
+
+
+  const minutes =
+    Math.floor(
+      (totalSeconds % 3600) / 60
+    );
+
+
+  const seconds =
+    totalSeconds % 60;
+
+
+  if (daysElement) {
+
+    daysElement.textContent =
+      String(days);
+
+  }
+
+
+  if (hoursElement) {
+
+    hoursElement.textContent =
+      String(hours).padStart(
+        2,
+        "0"
+      );
+
+  }
+
+
+  if (minutesElement) {
+
+    minutesElement.textContent =
+      String(minutes).padStart(
+        2,
+        "0"
+      );
+
+  }
+
+
+  if (secondsElement) {
+
+    secondsElement.textContent =
+      String(seconds).padStart(
+        2,
+        "0"
+      );
+
+  }
+
+}
+
+
+function initCountdown() {
+
+  updateCountdown();
+
+
+  if (countdownTimer) {
+
+    clearInterval(
+      countdownTimer
+    );
+
+  }
+
+
+  countdownTimer =
+    setInterval(
+      updateCountdown,
+      1000
+    );
+
+}
+
+
+/* =========================================================
+   14. HEADER SCROLL
+========================================================= */
+
+function initHeaderScroll() {
+
+  const header =
+    $("#siteHeader");
+
+
+  if (!header) {
+    return;
+  }
+
+
+  function checkScroll() {
+
+    if (
+      window.scrollY > 15
+    ) {
+
+      header.classList.add(
+        "scrolled"
+      );
+
+    } else {
+
+      header.classList.remove(
+        "scrolled"
+      );
+
+    }
+
+  }
+
+
+  checkScroll();
+
+
+  window.addEventListener(
+    "scroll",
+    checkScroll,
+    {
+      passive: true
+    }
+  );
+
+}
+
+
+/* =========================================================
+   15. ACTIVE NAVIGATION
+========================================================= */
+
+function initActiveNavigation() {
+
+  const currentPage =
+    window.location.pathname
+      .split("/")
+      .pop()
+      .toLowerCase() ||
+    "index.html";
+
+
+  $$(".nav-link")
+    .forEach(link => {
+
+      const href =
+        link.getAttribute(
+          "href"
+        );
+
+
+      if (!href) {
+        return;
+      }
+
+
+      const cleanHref =
+        href
+          .split("#")[0]
+          .split("?")[0]
+          .toLowerCase();
+
+
+      if (
+        cleanHref === currentPage
+      ) {
+
+        link.classList.add(
+          "active"
+        );
+
+      } else {
+
+        link.classList.remove(
+          "active"
+        );
+
+      }
+
+    });
+
+}
+
+
+/* =========================================================
+   16. SMOOTH INTERNAL LINKS
+========================================================= */
+
+function initSmoothLinks() {
+
+  $$(
+    'a[href^="#"]'
+  ).forEach(link => {
+
+    link.addEventListener(
+      "click",
+      function (event) {
+
+        const targetId =
+          this.getAttribute(
+            "href"
+          );
+
+
+        if (
+          !targetId ||
+          targetId === "#"
+        ) {
+
+          return;
+
+        }
+
+
+        const target =
+          document.querySelector(
+            targetId
+          );
+
+
+        if (!target) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   17. SCROLL REVEAL
+========================================================= */
+
+function initScrollReveal() {
+
+  const elements =
+    $$(".reveal");
+
+
+  if (
+    !elements.length
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    !("IntersectionObserver" in window)
+  ) {
+
+    elements.forEach(
+      element => {
+        element.classList.add(
+          "visible"
+        );
+      }
+    );
+
+    return;
+
+  }
+
+
+  const observer =
+    new IntersectionObserver(
+      function (entries) {
+
+        entries.forEach(
+          entry => {
+
+            if (
+              entry.isIntersecting
+            ) {
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          }
+        );
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+  elements.forEach(
+    element => {
+
+      observer.observe(
+        element
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   18. TOAST SYSTEM
+========================================================= */
+
+function showToast(
+  message,
+  type = "info"
+) {
+
+  let container =
+    $("#toastContainer");
+
+
+  if (!container) {
 
     container =
       document.createElement(
@@ -916,908 +1500,980 @@ document.addEventListener("DOMContentLoaded", () => {
       container
     );
 
-    return container;
   }
 
-  function showToast(
-    message,
-    type = "info",
-    duration = 2800
-  ) {
-    const container =
-      createToastContainer();
 
-    const toast =
-      document.createElement(
-        "div"
-      );
-
-    toast.className =
-      `snk-toast toast-${type}`;
-
-    const iconMap = {
-      success: "✓",
-      error: "!",
-      warning: "⚠",
-      info: "i"
-    };
-
-    const icon =
-      iconMap[type] ||
-      iconMap.info;
-
-    toast.innerHTML = `
-      <span class="toast-icon">${icon}</span>
-      <span class="toast-message"></span>
-      <button
-        class="toast-close"
-        type="button"
-        aria-label="Close notification"
-      >×</button>
-    `;
-
-    const messageElement =
-      toast.querySelector(
-        ".toast-message"
-      );
-
-    if (messageElement) {
-      messageElement.textContent =
-        message;
-    }
-
-    container.appendChild(
-      toast
+  const toast =
+    document.createElement(
+      "div"
     );
 
-    requestAnimationFrame(
-      () => {
-        toast.classList.add(
-          "show"
-        );
-      }
-    );
 
-    const closeButton =
-      toast.querySelector(
-        ".toast-close"
-      );
+  toast.className =
+    "toast " + type;
 
-    const removeToast = () => {
-      toast.classList.remove(
-        "show"
-      );
 
-      window.setTimeout(
-        () => {
+  let icon =
+    "fa-circle-info";
+
+
+  if (type === "success") {
+
+    icon =
+      "fa-circle-check";
+
+  }
+
+
+  if (type === "error") {
+
+    icon =
+      "fa-circle-exclamation";
+
+  }
+
+
+  if (type === "warning") {
+
+    icon =
+      "fa-triangle-exclamation";
+
+  }
+
+
+  toast.innerHTML = `
+    <i class="fa-solid ${icon}"></i>
+    <span>${escapeHTML(message)}</span>
+  `;
+
+
+  container.appendChild(
+    toast
+  );
+
+
+  setTimeout(
+    function () {
+
+      toast.style.opacity =
+        "0";
+
+      toast.style.transform =
+        "translateY(10px)";
+
+
+      setTimeout(
+        function () {
+
           toast.remove();
+
         },
         250
       );
-    };
 
-    if (closeButton) {
-      closeButton.addEventListener(
-        "click",
-        removeToast
-      );
-    }
-
-    window.setTimeout(
-      removeToast,
-      duration
-    );
-  }
-
-
-  /* =======================================================
-     14. BUTTON INTERACTIONS
-     ======================================================= */
-
-  function initializeThemeButtons() {
-    $$(
-      "[data-theme-toggle], #themeToggle, .theme-toggle"
-    ).forEach(
-      (button) => {
-        button.addEventListener(
-          "click",
-          toggleTheme
-        );
-      }
-    );
-  }
-
-  function initializeLanguageButtons() {
-    $$(
-      "[data-language-toggle], #languageToggle, .language-toggle"
-    ).forEach(
-      (button) => {
-        button.addEventListener(
-          "click",
-          toggleLanguage
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     15. LOGIN REQUIRED BUTTONS
-     ======================================================= */
-
-  function initializeLoginRequiredLinks() {
-    $$(
-      "[data-login-required]"
-    ).forEach(
-      (element) => {
-        element.addEventListener(
-          "click",
-          (event) => {
-            const loggedIn =
-              sessionStorage.getItem(
-                STORAGE_KEYS.loggedIn
-              );
-
-            if (
-              loggedIn === "true"
-            ) {
-              return;
-            }
-
-            event.preventDefault();
-
-            showToast(
-              "Student Dashboard ব্যবহার করতে Login করুন।",
-              "warning"
-            );
-
-            window.setTimeout(
-              () => {
-                window.location.href =
-                  "login.html";
-              },
-              700
-            );
-          }
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     16. DEMO BUTTONS
-     ======================================================= */
-
-  function initializeDemoButtons() {
-    $$(
-      "[data-demo-alert]"
-    ).forEach(
-      (button) => {
-        button.addEventListener(
-          "click",
-          (event) => {
-            event.preventDefault();
-
-            const message =
-              button.getAttribute(
-                "data-demo-alert"
-              ) ||
-              "এই ফিচারটি Demo Mode-এ আছে।";
-
-            showToast(
-              message,
-              "info"
-            );
-          }
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     17. LOGOUT
-     ======================================================= */
-
-  function logoutStudent() {
-    try {
-      sessionStorage.removeItem(
-        STORAGE_KEYS.loggedIn
-      );
-
-      sessionStorage.removeItem(
-        STORAGE_KEYS.studentId
-      );
-
-      sessionStorage.removeItem(
-        STORAGE_KEYS.studentName
-      );
-
-      sessionStorage.removeItem(
-        STORAGE_KEYS.studentCourse
-      );
-    } catch (error) {
-      console.warn(
-        "Logout cleanup failed:",
-        error
-      );
-    }
-
-    showToast(
-      "Logout করা হয়েছে।",
-      "success"
-    );
-
-    window.setTimeout(
-      () => {
-        window.location.href =
-          "login.html";
-      },
-      700
-    );
-  }
-
-  function initializeLogoutButtons() {
-    $$(
-      "[data-logout], #logoutBtn, .logout-btn"
-    ).forEach(
-      (button) => {
-        button.addEventListener(
-          "click",
-          (event) => {
-            event.preventDefault();
-            logoutStudent();
-          }
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     18. CLASS READY BUTTON
-     ======================================================= */
-
-  function initializeClassReadyButton() {
-    $$(
-      "[data-class-ready], #classReadyBtn, .class-ready-btn"
-    ).forEach(
-      (button) => {
-        button.addEventListener(
-          "click",
-          () => {
-            const readiness = {
-              studentId: student.id,
-              studentName: student.name,
-              classStart:
-                CONFIG.classStart,
-              status: "Ready",
-              updatedAt:
-                new Date().toISOString()
-            };
-
-            setStorage(
-              "snkClassReady",
-              JSON.stringify(
-                readiness
-              )
-            );
-
-            button.classList.add(
-              "ready"
-            );
-
-            button.textContent =
-              "✓ Ready";
-
-            button.setAttribute(
-              "disabled",
-              "true"
-            );
-
-            showToast(
-              "আপনার class readiness save হয়েছে।",
-              "success"
-            );
-          }
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     19. STORAGE EVENT
-     ======================================================= */
-
-  function initializeStorageSync() {
-    window.addEventListener(
-      "storage",
-      (event) => {
-        if (
-          event.key ===
-          STORAGE_KEYS.theme
-        ) {
-          applyTheme(
-            event.newValue ||
-              "dark"
-          );
-        }
-
-        if (
-          event.key ===
-            STORAGE_KEYS.studentId ||
-          event.key ===
-            STORAGE_KEYS.studentName ||
-          event.key ===
-            STORAGE_KEYS.studentCourse
-        ) {
-          updateStudentElements();
-        }
-      }
-    );
-  }
-
-
-  /* =======================================================
-     20. VISIBILITY REFRESH
-     ======================================================= */
-
-  function initializeVisibilityRefresh() {
-    document.addEventListener(
-      "visibilitychange",
-      () => {
-        if (
-          document.visibilityState ===
-          "visible"
-        ) {
-          updateClassCountdown();
-          updateStudentElements();
-          applyTheme(
-            getStorage(
-              STORAGE_KEYS.theme,
-              "dark"
-            )
-          );
-        }
-      }
-    );
-  }
-
-
-  /* =======================================================
-     21. HEADER SCROLL EFFECT
-     ======================================================= */
-
-  function initializeHeaderScroll() {
-    const header =
-      $(
-        "header"
-      ) ||
-      $(
-        ".site-header"
-      ) ||
-      $(
-        ".navbar"
-      );
-
-    if (!header) {
-      return;
-    }
-
-    const updateHeader =
-      () => {
-        header.classList.toggle(
-          "scrolled",
-          window.scrollY > 20
-        );
-      };
-
-    updateHeader();
-
-    window.addEventListener(
-      "scroll",
-      updateHeader,
-      {
-        passive: true
-      }
-    );
-  }
-
-
-  /* =======================================================
-     22. BACK TO TOP
-     ======================================================= */
-
-  function initializeBackToTop() {
-    const button =
-      $(
-        "#backToTop"
-      ) ||
-      $(
-        "[data-back-to-top]"
-      );
-
-    if (!button) {
-      return;
-    }
-
-    const updateVisibility =
-      () => {
-        button.classList.toggle(
-          "show",
-          window.scrollY > 500
-        );
-      };
-
-    updateVisibility();
-
-    window.addEventListener(
-      "scroll",
-      updateVisibility,
-      {
-        passive: true
-      }
-    );
-
-    button.addEventListener(
-      "click",
-      () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      }
-    );
-  }
-
-
-  /* =======================================================
-     23. PREVENT DOUBLE FORM SUBMISSION
-     ======================================================= */
-
-  function initializeForms() {
-    $$(
-      "form"
-    ).forEach(
-      (form) => {
-        form.addEventListener(
-          "submit",
-          () => {
-            const submitButton =
-              form.querySelector(
-                'button[type="submit"], input[type="submit"]'
-              );
-
-            if (!submitButton) {
-              return;
-            }
-
-            if (
-              submitButton.dataset.locked ===
-              "true"
-            ) {
-              return;
-            }
-
-            submitButton.dataset.locked =
-              "true";
-
-            window.setTimeout(
-              () => {
-                submitButton.dataset.locked =
-                  "false";
-              },
-              1200
-            );
-          }
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     24. IMAGE ERROR HANDLING
-     ======================================================= */
-
-  function initializeImageFallback() {
-    $$(
-      "img"
-    ).forEach(
-      (image) => {
-        image.addEventListener(
-          "error",
-          () => {
-            image.classList.add(
-              "image-error"
-            );
-
-            /*
-              Keep the broken image from
-              creating an ugly layout.
-            */
-
-            image.setAttribute(
-              "alt",
-              image.getAttribute(
-                "alt"
-              ) ||
-                "SNK IT Institute"
-            );
-          }
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     25. KEYBOARD ACCESSIBILITY
-     ======================================================= */
-
-  function initializeKeyboardSupport() {
-    document.addEventListener(
-      "keydown",
-      (event) => {
-        /*
-          ESC closes mobile menu.
-        */
-
-        if (
-          event.key ===
-          "Escape"
-        ) {
-          const nav =
-            $(
-              "#mainNav"
-            ) ||
-            $(
-              ".main-nav"
-            );
-
-          const menuButton =
-            $(
-              "#mobileMenuBtn"
-            ) ||
-            $(
-              ".mobile-menu-btn"
-            );
-
-          if (nav) {
-            nav.classList.remove(
-              "mobile-open"
-            );
-          }
-
-          if (menuButton) {
-            menuButton.classList.remove(
-              "active"
-            );
-
-            menuButton.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-          }
-        }
-      }
-    );
-  }
-
-
-  /* =======================================================
-     26. REDUCED MOTION SUPPORT
-     ======================================================= */
-
-  function initializeMotionPreference() {
-    if (
-      !window.matchMedia
-    ) {
-      return;
-    }
-
-    const reduceMotion =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      );
-
-    const applyMotionPreference =
-      () => {
-        document.body.classList.toggle(
-          "reduce-motion",
-          reduceMotion.matches
-        );
-      };
-
-    applyMotionPreference();
-
-    if (
-      reduceMotion.addEventListener
-    ) {
-      reduceMotion.addEventListener(
-        "change",
-        applyMotionPreference
-      );
-    }
-  }
-
-
-  /* =======================================================
-     27. YEAR AUTO UPDATE
-     ======================================================= */
-
-  function initializeYear() {
-    const year =
-      new Date().getFullYear();
-
-    $$(
-      "[data-current-year], #currentYear"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          year;
-      }
-    );
-  }
-
-
-  /* =======================================================
-     28. COURSE START LABELS
-     ======================================================= */
-
-  function initializeCourseLabels() {
-    $$(
-      "[data-class-start]"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          CONFIG.classStart;
-      }
-    );
-
-    $$(
-      "[data-class-time]"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          CONFIG.classTime;
-      }
-    );
-
-    $$(
-      "[data-course-duration]"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          CONFIG.duration;
-      }
-    );
-
-    $$(
-      "[data-course-mode]"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          CONFIG.mode;
-      }
-    );
-
-    $$(
-      "[data-course-routine]"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          CONFIG.routine;
-      }
-    );
-  }
-
-
-  /* =======================================================
-     29. CURRENT DATE DISPLAY
-     ======================================================= */
-
-  function initializeCurrentDate() {
-    const date =
-      new Date();
-
-    const formatted =
-      date.toLocaleDateString(
-        "bn-BD",
-        {
-          day: "numeric",
-          month: "long",
-          year: "numeric"
-        }
-      );
-
-    $$(
-      "[data-current-date]"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          formatted;
-      }
-    );
-  }
-
-
-  /* =======================================================
-     30. PORTAL STATUS
-     ======================================================= */
-
-  function initializePortalStatus() {
-    $$(
-      "[data-portal-status]"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          "Active";
-      }
-    );
-  }
-
-
-  /* =======================================================
-     31. DEMO STUDENT NOTICE
-     ======================================================= */
-
-  function initializeDemoStudentNotice() {
-    $$(
-      "[data-demo-student]"
-    ).forEach(
-      (element) => {
-        element.textContent =
-          `${student.name} • ${student.id}`;
-      }
-    );
-  }
-
-
-  /* =======================================================
-     32. PRINT BUTTON
-     ======================================================= */
-
-  function initializePrintButtons() {
-    $$(
-      "[data-print], #printBtn, .print-btn"
-    ).forEach(
-      (button) => {
-        button.addEventListener(
-          "click",
-          (event) => {
-            event.preventDefault();
-            window.print();
-          }
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     33. PAGE LOAD ANIMATION
-     ======================================================= */
-
-  function initializePageLoad() {
-    requestAnimationFrame(
-      () => {
-        document.body.classList.add(
-          "page-loaded"
-        );
-      }
-    );
-  }
-
-
-  /* =======================================================
-     34. GLOBAL ERROR PROTECTION
-     ======================================================= */
-
-  window.addEventListener(
-    "error",
-    (event) => {
-      console.warn(
-        "SNK Portal JS:",
-        event.message
-      );
-    }
+    },
+    2800
   );
 
-
-  /* =======================================================
-     35. INITIALIZE EVERYTHING
-     ======================================================= */
-
-  initializeTheme();
-  initializeLanguage();
-
-  updateStudentElements();
-  initializeCourseLabels();
-  initializeCurrentDate();
-  initializePortalStatus();
-  initializeDemoStudentNotice();
-
-  initializeMobileMenu();
-  initializeThemeButtons();
-  initializeLanguageButtons();
-
-  initializeActiveNavigation();
-  initializeSmoothScroll();
-
-  initializeCountdown();
-
-  initializeRevealAnimation();
-  initializeGalaxyEffects();
-
-  initializeLoginRequiredLinks();
-  initializeDemoButtons();
-
-  initializeLogoutButtons();
-  initializeClassReadyButton();
-
-  initializeStorageSync();
-  initializeVisibilityRefresh();
-
-  initializeHeaderScroll();
-  initializeBackToTop();
-
-  initializeForms();
-  initializeImageFallback();
-
-  initializeKeyboardSupport();
-  initializeMotionPreference();
-
-  initializeYear();
-  initializePrintButtons();
-
-  initializePageLoad();
+}
 
 
-  /* =======================================================
-     36. GLOBAL FUNCTIONS
-     ======================================================= */
+/* =========================================================
+   19. HTML ESCAPE
+========================================================= */
 
-  window.SNKPortal = {
-    config: CONFIG,
-    student,
+function escapeHTML(value) {
 
-    toggleTheme,
-    toggleLanguage,
-    logoutStudent,
-    showToast,
+  const div =
+    document.createElement(
+      "div"
+    );
 
-    refresh: () => {
-      updateStudentElements();
-      updateClassCountdown();
 
-      applyTheme(
-        getStorage(
-          STORAGE_KEYS.theme,
-          "dark"
-        )
-      );
-    }
+  div.textContent =
+    String(value ?? "");
+
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   20. CLASS READY SYSTEM
+========================================================= */
+
+function setClassReady() {
+
+  const student =
+    getStudentData();
+
+
+  const readyData = {
+
+    studentId:
+      student.id,
+
+    studentName:
+      student.name,
+
+    course:
+      student.course,
+
+    batch:
+      student.batch,
+
+    ready:
+      true,
+
+    updatedAt:
+      new Date().toISOString()
+
   };
 
 
-  /* =======================================================
-     37. READY MESSAGE
-     ======================================================= */
+  try {
 
-  console.log(
-    "SNK IT Institute Student Portal — Step 1.18.2 loaded successfully."
+    localStorage.setItem(
+      SNKPortal.storage.classReady,
+      JSON.stringify(
+        readyData
+      )
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Class ready storage error:",
+      error
+    );
+
+  }
+
+
+  showToast(
+    "You are ready for class!",
+    "success"
   );
 
-  console.log(
-    `Student: ${student.name} (${student.id})`
+}
+
+
+function getClassReadyData() {
+
+  try {
+
+    const raw =
+      localStorage.getItem(
+        SNKPortal.storage.classReady
+      );
+
+
+    if (!raw) {
+      return null;
+    }
+
+
+    return JSON.parse(
+      raw
+    );
+
+  } catch (error) {
+
+    return null;
+
+  }
+
+}
+
+
+function initClassReadyButtons() {
+
+  $$(
+    "[data-class-ready]"
+  ).forEach(button => {
+
+    button.addEventListener(
+      "click",
+      function () {
+
+        setClassReady();
+
+      }
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   21. DEMO ACTIONS
+========================================================= */
+
+function initDemoActions() {
+
+  $$(
+    "[data-demo-action]"
+  ).forEach(button => {
+
+    button.addEventListener(
+      "click",
+      function (event) {
+
+        event.preventDefault();
+
+
+        const message =
+          this.getAttribute(
+            "data-demo-message"
+          ) ||
+          "This feature is available in the student portal.";
+
+
+        showToast(
+          message,
+          "info"
+        );
+
+      }
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   22. PRINT
+========================================================= */
+
+function initPrintButtons() {
+
+  $$(
+    "[data-print]"
+  ).forEach(button => {
+
+    button.addEventListener(
+      "click",
+      function (event) {
+
+        event.preventDefault();
+
+        window.print();
+
+      }
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   23. BACK TO TOP
+========================================================= */
+
+function initBackToTop() {
+
+  const button =
+    $("#backToTop");
+
+
+  if (!button) {
+    return;
+  }
+
+
+  function updateButton() {
+
+    if (
+      window.scrollY > 450
+    ) {
+
+      button.classList.add(
+        "show"
+      );
+
+    } else {
+
+      button.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+
+
+  updateButton();
+
+
+  window.addEventListener(
+    "scroll",
+    updateButton,
+    {
+      passive: true
+    }
   );
 
-  console.log(
-    `Course: ${student.course}`
+
+  button.addEventListener(
+    "click",
+    function () {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
   );
 
-});
+}
+
+
+/* =========================================================
+   24. STORAGE SYNC
+========================================================= */
+
+function initStorageSync() {
+
+  window.addEventListener(
+    "storage",
+    function (event) {
+
+      if (
+        [
+          SNKPortal.storage.studentId,
+          SNKPortal.storage.studentName,
+          SNKPortal.storage.studentCourse,
+          SNKPortal.storage.studentLoggedIn,
+          SNKPortal.storage.theme,
+          SNKPortal.storage.studentProfile
+        ].includes(event.key)
+      ) {
+
+        updateStudentUI();
+
+        applyTheme(
+          getPreferredTheme()
+        );
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "visibilitychange",
+    function () {
+
+      if (
+        !document.hidden
+      ) {
+
+        updateStudentUI();
+
+        applyTheme(
+          getPreferredTheme()
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   25. SYSTEM THEME DETECTION
+========================================================= */
+
+function initSystemTheme() {
+
+  if (
+    !window.matchMedia
+  ) {
+
+    return;
+
+  }
+
+
+  const media =
+    window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    );
+
+
+  media.addEventListener?.(
+    "change",
+    function () {
+
+      /*
+        User-selected theme always wins.
+      */
+
+      const savedTheme =
+        localStorage.getItem(
+          SNKPortal.storage.theme
+        );
+
+
+      if (
+        savedTheme === "dark" ||
+        savedTheme === "light"
+      ) {
+
+        return;
+
+      }
+
+
+      applyTheme(
+        media.matches
+          ? "dark"
+          : "light"
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   26. THEME BUTTON EVENTS
+========================================================= */
+
+function initThemeButtons() {
+
+  const buttons = [
+    $("#themeToggle"),
+    $("#themeButton"),
+    $("[data-theme-toggle]")
+  ].filter(Boolean);
+
+
+  buttons.forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        toggleTheme
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   27. LANGUAGE BUTTON EVENTS
+========================================================= */
+
+function initLanguageButton() {
+
+  const button =
+    $("#languageToggle");
+
+
+  if (!button) {
+    return;
+  }
+
+
+  button.addEventListener(
+    "click",
+    toggleLanguage
+  );
+
+
+  updateLanguageButton(
+    getLanguage()
+  );
+
+}
+
+
+/* =========================================================
+   28. KEYBOARD ESCAPE
+========================================================= */
+
+function initKeyboardEvents() {
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeLoginRequiredModal();
+
+
+        const nav =
+          $("#mainNav");
+
+        const menuButton =
+          $("#mobileMenuBtn");
+
+
+        if (nav) {
+
+          nav.classList.remove(
+            "mobile-open"
+          );
+
+        }
+
+
+        if (menuButton) {
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+
+          menuButton.innerHTML =
+            '<i class="fa-solid fa-bars"></i>';
+
+        }
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   29. CURRENT YEAR
+========================================================= */
+
+function updateCurrentYear() {
+
+  const year =
+    new Date()
+      .getFullYear();
+
+
+  $$("#currentYear")
+    .forEach(element => {
+
+      element.textContent =
+        year;
+
+    });
+
+}
+
+
+/* =========================================================
+   30. COURSE PROGRESS
+========================================================= */
+
+function updateCourseProgress() {
+
+  const progress =
+    0;
+
+
+  const progressElements = [
+    $("#courseProgressPercent"),
+    $("#courseProgressValue")
+  ].filter(Boolean);
+
+
+  progressElements.forEach(
+    element => {
+
+      element.textContent =
+        progress + "%";
+
+    }
+  );
+
+
+  const bars = [
+    $("#courseProgressBar"),
+    $("#courseProgressFill")
+  ].filter(Boolean);
+
+
+  bars.forEach(
+    bar => {
+
+      bar.style.width =
+        progress + "%";
+
+    }
+  );
+
+
+  $$("[data-course-progress]")
+    .forEach(element => {
+
+      element.textContent =
+        progress + "%";
+
+    });
+
+}
+
+
+/* =========================================================
+   31. PAGE DATA ATTRIBUTES
+========================================================= */
+
+function initDataAttributes() {
+
+  const student =
+    getStudentData();
+
+
+  $$("[data-student-name]")
+    .forEach(element => {
+
+      element.textContent =
+        student.name;
+
+    });
+
+
+  $$("[data-student-id]")
+    .forEach(element => {
+
+      element.textContent =
+        student.id;
+
+    });
+
+
+  $$("[data-student-course]")
+    .forEach(element => {
+
+      element.textContent =
+        student.course;
+
+    });
+
+
+  $$("[data-student-batch]")
+    .forEach(element => {
+
+      element.textContent =
+        student.batch;
+
+    });
+
+
+  $$("[data-course-name]")
+    .forEach(element => {
+
+      element.textContent =
+        SNKPortal.course.name;
+
+    });
+
+
+  $$("[data-course-duration]")
+    .forEach(element => {
+
+      element.textContent =
+        SNKPortal.course.duration;
+
+    });
+
+
+  $$("[data-course-mode]")
+    .forEach(element => {
+
+      element.textContent =
+        SNKPortal.course.mode;
+
+    });
+
+
+  $$("[data-course-days]")
+    .forEach(element => {
+
+      element.textContent =
+        SNKPortal.course.days;
+
+    });
+
+
+  $$("[data-course-time]")
+    .forEach(element => {
+
+      element.textContent =
+        SNKPortal.course.time;
+
+    });
+
+}
+
+
+/* =========================================================
+   32. IMAGE FALLBACK
+========================================================= */
+
+function initImageFallback() {
+
+  $$("img").forEach(
+    image => {
+
+      image.addEventListener(
+        "error",
+        function () {
+
+          this.classList.add(
+            "image-error"
+          );
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   33. FOCUS ACCESSIBILITY
+========================================================= */
+
+function initAccessibility() {
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Tab"
+      ) {
+
+        document.body.classList.add(
+          "keyboard-navigation"
+        );
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "mousedown",
+    function () {
+
+      document.body.classList.remove(
+        "keyboard-navigation"
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   34. PAGE LOAD
+========================================================= */
+
+function initializeSNKPortal() {
+
+  /*
+    1. Theme
+  */
+  applyTheme(
+    getPreferredTheme()
+  );
+
+
+  /*
+    2. Language
+  */
+  setLanguage(
+    getLanguage()
+  );
+
+
+  /*
+    3. Student
+  */
+  updateStudentUI();
+
+
+  initDataAttributes();
+
+
+  /*
+    4. Navigation
+  */
+  initMobileNavigation();
+
+  initActiveNavigation();
+
+  initProtectedLinks();
+
+  initLogoutButtons();
+
+
+  /*
+    5. Header
+  */
+  initHeaderScroll();
+
+
+  /*
+    6. Course
+  */
+  initCountdown();
+
+  updateCourseProgress();
+
+
+  /*
+    7. UI
+  */
+  initThemeButtons();
+
+  initLanguageButton();
+
+  initLoginModal();
+
+  initSmoothLinks();
+
+  initScrollReveal();
+
+  initClassReadyButtons();
+
+  initDemoActions();
+
+  initPrintButtons();
+
+  initBackToTop();
+
+
+  /*
+    8. Storage
+  */
+  initStorageSync();
+
+  initSystemTheme();
+
+
+  /*
+    9. Accessibility
+  */
+  initKeyboardEvents();
+
+  initAccessibility();
+
+
+  /*
+    10. Misc
+  */
+  updateCurrentYear();
+
+  initImageFallback();
+
+
+  /*
+    Global ready flag
+  */
+  window.SNKPortalReady =
+    true;
+
+
+  /*
+    Developer / debugging info
+  */
+  console.log(
+    "SNK IT Student Portal initialized — Step 1.19.1"
+  );
+
+}
+
+
+/* =========================================================
+   35. DOM READY
+========================================================= */
+
+if (
+  document.readyState === "loading"
+) {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializeSNKPortal
+  );
+
+} else {
+
+  initializeSNKPortal();
+
+}
+
+
+/* =========================================================
+   36. GLOBAL API
+   Other Student Portal pages can use these.
+========================================================= */
+
+window.SNKPortalAPI = {
+
+  config:
+    SNKPortal,
+
+  isLoggedIn:
+    isStudentLoggedIn,
+
+  getStudent:
+    getStudentData,
+
+  logout:
+    logoutStudent,
+
+  showToast:
+    showToast,
+
+  showLoginRequired:
+    showLoginRequiredModal,
+
+  closeLoginRequired:
+    closeLoginRequiredModal,
+
+  setTheme:
+    applyTheme,
+
+  getTheme:
+    getPreferredTheme,
+
+  toggleTheme:
+    toggleTheme,
+
+  getLanguage:
+    getLanguage,
+
+  setLanguage:
+    setLanguage,
+
+  setClassReady:
+    setClassReady,
+
+  getClassReady:
+    getClassReadyData
+
+};
 ```
