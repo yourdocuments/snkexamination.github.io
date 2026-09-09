@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#070b14">
-<title>SNK IT Institute | Quiz Attempts</title>
+<title>SNK IT Institute | Quiz Attempt Control</title>
 
 <style>
 *{
@@ -18,7 +18,7 @@
   --bg2:#0c1220;
   --card:#101827;
   --card2:#141e30;
-  --border:#243149;
+  --border:#26334b;
   --text:#f5f7fb;
   --muted:#98a6bb;
   --primary:#6c63ff;
@@ -26,6 +26,7 @@
   --danger:#ff5d73;
   --warning:#ffbd59;
   --info:#4dabf7;
+  --purple:#a78bfa;
   --shadow:0 18px 50px rgba(0,0,0,.28);
 }
 
@@ -280,9 +281,9 @@ body.light .topbar{
   display:inline-flex;
   padding:7px 11px;
   border-radius:999px;
-  background:rgba(77,171,247,.12);
-  color:#70c1ff;
-  border:1px solid rgba(77,171,247,.22);
+  background:rgba(167,139,250,.12);
+  color:#c4b5fd;
+  border:1px solid rgba(167,139,250,.25);
   font-size:12px;
   font-weight:800;
 }
@@ -295,11 +296,11 @@ body.light .topbar{
 .hero p{
   color:var(--muted);
   line-height:1.7;
-  max-width:820px;
+  max-width:850px;
 }
 
 /* =========================
-   BUTTON
+   BUTTONS
 ========================= */
 
 .btn{
@@ -344,6 +345,11 @@ body.light .topbar{
   color:#061a28;
 }
 
+.btn-purple{
+  background:var(--purple);
+  color:#160c2b;
+}
+
 .btn-secondary{
   background:var(--card2);
   border:1px solid var(--border);
@@ -361,7 +367,7 @@ body.light .topbar{
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:repeat(6,1fr);
   gap:14px;
   margin-top:18px;
 }
@@ -461,6 +467,11 @@ body.light .topbar{
   background:rgba(77,171,247,.12);
 }
 
+.status.purple{
+  color:#c4b5fd;
+  background:rgba(167,139,250,.12);
+}
+
 .status.gray{
   color:#b0bac8;
   background:rgba(160,170,185,.10);
@@ -508,7 +519,7 @@ select:focus{
 
 table{
   width:100%;
-  min-width:1100px;
+  min-width:1250px;
   border-collapse:collapse;
 }
 
@@ -562,6 +573,62 @@ th{
 }
 
 /* =========================
+   MAKEUP CARD
+========================= */
+
+.makeup-box{
+  border:1px solid rgba(167,139,250,.28);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(167,139,250,.08),
+      rgba(108,99,255,.04)
+    );
+  border-radius:16px;
+  padding:18px;
+}
+
+.makeup-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:15px;
+}
+
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:6px;
+}
+
+.field input,
+.field select{
+  width:100%;
+}
+
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  color:var(--text);
+  font-size:13px;
+}
+
+.checkbox-row input{
+  width:17px;
+  height:17px;
+}
+
+.makeup-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+/* =========================
    MODAL
 ========================= */
 
@@ -582,8 +649,8 @@ th{
 }
 
 .modal-box{
-  width:min(760px,100%);
-  max-height:90vh;
+  width:min(800px,100%);
+  max-height:92vh;
   overflow:auto;
   background:var(--card);
   border:1px solid var(--border);
@@ -610,10 +677,6 @@ th{
   padding:16px 20px;
   border-top:1px solid var(--border);
 }
-
-/* =========================
-   DETAILS
-========================= */
 
 .detail-grid{
   display:grid;
@@ -703,10 +766,14 @@ th{
    RESPONSIVE
 ========================= */
 
-@media(max-width:1200px){
+@media(max-width:1300px){
 
   .stats{
     grid-template-columns:repeat(3,1fr);
+  }
+
+  .makeup-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
@@ -768,6 +835,10 @@ th{
     width:100%;
     min-width:0;
   }
+
+  .makeup-grid{
+    grid-template-columns:1fr;
+  }
 }
 
 @media(max-width:430px){
@@ -791,7 +862,8 @@ th{
   .topbar,
   .no-print,
   .modal,
-  .toast{
+  .toast,
+  .makeup-box{
     display:none!important;
   }
 
@@ -823,10 +895,7 @@ th{
      SIDEBAR
 ========================= -->
 
-<aside
-  class="sidebar"
-  id="sidebar"
->
+<aside class="sidebar" id="sidebar">
 
   <div class="sidebar-head">
 
@@ -968,536 +1037,735 @@ th{
 
 <main class="main">
 
-  <header class="topbar">
+<header class="topbar">
 
-    <div class="top-left">
+  <div class="top-left">
 
-      <button
-        class="menu-btn"
-        id="menuBtn"
-        type="button"
-      >
-        ☰
-      </button>
-
-      <div>
-
-        <div class="page-title">
-          Quiz Attempts
-        </div>
-
-        <div class="page-subtitle">
-          Student attempt & one-attempt control
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="top-actions">
-
-      <button
-        class="icon-btn"
-        id="refreshBtn"
-        type="button"
-        title="Refresh"
-      >
-        ↻
-      </button>
-
-      <button
-        class="icon-btn"
-        id="themeBtn"
-        type="button"
-        title="Theme"
-      >
-        🌙
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <div class="container">
-
-    <!-- =========================
-         HERO
-    ========================= -->
-
-    <section class="hero">
-
-      <div class="hero-content">
-
-        <span class="badge">
-          ● STUDENT ATTEMPT CONTROL
-        </span>
-
-        <h1 id="heroTitle">
-          Quiz Attempts
-        </h1>
-
-        <p>
-          কোন Student Quiz শুরু করেছে, submit করেছে,
-          attempt lock আছে কি না এবং প্রয়োজনে attempt reset—
-          সবকিছু এখান থেকে manage করা যাবে।
-        </p>
-
-        <div
-          style="
-            display:flex;
-            gap:8px;
-            flex-wrap:wrap;
-            margin-top:18px;
-          "
-        >
-
-          <button
-            class="btn btn-primary"
-            type="button"
-            onclick="refreshAll()"
-          >
-            ↻ Refresh Attempts
-          </button>
-
-          <button
-            class="btn btn-secondary"
-            type="button"
-            onclick="location.href='admin-quiz-results.html'"
-          >
-            📈 Quiz Results
-          </button>
-
-          <button
-            class="btn btn-warning"
-            type="button"
-            onclick="resetAllUnsubmittedAttempts()"
-          >
-            🔄 Reset Unsubmitted
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         STATS
-    ========================= -->
-
-    <section class="stats">
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Total Students
-        </div>
-
-        <div
-          class="stat-value"
-          id="statStudents"
-        >
-          0
-        </div>
-
-        <div class="stat-small">
-          Current student list
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Submitted
-        </div>
-
-        <div
-          class="stat-value"
-          id="statSubmitted"
-        >
-          0
-        </div>
-
-        <div class="stat-small">
-          Quiz completed
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Not Submitted
-        </div>
-
-        <div
-          class="stat-value"
-          id="statNotSubmitted"
-        >
-          0
-        </div>
-
-        <div class="stat-small">
-          No final result
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Active Attempt
-        </div>
-
-        <div
-          class="stat-value"
-          id="statActive"
-        >
-          0
-        </div>
-
-        <div class="stat-small">
-          Quiz currently started
-        </div>
-
-      </div>
-
-
-      <div class="stat">
-
-        <div class="stat-label">
-          Locked
-        </div>
-
-        <div
-          class="stat-value"
-          id="statLocked"
-        >
-          0
-        </div>
-
-        <div class="stat-small">
-          One-attempt lock
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         QUIZ INFO
-    ========================= -->
-
-    <section class="card">
-
-      <div class="card-head">
-
-        <div>
-
-          <div class="card-title">
-            ❓ Current Quiz
-          </div>
-
-          <div
-            class="card-sub"
-            id="quizInfoSub"
-          >
-            Quiz information
-          </div>
-
-        </div>
-
-        <span
-          class="status yellow"
-          id="quizStatus"
-        >
-          DRAFT
-        </span>
-
-      </div>
-
-      <div class="card-body">
-
-        <div class="detail-grid">
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Quiz Title
-            </div>
-
-            <div
-              class="detail-value"
-              id="infoTitle"
-            >
-              —
-            </div>
-
-          </div>
-
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Quiz ID
-            </div>
-
-            <div
-              class="detail-value"
-              id="infoId"
-            >
-              —
-            </div>
-
-          </div>
-
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Date Window
-            </div>
-
-            <div
-              class="detail-value"
-              id="infoDates"
-            >
-              —
-            </div>
-
-          </div>
-
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Duration
-            </div>
-
-            <div
-              class="detail-value"
-              id="infoDuration"
-            >
-              —
-            </div>
-
-          </div>
-
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              Pass Percentage
-            </div>
-
-            <div
-              class="detail-value"
-              id="infoPass"
-            >
-              —
-            </div>
-
-          </div>
-
-
-          <div class="detail-box">
-
-            <div class="detail-label">
-              One Attempt
-            </div>
-
-            <div
-              class="detail-value"
-              id="infoOneAttempt"
-            >
-              —
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         CONTROL NOTICE
-    ========================= -->
-
-    <div
-      class="notice"
-      style="margin-top:18px;"
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
     >
+      ☰
+    </button>
 
-      <strong>Reset কী করবে?</strong><br>
+    <div>
 
-      Reset করলে selected Student-এর active attempt এবং
-      one-attempt lock clear হবে।
-      কিন্তু পুরোনো submitted result automatically delete হবে না।
-      Result delete করতে Quiz Results page ব্যবহার করুন।
-
-    </div>
-
-
-    <!-- =========================
-         STUDENT ATTEMPTS
-    ========================= -->
-
-    <section class="card">
-
-      <div class="card-head">
-
-        <div>
-
-          <div class="card-title">
-            👨‍🎓 Student Attempts
-          </div>
-
-          <div class="card-sub">
-            Student-wise quiz attempt status
-          </div>
-
-        </div>
-
+      <div class="page-title">
+        Quiz Attempt Control
       </div>
 
-
-      <div class="card-body">
-
-        <div class="toolbar">
-
-          <input
-            id="searchInput"
-            type="search"
-            placeholder="Student ID / Name search..."
-          >
-
-          <select id="statusFilter">
-
-            <option value="all">
-              All Students
-            </option>
-
-            <option value="submitted">
-              Submitted
-            </option>
-
-            <option value="active">
-              Active Attempt
-            </option>
-
-            <option value="locked">
-              Locked
-            </option>
-
-            <option value="not-submitted">
-              Not Submitted
-            </option>
-
-          </select>
-
-          <select id="sortFilter">
-
-            <option value="student">
-              Student A-Z
-            </option>
-
-            <option value="latest">
-              Latest Activity
-            </option>
-
-            <option value="oldest">
-              Oldest Activity
-            </option>
-
-          </select>
-
-          <button
-            class="btn btn-secondary"
-            type="button"
-            onclick="resetFilters()"
-          >
-            Reset Filter
-          </button>
-
-        </div>
-
-
-        <div
-          class="table-wrap"
-          style="margin-top:15px;"
-        >
-
-          <table>
-
-            <thead>
-
-              <tr>
-
-                <th>
-                  Student
-                </th>
-
-                <th>
-                  Course
-                </th>
-
-                <th>
-                  Submitted
-                </th>
-
-                <th>
-                  Active
-                </th>
-
-                <th>
-                  Lock
-                </th>
-
-                <th>
-                  Score
-                </th>
-
-                <th>
-                  Activity
-                </th>
-
-                <th>
-                  Action
-                </th>
-
-              </tr>
-
-            </thead>
-
-            <tbody
-              id="attemptTableBody"
-            ></tbody>
-
-          </table>
-
-        </div>
-
+      <div class="page-subtitle">
+        Reschedule • Make-up • Attempt Permission
       </div>
 
-    </section>
-
-
-    <div class="footer">
-      SNK IT Institute • Admin Quiz Attempts v2.5.12
     </div>
 
   </div>
+
+
+  <div class="top-actions">
+
+    <button
+      class="icon-btn"
+      id="refreshBtn"
+      type="button"
+      title="Refresh"
+    >
+      ↻
+    </button>
+
+    <button
+      class="icon-btn"
+      id="themeBtn"
+      type="button"
+      title="Theme"
+    >
+      🌙
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="container">
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <span class="badge">
+      ● MAKE-UP / RESCHEDULE CONTROL
+    </span>
+
+    <h1 id="heroTitle">
+      Quiz Attempt Control
+    </h1>
+
+    <p>
+      কোনো Student নির্ধারিত সময়ে Quiz দিতে না পারলে
+      Admin এখান থেকে তার জন্য আলাদা Make-up date দিতে
+      পারবেন। Student-এর attempt reset করে আবার Quiz দেওয়ার
+      permission-ও দেওয়া যাবে।
+    </p>
+
+    <div
+      style="
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+        margin-top:18px;
+      "
+    >
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        onclick="refreshAll()"
+      >
+        ↻ Refresh
+      </button>
+
+      <button
+        class="btn btn-purple"
+        type="button"
+        onclick="openMakeupForFirstStudent()"
+      >
+        🗓️ Make-up Schedule
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="location.href='admin-quiz-results.html'"
+      >
+        📈 Quiz Results
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<section class="stats">
+
+  <div class="stat">
+
+    <div class="stat-label">
+      Total Students
+    </div>
+
+    <div
+      class="stat-value"
+      id="statStudents"
+    >
+      0
+    </div>
+
+    <div class="stat-small">
+      Current students
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-label">
+      Submitted
+    </div>
+
+    <div
+      class="stat-value"
+      id="statSubmitted"
+    >
+      0
+    </div>
+
+    <div class="stat-small">
+      Final result saved
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-label">
+      Not Submitted
+    </div>
+
+    <div
+      class="stat-value"
+      id="statNotSubmitted"
+    >
+      0
+    </div>
+
+    <div class="stat-small">
+      No final result
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-label">
+      Active
+    </div>
+
+    <div
+      class="stat-value"
+      id="statActive"
+    >
+      0
+    </div>
+
+    <div class="stat-small">
+      Quiz started
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-label">
+      Locked
+    </div>
+
+    <div
+      class="stat-value"
+      id="statLocked"
+    >
+      0
+    </div>
+
+    <div class="stat-small">
+      One-attempt lock
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div class="stat-label">
+      Make-up
+    </div>
+
+    <div
+      class="stat-value"
+      id="statMakeup"
+    >
+      0
+    </div>
+
+    <div class="stat-small">
+      Special permissions
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     QUIZ INFORMATION
+========================= -->
+
+<section class="card">
+
+  <div class="card-head">
+
+    <div>
+
+      <div class="card-title">
+        ❓ Current Quiz
+      </div>
+
+      <div
+        class="card-sub"
+        id="quizInfoSub"
+      >
+        Quiz information
+      </div>
+
+    </div>
+
+    <span
+      class="status yellow"
+      id="quizStatus"
+    >
+      DRAFT
+    </span>
+
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="detail-grid">
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Quiz Title
+        </div>
+
+        <div
+          class="detail-value"
+          id="infoTitle"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Quiz ID
+        </div>
+
+        <div
+          class="detail-value"
+          id="infoId"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Normal Date Window
+        </div>
+
+        <div
+          class="detail-value"
+          id="infoDates"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Duration
+        </div>
+
+        <div
+          class="detail-value"
+          id="infoDuration"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Pass Percentage
+        </div>
+
+        <div
+          class="detail-value"
+          id="infoPass"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          One Attempt
+        </div>
+
+        <div
+          class="detail-value"
+          id="infoOneAttempt"
+        >
+          —
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     MAKE-UP PANEL
+========================= -->
+
+<section class="card">
+
+  <div class="card-head">
+
+    <div>
+
+      <div class="card-title">
+        🗓️ Student Make-up / Reschedule
+      </div>
+
+      <div class="card-sub">
+        একটি Student-এর জন্য আলাদা Quiz access window তৈরি করুন
+      </div>
+
+    </div>
+
+    <span class="status purple">
+      ADMIN CONTROL
+    </span>
+
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="makeup-box">
+
+      <div class="notice">
+
+        <strong>কখন ব্যবহার করবেন?</strong><br>
+
+        Student যদি normal quiz date-এ Quiz দিতে না পারে,
+        তাহলে তার attempt reset করে এখানে একটি special
+        Make-up date দেওয়া যাবে। এই permission শুধু ওই
+        Student-এর জন্য কাজ করবে।
+
+      </div>
+
+
+      <div class="makeup-grid">
+
+        <div class="field">
+
+          <label>
+            Student
+          </label>
+
+          <select id="makeupStudent"></select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Make-up Start Date
+          </label>
+
+          <input
+            id="makeupStartDate"
+            type="date"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Make-up End Date
+          </label>
+
+          <input
+            id="makeupEndDate"
+            type="date"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Reason
+          </label>
+
+          <input
+            id="makeupReason"
+            type="text"
+            placeholder="যেমন: Missed Quiz"
+          >
+
+        </div>
+
+      </div>
+
+
+      <label class="checkbox-row">
+
+        <input
+          id="makeupResetAttempt"
+          type="checkbox"
+          checked
+        >
+
+        Student-এর existing attempt/lock reset করে নতুন attempt allow করুন
+
+      </label>
+
+
+      <label class="checkbox-row">
+
+        <input
+          id="makeupAllowAfterNormalWindow"
+          type="checkbox"
+          checked
+        >
+
+        Normal Quiz date শেষ হলেও Make-up window-তে Quiz allow করুন
+
+      </label>
+
+
+      <div class="makeup-actions">
+
+        <button
+          class="btn btn-purple"
+          type="button"
+          onclick="saveMakeupPermission()"
+        >
+          🗓️ Save Make-up Permission
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          type="button"
+          onclick="clearMakeupForm()"
+        >
+          Clear
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PERMISSIONS
+========================= -->
+
+<section class="card">
+
+  <div class="card-head">
+
+    <div>
+
+      <div class="card-title">
+        🛂 Make-up Permissions
+      </div>
+
+      <div class="card-sub">
+        Student-wise special quiz access
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card-body">
+
+    <div
+      id="makeupPermissions"
+    ></div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     STUDENT ATTEMPTS
+========================= -->
+
+<section class="card">
+
+  <div class="card-head">
+
+    <div>
+
+      <div class="card-title">
+        👨‍🎓 Student Attempt Status
+      </div>
+
+      <div class="card-sub">
+        Submitted, Active, Locked এবং Make-up status
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="toolbar">
+
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Student ID / Name search..."
+      >
+
+      <select id="statusFilter">
+
+        <option value="all">
+          All Students
+        </option>
+
+        <option value="submitted">
+          Submitted
+        </option>
+
+        <option value="active">
+          Active Attempt
+        </option>
+
+        <option value="locked">
+          Locked
+        </option>
+
+        <option value="makeup">
+          Make-up
+        </option>
+
+        <option value="not-submitted">
+          Not Submitted
+        </option>
+
+      </select>
+
+      <select id="sortFilter">
+
+        <option value="student">
+          Student A-Z
+        </option>
+
+        <option value="latest">
+          Latest Activity
+        </option>
+
+        <option value="oldest">
+          Oldest Activity
+        </option>
+
+      </select>
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="resetFilters()"
+      >
+        Reset Filter
+      </button>
+
+    </div>
+
+
+    <div
+      class="table-wrap"
+      style="margin-top:15px;"
+    >
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Student
+            </th>
+
+            <th>
+              Course
+            </th>
+
+            <th>
+              Submitted
+            </th>
+
+            <th>
+              Active
+            </th>
+
+            <th>
+              Lock
+            </th>
+
+            <th>
+              Make-up
+            </th>
+
+            <th>
+              Score
+            </th>
+
+            <th>
+              Activity
+            </th>
+
+            <th>
+              Action
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody
+          id="attemptTableBody"
+        ></tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+  SNK IT Institute • Admin Quiz Attempt Control v2.5.13
+</div>
+
+</div>
 
 </main>
 
@@ -1545,9 +1813,7 @@ th{
 
     <div class="modal-body">
 
-      <div
-        id="modalContent"
-      ></div>
+      <div id="modalContent"></div>
 
     </div>
 
@@ -1568,10 +1834,6 @@ th{
 
 </div>
 
-
-<!-- =========================
-     TOAST
-========================= -->
 
 <div
   class="toast"
@@ -1610,7 +1872,10 @@ const STORAGE = {
     "snkQuizActiveAttemptV25",
 
   attemptLock:
-    "snkQuizAttemptLockV25"
+    "snkQuizAttemptLockV25",
+
+  makeup:
+    "snkQuizMakeupPermissionsV25"
 
 };
 
@@ -1688,7 +1953,11 @@ const DEFAULT_QUIZ = {
    HELPERS
 ========================================================= */
 
-function readJSON(storage,key,fallback){
+function readJSON(
+  storage,
+  key,
+  fallback
+){
 
   try{
 
@@ -1718,7 +1987,11 @@ function readJSON(storage,key,fallback){
 }
 
 
-function writeJSON(storage,key,value){
+function writeJSON(
+  storage,
+  key,
+  value
+){
 
   try{
 
@@ -1744,7 +2017,10 @@ function writeJSON(storage,key,value){
 }
 
 
-function getLocal(key,fallback){
+function getLocal(
+  key,
+  fallback
+){
 
   return readJSON(
     localStorage,
@@ -1755,7 +2031,10 @@ function getLocal(key,fallback){
 }
 
 
-function setLocal(key,value){
+function setLocal(
+  key,
+  value
+){
 
   return writeJSON(
     localStorage,
@@ -1766,7 +2045,9 @@ function setLocal(key,value){
 }
 
 
-function escapeHTML(value){
+function escapeHTML(
+  value
+){
 
   return String(
     value ?? ""
@@ -1780,7 +2061,9 @@ function escapeHTML(value){
 }
 
 
-function showToast(message){
+function showToast(
+  message
+){
 
   const toast =
     document.getElementById(
@@ -1805,13 +2088,52 @@ function showToast(message){
           "show"
         );
       },
-      2500
+      2800
     );
 
 }
 
 
-function formatDateTime(value){
+function formatDateOnly(
+  value
+){
+
+  if(!value){
+
+    return "—";
+
+  }
+
+  const date =
+    new Date(
+      `${value}T00:00:00`
+    );
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return value;
+
+  }
+
+  return date.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function formatDateTime(
+  value
+){
 
   if(!value){
 
@@ -1846,37 +2168,25 @@ function formatDateTime(value){
 }
 
 
-function formatDateOnly(value){
-
-  if(!value){
-
-    return "—";
-
-  }
+function todayISO(){
 
   const date =
-    new Date(
-      `${value}T00:00:00`
-    );
+    new Date();
 
-  if(
-    Number.isNaN(
-      date.getTime()
-    )
-  ){
+  const y =
+    date.getFullYear();
 
-    return value;
+  const m =
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
 
-  }
+  const d =
+    String(
+      date.getDate()
+    ).padStart(2,"0");
 
-  return date.toLocaleDateString(
-    "en-GB",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric"
-    }
-  );
+  return `${y}-${m}-${d}`;
 
 }
 
@@ -1922,14 +2232,14 @@ function applyTheme(){
 
 function toggleTheme(){
 
-  const isLight =
+  const light =
     document.body.classList.contains(
       "light"
     );
 
   localStorage.setItem(
     STORAGE.theme,
-    isLight
+    light
       ? "dark"
       : "light"
   );
@@ -1940,45 +2250,39 @@ function toggleTheme(){
 
 
 /* =========================================================
-   COURSE
+   COURSE / QUIZ
 ========================================================= */
 
 function getCourse(){
-
-  const saved =
-    getLocal(
-      STORAGE.course,
-      null
-    );
 
   return {
 
     ...DEFAULT_COURSE,
 
-    ...(saved || {})
+    ...(
+      getLocal(
+        STORAGE.course,
+        {}
+      ) || {}
+    )
 
   };
 
 }
 
 
-/* =========================================================
-   QUIZ
-========================================================= */
-
 function getQuiz(){
-
-  const saved =
-    getLocal(
-      STORAGE.quiz,
-      null
-    );
 
   return {
 
     ...DEFAULT_QUIZ,
 
-    ...(saved || {})
+    ...(
+      getLocal(
+        STORAGE.quiz,
+        {}
+      ) || {}
+    )
 
   };
 
@@ -1991,20 +2295,22 @@ function getQuiz(){
 
 function getStudents(){
 
-  const saved =
+  const students =
     getLocal(
       STORAGE.students,
       []
     );
 
+
   if(
-    Array.isArray(saved) &&
-    saved.length
+    Array.isArray(students) &&
+    students.length
   ){
 
-    return saved;
+    return students;
 
   }
+
 
   return [
 
@@ -2035,14 +2341,14 @@ function getStudents(){
 
 function getResults(){
 
-  const saved =
+  const results =
     getLocal(
       STORAGE.results,
       []
     );
 
-  return Array.isArray(saved)
-    ? saved
+  return Array.isArray(results)
+    ? results
     : [];
 
 }
@@ -2050,30 +2356,6 @@ function getResults(){
 
 /* =========================================================
    ACTIVE ATTEMPTS
-=========================================================
-
-   Supported formats:
-
-   1. Single object:
-      {
-        studentId,
-        quizId,
-        ...
-      }
-
-   2. Array:
-      [
-        {
-          studentId,
-          quizId,
-          ...
-        }
-      ]
-
-   3. Object map:
-      {
-        "SNK-1001": {...}
-      }
 ========================================================= */
 
 function getActiveAttempts(){
@@ -2083,6 +2365,7 @@ function getActiveAttempts(){
       STORAGE.activeAttempt,
       null
     );
+
 
   if(!saved){
 
@@ -2102,21 +2385,18 @@ function getActiveAttempts(){
     typeof saved === "object"
   ){
 
-    if(
-      saved.studentId
-    ){
+    if(saved.studentId){
 
       return [saved];
 
     }
 
-
     return Object
       .values(saved)
       .filter(
-        value =>
-          value &&
-          typeof value === "object"
+        item =>
+          item &&
+          typeof item === "object"
       );
 
   }
@@ -2129,13 +2409,6 @@ function getActiveAttempts(){
 
 /* =========================================================
    LOCKS
-=========================================================
-
-   Supported formats:
-
-   1. Array
-   2. Single object
-   3. Student ID map
 ========================================================= */
 
 function getAttemptLocks(){
@@ -2145,6 +2418,7 @@ function getAttemptLocks(){
       STORAGE.attemptLock,
       null
     );
+
 
   if(!saved){
 
@@ -2215,55 +2489,54 @@ function getAttemptLocks(){
 
 
 /* =========================================================
-   CURRENT QUIZ ACTIVE ATTEMPTS
+   MAKE-UP PERMISSIONS
 ========================================================= */
 
-function getCurrentActiveAttempts(){
+function getMakeupPermissions(){
 
-  const quiz =
-    getQuiz();
-
-  return getActiveAttempts()
-    .filter(
-      attempt=>{
-
-        return (
-          !attempt.quizId ||
-          attempt.quizId === quiz.id
-        );
-
-      }
+  const saved =
+    getLocal(
+      STORAGE.makeup,
+      []
     );
+
+
+  return Array.isArray(saved)
+    ? saved
+    : [];
 
 }
 
 
 /* =========================================================
-   CURRENT QUIZ LOCKS
+   CURRENT QUIZ FILTER
 ========================================================= */
 
-function getCurrentLocks(){
+function isSameQuiz(
+  item
+){
 
   const quiz =
     getQuiz();
 
-  return getAttemptLocks()
-    .filter(
-      lock=>{
 
-        return (
-          !lock.quizId ||
-          lock.quizId === quiz.id
-        );
+  if(!item){
 
-      }
-    );
+    return false;
+
+  }
+
+
+  return (
+    !item.quizId ||
+    item.quizId === quiz.id
+  );
 
 }
 
 
 /* =========================================================
-   FIND STUDENT RESULT
+   RESULT
 ========================================================= */
 
 function getStudentResult(
@@ -2273,82 +2546,74 @@ function getStudentResult(
   const quiz =
     getQuiz();
 
-  const results =
-    getResults();
 
-  const matches =
-    results
-      .filter(
-        result=>{
+  return getResults()
+    .filter(
+      result=>{
 
-          const sameStudent =
-            String(
-              result.studentId || ""
-            ) ===
-            String(
-              studentId
-            );
-
-          const sameQuiz =
-            !result.quizId ||
-            result.quizId === quiz.id ||
-            result.quizName === quiz.title;
-
-          return (
-            sameStudent &&
-            sameQuiz
+        const sameStudent =
+          String(
+            result.studentId || ""
+          ) ===
+          String(
+            studentId
           );
 
-        }
-      )
-      .sort(
-        (a,b)=>
-          new Date(
-            b.submittedAt ||
-            b.updatedAt ||
-            0
-          ) -
-          new Date(
-            a.submittedAt ||
-            a.updatedAt ||
-            0
-          )
-      );
 
-  return matches[0] || null;
+        const sameQuiz =
+          !result.quizId ||
+          result.quizId === quiz.id ||
+          result.quizName === quiz.title;
+
+
+        return (
+          sameStudent &&
+          sameQuiz
+        );
+
+      }
+    )
+    .sort(
+      (a,b)=>
+        new Date(
+          b.submittedAt ||
+          b.updatedAt ||
+          0
+        ) -
+        new Date(
+          a.submittedAt ||
+          a.updatedAt ||
+          0
+        )
+    )[0] || null;
 
 }
 
 
 /* =========================================================
-   FIND ACTIVE ATTEMPT
+   ACTIVE ATTEMPT
 ========================================================= */
 
 function getStudentActiveAttempt(
   studentId
 ){
 
-  const attempts =
-    getCurrentActiveAttempts();
-
-  const matches =
-    attempts.filter(
+  return getActiveAttempts()
+    .filter(
       attempt=>
+
         String(
           attempt.studentId || ""
         ) ===
         String(
           studentId
+        ) &&
+
+        isSameQuiz(
+          attempt
         )
-    );
 
-  if(!matches.length){
-
-    return null;
-
-  }
-
-  return matches
+    )
     .sort(
       (a,b)=>
         new Date(
@@ -2361,96 +2626,137 @@ function getStudentActiveAttempt(
           a.createdAt ||
           0
         )
-    )[0];
+    )[0] || null;
 
 }
 
 
 /* =========================================================
-   FIND LOCK
+   LOCK
 ========================================================= */
 
 function getStudentLock(
   studentId
 ){
 
-  const locks =
-    getCurrentLocks();
-
-  const matches =
-    locks.filter(
+  return getAttemptLocks()
+    .filter(
       lock=>
+
         String(
           lock.studentId || ""
         ) ===
         String(
           studentId
-        )
-    );
+        ) &&
 
-  if(!matches.length){
+        isSameQuiz(
+          lock
+        )
+
+    )[0] || null;
+
+}
+
+
+/* =========================================================
+   MAKE-UP PERMISSION
+========================================================= */
+
+function getStudentMakeup(
+  studentId
+){
+
+  const quiz =
+    getQuiz();
+
+
+  const today =
+    todayISO();
+
+
+  const permissions =
+    getMakeupPermissions()
+      .filter(
+        item=>{
+
+          return (
+
+            String(
+              item.studentId || ""
+            ) ===
+            String(
+              studentId
+            ) &&
+
+            (
+              !item.quizId ||
+              item.quizId === quiz.id
+            )
+
+          );
+
+        }
+      )
+      .sort(
+        (a,b)=>
+          new Date(
+            b.updatedAt ||
+            b.createdAt ||
+            0
+          ) -
+          new Date(
+            a.updatedAt ||
+            a.createdAt ||
+            0
+          )
+      );
+
+
+  if(!permissions.length){
 
     return null;
 
   }
 
-  return matches[0];
 
-}
+  const valid =
+    permissions.find(
+      permission=>{
 
+        if(
+          permission.enabled === false
+        ){
 
-/* =========================================================
-   DETERMINE LOCKED
-========================================================= */
+          return false;
 
-function isStudentLocked(
-  studentId
-){
+        }
 
-  const lock =
-    getStudentLock(
-      studentId
+        if(
+          permission.endDate &&
+          today >
+          permission.endDate
+        ){
+
+          return false;
+
+        }
+
+        return true;
+
+      }
     );
 
-  if(!lock){
 
-    return false;
-
-  }
-
-  if(
-    lock.locked === false
-  ){
-
-    return false;
-
-  }
-
-  return true;
+  return valid ||
+    permissions[0] ||
+    null;
 
 }
 
 
 /* =========================================================
-   DETERMINE ACTIVE
-========================================================= */
-
-function isStudentActive(
-  studentId
-){
-
-  const attempt =
-    getStudentActiveAttempt(
-      studentId
-    );
-
-  return !!attempt;
-
-}
-
-
-/* =========================================================
-   STUDENT STATUS
+   STATUS
 ========================================================= */
 
 function getStudentStatus(
@@ -2462,18 +2768,27 @@ function getStudentStatus(
     student.id ||
     "";
 
+
   const result =
     getStudentResult(
       studentId
     );
+
 
   const active =
     getStudentActiveAttempt(
       studentId
     );
 
-  const locked =
-    isStudentLocked(
+
+  const lock =
+    getStudentLock(
+      studentId
+    );
+
+
+  const makeup =
+    getStudentMakeup(
       studentId
     );
 
@@ -2486,10 +2801,24 @@ function getStudentStatus(
 
     active,
 
-    locked,
+    lock,
+
+    makeup,
 
     submitted:
-      !!result
+      !!result,
+
+    locked:
+      !!(
+        lock &&
+        lock.locked !== false
+      ),
+
+    isActive:
+      !!active,
+
+    isMakeup:
+      !!makeup
 
   };
 
@@ -2505,11 +2834,14 @@ function updateStats(){
   const students =
     getStudents();
 
+
   let submitted = 0;
 
   let active = 0;
 
   let locked = 0;
+
+  let makeup = 0;
 
 
   students.forEach(
@@ -2520,17 +2852,20 @@ function updateStats(){
           student
         );
 
+
       if(status.submitted){
 
         submitted++;
 
       }
 
-      if(status.active){
+
+      if(status.isActive){
 
         active++;
 
       }
+
 
       if(status.locked){
 
@@ -2538,16 +2873,15 @@ function updateStats(){
 
       }
 
+
+      if(status.isMakeup){
+
+        makeup++;
+
+      }
+
     }
   );
-
-
-  const notSubmitted =
-    Math.max(
-      0,
-      students.length -
-      submitted
-    );
 
 
   document.getElementById(
@@ -2565,7 +2899,11 @@ function updateStats(){
   document.getElementById(
     "statNotSubmitted"
   ).textContent =
-    notSubmitted;
+    Math.max(
+      0,
+      students.length -
+      submitted
+    );
 
 
   document.getElementById(
@@ -2579,11 +2917,17 @@ function updateStats(){
   ).textContent =
     locked;
 
+
+  document.getElementById(
+    "statMakeup"
+  ).textContent =
+    makeup;
+
 }
 
 
 /* =========================================================
-   QUIZ INFO UI
+   QUIZ INFO
 ========================================================= */
 
 function renderQuizInfo(){
@@ -2591,11 +2935,15 @@ function renderQuizInfo(){
   const quiz =
     getQuiz();
 
+  const course =
+    getCourse();
+
+
   document.getElementById(
     "heroTitle"
   ).textContent =
     quiz.title ||
-    "Quiz Attempts";
+    "Quiz Attempt Control";
 
 
   document.getElementById(
@@ -2649,12 +2997,10 @@ function renderQuizInfo(){
   document.getElementById(
     "quizInfoSub"
   ).textContent =
-    `${getCourse().name} • ${
-      getCourse().batch
-    }`;
+    `${course.name} • ${course.batch}`;
 
 
-  const badge =
+  const status =
     document.getElementById(
       "quizStatus"
     );
@@ -2662,18 +3008,18 @@ function renderQuizInfo(){
 
   if(quiz.published){
 
-    badge.textContent =
+    status.textContent =
       "PUBLISHED";
 
-    badge.className =
+    status.className =
       "status green";
 
   }else{
 
-    badge.textContent =
+    status.textContent =
       "DRAFT";
 
-    badge.className =
+    status.className =
       "status yellow";
 
   }
@@ -2682,233 +3028,621 @@ function renderQuizInfo(){
 
 
 /* =========================================================
-   RENDER TABLE
+   MAKE-UP STUDENT SELECT
 ========================================================= */
 
-function renderAttempts(){
+function renderMakeupStudents(){
 
-  const body =
+  const select =
     document.getElementById(
-      "attemptTableBody"
+      "makeupStudent"
     );
 
 
-  const search =
-    document.getElementById(
-      "searchInput"
-    )
-    .value
-    .trim()
-    .toLowerCase();
-
-
-  const statusFilter =
-    document.getElementById(
-      "statusFilter"
-    ).value;
-
-
-  const sortFilter =
-    document.getElementById(
-      "sortFilter"
-    ).value;
-
-
-  let students =
+  const students =
     getStudents();
 
 
-  let rows =
+  const previous =
+    select.value;
+
+
+  select.innerHTML =
     students.map(
       student=>{
 
-        const status =
-          getStudentStatus(
-            student
-          );
-
-        return {
-
-          student,
-
-          ...status
-
-        };
-
-      }
-    );
-
-
-  rows =
-    rows.filter(
-      row=>{
-
         const id =
-          String(
-            row.studentId || ""
-          ).toLowerCase();
+          student.studentId ||
+          student.id ||
+          "";
+
 
         const name =
-          String(
-            row.student.studentName ||
-            row.student.name ||
-            ""
-          ).toLowerCase();
+          student.studentName ||
+          student.name ||
+          "Student";
 
 
-        if(
-          search &&
-          !id.includes(search) &&
-          !name.includes(search)
-        ){
+        return `
 
-          return false;
+          <option
+            value="${escapeHTML(id)}"
+          >
+            ${escapeHTML(name)}
+            — ${escapeHTML(id)}
+          </option>
 
-        }
-
-
-        if(
-          statusFilter ===
-          "submitted"
-        ){
-
-          return row.submitted;
-
-        }
-
-
-        if(
-          statusFilter ===
-          "active"
-        ){
-
-          return row.active;
-
-        }
-
-
-        if(
-          statusFilter ===
-          "locked"
-        ){
-
-          return row.locked;
-
-        }
-
-
-        if(
-          statusFilter ===
-          "not-submitted"
-        ){
-
-          return !row.submitted;
-
-        }
-
-
-        return true;
+        `;
 
       }
+    ).join("");
+
+
+  if(
+    previous &&
+    students.some(
+      student=>
+        String(
+          student.studentId ||
+          student.id ||
+          ""
+        ) ===
+        String(
+          previous
+        )
+    )
+  ){
+
+    select.value =
+      previous;
+
+  }
+
+
+  loadMakeupFormForStudent();
+
+}
+
+
+/* =========================================================
+   LOAD MAKEUP FORM
+========================================================= */
+
+function loadMakeupFormForStudent(){
+
+  const studentId =
+    document.getElementById(
+      "makeupStudent"
+    ).value;
+
+
+  const permission =
+    getStudentMakeup(
+      studentId
     );
 
 
-  rows.sort(
-    (a,b)=>{
+  if(permission){
 
-      if(
-        sortFilter ===
-        "latest"
-      ){
+    document.getElementById(
+      "makeupStartDate"
+    ).value =
+      permission.startDate ||
+      "";
 
-        const ad =
-          new Date(
-            a.result?.submittedAt ||
-            a.active?.startedAt ||
-            0
-          ).getTime();
+    document.getElementById(
+      "makeupEndDate"
+    ).value =
+      permission.endDate ||
+      "";
 
-        const bd =
-          new Date(
-            b.result?.submittedAt ||
-            b.active?.startedAt ||
-            0
-          ).getTime();
+    document.getElementById(
+      "makeupReason"
+    ).value =
+      permission.reason ||
+      "";
 
-        return bd - ad;
+  }else{
 
-      }
-
-
-      if(
-        sortFilter ===
-        "oldest"
-      ){
-
-        const ad =
-          new Date(
-            a.result?.submittedAt ||
-            a.active?.startedAt ||
-            0
-          ).getTime();
-
-        const bd =
-          new Date(
-            b.result?.submittedAt ||
-            b.active?.startedAt ||
-            0
-          ).getTime();
-
-        return ad - bd;
-
-      }
+    const today =
+      todayISO();
 
 
-      return String(
-        a.student.studentName ||
-        a.student.name ||
-        a.studentId ||
-        ""
-      ).localeCompare(
+    document.getElementById(
+      "makeupStartDate"
+    ).value =
+      today;
+
+
+    document.getElementById(
+      "makeupEndDate"
+    ).value =
+      today;
+
+
+    document.getElementById(
+      "makeupReason"
+    ).value =
+      "Missed Quiz";
+
+  }
+
+}
+
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearMakeupForm(){
+
+  const today =
+    todayISO();
+
+
+  document.getElementById(
+    "makeupStartDate"
+  ).value =
+    today;
+
+
+  document.getElementById(
+    "makeupEndDate"
+  ).value =
+    today;
+
+
+  document.getElementById(
+    "makeupReason"
+  ).value =
+    "Missed Quiz";
+
+
+  document.getElementById(
+    "makeupResetAttempt"
+  ).checked =
+    true;
+
+
+  document.getElementById(
+    "makeupAllowAfterNormalWindow"
+  ).checked =
+    true;
+
+}
+
+
+/* =========================================================
+   SAVE MAKE-UP PERMISSION
+========================================================= */
+
+function saveMakeupPermission(){
+
+  const quiz =
+    getQuiz();
+
+
+  const studentId =
+    document.getElementById(
+      "makeupStudent"
+    ).value;
+
+
+  const startDate =
+    document.getElementById(
+      "makeupStartDate"
+    ).value;
+
+
+  const endDate =
+    document.getElementById(
+      "makeupEndDate"
+    ).value;
+
+
+  const reason =
+    document.getElementById(
+      "makeupReason"
+    ).value.trim();
+
+
+  const resetAttempt =
+    document.getElementById(
+      "makeupResetAttempt"
+    ).checked;
+
+
+  const allowAfterNormalWindow =
+    document.getElementById(
+      "makeupAllowAfterNormalWindow"
+    ).checked;
+
+
+  if(!studentId){
+
+    showToast(
+      "Student select করুন"
+    );
+
+    return;
+
+  }
+
+
+  if(!startDate || !endDate){
+
+    showToast(
+      "Start এবং End date দিন"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    endDate <
+    startDate
+  ){
+
+    showToast(
+      "End date Start date-এর আগে হতে পারবে না"
+    );
+
+    return;
+
+  }
+
+
+  if(!reason){
+
+    showToast(
+      "Make-up reason দিন"
+    );
+
+    return;
+
+  }
+
+
+  const students =
+    getStudents();
+
+
+  const student =
+    students.find(
+      item=>
         String(
-          b.student.studentName ||
-          b.student.name ||
-          b.studentId ||
+          item.studentId ||
+          item.id ||
           ""
+        ) ===
+        String(
+          studentId
         )
-      );
+    );
 
-    }
+
+  const oldPermissions =
+    getMakeupPermissions();
+
+
+  const now =
+    new Date().toISOString();
+
+
+  const existingIndex =
+    oldPermissions.findIndex(
+      item=>
+
+        String(
+          item.studentId || ""
+        ) ===
+        String(
+          studentId
+        ) &&
+
+        (
+          !item.quizId ||
+          item.quizId === quiz.id
+        )
+
+    );
+
+
+  const permission = {
+
+    id:
+      existingIndex >= 0
+        ? oldPermissions[
+            existingIndex
+          ].id
+        : `MAKEUP-${Date.now()}`,
+
+    quizId:
+      quiz.id,
+
+    quizName:
+      quiz.title,
+
+    studentId,
+
+    studentName:
+      student?.studentName ||
+      student?.name ||
+      "Student",
+
+    course:
+      student?.course ||
+      getCourse().name,
+
+    batch:
+      student?.batch ||
+      getCourse().batch,
+
+    startDate,
+
+    endDate,
+
+    reason,
+
+    enabled:
+      true,
+
+    resetAttempt,
+
+    allowAfterNormalWindow,
+
+    createdAt:
+      existingIndex >= 0
+        ? (
+            oldPermissions[
+              existingIndex
+            ].createdAt ||
+            now
+          )
+        : now,
+
+    updatedAt:
+      now,
+
+    source:
+      "admin",
+
+    version:
+      "2.5.13"
+
+  };
+
+
+  if(existingIndex >= 0){
+
+    oldPermissions[
+      existingIndex
+    ] =
+      permission;
+
+  }else{
+
+    oldPermissions.push(
+      permission
+    );
+
+  }
+
+
+  setLocal(
+    STORAGE.makeup,
+    oldPermissions
   );
 
 
-  if(!rows.length){
+  if(resetAttempt){
 
-    body.innerHTML = `
+    clearLockOnly(
+      studentId
+    );
 
-      <tr>
+    clearActiveAttemptWithoutConfirm(
+      studentId
+    );
 
-        <td colspan="8">
+  }
 
-          <div class="empty">
 
-            <div class="empty-icon">
-              🔎
-            </div>
+  showToast(
+    "Make-up permission saved"
+  );
 
-            <div class="empty-title">
-              No Student Found
-            </div>
 
-            <div>
-              এই filter/search অনুযায়ী কোনো student পাওয়া যায়নি।
-            </div>
+  renderMakeupPermissions();
 
-          </div>
+  updateStats();
 
-        </td>
+  renderAttempts();
 
-      </tr>
+}
+
+
+/* =========================================================
+   DELETE MAKE-UP
+========================================================= */
+
+function deleteMakeup(
+  permissionId
+){
+
+  const permissions =
+    getMakeupPermissions();
+
+
+  const permission =
+    permissions.find(
+      item=>
+        item.id ===
+        permissionId
+    );
+
+
+  if(!permission){
+
+    return;
+
+  }
+
+
+  const ok =
+    confirm(
+      `${permission.studentName || permission.studentId}-এর Make-up permission remove করবেন?`
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  const filtered =
+    permissions.filter(
+      item=>
+        item.id !==
+        permissionId
+    );
+
+
+  setLocal(
+    STORAGE.makeup,
+    filtered
+  );
+
+
+  showToast(
+    "Make-up permission removed"
+  );
+
+
+  renderMakeupPermissions();
+
+  updateStats();
+
+  renderAttempts();
+
+}
+
+
+/* =========================================================
+   TOGGLE MAKE-UP
+========================================================= */
+
+function toggleMakeup(
+  permissionId
+){
+
+  const permissions =
+    getMakeupPermissions();
+
+
+  const permission =
+    permissions.find(
+      item=>
+        item.id ===
+        permissionId
+    );
+
+
+  if(!permission){
+
+    return;
+
+  }
+
+
+  permission.enabled =
+    permission.enabled === false;
+
+
+  permission.updatedAt =
+    new Date().toISOString();
+
+
+  setLocal(
+    STORAGE.makeup,
+    permissions
+  );
+
+
+  showToast(
+    permission.enabled
+      ? "Make-up enabled"
+      : "Make-up disabled"
+  );
+
+
+  renderMakeupPermissions();
+
+  updateStats();
+
+  renderAttempts();
+
+}
+
+
+/* =========================================================
+   MAKE-UP LIST
+========================================================= */
+
+function renderMakeupPermissions(){
+
+  const container =
+    document.getElementById(
+      "makeupPermissions"
+    );
+
+
+  const permissions =
+    getMakeupPermissions()
+      .filter(
+        permission=>
+          isSameQuiz(
+            permission
+          )
+      )
+      .sort(
+        (a,b)=>
+          new Date(
+            b.updatedAt ||
+            b.createdAt ||
+            0
+          ) -
+          new Date(
+            a.updatedAt ||
+            a.createdAt ||
+            0
+          )
+      );
+
+
+  if(!permissions.length){
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          🗓️
+        </div>
+
+        <div class="empty-title">
+          No Make-up Permission
+        </div>
+
+        <div>
+          এখনো কোনো Student-এর জন্য special make-up permission তৈরি হয়নি।
+        </div>
+
+      </div>
 
     `;
 
@@ -2917,253 +3651,542 @@ function renderAttempts(){
   }
 
 
-  body.innerHTML =
-    rows.map(
-      row=>{
+  container.innerHTML = `
 
-        const student =
-          row.student;
+    <div class="table-wrap">
 
-        const name =
-          student.studentName ||
-          student.name ||
-          "Student";
+      <table style="min-width:1000px;">
 
-        const course =
-          student.course ||
-          getCourse().name;
-
-        const batch =
-          student.batch ||
-          getCourse().batch;
-
-
-        let score =
-          "—";
-
-
-        if(row.result){
-
-          const obtained =
-            row.result.obtainedMarks ??
-            row.result.correct ??
-            0;
-
-          const total =
-            row.result.totalMarks ??
-            (
-              Number(
-                row.result.totalQuestions ||
-                10
-              ) *
-              Number(
-                row.result.marksPerQuestion ||
-                1
-              )
-            );
-
-          score =
-            `${obtained}/${total}`;
-
-        }
-
-
-        const activity =
-          row.result?.submittedAt ||
-          row.active?.startedAt ||
-          row.active?.createdAt ||
-          null;
-
-
-        return `
+        <thead>
 
           <tr>
 
-            <td>
+            <th>
+              Student
+            </th>
 
-              <div class="student-name">
-                ${escapeHTML(name)}
-              </div>
+            <th>
+              Make-up Window
+            </th>
 
-              <div class="student-id">
-                ${escapeHTML(
-                  row.studentId
-                )}
-              </div>
+            <th>
+              Reason
+            </th>
 
-            </td>
+            <th>
+              Reset
+            </th>
 
+            <th>
+              Status
+            </th>
 
-            <td>
+            <th>
+              Updated
+            </th>
 
-              ${escapeHTML(course)}
-
-              <div class="student-id">
-                ${escapeHTML(batch)}
-              </div>
-
-            </td>
-
-
-            <td>
-
-              ${
-                row.submitted
-
-                ? `<span class="status green">
-                    Submitted
-                  </span>`
-
-                : `<span class="status gray">
-                    Not Submitted
-                  </span>`
-              }
-
-            </td>
-
-
-            <td>
-
-              ${
-                row.active
-
-                ? `<span class="status blue">
-                    Active
-                  </span>`
-
-                : `<span class="status gray">
-                    No
-                  </span>`
-              }
-
-            </td>
-
-
-            <td>
-
-              ${
-                row.locked
-
-                ? `<span class="status yellow">
-                    Locked
-                  </span>`
-
-                : `<span class="status gray">
-                    Unlocked
-                  </span>`
-              }
-
-            </td>
-
-
-            <td>
-
-              <strong>
-                ${escapeHTML(score)}
-              </strong>
-
-              ${
-                row.result
-                ? `<div class="student-id">
-                    ${escapeHTML(
-                      Number(
-                        row.result.percentage ||
-                        0
-                      )
-                    )}%
-                  </div>`
-                : ""
-              }
-
-            </td>
-
-
-            <td>
-
-              ${escapeHTML(
-                formatDateTime(
-                  activity
-                )
-              )}
-
-            </td>
-
-
-            <td>
-
-              <div class="action-row">
-
-                <button
-                  class="btn btn-secondary btn-sm"
-                  type="button"
-                  onclick="viewStudent('${escapeHTML(
-                    row.studentId
-                  )}')"
-                >
-                  View
-                </button>
-
-
-                ${
-                  row.result
-
-                  ? `<button
-                      class="btn btn-info btn-sm"
-                      type="button"
-                      onclick="openResult('${escapeHTML(
-                        row.studentId
-                      )}')"
-                    >
-                      Result
-                    </button>`
-
-                  : ""
-                }
-
-
-                ${
-                  row.active
-
-                  ? `<button
-                      class="btn btn-warning btn-sm"
-                      type="button"
-                      onclick="clearActiveAttempt('${escapeHTML(
-                        row.studentId
-                      )}')"
-                    >
-                      Clear Active
-                    </button>`
-
-                  : ""
-                }
-
-
-                ${
-                  row.locked
-
-                  ? `<button
-                      class="btn btn-success btn-sm"
-                      type="button"
-                      onclick="resetStudentAttempt('${escapeHTML(
-                        row.studentId
-                      )}')"
-                    >
-                      Reset
-                    </button>`
-
-                  : ""
-                }
-
-              </div>
-
-            </td>
+            <th>
+              Action
+            </th>
 
           </tr>
 
-        `;
+        </thead>
 
-      }
-    ).join("");
+        <tbody>
+
+          ${
+            permissions.map(
+              permission=>`
+
+                <tr>
+
+                  <td>
+
+                    <div class="student-name">
+                      ${escapeHTML(
+                        permission.studentName ||
+                        "Student"
+                      )}
+                    </div>
+
+                    <div class="student-id">
+                      ${escapeHTML(
+                        permission.studentId
+                      )}
+                    </div>
+
+                  </td>
+
+
+                  <td>
+
+                    ${escapeHTML(
+                      formatDateOnly(
+                        permission.startDate
+                      )
+                    )}
+
+                    →
+
+                    ${escapeHTML(
+                      formatDateOnly(
+                        permission.endDate
+                      )
+                    )}
+
+                  </td>
+
+
+                  <td>
+                    ${escapeHTML(
+                      permission.reason ||
+                      "—"
+                    )}
+                  </td>
+
+
+                  <td>
+
+                    ${
+                      permission.resetAttempt
+                        ? `<span class="status green">
+                            Yes
+                          </span>`
+                        : `<span class="status gray">
+                            No
+                          </span>`
+                    }
+
+                  </td>
+
+
+                  <td>
+
+                    ${
+                      permission.enabled !== false
+
+                        ? `<span class="status purple">
+                            Enabled
+                          </span>`
+
+                        : `<span class="status gray">
+                            Disabled
+                          </span>`
+                    }
+
+                  </td>
+
+
+                  <td>
+                    ${escapeHTML(
+                      formatDateTime(
+                        permission.updatedAt
+                      )
+                    )}
+                  </td>
+
+
+                  <td>
+
+                    <div class="action-row">
+
+                      <button
+                        class="btn btn-secondary btn-sm"
+                        type="button"
+                        onclick="editMakeup('${escapeHTML(
+                          permission.studentId
+                        )}')"
+                      >
+                        Edit
+                      </button>
+
+                      <button
+                        class="btn btn-warning btn-sm"
+                        type="button"
+                        onclick="toggleMakeup('${escapeHTML(
+                          permission.id
+                        )}')"
+                      >
+                        ${
+                          permission.enabled !== false
+                            ? "Disable"
+                            : "Enable"
+                        }
+                      </button>
+
+                      <button
+                        class="btn btn-danger btn-sm"
+                        type="button"
+                        onclick="deleteMakeup('${escapeHTML(
+                          permission.id
+                        )}')"
+                      >
+                        Delete
+                      </button>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+              `
+            ).join("")
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   EDIT MAKE-UP
+========================================================= */
+
+function editMakeup(
+  studentId
+){
+
+  const select =
+    document.getElementById(
+      "makeupStudent"
+    );
+
+
+  select.value =
+    studentId;
+
+
+  loadMakeupFormForStudent();
+
+
+  document
+    .getElementById(
+      "makeupStartDate"
+    )
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+
+  showToast(
+    "Make-up permission loaded"
+  );
+
+}
+
+
+/* =========================================================
+   FIRST STUDENT
+========================================================= */
+
+function openMakeupForFirstStudent(){
+
+  const students =
+    getStudents();
+
+
+  if(!students.length){
+
+    showToast(
+      "Student পাওয়া যায়নি"
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "makeupStudent"
+  ).value =
+    students[0].studentId ||
+    students[0].id ||
+    "";
+
+
+  loadMakeupFormForStudent();
+
+
+  document
+    .querySelector(
+      ".makeup-box"
+    )
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+}
+
+
+/* =========================================================
+   CLEAR ACTIVE ATTEMPT
+========================================================= */
+
+function clearActiveAttemptWithoutConfirm(
+  studentId
+){
+
+  const quiz =
+    getQuiz();
+
+
+  const saved =
+    getLocal(
+      STORAGE.activeAttempt,
+      null
+    );
+
+
+  if(!saved){
+
+    return;
+
+  }
+
+
+  if(Array.isArray(saved)){
+
+    const filtered =
+      saved.filter(
+        attempt=>{
+
+          return !(
+            String(
+              attempt.studentId || ""
+            ) ===
+            String(
+              studentId
+            ) &&
+
+            (
+              !attempt.quizId ||
+              attempt.quizId === quiz.id
+            )
+
+          );
+
+        }
+      );
+
+
+    setLocal(
+      STORAGE.activeAttempt,
+      filtered
+    );
+
+    return;
+
+  }
+
+
+  if(saved.studentId){
+
+    if(
+      String(
+        saved.studentId
+      ) ===
+      String(
+        studentId
+      ) &&
+
+      (
+        !saved.quizId ||
+        saved.quizId === quiz.id
+      )
+
+    ){
+
+      localStorage.removeItem(
+        STORAGE.activeAttempt
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  if(
+    typeof saved === "object"
+  ){
+
+    const copy = {
+      ...saved
+    };
+
+    delete copy[
+      studentId
+    ];
+
+    setLocal(
+      STORAGE.activeAttempt,
+      copy
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CLEAR LOCK
+========================================================= */
+
+function clearLockOnly(
+  studentId
+){
+
+  const quiz =
+    getQuiz();
+
+
+  const saved =
+    getLocal(
+      STORAGE.attemptLock,
+      null
+    );
+
+
+  if(!saved){
+
+    return;
+
+  }
+
+
+  if(Array.isArray(saved)){
+
+    const filtered =
+      saved.filter(
+        lock=>{
+
+          return !(
+            String(
+              lock.studentId || ""
+            ) ===
+            String(
+              studentId
+            ) &&
+
+            (
+              !lock.quizId ||
+              lock.quizId === quiz.id
+            )
+
+          );
+
+        }
+      );
+
+
+    setLocal(
+      STORAGE.attemptLock,
+      filtered
+    );
+
+    return;
+
+  }
+
+
+  if(saved.studentId){
+
+    if(
+      String(
+        saved.studentId
+      ) ===
+      String(
+        studentId
+      ) &&
+
+      (
+        !saved.quizId ||
+        saved.quizId === quiz.id
+      )
+
+    ){
+
+      localStorage.removeItem(
+        STORAGE.attemptLock
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  if(
+    typeof saved === "object"
+  ){
+
+    const copy = {
+      ...saved
+    };
+
+    delete copy[
+      studentId
+    ];
+
+    setLocal(
+      STORAGE.attemptLock,
+      copy
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RESET STUDENT
+========================================================= */
+
+function resetStudentAttempt(
+  studentId
+){
+
+  const ok =
+    confirm(
+      `${studentId}-এর attempt reset করবেন?\n\nStudent আবার Quiz শুরু করতে পারবে। পুরোনো submitted result delete হবে না।`
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  clearLockOnly(
+    studentId
+  );
+
+
+  clearActiveAttemptWithoutConfirm(
+    studentId
+  );
+
+
+  showToast(
+    "Student attempt reset হয়েছে"
+  );
+
+
+  refreshAll();
 
 }
 
@@ -3177,18 +4200,17 @@ function viewStudent(
 ){
 
   const student =
-    getStudents()
-      .find(
-        item=>
-          String(
-            item.studentId ||
-            item.id ||
-            ""
-          ) ===
-          String(
-            studentId
-          )
-      );
+    getStudents().find(
+      item=>
+        String(
+          item.studentId ||
+          item.id ||
+          ""
+        ) ===
+        String(
+          studentId
+        )
+    );
 
 
   if(!student){
@@ -3253,38 +4275,6 @@ function viewStudent(
       <div class="detail-box">
 
         <div class="detail-label">
-          Course
-        </div>
-
-        <div class="detail-value">
-          ${escapeHTML(
-            student.course ||
-            getCourse().name
-          )}
-        </div>
-
-      </div>
-
-
-      <div class="detail-box">
-
-        <div class="detail-label">
-          Batch
-        </div>
-
-        <div class="detail-value">
-          ${escapeHTML(
-            student.batch ||
-            getCourse().batch
-          )}
-        </div>
-
-      </div>
-
-
-      <div class="detail-box">
-
-        <div class="detail-label">
           Submitted
         </div>
 
@@ -3307,7 +4297,7 @@ function viewStudent(
 
         <div class="detail-value">
           ${
-            status.active
+            status.isActive
               ? "Yes"
               : "No"
           }
@@ -3327,6 +4317,23 @@ function viewStudent(
             status.locked
               ? "Locked"
               : "Unlocked"
+          }
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Make-up Permission
+        </div>
+
+        <div class="detail-value">
+          ${
+            status.isMakeup
+              ? "Available"
+              : "None"
           }
         </div>
 
@@ -3360,11 +4367,37 @@ function viewStudent(
 
       </div>
 
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Percentage
+        </div>
+
+        <div class="detail-value">
+
+          ${
+            status.result
+
+              ? `${escapeHTML(
+                  Number(
+                    status.result.percentage ||
+                    0
+                  )
+                )}%`
+
+              : "—"
+          }
+
+        </div>
+
+      </div>
+
     </div>
 
 
     ${
-      status.active
+      status.isMakeup
 
       ? `
 
@@ -3373,68 +4406,29 @@ function viewStudent(
           style="margin-top:15px;"
         >
 
-          <strong>Active Attempt</strong><br>
+          <strong>Make-up Window</strong><br>
 
-          Started:
           ${escapeHTML(
-            formatDateTime(
-              status.active.startedAt
+            formatDateOnly(
+              status.makeup.startDate
+            )
+          )}
+
+          →
+
+          ${escapeHTML(
+            formatDateOnly(
+              status.makeup.endDate
             )
           )}
 
           <br>
 
-          Saved Answers:
+          Reason:
           ${escapeHTML(
-            countSavedAnswers(
-              status.active
-            )
-          )}
-
-        </div>
-
-      `
-
-      : ""
-    }
-
-
-    ${
-      status.result
-
-      ? `
-
-        <div
-          class="notice"
-          style="margin-top:15px;"
-        >
-
-          <strong>Submitted Result</strong><br>
-
-          Submitted:
-          ${escapeHTML(
-            formatDateTime(
-              status.result.submittedAt
-            )
-          )}
-
-          <br>
-
-          Result:
-          ${escapeHTML(
-            status.result.result ||
+            status.makeup.reason ||
             "—"
           )}
-
-          <br>
-
-          Percentage:
-          ${escapeHTML(
-            Number(
-              status.result.percentage ||
-              0
-            )
-          )}%
 
         </div>
 
@@ -3454,23 +4448,6 @@ function viewStudent(
     >
 
       ${
-        status.active
-
-        ? `<button
-            class="btn btn-warning"
-            type="button"
-            onclick="clearActiveAttempt('${escapeHTML(
-              studentId
-            )}');closeModal();"
-          >
-            Clear Active Attempt
-          </button>`
-
-        : ""
-      }
-
-
-      ${
         status.locked
 
         ? `<button
@@ -3480,11 +4457,22 @@ function viewStudent(
               studentId
             )}');closeModal();"
           >
-            Reset Attempt
+            🔓 Reset Attempt
           </button>`
 
         : ""
       }
+
+
+      <button
+        class="btn btn-purple"
+        type="button"
+        onclick="editMakeup('${escapeHTML(
+          studentId
+        )}');closeModal();"
+      >
+        🗓️ Make-up
+      </button>
 
 
       ${
@@ -3497,7 +4485,7 @@ function viewStudent(
               studentId
             )}')"
           >
-            Open Result
+            📈 Open Result
           </button>`
 
         : ""
@@ -3513,527 +4501,6 @@ function viewStudent(
   ).classList.add(
     "show"
   );
-
-}
-
-
-/* =========================================================
-   COUNT SAVED ANSWERS
-========================================================= */
-
-function countSavedAnswers(
-  attempt
-){
-
-  if(!attempt){
-
-    return 0;
-
-  }
-
-
-  const candidates = [
-
-    attempt.answers,
-
-    attempt.selectedAnswers,
-
-    attempt.answerSheet,
-
-    attempt.responses
-
-  ];
-
-
-  for(
-    const candidate of candidates
-  ){
-
-    if(
-      candidate &&
-      typeof candidate === "object"
-    ){
-
-      if(
-        Array.isArray(candidate)
-      ){
-
-        return candidate.length;
-
-      }
-
-      return Object.keys(
-        candidate
-      ).length;
-
-    }
-
-  }
-
-
-  return 0;
-
-}
-
-
-/* =========================================================
-   CLEAR ACTIVE ATTEMPT
-========================================================= */
-
-function clearActiveAttempt(
-  studentId
-){
-
-  const quiz =
-    getQuiz();
-
-
-  const saved =
-    getLocal(
-      STORAGE.activeAttempt,
-      null
-    );
-
-
-  if(!saved){
-
-    showToast(
-      "Active attempt পাওয়া যায়নি"
-    );
-
-    return;
-
-  }
-
-
-  const ok =
-    confirm(
-      `${studentId}-এর active quiz attempt clear করবেন?`
-    );
-
-
-  if(!ok){
-
-    return;
-
-  }
-
-
-  if(Array.isArray(saved)){
-
-    const filtered =
-      saved.filter(
-        attempt=>{
-
-          return !(
-            String(
-              attempt.studentId || ""
-            ) ===
-            String(
-              studentId
-            ) &&
-            (
-              !attempt.quizId ||
-              attempt.quizId === quiz.id
-            )
-          );
-
-        }
-      );
-
-
-    setLocal(
-      STORAGE.activeAttempt,
-      filtered
-    );
-
-  }else if(
-    saved.studentId
-  ){
-
-    if(
-      String(
-        saved.studentId
-      ) ===
-      String(
-        studentId
-      ) &&
-      (
-        !saved.quizId ||
-        saved.quizId === quiz.id
-      )
-    ){
-
-      localStorage.removeItem(
-        STORAGE.activeAttempt
-      );
-
-    }
-
-  }else if(
-    typeof saved === "object"
-  ){
-
-    const copy = {
-      ...saved
-    };
-
-    delete copy[
-      studentId
-    ];
-
-    setLocal(
-      STORAGE.activeAttempt,
-      copy
-    );
-
-  }
-
-
-  showToast(
-    "Active attempt cleared"
-  );
-
-
-  refreshAll();
-
-}
-
-
-/* =========================================================
-   RESET STUDENT ATTEMPT
-========================================================= */
-
-function resetStudentAttempt(
-  studentId
-){
-
-  const ok =
-    confirm(
-      `${studentId}-এর attempt lock reset করবেন?\n\nStudent আবার নতুন করে Quiz শুরু করতে পারবে।`
-    );
-
-
-  if(!ok){
-
-    return;
-
-  }
-
-
-  clearLockOnly(
-    studentId
-  );
-
-
-  clearActiveAttemptWithoutConfirm(
-    studentId
-  );
-
-
-  showToast(
-    `${studentId} attempt reset হয়েছে`
-  );
-
-
-  refreshAll();
-
-}
-
-
-/* =========================================================
-   CLEAR LOCK
-========================================================= */
-
-function clearLockOnly(
-  studentId
-){
-
-  const quiz =
-    getQuiz();
-
-
-  const saved =
-    getLocal(
-      STORAGE.attemptLock,
-      null
-    );
-
-
-  if(!saved){
-
-    return;
-
-  }
-
-
-  if(Array.isArray(saved)){
-
-    const filtered =
-      saved.filter(
-        lock=>{
-
-          return !(
-            String(
-              lock.studentId || ""
-            ) ===
-            String(
-              studentId
-            ) &&
-            (
-              !lock.quizId ||
-              lock.quizId === quiz.id
-            )
-          );
-
-        }
-      );
-
-
-    setLocal(
-      STORAGE.attemptLock,
-      filtered
-    );
-
-    return;
-
-  }
-
-
-  if(
-    saved.studentId
-  ){
-
-    if(
-      String(
-        saved.studentId
-      ) ===
-      String(
-        studentId
-      ) &&
-      (
-        !saved.quizId ||
-        saved.quizId === quiz.id
-      )
-    ){
-
-      localStorage.removeItem(
-        STORAGE.attemptLock
-      );
-
-    }
-
-    return;
-
-  }
-
-
-  if(
-    typeof saved === "object"
-  ){
-
-    const copy = {
-      ...saved
-    };
-
-    delete copy[
-      studentId
-    ];
-
-    setLocal(
-      STORAGE.attemptLock,
-      copy
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   CLEAR ACTIVE WITHOUT CONFIRM
-========================================================= */
-
-function clearActiveAttemptWithoutConfirm(
-  studentId
-){
-
-  const quiz =
-    getQuiz();
-
-  const saved =
-    getLocal(
-      STORAGE.activeAttempt,
-      null
-    );
-
-
-  if(!saved){
-
-    return;
-
-  }
-
-
-  if(Array.isArray(saved)){
-
-    const filtered =
-      saved.filter(
-        attempt=>{
-
-          return !(
-            String(
-              attempt.studentId || ""
-            ) ===
-            String(
-              studentId
-            ) &&
-            (
-              !attempt.quizId ||
-              attempt.quizId === quiz.id
-            )
-          );
-
-        }
-      );
-
-
-    setLocal(
-      STORAGE.activeAttempt,
-      filtered
-    );
-
-    return;
-
-  }
-
-
-  if(
-    saved.studentId
-  ){
-
-    if(
-      String(
-        saved.studentId
-      ) ===
-      String(
-        studentId
-      )
-    ){
-
-      localStorage.removeItem(
-        STORAGE.activeAttempt
-      );
-
-    }
-
-    return;
-
-  }
-
-
-  if(
-    typeof saved === "object"
-  ){
-
-    const copy = {
-      ...saved
-    };
-
-    delete copy[
-      studentId
-    ];
-
-    setLocal(
-      STORAGE.activeAttempt,
-      copy
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   RESET ALL UNSUBMITTED
-========================================================= */
-
-function resetAllUnsubmittedAttempts(){
-
-  const students =
-    getStudents();
-
-
-  const candidates =
-    students.filter(
-      student=>{
-
-        const status =
-          getStudentStatus(
-            student
-          );
-
-        return (
-          !status.submitted &&
-          (
-            status.active ||
-            status.locked
-          )
-        );
-
-      }
-    );
-
-
-  if(!candidates.length){
-
-    showToast(
-      "Reset করার মতো কোনো unsubmitted attempt নেই"
-    );
-
-    return;
-
-  }
-
-
-  const ok =
-    confirm(
-      `${candidates.length} জন unsubmitted student-এর attempt reset করবেন?`
-    );
-
-
-  if(!ok){
-
-    return;
-
-  }
-
-
-  candidates.forEach(
-    student=>{
-
-      const studentId =
-        student.studentId ||
-        student.id;
-
-      clearLockOnly(
-        studentId
-      );
-
-      clearActiveAttemptWithoutConfirm(
-        studentId
-      );
-
-    }
-  );
-
-
-  showToast(
-    `${candidates.length}টি attempt reset হয়েছে`
-  );
-
-
-  refreshAll();
 
 }
 
@@ -4066,6 +4533,7 @@ function openResult(
   const params =
     new URLSearchParams();
 
+
   params.set(
     "studentId",
     studentId
@@ -4089,6 +4557,525 @@ function openResult(
 
 
 /* =========================================================
+   TABLE
+========================================================= */
+
+function renderAttempts(){
+
+  const body =
+    document.getElementById(
+      "attemptTableBody"
+    );
+
+
+  const search =
+    document.getElementById(
+      "searchInput"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  const statusFilter =
+    document.getElementById(
+      "statusFilter"
+    ).value;
+
+
+  const sortFilter =
+    document.getElementById(
+      "sortFilter"
+    ).value;
+
+
+  let rows =
+    getStudents()
+      .map(
+        student=>({
+
+          student,
+
+          status:
+            getStudentStatus(
+              student
+            )
+
+        })
+      );
+
+
+  rows =
+    rows.filter(
+      row=>{
+
+        const id =
+          String(
+            row.status.studentId ||
+            ""
+          ).toLowerCase();
+
+
+        const name =
+          String(
+            row.student.studentName ||
+            row.student.name ||
+            ""
+          ).toLowerCase();
+
+
+        if(
+          search &&
+          !id.includes(search) &&
+          !name.includes(search)
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "submitted"
+        ){
+
+          return row.status.submitted;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "active"
+        ){
+
+          return row.status.isActive;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "locked"
+        ){
+
+          return row.status.locked;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "makeup"
+        ){
+
+          return row.status.isMakeup;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "not-submitted"
+        ){
+
+          return !row.status.submitted;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  rows.sort(
+    (a,b)=>{
+
+      if(
+        sortFilter ===
+        "latest"
+      ){
+
+        const ad =
+          new Date(
+            a.status.result?.submittedAt ||
+            a.status.active?.startedAt ||
+            a.status.makeup?.updatedAt ||
+            0
+          ).getTime();
+
+
+        const bd =
+          new Date(
+            b.status.result?.submittedAt ||
+            b.status.active?.startedAt ||
+            b.status.makeup?.updatedAt ||
+            0
+          ).getTime();
+
+
+        return bd - ad;
+
+      }
+
+
+      if(
+        sortFilter ===
+        "oldest"
+      ){
+
+        const ad =
+          new Date(
+            a.status.result?.submittedAt ||
+            a.status.active?.startedAt ||
+            a.status.makeup?.updatedAt ||
+            0
+          ).getTime();
+
+
+        const bd =
+          new Date(
+            b.status.result?.submittedAt ||
+            b.status.active?.startedAt ||
+            b.status.makeup?.updatedAt ||
+            0
+          ).getTime();
+
+
+        return ad - bd;
+
+      }
+
+
+      return String(
+        a.student.studentName ||
+        a.student.name ||
+        a.status.studentId
+      ).localeCompare(
+        String(
+          b.student.studentName ||
+          b.student.name ||
+          b.status.studentId
+        )
+      );
+
+    }
+  );
+
+
+  if(!rows.length){
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td colspan="9">
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              🔎
+            </div>
+
+            <div class="empty-title">
+              No Student Found
+            </div>
+
+            <div>
+              এই filter/search অনুযায়ী কোনো student পাওয়া যায়নি।
+            </div>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    rows.map(
+      row=>{
+
+        const student =
+          row.student;
+
+        const status =
+          row.status;
+
+
+        const name =
+          student.studentName ||
+          student.name ||
+          "Student";
+
+
+        const course =
+          student.course ||
+          getCourse().name;
+
+
+        const batch =
+          student.batch ||
+          getCourse().batch;
+
+
+        let score =
+          "—";
+
+
+        if(status.result){
+
+          const obtained =
+            status.result.obtainedMarks ??
+            status.result.correct ??
+            0;
+
+
+          const total =
+            status.result.totalMarks ??
+            (
+              Number(
+                status.result.totalQuestions ||
+                10
+              ) *
+              Number(
+                status.result.marksPerQuestion ||
+                1
+              )
+            );
+
+
+          score =
+            `${obtained}/${total}`;
+
+        }
+
+
+        const activity =
+          status.result?.submittedAt ||
+          status.active?.startedAt ||
+          status.makeup?.updatedAt ||
+          null;
+
+
+        return `
+
+          <tr>
+
+            <td>
+
+              <div class="student-name">
+                ${escapeHTML(name)}
+              </div>
+
+              <div class="student-id">
+                ${escapeHTML(
+                  status.studentId
+                )}
+              </div>
+
+            </td>
+
+
+            <td>
+
+              ${escapeHTML(course)}
+
+              <div class="student-id">
+                ${escapeHTML(batch)}
+              </div>
+
+            </td>
+
+
+            <td>
+
+              ${
+                status.submitted
+
+                  ? `<span class="status green">
+                      Submitted
+                    </span>`
+
+                  : `<span class="status gray">
+                      Not Submitted
+                    </span>`
+              }
+
+            </td>
+
+
+            <td>
+
+              ${
+                status.isActive
+
+                  ? `<span class="status blue">
+                      Active
+                    </span>`
+
+                  : `<span class="status gray">
+                      No
+                    </span>`
+              }
+
+            </td>
+
+
+            <td>
+
+              ${
+                status.locked
+
+                  ? `<span class="status yellow">
+                      Locked
+                    </span>`
+
+                  : `<span class="status gray">
+                      Unlocked
+                    </span>`
+              }
+
+            </td>
+
+
+            <td>
+
+              ${
+                status.isMakeup
+
+                  ? `<span class="status purple">
+                      ${
+                        status.makeup.enabled !== false
+                          ? "Make-up"
+                          : "Disabled"
+                      }
+                    </span>`
+
+                  : `<span class="status gray">
+                      None
+                    </span>`
+              }
+
+            </td>
+
+
+            <td>
+
+              <strong>
+                ${escapeHTML(score)}
+              </strong>
+
+              ${
+                status.result
+
+                  ? `<div class="student-id">
+                      ${escapeHTML(
+                        Number(
+                          status.result.percentage ||
+                          0
+                        )
+                      )}%
+                    </div>`
+
+                  : ""
+              }
+
+            </td>
+
+
+            <td>
+              ${escapeHTML(
+                formatDateTime(
+                  activity
+                )
+              )}
+            </td>
+
+
+            <td>
+
+              <div class="action-row">
+
+                <button
+                  class="btn btn-secondary btn-sm"
+                  type="button"
+                  onclick="viewStudent('${escapeHTML(
+                    status.studentId
+                  )}')"
+                >
+                  View
+                </button>
+
+
+                <button
+                  class="btn btn-purple btn-sm"
+                  type="button"
+                  onclick="editMakeup('${escapeHTML(
+                    status.studentId
+                  )}')"
+                >
+                  Make-up
+                </button>
+
+
+                ${
+                  status.locked
+
+                    ? `<button
+                        class="btn btn-success btn-sm"
+                        type="button"
+                        onclick="resetStudentAttempt('${escapeHTML(
+                          status.studentId
+                        )}')"
+                      >
+                        Reset
+                      </button>`
+
+                    : ""
+                }
+
+
+                ${
+                  status.result
+
+                    ? `<button
+                        class="btn btn-info btn-sm"
+                        type="button"
+                        onclick="openResult('${escapeHTML(
+                          status.studentId
+                        )}')"
+                      >
+                        Result
+                      </button>`
+
+                    : ""
+                }
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================================================
    FILTER RESET
 ========================================================= */
 
@@ -4098,13 +5085,18 @@ function resetFilters(){
     "searchInput"
   ).value = "";
 
+
   document.getElementById(
     "statusFilter"
-  ).value = "all";
+  ).value =
+    "all";
+
 
   document.getElementById(
     "sortFilter"
-  ).value = "student";
+  ).value =
+    "student";
+
 
   renderAttempts();
 
@@ -4134,6 +5126,10 @@ function refreshAll(){
 
   renderQuizInfo();
 
+  renderMakeupStudents();
+
+  renderMakeupPermissions();
+
   updateStats();
 
   renderAttempts();
@@ -4142,7 +5138,7 @@ function refreshAll(){
 
 
 /* =========================================================
-   MOBILE MENU
+   MOBILE
 ========================================================= */
 
 function toggleSidebar(){
@@ -4172,11 +5168,20 @@ window.SNKAdminQuizAttempts = {
 
   getAttemptLocks,
 
+  getMakeupPermissions,
+
   getStudentStatus,
+
+  saveMakeupPermission,
 
   resetStudentAttempt,
 
-  clearActiveAttempt,
+  clearActiveAttempt:
+    clearActiveAttemptWithoutConfirm,
+
+  deleteMakeup,
+
+  toggleMakeup,
 
   refresh:
     refreshAll
@@ -4206,8 +5211,9 @@ document
     "click",
     ()=>{
       refreshAll();
+
       showToast(
-        "Attempts refreshed"
+        "Quiz attempts refreshed"
       );
     }
   );
@@ -4220,6 +5226,16 @@ document
   .addEventListener(
     "click",
     toggleSidebar
+  );
+
+
+document
+  .getElementById(
+    "makeupStudent"
+  )
+  .addEventListener(
+    "change",
+    loadMakeupFormForStudent
   );
 
 
@@ -4299,22 +5315,33 @@ window.addEventListener(
   "storage",
   event=>{
 
+    const keys = [
+
+      STORAGE.theme,
+
+      STORAGE.course,
+
+      STORAGE.quiz,
+
+      STORAGE.questions,
+
+      STORAGE.results,
+
+      STORAGE.students,
+
+      STORAGE.activeAttempt,
+
+      STORAGE.attemptLock,
+
+      STORAGE.makeup
+
+    ];
+
+
     if(
-
-      [
-        STORAGE.theme,
-        STORAGE.course,
-        STORAGE.quiz,
-        STORAGE.questions,
-        STORAGE.results,
-        STORAGE.students,
-        STORAGE.activeAttempt,
-        STORAGE.attemptLock
-
-      ].includes(
+      keys.includes(
         event.key
       )
-
     ){
 
       applyTheme();
@@ -4351,7 +5378,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   INITIALIZE
+   INIT
 ========================================================= */
 
 (function init(){
