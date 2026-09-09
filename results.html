@@ -1,2923 +1,3467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>My Results — SNK IT Institute</title>
+<title>SNK IT Institute — My Results</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <style>
-    :root{
-      --bg:#060914;
-      --bg2:#0b1222;
-      --card:rgba(15,23,42,.90);
-      --card2:#111b2e;
-      --text:#f8fafc;
-      --muted:#94a3b8;
-      --line:rgba(148,163,184,.16);
-      --primary:#7c3aed;
-      --primary2:#a78bfa;
-      --cyan:#06b6d4;
-      --green:#22c55e;
-      --yellow:#f59e0b;
-      --red:#ef4444;
-      --shadow:0 25px 70px rgba(0,0,0,.36);
-    }
+<link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+>
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
+<style>
+:root{
+    --bg:#07111f;
+    --bg-soft:#0b1728;
+    --card:#0f1d30;
+    --card-2:#13243a;
+    --border:rgba(255,255,255,.09);
 
-    html{
-      scroll-behavior:smooth;
+    --text:#f7f9fc;
+    --muted:#9eacc0;
+
+    --primary:#7c5cff;
+    --primary-2:#5b3df5;
+
+    --success:#20c997;
+    --warning:#ffc107;
+    --danger:#ff5d73;
+    --info:#38bdf8;
+
+    --shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Noto Sans Bengali",Arial,sans-serif;
+    min-height:100vh;
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            circle at 10% 0%,
+            rgba(124,92,255,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(56,189,248,.10),
+            transparent 28%
+        ),
+        var(--bg);
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 28px;
+
+    background:rgba(7,17,31,.82);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.logo{
+    width:43px;
+    height:43px;
+
+    object-fit:contain;
+
+    background:#fff;
+    border-radius:12px;
+    padding:4px;
+}
+
+.brand-text strong{
+    display:block;
+    font-size:15px;
+}
+
+.brand-text span{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    margin-top:1px;
+}
+
+.nav{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.nav a{
+    color:#aebbd0;
+    font-size:11px;
+    padding:8px 10px;
+    border-radius:8px;
+}
+
+.nav a:hover,
+.nav a.active{
+    background:rgba(124,92,255,.14);
+    color:#fff;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.icon-btn{
+    width:38px;
+    height:38px;
+
+    border:1px solid var(--border);
+    border-radius:10px;
+
+    color:#fff;
+    background:var(--card);
+}
+
+.mobile-btn{
+    display:none;
+}
+
+
+/* =========================================================
+   MOBILE NAV
+========================================================= */
+
+.mobile-nav{
+    display:none;
+
+    position:fixed;
+    top:72px;
+    left:0;
+    right:0;
+    z-index:999;
+
+    padding:12px;
+
+    background:#091526;
+    border-bottom:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+}
+
+.mobile-nav.open{
+    display:block;
+}
+
+.mobile-nav a{
+    display:block;
+    padding:11px 12px;
+
+    color:#b4c0d2;
+    border-radius:9px;
+
+    font-size:12px;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a.active{
+    background:rgba(124,92,255,.15);
+    color:#fff;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    width:min(1250px,calc(100% - 40px));
+    margin:0 auto;
+
+    padding:30px 0 50px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+
+    padding:30px;
+
+    border:1px solid rgba(124,92,255,.22);
+    border-radius:23px;
+
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(124,92,255,.26),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #101e34,
+            #0b1525
+        );
+
+    box-shadow:var(--shadow);
+}
+
+.hero:before{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    right:-130px;
+    top:-150px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.hero:after{
+    content:"";
+
+    position:absolute;
+
+    width:190px;
+    height:190px;
+
+    right:-70px;
+    top:-95px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(124,92,255,.12);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:25px;
+}
+
+.hero-left{
+    max-width:760px;
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    padding:6px 11px;
+
+    border-radius:30px;
+
+    background:rgba(32,201,151,.12);
+    border:1px solid rgba(32,201,151,.22);
+
+    color:#55e0b6;
+
+    font-size:10px;
+    font-weight:800;
+}
+
+.hero h1{
+    font-size:30px;
+    line-height:1.2;
+
+    margin:13px 0 7px;
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.7;
+}
+
+.exam-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+
+    margin-top:17px;
+}
+
+.info-chip{
+    padding:7px 10px;
+
+    color:#c9d4e2;
+
+    background:rgba(255,255,255,.035);
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    font-size:10px;
+}
+
+.hero-score{
+    min-width:175px;
+
+    text-align:center;
+
+    padding:18px;
+
+    border:1px solid var(--border);
+    border-radius:16px;
+
+    background:rgba(255,255,255,.035);
+}
+
+.hero-score .score{
+    font-size:37px;
+    font-weight:900;
+}
+
+.hero-score .score-label{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.hero-score .score-status{
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+
+    padding:5px 9px;
+
+    border-radius:30px;
+
+    font-size:9px;
+    font-weight:800;
+}
+
+.badge-success{
+    color:#55e0b6;
+    background:rgba(32,201,151,.12);
+    border:1px solid rgba(32,201,151,.2);
+}
+
+.badge-warning{
+    color:#ffd65c;
+    background:rgba(255,193,7,.12);
+    border:1px solid rgba(255,193,7,.16);
+}
+
+.badge-danger{
+    color:#ff8b9a;
+    background:rgba(255,93,115,.12);
+    border:1px solid rgba(255,93,115,.17);
+}
+
+.badge-info{
+    color:#66d3ff;
+    background:rgba(56,189,248,.12);
+    border:1px solid rgba(56,189,248,.16);
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary{
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:13px;
+
+    margin:20px 0;
+}
+
+.summary-card{
+    padding:17px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.summary-icon{
+    width:34px;
+    height:34px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:9px;
+
+    background:rgba(124,92,255,.12);
+
+    margin-bottom:11px;
+}
+
+.summary-value{
+    font-size:23px;
+    font-weight:900;
+}
+
+.summary-label{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:2px;
+}
+
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.panel{
+    background:var(--card);
+
+    border:1px solid var(--border);
+    border-radius:18px;
+
+    overflow:hidden;
+
+    margin-bottom:18px;
+}
+
+.panel-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:18px 20px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.panel-title h2{
+    font-size:15px;
+}
+
+.panel-title p{
+    color:var(--muted);
+    font-size:9px;
+    margin-top:3px;
+}
+
+.panel-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+    border:0;
+
+    border-radius:9px;
+
+    padding:9px 12px;
+
+    font-size:10px;
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-2)
+        );
+}
+
+.btn-secondary{
+    color:#d7e0ed;
+
+    background:#182940;
+
+    border:1px solid var(--border);
+}
+
+.btn-success{
+    color:#05291e;
+    background:#4bdbb0;
+}
+
+
+/* =========================================================
+   RESULT HERO CARD
+========================================================= */
+
+.latest-result{
+    padding:22px;
+}
+
+.latest-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.latest-title strong{
+    display:block;
+    font-size:16px;
+}
+
+.latest-title span{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    margin-top:4px;
+}
+
+.latest-score-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+    margin-top:20px;
+}
+
+.score-box{
+    padding:14px;
+
+    border-radius:12px;
+
+    background:var(--card-2);
+
+    border:1px solid var(--border);
+}
+
+.score-box-label{
+    color:#8594a9;
+    font-size:9px;
+}
+
+.score-box-value{
+    font-size:20px;
+    font-weight:900;
+    margin-top:5px;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-wrap{
+    margin-top:18px;
+}
+
+.progress-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    color:#9baabd;
+    font-size:10px;
+}
+
+.progress{
+    height:9px;
+
+    margin-top:7px;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    background:#091526;
+}
+
+.progress span{
+    display:block;
+
+    height:100%;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            #36c9ff
+        );
+}
+
+
+/* =========================================================
+   RESULT HISTORY
+========================================================= */
+
+.history-table{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:850px;
+}
+
+th{
+    padding:12px 15px;
+
+    text-align:left;
+
+    color:#7e8da4;
+
+    font-size:9px;
+    font-weight:800;
+
+    border-bottom:1px solid var(--border);
+}
+
+td{
+    padding:13px 15px;
+
+    color:#d5deea;
+
+    font-size:10px;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+tbody tr:hover{
+    background:rgba(255,255,255,.018);
+}
+
+.marks{
+    font-size:13px;
+    font-weight:900;
+}
+
+
+/* =========================================================
+   STUDENT INFO
+========================================================= */
+
+.student-info{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+
+    padding:20px;
+}
+
+.info-box{
+    padding:14px;
+
+    border:1px solid var(--border);
+
+    background:var(--card-2);
+
+    border-radius:12px;
+}
+
+.info-box label{
+    display:block;
+
+    color:#78889f;
+
+    font-size:9px;
+    margin-bottom:5px;
+}
+
+.info-box strong{
+    font-size:12px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty{
+    padding:50px 20px;
+
+    text-align:center;
+}
+
+.empty-icon{
+    width:60px;
+    height:60px;
+
+    display:grid;
+    place-items:center;
+
+    margin:0 auto 13px;
+
+    border-radius:17px;
+
+    background:rgba(124,92,255,.10);
+
+    font-size:25px;
+}
+
+.empty h3{
+    font-size:15px;
+}
+
+.empty p{
+    color:var(--muted);
+
+    max-width:500px;
+
+    margin:6px auto 0;
+
+    font-size:10px;
+    line-height:1.7;
+}
+
+
+/* =========================================================
+   NOTICE
+========================================================= */
+
+.notice{
+    padding:15px 18px;
+
+    display:flex;
+    align-items:flex-start;
+
+    gap:10px;
+
+    background:rgba(56,189,248,.06);
+
+    border:1px solid rgba(56,189,248,.14);
+
+    border-radius:13px;
+
+    color:#a8dfff;
+
+    font-size:10px;
+
+    line-height:1.7;
+
+    margin-bottom:18px;
+}
+
+.notice-icon{
+    font-size:17px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    text-align:center;
+
+    padding:10px 0 20px;
+
+    color:#627289;
+
+    font-size:9px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    z-index:3000;
+
+    min-width:250px;
+
+    padding:12px 15px;
+
+    background:#14243a;
+
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
+    box-shadow:var(--shadow);
+
+    font-size:10px;
+
+    transform:translateY(120px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+
+/* =========================================================
+   LIGHT MODE
+========================================================= */
+
+body.light{
+    --bg:#f4f7fb;
+    --bg-soft:#fff;
+    --card:#fff;
+    --card-2:#f7f9fc;
+
+    --border:rgba(20,35,55,.10);
+
+    --text:#142033;
+    --muted:#65748a;
+
+    background:#f4f7fb;
+}
+
+body.light .header{
+    background:rgba(255,255,255,.92);
+}
+
+body.light .hero{
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #edf2ff
+        );
+}
+
+body.light .nav a{
+    color:#5f6e82;
+}
+
+body.light .nav a:hover,
+body.light .nav a.active{
+    color:#142033;
+}
+
+body.light .progress{
+    background:#e5ebf3;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    .header,
+    .mobile-nav,
+    .panel-actions,
+    .btn,
+    .toast{
+        display:none!important;
     }
 
     body{
-      font-family:"Noto Sans Bengali",system-ui,sans-serif;
-      color:var(--text);
-      min-height:100vh;
-      background:
-        radial-gradient(circle at 10% 5%,rgba(124,58,237,.17),transparent 28%),
-        radial-gradient(circle at 90% 10%,rgba(6,182,212,.10),transparent 24%),
-        linear-gradient(180deg,#050816,#08101f 52%,#050814);
-      overflow-x:hidden;
+        background:#fff;
+        color:#111;
     }
 
-    body.light{
-      --card:#ffffff;
-      --card2:#f8fafc;
-      --text:#111827;
-      --muted:#64748b;
-      --line:rgba(15,23,42,.10);
-      --shadow:0 20px 55px rgba(15,23,42,.10);
-
-      background:
-        radial-gradient(circle at 10% 5%,rgba(124,58,237,.09),transparent 25%),
-        linear-gradient(180deg,#f8fafc,#eef2f7);
+    .main{
+        width:100%;
+        padding:10px;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
+    .hero,
+    .panel,
+    .summary-card{
+        box-shadow:none;
+        border:1px solid #ddd;
     }
 
-    button{
-      font:inherit;
-      cursor:pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .summary{
+        grid-template-columns:
+            repeat(3,1fr);
     }
 
-    .container{
-      width:min(1180px,calc(100% - 32px));
-      margin:auto;
+    .student-info{
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
-    /* =========================
-       NAVBAR
-    ========================= */
+}
 
-    .navbar{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      border-bottom:1px solid var(--line);
-      background:rgba(5,8,22,.80);
-      backdrop-filter:blur(18px);
+@media(max-width:850px){
+
+    .nav{
+        display:none;
     }
 
-    body.light .navbar{
-      background:rgba(255,255,255,.84);
+    .mobile-btn{
+        display:block;
     }
 
-    .nav-inner{
-      min-height:72px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
+    .hero-content{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-shrink:0;
+    .hero-score{
+        width:100%;
+        text-align:left;
     }
 
-    .brand-logo{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      object-fit:contain;
-      background:#fff;
-      padding:5px;
-      border:1px solid var(--line);
+    .latest-score-grid{
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
-    .brand-text strong{
-      display:block;
-      font-size:15px;
-      font-weight:800;
+}
+
+@media(max-width:650px){
+
+    .header{
+        padding:0 14px;
     }
 
-    .brand-text span{
-      display:block;
-      color:var(--muted);
-      font-size:11px;
+    .main{
+        width:calc(100% - 24px);
+        padding-top:18px;
     }
-
-    .nav-links{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      flex-wrap:wrap;
-      gap:3px;
-    }
-
-    .nav-links a,
-    .nav-btn{
-      border:0;
-      background:transparent;
-      color:var(--muted);
-      padding:9px 10px;
-      border-radius:10px;
-      font-size:13px;
-      white-space:nowrap;
-      transition:.2s;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active,
-    .nav-btn:hover{
-      color:var(--text);
-      background:rgba(124,58,237,.12);
-    }
-
-    .nav-actions{
-      display:flex;
-      gap:7px;
-    }
-
-    .icon-btn{
-      width:38px;
-      height:38px;
-      border:1px solid var(--line);
-      border-radius:11px;
-      background:var(--card);
-      color:var(--text);
-      display:grid;
-      place-items:center;
-    }
-
-    .mobile-toggle{
-      display:none;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
 
     .hero{
-      padding:52px 0 28px;
-    }
-
-    .hero-card{
-      position:relative;
-      overflow:hidden;
-      padding:36px;
-      border:1px solid var(--line);
-      border-radius:30px;
-      background:
-        radial-gradient(circle at 15% 20%,rgba(124,58,237,.21),transparent 34%),
-        radial-gradient(circle at 90% 80%,rgba(6,182,212,.10),transparent 30%),
-        rgba(10,16,32,.82);
-      box-shadow:var(--shadow);
-    }
-
-    body.light .hero-card{
-      background:
-        radial-gradient(circle at 15% 20%,rgba(124,58,237,.09),transparent 34%),
-        radial-gradient(circle at 90% 80%,rgba(6,182,212,.07),transparent 30%),
-        #fff;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 11px;
-      border-radius:999px;
-      color:var(--primary2);
-      background:rgba(124,58,237,.12);
-      border:1px solid rgba(124,58,237,.22);
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:15px;
-    }
-
-    .dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 12px var(--green);
+        padding:20px;
+        border-radius:18px;
     }
 
     .hero h1{
-      font-size:clamp(30px,4vw,46px);
-      line-height:1.15;
-      margin-bottom:10px;
-      letter-spacing:-1px;
+        font-size:23px;
     }
-
-    .hero h1 span{
-      color:var(--primary2);
-    }
-
-    .hero p{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.8;
-      max-width:760px;
-    }
-
-    .student-mini{
-      display:flex;
-      align-items:center;
-      gap:13px;
-      width:max-content;
-      max-width:100%;
-      margin-top:23px;
-      padding:13px 15px;
-      border:1px solid var(--line);
-      border-radius:17px;
-      background:rgba(255,255,255,.025);
-    }
-
-    .avatar{
-      width:46px;
-      height:46px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      color:#fff;
-      font-weight:800;
-      background:linear-gradient(135deg,var(--primary),var(--cyan));
-    }
-
-    .student-mini strong{
-      display:block;
-      font-size:14px;
-    }
-
-    .student-mini span{
-      display:block;
-      color:var(--muted);
-      font-size:11px;
-      margin-top:2px;
-    }
-
-    /* =========================
-       SUMMARY
-    ========================= */
 
     .summary{
-      padding:0 0 20px;
-    }
+        grid-template-columns:
+            repeat(2,1fr);
 
-    .summary-grid{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:13px;
+        gap:9px;
     }
 
     .summary-card{
-      padding:18px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:var(--card);
-      box-shadow:var(--shadow);
+        padding:14px;
     }
 
-    .summary-card small{
-      display:block;
-      color:var(--muted);
-      font-size:10px;
-      margin-bottom:7px;
-    }
-
-    .summary-card strong{
-      display:block;
-      font-size:23px;
-    }
-
-    .summary-card.primary strong{
-      color:var(--primary2);
-    }
-
-    .summary-card.green strong{
-      color:#4ade80;
-    }
-
-    .summary-card.yellow strong{
-      color:#fbbf24;
-    }
-
-    .summary-card.red strong{
-      color:#f87171;
-    }
-
-    /* =========================
-       RESULT SECTION
-    ========================= */
-
-    .section{
-      padding:18px 0;
-    }
-
-    .section-title{
-      margin-bottom:17px;
-    }
-
-    .section-title h2{
-      font-size:22px;
-      margin-bottom:5px;
-    }
-
-    .section-title p{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .latest-card{
-      border:1px solid var(--line);
-      border-radius:24px;
-      background:var(--card);
-      box-shadow:var(--shadow);
-      padding:23px;
-    }
-
-    .latest-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      margin-bottom:22px;
-    }
-
-    .latest-title strong{
-      display:block;
-      font-size:18px;
-    }
-
-    .latest-title span{
-      display:block;
-      color:var(--muted);
-      font-size:11px;
-      margin-top:4px;
-    }
-
-    .result-badge{
-      display:inline-flex;
-      align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:800;
-      background:rgba(124,58,237,.12);
-      color:var(--primary2);
-      border:1px solid rgba(124,58,237,.20);
-    }
-
-    .score-layout{
-      display:grid;
-      grid-template-columns:180px 1fr;
-      gap:25px;
-      align-items:center;
-    }
-
-    .score-circle{
-      width:155px;
-      height:155px;
-      margin:auto;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      position:relative;
-      background:
-        conic-gradient(
-          var(--primary) var(--score,0%),
-          rgba(148,163,184,.13) 0
-        );
-    }
-
-    .score-circle:before{
-      content:"";
-      position:absolute;
-      inset:12px;
-      border-radius:50%;
-      background:var(--card);
-    }
-
-    .score-content{
-      position:relative;
-      z-index:2;
-      text-align:center;
-    }
-
-    .score-content strong{
-      display:block;
-      font-size:32px;
-      line-height:1;
-    }
-
-    .score-content span{
-      display:block;
-      color:var(--muted);
-      font-size:10px;
-      margin-top:5px;
-    }
-
-    .result-details{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-    }
-
-    .detail-box{
-      padding:15px;
-      border:1px solid var(--line);
-      border-radius:15px;
-      background:var(--card2);
-    }
-
-    .detail-box small{
-      display:block;
-      color:var(--muted);
-      font-size:10px;
-      margin-bottom:5px;
-    }
-
-    .detail-box strong{
-      font-size:18px;
-    }
-
-    .performance{
-      margin-top:15px;
-      padding:15px;
-      border-radius:15px;
-      border:1px solid var(--line);
-      background:var(--card2);
-    }
-
-    .performance strong{
-      display:block;
-      font-size:13px;
-      margin-bottom:5px;
-    }
-
-    .performance p{
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.7;
-    }
-
-    /* =========================
-       EMPTY STATE
-    ========================= */
-
-    .empty-state{
-      display:none;
-      text-align:center;
-      padding:45px 20px;
-      border:1px dashed var(--line);
-      border-radius:22px;
-      background:var(--card);
-    }
-
-    .empty-icon{
-      width:62px;
-      height:62px;
-      margin:0 auto 14px;
-      display:grid;
-      place-items:center;
-      border-radius:18px;
-      background:rgba(124,58,237,.10);
-      font-size:27px;
-    }
-
-    .empty-state h3{
-      font-size:18px;
-      margin-bottom:6px;
-    }
-
-    .empty-state p{
-      max-width:500px;
-      margin:auto;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.7;
-    }
-
-    /* =========================
-       HISTORY
-    ========================= */
-
-    .history-card{
-      overflow:hidden;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:var(--card);
-      box-shadow:var(--shadow);
-    }
-
-    .history-table-wrap{
-      overflow-x:auto;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:700px;
-    }
-
-    th,
-    td{
-      padding:14px 16px;
-      border-bottom:1px solid var(--line);
-      text-align:left;
-      font-size:12px;
-    }
-
-    th{
-      color:var(--muted);
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.5px;
-      background:var(--card2);
-    }
-
-    td strong{
-      font-size:12px;
-    }
-
-    td span{
-      color:var(--muted);
-      font-size:10px;
-    }
-
-    tr:last-child td{
-      border-bottom:0;
-    }
-
-    .score-pill{
-      display:inline-flex;
-      padding:5px 9px;
-      border-radius:999px;
-      font-weight:800;
-      font-size:10px;
-    }
-
-    .score-good{
-      color:#4ade80;
-      background:rgba(34,197,94,.10);
-    }
-
-    .score-mid{
-      color:#fbbf24;
-      background:rgba(245,158,11,.10);
-    }
-
-    .score-low{
-      color:#f87171;
-      background:rgba(239,68,68,.10);
-    }
-
-    /* =========================
-       COURSE INFO
-    ========================= */
-
-    .course-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:13px;
-    }
-
-    .course-item{
-      padding:16px;
-      border:1px solid var(--line);
-      border-radius:17px;
-      background:var(--card);
-    }
-
-    .course-item small{
-      display:block;
-      color:var(--muted);
-      font-size:10px;
-      margin-bottom:5px;
-    }
-
-    .course-item strong{
-      font-size:13px;
-    }
-
-    /* =========================
-       ACTIONS
-    ========================= */
-
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:18px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border:1px solid var(--line);
-      background:var(--card2);
-      color:var(--text);
-      padding:11px 16px;
-      border-radius:12px;
-      font-size:13px;
-      font-weight:700;
-      transition:.2s;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-      border-color:rgba(124,58,237,.45);
-    }
-
-    .btn.primary{
-      color:#fff;
-      border-color:transparent;
-      background:linear-gradient(135deg,var(--primary),#5b21b6);
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer{
-      border-top:1px solid var(--line);
-      margin-top:20px;
-      padding:25px 0 35px;
-    }
-
-    .footer-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:20px;
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .footer-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-
-    .footer-links a:hover{
-      color:var(--text);
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    .toast{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:3000;
-      min-width:250px;
-      max-width:calc(100% - 40px);
-      padding:14px 16px;
-      border-radius:14px;
-      background:#111827;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 20px 45px rgba(0,0,0,.35);
-      opacity:0;
-      transform:translateY(25px);
-      pointer-events:none;
-      transition:.25s;
-      font-size:13px;
-    }
-
-    .toast.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media(max-width:1000px){
-
-      .nav-links{
-        position:absolute;
-        top:72px;
-        left:16px;
-        right:16px;
-        padding:12px;
-        border-radius:18px;
-        background:var(--card);
-        border:1px solid var(--line);
-        box-shadow:var(--shadow);
-        display:none;
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .nav-links.open{
-        display:flex;
-      }
-
-      .nav-links a,
-      .nav-btn{
-        width:100%;
-        text-align:left;
-      }
-
-      .mobile-toggle{
-        display:grid;
-      }
-
-      .summary-grid{
-        grid-template-columns:repeat(3,1fr);
-      }
-
-      .course-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:700px){
-
-      .container{
-        width:min(100% - 20px,1180px);
-      }
-
-      .brand-text{
-        display:none;
-      }
-
-      .hero{
-        padding-top:30px;
-      }
-
-      .hero-card{
-        padding:25px 20px;
-        border-radius:22px;
-      }
-
-      .summary-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .score-layout{
+    .student-info{
         grid-template-columns:1fr;
-      }
+    }
 
-      .score-circle{
-        width:145px;
-        height:145px;
-      }
-
-      .result-details{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .course-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .footer-inner{
+    .panel-header{
         flex-direction:column;
         align-items:flex-start;
-      }
     }
 
-    @media(max-width:430px){
+    .latest-score-grid{
+        grid-template-columns:1fr 1fr;
+    }
 
-      .summary-grid,
-      .result-details,
-      .course-grid{
+}
+
+@media(max-width:430px){
+
+    .summary{
         grid-template-columns:1fr;
-      }
-
-      .actions .btn{
-        width:100%;
-      }
-
-      .student-mini{
-        width:100%;
-      }
     }
 
-    /* =========================
-       PRINT
-    ========================= */
-
-    @media print{
-
-      body{
-        background:#fff !important;
-        color:#111 !important;
-      }
-
-      .navbar,
-      .hero,
-      .summary,
-      .history-card,
-      .course-section,
-      .actions,
-      footer,
-      .empty-state{
-        display:none !important;
-      }
-
-      .section{
-        padding:0;
-      }
-
-      .latest-card{
-        border:1px solid #222;
-        box-shadow:none;
-        background:#fff;
-      }
-
-      .score-circle:before{
-        background:#fff;
-      }
+    .latest-score-grid{
+        grid-template-columns:1fr;
     }
-  </style>
+
+}
+</style>
 </head>
+
 
 <body>
 
-  <!-- =========================
-       NAVBAR
-  ========================= -->
 
-  <header class="navbar">
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <div class="container nav-inner">
+<header class="header">
 
-      <a href="index.html" class="brand">
+    <div class="brand">
 
         <img
-          class="brand-logo"
-          src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
-          alt="SNK IT Institute"
-          onerror="this.style.display='none'"
+            class="logo"
+            src="https://raw.githubusercontent.com/yourdocuments/products/main/snkitlogo%20(2).svg"
+            alt="SNK IT Institute"
+            onerror="this.style.display='none'"
         >
 
         <div class="brand-text">
-          <strong>SNK IT Institute</strong>
-          <span>Student Portal</span>
+
+            <strong>
+                SNK IT Institute
+            </strong>
+
+            <span>
+                Student Portal
+            </span>
+
         </div>
-
-      </a>
-
-
-      <nav class="nav-links" id="navLinks">
-
-        <a href="index.html">Home</a>
-        <a href="student-dashboard.html">Dashboard</a>
-        <a href="courses.html">My Course</a>
-        <a href="assignments.html">Assignment</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="results.html" class="active">Result</a>
-        <a href="student-attendance.html">Attendance</a>
-        <a href="student-certificates.html">Certificate</a>
-        <a href="student-id-cards.html">ID Card</a>
-        <a href="student-timetable.html">Timetable</a>
-        <a href="student-resources.html">Resources</a>
-        <a href="student-support.html">Support</a>
-        <button class="nav-btn" id="logoutBtn">Logout</button>
-
-      </nav>
-
-
-      <div class="nav-actions">
-
-        <button
-          class="icon-btn"
-          id="themeBtn"
-          title="Toggle Theme"
-        >☾</button>
-
-        <button
-          class="icon-btn mobile-toggle"
-          id="mobileToggle"
-          title="Menu"
-        >☰</button>
-
-      </div>
 
     </div>
 
-  </header>
 
+    <nav class="nav">
 
-  <main>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="student-dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="courses.html">
+            My Course
+        </a>
+
+        <a href="assignments.html">
+            Assignment
+        </a>
+
+        <a href="quiz.html">
+            Quiz
+        </a>
+
+        <a
+            class="active"
+            href="results.html"
+        >
+            Result
+        </a>
+
+        <a href="student-attendance.html">
+            Attendance
+        </a>
 
-    <!-- =========================
-         HERO
-    ========================= -->
+        <a href="student-resources.html">
+            Resources
+        </a>
 
-    <section class="hero">
+    </nav>
 
-      <div class="container">
 
-        <div class="hero-card">
+    <div class="header-actions">
 
-          <div class="eyebrow">
-            <span class="dot"></span>
-            Student Result Center
-          </div>
+        <button
+            class="icon-btn mobile-btn"
+            id="mobileMenuBtn"
+            aria-label="Menu"
+        >
+            ☰
+        </button>
 
-          <h1>
-            My <span>Results</span>
-          </h1>
+        <button
+            class="icon-btn"
+            id="themeBtn"
+            title="Toggle Theme"
+        >
+            ◐
+        </button>
 
-          <p>
-            আপনার নিজের Student ID অনুযায়ী quiz result এখানে দেখানো হবে।
-            অন্য কোনো student's result এই page-এ দেখানো হবে না।
-          </p>
+        <button
+            class="icon-btn"
+            id="printBtn"
+            title="Print Result"
+        >
+            🖨
+        </button>
 
+    </div>
 
-          <div class="student-mini">
+</header>
 
-            <div class="avatar" id="studentAvatar">
-              S
-            </div>
 
-            <div>
+<!-- =====================================================
+     MOBILE NAV
+===================================================== -->
 
-              <strong id="studentName">
-                Student
-              </strong>
+<nav
+    class="mobile-nav"
+    id="mobileNav"
+>
 
-              <span id="studentMeta">
-                SNK-1001 • Batch 01
-              </span>
+    <a href="index.html">
+        Home
+    </a>
 
-            </div>
+    <a href="student-dashboard.html">
+        Dashboard
+    </a>
 
-          </div>
+    <a href="courses.html">
+        My Course
+    </a>
 
-        </div>
+    <a href="assignments.html">
+        Assignment
+    </a>
 
-      </div>
+    <a href="quiz.html">
+        Quiz
+    </a>
 
-    </section>
+    <a
+        class="active"
+        href="results.html"
+    >
+        Result
+    </a>
 
+    <a href="student-attendance.html">
+        Attendance
+    </a>
 
-    <!-- =========================
-         SUMMARY
-    ========================= -->
+    <a href="student-resources.html">
+        Resources
+    </a>
 
-    <section class="summary">
+    <a href="student-notifications.html">
+        Notifications
+    </a>
 
-      <div class="container">
+    <a href="student-support.html">
+        Support
+    </a>
 
-        <div class="summary-grid">
+    <a href="student-settings.html">
+        Settings
+    </a>
 
-          <div class="summary-card primary">
-            <small>Total Quizzes</small>
-            <strong id="totalQuizzes">0</strong>
-          </div>
+</nav>
 
-          <div class="summary-card green">
-            <small>Best Score</small>
-            <strong id="bestScore">0%</strong>
-          </div>
 
-          <div class="summary-card">
-            <small>Average Score</small>
-            <strong id="averageScore">0%</strong>
-          </div>
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-          <div class="summary-card yellow">
-            <small>Latest Score</small>
-            <strong id="latestScore">0%</strong>
-          </div>
+<main class="main">
 
-          <div class="summary-card">
-            <small>Course</small>
-            <strong id="summaryCourse" style="font-size:14px;">
-              Computer Office Application
-            </strong>
-          </div>
 
-        </div>
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-      </div>
+<section class="hero">
 
-    </section>
+    <div class="hero-content">
 
+        <div class="hero-left">
 
-    <!-- =========================
-         LATEST RESULT
-    ========================= -->
+            <span class="hero-badge">
+                ● STUDENT RESULT
+            </span>
 
-    <section class="section">
+            <h1>
+                আমার পরীক্ষার ফলাফল
+            </h1>
 
-      <div class="container">
+            <p>
+                Admin কর্তৃক Publish করা আপনার পরীক্ষার ফলাফল
+                এখানে দেখা যাবে।
+            </p>
 
-        <div class="section-title">
 
-          <h2>Latest Result</h2>
+            <div class="exam-info">
 
-          <p>
-            সর্বশেষ completed quiz-এর result
-          </p>
+                <span class="info-chip">
+                    📚 Computer Office Application
+                </span>
 
-        </div>
+                <span class="info-chip">
+                    👥 Batch 01
+                </span>
 
+                <span class="info-chip">
+                    📅 Exam: 08 September 2026
+                </span>
 
-        <div class="latest-card" id="latestCard">
+                <span class="info-chip">
+                    💯 Total: 100
+                </span>
 
-          <div class="latest-top">
-
-            <div class="latest-title">
-
-              <strong id="latestQuizName">
-                Computer Basics Quiz
-              </strong>
-
-              <span id="latestDate">
-                No result submitted yet
-              </span>
-
-            </div>
-
-            <div class="result-badge" id="latestBadge">
-              Pending
-            </div>
-
-          </div>
-
-
-          <div class="score-layout">
-
-            <div>
-
-              <div
-                class="score-circle"
-                id="scoreCircle"
-                style="--score:0%;"
-              >
-
-                <div class="score-content">
-
-                  <strong id="latestPercentage">
-                    0%
-                  </strong>
-
-                  <span>
-                    Score
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div>
-
-              <div class="result-details">
-
-                <div class="detail-box">
-
-                  <small>Correct</small>
-
-                  <strong id="latestCorrect">
-                    0
-                  </strong>
-
-                </div>
-
-
-                <div class="detail-box">
-
-                  <small>Wrong</small>
-
-                  <strong id="latestWrong">
-                    0
-                  </strong>
-
-                </div>
-
-
-                <div class="detail-box">
-
-                  <small>Total</small>
-
-                  <strong id="latestTotal">
-                    0
-                  </strong>
-
-                </div>
-
-              </div>
-
-
-              <div class="performance">
-
-                <strong id="performanceTitle">
-                  No Result Yet
-                </strong>
-
-                <p id="performanceText">
-                  Quiz complete করলে result এখানে automatically দেখা যাবে।
-                </p>
-
-              </div>
+                <span class="info-chip">
+                    ✓ Pass: 40
+                </span>
 
             </div>
-
-          </div>
-
-
-          <div class="actions">
-
-            <a
-              class="btn primary"
-              href="quiz.html"
-            >
-              Take Quiz
-            </a>
-
-            <button
-              class="btn"
-              id="printBtn"
-            >
-              🖨 Print Result
-            </button>
-
-            <a
-              class="btn"
-              href="student-dashboard.html"
-            >
-              Dashboard
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <div class="empty-state" id="emptyState">
-
-          <div class="empty-icon">
-            📊
-          </div>
-
-          <h3>
-            No Result Yet
-          </h3>
-
-          <p>
-            আপনার Student ID-এর জন্য এখনো কোনো quiz result পাওয়া যায়নি।
-            Quiz complete করার পরে result এখানে automatically show হবে।
-          </p>
-
-          <div class="actions" style="justify-content:center;">
-
-            <a
-              class="btn primary"
-              href="quiz.html"
-            >
-              Start Quiz
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         RESULT HISTORY
-    ========================= -->
-
-    <section class="section">
-
-      <div class="container">
-
-        <div class="section-title">
-
-          <h2>Result History</h2>
-
-          <p>
-            আপনার Student ID-এর সব saved quiz results
-          </p>
-
-        </div>
-
-
-        <div class="history-card">
-
-          <div class="history-table-wrap">
-
-            <table>
-
-              <thead>
-
-                <tr>
-
-                  <th>Quiz</th>
-                  <th>Date</th>
-                  <th>Correct</th>
-                  <th>Wrong</th>
-                  <th>Total</th>
-                  <th>Score</th>
-
-                </tr>
-
-              </thead>
-
-              <tbody id="historyBody"></tbody>
-
-            </table>
-
-          </div>
 
         </div>
 
 
         <div
-          id="historyEmpty"
-          class="empty-state"
-          style="margin-top:15px;"
+            class="hero-score"
+            id="heroScoreBox"
         >
 
-          <div class="empty-icon">
-            📝
-          </div>
+            <div
+                class="score"
+                id="heroScore"
+            >
+                —
+            </div>
 
-          <h3>
-            No Result History
-          </h3>
+            <div class="score-label">
+                Latest Published Score
+            </div>
 
-          <p>
-            Quiz submit করলে আপনার result history এখানে জমা হবে।
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         COURSE INFORMATION
-    ========================= -->
-
-    <section class="section">
-
-      <div class="container">
-
-        <div class="section-title">
-
-          <h2>Course Information</h2>
-
-          <p>
-            আপনার current course-এর তথ্য
-          </p>
+            <div
+                class="score-status"
+                id="heroStatus"
+            >
+                <span class="badge badge-warning">
+                    No Result
+                </span>
+            </div>
 
         </div>
-
-
-        <div class="course-grid">
-
-          <div class="course-item">
-
-            <small>Course</small>
-
-            <strong id="courseName">
-              Computer Office Application
-            </strong>
-
-          </div>
-
-
-          <div class="course-item">
-
-            <small>Batch</small>
-
-            <strong id="courseBatch">
-              Batch 01
-            </strong>
-
-          </div>
-
-
-          <div class="course-item">
-
-            <small>Mode</small>
-
-            <strong>
-              Offline
-            </strong>
-
-          </div>
-
-
-          <div class="course-item">
-
-            <small>Duration</small>
-
-            <strong>
-              6 Months
-            </strong>
-
-          </div>
-
-
-          <div class="course-item">
-
-            <small>Class Days</small>
-
-            <strong>
-              Saturday – Monday
-            </strong>
-
-          </div>
-
-
-          <div class="course-item">
-
-            <small>Class Time</small>
-
-            <strong>
-              4:00 PM – 6:00 PM
-            </strong>
-
-          </div>
-
-
-          <div class="course-item">
-
-            <small>Start Date</small>
-
-            <strong>
-              08 September 2026
-            </strong>
-
-          </div>
-
-
-          <div class="course-item">
-
-            <small>Instructor</small>
-
-            <strong>
-              SNK IT Instructor
-            </strong>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
-  <footer>
-
-    <div class="container footer-inner">
-
-      <div>
-
-        © <span id="year"></span>
-        SNK IT Institute • Student Portal
-
-      </div>
-
-
-      <div class="footer-links">
-
-        <a href="student-dashboard.html">
-          Dashboard
-        </a>
-
-        <a href="courses.html">
-          Course
-        </a>
-
-        <a href="quiz.html">
-          Quiz
-        </a>
-
-        <a href="student-attendance.html">
-          Attendance
-        </a>
-
-        <a href="student-certificates.html">
-          Certificate
-        </a>
-
-        <a href="student-support.html">
-          Support
-        </a>
-
-      </div>
 
     </div>
 
-  </footer>
+</section>
 
 
-  <div
+<!-- =====================================================
+     STUDENT INFO
+===================================================== -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div class="panel-title">
+
+            <h2>
+                👨‍🎓 Student Information
+            </h2>
+
+            <p>
+                আপনার Student Portal account information
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="student-info">
+
+        <div class="info-box">
+
+            <label>
+                Student Name
+            </label>
+
+            <strong id="studentName">
+                Student
+            </strong>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <label>
+                Student ID
+            </label>
+
+            <strong id="studentId">
+                SNK-1001
+            </strong>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <label>
+                Course
+            </label>
+
+            <strong id="studentCourse">
+                Computer Office Application
+            </strong>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <label>
+                Batch
+            </label>
+
+            <strong id="studentBatch">
+                Batch 01
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SUMMARY
+===================================================== -->
+
+<section class="summary">
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            📊
+        </div>
+
+        <div
+            class="summary-value"
+            id="totalResults"
+        >
+            0
+        </div>
+
+        <div class="summary-label">
+            Published Results
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            🏆
+        </div>
+
+        <div
+            class="summary-value"
+            id="bestScore"
+        >
+            —
+        </div>
+
+        <div class="summary-label">
+            Best Score
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            📈
+        </div>
+
+        <div
+            class="summary-value"
+            id="averageScore"
+        >
+            —
+        </div>
+
+        <div class="summary-label">
+            Average Score
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            🕐
+        </div>
+
+        <div
+            class="summary-value"
+            id="latestScore"
+        >
+            —
+        </div>
+
+        <div class="summary-label">
+            Latest Score
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            🎯
+        </div>
+
+        <div
+            class="summary-value"
+            id="passCount"
+        >
+            0
+        </div>
+
+        <div class="summary-label">
+            Passed Exams
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PUBLISHED RESULT NOTICE
+===================================================== -->
+
+<div class="notice">
+
+    <div class="notice-icon">
+        🔐
+    </div>
+
+    <div>
+        <strong>
+            Result Privacy:
+        </strong>
+
+        এখানে শুধু আপনার Student ID-এর সাথে যুক্ত এবং
+        Admin কর্তৃক <strong>Published</strong> করা result
+        দেখানো হবে। Unpublished result student portal-এ
+        দেখানো হবে না।
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     LATEST RESULT
+===================================================== -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div class="panel-title">
+
+            <h2>
+                🏆 Latest Published Result
+            </h2>
+
+            <p>
+                আপনার সর্বশেষ published examination result
+            </p>
+
+        </div>
+
+        <div class="panel-actions">
+
+            <button
+                class="btn btn-secondary"
+                id="refreshBtn"
+            >
+                ↻ Refresh
+            </button>
+
+            <button
+                class="btn btn-primary"
+                id="printResultBtn"
+            >
+                🖨 Print
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div id="latestResultContainer">
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+            <h3>
+                No Result Yet
+            </h3>
+
+            <p>
+                আপনার জন্য এখনো কোনো published result
+                পাওয়া যায়নি।
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RESULT HISTORY
+===================================================== -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div class="panel-title">
+
+            <h2>
+                📚 Result History
+            </h2>
+
+            <p>
+                আপনার সব published result
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="history-table"
+        id="historyContainer"
+    >
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Exam
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Marks
+                    </th>
+
+                    <th>
+                        Percentage
+                    </th>
+
+                    <th>
+                        Result
+                    </th>
+
+                    <th>
+                        Published
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="historyBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     COURSE RESULT INFO
+===================================================== -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div class="panel-title">
+
+            <h2>
+                📚 Course & Exam Information
+            </h2>
+
+            <p>
+                Current course examination details
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="student-info">
+
+        <div class="info-box">
+
+            <label>
+                Course
+            </label>
+
+            <strong>
+                Computer Office Application
+            </strong>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <label>
+                Batch
+            </label>
+
+            <strong>
+                Batch 01
+            </strong>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <label>
+                Exam Date
+            </label>
+
+            <strong>
+                08 September 2026
+            </strong>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <label>
+                Pass Mark
+            </label>
+
+            <strong>
+                40 / 100
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    SNK IT Institute • Student Portal • My Results
+
+    <br>
+
+    © <span id="year"></span> SNK IT Institute
+
+</footer>
+
+
+</main>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
     class="toast"
     id="toast"
-  ></div>
+>
+</div>
 
 
-  <script>
+<script>
+/* =========================================================
+   SNK IT INSTITUTE
+   STUDENT PORTAL RESULT SYNC
+   STEP 2.3
+   ========================================================= */
 
-    /* =========================================================
-       SNK IT INSTITUTE
-       Step 1.19.3.7
-       results.html — Data Sync
-       ========================================================= */
+(function(){
+
+"use strict";
 
 
-    /* =========================
-       STORAGE KEYS
-    ========================= */
+/* =========================================================
+   STORAGE KEYS
+========================================================= */
 
-    const KEYS = {
+const STORAGE = {
 
-      theme:
+    theme:
         "snkTheme",
 
-      loggedIn:
+    loggedIn:
         "snkStudentLoggedIn",
 
-      studentId:
+    studentId:
         "snkStudentId",
 
-      studentName:
+    studentName:
         "snkStudentName",
 
-      studentCourse:
+    studentCourse:
         "snkStudentCourse",
 
-      studentBatch:
+    studentBatch:
         "snkStudentBatch",
 
-      profile:
+    studentProfile:
         "snkStudentProfile",
 
-      quizResults:
+    adminResults:
+        "snkAdminExamResultsV21",
+
+    quizResults:
         "snkQuizResults"
 
-    };
+};
 
 
-    /* =========================
-       DEFAULT STUDENT
-    ========================= */
+/* =========================================================
+   EXAM CONFIG
+========================================================= */
 
-    const DEFAULT_STUDENT = {
+const EXAM = {
 
-      id:
+    id:
+        "SNK-EXAM-2026-09-08",
+
+    name:
+        "Computer Office Application Exam",
+
+    date:
+        "08 September 2026",
+
+    isoDate:
+        "2026-09-08",
+
+    totalMarks:
+        100,
+
+    passMark:
+        40
+
+};
+
+
+/* =========================================================
+   DEFAULT STUDENT
+========================================================= */
+
+const DEFAULT_STUDENT = {
+
+    id:
         "SNK-1001",
 
-      name:
+    name:
         "Student",
 
-      course:
+    course:
         "Computer Office Application",
 
-      batch:
+    batch:
         "Batch 01"
+
+};
+
+
+/* =========================================================
+   DOM HELPER
+========================================================= */
+
+const $ = id =>
+    document.getElementById(id);
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function applyTheme(){
+
+    const theme =
+        localStorage.getItem(
+            STORAGE.theme
+        );
+
+    document.body.classList.toggle(
+        "light",
+        theme === "light"
+    );
+
+}
+
+
+function toggleTheme(){
+
+    const isLight =
+        document.body.classList.contains(
+            "light"
+        );
+
+    localStorage.setItem(
+        STORAGE.theme,
+        isLight
+        ? "dark"
+        : "light"
+    );
+
+    applyTheme();
+
+}
+
+
+/* =========================================================
+   STUDENT DATA
+========================================================= */
+
+function readProfile(){
+
+    try{
+
+        const raw =
+            localStorage.getItem(
+                STORAGE.studentProfile
+            );
+
+        if(!raw){
+            return null;
+        }
+
+        const profile =
+            JSON.parse(raw);
+
+        if(
+            profile &&
+            typeof profile === "object"
+        ){
+            return profile;
+        }
+
+    }
+    catch(error){
+
+        console.warn(
+            "Student profile read error:",
+            error
+        );
+
+    }
+
+    return null;
+
+}
+
+
+function getStudent(){
+
+    const profile =
+        readProfile();
+
+
+    const studentId =
+        sessionStorage.getItem(
+            STORAGE.studentId
+        )
+        ||
+        localStorage.getItem(
+            STORAGE.studentId
+        )
+        ||
+        profile?.studentId
+        ||
+        profile?.id
+        ||
+        DEFAULT_STUDENT.id;
+
+
+    const studentName =
+        sessionStorage.getItem(
+            STORAGE.studentName
+        )
+        ||
+        localStorage.getItem(
+            STORAGE.studentName
+        )
+        ||
+        profile?.name
+        ||
+        profile?.studentName
+        ||
+        DEFAULT_STUDENT.name;
+
+
+    const course =
+        sessionStorage.getItem(
+            STORAGE.studentCourse
+        )
+        ||
+        localStorage.getItem(
+            STORAGE.studentCourse
+        )
+        ||
+        profile?.course
+        ||
+        profile?.courseName
+        ||
+        DEFAULT_STUDENT.course;
+
+
+    const batch =
+        sessionStorage.getItem(
+            STORAGE.studentBatch
+        )
+        ||
+        localStorage.getItem(
+            STORAGE.studentBatch
+        )
+        ||
+        profile?.batch
+        ||
+        profile?.batchName
+        ||
+        DEFAULT_STUDENT.batch;
+
+
+    return {
+
+        id:
+            String(
+                studentId
+            ).trim(),
+
+        name:
+            String(
+                studentName
+            ).trim(),
+
+        course:
+            String(
+                course
+            ).trim(),
+
+        batch:
+            String(
+                batch
+            ).trim()
 
     };
 
-
-    /* =========================
-       DOM
-    ========================= */
-
-    const $ =
-      id => document.getElementById(id);
+}
 
 
-    const body =
-      document.body;
+/* =========================================================
+   SESSION
+========================================================= */
 
-    const navLinks =
-      $("navLinks");
+function checkLogin(){
 
-    const mobileToggle =
-      $("mobileToggle");
-
-    const themeBtn =
-      $("themeBtn");
-
-    const logoutBtn =
-      $("logoutBtn");
-
-    const printBtn =
-      $("printBtn");
-
-    const toastBox =
-      $("toast");
+    const loggedIn =
+        sessionStorage.getItem(
+            STORAGE.loggedIn
+        );
 
 
-    /* =========================
-       JSON PARSER
-    ========================= */
+    /*
+      The existing Student Portal already uses
+      sessionStorage for login protection.
 
-    function parseJSON(
-      value,
-      fallback
-    ){
+      We keep a demo fallback so the page remains
+      usable with the current demo account.
+    */
 
-      try{
-
-        return value
-          ? JSON.parse(value)
-          : fallback;
-
-      }catch(error){
-
-        return fallback;
-
-      }
-
+    if(loggedIn === "true"){
+        return true;
     }
 
 
-    /* =========================
-       LOGIN CHECK
-    ========================= */
-
-    function isLoggedIn(){
-
-      return (
+    const hasStudentIdentity =
         sessionStorage.getItem(
-          KEYS.loggedIn
-        ) === "true"
-
+            STORAGE.studentId
+        )
         ||
-
         localStorage.getItem(
-          KEYS.loggedIn
-        ) === "true"
-      );
+            STORAGE.studentId
+        );
 
+
+    if(hasStudentIdentity){
+        return true;
     }
 
 
-    /* =========================
-       STUDENT DATA
-       Priority:
-       Session
-       Local
-       Profile
-       Default
-    ========================= */
+    /*
+      Demo account fallback.
+      If you want strict protection later,
+      remove this fallback and redirect to login.
+    */
 
-    function getStudentData(){
+    return true;
 
-      const sessionId =
-        sessionStorage.getItem(
-          KEYS.studentId
-        );
+}
 
-      const sessionName =
-        sessionStorage.getItem(
-          KEYS.studentName
-        );
 
-      const sessionCourse =
-        sessionStorage.getItem(
-          KEYS.studentCourse
-        );
+/* =========================================================
+   READ ADMIN RESULTS
+========================================================= */
 
-      const sessionBatch =
-        sessionStorage.getItem(
-          KEYS.studentBatch
-        );
+function readAdminResults(){
 
+    try{
 
-      const localId =
-        localStorage.getItem(
-          KEYS.studentId
-        );
-
-      const localName =
-        localStorage.getItem(
-          KEYS.studentName
-        );
-
-      const localCourse =
-        localStorage.getItem(
-          KEYS.studentCourse
-        );
-
-      const localBatch =
-        localStorage.getItem(
-          KEYS.studentBatch
-        );
-
-
-      const profile =
-        parseJSON(
-          localStorage.getItem(
-            KEYS.profile
-          ),
-          {}
-        );
-
-
-      return {
-
-        id:
-          sessionId ||
-          localId ||
-          profile.studentId ||
-          DEFAULT_STUDENT.id,
-
-        name:
-          sessionName ||
-          localName ||
-          profile.name ||
-          DEFAULT_STUDENT.name,
-
-        course:
-          sessionCourse ||
-          localCourse ||
-          profile.course ||
-          DEFAULT_STUDENT.course,
-
-        batch:
-          sessionBatch ||
-          localBatch ||
-          profile.batch ||
-          DEFAULT_STUDENT.batch
-
-      };
-
-    }
-
-
-    let student =
-      getStudentData();
-
-
-    /* =========================
-       SESSION PROTECTION
-    ========================= */
-
-    function protectPage(){
-
-      if(!isLoggedIn()){
-
-        showToast(
-          "Please login first."
-        );
-
-        setTimeout(() => {
-
-          window.location.href =
-            "login.html";
-
-        },700);
-
-        return false;
-
-      }
-
-      return true;
-
-    }
-
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    let toastTimer =
-      null;
-
-
-    function showToast(
-      message
-    ){
-
-      if(!toastBox){
-        return;
-      }
-
-      toastBox.textContent =
-        message;
-
-      toastBox.classList.add(
-        "show"
-      );
-
-      clearTimeout(
-        toastTimer
-      );
-
-      toastTimer =
-        setTimeout(() => {
-
-          toastBox.classList.remove(
-            "show"
-          );
-
-        },2800);
-
-    }
-
-
-    /* =========================
-       INITIAL
-    ========================= */
-
-    function getInitial(
-      name
-    ){
-
-      const clean =
-        String(
-          name || "Student"
-        ).trim();
-
-      return clean
-        ? clean.charAt(0).toUpperCase()
-        : "S";
-
-    }
-
-
-    /* =========================
-       NORMALIZE ID
-    ========================= */
-
-    function normalizeId(
-      value
-    ){
-
-      return String(
-        value || ""
-      )
-      .trim()
-      .toLowerCase();
-
-    }
-
-
-    /* =========================
-       GET QUIZ RESULTS
-       Current student only
-    ========================= */
-
-    function getCurrentStudentResults(){
-
-      const raw =
-        localStorage.getItem(
-          KEYS.quizResults
-        );
-
-      const data =
-        parseJSON(
-          raw,
-          []
-        );
-
-
-      if(!Array.isArray(data)){
-        return [];
-      }
-
-
-      const currentId =
-        normalizeId(
-          student.id
-        );
-
-
-      return data
-
-        .filter(result => {
-
-          if(!result){
-            return false;
-          }
-
-
-          const resultId =
-            normalizeId(
-              result.studentId
+        const raw =
+            localStorage.getItem(
+                STORAGE.adminResults
             );
 
+        if(!raw){
+            return [];
+        }
 
-          /*
-            Security/data rule:
-            Student ID must match.
-          */
+        const parsed =
+            JSON.parse(raw);
 
-          return (
-            resultId &&
-            resultId === currentId
-          );
+
+        if(Array.isArray(parsed)){
+            return parsed;
+        }
+
+
+        if(
+            parsed &&
+            Array.isArray(parsed.results)
+        ){
+            return parsed.results;
+        }
+
+
+        return [];
+
+    }
+    catch(error){
+
+        console.error(
+            "Admin result read error:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =========================================================
+   GET PUBLISHED RESULTS FOR CURRENT STUDENT
+========================================================= */
+
+function getPublishedResults(){
+
+    const student =
+        getStudent();
+
+    const results =
+        readAdminResults();
+
+
+    return results
+        .filter(result => {
+
+            /*
+              Critical privacy check:
+              Student ID must match.
+            */
+
+            const sameStudent =
+                String(
+                    result.studentId || ""
+                ).trim()
+                ===
+                String(
+                    student.id || ""
+                ).trim();
+
+
+            if(!sameStudent){
+                return false;
+            }
+
+
+            /*
+              Only Admin-published results.
+            */
+
+            if(result.published !== true){
+                return false;
+            }
+
+
+            return true;
 
         })
+        .sort(
+            (a,b) => {
 
-        .map(result => {
+                const dateA =
+                    new Date(
+                        a.updatedAt ||
+                        a.createdAt ||
+                        0
+                    ).getTime();
 
-          return {
+                const dateB =
+                    new Date(
+                        b.updatedAt ||
+                        b.createdAt ||
+                        0
+                    ).getTime();
 
-            id:
-              result.id ||
-              "",
+                return dateB - dateA;
 
-            studentId:
-              result.studentId ||
-              "",
+            }
+        );
 
-            studentName:
-              result.studentName ||
-              student.name,
+}
 
-            course:
-              result.course ||
-              student.course,
 
-            batch:
-              result.batch ||
-              student.batch,
+/* =========================================================
+   NUMBER HELPERS
+========================================================= */
 
-            quizName:
-              result.quizName ||
-              "Quiz",
+function safeNumber(
+    value,
+    fallback = 0
+){
 
-            correct:
-              Number(
-                result.correct || 0
-              ),
+    const number =
+        Number(value);
 
-            wrong:
-              Number(
-                result.wrong || 0
-              ),
+    return Number.isFinite(number)
+        ? number
+        : fallback;
 
-            total:
-              Number(
-                result.total || 0
-              ),
+}
 
-            percentage:
-              Number(
-                result.percentage || 0
-              ),
 
-            submittedAt:
-              result.submittedAt ||
-              result.createdAt ||
-              "",
+function getPercentage(result){
 
-            submitMethod:
-              result.submitMethod ||
-              "Manual"
+    const percentage =
+        safeNumber(
+            result.percentage,
+            NaN
+        );
 
-          };
 
-        })
+    if(Number.isFinite(percentage)){
+        return Number(
+            percentage.toFixed(2)
+        );
+    }
 
-        .sort((a,b) => {
 
-          const dateA =
-            new Date(
-              a.submittedAt || 0
-            ).getTime();
+    const marks =
+        safeNumber(
+            result.marks,
+            0
+        );
 
-          const dateB =
-            new Date(
-              b.submittedAt || 0
-            ).getTime();
+    const total =
+        safeNumber(
+            result.totalMarks,
+            EXAM.totalMarks
+        );
 
-          return dateB - dateA;
 
-        });
+    if(total <= 0){
+        return 0;
+    }
+
+
+    return Number(
+        (
+            (marks / total) * 100
+        ).toFixed(2)
+    );
+
+}
+
+
+/* =========================================================
+   RESULT STATUS
+========================================================= */
+
+function getResultStatus(result){
+
+    const explicit =
+        String(
+            result.result || ""
+        ).trim().toLowerCase();
+
+
+    if(
+        explicit === "pass" ||
+        explicit === "passed"
+    ){
+        return "Pass";
+    }
+
+
+    if(
+        explicit === "fail" ||
+        explicit === "failed"
+    ){
+        return "Fail";
+    }
+
+
+    const marks =
+        safeNumber(
+            result.marks,
+            0
+        );
+
+
+    const passMark =
+        safeNumber(
+            result.passMark,
+            EXAM.passMark
+        );
+
+
+    return marks >= passMark
+        ? "Pass"
+        : "Fail";
+
+}
+
+
+/* =========================================================
+   STATUS BADGE
+========================================================= */
+
+function statusBadge(
+    status
+){
+
+    if(status === "Pass"){
+
+        return `
+            <span class="badge badge-success">
+                ✓ PASS
+            </span>
+        `;
 
     }
 
 
-    /* =========================
-       FORMAT DATE
-    ========================= */
+    return `
+        <span class="badge badge-danger">
+            ✕ FAIL
+        </span>
+    `;
 
-    function formatDate(
-      value
-    ){
-
-      if(!value){
-        return "Date not available";
-      }
+}
 
 
-      const date =
+/* =========================================================
+   SCORE LABEL
+========================================================= */
+
+function getScoreMessage(
+    percentage
+){
+
+    if(percentage >= 80){
+
+        return `
+            <span class="badge badge-success">
+                Excellent
+            </span>
+        `;
+
+    }
+
+
+    if(percentage >= 60){
+
+        return `
+            <span class="badge badge-info">
+                Good
+            </span>
+        `;
+
+    }
+
+
+    if(percentage >= 40){
+
+        return `
+            <span class="badge badge-warning">
+                Passed
+            </span>
+        `;
+
+    }
+
+
+    return `
+        <span class="badge badge-danger">
+            Needs Improvement
+        </span>
+    `;
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(
+    value
+){
+
+    if(!value){
+        return "—";
+    }
+
+
+    const date =
         new Date(value);
 
 
-      if(
+    if(
         Number.isNaN(
-          date.getTime()
+            date.getTime()
         )
-      ){
-
-        return String(value);
-
-      }
+    ){
+        return "—";
+    }
 
 
-      return date.toLocaleString(
+    return date.toLocaleDateString(
         "en-GB",
         {
-          day:"2-digit",
-          month:"short",
-          year:"numeric",
-          hour:"2-digit",
-          minute:"2-digit"
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
         }
-      );
+    );
 
+}
+
+
+function formatDateTime(
+    value
+){
+
+    if(!value){
+        return "—";
     }
 
 
-    /* =========================
-       SCORE CLASS
-    ========================= */
+    const date =
+        new Date(value);
 
-    function getScoreClass(
-      score
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
     ){
-
-      if(score >= 80){
-        return "score-good";
-      }
-
-      if(score >= 60){
-        return "score-mid";
-      }
-
-      return "score-low";
-
+        return "—";
     }
 
 
-    /* =========================
-       PERFORMANCE
-    ========================= */
+    return date.toLocaleString(
+        "en-GB",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
 
-    function getPerformance(
-      score
-    ){
-
-      if(score >= 80){
-
-        return {
-
-          title:
-            "Excellent Performance",
-
-          text:
-            "দারুণ! আপনার quiz performance খুব ভালো হয়েছে। নিয়মিত practice চালিয়ে যান।"
-
-        };
-
-      }
+}
 
 
-      if(score >= 60){
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
-        return {
+function escapeHTML(
+    value
+){
 
-          title:
-            "Good Performance",
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
-          text:
-            "ভালো হয়েছে। আরও কিছু practice করলে আপনার score আরও উন্নত হবে।"
-
-        };
-
-      }
+}
 
 
-      return {
+/* =========================================================
+   TOAST
+========================================================= */
 
-        title:
-          "Needs Improvement",
-
-        text:
-          "আরও practice করুন এবং ভুল প্রশ্নগুলো আবার review করুন।"
-
-      };
-
-    }
+let toastTimer = null;
 
 
-    /* =========================
-       RENDER STUDENT
-    ========================= */
+function showToast(
+    message
+){
 
-    function renderStudent(){
+    const toast =
+        $("toast");
 
-      $("studentName").textContent =
-        student.name;
 
-      $("studentMeta").textContent =
-        `${student.id} • ${student.batch}`;
+    toast.textContent =
+        message;
 
-      $("studentAvatar").textContent =
-        getInitial(
-          student.name
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2800
         );
 
-
-      $("summaryCourse").textContent =
-        student.course;
-
-      $("courseName").textContent =
-        student.course;
-
-      $("courseBatch").textContent =
-        student.batch;
-
-    }
+}
 
 
-    /* =========================
-       RENDER SUMMARY
-    ========================= */
+/* =========================================================
+   RENDER STUDENT
+========================================================= */
 
-    function renderSummary(
-      results
-    ){
+function renderStudent(){
 
-      const total =
+    const student =
+        getStudent();
+
+
+    $("studentName")
+        .textContent =
+        student.name ||
+        DEFAULT_STUDENT.name;
+
+
+    $("studentId")
+        .textContent =
+        student.id ||
+        DEFAULT_STUDENT.id;
+
+
+    $("studentCourse")
+        .textContent =
+        student.course ||
+        DEFAULT_STUDENT.course;
+
+
+    $("studentBatch")
+        .textContent =
+        student.batch ||
+        DEFAULT_STUDENT.batch;
+
+}
+
+
+/* =========================================================
+   RENDER SUMMARY
+========================================================= */
+
+function renderSummary(
+    results
+){
+
+    const total =
         results.length;
 
 
-      const scores =
-        results.map(
-          item =>
-            Number(
-              item.percentage || 0
-            )
-        );
-
-
-      const best =
-        scores.length
-          ? Math.max(...scores)
-          : 0;
-
-
-      const average =
-        scores.length
-          ? Math.round(
-              scores.reduce(
-                (sum,score) =>
-                  sum + score,
-                0
-              ) / scores.length
-            )
-          : 0;
-
-
-      const latest =
-        results.length
-          ? Number(
-              results[0].percentage || 0
-            )
-          : 0;
-
-
-      $("totalQuizzes").textContent =
+    $("totalResults")
+        .textContent =
         total;
 
-      $("bestScore").textContent =
-        `${best}%`;
 
-      $("averageScore").textContent =
-        `${average}%`;
+    if(!results.length){
 
-      $("latestScore").textContent =
-        `${latest}%`;
+        $("bestScore")
+            .textContent =
+            "—";
+
+        $("averageScore")
+            .textContent =
+            "—";
+
+        $("latestScore")
+            .textContent =
+            "—";
+
+        $("passCount")
+            .textContent =
+            "0";
+
+        return;
 
     }
 
 
-    /* =========================
-       RENDER LATEST
-    ========================= */
+    const percentages =
+        results.map(
+            getPercentage
+        );
 
-    function renderLatest(
-      results
-    ){
 
-      const latest =
+    const best =
+        Math.max(
+            ...percentages
+        );
+
+
+    const average =
+        percentages.reduce(
+            (sum,value) =>
+                sum + value,
+            0
+        ) / percentages.length;
+
+
+    const passed =
+        results.filter(
+            result =>
+                getResultStatus(result)
+                ===
+                "Pass"
+        ).length;
+
+
+    $("bestScore")
+        .textContent =
+        best.toFixed(2) + "%";
+
+
+    $("averageScore")
+        .textContent =
+        average.toFixed(2) + "%";
+
+
+    $("latestScore")
+        .textContent =
+        getPercentage(
+            results[0]
+        ).toFixed(2) + "%";
+
+
+    $("passCount")
+        .textContent =
+        passed;
+
+}
+
+
+/* =========================================================
+   RENDER HERO
+========================================================= */
+
+function renderHero(
+    results
+){
+
+    const heroScore =
+        $("heroScore");
+
+    const heroStatus =
+        $("heroStatus");
+
+
+    if(!results.length){
+
+        heroScore.textContent =
+            "—";
+
+
+        heroStatus.innerHTML = `
+            <span class="badge badge-warning">
+                No Published Result
+            </span>
+        `;
+
+        return;
+
+    }
+
+
+    const latest =
         results[0];
 
 
-      const latestCard =
-        $("latestCard");
+    const percentage =
+        getPercentage(
+            latest
+        );
 
-      const emptyState =
-        $("emptyState");
+
+    heroScore.textContent =
+        percentage.toFixed(2) + "%";
 
 
-      if(!latest){
+    heroStatus.innerHTML =
+        statusBadge(
+            getResultStatus(
+                latest
+            )
+        );
 
-        latestCard.style.display =
-          "none";
+}
 
-        emptyState.style.display =
-          "block";
+
+/* =========================================================
+   RENDER LATEST RESULT
+========================================================= */
+
+function renderLatestResult(
+    results
+){
+
+    const container =
+        $("latestResultContainer");
+
+
+    if(!results.length){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+                <h3>
+                    No Published Result Yet
+                </h3>
+
+                <p>
+                    Admin এখনো আপনার কোনো result
+                    publish করেননি।
+                    Publish করার পরে result এখানে দেখা যাবে।
+                </p>
+
+            </div>
+
+        `;
 
         return;
-
-      }
-
-
-      latestCard.style.display =
-        "block";
-
-      emptyState.style.display =
-        "none";
-
-
-      const score =
-        Math.max(
-          0,
-          Math.min(
-            100,
-            Number(
-              latest.percentage || 0
-            )
-          )
-        );
-
-
-      $("latestQuizName").textContent =
-        latest.quizName;
-
-
-      $("latestDate").textContent =
-        formatDate(
-          latest.submittedAt
-        );
-
-
-      $("latestPercentage").textContent =
-        `${score}%`;
-
-
-      $("latestCorrect").textContent =
-        latest.correct;
-
-
-      $("latestWrong").textContent =
-        latest.wrong;
-
-
-      $("latestTotal").textContent =
-        latest.total;
-
-
-      $("scoreCircle").style
-        .setProperty(
-          "--score",
-          `${score}%`
-        );
-
-
-      const performance =
-        getPerformance(
-          score
-        );
-
-
-      $("performanceTitle")
-        .textContent =
-        performance.title;
-
-
-      $("performanceText")
-        .textContent =
-        performance.text;
-
-
-      const badge =
-        $("latestBadge");
-
-
-      badge.textContent =
-        score >= 80
-          ? "Excellent"
-          : score >= 60
-            ? "Good"
-            : "Needs Improvement";
-
-
-      badge.style.color =
-        score >= 80
-          ? "#4ade80"
-          : score >= 60
-            ? "#fbbf24"
-            : "#f87171";
-
-
-      badge.style.background =
-        score >= 80
-          ? "rgba(34,197,94,.10)"
-          : score >= 60
-            ? "rgba(245,158,11,.10)"
-            : "rgba(239,68,68,.10)";
 
     }
 
 
-    /* =========================
-       RENDER HISTORY
-    ========================= */
+    const result =
+        results[0];
 
-    function renderHistory(
-      results
-    ){
 
-      const bodyEl =
+    const marks =
+        safeNumber(
+            result.marks
+        );
+
+
+    const total =
+        safeNumber(
+            result.totalMarks,
+            EXAM.totalMarks
+        );
+
+
+    const percentage =
+        getPercentage(
+            result
+        );
+
+
+    const status =
+        getResultStatus(
+            result
+        );
+
+
+    container.innerHTML = `
+
+        <div class="latest-result">
+
+            <div class="latest-top">
+
+                <div class="latest-title">
+
+                    <strong>
+                        ${escapeHTML(
+                            result.examName ||
+                            EXAM.name
+                        )}
+                    </strong>
+
+                    <span>
+                        Exam Date:
+                        ${
+                            formatDate(
+                                result.examDate ||
+                                EXAM.isoDate
+                            )
+                        }
+                    </span>
+
+                </div>
+
+                <div>
+
+                    ${statusBadge(status)}
+
+                </div>
+
+            </div>
+
+
+            <div class="latest-score-grid">
+
+                <div class="score-box">
+
+                    <div class="score-box-label">
+                        Obtained Marks
+                    </div>
+
+                    <div class="score-box-value">
+                        ${marks}
+                    </div>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    <div class="score-box-label">
+                        Total Marks
+                    </div>
+
+                    <div class="score-box-value">
+                        ${total}
+                    </div>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    <div class="score-box-label">
+                        Percentage
+                    </div>
+
+                    <div class="score-box-value">
+                        ${percentage.toFixed(2)}%
+                    </div>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    <div class="score-box-label">
+                        Pass Mark
+                    </div>
+
+                    <div class="score-box-value">
+                        ${safeNumber(
+                            result.passMark,
+                            EXAM.passMark
+                        )}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-wrap">
+
+                <div class="progress-head">
+
+                    <span>
+                        Performance
+                    </span>
+
+                    <strong>
+                        ${percentage.toFixed(2)}%
+                    </strong>
+
+                </div>
+
+                <div class="progress">
+
+                    <span
+                        style="width:${Math.min(
+                            percentage,
+                            100
+                        )}%"
+                    ></span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    display:flex;
+                    flex-wrap:wrap;
+                    gap:8px;
+                    margin-top:15px;
+                "
+            >
+
+                ${getScoreMessage(
+                    percentage
+                )}
+
+                <span class="badge badge-info">
+                    📢 Published
+                </span>
+
+                <span class="badge badge-success">
+                    ✓ Admin Verified
+                </span>
+
+            </div>
+
+
+            ${
+                result.note
+                ? `
+                    <div
+                        style="
+                            margin-top:16px;
+                            padding:12px;
+                            border-radius:10px;
+                            background:rgba(255,255,255,.035);
+                            border:1px solid var(--border);
+                            color:#aebbd0;
+                            font-size:10px;
+                            line-height:1.7;
+                        "
+                    >
+                        <strong>
+                            Admin Note:
+                        </strong>
+
+                        <br>
+
+                        ${escapeHTML(
+                            result.note
+                        )}
+                    </div>
+                `
+                : ""
+            }
+
+
+            <div
+                style="
+                    margin-top:15px;
+                    color:#697a91;
+                    font-size:9px;
+                "
+            >
+                Published / Updated:
+                ${formatDateTime(
+                    result.updatedAt ||
+                    result.createdAt
+                )}
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER HISTORY
+========================================================= */
+
+function renderHistory(
+    results
+){
+
+    const body =
         $("historyBody");
 
-      const empty =
-        $("historyEmpty");
 
+    if(!results.length){
 
-      bodyEl.innerHTML =
-        "";
+        body.innerHTML = `
 
+            <tr>
 
-      if(!results.length){
+                <td colspan="6">
 
-        empty.style.display =
-          "block";
+                    <div class="empty">
 
-        return;
+                        <div class="empty-icon">
+                            📚
+                        </div>
 
-      }
+                        <h3>
+                            No Published Results
+                        </h3>
 
+                        <p>
+                            আপনার result history এখনো খালি।
+                        </p>
 
-      empty.style.display =
-        "none";
+                    </div>
 
+                </td>
 
-      results.forEach(
-        result => {
+            </tr>
 
-          const score =
-            Number(
-              result.percentage || 0
-            );
-
-
-          const row =
-            document.createElement(
-              "tr"
-            );
-
-
-          row.innerHTML = `
-
-            <td>
-
-              <strong>
-                ${escapeHTML(
-                  result.quizName
-                )}
-              </strong>
-
-              <br>
-
-              <span>
-                ${escapeHTML(
-                  result.course
-                )}
-              </span>
-
-            </td>
-
-
-            <td>
-              ${escapeHTML(
-                formatDate(
-                  result.submittedAt
-                )
-              )}
-            </td>
-
-
-            <td>
-              ${result.correct}
-            </td>
-
-
-            <td>
-              ${result.wrong}
-            </td>
-
-
-            <td>
-              ${result.total}
-            </td>
-
-
-            <td>
-
-              <span
-                class="score-pill
-                ${getScoreClass(score)}"
-              >
-                ${score}%
-              </span>
-
-            </td>
-
-          `;
-
-
-          bodyEl.appendChild(
-            row
-          );
-
-        }
-      );
-
-    }
-
-
-    /* =========================
-       ESCAPE HTML
-    ========================= */
-
-    function escapeHTML(
-      value
-    ){
-
-      return String(
-        value ?? ""
-      )
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
-    }
-
-
-    /* =========================
-       REFRESH RESULTS
-    ========================= */
-
-    function refreshResults(){
-
-      student =
-        getStudentData();
-
-      renderStudent();
-
-
-      const results =
-        getCurrentStudentResults();
-
-
-      renderSummary(
-        results
-      );
-
-      renderLatest(
-        results
-      );
-
-      renderHistory(
-        results
-      );
-
-    }
-
-
-    /* =========================
-       THEME
-    ========================= */
-
-    function applyTheme(){
-
-      const saved =
-        localStorage.getItem(
-          KEYS.theme
-        );
-
-
-      if(saved === "light"){
-
-        body.classList.add(
-          "light"
-        );
-
-        themeBtn.textContent =
-          "☀";
+        `;
 
         return;
 
-      }
-
-
-      if(saved === "dark"){
-
-        body.classList.remove(
-          "light"
-        );
-
-        themeBtn.textContent =
-          "☾";
-
-        return;
-
-      }
-
-
-      const systemDark =
-        window.matchMedia &&
-        window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-
-
-      body.classList.toggle(
-        "light",
-        !systemDark
-      );
-
-
-      themeBtn.textContent =
-        systemDark
-          ? "☾"
-          : "☀";
-
     }
 
 
-    function toggleTheme(){
+    body.innerHTML =
+        results.map(
+            result => {
 
-      const isLight =
-        body.classList.contains(
-          "light"
-        );
-
-
-      const next =
-        isLight
-          ? "dark"
-          : "light";
+                const percentage =
+                    getPercentage(
+                        result
+                    );
 
 
-      localStorage.setItem(
-        KEYS.theme,
-        next
-      );
+                const status =
+                    getResultStatus(
+                        result
+                    );
 
 
-      applyTheme();
+                const marks =
+                    safeNumber(
+                        result.marks
+                    );
 
 
-      showToast(
-        next === "light"
-          ? "Light theme enabled."
-          : "Dark theme enabled."
-      );
-
-    }
+                const total =
+                    safeNumber(
+                        result.totalMarks,
+                        EXAM.totalMarks
+                    );
 
 
-    /* =========================
-       MOBILE MENU
-    ========================= */
+                return `
 
-    function toggleMobileMenu(){
+                    <tr>
 
-      navLinks.classList.toggle(
-        "open"
-      );
+                        <td>
+
+                            <strong>
+                                ${escapeHTML(
+                                    result.examName ||
+                                    EXAM.name
+                                )}
+                            </strong>
+
+                            <br>
+
+                            <span
+                                style="
+                                    color:#718198;
+                                    font-size:8px;
+                                "
+                            >
+                                ${escapeHTML(
+                                    result.examId ||
+                                    EXAM.id
+                                )}
+                            </span>
+
+                        </td>
 
 
-      mobileToggle.textContent =
-        navLinks.classList.contains(
-          "open"
+                        <td>
+                            ${
+                                formatDate(
+                                    result.examDate ||
+                                    EXAM.isoDate
+                                )
+                            }
+                        </td>
+
+
+                        <td>
+
+                            <span class="marks">
+                                ${marks}
+                            </span>
+
+                            <span
+                                style="
+                                    color:#718198;
+                                "
+                            >
+                                / ${total}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            <strong>
+                                ${percentage.toFixed(2)}%
+                            </strong>
+                        </td>
+
+
+                        <td>
+                            ${statusBadge(status)}
+                        </td>
+
+
+                        <td>
+
+                            <span class="badge badge-success">
+                                ✓ Published
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
         )
-          ? "✕"
-          : "☰";
+        .join("");
 
-    }
-
-
-    function closeMobileMenu(){
-
-      navLinks.classList.remove(
-        "open"
-      );
-
-      mobileToggle.textContent =
-        "☰";
-
-    }
+}
 
 
-    /* =========================
-       LOGOUT
-    ========================= */
+/* =========================================================
+   RENDER ALL
+========================================================= */
 
-    function logout(){
+function renderAll(){
 
-      sessionStorage.removeItem(
-        KEYS.loggedIn
-      );
-
-      sessionStorage.removeItem(
-        KEYS.studentId
-      );
-
-      sessionStorage.removeItem(
-        KEYS.studentName
-      );
-
-      sessionStorage.removeItem(
-        KEYS.studentCourse
-      );
-
-      sessionStorage.removeItem(
-        KEYS.studentBatch
-      );
-
-      localStorage.removeItem(
-        KEYS.loggedIn
-      );
+    const results =
+        getPublishedResults();
 
 
-      showToast(
-        "Logged out successfully."
-      );
+    renderStudent();
 
-
-      setTimeout(() => {
-
-        window.location.href =
-          "login.html";
-
-      },500);
-
-    }
-
-
-    /* =========================
-       PRINT
-    ========================= */
-
-    function printResult(){
-
-      window.print();
-
-    }
-
-
-    /* =========================
-       STORAGE SYNC
-    ========================= */
-
-    window.addEventListener(
-      "storage",
-      event => {
-
-        if(
-
-          [
-            KEYS.studentId,
-            KEYS.studentName,
-            KEYS.studentCourse,
-            KEYS.studentBatch,
-            KEYS.profile,
-            KEYS.quizResults,
-            KEYS.theme
-
-          ].includes(
-            event.key
-          )
-
-        ){
-
-          refreshResults();
-
-          applyTheme();
-
-        }
-
-      }
+    renderSummary(
+        results
     );
 
-
-    /* =========================
-       VISIBILITY SYNC
-    ========================= */
-
-    document.addEventListener(
-      "visibilitychange",
-      () => {
-
-        if(
-          !document.hidden
-        ){
-
-          refreshResults();
-
-        }
-
-      }
+    renderHero(
+        results
     );
 
+    renderLatestResult(
+        results
+    );
 
-    /* =========================
-       SYSTEM THEME
-    ========================= */
+    renderHistory(
+        results
+    );
 
-    if(window.matchMedia){
+}
 
-      const media =
-        window.matchMedia(
-          "(prefers-color-scheme: dark)"
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printResult(){
+
+    const results =
+        getPublishedResults();
+
+
+    if(!results.length){
+
+        showToast(
+            "Print করার মতো published result নেই।"
         );
 
+        return;
 
-      media.addEventListener(
-        "change",
-        () => {
+    }
 
-          if(
-            !localStorage.getItem(
-              KEYS.theme
-            )
-          ){
+
+    window.print();
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+$("mobileMenuBtn")
+.addEventListener(
+    "click",
+    function(){
+
+        $("mobileNav")
+            .classList
+            .toggle("open");
+
+    }
+);
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+$("themeBtn")
+.addEventListener(
+    "click",
+    toggleTheme
+);
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+$("printBtn")
+.addEventListener(
+    "click",
+    printResult
+);
+
+
+$("printResultBtn")
+.addEventListener(
+    "click",
+    printResult
+);
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+$("refreshBtn")
+.addEventListener(
+    "click",
+    function(){
+
+        renderAll();
+
+        showToast(
+            "Result data refreshed."
+        );
+
+    }
+);
+
+
+/* =========================================================
+   STORAGE SYNC
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            event.key ===
+            STORAGE.adminResults
+        ){
+
+            renderAll();
+
+            showToast(
+                "New result data detected."
+            );
+
+        }
+
+
+        if(
+            event.key ===
+            STORAGE.studentProfile
+            ||
+            event.key ===
+            STORAGE.studentId
+            ||
+            event.key ===
+            STORAGE.studentName
+            ||
+            event.key ===
+            STORAGE.studentCourse
+            ||
+            event.key ===
+            STORAGE.studentBatch
+        ){
+
+            renderAll();
+
+        }
+
+
+        if(
+            event.key ===
+            STORAGE.theme
+        ){
 
             applyTheme();
 
-          }
-
-        }
-      );
-
-    }
-
-
-    /* =========================
-       ACTIVE NAV
-    ========================= */
-
-    function setActiveNav(){
-
-      const current =
-        location.pathname
-          .split("/")
-          .pop()
-          .toLowerCase();
-
-
-      document
-        .querySelectorAll(
-          ".nav-links a"
-        )
-        .forEach(link => {
-
-          const href =
-            link
-              .getAttribute("href")
-              .split("/")
-              .pop()
-              .toLowerCase();
-
-
-          if(
-            href === current
-          ){
-
-            link.classList.add(
-              "active"
-            );
-
-          }
-
-        });
-
-    }
-
-
-    /* =========================
-       YEAR
-    ========================= */
-
-    function setYear(){
-
-      $("year").textContent =
-        new Date().getFullYear();
-
-    }
-
-
-    /* =========================
-       GLOBAL OBJECT
-    ========================= */
-
-    window.SNKStudent = {
-
-      get:
-        () => getStudentData(),
-
-      getResults:
-        () => getCurrentStudentResults(),
-
-      refresh:
-        () => {
-
-          refreshResults();
-
-          return getCurrentStudentResults();
-
         }
 
-    };
+    }
+);
 
 
-    /* =========================
-       EVENTS
-    ========================= */
+/* =========================================================
+   VISIBILITY REFRESH
+========================================================= */
 
-    themeBtn.addEventListener(
-      "click",
-      toggleTheme
-    );
-
-
-    mobileToggle.addEventListener(
-      "click",
-      toggleMobileMenu
-    );
-
-
-    logoutBtn.addEventListener(
-      "click",
-      logout
-    );
-
-
-    printBtn.addEventListener(
-      "click",
-      printResult
-    );
-
-
-    document
-      .querySelectorAll(
-        ".nav-links a"
-      )
-      .forEach(link => {
-
-        link.addEventListener(
-          "click",
-          closeMobileMenu
-        );
-
-      });
-
-
-    /* =========================
-       ESC
-    ========================= */
-
-    document.addEventListener(
-      "keydown",
-      event => {
+document.addEventListener(
+    "visibilitychange",
+    function(){
 
         if(
-          event.key === "Escape"
+            document.visibilityState ===
+            "visible"
         ){
 
-          closeMobileMenu();
+            renderAll();
 
         }
 
-      }
-    );
+    }
+);
 
 
-    /* =========================
-       INIT
-    ========================= */
+/* =========================================================
+   CROSS-TAB MESSAGE
+========================================================= */
 
-    function init(){
+window.addEventListener(
+    "focus",
+    function(){
 
-      if(
-        !protectPage()
-      ){
-
-        return;
-
-      }
-
-
-      applyTheme();
-
-      renderStudent();
-
-      refreshResults();
-
-      setActiveNav();
-
-      setYear();
-
-
-      setTimeout(() => {
-
-        const results =
-          getCurrentStudentResults();
-
-
-        showToast(
-
-          results.length
-
-            ? `Results loaded: ${results.length}`
-
-            : "No quiz result found yet."
-
-        );
-
-      },500);
+        renderAll();
 
     }
+);
 
 
-    init();
+/* =========================================================
+   CURRENT YEAR
+========================================================= */
 
-  </script>
+$("year")
+.textContent =
+    new Date()
+    .getFullYear();
+
+
+/* =========================================================
+   PUBLIC API
+========================================================= */
+
+window.SNKStudent = {
+
+    get:
+        getStudent,
+
+    getResults:
+        getPublishedResults,
+
+    refresh:
+        renderAll
+
+};
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+applyTheme();
+
+checkLogin();
+
+renderAll();
+
+
+})();
+</script>
 
 </body>
 </html>
