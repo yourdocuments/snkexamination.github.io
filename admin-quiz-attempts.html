@@ -1,0 +1,4369 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070b14">
+<title>SNK IT Institute | Quiz Attempts</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#070b14;
+  --bg2:#0c1220;
+  --card:#101827;
+  --card2:#141e30;
+  --border:#243149;
+  --text:#f5f7fb;
+  --muted:#98a6bb;
+  --primary:#6c63ff;
+  --success:#20c997;
+  --danger:#ff5d73;
+  --warning:#ffbd59;
+  --info:#4dabf7;
+  --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+
+body.light{
+  --bg:#f4f7fb;
+  --bg2:#fff;
+  --card:#fff;
+  --card2:#f7f9fc;
+  --border:#dce3ee;
+  --text:#182235;
+  --muted:#68758a;
+  --shadow:0 15px 40px rgba(27,39,67,.10);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(108,99,255,.12),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(77,171,247,.08),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+  min-height:100vh;
+  display:flex;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:260px;
+  background:rgba(10,15,27,.97);
+  border-right:1px solid var(--border);
+  z-index:1000;
+  overflow-y:auto;
+}
+
+body.light .sidebar{
+  background:#fff;
+}
+
+.sidebar-head{
+  padding:22px 18px;
+  border-bottom:1px solid var(--border);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:46px;
+  height:46px;
+  object-fit:contain;
+  border-radius:12px;
+  background:#fff;
+  padding:5px;
+}
+
+.brand-title{
+  font-size:16px;
+  font-weight:800;
+}
+
+.brand-sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.nav{
+  padding:14px 10px 30px;
+}
+
+.nav-label{
+  color:#6f7c91;
+  font-size:11px;
+  font-weight:700;
+  padding:14px 12px 7px;
+  text-transform:uppercase;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px 12px;
+  margin:3px 0;
+  border-radius:11px;
+  color:#aeb9ca;
+  font-size:14px;
+  transition:.2s;
+}
+
+body.light .nav a{
+  color:#5d687b;
+}
+
+.nav a:hover,
+.nav a.active{
+  background:rgba(108,99,255,.15);
+  color:#fff;
+}
+
+body.light .nav a:hover,
+body.light .nav a.active{
+  color:var(--primary);
+}
+
+.nav-icon{
+  width:23px;
+  text-align:center;
+}
+
+.main{
+  width:calc(100% - 260px);
+  margin-left:260px;
+  min-width:0;
+}
+
+.topbar{
+  height:70px;
+  position:sticky;
+  top:0;
+  z-index:900;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  background:rgba(7,11,20,.84);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+body.light .topbar{
+  background:rgba(255,255,255,.9);
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.menu-btn,
+.icon-btn{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:10px;
+}
+
+.menu-btn{
+  display:none;
+  width:40px;
+  height:40px;
+}
+
+.icon-btn{
+  width:40px;
+  height:40px;
+}
+
+.page-title{
+  font-size:18px;
+  font-weight:800;
+}
+
+.page-subtitle{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.container{
+  max-width:1450px;
+  margin:auto;
+  padding:25px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(108,99,255,.18),transparent 32%),
+    linear-gradient(135deg,var(--card),var(--card2));
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  right:-90px;
+  bottom:-120px;
+  border:1px solid rgba(108,99,255,.25);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 25px rgba(108,99,255,.04),
+    0 0 0 50px rgba(108,99,255,.025);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.badge{
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(77,171,247,.12);
+  color:#70c1ff;
+  border:1px solid rgba(77,171,247,.22);
+  font-size:12px;
+  font-weight:800;
+}
+
+.hero h1{
+  font-size:clamp(26px,3vw,40px);
+  margin:16px 0 8px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  max-width:820px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  font-size:13px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+}
+
+.btn-success{
+  background:var(--success);
+  color:#062017;
+}
+
+.btn-danger{
+  background:var(--danger);
+  color:#fff;
+}
+
+.btn-warning{
+  background:var(--warning);
+  color:#2c2000;
+}
+
+.btn-info{
+  background:var(--info);
+  color:#061a28;
+}
+
+.btn-secondary{
+  background:var(--card2);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.btn-sm{
+  padding:8px 10px;
+  font-size:12px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+  margin-top:18px;
+}
+
+.stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.stat-value{
+  font-size:27px;
+  font-weight:800;
+  margin-top:8px;
+}
+
+.stat-small{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  margin-top:18px;
+}
+
+.card-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.card-title{
+  font-size:16px;
+  font-weight:800;
+}
+
+.card-sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.card-body{
+  padding:20px;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.status.green{
+  color:#4be0b1;
+  background:rgba(32,201,151,.12);
+}
+
+.status.red{
+  color:#ff7386;
+  background:rgba(255,93,115,.12);
+}
+
+.status.yellow{
+  color:#ffc96e;
+  background:rgba(255,189,89,.12);
+}
+
+.status.blue{
+  color:#72c3ff;
+  background:rgba(77,171,247,.12);
+}
+
+.status.gray{
+  color:#b0bac8;
+  background:rgba(160,170,185,.10);
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.toolbar input,
+.toolbar select{
+  min-width:180px;
+}
+
+input,
+select{
+  background:var(--bg2);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 12px;
+  outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(108,99,255,.10);
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:1100px;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:13px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  font-size:12px;
+  vertical-align:middle;
+}
+
+th{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+}
+
+.student-name{
+  font-weight:800;
+}
+
+.student-id{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.action-row{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   NOTICE
+========================= */
+
+.notice{
+  padding:13px 15px;
+  border:1px solid var(--border);
+  background:var(--card2);
+  border-radius:12px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+
+.notice strong{
+  color:var(--text);
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(760px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.modal-foot{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  padding:16px 20px;
+  border-top:1px solid var(--border);
+}
+
+/* =========================
+   DETAILS
+========================= */
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.detail-box{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:13px;
+}
+
+.detail-label{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.detail-value{
+  margin-top:5px;
+  font-weight:700;
+  font-size:13px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  text-align:center;
+  padding:45px 20px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+.empty-title{
+  color:var(--text);
+  font-size:17px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:5000;
+  background:#151d2e;
+  color:#fff;
+  border:1px solid #29364e;
+  border-radius:12px;
+  padding:12px 15px;
+  font-size:13px;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+  transform:translateY(30px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  padding:30px 0 10px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:900px){
+
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    width:100%;
+    margin-left:0;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+
+  .container{
+    padding:14px;
+  }
+
+  .topbar{
+    padding:0 14px;
+  }
+
+  .hero{
+    padding:20px;
+    border-radius:18px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .card-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .toolbar{
+    width:100%;
+  }
+
+  .toolbar input,
+  .toolbar select{
+    width:100%;
+    min-width:0;
+  }
+}
+
+@media(max-width:430px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:25px;
+  }
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+
+  .sidebar,
+  .topbar,
+  .no-print,
+  .modal,
+  .toast{
+    display:none!important;
+  }
+
+  .main{
+    margin:0;
+    width:100%;
+  }
+
+  body{
+    background:#fff;
+    color:#000;
+  }
+
+  .card,
+  .stat,
+  .hero{
+    box-shadow:none;
+    border:1px solid #ccc;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside
+  class="sidebar"
+  id="sidebar"
+>
+
+  <div class="sidebar-head">
+
+    <div class="brand">
+
+      <img
+        class="logo"
+        src="https://github.com/yourdocuments/products/blob/main/snkitlogo%20(2).svg?raw=true"
+        alt="SNK IT Institute"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+
+        <div class="brand-title">
+          SNK IT Institute
+        </div>
+
+        <div class="brand-sub">
+          Admin Control Panel
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <nav class="nav">
+
+    <div class="nav-label">
+      Main
+    </div>
+
+    <a href="admin.html">
+      <span class="nav-icon">📊</span>
+      <span>Admin Dashboard</span>
+    </a>
+
+    <a href="students.html">
+      <span class="nav-icon">👨‍🎓</span>
+      <span>Students</span>
+    </a>
+
+    <a href="courses.html">
+      <span class="nav-icon">📚</span>
+      <span>Courses</span>
+    </a>
+
+
+    <div class="nav-label">
+      Academic
+    </div>
+
+    <a href="assignments.html">
+      <span class="nav-icon">📝</span>
+      <span>Assignments</span>
+    </a>
+
+    <a href="admin-submissions.html">
+      <span class="nav-icon">📥</span>
+      <span>Submissions</span>
+    </a>
+
+    <a href="quiz.html">
+      <span class="nav-icon">❓</span>
+      <span>Student Quiz</span>
+    </a>
+
+    <a href="admin-quiz-results.html">
+      <span class="nav-icon">📈</span>
+      <span>Quiz Results</span>
+    </a>
+
+    <a href="admin-quiz-attempts.html" class="active">
+      <span class="nav-icon">⏱️</span>
+      <span>Quiz Attempts</span>
+    </a>
+
+    <a href="admin-quiz-result-details.html">
+      <span class="nav-icon">📄</span>
+      <span>Result Details</span>
+    </a>
+
+    <a href="admin-quiz-answer-review.html">
+      <span class="nav-icon">🔍</span>
+      <span>Answer Review</span>
+    </a>
+
+
+    <div class="nav-label">
+      Exam
+    </div>
+
+    <a href="student-result-details.html">
+      <span class="nav-icon">🎓</span>
+      <span>Exam Marksheet</span>
+    </a>
+
+    <a href="admin-attendance.html">
+      <span class="nav-icon">✅</span>
+      <span>Exam Attendance</span>
+    </a>
+
+
+    <div class="nav-label">
+      Student Portal
+    </div>
+
+    <a href="student-dashboard.html">
+      <span class="nav-icon">🏠</span>
+      <span>Student Dashboard</span>
+    </a>
+
+    <a href="student-resources.html">
+      <span class="nav-icon">📦</span>
+      <span>Resources</span>
+    </a>
+
+    <a href="student-notifications.html">
+      <span class="nav-icon">🔔</span>
+      <span>Notifications</span>
+    </a>
+
+    <a href="student-support.html">
+      <span class="nav-icon">💬</span>
+      <span>Support</span>
+    </a>
+
+  </nav>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+  <header class="topbar">
+
+    <div class="top-left">
+
+      <button
+        class="menu-btn"
+        id="menuBtn"
+        type="button"
+      >
+        ☰
+      </button>
+
+      <div>
+
+        <div class="page-title">
+          Quiz Attempts
+        </div>
+
+        <div class="page-subtitle">
+          Student attempt & one-attempt control
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="top-actions">
+
+      <button
+        class="icon-btn"
+        id="refreshBtn"
+        type="button"
+        title="Refresh"
+      >
+        ↻
+      </button>
+
+      <button
+        class="icon-btn"
+        id="themeBtn"
+        type="button"
+        title="Theme"
+      >
+        🌙
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <div class="container">
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <span class="badge">
+          ● STUDENT ATTEMPT CONTROL
+        </span>
+
+        <h1 id="heroTitle">
+          Quiz Attempts
+        </h1>
+
+        <p>
+          কোন Student Quiz শুরু করেছে, submit করেছে,
+          attempt lock আছে কি না এবং প্রয়োজনে attempt reset—
+          সবকিছু এখান থেকে manage করা যাবে।
+        </p>
+
+        <div
+          style="
+            display:flex;
+            gap:8px;
+            flex-wrap:wrap;
+            margin-top:18px;
+          "
+        >
+
+          <button
+            class="btn btn-primary"
+            type="button"
+            onclick="refreshAll()"
+          >
+            ↻ Refresh Attempts
+          </button>
+
+          <button
+            class="btn btn-secondary"
+            type="button"
+            onclick="location.href='admin-quiz-results.html'"
+          >
+            📈 Quiz Results
+          </button>
+
+          <button
+            class="btn btn-warning"
+            type="button"
+            onclick="resetAllUnsubmittedAttempts()"
+          >
+            🔄 Reset Unsubmitted
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <section class="stats">
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Total Students
+        </div>
+
+        <div
+          class="stat-value"
+          id="statStudents"
+        >
+          0
+        </div>
+
+        <div class="stat-small">
+          Current student list
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Submitted
+        </div>
+
+        <div
+          class="stat-value"
+          id="statSubmitted"
+        >
+          0
+        </div>
+
+        <div class="stat-small">
+          Quiz completed
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Not Submitted
+        </div>
+
+        <div
+          class="stat-value"
+          id="statNotSubmitted"
+        >
+          0
+        </div>
+
+        <div class="stat-small">
+          No final result
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Active Attempt
+        </div>
+
+        <div
+          class="stat-value"
+          id="statActive"
+        >
+          0
+        </div>
+
+        <div class="stat-small">
+          Quiz currently started
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          Locked
+        </div>
+
+        <div
+          class="stat-value"
+          id="statLocked"
+        >
+          0
+        </div>
+
+        <div class="stat-small">
+          One-attempt lock
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUIZ INFO
+    ========================= -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <div>
+
+          <div class="card-title">
+            ❓ Current Quiz
+          </div>
+
+          <div
+            class="card-sub"
+            id="quizInfoSub"
+          >
+            Quiz information
+          </div>
+
+        </div>
+
+        <span
+          class="status yellow"
+          id="quizStatus"
+        >
+          DRAFT
+        </span>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="detail-grid">
+
+          <div class="detail-box">
+
+            <div class="detail-label">
+              Quiz Title
+            </div>
+
+            <div
+              class="detail-value"
+              id="infoTitle"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <div class="detail-label">
+              Quiz ID
+            </div>
+
+            <div
+              class="detail-value"
+              id="infoId"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <div class="detail-label">
+              Date Window
+            </div>
+
+            <div
+              class="detail-value"
+              id="infoDates"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <div class="detail-label">
+              Duration
+            </div>
+
+            <div
+              class="detail-value"
+              id="infoDuration"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <div class="detail-label">
+              Pass Percentage
+            </div>
+
+            <div
+              class="detail-value"
+              id="infoPass"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <div class="detail-label">
+              One Attempt
+            </div>
+
+            <div
+              class="detail-value"
+              id="infoOneAttempt"
+            >
+              —
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTROL NOTICE
+    ========================= -->
+
+    <div
+      class="notice"
+      style="margin-top:18px;"
+    >
+
+      <strong>Reset কী করবে?</strong><br>
+
+      Reset করলে selected Student-এর active attempt এবং
+      one-attempt lock clear হবে।
+      কিন্তু পুরোনো submitted result automatically delete হবে না।
+      Result delete করতে Quiz Results page ব্যবহার করুন।
+
+    </div>
+
+
+    <!-- =========================
+         STUDENT ATTEMPTS
+    ========================= -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <div>
+
+          <div class="card-title">
+            👨‍🎓 Student Attempts
+          </div>
+
+          <div class="card-sub">
+            Student-wise quiz attempt status
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <div class="toolbar">
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Student ID / Name search..."
+          >
+
+          <select id="statusFilter">
+
+            <option value="all">
+              All Students
+            </option>
+
+            <option value="submitted">
+              Submitted
+            </option>
+
+            <option value="active">
+              Active Attempt
+            </option>
+
+            <option value="locked">
+              Locked
+            </option>
+
+            <option value="not-submitted">
+              Not Submitted
+            </option>
+
+          </select>
+
+          <select id="sortFilter">
+
+            <option value="student">
+              Student A-Z
+            </option>
+
+            <option value="latest">
+              Latest Activity
+            </option>
+
+            <option value="oldest">
+              Oldest Activity
+            </option>
+
+          </select>
+
+          <button
+            class="btn btn-secondary"
+            type="button"
+            onclick="resetFilters()"
+          >
+            Reset Filter
+          </button>
+
+        </div>
+
+
+        <div
+          class="table-wrap"
+          style="margin-top:15px;"
+        >
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Student
+                </th>
+
+                <th>
+                  Course
+                </th>
+
+                <th>
+                  Submitted
+                </th>
+
+                <th>
+                  Active
+                </th>
+
+                <th>
+                  Lock
+                </th>
+
+                <th>
+                  Score
+                </th>
+
+                <th>
+                  Activity
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody
+              id="attemptTableBody"
+            ></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <div class="footer">
+      SNK IT Institute • Admin Quiz Attempts v2.5.12
+    </div>
+
+  </div>
+
+</main>
+
+</div>
+
+
+<!-- =========================
+     DETAIL MODAL
+========================= -->
+
+<div
+  class="modal"
+  id="detailModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div>
+
+        <div class="card-title">
+          Student Attempt Details
+        </div>
+
+        <div
+          class="card-sub"
+          id="modalStudent"
+        >
+          —
+        </div>
+
+      </div>
+
+      <button
+        class="icon-btn"
+        type="button"
+        onclick="closeModal()"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div
+        id="modalContent"
+      ></div>
+
+    </div>
+
+
+    <div class="modal-foot">
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        onclick="closeModal()"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<script>
+"use strict";
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const STORAGE = {
+
+  theme:
+    "snkTheme",
+
+  course:
+    "snkCourseSettingsV25",
+
+  quiz:
+    "snkQuizSettingsV25",
+
+  questions:
+    "snkQuizQuestionsV25",
+
+  results:
+    "snkQuizResults",
+
+  students:
+    "snkStudents",
+
+  activeAttempt:
+    "snkQuizActiveAttemptV25",
+
+  attemptLock:
+    "snkQuizAttemptLockV25"
+
+};
+
+
+/* =========================================================
+   DEFAULT COURSE
+========================================================= */
+
+const DEFAULT_COURSE = {
+
+  name:
+    "Computer Office Application",
+
+  batch:
+    "Batch 01",
+
+  mode:
+    "Offline",
+
+  duration:
+    "6 Months",
+
+  days:
+    "Saturday–Monday",
+
+  time:
+    "4:00 PM – 6:00 PM",
+
+  instructor:
+    "SNK IT Instructor"
+
+};
+
+
+/* =========================================================
+   DEFAULT QUIZ
+========================================================= */
+
+const DEFAULT_QUIZ = {
+
+  id:
+    "SNK-QUIZ-2026-01",
+
+  title:
+    "Computer Basics Quiz",
+
+  startDate:
+    "2026-09-10",
+
+  endDate:
+    "2026-09-15",
+
+  durationMinutes:
+    20,
+
+  marksPerQuestion:
+    1,
+
+  passPercentage:
+    40,
+
+  oneAttemptOnly:
+    true,
+
+  autoSubmit:
+    true,
+
+  published:
+    false
+
+};
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function readJSON(storage,key,fallback){
+
+  try{
+
+    const value =
+      storage.getItem(key);
+
+    if(!value){
+
+      return fallback;
+
+    }
+
+    return JSON.parse(value);
+
+  }catch(error){
+
+    console.warn(
+      "Read error:",
+      key,
+      error
+    );
+
+    return fallback;
+
+  }
+
+}
+
+
+function writeJSON(storage,key,value){
+
+  try{
+
+    storage.setItem(
+      key,
+      JSON.stringify(value)
+    );
+
+    return true;
+
+  }catch(error){
+
+    console.error(
+      "Write error:",
+      key,
+      error
+    );
+
+    return false;
+
+  }
+
+}
+
+
+function getLocal(key,fallback){
+
+  return readJSON(
+    localStorage,
+    key,
+    fallback
+  );
+
+}
+
+
+function setLocal(key,value){
+
+  return writeJSON(
+    localStorage,
+    key,
+    value
+  );
+
+}
+
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    window.__toastTimer
+  );
+
+  window.__toastTimer =
+    setTimeout(
+      ()=>{
+        toast.classList.remove(
+          "show"
+        );
+      },
+      2500
+    );
+
+}
+
+
+function formatDateTime(value){
+
+  if(!value){
+
+    return "—";
+
+  }
+
+  const date =
+    new Date(value);
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return String(value);
+
+  }
+
+  return date.toLocaleString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+function formatDateOnly(value){
+
+  if(!value){
+
+    return "—";
+
+  }
+
+  const date =
+    new Date(
+      `${value}T00:00:00`
+    );
+
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  ){
+
+    return value;
+
+  }
+
+  return date.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function applyTheme(){
+
+  const theme =
+    localStorage.getItem(
+      STORAGE.theme
+    ) || "dark";
+
+  const button =
+    document.getElementById(
+      "themeBtn"
+    );
+
+  if(theme === "light"){
+
+    document.body.classList.add(
+      "light"
+    );
+
+    button.textContent =
+      "☀️";
+
+  }else{
+
+    document.body.classList.remove(
+      "light"
+    );
+
+    button.textContent =
+      "🌙";
+
+  }
+
+}
+
+
+function toggleTheme(){
+
+  const isLight =
+    document.body.classList.contains(
+      "light"
+    );
+
+  localStorage.setItem(
+    STORAGE.theme,
+    isLight
+      ? "dark"
+      : "light"
+  );
+
+  applyTheme();
+
+}
+
+
+/* =========================================================
+   COURSE
+========================================================= */
+
+function getCourse(){
+
+  const saved =
+    getLocal(
+      STORAGE.course,
+      null
+    );
+
+  return {
+
+    ...DEFAULT_COURSE,
+
+    ...(saved || {})
+
+  };
+
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+function getQuiz(){
+
+  const saved =
+    getLocal(
+      STORAGE.quiz,
+      null
+    );
+
+  return {
+
+    ...DEFAULT_QUIZ,
+
+    ...(saved || {})
+
+  };
+
+}
+
+
+/* =========================================================
+   STUDENTS
+========================================================= */
+
+function getStudents(){
+
+  const saved =
+    getLocal(
+      STORAGE.students,
+      []
+    );
+
+  if(
+    Array.isArray(saved) &&
+    saved.length
+  ){
+
+    return saved;
+
+  }
+
+  return [
+
+    {
+
+      studentId:
+        "SNK-1001",
+
+      studentName:
+        "Student",
+
+      course:
+        DEFAULT_COURSE.name,
+
+      batch:
+        DEFAULT_COURSE.batch
+
+    }
+
+  ];
+
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+function getResults(){
+
+  const saved =
+    getLocal(
+      STORAGE.results,
+      []
+    );
+
+  return Array.isArray(saved)
+    ? saved
+    : [];
+
+}
+
+
+/* =========================================================
+   ACTIVE ATTEMPTS
+=========================================================
+
+   Supported formats:
+
+   1. Single object:
+      {
+        studentId,
+        quizId,
+        ...
+      }
+
+   2. Array:
+      [
+        {
+          studentId,
+          quizId,
+          ...
+        }
+      ]
+
+   3. Object map:
+      {
+        "SNK-1001": {...}
+      }
+========================================================= */
+
+function getActiveAttempts(){
+
+  const saved =
+    getLocal(
+      STORAGE.activeAttempt,
+      null
+    );
+
+  if(!saved){
+
+    return [];
+
+  }
+
+
+  if(Array.isArray(saved)){
+
+    return saved;
+
+  }
+
+
+  if(
+    typeof saved === "object"
+  ){
+
+    if(
+      saved.studentId
+    ){
+
+      return [saved];
+
+    }
+
+
+    return Object
+      .values(saved)
+      .filter(
+        value =>
+          value &&
+          typeof value === "object"
+      );
+
+  }
+
+
+  return [];
+
+}
+
+
+/* =========================================================
+   LOCKS
+=========================================================
+
+   Supported formats:
+
+   1. Array
+   2. Single object
+   3. Student ID map
+========================================================= */
+
+function getAttemptLocks(){
+
+  const saved =
+    getLocal(
+      STORAGE.attemptLock,
+      null
+    );
+
+  if(!saved){
+
+    return [];
+
+  }
+
+
+  if(Array.isArray(saved)){
+
+    return saved;
+
+  }
+
+
+  if(
+    typeof saved === "object"
+  ){
+
+    if(saved.studentId){
+
+      return [saved];
+
+    }
+
+
+    return Object
+      .entries(saved)
+      .map(
+        ([studentId,value])=>{
+
+          if(
+            value &&
+            typeof value === "object"
+          ){
+
+            return {
+
+              studentId:
+                value.studentId ||
+                studentId,
+
+              ...value
+
+            };
+
+          }
+
+
+          return {
+
+            studentId,
+
+            locked:
+              value === true
+
+          };
+
+        }
+      );
+
+  }
+
+
+  return [];
+
+}
+
+
+/* =========================================================
+   CURRENT QUIZ ACTIVE ATTEMPTS
+========================================================= */
+
+function getCurrentActiveAttempts(){
+
+  const quiz =
+    getQuiz();
+
+  return getActiveAttempts()
+    .filter(
+      attempt=>{
+
+        return (
+          !attempt.quizId ||
+          attempt.quizId === quiz.id
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   CURRENT QUIZ LOCKS
+========================================================= */
+
+function getCurrentLocks(){
+
+  const quiz =
+    getQuiz();
+
+  return getAttemptLocks()
+    .filter(
+      lock=>{
+
+        return (
+          !lock.quizId ||
+          lock.quizId === quiz.id
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   FIND STUDENT RESULT
+========================================================= */
+
+function getStudentResult(
+  studentId
+){
+
+  const quiz =
+    getQuiz();
+
+  const results =
+    getResults();
+
+  const matches =
+    results
+      .filter(
+        result=>{
+
+          const sameStudent =
+            String(
+              result.studentId || ""
+            ) ===
+            String(
+              studentId
+            );
+
+          const sameQuiz =
+            !result.quizId ||
+            result.quizId === quiz.id ||
+            result.quizName === quiz.title;
+
+          return (
+            sameStudent &&
+            sameQuiz
+          );
+
+        }
+      )
+      .sort(
+        (a,b)=>
+          new Date(
+            b.submittedAt ||
+            b.updatedAt ||
+            0
+          ) -
+          new Date(
+            a.submittedAt ||
+            a.updatedAt ||
+            0
+          )
+      );
+
+  return matches[0] || null;
+
+}
+
+
+/* =========================================================
+   FIND ACTIVE ATTEMPT
+========================================================= */
+
+function getStudentActiveAttempt(
+  studentId
+){
+
+  const attempts =
+    getCurrentActiveAttempts();
+
+  const matches =
+    attempts.filter(
+      attempt=>
+        String(
+          attempt.studentId || ""
+        ) ===
+        String(
+          studentId
+        )
+    );
+
+  if(!matches.length){
+
+    return null;
+
+  }
+
+  return matches
+    .sort(
+      (a,b)=>
+        new Date(
+          b.startedAt ||
+          b.createdAt ||
+          0
+        ) -
+        new Date(
+          a.startedAt ||
+          a.createdAt ||
+          0
+        )
+    )[0];
+
+}
+
+
+/* =========================================================
+   FIND LOCK
+========================================================= */
+
+function getStudentLock(
+  studentId
+){
+
+  const locks =
+    getCurrentLocks();
+
+  const matches =
+    locks.filter(
+      lock=>
+        String(
+          lock.studentId || ""
+        ) ===
+        String(
+          studentId
+        )
+    );
+
+  if(!matches.length){
+
+    return null;
+
+  }
+
+  return matches[0];
+
+}
+
+
+/* =========================================================
+   DETERMINE LOCKED
+========================================================= */
+
+function isStudentLocked(
+  studentId
+){
+
+  const lock =
+    getStudentLock(
+      studentId
+    );
+
+  if(!lock){
+
+    return false;
+
+  }
+
+  if(
+    lock.locked === false
+  ){
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/* =========================================================
+   DETERMINE ACTIVE
+========================================================= */
+
+function isStudentActive(
+  studentId
+){
+
+  const attempt =
+    getStudentActiveAttempt(
+      studentId
+    );
+
+  return !!attempt;
+
+}
+
+
+/* =========================================================
+   STUDENT STATUS
+========================================================= */
+
+function getStudentStatus(
+  student
+){
+
+  const studentId =
+    student.studentId ||
+    student.id ||
+    "";
+
+  const result =
+    getStudentResult(
+      studentId
+    );
+
+  const active =
+    getStudentActiveAttempt(
+      studentId
+    );
+
+  const locked =
+    isStudentLocked(
+      studentId
+    );
+
+
+  return {
+
+    studentId,
+
+    result,
+
+    active,
+
+    locked,
+
+    submitted:
+      !!result
+
+  };
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  const students =
+    getStudents();
+
+  let submitted = 0;
+
+  let active = 0;
+
+  let locked = 0;
+
+
+  students.forEach(
+    student=>{
+
+      const status =
+        getStudentStatus(
+          student
+        );
+
+      if(status.submitted){
+
+        submitted++;
+
+      }
+
+      if(status.active){
+
+        active++;
+
+      }
+
+      if(status.locked){
+
+        locked++;
+
+      }
+
+    }
+  );
+
+
+  const notSubmitted =
+    Math.max(
+      0,
+      students.length -
+      submitted
+    );
+
+
+  document.getElementById(
+    "statStudents"
+  ).textContent =
+    students.length;
+
+
+  document.getElementById(
+    "statSubmitted"
+  ).textContent =
+    submitted;
+
+
+  document.getElementById(
+    "statNotSubmitted"
+  ).textContent =
+    notSubmitted;
+
+
+  document.getElementById(
+    "statActive"
+  ).textContent =
+    active;
+
+
+  document.getElementById(
+    "statLocked"
+  ).textContent =
+    locked;
+
+}
+
+
+/* =========================================================
+   QUIZ INFO UI
+========================================================= */
+
+function renderQuizInfo(){
+
+  const quiz =
+    getQuiz();
+
+  document.getElementById(
+    "heroTitle"
+  ).textContent =
+    quiz.title ||
+    "Quiz Attempts";
+
+
+  document.getElementById(
+    "infoTitle"
+  ).textContent =
+    quiz.title ||
+    "—";
+
+
+  document.getElementById(
+    "infoId"
+  ).textContent =
+    quiz.id ||
+    "—";
+
+
+  document.getElementById(
+    "infoDates"
+  ).textContent =
+    `${formatDateOnly(
+      quiz.startDate
+    )} → ${formatDateOnly(
+      quiz.endDate
+    )}`;
+
+
+  document.getElementById(
+    "infoDuration"
+  ).textContent =
+    `${Number(
+      quiz.durationMinutes || 0
+    )} minutes`;
+
+
+  document.getElementById(
+    "infoPass"
+  ).textContent =
+    `${Number(
+      quiz.passPercentage || 0
+    )}%`;
+
+
+  document.getElementById(
+    "infoOneAttempt"
+  ).textContent =
+    quiz.oneAttemptOnly !== false
+      ? "Enabled"
+      : "Disabled";
+
+
+  document.getElementById(
+    "quizInfoSub"
+  ).textContent =
+    `${getCourse().name} • ${
+      getCourse().batch
+    }`;
+
+
+  const badge =
+    document.getElementById(
+      "quizStatus"
+    );
+
+
+  if(quiz.published){
+
+    badge.textContent =
+      "PUBLISHED";
+
+    badge.className =
+      "status green";
+
+  }else{
+
+    badge.textContent =
+      "DRAFT";
+
+    badge.className =
+      "status yellow";
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderAttempts(){
+
+  const body =
+    document.getElementById(
+      "attemptTableBody"
+    );
+
+
+  const search =
+    document.getElementById(
+      "searchInput"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  const statusFilter =
+    document.getElementById(
+      "statusFilter"
+    ).value;
+
+
+  const sortFilter =
+    document.getElementById(
+      "sortFilter"
+    ).value;
+
+
+  let students =
+    getStudents();
+
+
+  let rows =
+    students.map(
+      student=>{
+
+        const status =
+          getStudentStatus(
+            student
+          );
+
+        return {
+
+          student,
+
+          ...status
+
+        };
+
+      }
+    );
+
+
+  rows =
+    rows.filter(
+      row=>{
+
+        const id =
+          String(
+            row.studentId || ""
+          ).toLowerCase();
+
+        const name =
+          String(
+            row.student.studentName ||
+            row.student.name ||
+            ""
+          ).toLowerCase();
+
+
+        if(
+          search &&
+          !id.includes(search) &&
+          !name.includes(search)
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "submitted"
+        ){
+
+          return row.submitted;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "active"
+        ){
+
+          return row.active;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "locked"
+        ){
+
+          return row.locked;
+
+        }
+
+
+        if(
+          statusFilter ===
+          "not-submitted"
+        ){
+
+          return !row.submitted;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  rows.sort(
+    (a,b)=>{
+
+      if(
+        sortFilter ===
+        "latest"
+      ){
+
+        const ad =
+          new Date(
+            a.result?.submittedAt ||
+            a.active?.startedAt ||
+            0
+          ).getTime();
+
+        const bd =
+          new Date(
+            b.result?.submittedAt ||
+            b.active?.startedAt ||
+            0
+          ).getTime();
+
+        return bd - ad;
+
+      }
+
+
+      if(
+        sortFilter ===
+        "oldest"
+      ){
+
+        const ad =
+          new Date(
+            a.result?.submittedAt ||
+            a.active?.startedAt ||
+            0
+          ).getTime();
+
+        const bd =
+          new Date(
+            b.result?.submittedAt ||
+            b.active?.startedAt ||
+            0
+          ).getTime();
+
+        return ad - bd;
+
+      }
+
+
+      return String(
+        a.student.studentName ||
+        a.student.name ||
+        a.studentId ||
+        ""
+      ).localeCompare(
+        String(
+          b.student.studentName ||
+          b.student.name ||
+          b.studentId ||
+          ""
+        )
+      );
+
+    }
+  );
+
+
+  if(!rows.length){
+
+    body.innerHTML = `
+
+      <tr>
+
+        <td colspan="8">
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              🔎
+            </div>
+
+            <div class="empty-title">
+              No Student Found
+            </div>
+
+            <div>
+              এই filter/search অনুযায়ী কোনো student পাওয়া যায়নি।
+            </div>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  body.innerHTML =
+    rows.map(
+      row=>{
+
+        const student =
+          row.student;
+
+        const name =
+          student.studentName ||
+          student.name ||
+          "Student";
+
+        const course =
+          student.course ||
+          getCourse().name;
+
+        const batch =
+          student.batch ||
+          getCourse().batch;
+
+
+        let score =
+          "—";
+
+
+        if(row.result){
+
+          const obtained =
+            row.result.obtainedMarks ??
+            row.result.correct ??
+            0;
+
+          const total =
+            row.result.totalMarks ??
+            (
+              Number(
+                row.result.totalQuestions ||
+                10
+              ) *
+              Number(
+                row.result.marksPerQuestion ||
+                1
+              )
+            );
+
+          score =
+            `${obtained}/${total}`;
+
+        }
+
+
+        const activity =
+          row.result?.submittedAt ||
+          row.active?.startedAt ||
+          row.active?.createdAt ||
+          null;
+
+
+        return `
+
+          <tr>
+
+            <td>
+
+              <div class="student-name">
+                ${escapeHTML(name)}
+              </div>
+
+              <div class="student-id">
+                ${escapeHTML(
+                  row.studentId
+                )}
+              </div>
+
+            </td>
+
+
+            <td>
+
+              ${escapeHTML(course)}
+
+              <div class="student-id">
+                ${escapeHTML(batch)}
+              </div>
+
+            </td>
+
+
+            <td>
+
+              ${
+                row.submitted
+
+                ? `<span class="status green">
+                    Submitted
+                  </span>`
+
+                : `<span class="status gray">
+                    Not Submitted
+                  </span>`
+              }
+
+            </td>
+
+
+            <td>
+
+              ${
+                row.active
+
+                ? `<span class="status blue">
+                    Active
+                  </span>`
+
+                : `<span class="status gray">
+                    No
+                  </span>`
+              }
+
+            </td>
+
+
+            <td>
+
+              ${
+                row.locked
+
+                ? `<span class="status yellow">
+                    Locked
+                  </span>`
+
+                : `<span class="status gray">
+                    Unlocked
+                  </span>`
+              }
+
+            </td>
+
+
+            <td>
+
+              <strong>
+                ${escapeHTML(score)}
+              </strong>
+
+              ${
+                row.result
+                ? `<div class="student-id">
+                    ${escapeHTML(
+                      Number(
+                        row.result.percentage ||
+                        0
+                      )
+                    )}%
+                  </div>`
+                : ""
+              }
+
+            </td>
+
+
+            <td>
+
+              ${escapeHTML(
+                formatDateTime(
+                  activity
+                )
+              )}
+
+            </td>
+
+
+            <td>
+
+              <div class="action-row">
+
+                <button
+                  class="btn btn-secondary btn-sm"
+                  type="button"
+                  onclick="viewStudent('${escapeHTML(
+                    row.studentId
+                  )}')"
+                >
+                  View
+                </button>
+
+
+                ${
+                  row.result
+
+                  ? `<button
+                      class="btn btn-info btn-sm"
+                      type="button"
+                      onclick="openResult('${escapeHTML(
+                        row.studentId
+                      )}')"
+                    >
+                      Result
+                    </button>`
+
+                  : ""
+                }
+
+
+                ${
+                  row.active
+
+                  ? `<button
+                      class="btn btn-warning btn-sm"
+                      type="button"
+                      onclick="clearActiveAttempt('${escapeHTML(
+                        row.studentId
+                      )}')"
+                    >
+                      Clear Active
+                    </button>`
+
+                  : ""
+                }
+
+
+                ${
+                  row.locked
+
+                  ? `<button
+                      class="btn btn-success btn-sm"
+                      type="button"
+                      onclick="resetStudentAttempt('${escapeHTML(
+                        row.studentId
+                      )}')"
+                    >
+                      Reset
+                    </button>`
+
+                  : ""
+                }
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================================================
+   VIEW STUDENT
+========================================================= */
+
+function viewStudent(
+  studentId
+){
+
+  const student =
+    getStudents()
+      .find(
+        item=>
+          String(
+            item.studentId ||
+            item.id ||
+            ""
+          ) ===
+          String(
+            studentId
+          )
+      );
+
+
+  if(!student){
+
+    showToast(
+      "Student পাওয়া যায়নি"
+    );
+
+    return;
+
+  }
+
+
+  const status =
+    getStudentStatus(
+      student
+    );
+
+
+  document.getElementById(
+    "modalStudent"
+  ).textContent =
+    `${student.studentName || student.name || "Student"} • ${studentId}`;
+
+
+  document.getElementById(
+    "modalContent"
+  ).innerHTML = `
+
+    <div class="detail-grid">
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Student ID
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(studentId)}
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Student Name
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(
+            student.studentName ||
+            student.name ||
+            "Student"
+          )}
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Course
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(
+            student.course ||
+            getCourse().name
+          )}
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Batch
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(
+            student.batch ||
+            getCourse().batch
+          )}
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Submitted
+        </div>
+
+        <div class="detail-value">
+          ${
+            status.submitted
+              ? "Yes"
+              : "No"
+          }
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Active Attempt
+        </div>
+
+        <div class="detail-value">
+          ${
+            status.active
+              ? "Yes"
+              : "No"
+          }
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Attempt Lock
+        </div>
+
+        <div class="detail-value">
+          ${
+            status.locked
+              ? "Locked"
+              : "Unlocked"
+          }
+        </div>
+
+      </div>
+
+
+      <div class="detail-box">
+
+        <div class="detail-label">
+          Score
+        </div>
+
+        <div class="detail-value">
+
+          ${
+            status.result
+
+              ? `${escapeHTML(
+                  status.result.obtainedMarks ??
+                  status.result.correct ??
+                  0
+                )} / ${escapeHTML(
+                  status.result.totalMarks ??
+                  10
+                )}`
+
+              : "—"
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    ${
+      status.active
+
+      ? `
+
+        <div
+          class="notice"
+          style="margin-top:15px;"
+        >
+
+          <strong>Active Attempt</strong><br>
+
+          Started:
+          ${escapeHTML(
+            formatDateTime(
+              status.active.startedAt
+            )
+          )}
+
+          <br>
+
+          Saved Answers:
+          ${escapeHTML(
+            countSavedAnswers(
+              status.active
+            )
+          )}
+
+        </div>
+
+      `
+
+      : ""
+    }
+
+
+    ${
+      status.result
+
+      ? `
+
+        <div
+          class="notice"
+          style="margin-top:15px;"
+        >
+
+          <strong>Submitted Result</strong><br>
+
+          Submitted:
+          ${escapeHTML(
+            formatDateTime(
+              status.result.submittedAt
+            )
+          )}
+
+          <br>
+
+          Result:
+          ${escapeHTML(
+            status.result.result ||
+            "—"
+          )}
+
+          <br>
+
+          Percentage:
+          ${escapeHTML(
+            Number(
+              status.result.percentage ||
+              0
+            )
+          )}%
+
+        </div>
+
+      `
+
+      : ""
+    }
+
+
+    <div
+      style="
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+        margin-top:18px;
+      "
+    >
+
+      ${
+        status.active
+
+        ? `<button
+            class="btn btn-warning"
+            type="button"
+            onclick="clearActiveAttempt('${escapeHTML(
+              studentId
+            )}');closeModal();"
+          >
+            Clear Active Attempt
+          </button>`
+
+        : ""
+      }
+
+
+      ${
+        status.locked
+
+        ? `<button
+            class="btn btn-success"
+            type="button"
+            onclick="resetStudentAttempt('${escapeHTML(
+              studentId
+            )}');closeModal();"
+          >
+            Reset Attempt
+          </button>`
+
+        : ""
+      }
+
+
+      ${
+        status.result
+
+        ? `<button
+            class="btn btn-info"
+            type="button"
+            onclick="openResult('${escapeHTML(
+              studentId
+            )}')"
+          >
+            Open Result
+          </button>`
+
+        : ""
+      }
+
+    </div>
+
+  `;
+
+
+  document.getElementById(
+    "detailModal"
+  ).classList.add(
+    "show"
+  );
+
+}
+
+
+/* =========================================================
+   COUNT SAVED ANSWERS
+========================================================= */
+
+function countSavedAnswers(
+  attempt
+){
+
+  if(!attempt){
+
+    return 0;
+
+  }
+
+
+  const candidates = [
+
+    attempt.answers,
+
+    attempt.selectedAnswers,
+
+    attempt.answerSheet,
+
+    attempt.responses
+
+  ];
+
+
+  for(
+    const candidate of candidates
+  ){
+
+    if(
+      candidate &&
+      typeof candidate === "object"
+    ){
+
+      if(
+        Array.isArray(candidate)
+      ){
+
+        return candidate.length;
+
+      }
+
+      return Object.keys(
+        candidate
+      ).length;
+
+    }
+
+  }
+
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   CLEAR ACTIVE ATTEMPT
+========================================================= */
+
+function clearActiveAttempt(
+  studentId
+){
+
+  const quiz =
+    getQuiz();
+
+
+  const saved =
+    getLocal(
+      STORAGE.activeAttempt,
+      null
+    );
+
+
+  if(!saved){
+
+    showToast(
+      "Active attempt পাওয়া যায়নি"
+    );
+
+    return;
+
+  }
+
+
+  const ok =
+    confirm(
+      `${studentId}-এর active quiz attempt clear করবেন?`
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  if(Array.isArray(saved)){
+
+    const filtered =
+      saved.filter(
+        attempt=>{
+
+          return !(
+            String(
+              attempt.studentId || ""
+            ) ===
+            String(
+              studentId
+            ) &&
+            (
+              !attempt.quizId ||
+              attempt.quizId === quiz.id
+            )
+          );
+
+        }
+      );
+
+
+    setLocal(
+      STORAGE.activeAttempt,
+      filtered
+    );
+
+  }else if(
+    saved.studentId
+  ){
+
+    if(
+      String(
+        saved.studentId
+      ) ===
+      String(
+        studentId
+      ) &&
+      (
+        !saved.quizId ||
+        saved.quizId === quiz.id
+      )
+    ){
+
+      localStorage.removeItem(
+        STORAGE.activeAttempt
+      );
+
+    }
+
+  }else if(
+    typeof saved === "object"
+  ){
+
+    const copy = {
+      ...saved
+    };
+
+    delete copy[
+      studentId
+    ];
+
+    setLocal(
+      STORAGE.activeAttempt,
+      copy
+    );
+
+  }
+
+
+  showToast(
+    "Active attempt cleared"
+  );
+
+
+  refreshAll();
+
+}
+
+
+/* =========================================================
+   RESET STUDENT ATTEMPT
+========================================================= */
+
+function resetStudentAttempt(
+  studentId
+){
+
+  const ok =
+    confirm(
+      `${studentId}-এর attempt lock reset করবেন?\n\nStudent আবার নতুন করে Quiz শুরু করতে পারবে।`
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  clearLockOnly(
+    studentId
+  );
+
+
+  clearActiveAttemptWithoutConfirm(
+    studentId
+  );
+
+
+  showToast(
+    `${studentId} attempt reset হয়েছে`
+  );
+
+
+  refreshAll();
+
+}
+
+
+/* =========================================================
+   CLEAR LOCK
+========================================================= */
+
+function clearLockOnly(
+  studentId
+){
+
+  const quiz =
+    getQuiz();
+
+
+  const saved =
+    getLocal(
+      STORAGE.attemptLock,
+      null
+    );
+
+
+  if(!saved){
+
+    return;
+
+  }
+
+
+  if(Array.isArray(saved)){
+
+    const filtered =
+      saved.filter(
+        lock=>{
+
+          return !(
+            String(
+              lock.studentId || ""
+            ) ===
+            String(
+              studentId
+            ) &&
+            (
+              !lock.quizId ||
+              lock.quizId === quiz.id
+            )
+          );
+
+        }
+      );
+
+
+    setLocal(
+      STORAGE.attemptLock,
+      filtered
+    );
+
+    return;
+
+  }
+
+
+  if(
+    saved.studentId
+  ){
+
+    if(
+      String(
+        saved.studentId
+      ) ===
+      String(
+        studentId
+      ) &&
+      (
+        !saved.quizId ||
+        saved.quizId === quiz.id
+      )
+    ){
+
+      localStorage.removeItem(
+        STORAGE.attemptLock
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  if(
+    typeof saved === "object"
+  ){
+
+    const copy = {
+      ...saved
+    };
+
+    delete copy[
+      studentId
+    ];
+
+    setLocal(
+      STORAGE.attemptLock,
+      copy
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CLEAR ACTIVE WITHOUT CONFIRM
+========================================================= */
+
+function clearActiveAttemptWithoutConfirm(
+  studentId
+){
+
+  const quiz =
+    getQuiz();
+
+  const saved =
+    getLocal(
+      STORAGE.activeAttempt,
+      null
+    );
+
+
+  if(!saved){
+
+    return;
+
+  }
+
+
+  if(Array.isArray(saved)){
+
+    const filtered =
+      saved.filter(
+        attempt=>{
+
+          return !(
+            String(
+              attempt.studentId || ""
+            ) ===
+            String(
+              studentId
+            ) &&
+            (
+              !attempt.quizId ||
+              attempt.quizId === quiz.id
+            )
+          );
+
+        }
+      );
+
+
+    setLocal(
+      STORAGE.activeAttempt,
+      filtered
+    );
+
+    return;
+
+  }
+
+
+  if(
+    saved.studentId
+  ){
+
+    if(
+      String(
+        saved.studentId
+      ) ===
+      String(
+        studentId
+      )
+    ){
+
+      localStorage.removeItem(
+        STORAGE.activeAttempt
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  if(
+    typeof saved === "object"
+  ){
+
+    const copy = {
+      ...saved
+    };
+
+    delete copy[
+      studentId
+    ];
+
+    setLocal(
+      STORAGE.activeAttempt,
+      copy
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   RESET ALL UNSUBMITTED
+========================================================= */
+
+function resetAllUnsubmittedAttempts(){
+
+  const students =
+    getStudents();
+
+
+  const candidates =
+    students.filter(
+      student=>{
+
+        const status =
+          getStudentStatus(
+            student
+          );
+
+        return (
+          !status.submitted &&
+          (
+            status.active ||
+            status.locked
+          )
+        );
+
+      }
+    );
+
+
+  if(!candidates.length){
+
+    showToast(
+      "Reset করার মতো কোনো unsubmitted attempt নেই"
+    );
+
+    return;
+
+  }
+
+
+  const ok =
+    confirm(
+      `${candidates.length} জন unsubmitted student-এর attempt reset করবেন?`
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  candidates.forEach(
+    student=>{
+
+      const studentId =
+        student.studentId ||
+        student.id;
+
+      clearLockOnly(
+        studentId
+      );
+
+      clearActiveAttemptWithoutConfirm(
+        studentId
+      );
+
+    }
+  );
+
+
+  showToast(
+    `${candidates.length}টি attempt reset হয়েছে`
+  );
+
+
+  refreshAll();
+
+}
+
+
+/* =========================================================
+   OPEN RESULT
+========================================================= */
+
+function openResult(
+  studentId
+){
+
+  const result =
+    getStudentResult(
+      studentId
+    );
+
+
+  if(!result){
+
+    showToast(
+      "Result পাওয়া যায়নি"
+    );
+
+    return;
+
+  }
+
+
+  const params =
+    new URLSearchParams();
+
+  params.set(
+    "studentId",
+    studentId
+  );
+
+
+  if(result.id){
+
+    params.set(
+      "resultId",
+      result.id
+    );
+
+  }
+
+
+  window.location.href =
+    `admin-quiz-result-details.html?${params.toString()}`;
+
+}
+
+
+/* =========================================================
+   FILTER RESET
+========================================================= */
+
+function resetFilters(){
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+  document.getElementById(
+    "statusFilter"
+  ).value = "all";
+
+  document.getElementById(
+    "sortFilter"
+  ).value = "student";
+
+  renderAttempts();
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(){
+
+  document.getElementById(
+    "detailModal"
+  ).classList.remove(
+    "show"
+  );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshAll(){
+
+  renderQuizInfo();
+
+  updateStats();
+
+  renderAttempts();
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function toggleSidebar(){
+
+  document.getElementById(
+    "sidebar"
+  ).classList.toggle(
+    "open"
+  );
+
+}
+
+
+/* =========================================================
+   PUBLIC API
+========================================================= */
+
+window.SNKAdminQuizAttempts = {
+
+  getQuiz,
+
+  getStudents,
+
+  getResults,
+
+  getActiveAttempts,
+
+  getAttemptLocks,
+
+  getStudentStatus,
+
+  resetStudentAttempt,
+
+  clearActiveAttempt,
+
+  refresh:
+    refreshAll
+
+};
+
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+document
+  .getElementById(
+    "themeBtn"
+  )
+  .addEventListener(
+    "click",
+    toggleTheme
+  );
+
+
+document
+  .getElementById(
+    "refreshBtn"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+      refreshAll();
+      showToast(
+        "Attempts refreshed"
+      );
+    }
+  );
+
+
+document
+  .getElementById(
+    "menuBtn"
+  )
+  .addEventListener(
+    "click",
+    toggleSidebar
+  );
+
+
+document
+  .getElementById(
+    "searchInput"
+  )
+  .addEventListener(
+    "input",
+    renderAttempts
+  );
+
+
+document
+  .getElementById(
+    "statusFilter"
+  )
+  .addEventListener(
+    "change",
+    renderAttempts
+  );
+
+
+document
+  .getElementById(
+    "sortFilter"
+  )
+  .addEventListener(
+    "change",
+    renderAttempts
+  );
+
+
+document
+  .getElementById(
+    "detailModal"
+  )
+  .addEventListener(
+    "click",
+    event=>{
+
+      if(
+        event.target.id ===
+        "detailModal"
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key ===
+      "Escape"
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   STORAGE SYNC
+========================================================= */
+
+window.addEventListener(
+  "storage",
+  event=>{
+
+    if(
+
+      [
+        STORAGE.theme,
+        STORAGE.course,
+        STORAGE.quiz,
+        STORAGE.questions,
+        STORAGE.results,
+        STORAGE.students,
+        STORAGE.activeAttempt,
+        STORAGE.attemptLock
+
+      ].includes(
+        event.key
+      )
+
+    ){
+
+      applyTheme();
+
+      refreshAll();
+
+    }
+
+  }
+);
+
+
+window.addEventListener(
+  "focus",
+  refreshAll
+);
+
+
+document.addEventListener(
+  "visibilitychange",
+  ()=>{
+
+    if(
+      document.visibilityState ===
+      "visible"
+    ){
+
+      refreshAll();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+(function init(){
+
+  applyTheme();
+
+  refreshAll();
+
+})();
+
+</script>
+
+</body>
+</html>
+```
