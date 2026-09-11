@@ -357,7 +357,7 @@ th{ color:var(--muted); font-size:11px; text-transform:uppercase; }
       >
       <div>
         <div class="brand-title">SNK IT Institute</div>
-        <div class="brand-sub">Admin Control Panel</div>
+        <div class="brand-sub" id="adminEmailLabel">Admin Control Panel</div>
       </div>
     </div>
   </div>
@@ -435,6 +435,7 @@ th{ color:var(--muted); font-size:11px; text-transform:uppercase; }
     <div class="top-actions">
       <button class="icon-btn" id="refreshBtn" type="button" title="Refresh">↻</button>
       <button class="icon-btn" id="themeBtn" type="button" title="Theme">🌙</button>
+      <button class="icon-btn" id="logoutBtn" type="button" title="Logout">⏻</button>
     </div>
 
   </header>
@@ -614,6 +615,44 @@ const STORAGE = {
   results: "snkQuizResults",
   attendance: "snkStudentAttendance"
 };
+
+const ADMIN_LOGIN_KEY = "snkAdminLoggedIn";
+const ADMIN_EMAIL_KEY = "snkAdminEmail";
+
+/* =========================================================
+   ADMIN SESSION GUARD
+   Login না করা থাকলে সাথে সাথে admin-login.html এ পাঠিয়ে দেবে।
+========================================================= */
+(function guardAdminSession(){
+  const loggedIn = sessionStorage.getItem(ADMIN_LOGIN_KEY);
+  if(loggedIn !== "true"){
+    window.location.replace("admin-login.html");
+  }
+})();
+
+function showAdminEmail(){
+  const email = sessionStorage.getItem(ADMIN_EMAIL_KEY);
+  const label = document.getElementById("adminEmailLabel");
+  if(label){
+    label.textContent = email ? email : "Admin Control Panel";
+  }
+}
+
+function logoutAdmin(){
+  const confirmLogout = confirm("আপনি কি Admin Panel থেকে Logout করতে চান?");
+  if(!confirmLogout) return;
+
+  sessionStorage.removeItem(ADMIN_LOGIN_KEY);
+  sessionStorage.removeItem(ADMIN_EMAIL_KEY);
+
+  import("./firebase-config.js")
+    .then(({ auth }) => import("https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js")
+      .then(({ signOut }) => signOut(auth)))
+    .catch(() => {})
+    .finally(() => {
+      window.location.replace("admin-login.html");
+    });
+}
 
 const DEFAULT_COURSES = [
   "Computer Office Application",
@@ -830,6 +869,7 @@ function refreshAll(){
   renderStats();
   renderRecentStudents();
   renderRecentResults();
+  showAdminEmail();
 }
 
 /* =========================================================
@@ -840,6 +880,8 @@ document.getElementById("themeBtn").addEventListener("click", toggleTheme);
 document.getElementById("refreshBtn").addEventListener("click", refreshAll);
 
 document.getElementById("menuBtn").addEventListener("click", toggleSidebar);
+
+document.getElementById("logoutBtn").addEventListener("click", logoutAdmin);
 
 window.addEventListener("storage", event => {
   if(Object.values(STORAGE).includes(event.key)){
