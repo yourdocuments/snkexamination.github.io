@@ -4,409 +4,902 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b1020">
-<title>SNK AI Academy | Admin Login</title>
+<title>SNK AI Academy | Admin Dashboard</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 :root{
   --bg:#050505;
+  --bg2:#0a0a0a;
   --card:#141414;
   --card2:#181818;
+  --border:rgba(183,255,0,.14);
   --text:#ffffff;
   --muted:#999999;
-  --border:rgba(183,255,0,0.14);
   --primary:#b7ff00;
   --primary2:#ccff4d;
-  --danger:#ff4545;
   --success:#20c997;
-  --input:#0a0a0a;
+  --danger:#ff4545;
+  --warning:#ffbd59;
+  --info:#4dabf7;
+  --shadow:0 18px 50px rgba(0,0,0,.5);
 }
 
 body.light{
-  --bg:#f5f7fb;
+  --bg:#f4f7fb;
+  --bg2:#ffffff;
   --card:#ffffff;
-  --card2:#f0f2f7;
-  --text:#111827;
-  --muted:#667085;
-  --border:rgba(0,0,0,0.08);
+  --card2:#f7f9fc;
+  --border:#dce3ee;
+  --text:#182235;
+  --muted:#68758a;
   --primary:#5a8a00;
   --primary2:#446b00;
-  --input:#f8fafc;
+  --shadow:0 15px 40px rgba(27,39,67,.10);
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   font-family:Arial,"Noto Sans Bengali",sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(183,255,0,0.10), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(32,201,151,0.08), transparent 35%),
+    radial-gradient(circle at 10% 10%,rgba(183,255,0,.12),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(77,171,247,.08),transparent 30%),
     var(--bg);
   color:var(--text);
   min-height:100vh;
-  transition:0.25s ease;
 }
 
-.page{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
+button,input,select,textarea{ font:inherit; }
+button{ cursor:pointer; }
+a{ color:inherit; text-decoration:none; }
+
+/* ===== LAYOUT ===== */
+.app{ display:flex; min-height:100vh; }
+
+.sidebar{
+  width:260px;
+  position:fixed;
+  left:0; top:0; bottom:0;
+  background:rgba(10,15,27,.96);
+  border-right:1px solid var(--border);
+  z-index:1000;
+  overflow-y:auto;
+  transition:.25s ease;
 }
 
-.login-wrapper{
-  width:100%;
-  max-width:460px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:28px;
-  padding:46px;
-  box-shadow:0 25px 80px rgba(0,0,0,0.35);
-}
+body.light .sidebar{ background:#fff; }
 
-.logo-box{
-  width:64px; height:64px;
-  border-radius:18px;
+.sidebar-head{ padding:22px 18px; border-bottom:1px solid var(--border); }
+
+.brand{ display:flex; align-items:center; gap:12px; }
+
+.logo{
+  width:46px; height:46px; border-radius:13px;
   display:flex; align-items:center; justify-content:center;
-  background:#b7ff00;
-  margin-bottom:20px;
-  overflow:hidden;
-  color:#050505; font-weight:900; font-size:20px;
+  background:#b7ff00; color:#050505; font-weight:900; font-size:15px;
 }
 
-.logo-box img{ width:100%; height:100%; object-fit:contain; padding:8px; }
+.brand-title{ font-size:16px; font-weight:800; }
+.brand-sub{ color:var(--muted); font-size:12px; margin-top:3px; }
+
+.nav{ padding:14px 10px 30px; }
+
+.nav-label{
+  color:#6f7c91; font-size:11px; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding:14px 12px 7px;
+}
+
+.nav a{
+  display:flex; align-items:center; gap:11px;
+  padding:11px 12px; border-radius:11px;
+  color:#aeb9ca; font-size:14px; margin:3px 0; transition:.2s;
+}
+
+body.light .nav a{ color:#5d687b; }
+
+.nav a:hover, .nav a.active{
+  background:rgba(183,255,0,.15); color:var(--primary);
+}
+
+body.light .nav a:hover, body.light .nav a.active{ color:var(--primary); }
+
+.nav-icon{ width:23px; text-align:center; font-size:16px; }
+
+.main{
+  width:calc(100% - 260px);
+  margin-left:260px;
+  min-width:0;
+}
+
+.topbar{
+  height:70px; position:sticky; top:0; z-index:900;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 25px;
+  background:rgba(7,11,20,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+body.light .topbar{ background:rgba(255,255,255,.88); }
+
+.top-left{ display:flex; align-items:center; gap:13px; }
+
+.menu-btn{
+  display:none; border:1px solid var(--border);
+  background:var(--card); color:var(--text);
+  width:40px; height:40px; border-radius:10px;
+}
+
+.page-title{ font-size:18px; font-weight:800; }
+.page-subtitle{ font-size:12px; color:var(--muted); margin-top:3px; }
+
+.top-actions{ display:flex; gap:8px; align-items:center; }
+
+.icon-btn{
+  width:40px; height:40px; border-radius:10px;
+  border:1px solid var(--border); background:var(--card); color:var(--text);
+}
+
+.container{ max-width:1500px; margin:auto; padding:25px; }
+
+/* ===== HERO ===== */
+.hero{
+  position:relative; overflow:hidden;
+  border:1px solid var(--border); border-radius:24px; padding:28px;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(183,255,0,.18),transparent 30%),
+    linear-gradient(135deg,var(--card),var(--card2));
+  box-shadow:var(--shadow);
+}
+
+.hero::after{
+  content:""; position:absolute; width:240px; height:240px;
+  right:-80px; bottom:-100px;
+  border:1px solid rgba(183,255,0,.25); border-radius:50%;
+  box-shadow:0 0 0 25px rgba(183,255,0,.04), 0 0 0 50px rgba(183,255,0,.025);
+}
+
+.hero-content{ position:relative; z-index:2; }
 
 .badge{
   display:inline-flex; align-items:center; gap:7px;
-  padding:6px 10px; border-radius:999px;
-  background:rgba(183,255,0,.14); color:#b7ff00;
-  border:1px solid rgba(183,255,0,.28);
-  font-size:11px; font-weight:700; margin-bottom:14px;
+  padding:7px 11px; border-radius:999px;
+  background:rgba(32,201,151,.12); color:#58e2b5;
+  border:1px solid rgba(32,201,151,.22);
+  font-size:12px; font-weight:700;
 }
 
-.top-actions{
-  display:flex; justify-content:flex-end; gap:8px; margin-bottom:10px;
+.hero h1{ font-size:clamp(25px,3vw,38px); margin:16px 0 8px; }
+.hero p{ color:var(--muted); max-width:780px; line-height:1.7; }
+
+/* ===== BUTTONS ===== */
+.btn{
+  border:0; border-radius:10px; padding:10px 14px;
+  font-weight:700; font-size:13px; transition:.2s;
+  display:inline-flex; align-items:center; justify-content:center; gap:7px;
 }
 
-.icon-btn{
-  border:1px solid var(--border); background:transparent; color:var(--text);
-  width:38px; height:38px; border-radius:10px; cursor:pointer; font-size:14px;
+.btn:hover{ transform:translateY(-1px); }
+.btn-primary{ background:var(--primary); color:#050505; font-weight:800; }
+.btn-success{ background:var(--success); color:#061a14; }
+.btn-danger{ background:var(--danger); color:#fff; }
+.btn-warning{ background:var(--warning); color:#281b00; }
+.btn-info{ background:var(--info); color:#071522; }
+.btn-secondary{ background:var(--card2); border:1px solid var(--border); color:var(--text); }
+.btn-sm{ padding:8px 10px; font-size:12px; }
+
+/* ===== STATS ===== */
+.stats{
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:14px; margin-top:18px;
 }
 
-.icon-btn:hover{ background:var(--card2); }
-
-.form-title{ font-size:26px; margin-bottom:6px; }
-
-.form-subtitle{ color:var(--muted); margin-bottom:24px; line-height:1.6; font-size:13px; }
-
-.message{
-  display:none; margin-bottom:16px; padding:12px 13px;
-  border-radius:12px; font-size:13px; line-height:1.5;
+.stat{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:18px; padding:18px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; gap:6px;
 }
 
-.message.show{ display:block; }
+.stat-top{ display:flex; align-items:center; justify-content:space-between; }
+.stat-icon{ font-size:18px; opacity:.85; }
+.stat-label{ color:var(--muted); font-size:12px; }
+.stat-value{ font-size:27px; font-weight:800; }
+.stat-small{ color:var(--muted); font-size:11px; }
 
-.message.error{
-  background:rgba(255,93,115,0.10);
-  border:1px solid rgba(255,93,115,0.25);
-  color:#ff8798;
+/* ===== QUICK ACTIONS ===== */
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:18px;
 }
 
-.message.success{
-  background:rgba(32,201,151,0.10);
-  border:1px solid rgba(32,201,151,0.25);
-  color:#48dcae;
+.quick-card{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:18px; padding:18px;
+  box-shadow:var(--shadow); transition:.2s;
+  display:flex; flex-direction:column; gap:10px;
 }
 
-.field{ margin-bottom:16px; }
-
-.field label{ display:block; font-size:13px; font-weight:700; margin-bottom:7px; color:var(--muted); }
-
-.input-wrap{ position:relative; }
-
-.input-wrap input{
-  width:100%; height:48px;
-  border:1px solid var(--border); border-radius:12px;
-  outline:none; background:var(--input); color:var(--text);
-  padding:0 45px 0 14px; font-size:14px; transition:0.2s;
+.quick-card:hover{
+  border-color:rgba(183,255,0,.4);
+  transform:translateY(-2px);
 }
 
-.input-wrap input:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(183,255,0,0.12);
+.quick-icon{
+  width:42px; height:42px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(183,255,0,.12); font-size:20px;
 }
 
-.password-toggle{
-  position:absolute; right:12px; top:50%; transform:translateY(-50%);
-  border:0; background:transparent; color:var(--muted); cursor:pointer; font-size:14px;
+.quick-title{ font-size:14px; font-weight:800; }
+.quick-sub{ font-size:12px; color:var(--muted); line-height:1.5; }
+
+/* ===== GRID / CARD ===== */
+.grid-2{
+  display:grid; grid-template-columns:1.3fr 1fr;
+  gap:18px; margin-top:18px;
 }
 
-.login-btn{
-  width:100%; height:50px; border:0; border-radius:13px;
-  background:linear-gradient(135deg, var(--primary), var(--primary2));
-  color:#050505; font-size:15px; font-weight:800; cursor:pointer;
-  transition:0.2s; box-shadow:0 10px 30px rgba(183,255,0,0.20);
-  margin-top:6px;
+.card{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:20px; box-shadow:var(--shadow); overflow:hidden;
 }
 
-.login-btn:hover{ transform:translateY(-1px); }
-.login-btn:disabled{ opacity:0.65; cursor:not-allowed; transform:none; }
-
-.info-box{
-  margin-top:18px; padding:13px; border:1px dashed var(--border);
-  border-radius:12px; color:var(--muted); font-size:12px; line-height:1.6;
+.card-head{
+  padding:18px 20px; border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; gap:15px; align-items:center;
 }
 
-.info-box strong{ color:var(--text); }
+.card-title{ font-size:16px; font-weight:800; }
+.card-sub{ color:var(--muted); font-size:12px; margin-top:4px; }
+.card-body{ padding:20px; }
 
-.footer{ text-align:center; margin-top:20px; color:var(--muted); font-size:12px; }
-
-.back-link{
-  display:inline-block; margin-top:14px; color:var(--muted);
-  font-size:12px; text-decoration:none;
+/* ===== STATUS ===== */
+.status{
+  display:inline-flex; padding:5px 8px; border-radius:999px;
+  font-size:11px; font-weight:800;
 }
 
-.back-link:hover{ color:var(--primary2); }
+.status.green{ background:rgba(32,201,151,.12); color:#48dcae; }
+.status.red{ background:rgba(255,93,115,.12); color:#ff7285; }
+.status.yellow{ background:rgba(255,189,89,.12); color:#ffc86e; }
+.status.blue{ background:rgba(77,171,247,.12); color:#70c1ff; }
 
-.loading{ display:inline-flex; align-items:center; gap:8px; justify-content:center; }
+/* ===== TABLE ===== */
+.table-wrap{ overflow-x:auto; }
 
-.spinner{
-  width:15px; height:15px; border:2px solid rgba(255,255,255,0.35);
-  border-top-color:#fff; border-radius:50%; animation:spin 0.7s linear infinite;
+table{ width:100%; border-collapse:collapse; min-width:560px; }
+
+th,td{
+  padding:12px 13px; border-bottom:1px solid var(--border);
+  text-align:left; font-size:12px;
 }
 
-@keyframes spin{ to{ transform:rotate(360deg); } }
+th{ color:var(--muted); font-size:11px; text-transform:uppercase; }
+.student-name{ font-weight:700; }
+.student-id{ color:var(--muted); font-size:11px; margin-top:3px; }
 
-@media(max-width:480px){
-  .login-wrapper{ padding:28px 22px; border-radius:20px; }
+/* ===== ACTIVITY LIST ===== */
+.activity-list{ display:flex; flex-direction:column; gap:12px; }
+
+.activity-item{
+  display:flex; gap:12px; align-items:flex-start;
+  padding-bottom:12px; border-bottom:1px solid var(--border);
+}
+
+.activity-item:last-child{ border-bottom:0; padding-bottom:0; }
+
+.activity-dot{
+  width:9px; height:9px; border-radius:50%;
+  background:var(--primary); margin-top:6px; flex-shrink:0;
+}
+
+.activity-text{ font-size:13px; }
+.activity-time{ font-size:11px; color:var(--muted); margin-top:3px; }
+
+.empty-note{
+  text-align:center; color:var(--muted); padding:30px 10px; font-size:13px;
+}
+
+/* ===== FOOTER ===== */
+.footer{ text-align:center; color:var(--muted); padding:30px 0 10px; font-size:11px; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1200px){
+  .stats{ grid-template-columns:repeat(3,1fr); }
+  .quick-grid{ grid-template-columns:repeat(2,1fr); }
+  .grid-2{ grid-template-columns:1fr; }
+}
+
+@media(max-width:900px){
+  .sidebar{ transform:translateX(-100%); }
+  .sidebar.open{ transform:translateX(0); }
+  .main{ width:100%; margin-left:0; }
+  .menu-btn{ display:block; }
+}
+
+@media(max-width:650px){
+  .topbar{ padding:0 14px; }
+  .container{ padding:14px; }
+  .hero{ padding:20px; border-radius:18px; }
+  .stats{ grid-template-columns:1fr 1fr; }
+  .quick-grid{ grid-template-columns:1fr; }
+}
+
+@media(max-width:430px){
+  .stats{ grid-template-columns:1fr; }
+  .hero h1{ font-size:23px; }
 }
 </style>
 </head>
 
 <body>
 
-<main class="page">
+<div class="app">
 
-  <section class="login-wrapper">
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-head">
+    <div class="brand">
+      <div class="logo">SNK</div>
+      <div>
+        <div class="brand-title">SNK AI Academy</div>
+        <div class="brand-sub" id="adminEmailLabel">Admin Control Panel</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav">
+
+    <div class="nav-label">Main</div>
+
+    <a href="admin-dashboard.html" class="active">
+      <span class="nav-icon">🏠</span>
+      <span>Admin Dashboard</span>
+    </a>
+
+    <a href="admin.html">
+      <span class="nav-icon">📊</span>
+      <span>Quiz Management</span>
+    </a>
+
+    <a href="students.html">
+      <span class="nav-icon">👨‍🎓</span>
+      <span>Students</span>
+    </a>
+
+    <a href="courses.html">
+      <span class="nav-icon">📚</span>
+      <span>Courses</span>
+    </a>
+
+    <div class="nav-label">Academic</div>
+
+    <a href="assignments.html">
+      <span class="nav-icon">📝</span>
+      <span>Assignments</span>
+    </a>
+
+    <a href="admin-submissions.html">
+      <span class="nav-icon">📥</span>
+      <span>Submissions</span>
+    </a>
+
+    <a href="admin-quiz-results.html">
+      <span class="nav-icon">📈</span>
+      <span>Quiz Results</span>
+    </a>
+
+    <div class="nav-label">Exam & Attendance</div>
+
+    <a href="admin-attendance.html">
+      <span class="nav-icon">✅</span>
+      <span>Attendance</span>
+    </a>
+
+    <a href="attendance-dashboard.html">
+      <span class="nav-icon">📅</span>
+      <span>Attendance Dashboard</span>
+    </a>
+
+  </nav>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+  <header class="topbar">
+
+    <div class="top-left">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu">☰</button>
+
+      <div>
+        <div class="page-title">Admin Dashboard</div>
+        <div class="page-subtitle" id="dateSubtitle">Overview & Quick Actions</div>
+      </div>
+    </div>
 
     <div class="top-actions">
-      <button class="icon-btn" id="themeBtn" type="button" title="Theme">☀</button>
+      <button class="icon-btn" id="refreshBtn" type="button" title="Refresh">↻</button>
+      <button class="icon-btn" id="themeBtn" type="button" title="Theme">🌙</button>
+      <button class="icon-btn" id="logoutBtn" type="button" title="Logout">⏻</button>
     </div>
 
-    <div class="logo-box">
-      SNK
-    </div>
+  </header>
 
-    <span class="badge">● ADMIN ACCESS</span>
+  <div class="container">
 
-    <h2 class="form-title">Admin Login</h2>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-content">
 
-    <p class="form-subtitle">
-      শুধুমাত্র অনুমোদিত Admin account দিয়ে এখানে Login করা যাবে।
-    </p>
+        <span class="badge">● ADMIN CONTROL PANEL</span>
 
-    <div id="message" class="message" role="alert"></div>
+        <h1 id="greetingText">স্বাগতম, Admin</h1>
 
-    <form id="loginForm" autocomplete="on">
+        <p>
+          এখান থেকে আপনি Students, Courses, Assignments, Quiz এবং Attendance —
+          সব একসাথে monitor করতে পারবেন। নিচে Quick Actions থেকে সরাসরি
+          যেকোনো section-এ চলে যান।
+        </p>
 
-      <div class="field">
-        <label for="email">Admin Email</label>
-        <div class="input-wrap">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="admin@example.com"
-            autocomplete="email"
-            required
-          >
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
+          <button class="btn btn-primary" type="button" onclick="location.href='students.html'">👨‍🎓 Manage Students</button>
+          <button class="btn btn-secondary" type="button" onclick="location.href='admin.html'">❓ Quiz Management</button>
+          <button class="btn btn-success" type="button" onclick="location.href='admin-attendance.html'">✅ Attendance</button>
         </div>
+
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats">
+
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Total Students</div>
+          <div class="stat-icon">👨‍🎓</div>
+        </div>
+        <div class="stat-value" id="statStudents">0</div>
+        <div class="stat-small" id="statStudentsSmall">Registered students</div>
       </div>
 
-      <div class="field">
-        <label for="password">Password</label>
-        <div class="input-wrap">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="আপনার Firebase password"
-            autocomplete="current-password"
-            required
-          >
-          <button type="button" class="password-toggle" id="passwordToggle" title="Show password">👁</button>
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Total Courses</div>
+          <div class="stat-icon">📚</div>
         </div>
+        <div class="stat-value" id="statCourses">0</div>
+        <div class="stat-small">Active courses offered</div>
       </div>
 
-      <button type="submit" class="login-btn" id="loginBtn">Admin Login</button>
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Pending Submissions</div>
+          <div class="stat-icon">📥</div>
+        </div>
+        <div class="stat-value" id="statSubmissions">0</div>
+        <div class="stat-small">Awaiting review</div>
+      </div>
 
-    </form>
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Quiz Attempts</div>
+          <div class="stat-icon">❓</div>
+        </div>
+        <div class="stat-value" id="statQuizAttempts">0</div>
+        <div class="stat-small" id="statQuizPassSmall">0 passed</div>
+      </div>
 
-    <div class="info-box">
-      <strong>Note:</strong>
-      এই page শুধু নির্দিষ্ট Admin email-এর জন্য। অন্য কোনো (যেমন Student) account দিয়ে
-      Login করার চেষ্টা করলে Access দেওয়া হবে না।
-    </div>
+      <div class="stat">
+        <div class="stat-top">
+          <div class="stat-label">Attendance Records</div>
+          <div class="stat-icon">✅</div>
+        </div>
+        <div class="stat-value" id="statAttendance">0</div>
+        <div class="stat-small">Total logged entries</div>
+      </div>
+
+    </section>
+
+    <!-- ===== QUICK ACTIONS ===== -->
+    <section class="quick-grid">
+
+      <a class="quick-card" href="students.html">
+        <div class="quick-icon">👨‍🎓</div>
+        <div class="quick-title">Students</div>
+        <div class="quick-sub">নতুন student যোগ করুন, তথ্য এডিট বা খুঁজুন।</div>
+      </a>
+
+      <a class="quick-card" href="courses.html">
+        <div class="quick-icon">📚</div>
+        <div class="quick-title">Courses</div>
+        <div class="quick-sub">Course, batch ও schedule পরিচালনা করুন।</div>
+      </a>
+
+      <a class="quick-card" href="admin-submissions.html">
+        <div class="quick-icon">📥</div>
+        <div class="quick-title">Submissions</div>
+        <div class="quick-sub">Student-দের assignment submission review করুন।</div>
+      </a>
+
+      <a class="quick-card" href="admin.html">
+        <div class="quick-icon">❓</div>
+        <div class="quick-title">Quiz Management</div>
+        <div class="quick-sub">Quiz তৈরি, প্রশ্ন যোগ ও publish করুন।</div>
+      </a>
+
+    </section>
+
+    <!-- ===== RECENT STUDENTS + ACTIVITY ===== -->
+    <section class="grid-2">
+
+      <div class="card">
+
+        <div class="card-head">
+          <div>
+            <div class="card-title">👨‍🎓 সাম্প্রতিক Students</div>
+            <div class="card-sub">সর্বশেষ যোগ হওয়া students</div>
+          </div>
+          <button class="btn btn-secondary btn-sm" type="button" onclick="location.href='students.html'">সব দেখুন</button>
+        </div>
+
+        <div class="card-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Course</th>
+                  <th>Batch</th>
+                </tr>
+              </thead>
+              <tbody id="recentStudentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-head">
+          <div>
+            <div class="card-title">📈 সাম্প্রতিক Quiz Results</div>
+            <div class="card-sub">সর্বশেষ submission</div>
+          </div>
+          <button class="btn btn-secondary btn-sm" type="button" onclick="location.href='admin-quiz-results.html'">সব দেখুন</button>
+        </div>
+
+        <div class="card-body">
+          <div class="activity-list" id="recentResultsList"></div>
+        </div>
+
+      </div>
+
+    </section>
 
     <div class="footer">
-      © 2026 SNK AI Academy · Admin Panel
+      SNK AI Academy Admin Panel • Dashboard v1.0
     </div>
 
-    <a class="back-link" href="login.html">← Student Login-এ ফিরে যান</a>
-
-  </section>
+  </div>
 
 </main>
 
-<script type="module">
+</div>
 
-import { auth } from "./firebase-config.js";
-
-import {
-  signInWithEmailAndPassword,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+<script>
+"use strict";
 
 /* =========================================================
-   ADMIN EMAIL ALLOW-LIST
-   এখানে আপনার Firebase-এ তৈরি করা Admin email(s) বসান।
-   একাধিক Admin থাকলে কমা দিয়ে আরও email যোগ করতে পারবেন।
+   STORAGE KEYS (matches other admin pages on this site)
 ========================================================= */
-const ADMIN_EMAILS = [
-  "thesnkgraphic@email.com",
-  "sakhijahanusha@gmail.com"
-];
+const STORAGE = {
+  theme: "snkTheme",
+  students: "snkStudents",
+  submissions: "snkAssignmentSubmissions",
+  results: "snkQuizResults",
+  attendance: "snkStudentAttendance"
+};
 
-const THEME_KEY = "snkTheme";
 const ADMIN_LOGIN_KEY = "snkAdminLoggedIn";
 const ADMIN_EMAIL_KEY = "snkAdminEmail";
 
-const body = document.body;
-const loginForm = document.getElementById("loginForm");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const loginBtn = document.getElementById("loginBtn");
-const message = document.getElementById("message");
-const themeBtn = document.getElementById("themeBtn");
-const passwordToggle = document.getElementById("passwordToggle");
+/* =========================================================
+   ADMIN SESSION GUARD
+   Login না করা থাকলে সাথে সাথে admin-login.html এ পাঠিয়ে দেবে।
+========================================================= */
+(function guardAdminSession(){
+  const loggedIn = sessionStorage.getItem(ADMIN_LOGIN_KEY);
+  if(loggedIn !== "true"){
+    window.location.replace("admin-login.html");
+  }
+})();
 
-function applyTheme(){
-  const savedTheme = localStorage.getItem(THEME_KEY) || "dark";
-  if(savedTheme === "light"){
-    body.classList.add("light");
-    themeBtn.textContent = "☾";
-  }else{
-    body.classList.remove("light");
-    themeBtn.textContent = "☀";
+function showAdminEmail(){
+  const email = sessionStorage.getItem(ADMIN_EMAIL_KEY);
+  const label = document.getElementById("adminEmailLabel");
+  if(label){
+    label.textContent = email ? email : "Admin Control Panel";
   }
 }
 
-themeBtn.addEventListener("click", () => {
-  const isLight = body.classList.contains("light");
-  localStorage.setItem(THEME_KEY, isLight ? "dark" : "light");
-  applyTheme();
-});
+function logoutAdmin(){
+  const confirmLogout = confirm("আপনি কি Admin Panel থেকে Logout করতে চান?");
+  if(!confirmLogout) return;
 
-passwordToggle.addEventListener("click", () => {
-  if(passwordInput.type === "password"){
-    passwordInput.type = "text";
-    passwordToggle.textContent = "🙈";
-  }else{
-    passwordInput.type = "password";
-    passwordToggle.textContent = "👁";
-  }
-});
+  sessionStorage.removeItem(ADMIN_LOGIN_KEY);
+  sessionStorage.removeItem(ADMIN_EMAIL_KEY);
 
-function showMessage(text, type = "error"){
-  message.textContent = text;
-  message.className = "message show " + type;
+  import("./firebase-config.js")
+    .then(({ auth }) => import("https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js")
+      .then(({ signOut }) => signOut(auth)))
+    .catch(() => {})
+    .finally(() => {
+      window.location.replace("admin-login.html");
+    });
 }
 
-function hideMessage(){
-  message.textContent = "";
-  message.className = "message";
-}
+const DEFAULT_COURSES = [
+  "Computer Office Application",
+  "Graphics Design",
+  "Digital Marketing",
+  "Web Design & Development"
+];
 
-function getFirebaseErrorMessage(code){
-  const messages = {
-    "auth/invalid-email": "Email address সঠিক নয়।",
-    "auth/user-not-found": "এই Email দিয়ে Firebase-এ কোনো account পাওয়া যায়নি।",
-    "auth/wrong-password": "Password সঠিক নয়।",
-    "auth/invalid-credential": "Email অথবা Password সঠিক নয়।",
-    "auth/user-disabled": "এই account disabled করা হয়েছে।",
-    "auth/too-many-requests": "অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।",
-    "auth/network-request-failed": "Internet connection সমস্যা হয়েছে।"
-  };
-  return messages[code] || "Login করা যায়নি। আবার চেষ্টা করুন।";
-}
-
-loginForm.addEventListener("submit", async (event) => {
-
-  event.preventDefault();
-  hideMessage();
-
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-  if(!email){
-    showMessage("Email দিন।");
-    emailInput.focus();
-    return;
-  }
-
-  if(!password){
-    showMessage("Password দিন।");
-    passwordInput.focus();
-    return;
-  }
-
-  loginBtn.disabled = true;
-  loginBtn.innerHTML = `<span class="loading"><span class="spinner"></span> Login হচ্ছে...</span>`;
-
+/* =========================================================
+   HELPERS
+========================================================= */
+function readJSON(key, fallback){
   try{
-
-    const result = await signInWithEmailAndPassword(auth, email, password);
-    const user = result.user;
-
-    const isAdmin = ADMIN_EMAILS
-      .map(item => item.toLowerCase())
-      .includes((user.email || "").toLowerCase());
-
-    if(!isAdmin){
-
-      /* এই account admin না, তাই সাথে সাথে sign out করে দেওয়া হচ্ছে */
-      await signOut(auth);
-
-      showMessage("এই account-এর Admin Access নেই। সঠিক Admin email দিয়ে চেষ্টা করুন।");
-
-      loginBtn.disabled = false;
-      loginBtn.textContent = "Admin Login";
-
-      return;
-    }
-
-    sessionStorage.setItem(ADMIN_LOGIN_KEY, "true");
-    sessionStorage.setItem(ADMIN_EMAIL_KEY, user.email || "");
-
-    showMessage("Login সফল হয়েছে। Dashboard খুলছে...", "success");
-
-    setTimeout(() => {
-      window.location.href = "admin-dashboard.html";
-    }, 600);
-
+    const value = localStorage.getItem(key);
+    if(!value) return fallback;
+    return JSON.parse(value);
   }catch(error){
+    console.warn("Storage read error:", key, error);
+    return fallback;
+  }
+}
 
-    console.error("Admin Login Error:", error);
-    showMessage(getFirebaseErrorMessage(error.code));
+function escapeHTML(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
-    loginBtn.disabled = false;
-    loginBtn.textContent = "Admin Login";
+function formatDateTime(value){
+  if(!value) return "—";
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleString("en-GB",{
+    day:"2-digit", month:"short", year:"numeric",
+    hour:"2-digit", minute:"2-digit"
+  });
+}
+
+function getStudents(){
+  const saved = readJSON(STORAGE.students, []);
+  return Array.isArray(saved) ? saved : [];
+}
+
+function getSubmissions(){
+  const saved = readJSON(STORAGE.submissions, []);
+  return Array.isArray(saved) ? saved : [];
+}
+
+function getResults(){
+  const saved = readJSON(STORAGE.results, []);
+  return Array.isArray(saved) ? saved : [];
+}
+
+function getAttendance(){
+  const saved = readJSON(STORAGE.attendance, []);
+  if(Array.isArray(saved)) return saved;
+  if(saved && typeof saved === "object") return Object.values(saved).flat();
+  return [];
+}
+
+/* =========================================================
+   THEME
+========================================================= */
+function applyTheme(){
+  const theme = localStorage.getItem(STORAGE.theme) || "dark";
+  if(theme === "light"){
+    document.body.classList.add("light");
+    document.getElementById("themeBtn").textContent = "☀️";
+  }else{
+    document.body.classList.remove("light");
+    document.getElementById("themeBtn").textContent = "🌙";
+  }
+}
+
+function toggleTheme(){
+  const isLight = document.body.classList.contains("light");
+  localStorage.setItem(STORAGE.theme, isLight ? "dark" : "light");
+  applyTheme();
+}
+
+/* =========================================================
+   GREETING
+========================================================= */
+function updateGreeting(){
+  const hour = new Date().getHours();
+  let greeting = "শুভ সকাল";
+  if(hour >= 12 && hour < 17) greeting = "শুভ বিকাল";
+  else if(hour >= 17) greeting = "শুভ সন্ধ্যা";
+
+  document.getElementById("greetingText").textContent = `${greeting}, Admin`;
+
+  document.getElementById("dateSubtitle").textContent =
+    new Date().toLocaleDateString("en-GB",{
+      weekday:"long", day:"2-digit", month:"long", year:"numeric"
+    });
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+function renderStats(){
+  const students = getStudents();
+  const submissions = getSubmissions();
+  const results = getResults();
+  const attendance = getAttendance();
+
+  document.getElementById("statStudents").textContent = students.length;
+
+  const courses = new Set([
+    ...DEFAULT_COURSES,
+    ...students.map(s => s.course).filter(Boolean)
+  ]);
+  document.getElementById("statCourses").textContent = courses.size;
+
+  const pending = submissions.filter(
+    s => !s.status || String(s.status).toLowerCase() === "pending"
+  ).length;
+  document.getElementById("statSubmissions").textContent = pending;
+
+  document.getElementById("statQuizAttempts").textContent = results.length;
+
+  const passed = results.filter(
+    r => String(r.result || "").toLowerCase() === "pass"
+  ).length;
+  document.getElementById("statQuizPassSmall").textContent = `${passed} passed`;
+
+  document.getElementById("statAttendance").textContent = attendance.length;
+}
+
+/* =========================================================
+   RECENT STUDENTS
+========================================================= */
+function renderRecentStudents(){
+  const body = document.getElementById("recentStudentsBody");
+  const students = getStudents()
+    .slice()
+    .reverse()
+    .slice(0, 6);
+
+  if(!students.length){
+    body.innerHTML = `
+      <tr>
+        <td colspan="3" class="empty-note">এখনো কোনো student যোগ করা হয়নি।</td>
+      </tr>
+    `;
+    return;
   }
 
+  body.innerHTML = students.map(student => `
+    <tr>
+      <td>
+        <div class="student-name">${escapeHTML(student.name || "—")}</div>
+        <div class="student-id">${escapeHTML(student.id || "—")}</div>
+      </td>
+      <td>${escapeHTML(student.course || "—")}</td>
+      <td>${escapeHTML(student.batch || "—")}</td>
+    </tr>
+  `).join("");
+}
+
+/* =========================================================
+   RECENT QUIZ RESULTS
+========================================================= */
+function renderRecentResults(){
+  const list = document.getElementById("recentResultsList");
+
+  const results = getResults()
+    .slice()
+    .sort((a,b) =>
+      new Date(b.submittedAt || b.updatedAt || 0) -
+      new Date(a.submittedAt || a.updatedAt || 0)
+    )
+    .slice(0, 6);
+
+  if(!results.length){
+    list.innerHTML = `<div class="empty-note">এখনো কোনো quiz result জমা পড়েনি।</div>`;
+    return;
+  }
+
+  list.innerHTML = results.map(result => {
+    const isPass = String(result.result || "").toLowerCase() === "pass";
+    return `
+      <div class="activity-item">
+        <div class="activity-dot"></div>
+        <div>
+          <div class="activity-text">
+            <strong>${escapeHTML(result.studentName || "Student")}</strong>
+            quiz-এ
+            <span class="status ${isPass ? "green" : "red"}">${isPass ? "PASS" : "FAIL"}</span>
+            করেছে (${escapeHTML(result.percentage ?? 0)}%)
+          </div>
+          <div class="activity-time">${escapeHTML(formatDateTime(result.submittedAt))}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+/* =========================================================
+   REFRESH ALL
+========================================================= */
+function refreshAll(){
+  updateGreeting();
+  renderStats();
+  renderRecentStudents();
+  renderRecentResults();
+  showAdminEmail();
+}
+
+/* =========================================================
+   EVENTS
+========================================================= */
+document.getElementById("themeBtn").addEventListener("click", toggleTheme);
+
+document.getElementById("refreshBtn").addEventListener("click", refreshAll);
+
+document.getElementById("menuBtn").addEventListener("click", toggleSidebar);
+
+document.getElementById("logoutBtn").addEventListener("click", logoutAdmin);
+
+window.addEventListener("storage", event => {
+  if(Object.values(STORAGE).includes(event.key)){
+    refreshAll();
+  }
 });
 
-applyTheme();
+window.addEventListener("focus", refreshAll);
 
+document.addEventListener("visibilitychange", () => {
+  if(document.visibilityState === "visible") refreshAll();
+});
+
+/* =========================================================
+   INIT
+========================================================= */
+(function init(){
+  applyTheme();
+  refreshAll();
+})();
 </script>
 
 </body>
