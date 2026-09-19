@@ -1,1 +1,1 @@
-https://exam.snkexamination.com
+https://exam.snkitinstitute.com
