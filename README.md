@@ -1,1 +1,1 @@
-https://yourdocuments.github.io/snkexamination.github.io/
+https://exam.snkexamination.com
