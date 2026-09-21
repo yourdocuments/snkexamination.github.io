@@ -36,6 +36,12 @@
 
 <body>
 
+  <!-- Dynamic Site Notice (Firestore-driven, hidden by default) -->
+  <div
+    id="dynNoticeBanner"
+    style="display:none;background:#b7ff00;color:#050505;font-weight:800;font-size:13px;text-align:center;padding:10px 14px;"
+  ></div>
+
   <!-- =========================================================
        1. HEADER / NAVIGATION
   ========================================================== -->
@@ -45,12 +51,12 @@
 
       <!-- Logo -->
       <a href="index.html" class="brand" aria-label="SNK AI Academy Home">
-        <div class="brand-logo">
+        <div class="brand-logo" id="dynHeaderLogoBox">
           <span class="logo-fallback-text">SNK</span>
         </div>
 
         <div class="brand-text">
-          <strong>SNK AI Academy</strong>
+          <strong id="dynHeaderInstituteName">SNK AI Academy</strong>
           <span>Student Portal</span>
         </div>
       </a>
@@ -214,18 +220,18 @@
 
           <div class="hero-badge">
             <span class="badge-dot"></span>
-            Student Portal • Batch 01
+            <span id="dynHeroBadge">Student Portal • Batch 01</span>
           </div>
 
 
           <h1>
-            Learn.
-            <span>Practice.</span>
+            <span id="dynHeroHeading">Learn.</span>
+            <span id="dynHeroHighlight">Practice.</span>
             Grow.
           </h1>
 
 
-          <p class="hero-description">
+          <p class="hero-description" id="dynHeroDescription">
             Welcome to the SNK AI Academy Student Portal.
             Manage your course, assignments, quizzes, results,
             attendance and learning resources from one place.
@@ -899,22 +905,27 @@
 
         <a href="index.html" class="brand">
 
-          <div class="brand-logo small">
+          <div class="brand-logo small" id="dynFooterLogoBox">
             <span class="logo-fallback-text">SNK</span>
           </div>
 
           <div class="brand-text">
-            <strong>SNK AI Academy</strong>
+            <strong id="dynFooterInstituteName">SNK AI Academy</strong>
             <span>Student Portal</span>
           </div>
 
         </a>
 
 
-        <p>
+        <p id="dynFooterAbout">
           Learn practical IT skills and build your future
           with SNK AI Academy.
         </p>
+
+        <div
+          id="dynSocialLinks"
+          style="display:flex;gap:10px;margin-top:14px;"
+        ></div>
 
       </div>
 
@@ -1006,7 +1017,7 @@
 
       <div class="container footer-bottom-inner">
 
-        <p>
+        <p id="dynFooterCopyright">
           © <span id="currentYear"></span>
           SNK AI Academy. All Rights Reserved.
         </p>
@@ -1548,6 +1559,105 @@
 
     });
 
+  </script>
+
+  <!-- =========================================================
+       DYNAMIC SITE SETTINGS (Firestore)
+       admin-profile.html থেকে save করা settings এখান থেকেই
+       homepage-এ apply হয়। কোনো field খালি থাকলে সেটা বদলানো
+       হয় না, ডিফল্ট লেখাই থেকে যায়।
+  ========================================================== -->
+  <script type="module">
+    import { db } from "./firebase-config.js";
+    import {
+      doc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+    function setText(id, value){
+      if(!value) return;
+      const el = document.getElementById(id);
+      if(el) el.textContent = value;
+    }
+
+    function setLogo(boxId, url){
+      if(!url) return;
+      const box = document.getElementById(boxId);
+      if(box) box.innerHTML = `<img src="${url}" alt="Logo" style="width:100%;height:100%;object-fit:contain;">`;
+    }
+
+    async function applySiteSettings(){
+      try{
+        const snap = await getDoc(doc(db, "siteSettings", "main"));
+        if(!snap.exists()) return;
+
+        const d = snap.data();
+
+        /* Notice banner */
+        if(d.noticeActive && d.noticeText){
+          const banner = document.getElementById("dynNoticeBanner");
+          if(banner){
+            if(d.noticeLink){
+              banner.innerHTML =
+                `<a href="${d.noticeLink}" style="color:#050505;text-decoration:underline;">${d.noticeText}</a>`;
+            }else{
+              banner.textContent = d.noticeText;
+            }
+            banner.style.display = "block";
+          }
+        }
+
+        /* Institute name + logo (header + footer) */
+        setText("dynHeaderInstituteName", d.instituteName);
+        setText("dynFooterInstituteName", d.instituteName);
+        setLogo("dynHeaderLogoBox", d.logoUrl);
+        setLogo("dynFooterLogoBox", d.logoUrl);
+
+        /* Hero */
+        setText("dynHeroBadge", d.heroBadge);
+        setText("dynHeroHeading", d.heroHeading);
+        setText("dynHeroHighlight", d.heroHighlight);
+        setText("dynHeroDescription", d.heroDescription);
+
+        /* Footer */
+        setText("dynFooterAbout", d.footerAbout);
+        if(d.footerCopyright){
+          const cp = document.getElementById("dynFooterCopyright");
+          if(cp) cp.textContent = d.footerCopyright;
+        }
+
+        /* Social links */
+        const socialWrap = document.getElementById("dynSocialLinks");
+        if(socialWrap){
+          const links = [
+            { url: d.socialFacebook, icon: "📘", label: "Facebook" },
+            { url: d.socialYoutube, icon: "▶️", label: "YouTube" },
+            { url: d.socialWhatsapp, icon: "💬", label: "WhatsApp" },
+            { url: d.socialInstagram, icon: "📸", label: "Instagram" }
+          ].filter(item => item.url);
+
+          socialWrap.innerHTML = links.map(item => `
+            <a
+              href="${item.url}"
+              target="_blank"
+              rel="noopener"
+              aria-label="${item.label}"
+              style="
+                width:36px;height:36px;border-radius:10px;
+                display:flex;align-items:center;justify-content:center;
+                background:rgba(183,255,0,.1);border:1px solid rgba(183,255,0,.25);
+                font-size:15px;
+              "
+            >${item.icon}</a>
+          `).join("");
+        }
+
+      }catch(error){
+        console.warn("Site settings load skipped:", error);
+      }
+    }
+
+    applySiteSettings();
   </script>
 
 </body>

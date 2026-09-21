@@ -385,6 +385,16 @@ th{ color:var(--muted); font-size:11px; text-transform:uppercase; }
       <span>Courses</span>
     </a>
 
+    <a href="admin-courses.html">
+      <span class="nav-icon">🗂️</span>
+      <span>Course Management</span>
+    </a>
+
+    <a href="admin-profile.html">
+      <span class="nav-icon">🛠️</span>
+      <span>Site Settings</span>
+    </a>
+
     <div class="nav-label">Academic</div>
 
     <a href="assignments.html">
@@ -660,6 +670,19 @@ const DEFAULT_COURSES = [
   "Web Design & Development"
 ];
 
+function getCourses(){
+  try{
+    const saved = localStorage.getItem("snkCourses");
+    if(saved){
+      const parsed = JSON.parse(saved);
+      if(Array.isArray(parsed)) return parsed;
+    }
+  }catch(error){
+    console.warn("Course list read error:", error);
+  }
+  return DEFAULT_COURSES;
+}
+
 /* =========================================================
    HELPERS
 ========================================================= */
@@ -764,7 +787,7 @@ function renderStats(){
   document.getElementById("statStudents").textContent = students.length;
 
   const courses = new Set([
-    ...DEFAULT_COURSES,
+    ...getCourses(),
     ...students.map(s => s.course).filter(Boolean)
   ]);
   document.getElementById("statCourses").textContent = courses.size;
