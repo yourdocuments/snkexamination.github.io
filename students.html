@@ -86,6 +86,8 @@ select{border:1px solid var(--border);background:var(--bg);color:var(--text);pad
     <button class="menu-item" onclick="go('admin-dashboard.html')"><span class="menu-icon">📊</span>Dashboard</button>
     <button class="menu-item active"><span class="menu-icon">👨‍🎓</span>Students</button>
     <button class="menu-item" onclick="go('courses.html')"><span class="menu-icon">🎓</span>Courses</button>
+    <button class="menu-item" onclick="go('admin-courses.html')"><span class="menu-icon">📚</span>Course Management</button>
+    <button class="menu-item" onclick="go('admin-profile.html')"><span class="menu-icon">🛠️</span>Site Settings</button>
     <div class="menu-label">Academic</div>
     <button class="menu-item" onclick="go('assignments.html')"><span class="menu-icon">📝</span>Assignments</button>
     <button class="menu-item" onclick="go('quiz.html')"><span class="menu-icon">🎯</span>Quiz</button>
@@ -188,12 +190,27 @@ select{border:1px solid var(--border);background:var(--bg);color:var(--text);pad
 const STUDENT_KEY = "snkStudents";
 const THEME_KEY = "snkStudentsTheme";
 
+const COURSE_KEY = "snkCourses";
+
 const DEFAULT_COURSES = [
   "Computer Office Application",
   "Graphics Design",
   "Digital Marketing",
   "Web Design & Development"
 ];
+
+function getCourses(){
+  try{
+    const saved = localStorage.getItem(COURSE_KEY);
+    if(saved){
+      const parsed = JSON.parse(saved);
+      if(Array.isArray(parsed)) return parsed;
+    }
+  }catch(error){
+    console.warn("Course list read error:", error);
+  }
+  return DEFAULT_COURSES;
+}
 
 let students = [];
 
@@ -263,7 +280,7 @@ function updateStats(){
 function updateCourseOptions(){
   const select = document.getElementById("courseFilter");
   const current = select.value;
-  const courses = [...new Set([...DEFAULT_COURSES, ...students.map(s => s.course).filter(Boolean)])].sort();
+  const courses = [...new Set([...getCourses(), ...students.map(s => s.course).filter(Boolean)])].sort();
   select.innerHTML = '<option value="">সব Course</option>' + courses.map(c => `<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join("");
   if(courses.includes(current)) select.value = current;
 
